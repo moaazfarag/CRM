@@ -8,3 +8,5 @@ composer.lock
 Thumbs.db
 
 /.idea
+/.idea/workspace.xml
+workspace.xml

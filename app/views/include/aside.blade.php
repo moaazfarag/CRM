@@ -37,15 +37,13 @@
       <div class="nano-content">
 
         <ul>
-          <li>
-            <a href="angularjs/" class="waves-effect waves-blue"><i class="ion ion-social-angular"></i> Open Angular Version <span class="badge new"></span></a>
-          </li>
-          <li class="label">Menu</li>
-          <li>
-            <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> Dashboards<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+
+          <li  class="label">البيانات الاساسية</li>
+          <li class="open">
+            <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
             <ul>
               <li>
-                <a href="dashboard.html" class="waves-effect waves-blue"> Dashboard</a>
+                <a href="admin/setting" class="waves-effect waves-blue"> بيانات الشركة </a>
               </li>
               <li>
                 <a href="dashboard-v1.html" class="waves-effect waves-blue"> Dashboard v1</a>
@@ -208,7 +206,7 @@
             </ul>
           </li>
 
-          <li class="open">
+          <li>
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="mdi mdi-action-shopping-cart"></i> eCommerce<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
             <ul>
               <li class="active"><a class="waves-effect waves-blue" href="ecommerce-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a>

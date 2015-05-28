@@ -2,7 +2,7 @@
  @section('content')
 
  <!-- Store Settings -->
-    <div class="card">
+    <div class="card minimized">
       <div class="title">
         <h5><i class="fa fa-cog"></i> معلومات الشركة</h5>
         <a class="minimize" href="#">
@@ -80,28 +80,45 @@
           </div>
         </div>
                 <div class="row">
-
+          <div class="col s2 l2">
+            <label for=""">
+اعدادات الموقع
+            </label>
+            </div>
         <p>
-          <input name="check-hobbies" type="checkbox" id="check-skiing" value="skiing" data-parsley-mincheck="2" required="" data-parsley-multiple="check-hobbies" data-parsley-id="7150">
-          <label for="check-skiing">Skiing</label>
-          <input name="check-hobbies" type="checkbox" id="check-running" value="running" data-parsley-multiple="check-hobbies" data-parsley-id="7150">
-          <label for="check-running">Running</label>
-          <input name="check-hobbies" type="checkbox" id="check-eating" value="eating" data-parsley-multiple="check-hobbies" data-parsley-id="7150">
-          <label for="check-eating">Eating</label>
-          <input name="check-hobbies" type="checkbox" id="check-sleeping" value="sleeping" data-parsley-multiple="check-hobbies" data-parsley-id="7150">
-          <label for="check-sleeping">Sleeping</label>
-        </p>
-</div>
+          <input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >
+          <label for="use_serial_no">استخدام مسلسل للاصناف</label>
+          <input name="enter_supplier" type="checkbox" id="enter_supplier" value="enter_supplier" >
+          <label for="enter_supplier">ادخال المورد اجباري عند تعريف الصنف </label>
+          <input name="use_season" type="checkbox" id="use_season" value="use_season">
+          <label for="use_season">استخدام المواسم عند تعريف الصنف </label>
+          <input name="use_trademark" type="checkbox" id="use_trademark" value="use_trademark">
+          <label for="use_trademark">استخدام الماركات لشركات السيارات </label>
+          <input name="use_model" type="checkbox" id="use_model" value="use_model">
+          <label for="use_model">استخدام الموديلات لشركات السيارات</label>
 
-</div>
+        </p>
+    </div>
+      <div class="row">
+        <div class="col s10 l10">
+            <p>
+              <input type="checkbox" id="checkbox_terms" />
+              <label for="checkbox_terms">اوفق على  <a href="#">شروط الاستخدام</a>.</label>
+            </p>
+
+            <button class="waves-effect btn">تسجيل </button>
+        </div>
+    </div>
+
 
       </div>
+
     </div>
     <!-- /Store Settings -->
 
 
     <!-- Owner Information -->
-    <div class="card">
+    <div class="card minimized">
       <div class="title">
         <h5><i class="mdi mdi-social-person"></i> معلومات المالك</h5>
         <a class="minimize" href="#">
@@ -111,113 +128,82 @@
       <div class="content">
 
         <div class="row no-margin-top">
-          <div class="col s12 l3">
+          <div class="col s12 l2">
             <label for="ecommerce-account-fname">
-              Name
+              الاسم
             </label>
           </div>
           <div class="col s12 m6 l4">
             <div class="input-field">
               <i class="mdi mdi-social-person prefix"></i>
-              <input id="ecommerce-account-fname" type="text" placeholder="First Name">
+              <input id="ecommerce-account-fname" type="text" placeholder="برجاء ادخال الاسم">
             </div>
           </div>
           <div class="col s12 m6 l5">
             <div class="input-field">
               <i class="mdi mdi-social-person prefix"></i>
-              <input id="ecommerce-account-lname" type="text" placeholder="Last Name">
+              <input id="ecommerce-account-lname" type="text" placeholder="برجاء ادخال لقب العائلة">
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col s12 l3">
+          <div class="col s12 l2">
             <label for="ecommerce-account-email">
-              Email
+              البريد الاكتروني
             </label>
           </div>
-          <div class="col s12 l9">
+          <div class="col s12 l4">
             <div class="input-field">
               <i class="mdi mdi-communication-email prefix"></i>
-              <input id="ecommerce-account-email" type="text" placeholder="Email">
+              <input id="ecommerce-account-email" type="text" placeholder="عنوان برديك الاكتروني ">
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col s12 l3">
+          <div class="col s12 l1">
             <label for="ecommerce-account-phone">
-              Phote
+              رقم الهاتف
             </label>
           </div>
-          <div class="col s12 l9">
+          <div class="col s12 l4">
             <div class="input-field">
               <i class="mdi mdi-communication-phone prefix"></i>
-              <input id="ecommerce-account-phone" type="text" placeholder="Phone">
+              <input id="ecommerce-account-phone" type="text" placeholder="رقم الهاتف">
             </div>
           </div>
         </div>
+     <div class="row">
+          <div class="col s12 l2">
+            <label for="ecommerce-account-phone">
+        رقم الموبيل
+            </label>
+          </div>
+          <div class="col s12 l4">
+            <div class="input-field">
+              <i class="mdi mdi-communication-phone prefix"></i>
+              <input id="ecommerce-account-phone" type="text" placeholder="رقم الموبيل ">
+            </div>
+                  <div class="row">
+                    <div class="col s12 l12">
+                        <p>
+                          <input type="checkbox" id="checkbox_terms" />
+                          <label for="checkbox_terms">اوفق على  <a href="#">شروط الاستخدام</a>.</label>
+                        </p>
+
+                        <button class="waves-effect btn">تسجيل </button>
+                    </div>
+                </div>
+          </div>
+
+     </div>
 
       </div>
     </div>
     <!-- /Owner Information -->
 
 
-    <!-- Store Policies -->
-    <div class="card">
-      <div class="title">
-        <h5><i class="mdi mdi-notification-event-available"></i> Store Policies</h5>
-        <a class="minimize" href="#">
-          <i class="mdi-navigation-expand-less"></i>
-        </a>
-      </div>
-      <div class="content">
 
-        <div class="row no-margin-top">
-          <div class="col s12 l3">
-            <label for="ecommerce-refund-policy">
-              Refund Policy
-            </label>
-          </div>
-          <div class="col s12 l9">
-            <div class="input-field">
-              <i class="mdi mdi-notification-event-available prefix"></i>
-              <textarea id="ecommerce-refund-policy" class="materialize-textarea" placeholder="Describe your refund policy"></textarea>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col s12 l3">
-            <label for="ecommerce-privacy-policy">
-              Privacy Policy
-            </label>
-          </div>
-          <div class="col s12 l9">
-            <div class="input-field">
-              <i class="mdi mdi-notification-event-available prefix"></i>
-              <textarea id="ecommerce-privacy-policy" class="materialize-textarea" placeholder="Describe your privacy policy"></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s12 l3">
-            <label for="ecommerce-terms-of-use">
-              Terms of Use
-            </label>
-          </div>
-          <div class="col s12 l9">
-            <div class="input-field">
-              <i class="mdi mdi-notification-event-available prefix"></i>
-              <textarea id="ecommerce-terms-of-use" class="materialize-textarea" placeholder="Describe your terms of use"></textarea>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- /Store Policies -->
 
 
   </section>
