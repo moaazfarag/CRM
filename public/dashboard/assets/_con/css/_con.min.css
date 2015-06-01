@@ -6921,7 +6921,8 @@ code {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: middle;
-    border-top: 1px solid #ddd
+    border-top: 1px solid #ddd;
+    text-align: right;
 }
 
 .table > thead > tr > th {
@@ -6930,7 +6931,8 @@ code {
 }
 
 .table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
-    border-top: 0
+    border-top: 0;
+    text-align: right;
 }
 
 .table > tbody + tbody {

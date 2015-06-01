@@ -43,10 +43,10 @@
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
             <ul>
               <li>
-                <a href="admin/setting" class="waves-effect waves-blue"> بيانات الشركة </a>
+                <a href="/admin/setting" class="waves-effect waves-blue"> بيانات الشركة </a>
               </li>
               <li>
-                <a href="dashboard-v1.html" class="waves-effect waves-blue"> Dashboard v1</a>
+                <a href="/admin/product" class="waves-effect waves-blue">اصناف الشركة</a>
               </li>
             </ul>
           </li>
@@ -260,19 +260,6 @@
               <li><a class="waves-effect waves-blue" href="ui-datatables.html">Data Tables</a>
               </li>
             </ul>
-          </li>
-
-          <li class="label">Stats</li>
-          <li class="content">
-            <span><i class="fa fa-spinner"></i> Server Load</span>
-            <div class="progress small light-green lighten-4">
-              <div class="light-green accent-5" style="width: 37%"></div>
-            </div>
-
-            <span><i class="fa fa-thumbs-o-up"></i> User Satisfaction</span>
-            <div class="progress small">
-              <div style="width: 91%"></div>
-            </div>
           </li>
         </ul>
 

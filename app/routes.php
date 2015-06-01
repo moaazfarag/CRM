@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@index');
 Route::group(array('prefix'=>'admin'),function(){
 
-    Route::resource('/','HomeController');
-    Route::get('setting','HomeController@creatSetting');
+    Route::get('/','dashboardController@index');
+    Route::get('setting','dashboardController@createSetting');
+    Route::get('product','dashboardController@manageProduct');
 
 });
