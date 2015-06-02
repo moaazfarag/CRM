@@ -28,5 +28,9 @@ class dashboardController extends BaseController {
 	{
 		return View::make('dashboard.product_home');
 	}
+    public function accounts()
+	{
+		return View::make('dashboard.accounts_home');
+	}
 
 }

@@ -41,7 +41,6 @@
   <!-- Main -->
   {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
 
-  {{--{{ HTML::style('dashboard/css/bootstrap.css') }}--}}
 
   <!--[if lt IE 9]>
     <script src="assets/html5shiv/html5shiv.min.js') }}

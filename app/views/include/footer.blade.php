@@ -29,9 +29,58 @@
       <!-- Main -->
       {{ HTML::script('dashboard/assets/_con/js/_con.min.js') }}
 
-
+                {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
       <!-- Google Prettify -->
       {{ HTML::script('dashboard/assets/google-code-prettify/prettify.js') }}
+      {{ HTML::script('dashboard/assets/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}
+              <script>
+                $('#table_customers').DataTable({
+      "iDisplayLength": 5,
+      "bLengthChange": false,
+                  "aLengthMenu": [
+                      [5, 10, 25, 50, -1],
+                      [5, 10, 25, 50, "all"]
+                    ],
+      "dom": 'Tlfrtip',
+                "tableTools": {
+                  "sSwfPath": "{{ URL::asset('dashboard/assets/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf') }}"
+                }
+                });
+              </script>
+               <script>
+                $('#table_expenses').DataTable({
+                  "bLengthChange": false,
+                  "aLengthMenu": [
+                      [5, 10, 25, 50, -1],
+                      [5, 10, 25, 50, "all"]
+                    ]
+                });
+              </script>               <script>
+                $('#table_supplier').DataTable({
+                  "bLengthChange": false,
+                  "aLengthMenu": [
+                      [5, 10, 25, 50, -1],
+                      [5, 10, 25, 50, "all"]
+                    ]
+                });
+              </script>               <script>
+                $('#table_partners').DataTable({
+                  "bLengthChange": false,
+                  "aLengthMenu": [
+                      [5, 10, 25, 50, -1],
+                      [5, 10, 25, 50, "all"]
+                    ]
+                });
+              </script>               <script>
+                $('#table_bank').DataTable({
+                  "bLengthChange": false,
+                  "aLengthMenu": [
+                      [5, 10, 25, 50, -1],
+                      [5, 10, 25, 50, "all"]
+                    ]
+                });
+              </script>
+                      {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
       <script>
         /*
          * Revenue Line Chart

@@ -8,6 +8,12 @@
            <!--h1>@@title</h1-->
            <nav>
              <ul class="left">
+            <li>
+            <a href="/admin/accounts">الحسابات </a>
+            </li>
+               <li>
+               <a href="/admin/product">الاصناف </a>
+               </li>
                <li class="active"  >
                <a href="/admin/setting">بيانات الموقع</a>
                </li>

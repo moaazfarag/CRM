@@ -48,6 +48,9 @@
               <li>
                 <a href="/admin/product" class="waves-effect waves-blue">اصناف الشركة</a>
               </li>
+              <li>
+                <a href="/admin/accounts" class="waves-effect waves-blue">الحسابات </a>
+              </li>
             </ul>
           </li>
 

@@ -8,15 +8,20 @@
            <!--h1>@@title</h1-->
            <nav>
              <ul class="left">
-               <li class="active"  >
-               <a href="/admin/setting">الاصناف </a>
+            <li>
+            <a href="/admin/accounts">الحسابات </a>
+            </li>
+               <li class="active" >
+               <a href="/admin/product">الاصناف </a>
+               </li>
+               <li  >
+               <a href="/admin/setting">بيانات الموقع</a>
                </li>
                 <li>
                <a href="/admin">الرئيسية</a>
                </li>
              </ul>
            </nav>
-
          </div>
 
        </div>

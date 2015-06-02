@@ -17,5 +17,6 @@ Route::group(array('prefix'=>'admin'),function(){
     Route::get('/','dashboardController@index');
     Route::get('setting','dashboardController@createSetting');
     Route::get('product','dashboardController@manageProduct');
+    Route::get('accounts','dashboardController@accounts');
 
 });
