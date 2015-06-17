@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::group(array('prefix'=>'admin'),function(){
+    Route::get('/', 'HomeController@index');
+    Route::group(array('prefix'=>'admin'),function(){
 
-    Route::get('/','dashboardController@index');
-    Route::get('setting','dashboardController@createSetting');
-    Route::get('product','dashboardController@manageProduct');
-    Route::get('accounts','dashboardController@accounts');
+        Route::get('/','dashboardController@index');
+        Route::get('setting','dashboardController@createSetting');
+        Route::get('product','dashboardController@manageProduct');
+        Route::get('accounts','dashboardController@accounts');
+        Route::get('hr','dashboardController@hr');
 
-});
+    });

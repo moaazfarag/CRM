@@ -9,6 +9,9 @@
            <nav>
 
              <ul class="left">
+             <li>
+             <a href="/admin/hr">شئون العاملين </a>
+             </li>
             <li class="active">
             <a href="/admin/accounts">الحسابات </a>
             </li>
