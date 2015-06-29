@@ -11,7 +11,7 @@
 |
 */
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeControlledr@index');
     Route::group(array('prefix'=>'admin'),function(){
 
         Route::get('/','dashboardController@index');
