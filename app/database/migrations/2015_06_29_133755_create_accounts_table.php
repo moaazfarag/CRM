@@ -19,13 +19,13 @@ class CreateAccountsTable extends Migration {
 			
 			$table->string('acc_type');
 			$table->string('acc_name');
+			$table->string('acc_num');
 			$table->string('acc_address');
 			$table->string('acc_tel');
 			$table->string('acc_mobile_1');
 			$table->string('acc_mobile_2');
 			$table->string('acc_email');
 			$table->string('acc_limit');
-	
 			$table->string('user_id');
 			$table->timestamps();
 		});
