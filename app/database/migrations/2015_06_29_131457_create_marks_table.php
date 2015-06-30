@@ -16,7 +16,6 @@ class CreateMarksTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('co_id');
-			$table->string('mark_code');
 			$table->string('mark_name');
 			$table->string('user_id');
 			$table->timestamps();

@@ -17,7 +17,6 @@ class CreateModelsTable extends Migration {
 			$table->increments('id');
 			$table->string('co_id');
 			$table->string('mark_code');
-			$table->string('model_code');
 			$table->string('model_name');
 			$table->string('user_id');
 			$table->timestamps();
