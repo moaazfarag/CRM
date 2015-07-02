@@ -15,9 +15,9 @@ class CreateMarksTable extends Migration {
 		Schema::create('marks', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('co_id');
-			$table->string('mark_name');
-			$table->string('user_id');
+			$table->integer('co_id');
+			$table->string('marks_name');
+			$table->integer('user_id');
 			$table->timestamps();
 		});
 	}

@@ -14,8 +14,8 @@ class modelsSeeder extends Seeder {
 	array(
 
 	    	'co_id'       =>'1',
-	    	'mark_code'   =>'1',
-	    	'model_name'  =>'بنطلون',
+	    	'marks_id'   =>'1',
+	    	'models_name'  =>'بنطلون',
 	    	'user_id'     =>'1',
 	
 	    ),
@@ -23,8 +23,8 @@ class modelsSeeder extends Seeder {
   	array(
 
 	    	'co_id'       =>'2',
-	    	'mark_code'   =>'2',
-	    	'model_name'  =>'x5',
+	    	'marks_id'   =>'2',
+	    	'models_name'  =>'x5',
 	    	'user_id'     =>'2',
 	
 	    ),
@@ -32,8 +32,8 @@ class modelsSeeder extends Seeder {
   	array(
 
 	    	'co_id'       =>'3',
-	    	'mark_code'   =>'3',
-	    	'model_name'  =>'الملكة',
+	    	'marks_id'   =>'3',
+	    	'models_name'  =>'الملكة',
 	    	'user_id'     =>'3',
 	
 	    ),

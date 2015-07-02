@@ -12,7 +12,7 @@ class seasonsSeeder extends Seeder {
 	    array(
 
 	    	'co_id'      =>'1',
-	    	'seson_name' =>'فصل الشتاء',
+	    	'seasons_name' =>'فصل الشتاء',
 	    	'user_id'    =>'1',
 	
 	    ), 
@@ -20,13 +20,13 @@ class seasonsSeeder extends Seeder {
 	      array(
 
 	    	'co_id'      =>'2',
-	    	'seson_name' =>'فصل الصيف ',
+	    	'seasons_name' =>'فصل الصيف ',
 	    	'user_id'    =>'2',
 	
 	    ),   array(
 
 	    	'co_id'      =>'3',
-	    	'seson_name' =>' طوال العام',
+	    	'seasons_name' =>' طوال العام',
 	    	'user_id'    =>'3',
 	
 	    ),

@@ -18,9 +18,9 @@ class CreateCoDataTable extends Migration {
 
 			$table->string('co_name');
 			$table->mediumText('co_address');
-			$table->string('co_tel');
-			$table->string('co_mobile_1');
-			$table->string('co_mobile_2');
+			$table->integer('co_tel');
+			$table->integer('co_mobile_1');
+			$table->integer('co_mobile_2');
 			$table->string('co_carrency');
 			$table->string('co_print_size');
 			$table->string('co_use_seireal');
@@ -28,7 +28,7 @@ class CreateCoDataTable extends Migration {
 			$table->string('co_use_season');
 			$table->string('co_use_markes_models');
 			$table->string('co_statues');
-			$table->string('user_id');
+			$table->integer('user_id');
 
 	
 			$table->timestamps();

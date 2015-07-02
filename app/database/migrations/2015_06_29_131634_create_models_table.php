@@ -15,10 +15,10 @@ class CreateModelsTable extends Migration {
 		Schema::create('models', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('co_id');
-			$table->string('mark_code');
-			$table->string('model_name');
-			$table->string('user_id');
+			$table->integer('co_id');
+			$table->integer('marks_id');
+			$table->string('models_name');
+			$table->integer('user_id');
 			$table->timestamps();
 		});
 	}

@@ -16,10 +16,10 @@ class CreateBranchesTable extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->string('co_id');
+			$table->integer('co_id');
 			$table->string('br_name');
 			$table->string('br_address');
-			$table->string('user_id');
+			$table->integer('user_id');
 
 			$table->timestamps();
 		});

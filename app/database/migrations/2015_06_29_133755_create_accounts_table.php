@@ -15,7 +15,7 @@ class CreateAccountsTable extends Migration {
 		Schema::create('accounts', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('co_id');
+			$table->integer('co_id');
 			
 			$table->string('acc_type');
 			$table->string('acc_name');
@@ -26,7 +26,7 @@ class CreateAccountsTable extends Migration {
 			$table->string('acc_mobile_2');
 			$table->string('acc_email');
 			$table->string('acc_limit');
-			$table->string('user_id');
+			$table->integer('user_id');
 			$table->timestamps();
 		});
 	}
