@@ -16,14 +16,14 @@ class CreateItemsTable extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->string('co_id');
-			$table->string('cat_code');
+			$table->integer('co_id');
+			$table->integer('cat_id');
 			$table->string('item_name');
 			$table->string('unit');
 			$table->string('supplier');
-			$table->string('season');
-			$table->string('mark');
-			$table->string('model');
+			$table->integer('seasons_id');
+			$table->integer('marks_id');
+			$table->integer('models_id');
 			$table->string('bar_code');
 			$table->float('buy');
 			$table->float('sell_users');
