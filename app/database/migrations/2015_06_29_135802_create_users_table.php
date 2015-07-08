@@ -20,12 +20,13 @@ class CreateUsersTable extends Migration {
 			$table->string('all_br');
 
 			$table->string('name');
-			$table->string('user_name');
+			$table->string('username');
 			$table->string('password');
 			$table->string('email');
 			$table->string('permission');
 			$table->string('photo');
-			
+
+			$table->string('session_id');
 			$table->rememberToken();
 			$table->timestamps();
 		});

@@ -21,13 +21,13 @@ class CreateCoDataTable extends Migration {
 			$table->integer('co_tel');
 			$table->integer('co_mobile_1');
 			$table->integer('co_mobile_2');
-			$table->string('co_carrency');
+			$table->string('co_currency');
 			$table->string('co_print_size');
-			$table->string('co_use_seireal');
-			$table->string('co_supplier_must');
-			$table->string('co_use_season');
-			$table->string('co_use_markes_models');
-			$table->string('co_statues');
+			$table->boolean('co_use_serial');
+			$table->boolean('co_supplier_must');
+			$table->boolean('co_use_season');
+			$table->boolean('co_use_markes_models');
+			$table->boolean('co_statues');
 			$table->integer('user_id');
 
 	

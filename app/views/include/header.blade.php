@@ -9,17 +9,16 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>الراصد</title>
-
+    <title>الراصد | {{ @$title }} </title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
 
   <link rel="icon" type="image/png" href="{{ URL::asset('dashboard/assets/_con/images/icon.png') }}">
-        <style>
-          @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
-        </style>
+        {{--<style>--}}
+          {{--@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);--}}
+        {{--</style>--}}
   <!-- nanoScroller -->
 
     {{ HTML::style('dashboard/assets/nanoScroller/nanoscroller.css') }}
@@ -87,8 +86,12 @@
             </li>
             <li><a href="#!"><i class="fa fa-cogs"></i> الاعدادت</a>
             </li>
-            <li class="divider"></li>
-            <li><a href="/logout"><i class="fa fa-sign-out"></i> تسجيل خروج</a>
+            <li class="divider">
+
+            </li>
+            <li>
+                <a href="/logout">
+                    <i class="fa fa-sign-out"></i> تسجيل خروج</a>
             </li>
           </ul>
         </li>
