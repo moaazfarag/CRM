@@ -4433,7 +4433,7 @@ button.btn-floating {
     cursor: pointer;
     line-height: 1.5rem;
     width: 100%;
-    text-align: left;
+    text-align: right;
     text-transform: none
 }
 
@@ -5144,6 +5144,7 @@ form p:last-child {
     height: 25px;
     line-height: 25px;
     font-size: 1rem;
+    float: right;
     -khtml-user-select: none;
     -ms-user-select: none
 }

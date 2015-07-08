@@ -1,7 +1,7 @@
 <?php
 
 
-class Co_data extends Eloquent {
+class CoData extends Eloquent {
 
 
 	/**
