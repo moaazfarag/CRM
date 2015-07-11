@@ -27,11 +27,11 @@ class BranchController extends  BaseController
     public  function storeBranch()
     {
     //d(Input::get('branch_name') );
-        $branch = new Branches;
+        $branch             = new Branches; //object from branch will add
         $branch->br_name    = Input::get('branch_name');
         $branch->br_address = Input::get('branch_address');
-        $branch->user_id    = Auth::id();
-        $branch->co_id      = Auth::user()->co_id;
+        $branch->user_id    = Auth::id();  // id of user  who add  this branch
+        $branch->co_id      = Auth::user()->co_id;// id of company related this branch
         $branch->save();
         return Redirect::route('addBranch');
     }
@@ -42,20 +42,26 @@ class BranchController extends  BaseController
      */
     public  function editBranch()
     {
-        $id = Input::get('branch_id');
-        $data = $this->settingData();
-        $data['branch'] = Branches::find($id);
-        $data['miniBranch']  = "" ;
+        $id                  = Input::get('branch_id');
+        $data                = $this->settingData(); //company info data
+        $data['branch']      = Branches::findOrFail($id); //get branch will update
+        $data['miniBranch']  = "" ; //to maxmize  branch card in view
         return View::make('dashboard.setting', $data);
     }
+
+    /**
+     * update branch into database
+     * @param $id of branch
+     * @return mixed
+     */
     public  function updateBranch($id)
     {
         //d(Input::get('branch_name') );
-        $branch =  Branches::findOrFail($id);
+        $branch             =  Branches::findOrFail($id); //object from branch will update
         $branch->br_name    = Input::get('branch_name');
         $branch->br_address = Input::get('branch_address');
-        $branch->user_id    = Auth::id();
-        $branch->co_id      = Auth::user()->co_id;
+        $branch->user_id    = Auth::id(); // id of user  who update this branch
+        $branch->co_id      = Auth::user()->co_id; // id of company related this branch
         $branch->update();
         return Redirect::route('addBranch');
 //        return Redirect::route('editBranch',array("branch_id"=>$branch->id));

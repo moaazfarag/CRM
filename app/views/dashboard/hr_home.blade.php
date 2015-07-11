@@ -8,7 +8,7 @@
            <!--h1>@@title</h1-->
            <nav>
              <ul class="left">
-            <li class="active"  >
+            <li class="{{ @$active }}"  >
             <a href="/admin/hr">شئون العاملين </a>
             </li>
             <li>

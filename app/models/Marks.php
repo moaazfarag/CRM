@@ -1,7 +1,7 @@
 <?php
 
 
-class Models extends Eloquent {
+class Marks extends Eloquent {
 
 
 	/**
@@ -9,7 +9,7 @@ class Models extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'models';
+	protected $table = 'marks';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -22,9 +22,9 @@ class Models extends Eloquent {
         return $this->belongsTo('Co_data','co_id');
     }
 
-    public function models()
-    {
-        return $this->hasMany('Models','marks_id');
-    }
+//    public function marks()
+//    {
+//        return $this->hasMany('Models','marks_id');
+//    }
 
 }
