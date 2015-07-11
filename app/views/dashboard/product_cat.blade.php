@@ -1,47 +1,52 @@
-      <div id="product_cat" class="col s12">
- <!-- الفروع -->
-        <div class="card minimized">
+@extends('dashboard.main')
+@section('content')
+    @include('dashboard.product_nav')
+<div id="product_cat" class="col s12">
+ <!-- الاصناف  -->
+        <div class="card {{ @$categoryMini }}">
           <div class="title">
-            <h5><i class="mdi mdi-notification-event-available"></i> اضف فئة جديدة</h5>
+            <h5>
+                <i class="mdi mdi-notification-event-available"></i> اضف فئة جديدة</h5>
             <a class="minimize" href="#">
               <i class="mdi-navigation-expand-less"></i>
             </a>
           </div>
           <div class="content">
+              @if(isset($editCategory->name))
+                {{ Form::model($editCategory,array('route'=>array('updateCategory',$editCategory->id))) }}
+              @else
+                {{ Form::open(array('route'=>'storeCategory')) }}
+              @endif
         <div class="row no-margin-top">
           <div class="col s12 l2">
-            <label for="branch-name">
-اسم الفرع
+            <label for="name">
+اسم  {{@$arabicName}}
             </label>
           </div>
           <div class="col s12 m6 l6">
             <div class="input-field">
               <i class="mdi mdi-social-person prefix"></i>
-              <input id="branch-name" type="text" placeholder="  اسم الفرع">
+                {{Form::text('name',null,array('required','placeholder'=>"اسم   ". @$arabicName,'id'=>'name')) }}
+                  {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
             </div>
           </div>
-
         </div>
-                <div class="row no-margin-top">
-                  <div class="col s12 l2">
-                    <label for="branch-address">
-عنوان الفرع
-                    </label>
-                  </div>
-                  <div class="col s12 m6 l8">
-                    <div class="input-field">
-                      <i class="mdi mdi-social-person prefix"></i>
-                      <input id="branch-address" type="text" placeholder="عنوان  الفرع">
-                    </div>
-                  </div>
-
-                </div>
-
+                  <div class="input-field">
+                  {{--<p>--}}
+                  {{--<label for="cat_name">ادخال المورد اجباري عند تعريف الصنف </label>--}}
+                  {{--{{ Form::checkbox('cat_name', 1,null,array('id'=>'cat_name')) }}--}}
+                  {{--</p>--}}
+</div>
                   <div class="row">
                     <div class="col s12 l12">
 
+                        @if(isset($editCategory->name))
+                            <button class="waves-effect btn">تعديل </button>
+                        @else
+                            <button class="waves-effect btn">اضف </button>
+                        @endif
 
-                        <button class="waves-effect btn">اضف </button>
+                        {{ Form::close() }}
                     </div>
                 </div>
                 </div>
@@ -50,3 +55,8 @@
 </div>
         <!-- /عرض الفروع -->
 
+
+@include('include.search')
+
+</section>
+@stop

@@ -33,7 +33,7 @@
     </div>
 
 
-    <div class="nano">
+    <div class="nano has-scrollbar">
       <div class="nano-content">
 
         <ul>
@@ -41,19 +41,42 @@
           <li  class="label">البيانات الاساسية</li>
           <li class="open">
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                </li>
             <ul>
-              <li>
-                <a href="/admin/setting" class="waves-effect waves-blue"> بيانات الشركة </a>
-              </li>
-              <li>
-                <a href="/admin/product" class="waves-effect waves-blue">اصناف الشركة</a>
-              </li>
-              <li>
-                <a href="/admin/accounts" class="waves-effect waves-blue">الحسابات </a>
-              </li>
-              <li>
+                <li>
+                    <a href="{{ URL::route('editCompanyInfo') }}" class="waves-effect waves-blue"> بيانات الشركة </a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue">اصناف الشركة</a>
+                </li>
+                <li class="">
+                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  الحسابات<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                    <ul>
+
+                        <li>
+                            <a href="{{ URL::route('addAccount',array('customers')) }}" class="waves-effect waves-blue">اضف عميل </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('addAccount',array('suppliers')) }}" class="waves-effect waves-blue">اضف مورد </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('addAccount',array('bank')) }}" class="waves-effect waves-blue">اضف بنك </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('addAccount',array('expenses')) }}" class="waves-effect waves-blue">اضف نفاقات </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('addAccount',array('multiple_revenue')) }}" class="waves-effect waves-blue">اضف بنك </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+            <li>
                 <a href="/admin/hr" class="waves-effect waves-blue">شئون العاملين </a>
               </li>
+            </ul>
             </ul>
           </li>
 

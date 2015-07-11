@@ -45,7 +45,7 @@
     <script src="assets/html5shiv/html5shiv.min.js') }}
   <![endif]-->
 </head>
-<body class="yay-hide">
+<body>
 
 
   <!--
