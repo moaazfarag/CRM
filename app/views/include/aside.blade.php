@@ -47,7 +47,7 @@
                     <a href="{{ URL::route('editCompanyInfo') }}" class="waves-effect waves-blue"> بيانات الشركة </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue">اصناف الشركة</a>
+                    <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">اصناف الشركة</a>
                 </li>
                 <li class="">
                     <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  الحسابات<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
@@ -74,7 +74,7 @@
                 </li>
 
             <li>
-                <a href="/admin/hr" class="waves-effect waves-blue">شئون العاملين </a>
+                <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">شئون العاملين </a>
               </li>
             </ul>
             </ul>

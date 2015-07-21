@@ -20,9 +20,8 @@ class CreateItemsTable extends Migration {
 			$table->integer('cat_id');
 			$table->string('item_name');
 			$table->string('unit');
-			$table->string('supplier');
+			$table->integer('supplier_id');
 			$table->integer('seasons_id');
-			$table->integer('marks_id');
 			$table->integer('models_id');
 			$table->string('bar_code');
 			$table->float('buy');
@@ -30,10 +29,9 @@ class CreateItemsTable extends Migration {
 			$table->float('sell_nos_gomla');
 			$table->float('sell_gomla');
 			$table->float('sell_gomla_gomla');
-			
 			$table->string('limit');
 			$table->longText('notes');
-			$table->string('user_id');
+			$table->integer('user_id');
 
 			$table->timestamps();
 		});

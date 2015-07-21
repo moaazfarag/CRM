@@ -27,7 +27,7 @@ class Cat extends Eloquent {
 
     public function items()
     {
-        return $this->hasMany('Items','cat_id');
+        return $this->hasMany('Items','cat_id','id');
     }
 
 

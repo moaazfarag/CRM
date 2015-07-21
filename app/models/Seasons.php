@@ -24,7 +24,7 @@ class Seasons extends Eloquent {
 
     public function items()
     {
-        return $this->hasMany('Items','seasons_id');
+        return $this->hasMany('Items','seasons_id','id');
     }
 
 }

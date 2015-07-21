@@ -25,7 +25,7 @@ class CategoryController extends  BaseController
         public function storeCategory()
             {
                 $category           = new Cat ;
-                $category->name = Input::get('name'); //category name from input
+                $category->name     = Input::get('name'); //category name from input
                 $category->co_id    = Auth::user()->co_id; // company id
                 $category->user_id  = Auth::id();// user who add this record
                 $category->save();
