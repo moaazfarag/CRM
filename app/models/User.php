@@ -22,13 +22,31 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
+    public static $store_rules = array(
+        'password'         => 'required|min:8',
+        'username'         => 'required|unique:users,username' ,
+        'name'             => 'required',
+        'email'            => 'required|email|unique:users,email' ,
+        'confirm_password' => 'required|same:password',
+        'all_br'           => 'boolean',
 
+    );
+
+    public function formattedCreatedDate()
+    {
+        if ($this->created_at->diffInDays() > 15)
+        {
+            return  $this->created_at->toFormattedDateString();
+        } else {
+            return $this->created_at->diffForHumans();
+        }
+    }
 
 
     public function branch()
 
     {
-        return $this->hasMany('Branches','user_id');
+        return $this->belongsTo('Branches','user_id');
     }
 
     public function cat()
@@ -64,6 +82,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     {
         return $this->hasMany('Accounts','user_id');
+    }
+    public function company()
+
+    {
+        return $this->belongsTo('CoData','user_id');
     }
 
 

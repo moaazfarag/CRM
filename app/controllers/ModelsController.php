@@ -38,13 +38,13 @@ class ModelsController extends BaseController
         //dd('saddsa');
         $data = $this->modelData();
         $data['catActive'] = "active";
-        $data['editModel']  = Marks::findOrFail($id);
+        $data['editModel']  = Models::findOrFail($id);
         return View::make('dashboard.product_models',$data);
 
     }
     public function updateModel($id)
     {
-        $model           = Marks::findOrFail($id) ;
+        $model           = Models::findOrFail($id) ;
         $model->name = Input::get('name'); //season name from input
         $model->co_id    = Auth::user()->co_id; // company id
         $model->user_id  = Auth::id();// user who add this record
@@ -66,7 +66,7 @@ class ModelsController extends BaseController
         $data['seasonInputName'] = "seasons";
         $data['modelMini'] = "";
         $data['arabicName'] = "الماركة";
-        $data['tablesData'] = Marks::all();
+        $data['tablesData'] = Models::all();
         return $data;
     }
 }

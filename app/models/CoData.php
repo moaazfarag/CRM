@@ -16,7 +16,15 @@ class CoData extends Eloquent {
 	 *
 	 * @var array
 	 */
-
+    public function formattedCreatedDate()
+    {
+        if ($this->created_at->diffInDays() > 15)
+        {
+            return  $this->created_at->toFormattedDateString();
+        } else {
+            return $this->created_at->diffForHumans();
+        }
+    }
 
     public function branches()
     {
@@ -51,5 +59,9 @@ class CoData extends Eloquent {
     public function accounts()
     {
         return $this->hasMany('Accounts','co_id');
+    }
+    public function users()
+    {
+        return $this->hasMany('User','co_id');
     }
 }
