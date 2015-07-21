@@ -21,10 +21,10 @@
               <td>{{$item->item_name}}</td>
               <td>{{$item->buy}}</td>
               <td>{{$item->unit}}</td>
-              <th>{{$item->cat->name}}</th>
-              <th>{{$item->accounts->acc_name}}</th>
-              <th>{{$item->seasons->name}}</th>
-              <th>{{$item->models->name}}</th>
+              <th>{{@$item->cat->name}}</th>
+              <th>{{@$item->accounts->acc_name}}</th>
+              <th>{{@$item->seasons->name}}</th>
+              <th>{{@$item->models->name}}</th>
               <th>{{$item->limit}}</th>
               <th>{{$item->notes}}</th>
               <td>
