@@ -64,6 +64,7 @@ class UserController extends BaseController
             $newUser = new User;
             $newUser->co_id = Auth::user()->co_id;
             $newUser->br_code = Input::get('br_code');
+            $newUser->id =  User::max('id')+1 ;
             $newUser->all_br = Input::get('all_br');
             $newUser->name = Input::get('name');
             $newUser->username = Input::get('username');
