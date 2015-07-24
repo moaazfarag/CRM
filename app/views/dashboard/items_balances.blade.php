@@ -8,12 +8,12 @@
               {{ Form::model($item,array('route'=>array('updateItem',$item->id))) }}
               @endif
 <div class="card">
-          {{--<div class="title">--}}
-            {{--<h5><i class="mdi mdi-notification-event-available"></i> {{ @$title }}  </h5>--}}
-            {{--<a class="minimize" href="#">--}}
-              {{--<i class="mdi-navigation-expand-less"></i>--}}
-            {{--</a>--}}
-          {{--</div>--}}
+          <div class="title">
+                <h5><i class="mdi mdi-notification-event-available"></i> {{ @$title }}  </h5>
+                <a class="minimize" href="#">
+                  <i class="mdi-navigation-expand-less"></i>
+                </a>
+          </div>
       <div class="content">
           <div class="row no-margin-top">
 
@@ -81,7 +81,7 @@
     </div>
                   <table id="table_bank" class="display table table-bordered table-striped table-hover">
 
-{{--                  @include('dashboard.item_table_view')--}}
+                  @include('dashboard.items_balances_table_view')
 </div>
 </div>
       @include('include.search')
