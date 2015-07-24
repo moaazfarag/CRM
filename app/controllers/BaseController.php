@@ -23,4 +23,12 @@ class BaseController extends Controller {
         $data['branches']     = Branches::where('co_id','=',Auth::user()->co_id)->get();
         return $data;
     }
+
+    /**
+     * @return mixed
+     */
+    public function coAuth()
+    {
+        return Auth::user()->co_id;
+    }
 }

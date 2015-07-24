@@ -15,7 +15,7 @@ class modelsSeeder extends Seeder {
 
 	    	'co_id'       =>'1',
 	    	'marks_id'   =>'1',
-	    	'models_name'  =>'بنطلون',
+	    	'name'  =>'بنطلون',
 	    	'user_id'     =>'1',
 	
 	    ),
@@ -24,7 +24,7 @@ class modelsSeeder extends Seeder {
 
 	    	'co_id'       =>'2',
 	    	'marks_id'   =>'2',
-	    	'models_name'  =>'x5',
+	    	'name'  =>'x5',
 	    	'user_id'     =>'2',
 	
 	    ),
@@ -33,7 +33,7 @@ class modelsSeeder extends Seeder {
 
 	    	'co_id'       =>'3',
 	    	'marks_id'   =>'3',
-	    	'models_name'  =>'الملكة',
+	    	'name'  =>'الملكة',
 	    	'user_id'     =>'3',
 	
 	    ),

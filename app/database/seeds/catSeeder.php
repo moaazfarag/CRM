@@ -13,14 +13,14 @@ class catSeeder extends Seeder {
 	    array(
 
 	    	'co_id'    =>'1',
-	    	'cat_name' =>'بنطلون',
+	    	'name' =>'بنطلون',
 	    	'user_id'  =>'1',
 	    ),
 
 	    array(
 
 	    	'co_id'    =>'2',
-	    	'cat_name' =>'سيارات',
+	    	'name' =>'سيارات',
 	    	'user_id'  =>'2',
 	    ),
 
@@ -28,7 +28,7 @@ class catSeeder extends Seeder {
 	    array(
 
 	    	'co_id'    =>'3',
-	    	'cat_name' =>'مكرونة',
+	    	'name' =>'مكرونة',
 	    	'user_id'  =>'3',
 	    ),
 

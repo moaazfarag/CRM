@@ -23,10 +23,11 @@ class UserController extends BaseController
     public function checkLogin()
     {
         $rules = array(
-            'password'=> 'required',
-            'username'=> 'required',
-        );
+                        'password'=> 'required',
+                        'username'=> 'required',
+                      );
         $validator=Validator::make(Input::all(),$rules);
+
         if($validator->fails())
         {
             return Redirect::back()->withErrors($validator)->withInput();

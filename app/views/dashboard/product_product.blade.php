@@ -153,7 +153,7 @@
     </div>
                   <table id="table_bank" class="display table table-bordered table-striped table-hover">
 
-                  @include('dashboard.product_table_view')
+                  @include('dashboard.item_table_view')
 </div>
 </div>
       @include('include.search')

@@ -16,7 +16,7 @@ class CreateSeasonsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('co_id');
-			$table->string('seasons_name');
+			$table->string('name');
 			$table->integer('user_id');
 			
 			$table->timestamps();

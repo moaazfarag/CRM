@@ -44,7 +44,7 @@ class CategoryController extends  BaseController
         public function updateCategory($id)
             {
                 $category           = Cat::findOrFail($id) ;
-                $category->name = Input::get('name'); //category name from input
+                $category->name     = Input::get('name'); //category name from input
                 $category->co_id    = Auth::user()->co_id; // company id
                 $category->user_id  = Auth::id();// user who add this record
                 $category->update();
@@ -59,12 +59,12 @@ class CategoryController extends  BaseController
         protected function categoryData()
         {
 
-            $data['title'] = "فئات الاصناف";
-            $data['activeCatNav'] = "active";
-            $data['catFunName'] = "editCategory";
-            $data['categoryMini'] = "";
-            $data['arabicName'] = "الصنف";
-            $data['tablesData'] = Cat::all();
+            $data['title']          = "فئات الاصناف";
+            $data['activeCatNav']   = "active";
+            $data['catFunName']     = "editCategory";
+            $data['categoryMini']   = "";
+            $data['arabicName']     = "الصنف";
+            $data['tablesData']     = Cat::all();
             return $data;
         }
 }

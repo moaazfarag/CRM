@@ -97,12 +97,21 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     }
     );
 
-
+    /**
+     *  Items Balances Area
+     */
+    Route::group(array('prefix'=>'ItemBalance'),function()
+    {
+        Route::get('Add-Items-Balances', array('uses' => 'ItemsBalancesController@addItemsBalances','as' => 'addItemsBalances'));
+        Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
+    });
 
     Route::get('product','dashboardController@manageProduct');
 
 
     Route::get('accounts','dashboardController@accounts');
     Route::get('hr','dashboardController@hr');
+
+
 
 });

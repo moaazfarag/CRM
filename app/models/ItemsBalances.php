@@ -8,13 +8,18 @@ class ItemsBalances extends Eloquent {
 	 *
 	 * @var string
 	 */
-
 	protected $table = 'items_balances';
 
 	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
+	 * Store Rules
 	 * @var array
 	 */
+    public static  $store_rules = array(
+            'item_id'          => 'integer',
+            'bar_code'         => 'min:3',
+            'qty'              => 'required|integer|min:1',
+            'cost'             => 'integer',
+            'serial_no'        => 'string'
+                                        );
 
 }

@@ -16,8 +16,8 @@ class ItemController extends BaseController
     {
         $data['title']     = "اضف منتج جديد"; // page title
         $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
-        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-        $data['accounts'] = Accounts::where('acc_type','=','suppliers')
+        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+        $data['accounts']  = Accounts::where('acc_type','=','suppliers')
                                         ->where('co_id','=',Auth::user()->co_id)
                                         ->get()
                                         ->lists('acc_name','id');// suppliers from accounts table
@@ -114,11 +114,5 @@ class ItemController extends BaseController
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function coAuth()
-    {
-        return Auth::user()->co_id;
-    }
+
 }
