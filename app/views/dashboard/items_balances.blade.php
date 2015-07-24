@@ -4,8 +4,8 @@
       <div id="bank" class="col s12">
             @if(Route::currentRouteName() == 'addItemsBalances')
         {{ Form::open(array('route'=>array('storeItemsBalances'))) }}
-            @elseif(Route::currentRouteName() == 'editItem')
-              {{ Form::model($item,array('route'=>array('updateItem',$item->id))) }}
+            @elseif(Route::currentRouteName() == 'editItemsBalances')
+              {{ Form::model($item,array('route'=>array('updateItemsBalances',$item->id))) }}
               @endif
 <div class="card">
           <div class="title">
@@ -71,7 +71,7 @@
               <div class="col s12 l12">
               @if(Route::currentRouteName() == 'addItemsBalances')
                   <button type="submit" class="waves-effect btn">اضف </button>
-              @elseif(Route::currentRouteName() == 'editItem')
+              @elseif(Route::currentRouteName() == 'editItemsBalances')
                   <button type="submit" class="waves-effect btn">تعديل </button>
               @endif
               </div>

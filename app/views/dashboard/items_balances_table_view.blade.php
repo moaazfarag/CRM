@@ -18,11 +18,11 @@
               <td>{{$item->item_id}}</td>
               <td>{{$item->bar_code}}</td>
               <td>{{$item->qty}}</td>
-              <th>{{@$item->cost}}</th>
-              <th>{{@$item->serial_no}}</th>
-              <th>{{@$item->updated_at}}</th>
+              <th>{{$item->cost}}</th>
+              <th>{{$item->serial_no}}</th>
+              <th>{{$item->updated_at}}</th>
               <td>
-                <a href="{{ URL::route('editItem',array($item->id)) }}" class="btn btn-small z-depth-0">
+                <a href="{{ URL::route('editItemsBalances',array($item->id)) }}" class="btn btn-small z-depth-0">
                     <i class="mdi mdi-editor-mode-edit"></i>
                 </a>
               </td>
