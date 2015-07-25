@@ -25,7 +25,7 @@ class ItemsBalances extends Eloquent {
                                         );
 
     /**
-	 * Store Rules
+	 * update Rules
 	 * @var array
 	 */
     public static  $update_rules = array(

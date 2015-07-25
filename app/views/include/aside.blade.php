@@ -72,7 +72,7 @@
                             <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue"> ارصدة الاصناف </a>
                         </li>
                         <li>
-                            <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue"> ارصدة الحسابات </a>
+                            <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue"> ارصدة الحسابات </a>
                         </li>
 
 

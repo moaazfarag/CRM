@@ -17,4 +17,26 @@ class AccountsBalances extends Eloquent {
 	 * @var array
 	 */
 
+
+    /**
+     * Store Rules
+     * @var array
+     */
+    public static  $store_rules = array
+                (
+                    'debit'          => 'integer',
+                    'credit'         => 'integer'
+                );
+
+    /**
+     * update Rules
+     * @var array
+     */
+    public static  $update_rules = array
+                (
+                    'debit'          => 'integer',
+                    'credit'         => 'integer'
+                );
+
+
 }
