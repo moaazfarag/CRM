@@ -16,7 +16,7 @@ class CreateCatTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('co_id');
-			$table->string('cat_name');			
+			$table->string('name');
 			$table->integer('user_id');
 			$table->timestamps();
 		});

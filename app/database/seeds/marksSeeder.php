@@ -13,21 +13,21 @@ class marksSeeder extends Seeder {
 	    array(
 
 	    	'co_id'      =>'1',
-	    	'marks_name'  =>'nike',
+	    	'name'  =>'nike',
 	    	'user_id'    =>'1',
 
 	    ),
     array(
 
 	    	'co_id'      =>'2',
-	    	'marks_name'  =>'bmw',
+	    	'name'  =>'bmw',
 	    	'user_id'    =>'2',
 
 	    ),
     array(
 
 	    	'co_id'     =>'3',
-	    	'marks_name' =>'مكرونة الملكة',
+	    	'name' =>'مكرونة الملكة',
 	    	'user_id'   =>'3',
 
 	    ),

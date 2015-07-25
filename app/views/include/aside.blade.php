@@ -68,6 +68,12 @@
                         <li>
                             <a href="{{ URL::route('addAccount',array('multiple_revenue')) }}" class="waves-effect waves-blue">اضف بنك </a>
                         </li>
+                        <li>
+                            <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue"> ارصدة الاصناف </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue"> ارصدة الحسابات </a>
+                        </li>
 
 
                     </ul>

@@ -78,13 +78,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      * Account Area
      */
     Route::group(array('prefix'=>'account'),function()
-                {
-    Route::get('{accountType}',array('uses'=>'AccountController@addAccount','as'=>'addAccount'));
-    Route::get('{editAccount}/{id}',array('uses'=>'AccountController@editAccount','as'=>'editAccount'));
-    Route::post('storeAccount/{accountType}',array('before'=>'csrf','uses'=>'AccountController@storeAccount','as'=>'storeAccount'));
-    Route::post('updateAccount/{accountType}/{id}',array('before'=>'csrf','uses'=>'AccountController@updateAccount','as'=>'updateAccount'));
+    {
+        Route::get('{accountType}',array('uses'=>'AccountController@addAccount','as'=>'addAccount'));
+        Route::get('{editAccount}/{id}',array('uses'=>'AccountController@editAccount','as'=>'editAccount'));
+        Route::post('storeAccount/{accountType}',array('before'=>'csrf','uses'=>'AccountController@storeAccount','as'=>'storeAccount'));
+        Route::post('updateAccount/{accountType}/{id}',array('before'=>'csrf','uses'=>'AccountController@updateAccount','as'=>'updateAccount'));
 //    Route::post('{accountType}/{id}',array('uses'=>'AccountController@storeAccount','as'=>'storeAccount'));
-                });
+    });
     /**
      * Users Area
      */
@@ -97,12 +97,34 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     }
     );
 
+    /**
+     *  Items Balances Area
+     */
+    Route::group(array('prefix'=>'ItemBalance'),function()
+    {
+        Route::get('Add-Items-Balances', array('uses' => 'ItemsBalancesController@addItemsBalances','as' => 'addItemsBalances'));
+        Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
+        Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
+        Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
+    });
 
+    /**
+     *  Accounts Balances Area
+     */
+    Route::group(array('prefix'=>'AccountsBalances'),function()
+    {
+        Route::get('Add-Accounts-Balances', array('uses' => 'AccountsBalancesController@addAccountsBalances','as' => 'addAccountsBalances'));
+        Route::post('Store-Accounts-Balances',array('before'=>'csrf','uses'=>'AccountsBalancesController@storeAccountsBalances','as'=>'storeAccountsBalances')) ;
+        Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'AccountsBalancesController@editAccountsBalances','as'=>'editAccountsBalances')) ;
+        Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'AccountsBalancesController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
+    });
 
     Route::get('product','dashboardController@manageProduct');
 
 
     Route::get('accounts','dashboardController@accounts');
     Route::get('hr','dashboardController@hr');
+
+
 
 });
