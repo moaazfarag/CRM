@@ -13,6 +13,7 @@ class AccountController extends BaseController
             if($this->checkType($accountType)) {
             $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
             $data['accountType'] = $accountType;
+            $data['asideOpen']   = 'open' ;
             $data['navActive'] = "active";
             return View::make('dashboard.account_bank',$data);
             }else{
@@ -24,6 +25,7 @@ class AccountController extends BaseController
             if($this->checkType($accountType)) {
             $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
             $data['accountType'] = $accountType;
+            $data['asideOpen']   = 'open' ;
             $data['account'] = Accounts::where('acc_type','=',$accountType)->where('id','=',$id)->first();
             if($data['account']) {
                 return View::make('dashboard.account_bank', $data);
