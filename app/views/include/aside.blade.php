@@ -38,8 +38,10 @@
 
         <ul>
 
-          <li  class="label">البيانات الاساسية</li>
-          <li class="">
+          {{--<li  class="label">البيانات الاساسية</li>--}}
+
+
+            <li class="">
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
             <ul>
@@ -61,50 +63,40 @@
                 <li>
                     <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">الاصناف</a>
                 </li>
-            </ul>
-          </li> 
-                <li class="">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  الحسابات<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-
-                        <li>
-                            <a href="{{ URL::route('addAccount',array('customers')) }}" class="waves-effect waves-blue">اضف عميل </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addAccount',array('suppliers')) }}" class="waves-effect waves-blue">اضف مورد </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addAccount',array('bank')) }}" class="waves-effect waves-blue">اضف بنك </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addAccount',array('expenses')) }}" class="waves-effect waves-blue">اضف نفاقات </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addAccount',array('multiple_revenue')) }}" class="waves-effect waves-blue">اضف بنك </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue"> ارصدة الاصناف </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue"> ارصدة الحسابات </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">تسوية اضافة </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue"> تسوية خصم </a>
-                        </li>
-
-
-                    </ul>
+          <li>
+                    <a  href="{{  URL::route('addAccount','customers') }}" class="waves-effect waves-blue">أكواد الحسابات</a>
                 </li>
+                <li>
+                    <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">المستخدمين   </a>
 
-            <li>
-                <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">شئون العاملين </a>
-              </li>
-            </ul>
             </ul>
           </li>
+            </li>
+            <li>
+                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الارصده الافتتاحيه <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue">ارصده الاصناف</a>
+                    </li>
+                    <li>
+                        <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue">ارصده الحسابات </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="">
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  المخازن<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">تسوية اضافة </a>
+                    </li>
+                    <li>
+                        <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue"> تسوية خصم </a>
+                    </li>
+
+                </ul>
+            </li>
+          </ul>
 
 
 

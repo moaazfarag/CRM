@@ -16,9 +16,9 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
 
   <link rel="icon" type="image/png" href="{{ URL::asset('dashboard/assets/_con/images/icon.png') }}">
-        {{--<style>--}}
-          {{--@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);--}}
-        {{--</style>--}}
+        <style>
+          @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+        </style>
   <!-- nanoScroller -->
 
     {{ HTML::style('dashboard/assets/nanoScroller/nanoscroller.css') }}
