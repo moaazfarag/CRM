@@ -6,20 +6,25 @@
  * Time: 3:49 PM
  */
 
-class ItemsBalancesController extends BaseController {
+class TransHeaderController extends BaseController {
 
     /**
      * @return mixed
      * add Items Balances
      */
 
-    public function addItemsBalances()
+    public function addTransHeader($type)
     {
-        $data['title']     = "اضف جديد بارصدة الاصناف  "; // page title
+        if($type == 'add')
+            {
+                $name = 'اضافة';
+            }
+
+        $data['title']    = " تسوية $name "; // page title
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
 
-        return View::make('dashboard.items_balances',$data);
+        return View::make('dashboard.trans_header',$data,compact('type'));
     }
 
 
@@ -28,29 +33,34 @@ class ItemsBalancesController extends BaseController {
      * store Items Balances
      */
 
-    public function storeItemsBalances()
+    public function storeTransHeader($type)
     {
-        $validation = Validator::make(Input::all(), ItemsBalances::$store_rules);
+        $validation = Validator::make(Input::all(), TransHeader::$store_rules);
 
         if($validation->fails())
         {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
 //            die('hi');
-                $itemsBalances = new ItemsBalances;
+            $transHeader = new TransHeader;
 
-                $itemsBalances->co_id        = $this->coAuth();
-                $itemsBalances->user_id      = Auth::id();
+            $transHeader->co_id         = $this->coAuth();
+            $transHeader->user_id       = Auth::id();
+            $transHeader->br_code       = Auth::user()->br_code;
+            $new_num                    = $transHeader->max('invoice_no') ;
+            $transHeader->invoice_no    = $new_num + 1; //.'max nun in this colmun and then +1';
+            $transHeader->invoice_type  = $type;
+            $transHeader->account       = 'from account model group select in li like supplier and csts';
+            $transHeader->in_total      = 'a';
+            $transHeader->discount      = Input::get('discount');
+            $transHeader->tax           = Input::get('tax');
+            $transHeader->net           = 'total after -tax and - discount and - in total';
+            $transHeader->pay_type      = 'a ';
+            $transHeader->deleted       = '1';// Input::get('deleted');
 
-                $itemsBalances->item_id      = Input::get('item_id');
-                $itemsBalances->bar_code     = Input::get('bar_code');
-                $itemsBalances->qty          = Input::get('qty');
-                $itemsBalances->cost         = Input::get('cost');
-                $itemsBalances->serial_no    = Input::get('serial_no');
+            $transHeader->save();
 
-                $itemsBalances->save();
-
-                return Redirect::route('addItemsBalances');
+                return Redirect::route('addTransHeader',array('add'));
             }
         
     }
@@ -61,7 +71,7 @@ class ItemsBalancesController extends BaseController {
      * @return mixed
      * edit Items Balances
      */
-    public  function editItemsBalances($id)
+    public  function editTransHeader($id)
     {
         $data['title']     = " تعديل  رصيد صنف"; // page title
         $data['items']     = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
@@ -75,6 +85,8 @@ class ItemsBalancesController extends BaseController {
         }else{
             return "item not here";
         }
+
+
     }
 
     /**

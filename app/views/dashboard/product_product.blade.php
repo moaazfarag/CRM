@@ -107,7 +107,7 @@
               <div class="col s2 l3">
                   <i class="fa fa-truck"></i>
                   {{ Form::label('supplier_id','المورد') }}
-                  {{ Form::select('supplier_id', array('' => 'اختر المورد')+ $accounts,null,array('id'=>'supplier_id')) }}
+                  {{ Form::select('supplier_id', array('' => 'اختر المورد')+ $co_info->accounts->lists('acc_name','id'),null,array('id'=>'supplier_id')) }}
                 <p class="parsley-required">{{ $errors ->first('supplier_id') }} </p>
               </div> {{--supplier--}}
               @endif

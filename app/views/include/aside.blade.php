@@ -38,7 +38,7 @@
 
         <ul>
 
-          <li  class="label">البيانات الاساسية</li>
+          {{--<li  class="label">البيانات الاساسية</li>--}}
 
 
             <li class="">
@@ -63,16 +63,17 @@
                 <li>
                     <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">الاصناف</a>
                 </li>
-                <li>
+          <li>
                     <a  href="{{  URL::route('addAccount','customers') }}" class="waves-effect waves-blue">أكواد الحسابات</a>
                 </li>
                 <li>
                     <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">المستخدمين   </a>
-                </li>
+
             </ul>
-        </li>
+          </li>
+            </li>
             <li>
-            <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الارصده الافتتاحيه <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الارصده الافتتاحيه <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
                         <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue">ارصده الاصناف</a>
@@ -80,15 +81,22 @@
                     <li>
                         <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue">ارصده الحسابات </a>
                     </li>
+                </ul>
+            </li>
+
+            <li class="">
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  المخازن<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">تسوية اضافة </a>
+                    </li>
+                    <li>
+                        <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue"> تسوية خصم </a>
+                    </li>
 
                 </ul>
-
-
-            </ul>
-          </li>
-          <li>
-              
-          </li>
+            </li>
+          </ul>
 
 
 
