@@ -39,16 +39,30 @@
         <ul>
 
           <li  class="label">البيانات الاساسية</li>
-          <li class="open">
+          <li class="">
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                </li>
+
             <ul>
                 <li>
                     <a href="{{ URL::route('editCompanyInfo') }}" class="waves-effect waves-blue"> بيانات الشركة </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">اصناف الشركة</a>
+                    <a href="{{ URL::route('addBranch') }}" class="waves-effect waves-blue"> بيانات الفروع </a>
                 </li>
+                <li>
+                    <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue"> فئات الاصناف</a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('addSeason') }}" class="waves-effect waves-blue"> المواسم</a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('addModel') }}" class="waves-effect waves-blue"> الماركات والموديلات</a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">الاصناف</a>
+                </li>
+            </ul>
+          </li> 
                 <li class="">
                     <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  الحسابات<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                     <ul>
