@@ -64,6 +64,7 @@ class ModelsController extends BaseController
         $data['activeModelNav'] = "active";
         $data['catFunName'] = "editModel";
         $data['seasonInputName'] = "seasons";
+        $data['asideOpen']   = 'open' ;
         $data['modelMini'] = "";
         $data['arabicName'] = "الماركة";
         $data['tablesData'] = Models::all();

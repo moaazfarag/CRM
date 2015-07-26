@@ -63,6 +63,7 @@ class SeasonController extends BaseController
         $data['title'] = "فئات الاصناف";
         $data['catFunName'] = "editSeason";
         $data['activeSeasonNav'] = "active";
+        $data['asideOpen']   = 'open' ;
         $data['seasonInputName'] = "seasons";
         $data['seasonMini'] = "";
         $data['arabicName'] = "الموسم";

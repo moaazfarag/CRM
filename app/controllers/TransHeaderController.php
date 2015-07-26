@@ -21,6 +21,7 @@ class TransHeaderController extends BaseController {
             }
 
         $data['title']    = " تسوية $name "; // page title
+        $data['TransOpen']   = 'open' ;
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
 

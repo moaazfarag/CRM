@@ -39,9 +39,7 @@
         <ul>
 
           {{--<li  class="label">البيانات الاساسية</li>--}}
-
-
-            <li class="">
+        <li class="{{@$asideOpen}}">
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
             <ul>
@@ -63,16 +61,16 @@
                 <li>
                     <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">الاصناف</a>
                 </li>
-          <li>
+                <li>
                     <a  href="{{  URL::route('addAccount','customers') }}" class="waves-effect waves-blue">أكواد الحسابات</a>
                 </li>
                 <li>
                     <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">المستخدمين   </a>
 
             </ul>
-          </li>
+        </li>
             </li>
-            <li>
+            <li class="{{@$sideOpen}}">
                  <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الارصده الافتتاحيه <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
@@ -84,14 +82,23 @@
                 </ul>
             </li>
 
-            <li class="">
-                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i>  المخازن<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+            <li class="{{@$TransOpen}}">
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  المخازن<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
                         <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">تسوية اضافة </a>
                     </li>
                     <li>
-                        <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue"> تسوية خصم </a>
+                        <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue">  تسويه الخصم  </a>
+                    </li>
+                    <li>
+                        <a href="#" class="waves-effect waves-blue">  كارت الصنف </a>
+                    </li>
+                    <li>
+                        <a href="#" class="waves-effect waves-blue">  جرد المخازن  </a>
+                    </li>
+                    <li>
+                        <a href="#" class="waves-effect waves-blue">ارصده المخازن </a>
                     </li>
 
                 </ul>

@@ -16,6 +16,8 @@ class ItemsBalancesController extends BaseController {
     public function addItemsBalances()
     {
         $data['title']     = "اضف جديد بارصدة الاصناف  "; // page title
+        $data['sideOpen']   = 'open' ;
+
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
 
@@ -41,7 +43,6 @@ class ItemsBalancesController extends BaseController {
 
                 $itemsBalances->co_id        = $this->coAuth();
                 $itemsBalances->user_id      = Auth::id();
-
                 $itemsBalances->item_id      = Input::get('item_id');
                 $itemsBalances->bar_code     = Input::get('bar_code');
                 $itemsBalances->qty          = Input::get('qty');
@@ -64,6 +65,7 @@ class ItemsBalancesController extends BaseController {
     public  function editItemsBalances($id)
     {
         $data['title']     = " تعديل  رصيد صنف"; // page title
+        $data['sideOpen']   = 'open' ;
         $data['items']     = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['item']      = ItemsBalances::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
 //        dd($data['item']);

@@ -16,6 +16,7 @@ class AccountsBalancesController extends BaseController {
     public function addAccountsBalances()
     {
         $data['title']     = "اضافة ارصدة حسابية  "; // page title
+        $data['sideOpen']   = 'open' ;
 //        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = AccountsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
 
@@ -61,6 +62,7 @@ class AccountsBalancesController extends BaseController {
     public  function editAccountsBalances($id)
     {
         $data['title']     = " تعديل  رصيد حساب"; // page title
+        $data['sideOpen']   = 'open' ;
         $data['items']     = AccountsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['item']      = AccountsBalances::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
 //        dd($data['item']);

@@ -40,7 +40,7 @@ class UserController extends BaseController
                 $user = User::find(Auth::id());
                 $user->session_id =  Session::getId();
                 $user->update();
-                return Redirect::intended('admin');
+                return Redirect::intended('admin/setting');
             }else{
                 Session::flash('error','هذه البيانات غير صحيحه');
                 return Redirect::to('/login');
@@ -53,6 +53,7 @@ class UserController extends BaseController
     {
         $data['company'] = CoData::find(Auth::user()->co_id);
         $data['button']  = 'اضف';
+        $data['asideOpen']   = 'open' ;
         $data['title']  = ' اضف مستخدم';
         return View::make('dashboard.add_user',$data);
     }
@@ -64,6 +65,7 @@ class UserController extends BaseController
         } else {
             $newUser = new User;
             $newUser->co_id = Auth::user()->co_id;
+            $data['asideOpen']   = 'open' ;
             $newUser->br_code = Input::get('br_code');
             $newUser->id =  User::max('id')+1 ;
             $newUser->all_br = Input::get('all_br');
