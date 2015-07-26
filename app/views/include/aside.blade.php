@@ -88,6 +88,12 @@
                         <li>
                             <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue"> ارصدة الحسابات </a>
                         </li>
+                        <li>
+                            <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">تسوية اضافة </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue"> تسوية خصم </a>
+                        </li>
 
 
                     </ul>

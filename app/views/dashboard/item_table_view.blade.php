@@ -15,7 +15,7 @@
             </tr>
           </thead>
           <tbody>
-        @foreach($items as $item)
+        @foreach($co_info->items as $item)
             <tr>
               <th>{{$item->id}}</th>
               <td>{{$item->item_name}}</td>

@@ -15,12 +15,12 @@ class ItemController extends BaseController
     public  function addItem()
     {
         $data['title']     = "اضف منتج جديد"; // page title
-        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
+//        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-        $data['accounts']  = Accounts::where('acc_type','=','suppliers')
-                                        ->where('co_id','=',Auth::user()->co_id)
-                                        ->get()
-                                        ->lists('acc_name','id');// suppliers from accounts table
+//        $data['accounts']  = Accounts::where('acc_type','=','suppliers')
+//                                        ->where('co_id','=',Auth::user()->co_id)
+//                                        ->get()
+//                                        ->lists('acc_name','id');// suppliers from accounts table
         return View::make('dashboard.product_product',$data);
     }
 
@@ -60,16 +60,16 @@ class ItemController extends BaseController
     public  function editItem($id)
     {
         $data['title']     = " تعديل  منتج"; // page title
-        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
+//        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['item']      = Items::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
 //        dd($data['item']);
         if($data['item'])
         {
             $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-            $data['accounts'] = Accounts::where('acc_type','=','suppliers')
-                ->where('co_id','=',Auth::user()->co_id)
-                ->get()
-                ->lists('acc_name','id');// suppliers from accounts table
+//            $data['accounts'] = Accounts::where('acc_type','=','suppliers')
+//                ->where('co_id','=',Auth::user()->co_id)
+//                ->get()
+//                ->lists('acc_name','id');// suppliers from accounts table
             return View::make('dashboard.product_product',$data);
         }else{
             return "item not here";
