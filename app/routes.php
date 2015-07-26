@@ -119,6 +119,17 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'AccountsBalancesController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
     });
 
+    /**
+     *  Trans Header Area
+     */
+    Route::group(array('prefix'=>'Transaction'),function()
+    {
+        Route::get('Add-Trans-Header/{type}', array('uses' => 'TransHeaderController@addTransHeader','as' => 'addTransHeader'));
+        Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'TransHeaderController@storeTransHeader','as'=>'storeTransHeader')) ;
+        Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'TransHeaderController@editAccountsBalances','as'=>'editAccountsBalances')) ;
+        Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
+    });
+
     Route::get('product','dashboardController@manageProduct');
 
 
