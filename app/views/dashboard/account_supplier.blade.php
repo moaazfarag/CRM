@@ -1,4 +1,4 @@
-
+@include('dashboard.account_nav')
       <div id="account_supplier" class="col s12">
 
 

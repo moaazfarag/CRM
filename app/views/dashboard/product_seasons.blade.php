@@ -1,6 +1,6 @@
 @extends('dashboard.main')
 @section('content')
-    @include('dashboard.product_nav')
+
 
     <div id="product_cat" class="col s12">
         <!-- الاصناف  -->
@@ -24,6 +24,7 @@
                         <label for="name">
                             اسم  {{@$arabicName}}
                         </label>
+
                     </div>
                     <div class="col s12 m6 l6">
                         <div class="input-field">

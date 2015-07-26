@@ -13,6 +13,7 @@ class AccountController extends BaseController
             if($this->checkType($accountType)) {
             $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
             $data['accountType'] = $accountType;
+            $data['navActive'] = "active";
             return View::make('dashboard.account_bank',$data);
             }else{
                     return "type check error";

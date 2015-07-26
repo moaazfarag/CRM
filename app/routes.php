@@ -102,7 +102,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      */
     Route::group(array('prefix'=>'ItemBalance'),function()
     {
-        Route::get('Add-Items-Balances', array('uses' => 'ItemsBalancesController@addItemsBalances','as' => 'addItemsBalances'));
+            Route::get('Add-Items-Balances', array('uses' => 'ItemsBalancesController@addItemsBalances','as' => 'addItemsBalances'));
         Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
         Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
         Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;

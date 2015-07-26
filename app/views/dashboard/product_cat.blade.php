@@ -1,6 +1,6 @@
 @extends('dashboard.main')
 @section('content')
-    @include('dashboard.product_nav')
+
 <div id="product_cat" class="col s12">
  <!-- الاصناف  -->
         <div class="card {{ @$categoryMini }}">

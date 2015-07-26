@@ -1,5 +1,6 @@
 @extends('dashboard.main')
 @section('content')
+    @include('dashboard.account_nav')
       <div id="account_bank" class="col s12">
             @if(Route::currentRouteName() == 'addAccount')
         {{ Form::open(array('route'=>array('storeAccount',$accountType))) }}
