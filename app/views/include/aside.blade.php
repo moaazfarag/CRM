@@ -66,6 +66,10 @@
                 </li>
                 <li>
                     <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">المستخدمين   </a>
+                </li>
+                <li>
+                    <a href="{{  URL::route('set_Password') }}" class="waves-effect waves-blue">  تغيير كلمه السر  </a>
+                </li>
 
             </ul>
         </li>

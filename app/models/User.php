@@ -23,12 +23,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
     public static $store_rules = array(
+//        'username'         => 'required|unique:users,username' ,
+//        'name'             => 'required',
+//        'email'            => 'required|email|unique:users,email' ,
         'password'         => 'required|min:8',
-        'username'         => 'required|unique:users,username' ,
-        'name'             => 'required',
-        'email'            => 'required|email|unique:users,email' ,
         'confirm_password' => 'required|same:password',
-        'all_br'           => 'boolean',
+       // 'all_br'           => 'boolean',
 
     );
 
@@ -87,6 +87,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     {
         return $this->belongsTo('CoData','user_id');
+    }
+    public function set_password()
+
+    {
+        return $this->belongsTo('set_Password','user_id');
     }
 
 
