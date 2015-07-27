@@ -9,7 +9,7 @@
               @endif
         <div class="card">
           <div class="title">
-            <h5><i class="mdi mdi-notification-event-available"></i> اضف حساب بنك جديد</h5>
+            <h5><i class="mdi mdi-notification-event-available"></i> اضف حساب {{$arabicName}} جديد</h5>
             <a class="minimize" href="#">
               <i class="mdi-navigation-expand-less"></i>
             </a>

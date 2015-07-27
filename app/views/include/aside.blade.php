@@ -38,7 +38,7 @@
 
         <ul>
 
-          {{--<li  class="label">البيانات الاساسية</li>--}}
+          <li  class="label">البيانات الاساسية</li>
         <li class="{{@$asideOpen}}">
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
