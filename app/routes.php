@@ -90,7 +90,9 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      */
     Route::group(array('prefix'=>'users'),function()
     {
-       Route::get('addUser',array('uses'=>'UserController@addUser','as'=>'addUser')) ;
+        Route::get('/set_password',array('uses'=>'UserController@set_password','as'=>'set_Password')); //set password
+        Route::post('/set_password',array('uses'=>'UserController@storeNewPassword','as'=>'storeNewPassword')); //set password
+        Route::get('addUser',array('uses'=>'UserController@addUser','as'=>'addUser')) ;
        Route::post('storeUser',array('before'=>'csrf','uses'=>'UserController@storeUser','as'=>'storeUser')) ;
        Route::get('editUser/{id}',array('uses'=>'UserController@editUser','as'=>'editUser')) ;
        Route::post('updateUser/{id}',array('before'=>'csrf','uses'=>'UserController@updateUser','as'=>'updateUser')) ;
