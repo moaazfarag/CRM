@@ -52,6 +52,7 @@ class ItemController extends BaseController
             $newItem->limit            = Input::get('limit');
             $newItem->notes            = Input::get('notes');
             $newItem->user_id          = Auth::id();
+            $newItem->has_serial       =Input::get('has_serial');
 
             $newItem->save();
             return Redirect::route('addItem');

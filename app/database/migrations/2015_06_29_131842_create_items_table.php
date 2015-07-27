@@ -32,6 +32,8 @@ class CreateItemsTable extends Migration {
 			$table->string('limit');
 			$table->longText('notes');
 			$table->integer('user_id');
+            $table->decimal('avg_cost',10,3);
+            $table->boolean('has_serial');
 
 			$table->timestamps();
 		});

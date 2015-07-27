@@ -30,6 +30,7 @@ class Items extends Eloquent {
         'sell_gomla'       => 'regex:/^\d*(\.\d{2})?$/',
         'sell_gomla_gomla' => 'regex:/^\d*(\.\d{2})?$/',
         'limit'            => 'integer',
+        'has_serial'       =>  'boolean'
     );
     public static  $update_rules = array(
         'cat_id'           => 'required|integer',
@@ -45,6 +46,8 @@ class Items extends Eloquent {
         'sell_gomla'       => 'regex:/^\d*(\.\d{2})?$/',
         'sell_gomla_gomla' => 'regex:/^\d*(\.\d{2})?$/',
         'limit'            => 'integer',
+        'has_serial'       =>'boolean'
+
     );
     public function co_data()
     {
