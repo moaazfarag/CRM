@@ -9,18 +9,16 @@
             <tr>
 
               <th>رقم  المسلسل</th>
-              <th>الاسم</th>
-               <th>   ت التعين </th>
-              <th>اسم الفرع</th>
-              <th>القسم   </th>
-              <th>االمرتب</th>
-              <th>
-              له عمولة
-              </th>
-              <th>الرقم القومي</th>
-              <th>الرقم التاميني</th>
-              <th>الحالة </th>
-              <th>تعديل</th>
+              <th>@lang('main.name')</th>
+               <th>   @lang('main.joinDate') </th>
+              <th>@lang('main.branchName') </th>
+              <th>@lang('main.section')</th>
+              <th>@lang('main.salary')</th>
+              <th>@lang('main.commission') </th>
+              <th>@lang('main.tel') </th>
+              <th>@lang('main.insureNum') </th>
+              <th>@lang('main.statue') </th>
+              <th>@lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>
