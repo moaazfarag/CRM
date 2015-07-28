@@ -50,59 +50,59 @@
                     <a href="{{ URL::route('addBranch') }}" class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue"> فئات الاصناف</a>
+                    <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue"> @lang('main.itemCat') </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addSeason') }}" class="waves-effect waves-blue"> المواسم</a>
+                    <a href="{{ URL::route('addSeason') }}" class="waves-effect waves-blue"> @lang('main.seasons') </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addModel') }}" class="waves-effect waves-blue"> الماركات والموديلات</a>
+                    <a href="{{ URL::route('addModel') }}" class="waves-effect waves-blue">  @lang('main.models') </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue">الاصناف</a>
+                    <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue"> @lang('main.items')</a>
                 </li>
                 <li>
-                    <a  href="{{  URL::route('addAccount','customers') }}" class="waves-effect waves-blue">أكواد الحسابات</a>
+                    <a  href="{{  URL::route('addAccount','customers') }}" class="waves-effect waves-blue"> @lang('main.accounts') </a>
                 </li>
                 <li>
-                    <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue">المستخدمين   </a>
+                    <a href="{{  URL::route('addUser') }}" class="waves-effect waves-blue"> @lang('main.users')   </a>
                 </li>
                 <li>
-                    <a href="{{  URL::route('set_Password') }}" class="waves-effect waves-blue">  تغيير كلمه السر  </a>
+                    <a href="{{  URL::route('set_Password') }}" class="waves-effect waves-blue">     @lang('main.change_password')  </a>
                 </li>
 
             </ul>
         </li>
             </li>
             <li class="{{@$sideOpen}}">
-                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الارصده الافتتاحيه <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.balances')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
-                        <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue">ارصده الاصناف</a>
+                        <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue"> @lang('main.balanceItem') </a>
                     </li>
                     <li>
-                        <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue">ارصده الحسابات </a>
+                        <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue"> @lang('main.balanceAccount')</a>
                     </li>
                 </ul>
             </li>
 
             <li class="{{@$TransOpen}}">
-                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  المخازن<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.stores')<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
-                        <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">تسوية اضافة </a>
+                        <a href="{{ URL::route('addTransHeader',array('add')) }}" class="waves-effect waves-blue">@lang('main.settleAdd')  </a>
                     </li>
                     <li>
-                        <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue">  تسويه الخصم  </a>
+                        <a href="{{ URL::route('addTransHeader') }}" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
                     </li>
                     <li>
-                        <a href="#" class="waves-effect waves-blue">  كارت الصنف </a>
+                        <a href="#" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
                     </li>
                     <li>
-                        <a href="#" class="waves-effect waves-blue">  جرد المخازن  </a>
+                        <a href="#" class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
                     </li>
                     <li>
-                        <a href="#" class="waves-effect waves-blue">ارصده المخازن </a>
+                        <a href="#" class="waves-effect waves-blue">@lang('main.balanceStores')  </a>
                     </li>
 
                 </ul>

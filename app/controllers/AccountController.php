@@ -13,8 +13,9 @@ class AccountController extends BaseController
         'suppliers'=>'مورد',
         'bank'=>'بنك ',
         'expenses'=>'نفقات',
-        'multiple_revenue'=>'',
+        'multiple_revenue'=>'ايرادات اخرى',
         'partners'=>'شركاء',
+        'expenses'=>'مصروفات',
                 ];
         public function addAccount($accountType)
         {

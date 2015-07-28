@@ -1,15 +1,15 @@
 
           <thead>
             <tr>
-              <th>الرقم</th>
-              <th>الاسم </th>
-              <th>البريد الاكتروني </th>
-              <th>العنوان</th>
-              <th>ارقام الهاتف </th>
-              <th>السجل التجاري</th>
-              <th>البطاقة الضربية</th>
-              <th>ملاحظات</th>
-              <th>تعديل</th>
+              <th>@lang('main.number')</th>
+              <th>@lang('main.name') </th>
+              <th>@lang('main.mail')  </th>
+              <th>@lang('main.address')</th>
+              <th>@lang('main.phoneNum')</th>
+              <th>@lang('main.regComm') </th>
+              <th> @lang('main.taxCard')</th>
+              <th>@lang('main.notes')</th>
+              <th>@lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>

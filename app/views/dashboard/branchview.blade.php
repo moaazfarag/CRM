@@ -2,11 +2,11 @@
           <thead>
             <tr>
 
-              <th>رقم الفرع</th>
-              <th>اسم الفرع</th>
-              <th>عنوان الفرع </th>
-              <th>الحالة </th>
-              <th>تعديل</th>
+              <th>@lang('main.branchNum') </th>
+              <th>@lang('main.branchName') </th>
+              <th>@lang('main.branchAddress')</th>
+              <th>@lang('main.statue') </th>
+              <th>@lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>
