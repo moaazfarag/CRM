@@ -19,6 +19,7 @@ class BaseController extends Controller {
     {
         $data['title']       = "تعديل معلومات الشركة" ;
         $data['companyInfo'] = CoData::Where('id','=',Auth::user()->co_id)->first();
+        $data['asideOpen']   = 'open' ;
         $data['printSize']   = array('a1'=>'صغير','a3'=>'متوسط','a4'=>'كبير');
         $data['branches']     = Branches::where('co_id','=',Auth::user()->co_id)->get();
         return $data;

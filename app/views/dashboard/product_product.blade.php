@@ -16,7 +16,7 @@
           </div>
       <div class="content">
           <div class="row no-margin-top">
-              <div class="col s12 l6">
+              <div class="col s12 l4">
                   <div class="input-field">
                       <i class="fa fa-tag prefix"></i>
                       {{ Form::text('item_name',null,array('required','id'=>'item_name')) }}
@@ -32,6 +32,16 @@
                       <p class="parsley-required">{{ $errors ->first('buy') }} </p>
                   </div>
               </div> {{--buy--}}
+              <div class="col s2 l4">
+                  <p>
+                      {{ Form::checkbox('has_serial',1,null,array('id'=>'has_serial')) }}
+                      {{ Form::label('has_serial','البار كود ') }}
+                  <p class="parsley-required">
+                      {{ $errors ->first('has_serial') }}
+                  </p>
+                  {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
+                  </p>
+              </div>
           </div> {{--first row end--}}
           <div class="row no-margin-top">
               <div class="col s12 l4">

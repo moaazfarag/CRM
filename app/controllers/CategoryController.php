@@ -61,6 +61,7 @@ class CategoryController extends  BaseController
 
             $data['title']          = "فئات الاصناف";
             $data['activeCatNav']   = "active";
+            $data['asideOpen']      = "open";
             $data['catFunName']     = "editCategory";
             $data['categoryMini']   = "";
             $data['arabicName']     = "الصنف";

@@ -40,7 +40,7 @@ class UserController extends BaseController
                 $user = User::find(Auth::id());
                 $user->session_id =  Session::getId();
                 $user->update();
-                return Redirect::intended('admin');
+                return Redirect::intended('admin/setting');
             }else{
                 Session::flash('error','هذه البيانات غير صحيحه');
                 return Redirect::to('/login');
@@ -53,6 +53,7 @@ class UserController extends BaseController
     {
         $data['company'] = CoData::find(Auth::user()->co_id);
         $data['button']  = 'اضف';
+        $data['asideOpen']   = 'open' ;
         $data['title']  = ' اضف مستخدم';
         return View::make('dashboard.add_user',$data);
     }
@@ -64,12 +65,13 @@ class UserController extends BaseController
         } else {
             $newUser = new User;
             $newUser->co_id = Auth::user()->co_id;
+            $data['asideOpen']   = 'open' ;
             $newUser->br_code = Input::get('br_code');
             $newUser->id =  User::max('id')+1 ;
             $newUser->all_br = Input::get('all_br');
             $newUser->name = Input::get('name');
             $newUser->username = Input::get('username');
-            $newUser->password = Hash::make(Input::get('password'));
+            $newUser->password = Hash::make('12345678');
             $newUser->email = Input::get('email');
             $newUser->save();
             return Redirect::route('addUser');
@@ -116,6 +118,39 @@ class UserController extends BaseController
                 $oldUser->update();
             }
             return Redirect::route('addUser');
+        }else{
+            return "there ara no user ";
+        }
+    }
+
+    //set_password
+    public  function set_password() {
+        return View::make('dashboard.set_password');
+    }
+    public  function storeNewPassword()
+    {
+        $data['company'] = CoData::find(Auth::id());
+
+        $oldUser         = $data['company']->users()->first();
+        if($oldUser) {
+            $rules_update = array(
+                'password'         => 'min:8',
+                'confirm_password' => 'same:password',
+            );
+            $validation = Validator::make(Input::all(), $rules_update);
+            if ($validation->fails()) {
+                return Redirect::back()->withInput()->withErrors($validation->messages());
+            } else {
+                $oldUser->co_id = Auth::user()->co_id;
+//                $oldUser->br_code = Input::get('br_code');
+//                $oldUser->all_br = Input::get('all_br');
+//                $oldUser->name = Input::get('name');
+//                $oldUser->username = Input::get('username');
+                $oldUser->password = Hash::make(Input::get('password'));
+              //  $oldUser->email = Input::get('email');
+                $oldUser->update();
+            }
+            return View::make('dashboard.set_password');
         }else{
             return "there ara no user ";
         }
