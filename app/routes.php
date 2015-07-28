@@ -129,7 +129,10 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'TransHeaderController@editAccountsBalances','as'=>'editAccountsBalances')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
     });
-
+    Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
+    Route::post('addtest',array('uses'=>'TestController@addTest','as'=>'addTest'));
+    Route::delete('testdelete/{id}',array('uses'=>'TestController@destroy','as'=>'testdelete'));
+    Route::get('tests',array('uses'=>'TestController@view','as'=>'testsIndex'));
     Route::get('product','dashboardController@manageProduct');
 
 

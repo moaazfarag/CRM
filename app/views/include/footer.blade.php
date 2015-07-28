@@ -25,8 +25,7 @@
       {{ HTML::script('dashboard/assets/flot/jquery.flot.categories.min.js') }}
       <!-- Sortable -->
       {{ HTML::script('dashboard/assets/sortable/Sortable.min.js') }}
-
-      <!-- Main -->
+            <!-- Main -->
       {{ HTML::script('dashboard/assets/_con/js/_con.min.js') }}
 
                 {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
