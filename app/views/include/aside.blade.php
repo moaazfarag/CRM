@@ -38,16 +38,16 @@
 
         <ul>
 
-          <li  class="label">البيانات الاساسية</li>
+          <li  class="label">@lang('main.mainInfo') </li>
         <li class="{{@$asideOpen}}">
-            <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> القائمة الرئيسية<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+            <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.mainList')<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
             <ul>
                 <li>
-                    <a href="{{ URL::route('editCompanyInfo') }}" class="waves-effect waves-blue"> بيانات الشركة </a>
+                    <a href="{{ URL::route('editCompanyInfo') }}" class="waves-effect waves-blue">  @lang('main.companyInfo') </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('addBranch') }}" class="waves-effect waves-blue"> بيانات الفروع </a>
+                    <a href="{{ URL::route('addBranch') }}" class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
                 </li>
                 <li>
                     <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue"> فئات الاصناف</a>
