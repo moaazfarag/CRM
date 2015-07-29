@@ -87,14 +87,48 @@ return  array(
     'season'           => 'الموسم' ,
     'model'            => 'الموديل ',
     'sellLimit'        => 'حد البيع',
-
-
-
-
-
-
-
-
+    'item'             => 'الصنف',
+    'cost'             => 'التكلفه',
+    'bar_code'         => 'الباركود',
+    'serial_no'        => 'السيريال',
+    'qty'              => 'الكميه',
+    'itemName'         => 'اسم الصنف' ,
+    //Product  Pages
+    'addNewItem'       => 'اضافه فئه جديده',
+    'tradMark'         => 'الماركات',
+    'modelat'          => 'الموديلات',
+    'addNewModel'      => 'اضف موديل جديد',
+    'sellPrice'        => 'سعر البيع',
+    'sell_nos_gomla'   => 'سعر نص الجمله',
+    'sell_gomla'       => 'سعر الجمله',
+    'sell_gomla_gomla' => 'سعر جمله الجمله',
+    'unit'             => 'الوحده',
+    'choseImg'         => 'اختر الصوره',
+    'choseSeason'      => 'اختر الموسم ',
+    'choseModel'       => 'اختر الموديل ',
+    'addNewSeason'     => 'اضف موسم جديد',
+    //Setting Page
+    'companyName'      => 'اسم الشركه',
+    'print_size'       => 'حجم الطباعه',
+    'currency'         => 'العمله' ,
+    'settingSit'       => 'اعدادات الموقع' ,
+    'co_use_serial'    => 'استخدم مسلسل للاصناف',
+    'co_supplier_must' => 'ادخل المورد اجبارى عند تعريف الصنف',
+    'co_use_season'    => 'استخدام المواسم عندد تعريف الصنف',
+    'co_use_markes_models' => 'استخدام الماركات والموديلات لشركات السيارات ',
+    'branches'         => 'الفروع',
+    'account'          => 'الحساب' ,
+    //Trans
+    'discount'         => 'خصم',
+    'tax'              => 'ضريبه',
+    //Users_View Page
+    'serialNum'        => 'رقم المسلسل' ,
+    //Header Blade
+    'memberName'       => 'اسم العضو ',
+    'yourAccount'      => 'حسابك',
+    'settings'         => 'الاعدادات',
+    'login'            => 'تسجيل الدخول',
+    'customer'         => 'عميل',
 
 
 

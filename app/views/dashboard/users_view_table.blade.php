@@ -7,12 +7,12 @@
 
           <thead>
             <tr>
-              <th>رقم  المسلسل</th>
-              <th>الاسم</th>
-              <th>اسم المستخدم</th>
+              <th>@lang('main.serialNum')</th>
+              <th>@lang('main.name')</th>
+              <th>@lang('main.username')</th>
                <th>   ت  الاضافة </th>
-              <th>الحالة </th>
-              <th>تعديل</th>
+              <th>@lang('main.statue') </th>
+              <th>@lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>
