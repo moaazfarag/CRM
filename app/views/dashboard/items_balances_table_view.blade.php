@@ -6,7 +6,7 @@
               <th>@lang('main.bar_code')</th>
               <th> @lang('main.qty')</th>
               <th> @lang('main.cost')</th>
-              <th>@lang('main.serial') </th>
+              <th>@lang('main.serial_no') </th>
               <th>@lang('main.date') </th>
               <th>@lang('main.edit') </th>
             </tr>

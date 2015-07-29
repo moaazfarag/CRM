@@ -26,8 +26,8 @@
           <div class="col s12 m6 l6">
             <div class="input-field">
               <i class="mdi mdi-social-person prefix"></i>
-                <?php $name=Lang::get('main.namr')
-                {{Form::text('name',null,array('required','placeholder'=>$name. @$arabicName,'id'=>'name')) }}
+                <?php $name=Lang::get('main.name') ?>
+                {{Form::text('name',null,array('required','placeholder'=>$name.  @ $arabicName, 'id'=>'name')) }}
                   {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
             </div>
           </div>

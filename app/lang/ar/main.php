@@ -129,7 +129,7 @@ return  array(
     'settings'         => 'الاعدادات',
     'login'            => 'تسجيل الدخول',
     'customer'         => 'عميل',
-    
+
 
 
 
