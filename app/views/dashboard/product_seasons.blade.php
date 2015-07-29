@@ -7,7 +7,7 @@
         <div class="card {{ @$seasonMini }}">
             <div class="title">
                 <h5>
-                    <i class="mdi mdi-notification-event-available"></i> اضف موسم جديدة</h5>
+                    <i class="mdi mdi-notification-event-available"></i> @lang('main.addNewSeason')  </h5>
                 <a class="minimize" href="#">
                     <i class="mdi-navigation-expand-less"></i>
                 </a>
@@ -29,7 +29,8 @@
                     <div class="col s12 m6 l6">
                         <div class="input-field">
                             <i class="mdi mdi-social-person prefix"></i>
-                            {{Form::text('name',null,array('required','placeholder'=>"اسم   ". @$arabicName,'id'=>'name')) }}
+                            <?php $name=Lang::get('main.name') ?>
+                            {{Form::text('name',null,array('required','placeholder'=> $name . @$arabicName ,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
                         </div>
                     </div>
@@ -44,9 +45,9 @@
                     <div class="col s12 l12">
 
                         @if(isset($editSeason->name))
-                            <button class="waves-effect btn">تعديل </button>
+                            <button class="waves-effect btn">@lang('main.edit') </button>
                         @else
-                            <button class="waves-effect btn">اضف </button>
+                            <button class="waves-effect btn">@lang('main.add') </button>
                         @endif
 
                         {{ Form::close() }}

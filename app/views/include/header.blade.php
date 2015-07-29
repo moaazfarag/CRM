@@ -78,20 +78,20 @@
         </li>
         <li class="user">
           <a class="dropdown-button" href="#!" data-activates="user-dropdown">
-           <img src="{{ URL::asset('dashboard/assets/_con/images/user.jpg') }}" alt="John Doe" class="circle"> اسم العضو<i class="mdi-navigation-expand-more right"></i>
+           <img src="{{ URL::asset('dashboard/assets/_con/images/user.jpg') }}" alt="John Doe" class="circle">@lang('main.memberName')<i class="mdi-navigation-expand-more right"></i>
           </a>
 
           <ul id="user-dropdown" class="dropdown-content">
-            <li><a href="page-profile.html"><i class="fa fa-user"></i> حسابك</a>
+            <li><a href="page-profile.html"><i class="fa fa-user"></i>@lang('main.yourAccount') </a>
             </li>
-            <li><a href="#!"><i class="fa fa-cogs"></i> الاعدادت</a>
+            <li><a href="#!"><i class="fa fa-cogs"></i> @lang('main.settings')</a>
             </li>
             <li class="divider">
 
             </li>
             <li>
                 <a href="/logout">
-                    <i class="fa fa-sign-out"></i> تسجيل خروج</a>
+                    <i class="fa fa-sign-out"></i> @lang('main.login') </a>
             </li>
           </ul>
         </li>

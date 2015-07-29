@@ -37,7 +37,7 @@
 
     <div class="card {{ isset($miniComInfo)?$miniComInfo:"minimized" }}">
       <div class="title">
-        <h5><i class="fa fa-cog"></i> بيانات الشركة</h5>
+        <h5><i class="fa fa-cog"></i>  @lang('main.companyInfo')</h5>
         <a class="minimize" href="#">
           <i class="mdi-navigation-expand-less"></i>
         </a>
@@ -48,27 +48,29 @@
         <div class="row no-margin-top">
           <div class="col s12 l1">
             <label for="ecommerce-name">
-              اسم الشركة
+                @lang('main.companyName')
             </label>
           </div>
           <div class="col s4 m6 l5">
             <div class="input-field">
               <i class="mdi mdi-action-home prefix"></i>
+                <?php $companyName=Lang::get('main.companyName') ?>
               {{--<input name="co_name" id="ecommerce-name" type="text" placeholder="اسم الشركة">--}}
-                {{ Form::text('co_name',null,array('required','placeholder'=>'اسم الشركة')) }}
+                {{ Form::text('co_name',null,array('required','placeholder'=>$companyName)) }}
             </div>
           </div>
 
 
           <div class="col s2 l1">
             <label for="ecommerce-adress">
-              العنوان
+                @lang('main.address')
             </label>
           </div>
           <div class="col s4 l5">
             <div class="input-field">
               <i class="mdi mdi-action-language prefix"></i>
-                {{ Form::text('co_address',null,array('required','placeholder'=>'العنوان')) }}
+                <?php $address=Lang::get('main.address') ?>
+                {{ Form::text('co_address',null,array('required','placeholder'=>$address)) }}
                 {{--<input name="co_adress" id="ecommerce-adress" type="text" placeholder="العنوان">--}}
             </div>
           </div>
@@ -77,21 +79,22 @@
          <div class="row no-margin-top">
           <div class="col s2 l1">
             <label for="ecommerce-tel">
-       رقم الهاتف
+                @lang('main.phoneNum')
             </label>
           </div>
           <div class="col s4 l5">
             <div class="input-field">
               <i class="mdi mdi-communication-phone prefix"></i>
-              {{--<input name="co_tel" id="ecommerce-tel" type="text" placeholder="رقم الهاتف ">--}}
-                {{ Form::text('co_tel',null,array('required','placeholder'=>'رقم الهاتف')) }}
+                <?php $phoneNum=Lang::get('main.phoneNum') ?>
+                {{--<input name="co_tel" id="ecommerce-tel" type="text" placeholder="رقم الهاتف ">--}}
+                {{ Form::text('co_tel',null,array('required','placeholder'=>$phoneNum)) }}
 
             </div>
           </div>
 
           <div class="col s2 l1">
-
-              {{ Form::label('ecommerce-printsize','  حجم الطباعة') }}
+              <?php $print_size=Lang::get('main.print_size') ?>
+              {{ Form::label('ecommerce-printsize',$print_size) }}
           </div>
           <div class="col s2 l5">
 
@@ -103,14 +106,15 @@
         <div class="row">
           <div class="col s2 l1">
             <label for="ecommerce-currency">
-              العملة
+                @lang('main.currency')
             </label>
           </div>
           <div class="col s4 l5">
             <div class="input-field">
               <i class="mdi mdi-editor-attach-money prefix"></i>
-              {{--<input name="co_carrency" id="ecommerce-currency" type="text" placeholder="العملة">--}}
-            {{ Form::text('co_currency',null,array('required','placeholder'=>'العملة')) }}
+                <?php $currency=Lang::get('main.currency') ?>
+                {{--<input name="co_carrency" id="ecommerce-currency" type="text" placeholder="العملة">--}}
+            {{ Form::text('co_currency',null,array('required','placeholder'=>$currency)) }}
             </div>
 
           </div>
@@ -118,22 +122,22 @@
                 <div class="row">
           <div class="col s2 l2">
             <label for="">
-اعدادات الموقع
+                @lang('main.settingSit')
             </label>
             </div>
         <p>
             {{ Form::checkbox('co_use_serial', 1,null,array('id'=>'co_use_serial')) }}
           {{--<input name="co_use_serial" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
-          <label for="co_use_serial">استخدام مسلسل للاصناف</label>
+          <label for="co_use_serial">@lang('main.co_use_serial')</label>
             {{ Form::checkbox('co_supplier_must', 1,null,array('id'=>'co_supplier_must')) }}
             {{--<input name="co_supplier_must" type="checkbox" id="co_supplier_must" value="enter_supplier" >--}}
-          <label for="co_supplier_must">ادخال المورد اجباري عند تعريف الصنف </label>
+          <label for="co_supplier_must">@lang('main.co_supplier_must')</label>
             {{ Form::checkbox('co_use_season', 1,null,array('id'=>'co_use_season')) }}
             {{--<input name="co_season_use" type="checkbox" id="use_season" value="use_season">--}}
-          <label for="co_use_season">استخدام المواسم عند تعريف الصنف </label>
+          <label for="co_use_season">@lang('main.co_use_season')</label>
           {{--<input name="co_use_markes_models" type="checkbox" id="use_trademark" value="use_trademark">--}}
             {{ Form::checkbox('co_use_markes_models', 1,null,array('id'=>'co_use_markes_models')) }}
-            <label for="co_use_markes_models">استخدام الماركات و الموديلات لشركات السيارات </label>
+            <label for="co_use_markes_models">@lang('main.co_use_markes_models')</label>
 
 
         </p>
@@ -141,7 +145,7 @@
       <div class="row">
         <div class="col s10 l10">
 
-            <button  class="waves-effect btn">تعديل </button>
+            <button  class="waves-effect btn">@lang('main.edit') </button>
             {{ Form::close() }}
         </div>
     </div>
@@ -237,7 +241,7 @@
 
         <div class="card {{ isset($miniBranch)?$miniBranch:"minimized" }}">
           <div class="title">
-            <h5><i class="mdi mdi-notification-event-available"></i> الفروع</h5>
+            <h5><i class="mdi mdi-notification-event-available"></i> @lang('main.branches')</h5>
             <a class="minimize" href="#">
               <i class="mdi-navigation-expand-less"></i>
             </a>
@@ -251,13 +255,13 @@
               <div class="row no-margin-top">
           <div class="col s12 l2">
             <label for="branch-name">
-اسم الفرع
+                @lang('main.branchName')
             </label>
           </div>
           <div class="col s12 m6 l6">
             <div class="input-field">
               <i class="mdi mdi-social-person prefix"></i>
-              <input value="{{ isset($branch->br_name)?$branch->br_name:null }}" name="branch_name" id="branch-name" type="text" placeholder="  اسم الفرع">
+              <input value="{{ isset($branch->br_name)?$branch->br_name:null }}" name="branch_name" id="branch-name" type="text" placeholder=@lang('main.branchName')>
             </div>
           </div>
 
@@ -265,13 +269,13 @@
                 <div class="row no-margin-top">
                   <div class="col s12 l2">
                     <label for="branch-address">
-عنوان الفرع
+                        @lang('main.branchAddress')
                     </label>
                   </div>
                   <div class="col s12 m6 l8">
                     <div class="input-field">
                       <i class="mdi mdi-social-person prefix"></i>
-                      <input  value="{{ isset($branch->br_address)?$branch->br_address :null }}" name="branch_address" id="branch-address" type="text" placeholder="عنوان  الفرع">
+                      <input  value="{{ isset($branch->br_address)?$branch->br_address :null }}" name="branch_address" id="branch-address" type="text" placeholder= @lang('main.branchAddress')>
                     </div>
                   </div>
 
@@ -283,9 +287,9 @@
 
                       <div class="col s12 l12">
                           @if(Route::currentRouteName() == "editBranch" )
-                              <button class="waves-effect btn">تعديل</button>
+                              <button class="waves-effect btn">@lang('main.edit')</button>
                           @else
-                              <button class="waves-effect btn">اضف </button>
+                              <button class="waves-effect btn">@lang('main.add') </button>
                           @endif
                       </div>
                 </div>
