@@ -8,22 +8,14 @@
  */
 class AccountController extends BaseController
 {
-    public static $arabicName=[
-        'customers'=>'عميل',
-        'suppliers'=>'مورد',
-        'bank'=>'بنك ',
-        'expenses'=>'نفقات',
-        'multiple_revenue'=>'ايرادات اخرى',
-        'partners'=>'شركاء',
-        'expenses'=>'مصروفات',
-                ];
+
         public function addAccount($accountType)
         {
             if($this->checkType($accountType)) {
             $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
             $data['accountType'] = $accountType;
             $data['asideOpen']   = 'open' ;
-            $data['arabicName']   = AccountController::$arabicName[$accountType] ;
+            $data['arabicName']   = Lang::get('main.'.$accountType);
             $data['navActive']      = "active";
             return View::make('dashboard.account_bank',$data);
             }else{

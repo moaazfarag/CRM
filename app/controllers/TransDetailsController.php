@@ -15,7 +15,8 @@ class ItemsBalancesController extends BaseController {
 
     public function addItemsBalances()
     {
-        $data['title']     = "اضف جديد بارصدة الاصناف  "; // page title
+        $addItemsBalances  =Lang::get('main.addItemsBalances');
+        $data['title']     =$addItemsBalances; // page title
         $data['TransOpen']   = 'open' ;
 
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
@@ -65,7 +66,8 @@ class ItemsBalancesController extends BaseController {
      */
     public  function editItemsBalances($id)
     {
-        $data['title']     = " تعديل  رصيد صنف"; // page title
+        $editItemsBalances =Lang::get('main.editItemsBalances');
+        $data['title']     = $editItemsBalances; // page title
         $data['TransOpen']   = 'open' ;
 
         $data['items']     = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table

@@ -14,7 +14,8 @@ class ItemController extends BaseController
      */
     public  function addItem()
     {
-        $data['title']     = "اضف منتج جديد"; // page title
+        $addItem           = Lang::get('main.addItem');
+        $data['title']     = $addItem   ; // page title
         $data['asideOpen']      = "open";
 //        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
@@ -61,7 +62,8 @@ class ItemController extends BaseController
 
     public  function editItem($id)
     {
-        $data['title']     = " تعديل  منتج"; // page title
+        $editItem           = Lang::get('main.editItem');
+        $data['title']     = $editItem; // page title
         $data['mainasideOpen']      = "open";
 //        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['item']      = Items::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit

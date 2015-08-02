@@ -59,14 +59,15 @@ class SeasonController extends BaseController
      */
     protected function seasonData()
     {
-
-        $data['title'] = "فئات الاصناف";
+        $itemCat      =Lang::get('main.itemCat');
+        $season      =Lang::get('main.season');
+        $data['title'] = $itemCat;
         $data['catFunName'] = "editSeason";
         $data['activeSeasonNav'] = "active";
         $data['asideOpen']   = 'open' ;
         $data['seasonInputName'] = "seasons";
         $data['seasonMini'] = "";
-        $data['arabicName'] = "الموسم";
+        $data['arabicName'] = $season;
         $data['tablesData'] = Seasons::all();
         return $data;
     }
