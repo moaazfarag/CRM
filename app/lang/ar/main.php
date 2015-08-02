@@ -13,6 +13,7 @@ return  array(
     'seasons'          => 'المواسم',
     'models'            => 'الماركات والموديلات ',
     'items'            => 'الاصناف',
+    'items'            => 'الاصناف',
     'accounts'         => 'اكواد الحسابات',
     'users'            => 'المستخدمين ',
     'change_password'  => 'تغيير كلمة السر',
@@ -128,7 +129,42 @@ return  array(
     'yourAccount'      => 'حسابك',
     'settings'         => 'الاعدادات',
     'login'            => 'تسجيل الدخول',
-    'customer'         => 'عميل',
+    ///---------------------------------------------------------------------///
+    //Controller PageS.....
+    //AccountController..
+    'customers'        =>'عميل ',
+    'suppliers'        =>'مورد',
+    'bank'             =>'بنك ',
+    'expenses'         =>'نفقات',
+    'multiple_revenue' =>'ايرادات اخرى',
+    'partners'         =>'شركاء',
+    'expenses'         =>'مصروفات',
+    //AccountBalanceController
+    'addAccountBalance'=> 'اضف ارصده حسابيه',
+    'editAccountsBalances'=>'تعديل رصيد حساب ',
+    //BaseController
+    'settingData'      => 'تعديل معلومات الشركه',
+    'small'            =>'صغير',
+    'average'          => 'متوسط',
+    'large'            => 'كبير',
+    'addItem'          => 'اضف منتج جديد ',
+    'editItem'         => 'تعديل منتج ',
+    //ItemBalanceController..
+    'addItemsBalances' => 'اضف جديد بارصده الاصناف',
+    'editItemsBalances'=> 'تعديل رصيد صنف',
+    'marka'            =>'الماركه',
+    'error'            =>'هذه البيانات غير صحيحه',
+    'addUser'          =>'اضف مستخدم',
+    'editUser'         => 'تعديل مستخدم',
+
+
+
+
+
+
+
+
+
 
 
 

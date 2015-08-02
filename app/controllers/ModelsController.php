@@ -59,14 +59,15 @@ class ModelsController extends BaseController
      */
     protected function modelData()
     {
-
-        $data['title'] = "فئات الاصناف";
+        $itemCat      =Lang::get('main.itemCat');
+        $marka      =Lang::get('main.marka');
+        $data['title'] = $itemCat;
         $data['activeModelNav'] = "active";
         $data['catFunName'] = "editModel";
         $data['seasonInputName'] = "seasons";
         $data['asideOpen']   = 'open' ;
         $data['modelMini'] = "";
-        $data['arabicName'] = "الماركة";
+        $data['arabicName'] = $marka;
         $data['tablesData'] = Models::all();
         return $data;
     }

@@ -17,11 +17,15 @@ class BaseController extends Controller {
 
     protected function settingData()
     {
-        $data['title']       = "تعديل معلومات الشركة" ;
+        $settingData         =Lang::get('main.settingData');
+        $small               =Lang::get('main.small');
+        $average             =Lang::get('main.average');
+        $large               =Lang::get('main.large');
+        $data['title']       = $settingData ;
         $data['companyInfo'] = CoData::Where('id','=',Auth::user()->co_id)->first();
         $data['asideOpen']   = 'open' ;
-        $data['printSize']   = array('a1'=>'صغير','a3'=>'متوسط','a4'=>'كبير');
-        $data['branches']     = Branches::where('co_id','=',Auth::user()->co_id)->get();
+        $data['printSize']   = array('a1'=>$small,'a3'=>$average,'a4'=>$large);
+        $data['branches']    = Branches::where('co_id','=',Auth::user()->co_id)->get();
         return $data;
     }
 

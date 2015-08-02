@@ -42,7 +42,8 @@ class UserController extends BaseController
                 $user->update();
                 return Redirect::intended('admin/setting');
             }else{
-                Session::flash('error','هذه البيانات غير صحيحه');
+                $error=Lang::get('main.error');
+                Session::flash('error',$error);
                 return Redirect::to('/login');
             }
 
@@ -51,10 +52,12 @@ class UserController extends BaseController
 
     public  function addUser()
     {
+        $add=Lang::get('main.add');
+        $addUser=Lang::get('main.addUser');
         $data['company'] = CoData::find(Auth::user()->co_id);
-        $data['button']  = 'اضف';
+        $data['button']  = $add;
         $data['asideOpen']   = 'open' ;
-        $data['title']  = ' اضف مستخدم';
+        $data['title']  = $addUser;
         return View::make('dashboard.add_user',$data);
     }
     public  function storeUser()
@@ -79,10 +82,12 @@ class UserController extends BaseController
     }
     public  function editUser($id)
     {
+        $edit=Lang::get('main.edit');
+        $editUser=Lang::get('main.editUser');
         $data['company'] = CoData::find(Auth::user()->co_id);
         $data['user']    = $data['company']->users()->where('id','=',$id)->first();;
-        $data['button']  = 'تعديل';
-        $data['title']  = '  تعديل مستخدم';
+        $data['button']  =$edit;
+        $data['title']  = $editUser;
         if ($data['user'])
         {
             return View::make('dashboard.add_user',$data);
