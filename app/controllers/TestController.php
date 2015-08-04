@@ -10,7 +10,12 @@ class TestController extends BaseController
         {
             public function index()
             {
-                return Response::json(Items::get());
+//                $data = Response::json(Items::get());
+//                return View::make('dashboard.test',$data);
+                $data['items']= Items::get();
+                $data['users']= User::get();
+                return Response::make(json_encode($data));
+//                return Response::json(Items::get());
 
             }
 
@@ -20,6 +25,7 @@ class TestController extends BaseController
             }
             public function addTest()
             {
+                dd(input::all());
                 $newItem = new Items;
                 $newItem->item_name = Input::get('item_name');
                 $newItem->save();

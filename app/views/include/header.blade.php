@@ -39,6 +39,7 @@
   {{ HTML::style('dashboard/assets/google-code-prettify/prettify.css') }}
   <!-- Main -->
   {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
+    {{ HTML::style('dashboard/assets/pikaday/pikaday.css') }}
 
 
   <!--[if lt IE 9]>
@@ -78,7 +79,7 @@
         </li>
         <li class="user">
           <a class="dropdown-button" href="#!" data-activates="user-dropdown">
-           <img src="{{ URL::asset('dashboard/assets/_con/images/user.jpg') }}" alt="John Doe" class="circle"> اسم العضو<i class="mdi-navigation-expand-more right"></i>
+           <img src="{{ URL::asset('dashboard/assets/_con/images/user.jpg') }}" alt="John Doe" class="circle"> {{ Auth::user()->name }} <i class="mdi-navigation-expand-more right"></i>
           </a>
 
           <ul id="user-dropdown" class="dropdown-content">

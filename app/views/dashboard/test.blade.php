@@ -2,8 +2,10 @@
 @extends('dashboard.main')
 @section('content')
     <!-- JS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
+{{ HTML::script('dashboard/assets/angular.min.js') }}
+{{ HTML::script('dashboard/assets/jquery/jquery.min.js') }}
+    {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>--}}
+    {{--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->--}}
 
     <!-- ANGULAR -->
     <!-- all angular resources will be loaded from the /public folder -->
@@ -26,34 +28,48 @@
     </div>
 
     <!-- NEW COMMENT FORM -->
-    <form ng-submit="submitItem()"> <!-- ng-submit will disable the default form action and use our function -->
+    {{--<form ng-submit="pushItem()"> <!-- ng-submit will disable the default form action and use our function -->--}}
 
         <!-- AUTHOR -->
         <div class="form-group">
-            <input type="text" class="form-control input-sm" name="item_name" ng-model="itemData.item_name" placeholder="Name">
+            <input type="text" class="form-control input-sm" name="item_name" ng-model="itemss.itemAmount" placeholder="Name">
         </div>
 
         <!-- COMMENT TEXT -->
         <div class="form-group">
-            <input type="text" class="form-control input-lg" name="comment" ng-model="itemData.text" placeholder="Say what you have to say">
+            <input type="text" class="form-control input-lg" name="comment" ng-model="itemss.itemName" placeholder="Say what you have to say">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" name="comment" ng-model="itemName" placeholder="Say what you have to say">
         </div>
 
         <!-- SUBMIT BUTTON -->
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            <button ng-click="addItem()"  class="btn btn-primary btn-lg">Submit</button>
         </div>
-    </form>
+    {{--</form>--}}
 
 	<pre>
-	@{{ itemData }}
+	{{--@{{ itemData }}--}}
+
+	@{{ itemss }}@{{ items2 }}
 	</pre>
 
     <!-- LOADING ICON -->
     <!-- show loading icon if the loading variable is set to true -->
     <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+<style>
 
+
+</style>
     <!-- THE COMMENTS -->
     <!-- hide these comments if the loading variable is true -->
+    <div class="comment" ng-hide="loading" ng-repeat="item2 in items2">
+        <h3>Comment #@{{ item2.amount }} <small>by @{{ item2.name }}</small></h3>
+        <input style="border: 1px solid #FFF;" type="text" value="@{{ item2.amount }}" name="@{{ item2.amount }}" id="">
+        <p>@{{ item2.amount }}</p>
+        <p><a href="#" ng-click="deleteItem(item.id)" class="text-muted">Delete</a></p>
+    </div>
     <div class="comment" ng-hide="loading" ng-repeat="item in items">
         <h3>Comment #@{{ item.id }} <small>by @{{ item.item_name }}</small></h3>
         <p>@{{ item.notes }}</p>
