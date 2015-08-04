@@ -1,14 +1,14 @@
 
           <thead>
             <tr>
-              <th>الرقم</th>
-              <th>اسم الصنف </th>
-              <th>الباركود</th>
-              <th> الكمية</th>
-              <th> التكلفة </th>
-              <th>السيريال </th>
-              <th>التاريخ </th>
-              <th>تعديل </th>
+              <th>@lang('main.number')</th>
+              <th>@lang('main.itemName')</th>
+              <th>@lang('main.bar_code')</th>
+              <th> @lang('main.qty')</th>
+              <th> @lang('main.cost')</th>
+              <th>@lang('main.serial_no') </th>
+              <th>@lang('main.date') </th>
+              <th>@lang('main.edit') </th>
             </tr>
           </thead>
           <tbody>

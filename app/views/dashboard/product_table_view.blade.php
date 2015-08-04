@@ -2,10 +2,10 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>الرقم</th>
-            <th>الاسم </th>
-            <th>الحالة </th>
-            <th>تعديل</th>
+            <th>@lang('main.number')</th>
+            <th>@lang('main.name') </th>
+            <th>@lang('main.statue') </th>
+            <th>@lang('main.edit')</th>
 
         </tr>
         </thead>

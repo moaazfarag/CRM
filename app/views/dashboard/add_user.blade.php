@@ -42,16 +42,16 @@
 
 
                    <li>
-                   <a href="/admin/setting"> الوظائف</a>
+                   <a href="/admin/setting"> @lang('main.jobs')</a>
                    </li>
                     <li>
-                   <a href="/admin">الاقسام</a>
+                   <a href="/admin">@lang('main.parts')</a>
                    </li>
                    <li>
-                   <a href="/admin/hr">اضف موظف  </a>
+                   <a href="/admin/hr">@lang('main.addEmployee')</a>
                    </li>
                      <li class="active"  >
-                   <a href="/admin/hr">اضف مستخدم للنظام  </a>
+                   <a href="/admin/hr"> @lang('main.addSysUser')</a>
                    </li>
                  </ul>
                </nav>
@@ -83,7 +83,7 @@
                           <div class="input-field">
                               <i class="fa fa-user prefix"></i>
                               {{ Form::text('name',null,array('required','id'=>'name')) }}
-                              <label for="name">الاسم</label>
+                              <label for="name">@lang('main.name')</label>
                               <ul class="parsley-errors-list filled" id="parsley-id-5202">
                                   <li class="parsley-required">{{ $errors ->First('name') }} </li>
                               </ul>
@@ -93,7 +93,7 @@
                           <div class="input-field">
                               <i class="fa fa-user prefix"></i>
                               {{ Form::text('username',null,array('required','id'=>'username')) }}
-                              <label for="username">اسم المستخدم </label>
+                              <label for="username">@lang('main.username')</label>
                               <ul class="parsley-errors-list filled" id="parsley-id-5202">
                                   <li class="parsley-required">{{ $errors ->First('username') }} </li>
                               </ul>
@@ -104,7 +104,7 @@
                   <div class="input-field">
                       <i class="fa fa-envelope prefix"></i>
                       {{ Form::email('email',null,array('id'=>'email')) }}
-                      <label for="email">البريد الاكتروني</label>
+                      <label for="email"> @lang('main.mail')</label>
                       <ul class="parsley-errors-list filled" id="parsley-id-5202">
                           <li class="parsley-required">{{ $errors ->First('email') }} </li>
                       </ul>
@@ -115,7 +115,7 @@
                           <div class="input-field">
                               <i class="fa fa-unlock-alt prefix"></i>
                               {{ Form::password('password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'password')) }}
-                              <label for="password">كلمة المرور</label>
+                              <label for="password">@lang('main.password')</label>
                               <ul class="parsley-errors-list filled" id="parsley-id-5202">
                                   <li class="parsley-required">{{ $errors ->First('password') }} </li>
                               </ul>
@@ -125,7 +125,7 @@
                           <div class="input-field">
                               <i class="fa fa-unlock-alt prefix"></i>
                               {{ Form::password('confirm_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'confirm_password')) }}
-                              <label for="confirm_password">تاكيد كلمة المرور</label>
+                              <label for="confirm_password"> @lang('main.confirm_password') </label>
                               <ul class="parsley-errors-list filled" id="parsley-id-5202">
                                   <li class="parsley-required">{{ $errors ->First('confirm_password') }} </li>
                               </ul>
@@ -135,16 +135,19 @@
 
                   <div class="row">
                       <div class="col s2 l6">
-                          {{ Form::label('br_code','الفرع') }}
-                          {{ Form::select('br_code', array('' => 'اختر الفرع')+$company->branches->lists('br_name','id'),null,array('id'=>'br_code')) }}
+                          <?php $branch =Lang::get('main.branch');
+                                $choseBranch =Lang::get('main.choseBranch') ?>
+                          {{ Form::label('br_code',$branch) }}
+                          {{ Form::select('br_code', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_code')) }}
                           <p class="parsley-required">
                               {{ $errors ->first('br_code') }}
                           </p>
                       </div>
                       <div class="col s2 l6">
                           <p>
+                              <?php $allParts= Lang::get('main.allParts') ?>
                               {{ Form::checkbox('all_br',1,null,array('id'=>'all_br')) }}
-                              {{ Form::label('all_br','كل الفروع') }}
+                              {{ Form::label('all_br',$allParts) }}
                               <p class="parsley-required">
                                   {{ $errors ->first('all_br') }}
                               </p>

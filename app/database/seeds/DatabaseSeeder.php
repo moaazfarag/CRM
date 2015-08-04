@@ -16,6 +16,16 @@ class DatabaseSeeder extends Seeder {
 		$this->call('accountsSeeder');
 		$this->call('catSeeder');
 		$this->call('usersSeeder');
-	}
+        $this->call('hrDesDedSeeder');
+        $this->call('hrEmpDesDedSeeder');
+        $this->call('hrEmployeesSeeder');
+        $this->call('hrJobsSeeder');
+        $this->call('hrDepartmentsSeeder');
+        $this->call('hrLoansSeeder');
+        $this->call('hrMonthChangesSeeder');
+        $this->call('hrMSDetailsSeeder');
+        $this->call('hrMSHeaderSeeder');
+
+    }
 
 }

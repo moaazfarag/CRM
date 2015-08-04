@@ -58,13 +58,14 @@ class CategoryController extends  BaseController
      */
         protected function categoryData()
         {
-
-            $data['title']          = "فئات الاصناف";
+            $itemCat                =Lang::get('main.itemCat');
+            $item                   =Lang::get('main.item');
+            $data['title']          = $itemCat;
             $data['activeCatNav']   = "active";
             $data['asideOpen']      = "open";
             $data['catFunName']     = "editCategory";
             $data['categoryMini']   = "";
-            $data['arabicName']     = "الصنف";
+            $data['arabicName']     = $item;
             $data['tablesData']     = Cat::all();
             return $data;
         }

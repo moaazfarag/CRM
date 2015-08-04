@@ -36,6 +36,7 @@
              </div>{{--branch--}}
 
              <div class="col s2 l3">
+
                  {{ Form::text('data',null,array('required','class'=>'pikaday','id'=>'data')) }}
                  {{ Form::label('data','التاريخ') }}
                  <p class="parsley-required">{{ $errors ->first('data') }} </p>
@@ -46,8 +47,10 @@
                  {{ Form::label('item_id','الصنف') }}
              </div>
 
+
              <div class="col s2 l3">
                   <i class="wi wi-day-cloudy"></i>
+
                 {{ Form::text('name',null,array('autofocus','ng-model'=>"search",'id'=>'item_id')) }}
 
                  <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
@@ -62,11 +65,14 @@
                 </div>
             </div> {{--quantity--}}
 
+
               <div class="col s12 l2">
                 <div class="input-field">
                     <i class="mdi mdi-editor-attach-money prefix"></i>
+
                     {{ Form::number('cost',null,array('ng-enter'=>"addItem()", 'ng-model'=>"item.cost",'required','id'=>'cost')) }}
                     {{ Form::label('cost','القيمة') }}
+
                     <p class="parsley-required">{{ $errors ->first('cost') }} </p>
                 </div>
             </div>
@@ -94,6 +100,7 @@
 
 
 
+
               {{--<div class="col s12 m6 l4">--}}
                   {{--<div class="input-field">--}}
                       {{--<i class="fa fa-barcode prefix"></i>--}}
@@ -107,7 +114,8 @@
             <br>
           <div class="row">
               <div class="col s12 l12">
-                  <button  type="submit" class="waves-effect btn">اضف </button>
+
+                  <button  type="submit" class="waves-effect btn">@lang('main.add')</button>
 
                   {{--<button  ng-click="submitItem" type="submit" class="waves-effect btn">تعديل </button>--}}
 

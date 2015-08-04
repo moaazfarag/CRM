@@ -7,7 +7,7 @@
         <div class="card {{ @$modelMini }}">
             <div class="title">
                 <h5>
-                    <i class="mdi mdi-notification-event-available"></i> اضف موديل جديدة</h5>
+                    <i class="mdi mdi-notification-event-available"></i> @lang('main.addNewModel')  </h5>
                 <a class="minimize" href="#">
                     <i class="mdi-navigation-expand-less"></i>
                 </a>
@@ -44,9 +44,9 @@
                     <div class="col s12 l12">
 
                         @if(isset($editModel->name))
-                            <button class="waves-effect btn">تعديل </button>
+                            <button class="waves-effect btn">@lang('main.edit') </button>
                         @else
-                            <button class="waves-effect btn">اضف </button>
+                            <button class="waves-effect btn">@lang('main.add') </button>
                         @endif
 
                         {{ Form::close() }}

@@ -30,7 +30,8 @@
                   <div class="input-field">
                       <i class="mdi mdi-editor-attach-money prefix"></i>
                       {{ Form::text('debit',null,array('required','id'=>'debit')) }}
-                      {{ Form::label('debit','مدين') }}
+                      <?php $debit=Lang::get('main.debit') ?>
+                      {{ Form::label('debit',$debit) }}
                       <p class="parsley-required">{{ $errors ->first('debit') }} </p>
                   </div>
               </div> {{--debit--}}
@@ -39,7 +40,8 @@
                   <div class="input-field">
                       <i class="mdi mdi-editor-attach-money prefix"></i>
                       {{ Form::text('credit',null,array('required','id'=>'credit')) }}
-                      {{ Form::label('credit','دائن') }}
+                      <?php $Credit=Lang::get('main.Credit') ?>
+                      {{ Form::label('credit',$Credit) }}
                       <p class="parsley-required">{{ $errors ->first('credit') }} </p>
                   </div>
               </div> {{--credit--}}
@@ -48,7 +50,8 @@
                   <div class="input-field">
                       <i class="mdi-communication-chat prefix"></i>
                       <textarea name="notes" id="notes" class="materialize-textarea" length="120"> {{ @$item->notes }}</textarea>
-                      {{ Form::label('notes','ملاحظات') }}
+                      <?php $notes=Lang::get('main.notes') ?>
+                      {{ Form::label('notes',$notes) }}
                     <p class="parsley-required">{{ $errors ->first('notes') }} </p>
                   </div>
               </div> {{--notes--}}
@@ -88,9 +91,9 @@
           <div class="row">
               <div class="col s12 l12">
               @if(Route::currentRouteName() == 'addAccountsBalances')
-                  <button type="submit" class="waves-effect btn">اضف </button>
+                  <button type="submit" class="waves-effect btn">@lang('main.add') </button>
               @elseif(Route::currentRouteName() == 'editAccountsBalances')
-                  <button type="submit" class="waves-effect btn">تعديل </button>
+                  <button type="submit" class="waves-effect btn">@lang('main.edit') </button>
               @endif
               </div>
               {{ Form::close() }}

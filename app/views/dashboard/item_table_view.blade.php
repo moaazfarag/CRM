@@ -1,17 +1,17 @@
 
           <thead>
             <tr>
-              <th>الرقم</th>
-              <th>الاسم </th>
-              <th>سعر الشراء  </th>
-              <th>وحدة القياس</th>
-              <th> الفئة </th>
-              <th>المورد </th>
-              <th>الموسم </th>
-              <th>الموديل </th>
-              <th> حد البيع</th>
-              <th>ملاحظات</th>
-              <th>تعديل</th>
+              <th>@lang('main.number')</th>
+              <th>@lang('main.name') </th>
+              <th>@lang('main.purchPrice')</th>
+              <th>@lang('main.measUnit')</th>
+              <th> @lang('main.category') </th>
+              <th>@lang('main.supplier') </th>
+              <th>@lang('main.season') </th>
+              <th>@lang('main.model') </th>
+              <th> @lang('main.sellLimit') </th>
+              <th>@lang('main.notes')</th>
+              <th>@lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>

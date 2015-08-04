@@ -14,14 +14,14 @@
                          <a href="{{ URL::route('addAccount','multiple_revenue') }}">  ايرادات اخرى  </a>
                      </li>
 
-                    <li class="{{ ($accountType=="expenses")?$navActive:null }}" >
+                    <li class="{{ ($accountType=="partners")?$navActive:null }}" >
 
-                        <a href="{{ URL::route('addAccount','expenses') }}"> جارى الشركاء </a>
+                        <a href="{{ URL::route('addAccount','partners') }}"> جارى الشركاء </a>
                     </li>
 
-                    <li class="{{ ($accountType=="bank")?$navActive:null }}" >
+                    <li class="{{ ($accountType=="expenses")?$navActive:null }}" >
 
-                        <a href="{{ URL::route('addAccount','bank') }}"> االمصروفات </a>
+                        <a href="{{ URL::route('addAccount','expenses') }}"> االمصروفات </a>
                     </li>
 
                     <li class="{{ ($accountType=="suppliers")?$navActive:null }}" >

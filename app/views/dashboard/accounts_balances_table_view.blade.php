@@ -1,11 +1,11 @@
 
           <thead>
             <tr>
-              <th>الرقم</th>
-              <th> مدين </th>
-              <th>دائن</th>
-              <th>التاريخ </th>
-              <th>تعديل </th>
+              <th>@lang('main.number')</th>
+              <th> @lang('main.debit') </th>
+              <th>@lang('main.Credit') </th>
+              <th>@lang('main.date') </th>
+              <th>@lang('main.edit') </th>
             </tr>
           </thead>
           <tbody>
