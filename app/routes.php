@@ -31,7 +31,7 @@ Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
 Route::post('/login',array('uses'=>'UserController@checkLogin','as'=>'login','before'=>'csrf'));
 
 Route::get('/', 'HomeController@index');
-Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
+Route::group(array('prefix'=>'admin'),function(){
     /**
      * company info area
      */
@@ -131,6 +131,15 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'TransHeaderController@storeTransHeader','as'=>'storeTransHeader')) ;
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'TransHeaderController@editAccountsBalances','as'=>'editAccountsBalances')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
+    });
+
+
+    Route::group(array('prefix'=>''),function()
+    {
+        Route::get('Add-Employees', array('uses' => 'EmployeesController@addEmp','as' => 'addEmp'));
+        Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
+        Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
+        Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
     });
 
     Route::get('product','dashboardController@manageProduct');

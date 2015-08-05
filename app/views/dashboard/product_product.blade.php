@@ -20,7 +20,7 @@
                   <div class="input-field">
                       <i class="fa fa-tag prefix"></i>
                       <?php $itemName=Lang::get('main.itemName') ?>
-                      {{ Form::text('item_name',null,array('required','id'=>'item_name')) }}
+                      {{ Form::text('item_name',null,array('required','id'=>'item_name',)) }}
                       {{ Form::label('item_name',$itemName) }}
                       <p class="parsley-required">{{ $errors ->first('item_name') }} </p>
                   </div>
