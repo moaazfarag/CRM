@@ -43,6 +43,7 @@
 <body class="body">
 
   <section id="sign-in">
+      {{Hash::make('123456')}}
 
     <!-- Background Bubbles -->
     <canvas id="bubble-canvas"></canvas>

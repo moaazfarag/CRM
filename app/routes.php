@@ -31,7 +31,7 @@ Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
 Route::post('/login',array('uses'=>'UserController@checkLogin','as'=>'login','before'=>'csrf'));
 
 Route::get('/', 'HomeController@index');
-Route::group(array('prefix'=>'admin'),function(){
+Route::group(array('prefix'=>'admin' , 'before'=>'Auth'),function(){
     /**
      * company info area
      */
@@ -128,13 +128,15 @@ Route::group(array('prefix'=>'admin'),function(){
     Route::group(array('prefix'=>'Transaction'),function()
     {
         Route::get('Add-Trans-Header/{type}', array('uses' => 'TransHeaderController@addTransHeader','as' => 'addTransHeader'));
+        Route::post('transJson', array('uses' => 'TransHeaderController@transJson','as' => 'transJson'));
         Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'TransHeaderController@storeTransHeader','as'=>'storeTransHeader')) ;
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'TransHeaderController@editAccountsBalances','as'=>'editAccountsBalances')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
     });
 
 
-    Route::group(array('prefix'=>''),function()
+
+    Route::group(array('prefix'=>'hr'),function()
     {
         Route::get('Add-Employees', array('uses' => 'EmployeesController@addEmp','as' => 'addEmp'));
         Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
@@ -142,11 +144,17 @@ Route::group(array('prefix'=>'admin'),function(){
         Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
     });
 
+
+    Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
+    Route::get('addtest',array('uses'=>'TestController@addTest','as'=>'addTest'));
+    Route::delete('testdelete/{id}',array('uses'=>'TestController@destroy','as'=>'testdelete'));
+    Route::get('tests',array('uses'=>'TestController@view','as'=>'testsIndex'));
+
     Route::get('product','dashboardController@manageProduct');
 
 
     Route::get('accounts','dashboardController@accounts');
-    Route::get('hr','dashboardController@hr');
+    Route::get('hrr','dashboardController@hr');
 
 
 

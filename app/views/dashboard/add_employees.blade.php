@@ -47,6 +47,16 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col s2 l6">
+                        <?php $branch =Lang::get('main.branch');
+                        $choseBranch =Lang::get('main.choseBranch') ?>
+                        {{ Form::label('br_code',$branch) }}
+                        {{ Form::select('br_code', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_code')) }}
+                        <p class="parsley-required">
+                            {{ $errors ->first('br_code') }}
+                        </p>
+                    </div>
 
                 </div>
     </div>

@@ -13,7 +13,7 @@ class EmployeesController extends BaseController
 
         $data['title']     =  Lang::get('main.addEmployee')  ; // page title
         $data['employees'] = "open";
-        return View::make('dashboard.add_employees',$data);
+        return View::make('dashboard.add_employee',$data);
 
     }
     //Function Store Employee In Data Base
