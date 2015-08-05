@@ -107,6 +107,16 @@
 
                 </ul>
             </li>
+            <li class="{{@$employees}}">
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  شؤون العاملين <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف موظف  </a>
+
+                    </li>
+                </ul>
+
+            </li>
           </ul>
 
 

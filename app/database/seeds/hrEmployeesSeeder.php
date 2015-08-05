@@ -7,7 +7,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -40,7 +40,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -73,7 +73,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -106,7 +106,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -139,7 +139,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -172,7 +172,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -205,7 +205,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -238,7 +238,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -271,7 +271,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -304,7 +304,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -337,7 +337,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -370,7 +370,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',
@@ -403,7 +403,7 @@ class hrEmployeesSeeder extends Seeder {
             array(
                 'empCode'           => '221215',
                 'empName'           => 'ahmed',
-                'barCode'           => '123456789987456123',
+                'branchCode'           => '123456789987456123',
                 'empDate'           => '',
                 'workNature'        => 'commerce',
                 'depCode'           => '123423621',

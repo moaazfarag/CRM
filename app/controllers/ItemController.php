@@ -14,8 +14,8 @@ class ItemController extends BaseController
      */
     public  function addItem()
     {
-        $addItem           = Lang::get('main.addItem');
-        $data['title']     = $addItem   ; // page title
+
+        $data['title']     =  Lang::get('main.addItem')  ; // page title
         $data['asideOpen']      = "open";
 //        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons

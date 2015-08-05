@@ -16,8 +16,9 @@ class CreateHrEmployeesTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('empCode');
+            $table->integer('co_id');
             $table->char('empName','75');
-            $table->integer('barCode');
+            $table->integer('branchCode');
             $table->dateTime('empDate');
             $table->char('workNature','50');
             $table->integer('depCode');
