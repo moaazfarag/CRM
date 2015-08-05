@@ -25,14 +25,15 @@
       {{ HTML::script('dashboard/assets/flot/jquery.flot.categories.min.js') }}
       <!-- Sortable -->
       {{ HTML::script('dashboard/assets/sortable/Sortable.min.js') }}
-
-      <!-- Main -->
+            <!-- Main -->
       {{ HTML::script('dashboard/assets/_con/js/_con.min.js') }}
 
                 {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
       <!-- Google Prettify -->
       {{ HTML::script('dashboard/assets/google-code-prettify/prettify.js') }}
       {{ HTML::script('dashboard/assets/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}
+      {{ HTML::script('dashboard/assets/pikaday/pikaday.js') }}
+      {{ HTML::script('dashboard/assets/pikaday/pikaday.jquery.js') }}
               <script>
                 $('#table_customers').DataTable({
       "iDisplayLength": 5,

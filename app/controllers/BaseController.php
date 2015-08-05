@@ -36,4 +36,22 @@ class BaseController extends Controller {
     {
         return Auth::user()->co_id;
     }
+    /*
+     *  check if  user can controller all barnches or not
+     *
+     * */
+    public function isAllBranch()
+    {
+        //check if  user can controller all barnches or not
+        if(Auth::user()->all_br){
+            return true;
+        }else{
+            return $this->branchName();
+        }
+    }
+    public function branchName()
+    {
+     return Branches::find(Auth::user()->br_code)->br_name;
+    }
+
 }

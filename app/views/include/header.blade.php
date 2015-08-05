@@ -39,6 +39,7 @@
   {{ HTML::style('dashboard/assets/google-code-prettify/prettify.css') }}
   <!-- Main -->
   {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
+    {{ HTML::style('dashboard/assets/pikaday/pikaday.css') }}
 
 
   <!--[if lt IE 9]>

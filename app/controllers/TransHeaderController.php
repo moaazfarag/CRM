@@ -1,6 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
+ *
  * User: Mohamed Hafez
  * Date: 22/7/2015
  * Time: 3:49 PM
@@ -8,11 +9,12 @@
 
 class TransHeaderController extends BaseController {
 
+
+
     /**
      * @return mixed
      * add Items Balances
      */
-
     public function addTransHeader($type)
     {
         if($type == 'add')
@@ -20,8 +22,9 @@ class TransHeaderController extends BaseController {
                 $name = 'اضافة';
             }
 
-        $data['title']    = " تسوية $name "; // page title
+        $data['title']    = " تسوية $name " ; // page title
         $data['TransOpen']   = 'open' ;
+        $data['branch']   = $this->isAllBranch();
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
 
@@ -42,7 +45,7 @@ class TransHeaderController extends BaseController {
         {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
-//            die('hi');
+
             $transHeader = new TransHeader;
 
             $transHeader->co_id         = $this->coAuth();
@@ -124,7 +127,19 @@ class TransHeaderController extends BaseController {
     }
 
 
+    public function transJson()
+    {
+        Request::header('application/json');
+        if (Request::format() == 'json')
+        {
+            dd(Input::all());
+
+        }
+//        dd(Input::all());
 
 
+        return Response::json(array('success' => true));
+
+    }
 
 } 
