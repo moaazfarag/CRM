@@ -20,25 +20,25 @@
               <h4>Users</h4>
 
               <div class="each-result">
-                <img src="assets/_con/images/user2.jpg" alt="Felecia Castro" class="circle photo">
+                <img src="{{ URL::asset('dashboard/assets/_con/images/user2.jpg') }}" alt="Felecia Castro" class="circle photo">
                 <div class="title">Felecia Castro</div>
                 <div class="label">Content Manager</div>
               </div>
 
               <div class="each-result">
-                <img src="assets/_con/images/user3.jpg" alt="Max Brooks" class="circle photo">
+                <img src="{{ URL::asset('dashboard/assets/_con/images/user3.jpg') }}" alt="Max Brooks" class="circle photo">
                 <div class="title">Max Brooks</div>
                 <div class="label">Programmer</div>
               </div>
 
               <div class="each-result">
-                <img src="assets/_con/images/user4.jpg" alt="Patsy Griffin" class="circle photo">
+                <img src="{{ URL::asset('dashboard/assets/_con/images/user4.jpg') }} alt="Patsy Griffin" class="circle photo">
                 <div class="title">Patsy Griffin</div>
                 <div class="label">Support</div>
               </div>
 
               <div class="each-result">
-                <img src="assets/_con/images/user6.jpg" alt="Vernon Garrett" class="circle photo">
+                <img src="{{ URL::asset('dashboard/assets/_con/images/user6.jpg') }}" alt="Vernon Garrett" class="circle photo">
                 <div class="title">Vernon Garrett</div>
                 <div class="label">Photographer</div>
               </div>

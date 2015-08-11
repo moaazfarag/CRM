@@ -2,7 +2,7 @@
 /**
  * Created by PhpStorm.
  *
- * User: Mohamed Hafez
+ * User: Moaaz farag
  * Date: 22/7/2015
  * Time: 3:49 PM
  */
@@ -13,85 +13,64 @@ class TransHeaderController extends BaseController {
 
     /**
      * @return mixed
-     * add Items Balances
+     * addItems Balances
      */
     public function addTransHeader($type)
     {
-        if($type == 'add')
+        $types = array('addItems','discountItems');
+        if(in_array($type,$types) ){
+            if($type == 'addItems')
             {
                 $name = 'اضافة';
+            }elseif($type == 'discountItems'){
+                $name = 'خصم';
             }
 
-        $data['title']    = " تسوية $name " ; // page title
-        $data['TransOpen']   = 'open' ;
-        $data['branch']   = $this->isAllBranch();
-        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-        $data['items']    = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
-
-        return View::make('dashboard.trans_header',$data,compact('type'));
-    }
-
-
-    /**
-     * @return mixed
-     * store Items Balances
-     */
-
-    public function storeTransHeader($type)
-    {
-        $validation = Validator::make(Input::all(), TransHeader::$store_rules);
-
-        if($validation->fails())
-        {
-            return Redirect::back()->withInput()->withErrors($validation->messages());
-        }else {
-
-            $transHeader = new TransHeader;
-
-            $transHeader->co_id         = $this->coAuth();
-            $transHeader->user_id       = Auth::id();
-            $transHeader->br_code       = Auth::user()->br_code;
-            $new_num                    = $transHeader->max('invoice_no') ;
-            $transHeader->invoice_no    = $new_num + 1; //.'max nun in this colmun and then +1';
-            $transHeader->invoice_type  = $type;
-            $transHeader->account       = 'from account model group select in li like supplier and csts';
-            $transHeader->in_total      = 'a';
-            $transHeader->discount      = Input::get('discount');
-            $transHeader->tax           = Input::get('tax');
-            $transHeader->net           = 'total after -tax and - discount and - in total';
-            $transHeader->pay_type      = 'a ';
-            $transHeader->deleted       = '1';// Input::get('deleted');
-
-            $transHeader->save();
-
-                return Redirect::route('addTransHeader',array('add'));
-            }
-        
-    }
-
-
-
-    /**
-     * @return mixed
-     * edit Items Balances
-     */
-    public  function editTransHeader($id)
-    {
-        $data['title']     = " تعديل  رصيد صنف"; // page title
-        $data['items']     = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
-        $data['item']      = ItemsBalances::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
-//        dd($data['item']);
-        if($data['item'])
-        {
+            $data['title']    = " تسوية $name " ; // page title
+            $data['TransOpen']   = 'open' ;
             $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['branch']      = $this->isAllBranch();
+//            $data['newArray']    = $this->itemsToJson($invoiceId);
+//            dd(json_encode($newArray));
+            return View::make('dashboard.trans_header',$data,compact('type'));
 
-            return View::make('dashboard.items_balances',$data);
         }else{
-            return "item not here";
+
+            return "that's not correct page : type check fail";
+
         }
 
+    }
+
+    /**
+     * edit trans invoice
+     * @param $type       type of trans
+     * @param $invoiceId  edit invoice by id
+     * @return string
+     */
+    public function editTransHeader($invoiceId)
+    {
+        $trans = TransHeader::findOrFail($invoiceId);
+        if($trans){
+            $data['title']       = " تعديل تسوية اضافة " ; // page title
+            $data['TransOpen']   = 'open' ;
+            $data['co_info']     = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['branch']      = $this->isAllBranch(); //
+            $data['newArray']    = $this->itemsToJson($invoiceId);
+
+//            dd(json_encode( $data['newArray'] ));
+            return View::make('dashboard.trans_header',$data,compact('type'));
+
+        }else{
+
+            return "that's not correct page : type check fail";
+
+        }
 
     }
+
+
+
 
     /**
      * @return mixed
@@ -126,20 +105,75 @@ class TransHeaderController extends BaseController {
         }
     }
 
-
-    public function transJson()
+    /**
+     * store data into trans table 
+     * @param $type of trans
+     * @return mixed
+     */
+    public function transJson($type)
     {
-        Request::header('application/json');
-        if (Request::format() == 'json')
+
+        $inputs = Input::all();
+
+        $validation = Validator::make($inputs, TransDetails::rulesCreator($inputs));
+
+        if($validation->fails())
         {
-            dd(Input::all());
+            echo "fail";
+            dd(TransDetails::rulesCreator($inputs));
+
+        }else {
+            $newHeader                  = new TransHeader;
+            $newHeader->co_id           = $this->coAuth();
+            $newHeader->user_id         = Auth::id();
+            $newHeader->br_code         = $inputs['branch_id'];
+            $transHeaderId              = $newHeader->max('invoice_no')+1;
+            $newHeader->invoice_no      = $transHeaderId;
+            $newHeader->invoice_type    = $type;
+            $newHeader->date            = $inputs['date'];
+            foreach(TransDetails::countOfInputs($inputs) as $k => $v )
+            {// foreach for save item into trans_details table 
+                $newInvoiceHeader = new TransDetails;
+                $newInvoiceHeader->trans_header_id   = $transHeaderId;
+                $newInvoiceHeader->item_id           = $inputs['id_'.$k];
+                $newInvoiceHeader->qty               = $inputs['quantity_'.$k];
+                $newInvoiceHeader->save();
+            }
+            $newHeader->save();
+            return Response::json(array('success' => true));
+//
+//            echo "scusess";
+//            dd(TransDetails::rulesCreator($inputs));
+
 
         }
-//        dd(Input::all());
+//        dd(Input::get('id'));
+//        dd(Request::format());
+//        dd(Input::json()->all());
+//
+//        return Response::json(array('success' => true));
 
+    }
 
-        return Response::json(array('success' => true));
-
+    /**
+     * get items in invoice and convert to json to pass it  to view
+     * @param $invoiceId
+     * @return array
+     */
+    private function itemsToJson($invoiceId)
+    {
+        $invoiceItems      = TransDetails::where('trans_header_id','=',$invoiceId)->get(); //  get all item of this trans to view in table
+        $newArray = array();
+        foreach($invoiceItems as $invoiceItem ){
+            $newArray[] = array
+            (
+                'name'=> Items::find($invoiceItem['item_id'])->item_name,
+                'id'=> $invoiceItem['item_id'],
+                'quantity'=> $invoiceItem['qty'],
+                'cost'=> $invoiceItem['cost']/$invoiceItem['qty']
+            ) ;
+        }
+        return $newArray;
     }
 
 } 

@@ -20,17 +20,31 @@
     }
 
 </style>
+<form name="test">
+
             <tr ng-repeat="invoiceItem in invoiceItems">
-                <td><a href ng-click="removeItem(item)" class="btn btn-danger">[X]</a></td>
+                <td>
+                    <a href ng-click="removeItem(invoiceItem)" class="btn btn-danger">[X]</a>
+                </td>
                 <td>@{{ invoiceItems.indexOf(invoiceItem)+1 }}</td>
-                <td><input class="inputwithoutborder" name="id[@{{ invoiceItems.indexOf(invoiceItem) }}]" ng-model="invoiceItem.name" type="text"  value="@{{ invoiceItem.name }}" name="cost" /></td>
-                <td><input class="inputwithoutborder" name="quantity[@{{ invoiceItems.indexOf(invoiceItem) }}]"  ng-model="invoiceItem.quantity" type="text" value="@{{ invoiceItem.quantity }}" name="quantity" /></td>
-                <td><input class="inputwithoutborder" name="cost[@{{ invoiceItems.indexOf(invoiceItem) }}]" ng-model="invoiceItem.cost" type="text" value="@{{ invoiceItem.cost }}" name="cost" /></td>
+                <td><input disabled class="inputwithoutborder" ng-model="invoiceItem.name" type="text" /></td>
+                <td>
+                    <input   hidden class="inputwithoutborder" name="id_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.id" type="number" value="@{{ invoiceItem.id }}"/>
+                    <input class="inputwithoutborder" required name="quantity_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.quantity" type="number" value="@{{ invoiceItem.quantity }}"/>
+                    <div ng-show="form.$submitted || form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$touched">
+                        <div ng-show="form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.integer">Tell us your name.</div>
+                    </div>
+                </td>
+
+                <td>
+                    <input class="inputwithoutborder" name="cost_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.cost" type="text" value="@{{ invoiceItem.cost }}"  />
+                </td>
               <th>@{{ invoiceItem.cost * invoiceItem.quantity  }}</th>
               </td>
 
             </tr>
-
+</form>
           </tbody>
         </table>
-
+@{{ form.quantity[0] }}
+@{{ invoiceItem }}

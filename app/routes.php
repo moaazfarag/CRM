@@ -31,7 +31,7 @@ Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
 Route::post('/login',array('uses'=>'UserController@checkLogin','as'=>'login','before'=>'csrf'));
 
 Route::get('/', 'HomeController@index');
-Route::group(array('prefix'=>'admin' , 'before'=>'Auth'),function(){
+Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     /**
      * company info area
      */
@@ -105,7 +105,7 @@ Route::group(array('prefix'=>'admin' , 'before'=>'Auth'),function(){
      */
     Route::group(array('prefix'=>'ItemBalance'),function()
     {
-            Route::get('Add-Items-Balances', array('uses' => 'ItemsBalancesController@addItemsBalances','as' => 'addItemsBalances'));
+        Route::get('Add-Items-Balances', array('uses' => 'ItemsBalancesController@addItemsBalances','as' => 'addItemsBalances'));
         Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
         Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
         Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
@@ -128,9 +128,9 @@ Route::group(array('prefix'=>'admin' , 'before'=>'Auth'),function(){
     Route::group(array('prefix'=>'Transaction'),function()
     {
         Route::get('Add-Trans-Header/{type}', array('uses' => 'TransHeaderController@addTransHeader','as' => 'addTransHeader'));
-        Route::post('transJson', array('uses' => 'TransHeaderController@transJson','as' => 'transJson'));
+        Route::post('transJson/{type}', array('uses' => 'TransHeaderController@transJson','as' => 'transJson'));
         Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'TransHeaderController@storeTransHeader','as'=>'storeTransHeader')) ;
-        Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'TransHeaderController@editAccountsBalances','as'=>'editAccountsBalances')) ;
+        Route::get('Edit-Trans-Header/{invoiceId}',array('uses'=>'TransHeaderController@editTransHeader','as'=>'editTransHeader')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
     });
 
