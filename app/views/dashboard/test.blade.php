@@ -1,6 +1,7 @@
 
 @extends('dashboard.main')
 @section('content')
+
     <!-- JS -->
 {{ HTML::script('dashboard/assets/angular.min.js') }}
 {{ HTML::script('dashboard/assets/jquery/jquery.min.js') }}

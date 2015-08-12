@@ -12,7 +12,7 @@ class TestController extends BaseController
             {
 //                $data = Response::json(Items::get());
 //                return View::make('dashboard.test',$data);
-                $data['items']= Items::get();
+                $data['items']= Items::with('cat')->get();
                 $data['users']= User::get();
                 return Response::make(json_encode($data));
 //                return Response::json(Items::get());

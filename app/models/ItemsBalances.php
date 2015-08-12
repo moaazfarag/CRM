@@ -14,15 +14,19 @@ class ItemsBalances extends Eloquent {
 	 * Store Rules
 	 * @var array
 	 */
-    public static  $store_rules = array(
+    public static function rulesCreator($inputs)
+    {
+        $count = TransDetails::countOfInputs($inputs);
+        $store_rules = array();
+        foreach($count as $k => $v)
+        {
+            $store_rules['cost_'.$k] = 'required|integer';
+            $store_rules['quantity_'.$k] = 'required|integer';
+            $store_rules['id_'.$k] = 'required|integer';
+        }
 
-                                'item_id'          => 'integer',
-                                'bar_code'         => 'min:3',
-                                'qty'              => 'required|integer|min:1',
-                                'cost'             => 'integer',
-                                'serial_no'        => 'string'
-
-                                        );
+        return $store_rules;
+    }
 
     /**
 	 * update Rules

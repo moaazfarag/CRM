@@ -1,0 +1,44 @@
+/* moaaz farag*/
+input.input-without-border {
+    border: 1px solid #F5F5F5!important;
+    margin: 0!important;
+}
+/*style of drop down menu */
+ul.drop-down-menu
+{
+    position: absolute ;
+    margin:0px ;
+    box-shadow: -4px 4px 15px #888888
+}
+ul li.li-drop-down-menu{
+    width: 250px;
+    background-color: #fff;
+    cursor: pointer;
+    display: list-item;
+    margin:2px 2px 3px 2px
+}
+ ul li.li-drop-down-menu:hover{
+    width: 250px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    display: list-item;
+    margin:2px 2px 3px 2px
+}
+input.ng-invalid.ng-touched {
+    border-bottom: 1px red!important;
+    box-shadow: 1px 1px 2px red!important
+}
+
+
+div.error-div {
+    color: red;
+    font-size: 8pt;
+    margin-top: -1em;
+    margin-right: 3.5em;
+}
+.error-div-for-table {
+    color: red;
+    font-size: 8pt;
+
+}

@@ -1,5 +1,11 @@
 
-      <footer>&copy; 2015 <strong>nK</strong>. All rights reserved. <a href="http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=nKdev">Purchase</a>
+      <footer>
+          &copy; برمجة و تطوير شركة
+          <a href="http://www.clickfordata.net/">
+              <strong>
+                  ClickForData
+              </strong>
+          </a>
       </footer>
       <!-- DEMO [REMOVE IT ON PRODUCTION] -->
       {{ HTML::script('dashboard/assets/_con/js/_demo.js') }}
@@ -34,7 +40,13 @@
       {{ HTML::script('dashboard/assets/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}
       {{ HTML::script('dashboard/assets/pikaday/pikaday.js') }}
       {{ HTML::script('dashboard/assets/pikaday/pikaday.jquery.js') }}
-              <script>
+      {{ HTML::script('dashboard/assets/angular.min.js') }}
+      {{ HTML::script('dashboard/scripts/app.js') }}
+      {{ HTML::script('dashboard/scripts/itemService.js') }}
+      {{ HTML::script('dashboard/scripts/mainCtrl.js') }}
+      {{ HTML::script('dashboard/assets/select2/js/select2.full.min.js') }}
+
+      <script>
                 $('#table_customers').DataTable({
       "iDisplayLength": 5,
       "bLengthChange": false,

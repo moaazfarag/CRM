@@ -10,7 +10,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>الراصد | {{ @$title }} </title>
-  <meta name="description" content="">
+    <meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
+
+    <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
@@ -25,9 +27,10 @@
 
   <!-- FontAwesome -->
   {{ HTML::style('dashboard/assets/font-awesome/css/font-awesome.min.css') }}
+  {{ HTML::style('dashboard/assets/select2/css/select2.min.css') }}
 
-  <!-- Material Design Icons -->
-  {{ HTML::style('dashboard/assets/material-design-icons/css/material-design-icons.min.css') }}
+<!-- Material Design Icons -->
+{{ HTML::style('dashboard/assets/material-design-icons/css/material-design-icons.min.css') }}
 
   <!-- IonIcons -->
   {{ HTML::style('dashboard/assets/ionicons/css/ionicons.min.css') }}
@@ -40,14 +43,18 @@
   <!-- Main -->
   {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
     {{ HTML::style('dashboard/assets/pikaday/pikaday.css') }}
-
+    {{--custom css--}}
+    {{ HTML::style('dashboard/css/style.css') }}
 
   <!--[if lt IE 9]>
-    <script src="assets/html5shiv/html5shiv.min.js') }}
+    <script src="assets/html5shiv/html5shiv.min.js">
+        {{ HTML::script('dashboard/assets/angular.min.js') }}
+        {{ HTML::script('dashboard/scripts/app.js') }}
+        {{ HTML::script('dashboard/scripts/itemService.js') }}
+        {{ HTML::script('dashboard/scripts/mainCtrl.js') }}
   <![endif]-->
 </head>
 <body>
-
 
   <!--
   Top Navbar

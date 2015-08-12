@@ -6,7 +6,10 @@ angular.module('mainCtrl', [])
     .controller('mainController', function($scope, $http, Item) {
         // object to hold all the data for the new comment form
         $scope.itemData = {};
-        $scope.invoiceItems = [];
+        //$scope.item = {};
+        $scope.value = "";
+        $scope.invoiceItems = [
+        ];
         // loading variable to show the spinning loading icon
         $scope.loading = true;
 
@@ -21,33 +24,48 @@ angular.module('mainCtrl', [])
 
 
          //function to handle submitting the form
-        $scope.submitItem = function() {
-            $scope.loading = true;
-
-            // save the comment. pass in comment data from the form
-            Item.save($scope.invoiceItems)
-                //console.log($scope.invoiceItems)
-                .success(function(data) {
-                    $scope.invoiceItems = {};
-                    // if successful, we'll need to refresh the comment list
-                    Item.get()
-                        .success(function(getData) {
-                            $scope.invoiceItems = getData;
-                            $scope.loading = false;
-                        });
-
-                })
-                .error(function(data) {
-
-                });
-        };
+        //$scope.submitItem = function() {
+        //    $scope.loading = true;
+        //    console.log($scope.invoiceItems);
+        //
+        //    // save the comment. pass in comment data from the form
+        //    Item.save($scope.invoiceItems)
+        //        .success(function(data) {
+        //            console.log($scope.invoiceItems);
+        //
+        //            $scope.invoiceItems = {};
+        //             //if successful, we'll need to refresh the comment list
+        //            Item.get()
+        //                .success(function(getData) {
+        //                    $scope.invoiceItems = getData;
+        //                    $scope.loading = false;
+        //                });
+        //
+        //        })
+        //        .error(function(data) {
+        //
+        //        });
+        //};
         $scope.addItem = function () {
 
             $scope.invoiceItems.push($scope.item);
             // Clear input fields after push
             $scope.item = "";
+            $scope.form.$setUntouched();
             //foucus into item name after add
             document.getElementById('item_id').focus();
+        };
+
+        $scope.selectItem = function(itemName,itemId){
+            $scope.item.name = itemName;
+            $scope.item.id   = itemId;
+            document.getElementById('quantity').focus();
+            document.getElementById('itemsView').style.display = 'none';
+        };
+        $scope.displayOn = function(){
+            console.log();
+            $scope.prefs = false;
+            document.getElementById('itemsView').style.display = '';
         };
         $scope.invoice_sub_total = function() {
             var total = 0.00;
@@ -59,7 +77,31 @@ angular.module('mainCtrl', [])
         $scope.removeItem =  function(item){
             $scope.invoiceItems.splice($scope.invoiceItems.indexOf(item), 1)
         };
-        $scope.pushItem = function() {
+        $scope.hasInvoiceItems =  function(){
+            if( $scope.invoiceItems.length>0 ){
+                return false;
+            }else{
+                return true;
+            }
+
+        };
+        $scope.hasItem =  function(item){
+            if( item  > 0 && $scope.item.name.length>0 ){
+                return false;
+            }else{
+                return true;
+            }
+
+        };
+        $scope.hasItemBalance =  function(item){
+            if( item  > 0 && $scope.item.name.length > 0){
+                return false;
+            }else{
+                return true;
+            }
+
+        };
+/*        $scope.pushItem = function() {
             //$scope.data =  JSON.parse(localStorage["data"]);
             $scope.data = [];
             //localStorage["data"]
@@ -69,7 +111,7 @@ angular.module('mainCtrl', [])
             console.log($scope.data);
             console.log(localStorage['itemData']);
 
-        }
+        }*/
 
         // function to handle deleting a comment
         $scope.deleteItem = function(id) {

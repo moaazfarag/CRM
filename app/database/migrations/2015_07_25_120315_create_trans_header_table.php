@@ -18,7 +18,6 @@ class CreateTransHeaderTable extends Migration {
             $table->integer('co_id');
             $table->integer('user_id');
             $table->integer('br_code');
-
             $table->integer('invoice_no');
             $table->string('invoice_type');
             $table->integer('account');
@@ -26,6 +25,7 @@ class CreateTransHeaderTable extends Migration {
             $table->float('discount');
             $table->float('tax');
             $table->float('net');
+            $table->date('date');
             $table->string('pay_type');
             $table->integer('deleted');
 
