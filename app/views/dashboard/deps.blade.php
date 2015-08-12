@@ -14,7 +14,7 @@
             </div>
             <div class="content">
                 {{--{{ dd($editSeason->name) }}--}}
-                @if(isset($editDep->depName))
+                @if(isset($editDep->name))
                     {{ Form::model($editDep,array('route'=>array('updateDep',$editDep->id))) }}
                 @else
                     {{ Form::open(array('route'=>'storeDep')) }}
@@ -30,16 +30,12 @@
                         <div class="input-field">
                             <i class="mdi mdi-social-person prefix"></i>
 
-                            {{Form::text('depName',null,array('required','placeholder'=>" ".  @$arabicName,'id'=>'name')) }}
+                            {{Form::text('name',null,array('required','placeholder'=>" ".  @$arabicName,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
                         </div>
                     </div>
                 </div>
                 <div class="input-field">
-                    {{--<p>--}}
-                    {{--<label for="cat_name">????? ?????? ?????? ??? ????? ????? </label>--}}
-                    {{--{{ Form::checkbox('cat_name', 1,null,array('id'=>'cat_name')) }}--}}
-                    {{--</p>--}}
                 </div>
                 <div class="row">
                     <div class="col s12 l12">

@@ -15,17 +15,13 @@ class JobController extends BaseController
     public function addJob()
     {
         $data = $this->JobData();
-//        $data['catActive'] = "active";
         return View::make('dashboard.jobs',$data);
     }
 
-    /**
-     * add new season to database
-     */
     public function storeJob()
     {
         $jop           = new Job ;
-        $jop->jobName     = Input::get('jobName');
+        $jop->name     = Input::get('name');
         $jop->co_id    = Auth::user()->co_id;
 //        $dep->user_id  = Auth::id();
         $jop->save();
@@ -36,35 +32,26 @@ class JobController extends BaseController
     {
         //dd('saddsa');
         $data = $this->JobData();
-//        $data['catActive'] = "active";
         $data['editJob']  = Job::findOrFail($id);
         return View::make('dashboard.jobs',$data);
 
     }
     public function updateJob($id)
     {
-        $job           = Job::findOrFail($id) ;
-        $job->jobName = Input::get('jobName'); //season name from input
-        $job->co_id    = Auth::user()->co_id; // company id
+        $job              = Job::findOrFail($id) ;
+        $job->name        = Input::get('name'); //season name from input
+        $job->co_id       = Auth::user()->co_id; // company id
 //        $dep->user_id  = Auth::id();// user who add this record
         $job->update();
         return Redirect::route('addJob');
 
     }
 
-    /**
-     * data will use in season
-     * @return mixed
-     */
     protected function JobData()
     {
         $Jop =Lang::get('main.Jop');
         $addJop =Lang::get('main.addJop');
-
         $data['title']              = $Jop;
-//        $data['activeModelNav']     = "active";
-//        $data['catFunName']         = "editJob";
-//        $data['seasonInputName']    = "seasons";
         $data['employees']          = 'open' ;
         $data['modelMini']          = "";
         $data['arabicName']         = $addJop;

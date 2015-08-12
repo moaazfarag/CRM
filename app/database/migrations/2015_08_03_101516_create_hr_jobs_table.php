@@ -15,11 +15,11 @@ class CreateHrJobsTable extends Migration {
 		Schema::create('hr_jobs', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('jobCode');
+            $table->integer('job_id');
 			$table->integer('co_id');
-            $table->char('jobName','50');
+            $table->char('name','50');
             $table->boolean('deleted');
-            $table->integer('userId');
+            $table->integer('user_id');
 
 			$table->timestamps();
 		});

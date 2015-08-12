@@ -15,18 +15,18 @@ class CreateHrMonthChangesTable extends Migration {
 		Schema::create('hr_monthChanges', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('empCode');
-            $table->dateTime('transDate');
-            $table->integer('transSerial');
-            $table->integer('forYear');
-            $table->integer('forMonth');
-            $table->integer('desDedCode');
-            $table->char('dayCost','25');
+            $table->integer('employee_id');
+            $table->dateTime('trans_date');
+            $table->integer('trans_serial');
+            $table->integer('for_year');
+            $table->integer('for_month');
+            $table->integer('desDed_id');
+            $table->char('day_cost','25');
             $table->decimal('val',18,2);
             $table->char('cause','200');
-            $table->integer('userId');
+            $table->integer('user_id');
             $table->boolean('canceled');
-            $table->char('cancelCause');
+            $table->char('cancel_cause');
 			$table->timestamps();
 		});
 	}

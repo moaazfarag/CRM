@@ -15,12 +15,12 @@ class CreateHrDesDedTable extends Migration {
 		Schema::create('hr_desDed', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('dsCode');
-            $table->char('dsName','50');
-            $table->char('dsType','50');
-            $table->char('dsCat','50');
+            $table->integer('ds_id');
+            $table->char('name','50');
+            $table->char('ds_type','50');
+            $table->char('ds_cat','50');
             $table->boolean('deleted');
-            $table->integer('userId');
+            $table->integer('user_id');
 			$table->timestamps();
 		});
 	}

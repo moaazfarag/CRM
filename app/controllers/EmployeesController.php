@@ -7,16 +7,12 @@
  */
 class EmployeesController extends BaseController
 {
-
     public function addEmp()
     {
 
         $data['title']     =  Lang::get('main.addEmployee')  ; // page title
         $data['employees'] = "open";
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-
-        //$data['co_info']   = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-
         return View::make('dashboard.add_employee',$data);
 
     }
@@ -29,34 +25,35 @@ class EmployeesController extends BaseController
         {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
-            $newEmp           = new Employees;
+
 //        dd($this->coAuth());
-//        $newEmp->empCode = $this->coAuth();
-        $newEmp->co_id              = $this->coAuth();
-        $newEmp->empName            = Input::get('empName');
-        $newEmp->branchCode         = Input::get('branchCode');
-        $newEmp->empDate            = Input::get('empDate');
-        $newEmp->workNature         = Input::get('workNature');
-        $newEmp->depCode            = Input::get('depCode');
-        $newEmp->jobCode            = Input::get('jobCode');
-        $newEmp->salary             = Input::get('salary');
-        $newEmp->insSalary          = Input::get('insSalary');
-        $newEmp->insVal             = Input::get('insVal');
-        $newEmp->insNo              = Input::get('insNo');
-        $newEmp->idCardNo           = Input::get('idCardNo');
-        $newEmp->cancelDate         = Input::get('cancelDate');
-        $newEmp->cancelCause        = Input::get('cancelCause');
-        $newEmp->sex                = Input::get('sex');
-        $newEmp->marital            = Input::get('marital');
-        $newEmp->religion           = Input::get('religion');
-        $newEmp->militaryService    = Input::get('militaryService');
-        $newEmp->tel                = Input::get('tel');
-        $newEmp->address            = Input::get('address');
-        $newEmp->birthDate          = Input::get('birthDate');
-        $newEmp->certificate        = Input::get('certificate');
-        $newEmp->certDate           = Input::get('certDate');
-        $newEmp->certLocation       = Input::get('certLocation');
-        $newEmp->remark             = Input::get('remark');
+//        $newEmp->employee_id = $this->coAuth();
+        $newEmp                             = new Employees;
+        $newEmp->co_id                      = $this->coAuth();
+        $newEmp->name                       = Input::get('name');
+        $newEmp->branch_id                  = Input::get('branch_id');
+        $newEmp->employee_date              = Input::get('employee_date');
+        $newEmp->work_nature                = Input::get('work_nature');
+        $newEmp->department_id              = Input::get('department_id');
+        $newEmp->job_id                     = Input::get('job_id');
+        $newEmp->salary                     = Input::get('salary');
+        $newEmp->ins_salary                 = Input::get('ins_salary');
+        $newEmp->ins_val                    = Input::get('ins_val');
+        $newEmp->ins_no                     = Input::get('ins_no');
+        $newEmp->card_no                    = Input::get('card_no');
+        $newEmp->cancel_date                = Input::get('cancel_date');
+        $newEmp->cancel_cause               = Input::get('cancel_cause');
+        $newEmp->sex                        = Input::get('sex');
+        $newEmp->marital                    = Input::get('marital');
+        $newEmp->religion                   = Input::get('religion');
+        $newEmp->military_service           = Input::get('military_service');
+        $newEmp->tel                        = Input::get('tel');
+        $newEmp->address                    = Input::get('address');
+        $newEmp->birth_date                 = Input::get('birth_date');
+        $newEmp->certificate                = Input::get('certificate');
+        $newEmp->cert_date                  = Input::get('cert_date');
+        $newEmp->cert_location              = Input::get('cert_location');
+        $newEmp->remark                     = Input::get('remark');
 //        $newEmp->userID             = Auth::id();
 //        $newEmp->pic = Input::get('pic');
 //        $newEmp->fingerId = Input::get('fingerId');
@@ -77,24 +74,7 @@ class EmployeesController extends BaseController
        $data['employees'] = "open";
         $data['employee'] = Employees::findOrFail($id);
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-//        dd($data['employee']);
-//        dd($data['employee']);
-////        $data['employees']     =  ::where('co_id','=',$this->coAuth())->get(); //  get all emp to view in table
-//        $data['employees']      = Employees::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
-////        dd($data['item']);
-//        if($data['employees'])
-//        {
-//            $data['empCode']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-////            $data['accounts'] = Accounts::where('acc_type','=','suppliers')
-////                ->where('co_id','=',Auth::user()->co_id)
-////                ->get()
-////                ->lists('acc_name','id');// suppliers from accounts table
           return View::make('dashboard.add_employee',$data);
-//        }else{
-//            return "item not here";
-//        }
-//
-//
   }
 
     //Function Update Employee In Data Base
@@ -110,34 +90,32 @@ class EmployeesController extends BaseController
         }else {
             $oldEmp  = Employees::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();
             if($oldEmp){
-            $oldEmp = Employees::find($id);
-//            dd($oldEmp);
-//           $oldEmp->empCode             =
-            $oldEmp->co_id = $this->coAuth();
-            $oldEmp->empName = Input::get('empName');
-            $oldEmp->branchCode = Input::get('barCode');
-            $oldEmp->empDate = Input::get('empDate');
-            $oldEmp->workNature = Input::get('workNature');
-            $oldEmp->depCode = Input::get('depCode');
-            $oldEmp->jobCode = Input::get('jobCode');
-            $oldEmp->salary = Input::get('salary');
-            $oldEmp->insSalary = Input::get('insSalary');
-            $oldEmp->insVal = Input::get('insVal');
-            $oldEmp->insNo = Input::get('insNo');
-            $oldEmp->idCardNo = Input::get('idCardNo');
-            $oldEmp->cancelDate = Input::get('cancelDate');
-            $oldEmp->cancelCause = Input::get('cancelCause');
-            $oldEmp->sex = Input::get('sex');
-            $oldEmp->marital = Input::get('marital');
-            $oldEmp->religion = Input::get('religion');
-            $oldEmp->militaryService = Input::get('militaryService');
-            $oldEmp->tel = Input::get('tel');
-            $oldEmp->address = Input::get('address');
-            $oldEmp->birthDate = Input::get('birthDate');
-            $oldEmp->certificate = Input::get('certificate');
-            $oldEmp->certDate = Input::get('certDate');
-            $oldEmp->certLocation = Input::get('certLocation');
-            $oldEmp->remark = Input::get('remark');
+                $oldEmp = Employees::find($id);
+                $oldEmp->co_id                      = $this->coAuth();
+                $oldEmp->name                       = Input::get('name');
+                $oldEmp->branch_id                  = Input::get('branch_id');
+                $oldEmp->employee_date              = Input::get('employee_date');
+                $oldEmp->work_nature                = Input::get('work_nature');
+                $oldEmp->department_id              = Input::get('department_id');
+                $oldEmp->job_id                     = Input::get('job_id');
+                $oldEmp->salary                     = Input::get('salary');
+                $oldEmp->ins_salary                 = Input::get('ins_salary');
+                $oldEmp->ins_val                    = Input::get('ins_val');
+                $oldEmp->ins_no                     = Input::get('ins_no');
+                $oldEmp->card_no                    = Input::get('card_no');
+                $oldEmp->cancel_date                = Input::get('cancel_date');
+                $oldEmp->cancel_cause               = Input::get('cancel_cause');
+                $oldEmp->sex                        = Input::get('sex');
+                $oldEmp->marital                    = Input::get('marital');
+                $oldEmp->religion                   = Input::get('religion');
+                $oldEmp->military_service           = Input::get('military_service');
+                $oldEmp->tel                        = Input::get('tel');
+                $oldEmp->address                    = Input::get('address');
+                $oldEmp->birth_date                 = Input::get('birth_date');
+                $oldEmp->certificate                = Input::get('certificate');
+                $oldEmp->cert_date                  = Input::get('cert_date');
+                $oldEmp->cert_location              = Input::get('cert_location');
+                $oldEmp->remark                     = Input::get('remark');
 //                $oldEmp->userID              = Auth::id();
 //                $oldEmp->pic                 =Input::get('pic');
 //                $oldEmp->fingerId            =Input::get('fingerId');

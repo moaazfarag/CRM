@@ -15,12 +15,12 @@ class CreateHrMSDetailsTable extends Migration {
 		Schema::create('hr_MSDetails', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('empCode');
-            $table->integer('forYear');
-            $table->integer('forMonth');
-            $table->integer('desDedCode');
-            $table->char('desDedType','50');
-            $table->decimal('desDedVal',18,2);
+            $table->integer('employee_id');
+            $table->integer('for_year');
+            $table->integer('for_month');
+            $table->integer('desDed_id');
+            $table->char('desDed_type','50');
+            $table->decimal('desDed_val',18,2);
 
             $table->timestamps();
 		});

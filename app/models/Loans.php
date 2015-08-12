@@ -10,18 +10,18 @@ class Loans extends Eloquent
 
     protected $table = 'hr_loans';
     public static $store_rules = array(
-        'loanDate'       => 'required|date',
-        'loanStart'      => 'required|date',
-        'loanEnd'        => 'required|date',
-        'loanVal'        => 'required|integer',
-        'loanCurrBal'    => 'required|integer',
+        'loan_date'       => 'required|date',
+        'loan_start'      => 'required|date',
+        'loan_end'        => 'required|date',
+        'loan_val'        => 'required|integer',
+        'loan_currBal'    => 'required|integer',
     );
     public static $update_rules = array(
-        'loanDate'       => 'required|date',
-        'loanStart'      => 'required|date',
-        'loanEnd'        => 'required|date',
-        'loanVal'        => 'required|integer',
-        'loanCurrBal'    => 'required|integer',
+        'loan_date'       => 'required|date',
+        'loan_start'      => 'required|date',
+        'loan_end'        => 'required|date',
+        'loan_val'        => 'required|integer',
+        'loan_currBal'    => 'required|integer',
     );
     public function employees()
     {
