@@ -16,10 +16,10 @@ class CrreateHrDepartmentsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('co_id');
-            $table->integer('depCode');
-            $table->char('depName','50');
+            $table->integer('department_id');
+            $table->char('name','50');
             $table->boolean('deleted');
-            $table->integer('userId');
+            $table->integer('user_id');
 			$table->timestamps();
 		});
 	}

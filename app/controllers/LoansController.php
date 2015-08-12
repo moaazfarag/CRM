@@ -9,11 +9,10 @@ class LoansController extends BaseController
 {
     public function addLoans()
     {
-
         $data['title']     = 'طلب قرض'  ; // page title
         $data = $this->depData();
         $data['employees'] = "open";
-      $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
         return View::make('dashboard.loans',$data);
 
     }
@@ -26,18 +25,16 @@ class LoansController extends BaseController
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
             $inputs = Input::all();
-            $newLoans                     = new Loans;
-            $newLoans->co_id              = $this->coAuth();
-            $newLoans->loanDate           = $this->strToTime($inputs['loanDate']);
-            $newLoans->empCode            = $inputs['empCode'];
-            $newLoans->loanVal            = $inputs['loanVal'];
-            $newLoans->loanStart          = $this->strToTime($inputs['loanStart']);
-            $newLoans->loanEnd            = $this->strToTime($inputs['loanEnd']);
-            $newLoans->loanCurrBal        = $inputs['loanCurrBal'];
+            $newLoans                         = new Loans;
+            $newLoans->co_id                  = $this->coAuth();
+            $newLoans->loan_date              = $this->strToTime($inputs['loan_date']);
+            $newLoans->employee_id            = $inputs['employee_id'];
+            $newLoans->loan_val               = $inputs['loan_val'];
+            $newLoans->loan_start             = $this->strToTime($inputs['loan_start']);
+            $newLoans->loan_end               = $this->strToTime($inputs['loan_end']);
+            $newLoans->loan_currBal           = $inputs['loan_currBal'];
             $newLoans->save();
             return Redirect::route('addLoans');
-
-
         }
     }
 
@@ -49,9 +46,6 @@ class LoansController extends BaseController
         $data['employee'] = Loans::findOrFail($id);
        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
         return View::make('dashboard.loans',$data);
-
-
-
     }
 
     public function updateLoans($id)
@@ -67,13 +61,16 @@ class LoansController extends BaseController
             $oldLoans  = Loans::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();
             if($oldLoans)
             {
+                $inputs = Input::all();
                 $oldLoans = Loans::find($id);
                 $oldLoans->co_id              = $this->coAuth();
-                $oldLoans->loanDate           = Input::get('loanDate');
-                $oldLoans->loanVal            = Input::get('loanVal');
-                $oldLoans->loanStart          = Input::get('loanStart');
-                $oldLoans->loanEnd            = Input::get('loanEnd');
-                $oldLoans->loanCurrBal        = Input::get('loanCurrBal');
+                $oldLoans->co_id                  = $this->coAuth();
+                $oldLoans->loan_date              = $this->strToTime($inputs['loan_date']);
+                $oldLoans->employee_id            = $inputs['employee_id'];
+                $oldLoans->loan_val               = $inputs['loan_val'];
+                $oldLoans->loan_start             = $this->strToTime($inputs['loan_start']);
+                $oldLoans->loan_end               = $this->strToTime($inputs['loan_end']);
+                $oldLoans->loan_currBal           = $inputs['loan_currBal'];
                 $oldLoans->update();
                 return Redirect::route('addLoans');
             }
@@ -81,23 +78,15 @@ class LoansController extends BaseController
             {
                 return "this item not found ";
             }
-
         }
-
     }
     protected function depData()
     {
-//
         $data['title']              = 'القروض';
         $data['employees']          = 'open' ;
         $data['tablesData']        = Loans::where('co_id','=',$this->coAuth())->get();
-//        dd( $data['tablesData']->employees  );
         return $data;
     }
-
-    /**
-     * @return bool|string
-     */
     public function strToTime($date)
     {
         return date("Y-m-d", strtotime($date));

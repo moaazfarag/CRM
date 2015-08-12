@@ -18,11 +18,11 @@
             <tr>
                 <th>{{ $tableData->id }}</th>
                 <td>{{ $tableData->employees }}</td>
-                <td>{{ $tableData->loanDate }}</td>
-                <td>{{ $tableData->loanVal }}</td>
-                <td>{{ $tableData->loanCurrBal }}</td>
-                <td>{{ $tableData->loanStart }}</td>
-                <td>{{ $tableData->loanEnd }}</td>
+                <td>{{ $tableData->loan_date }}</td>
+                <td>{{ $tableData->loan_val }}</td>
+                <td>{{ $tableData->loan_currBal }}</td>
+                <td>{{ $tableData->loan_start }}</td>
+                <td>{{ $tableData->loan_end }}</td>
                 <td>
                     <a href="{{ URL::route('editLoans',array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>

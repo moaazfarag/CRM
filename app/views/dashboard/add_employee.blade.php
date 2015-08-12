@@ -21,17 +21,17 @@
                       <div class="col s12 l7">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('empName',null,array('required','id'=>'empName',)) }}
-                              {{ Form::label('empName',  'اسم الموظف'   )     }}
-                              <p class="parsley-required">{{ $errors ->first('empName') }} </p>
+                              {{ Form::text('name',null,array('required','id'=>'name',)) }}
+                              {{ Form::label('name',  'اسم الموظف'   )     }}
+                              <p class="parsley-required">{{ $errors ->first('name') }} </p>
                           </div>
                       </div>
 
                       <div class="col s12 l5">
                           <div class="input-field">
                               <i class="mdi mdi-action-language prefix"></i>
-                              {{ Form::text('empDate',null,array('required','id'=>'empDate','class'=>'pikaday')) }}
-                              <label for="empDate">
+                              {{ Form::text('employee_date',null,array('required','id'=>'employee_date','class'=>'pikaday')) }}
+                              <label for="employee_date">
                                                    ت التعيين
                               </label>
                           </div>
@@ -42,58 +42,49 @@
                           <div class="col s2 l7">
                               <div class="input-field">
                                   <i class="fa fa-tag prefix"></i>
-                                  {{ Form::text('idCardNo',null,array('required','id'=>'idCardNo',)) }}
-                                  {{ Form::label('idCardNo',  'الرقم القومى' )     }}
-                                  <p class="parsley-required">{{ $errors ->first('idCardNo') }} </p>
+                                  {{ Form::text('card_no',null,array('required','id'=>'card_no',)) }}
+                                  {{ Form::label('card_no',  'الرقم القومى' )     }}
+                                  <p class="parsley-required">{{ $errors ->first('card_no') }} </p>
                               </div>
                           </div>
 
                           <div class="col s2 l5">
                               <div class="input-field">
                                   <i class="fa fa-tag prefix"></i>
-                                  {{ Form::text('insNo',null,array('required','id'=>'insNo',)) }}
-                                  {{ Form::label('insNo',  'رقم التامين' )     }}
-                                  <p class="parsley-required">{{ $errors ->first('insNo') }} </p>
+                                  {{ Form::text('ins_no',null,array('required','id'=>'ins_no',)) }}
+                                  {{ Form::label('ins_no',  'رقم التامين' )     }}
+                                  <p class="parsley-required">{{ $errors ->first('ins_no') }} </p>
                               </div>
                           </div>
 
                           </div>
                           <div class="row">
-                              {{--<div class="col s8 l3">--}}
-                                  {{--<i class="fa fa-tag prefix"></i>--}}
-                                  {{--<select name="branchCode" id="branchCode">--}}
-                                      {{--<option selected value="0" disabled> الفرع </option>--}}
-                                      {{--<option value="big_size" > الدقى  </option>--}}
-                                      {{--<option value="mid_size" >النزهه </option>--}}
-                                      {{--<option value="small_size">  الجيزه</option>--}}
-                                  {{--</select>--}}
-                              {{--</div>--}}
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('branchCode','الفرع') }}
-                                  {{ Form::select('branchCode', array('' => ' ') + $co_info->branches->lists('br_name','id'),null,array('id'=>'branchCode')) }}
-                                      <p class="parsley-required">{{ $errors ->first('branchCode') }} </p>
+                                  {{ Form::label('branch_id','الفرع') }}
+                                  {{ Form::select('branch_id', array('' => ' ') + $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
+                                      <p class="parsley-required">{{ $errors ->first('branch_id') }} </p>
                                   </div>
                               </div>
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('jobCode','الوظيفه') }}
-                                  {{ Form::select('jobCode', array('' => '') + $co_info->Models->lists('name','id'),null,array('id'=>'jobCode')) }}
-                                      <p class="parsley-required">{{ $errors ->first('jobCode') }} </p>
+                                  {{ Form::label('job_id','الوظيفه') }}
+                                  {{ Form::select('job_id', array('' => '') + $co_info->Models->lists('name','id'),null,array('id'=>'job_id')) }}
+                                      <p class="parsley-required">{{ $errors ->first('job_id') }} </p>
                                   </div>
                               </div>
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('depCode','الاقسام') }}
-                                  {{ Form::select('depCode', array('' => '') + $co_info->Items->lists('item_name','id'),null,array('id'=>'depCode')) }}
-                                      <p class="parsley-required">{{ $errors ->first('depCode') }} </p>
+                                  {{ Form::label('department_id','الاقسام') }}
+                                  {{ Form::select('department_id', array('' => '') + $co_info->Items->lists('item_name','id'),null,array('id'=>'department_id')) }}
+                                      <p class="parsley-required">{{ $errors ->first('department_id') }} </p>
                                   </div>
                               </div>
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('workNature',' نوع التعاقد ') }}
-                                  {{ Form::select('workNature', array('' => '') + $co_info->Seasons->lists('name','id'),null,array('id'=>'workNature')) }}
-                                      <p class="parsley-required">{{ $errors ->first('workNature') }} </p>
+                                  {{ Form::label('work_nature',' نوع التعاقد ') }}
+                                  {{ Form::select('work_nature', array('' => '') + $co_info->Seasons->lists('name','id'),null,array('id'=>'work_nature')) }}
+                                      <p class="parsley-required">{{ $errors ->first('work_nature') }} </p>
                                   </div>
                               </div>
                   </div>
@@ -111,17 +102,17 @@
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('insSalary',null,array('required','id'=>'insSalary',)) }}
-                              {{ Form::label('insSalary',  ' مرتب التامينات ' )     }}
-                              <p class="parsley-required">{{ $errors ->first('insSalary') }} </p>
+                              {{ Form::text('ins_salary',null,array('required','id'=>'ins_salary',)) }}
+                              {{ Form::label('ins_salary',  ' مرتب التامينات ' )     }}
+                              <p class="parsley-required">{{ $errors ->first('ins_salary') }} </p>
                           </div>
                       </div>
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('insVal',null,array('required','id'=>'insVal',)) }}
-                              {{ Form::label('insVal',  ' خصم التامين' )     }}
-                              <p class="parsley-required">{{ $errors ->first('insVal') }} </p>
+                              {{ Form::text('ins_val',null,array('required','id'=>'ins_val',)) }}
+                              {{ Form::label('ins_val',  ' خصم التامين' )     }}
+                              <p class="parsley-required">{{ $errors ->first('ins_val') }} </p>
                           </div>
                       </div>
                   </div>
@@ -131,16 +122,16 @@
                       <div class="col s2 l2">
                           <div class="input-field">
                               {{--<i class="fa fa-tag prefix"></i>--}}
-                              {{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}
-                              {{ Form::label('cancelDate','الغاء العمل فى تاريخ') }}
+                              {{ Form::checkbox('cancel_date',1,null,array('id'=>'cancel_date')) }}
+                              {{ Form::label('cancel_date','الغاء العمل فى تاريخ') }}
 
-                              <p class="parsley-required">{{ $errors ->first('cancelDate') }} </p>
+                              <p class="parsley-required">{{ $errors ->first('cancel_date') }} </p>
                           </div>
                       </div>
                       <div class="col s2 l4">
                       <div class="input-field">
                           {{--<i class="mdi mdi-action-language prefix"></i>--}}
-                          {{ Form::text('cancelDate',null,array('required','id'=>'cancelDate','class'=>'pikaday')) }}
+                          {{ Form::text('cancel_date',null,array('required','id'=>'cancel_date','class'=>'pikaday')) }}
 
                       </div>
                       </div>
@@ -149,9 +140,9 @@
                             <div class="col s2 l12">
                                 <div class="input-field" >
                                     <i class="fa fa-tag prefix"></i>
-                                    {{ Form::textarea('cancelCause',null,array('id'=>'cancelCause',)) }}
-                                    {{ Form::label('cancelCause',  ' سبب الالغاء ' )     }}
-                                    <p class="parsley-required">{{ $errors ->first('cancelCause') }} </p>
+                                    {{ Form::textarea('cancel_cause',null,array('id'=>'cancel_cause',)) }}
+                                    {{ Form::label('cancel_cause',  ' سبب الالغاء ' )     }}
+                                    <p class="parsley-required">{{ $errors ->first('cancel_cause') }} </p>
                                 </div>
                             </div>
                       </div>
@@ -176,15 +167,6 @@
 
 
                </div>
-               {{--<div class="col s12 l5">--}}
-                   {{--<i class="fa fa-tag prefix"></i>--}}
-                   {{--<select name="marital" id="marital">--}}
-                       {{--<option selected value="0" disabled> الحاله الاجتماعيه  </option>--}}
-                       {{--<option value="big_size" >  اعزب </option>--}}
-                       {{--<option value="mid_size" >متزوج </option>--}}
-                   {{--</select>--}}
-
-               {{--</div>--}}
            </div>
              <div class="row">
                      {{--<i class="fa fa-tag prefix"></i>--}}
@@ -205,15 +187,6 @@
                          </div>
                      </div>
 
-
-                 {{--<div class="col s12 l5">--}}
-                     {{--<i class="fa fa-tag prefix"></i>--}}
-                     {{--<select name="militaryService" id="militaryService">--}}
-                         {{--<option selected value="0" disabled>موقف التجنيد </option>--}}
-                         {{--<option value="big_size" >  تم الخدمه </option>--}}
-                         {{--<option value="mid_size" >معافى  </option>--}}
-                         {{--<option value="mid_size" >تاجيل </option>--}}
-                     {{--</select>--}}
                      {{Form::submit('العمولات لمراحل التشغيل ')}}
 
                  </div>
@@ -243,23 +216,23 @@
               <div class="col s2 l1">
                   <div class="input-field">
                       {{--<i class="fa fa-tag prefix"></i>--}}
-                      {{ Form::checkbox('birthDate',1,null,array('id'=>'birthDate')) }}
-                      {{ Form::label('birthDate','تاريخ الميلاد    ') }}
+                      {{ Form::checkbox('birth_date',1,null,array('id'=>'birth_date')) }}
+                      {{ Form::label('birth_date','تاريخ الميلاد    ') }}
 
-                      <p class="parsley-required">{{ $errors ->first('birthDate') }} </p>
+                      <p class="parsley-required">{{ $errors ->first('birth_date') }} </p>
                   </div>
               </div>
               <div class="col s2 l2">
                   <div class="input-field">
                       {{--<i class="mdi mdi-action-language prefix"></i>--}}
-                      {{ Form::text('birthDate',null,array('required','id'=>'birthDate','class'=>'pikaday')) }}
+                      {{ Form::text('birth_date',null,array('required','id'=>'birth_date','class'=>'pikaday')) }}
 
                   </div>
               </div>
               <div class="col s12 l9">
                   <div class="input-field">
                       <i class="fa fa-tag prefix"></i>
-                      {{ Form::text('certificate',null,array('required','id'=>'certificate',)) }}
+                      {{ Form::text('certificate',null,array('required','id'=>'certificate')) }}
                       {{ Form::label('certificate', 'الؤهل ')     }}
                       <p class="parsley-required">{{ $errors ->first('certificate') }} </p>
                   </div>
@@ -269,32 +242,32 @@
               <div class="col s2 l1">
                   <div class="input-field">
                       {{--<i class="fa fa-tag prefix"></i>--}}
-                      {{ Form::checkbox('certDate',1,null,array('id'=>'certDate')) }}
-                      {{ Form::label('certDate','تاريخ المؤهل    ') }}
+                      {{ Form::checkbox('cert_date',1,null,array('id'=>'cert_date')) }}
+                      {{ Form::label('cert_date','تاريخ المؤهل    ') }}
 
-                      <p class="parsley-required">{{ $errors ->first('certDate') }} </p>
+                      <p class="parsley-required">{{ $errors ->first('cert_date') }} </p>
                   </div>
               </div>
               <div class="col s2 l2">
                   <div class="input-field">
                       {{--<i class="mdi mdi-action-language prefix"></i>--}}
 {{--                      {{ Form::text('certDate',null,array('required','id'=>'certificate',)) }}--}}
-                      {{ Form::text('certDate',null,array('required','id'=>'certDate','class'=>'pikaday')) }}
+                      {{ Form::text('cert_date',null,array('required','id'=>'cert_date','class'=>'pikaday')) }}
 
                   </div>
               </div>
               <div class="col s12 l9">
                   <div class="input-field">
                       <i class="fa fa-tag prefix"></i>
-                      {{ Form::text('certLocation',null,array('required','id'=>'certLocation',)) }}
-                      {{ Form::label('certLocation', 'جهه المؤهل ')     }}
-                      <p class="parsley-required">{{ $errors ->first('certLocation') }} </p>
+                      {{ Form::text('cert_location',null,array('required','id'=>'cert_location')) }}
+                      {{ Form::label('cert_location', 'جهه المؤهل ')     }}
+                      <p class="parsley-required">{{ $errors ->first('cert_location') }} </p>
                   </div>
               </div>
                   <div class="col s2 l12">
                       <div class="input-field" >
                           <i class="fa fa-tag prefix"></i>
-                          {{ Form::textarea('remark',null,array('id'=>'remark',)) }}
+                          {{ Form::textarea('remark',null,array('id'=>'remark')) }}
                           {{ Form::label('remark',  ' ملاحظات  ' )     }}
                           <p class="parsley-required">{{ $errors ->first('remark') }} </p>
                       </div>
