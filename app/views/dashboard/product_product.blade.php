@@ -7,7 +7,7 @@
             @elseif(Route::currentRouteName() == 'editItem')
               {{ Form::model($item,array('route'=>array('updateItem',$item->id))) }}
               @endif
-<div class="card">
+        <div class="card">
           <div class="title">
             <h5><i class="mdi mdi-notification-event-available"></i> {{ @$title }}  </h5>
             <a class="minimize" href="#">

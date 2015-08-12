@@ -111,6 +111,10 @@
                 <ul>
                     <li>
                         <a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف موظف  </a>
+                        <a href="{{ URL::route('addDep') }}" class="waves-effect waves-blue">الاقسام   </a>
+                        <a href="{{ URL::route('addJob') }}" class="waves-effect waves-blue">الوظائف   </a>
+                        <a href="{{ URL::route('addLoans') }}" class="waves-effect waves-blue">القروض   </a>
+
 
                     </li>
                 </ul>
