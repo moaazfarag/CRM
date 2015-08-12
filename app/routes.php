@@ -31,7 +31,7 @@ Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
 Route::post('/login',array('uses'=>'UserController@checkLogin','as'=>'login','before'=>'csrf'));
 
 Route::get('/', 'HomeController@index');
-Route::group(array('prefix'=>'admin' , 'before'=>'Auth'),function(){
+Route::group(array('prefix'=>'admin','before'=>'Auth'),function(){
     /**
      * company info area
      */
@@ -139,9 +139,35 @@ Route::group(array('prefix'=>'admin' , 'before'=>'Auth'),function(){
     Route::group(array('prefix'=>'hr'),function()
     {
         Route::get('Add-Employees', array('uses' => 'EmployeesController@addEmp','as' => 'addEmp'));
-        Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
-        Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
-        Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
+        Route::post('Store-Employees',array('before'=>'csrf','uses'=>'EmployeesController@storeEmp','as'=>'storeEmp')) ;
+        Route::get('Edit-Employees/{id}',array('uses'=>'EmployeesController@editEmp','as'=>'editEmp')) ;
+        Route::post('Update-Employees/{id}',array('before'=>'csrf','uses'=>'EmployeesController@updateEmp','as'=>'updateEmp')) ;
+
+
+        //Departments Page
+        Route::get('addDep',array('uses'=>'DepController@addDep','as'=>'addDep'));
+        Route::post('storeDep',array('before'=>'csrf','uses'=>'DepController@storeDep','as'=>'storeDep'));
+        Route::get('editDep/{id}',array('uses'=>'DepController@editDep','as'=>'editDep'));
+        Route::post('updateDep/{id}',array('before'=>'csrf','uses'=>'DepController@updateDep','as'=>'updateDep'));
+         //Job Page
+        Route::get('addJob',array('uses'=>'JobController@addJob','as'=>'addJob'));
+        Route::post('storeJob',array('before'=>'csrf','uses'=>'JobController@storeJob','as'=>'storeJob'));
+        Route::get('editJob/{id}',array('uses'=>'JobController@editJob','as'=>'editJob'));
+        Route::post('updateJob/{id}',array('before'=>'csrf','uses'=>'JobController@updateJob','as'=>'updateJob'));  //Job Page
+
+
+
+        //Loans Page
+        Route::get('addLoans',array('uses'=>'LoansController@addLoans','as'=>'addLoans'));
+        Route::post('storeLoans',array('before'=>'csrf','uses'=>'LoansController@storeLoans','as'=>'storeLoans'));
+        Route::get('editLoans/{id}',array('uses'=>'LoansController@editLoans','as'=>'editLoans'));
+        Route::post('updateLoans/{id}',array('before'=>'csrf','uses'=>'LoansController@updateLoans','as'=>'updateLoans'));
+
+
+
+
+
+
     });
 
 

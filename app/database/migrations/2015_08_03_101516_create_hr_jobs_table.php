@@ -16,6 +16,7 @@ class CreateHrJobsTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('jobCode');
+			$table->integer('co_id');
             $table->char('jobName','50');
             $table->boolean('deleted');
             $table->integer('userId');

@@ -26,7 +26,7 @@ class ModelsController extends BaseController
     public function storeModel()
     {
         $model           = new Models ;
-        $model->name = Input::get('name'); //season name from input
+        $model->name     = Input::get('name'); //season name from input
         $model->co_id    = Auth::user()->co_id; // company id
         $model->user_id  = Auth::id();// user who add this record
         $model->save();
@@ -59,16 +59,16 @@ class ModelsController extends BaseController
      */
     protected function modelData()
     {
-        $itemCat      =Lang::get('main.itemCat');
-        $marka      =Lang::get('main.marka');
-        $data['title'] = $itemCat;
-        $data['activeModelNav'] = "active";
-        $data['catFunName'] = "editModel";
-        $data['seasonInputName'] = "seasons";
-        $data['asideOpen']   = 'open' ;
-        $data['modelMini'] = "";
-        $data['arabicName'] = $marka;
-        $data['tablesData'] = Models::all();
+        $itemCat                    =Lang::get('main.itemCat');
+        $marka                      =Lang::get('main.marka');
+        $data['title']              = $itemCat;
+        $data['activeModelNav']     = "active";
+        $data['catFunName']         = "editModel";
+        $data['seasonInputName']    = "seasons";
+        $data['asideOpen']          = 'open' ;
+        $data['modelMini']          = "";
+        $data['arabicName']         = $marka;
+        $data['tablesData']         = Models::all();
         return $data;
     }
 }
