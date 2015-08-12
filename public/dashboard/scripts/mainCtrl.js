@@ -93,6 +93,14 @@ angular.module('mainCtrl', [])
             }
 
         };
+        $scope.hasItemBalance =  function(item){
+            if( item  > 0 && $scope.item.name.length > 0){
+                return false;
+            }else{
+                return true;
+            }
+
+        };
 /*        $scope.pushItem = function() {
             //$scope.data =  JSON.parse(localStorage["data"]);
             $scope.data = [];

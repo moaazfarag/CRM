@@ -120,6 +120,7 @@ class TransHeaderController extends BaseController {
         if($validation->fails())
         {
             echo "fail";
+            dd($validation->messages());
             dd(TransDetails::rulesCreator($inputs));
 
         }else {
@@ -131,15 +132,19 @@ class TransHeaderController extends BaseController {
             $newHeader->invoice_no      = $transHeaderId;
             $newHeader->invoice_type    = $type;
             $newHeader->date            = $inputs['date'];
-            foreach(TransDetails::countOfInputs($inputs) as $k => $v )
-            {// foreach for save item into trans_details table 
-                $newInvoiceHeader = new TransDetails;
-                $newInvoiceHeader->trans_header_id   = $transHeaderId;
-                $newInvoiceHeader->item_id           = $inputs['id_'.$k];
-                $newInvoiceHeader->qty               = $inputs['quantity_'.$k];
-                $newInvoiceHeader->save();
-            }
+            $newInvoiceItems = array();//create array to insert into database on save
+            foreach (TransDetails::countOfInputs($inputs) as $k=>$v)
+                {
+                    $newInvoiceItems[] =   array
+                    (
+                        'trans_header_id' => $transHeaderId,
+                        'qty'           => $inputs['quantity_'.$k],
+                        'item_id'       => $inputs['id_'.$k],
+                    );
+                }
             $newHeader->save();
+            TransDetails::insert($newInvoiceItems);
+            dd(DB::getQueryLog());
             return Response::json(array('success' => true));
 //
 //            echo "scusess";

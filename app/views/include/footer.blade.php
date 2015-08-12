@@ -1,5 +1,11 @@
 
-      <footer>&copy; 2015 <strong>nK</strong>. All rights reserved. <a href="http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=nKdev">Purchase</a>
+      <footer>
+          &copy; برمجة و تطوير شركة
+          <a href="http://www.clickfordata.net/">
+              <strong>
+                  ClickForData
+              </strong>
+          </a>
       </footer>
       <!-- DEMO [REMOVE IT ON PRODUCTION] -->
       {{ HTML::script('dashboard/assets/_con/js/_demo.js') }}

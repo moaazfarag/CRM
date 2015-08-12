@@ -16,7 +16,6 @@ class ItemsBalances extends Eloquent {
 	 */
     public static function rulesCreator($inputs)
     {
-
         $count = TransDetails::countOfInputs($inputs);
         $store_rules = array();
         foreach($count as $k => $v)

@@ -24,7 +24,6 @@ class TransDetails extends Eloquent {
 
             foreach($count as $k => $v)
             {
-                $store_rules['cost_'.$k] = 'required|integer';
                 $store_rules['quantity_'.$k] = 'required|integer';
                 $store_rules['id_'.$k] = 'required|integer';
             }
