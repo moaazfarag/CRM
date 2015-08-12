@@ -16,6 +16,7 @@ class CreateHrLoansTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('empCode');
+			$table->integer('co_id');
             $table->dateTime('loanDate');
             $table->integer('loanVal');
             $table->dateTime('loanStart');

@@ -62,8 +62,7 @@ class ItemController extends BaseController
 
     public  function editItem($id)
     {
-        $editItem           = Lang::get('main.editItem');
-        $data['title']     = $editItem; // page title
+        $data['title']     = Lang::get('main.editItem'); // page title
         $data['mainasideOpen']      = "open";
 //        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
         $data['item']      = Items::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit

@@ -20,7 +20,7 @@ class CreateHrEmployeesTable extends Migration {
             $table->char('empName','75');
             $table->integer('branchCode');
             $table->dateTime('empDate');
-            $table->char('workNature','50');
+            $table->enum('workNature',array('دائم','مؤقت'));
             $table->integer('depCode');
             $table->integer('jobCode');
             $table->decimal('salary',18,2);
@@ -30,10 +30,13 @@ class CreateHrEmployeesTable extends Migration {
             $table->char('idCardNo','14');
             $table->dateTime('cancelDate');
             $table->char('cancelCause','200');
-            $table->char('sex','50');
-            $table->char('marital','50');
-            $table->char('religion','50');
-            $table->char('militaryService','50');
+            $table->enum('sex',array('انثى ','ذكر '));
+            $table->enum('marital',array('اعزب ',' متزوج'));
+            $table->enum('religion',array('مسيحى ',' مسلم'));
+            $table->enum('militaryService',array('تم الخدمه ',' معافى ','تاجيل'));
+//            $table->char('marital','50');
+//            $table->char('religion','50');
+//            $table->char('militaryService','50');
             $table->char('tel','200');
             $table->char('address','200');
             $table->dateTime('birthDate');
