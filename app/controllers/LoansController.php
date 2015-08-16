@@ -87,9 +87,6 @@ class LoansController extends BaseController
         $data['tablesData']        = Loans::where('co_id','=',$this->coAuth())->get();
         return $data;
     }
-    public function strToTime($date)
-    {
-        return date("Y-m-d", strtotime($date));
-    }
+
 
 }

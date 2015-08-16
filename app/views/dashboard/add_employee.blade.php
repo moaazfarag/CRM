@@ -50,7 +50,7 @@
 
                           <div class="col s2 l5">
                               <div class="input-field">
-                                  <i class="fa fa-tag prefix"></i>
+
                                   {{ Form::text('ins_no',null,array('required','id'=>'ins_no',)) }}
                                   {{ Form::label('ins_no',  'رقم التامين' )     }}
                                   <p class="parsley-required">{{ $errors ->first('ins_no') }} </p>
@@ -61,29 +61,30 @@
                           <div class="row">
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('branch_id','الفرع') }}
-                                  {{ Form::select('branch_id', array('' => ' ') + $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
+                                  {{ Form::label('','') }}
+                                  {{ Form::select('branch_id', array('' => ' الفرع') + $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
                                       <p class="parsley-required">{{ $errors ->first('branch_id') }} </p>
                                   </div>
                               </div>
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('job_id','الوظيفه') }}
-                                  {{ Form::select('job_id', array('' => '') + $co_info->Models->lists('name','id'),null,array('id'=>'job_id')) }}
+                                  {{ Form::label('','') }}
+                                  {{ Form::select('job_id', array('' => 'الوظيفه') + $co_info->jobs->lists('name','id'),null,array('id'=>'job_id')) }}
                                       <p class="parsley-required">{{ $errors ->first('job_id') }} </p>
                                   </div>
                               </div>
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('department_id','الاقسام') }}
-                                  {{ Form::select('department_id', array('' => '') + $co_info->Items->lists('item_name','id'),null,array('id'=>'department_id')) }}
+                                  {{--{{ Form::label('','') }}--}}
+                                  {{ Form::select('department_id', array('' => 'الاقسام') + $co_info->departments->lists('name','id'),null,array('id'=>'department_id')) }}
                                       <p class="parsley-required">{{ $errors ->first('department_id') }} </p>
+
                                   </div>
                               </div>
                               <div class="col s8 l3">
                                   <div class="input-field">
-                                  {{ Form::label('work_nature',' نوع التعاقد ') }}
-                                  {{ Form::select('work_nature', array('' => '') + $co_info->Seasons->lists('name','id'),null,array('id'=>'work_nature')) }}
+                                  {{ Form::label('',' ') }}
+                                  {{ Form::select('work_nature',$work_nature,null,array('id'=>'work_nature')) }}
                                       <p class="parsley-required">{{ $errors ->first('work_nature') }} </p>
                                   </div>
                               </div>
@@ -150,8 +151,8 @@
                <div class="col s12 l5">
                    {{--<i class="fa fa-tag prefix"></i>--}}
                    <div class="input-field">
-                       {{ Form::label('sex','الجنس ') }}
-                       {{ Form::select('sex', array('' => '') + $co_info->Accounts->lists('acc_name','id'),null,array('id'=>'sex')) }}
+                       {{ Form::label(' ',' ') }}
+                       {{ Form::select('sex',$sex ,null,array('id'=>'sex')) }}
                        <p class="parsley-required">{{ $errors ->first('sex') }} </p>
                    </div>
 
@@ -160,8 +161,8 @@
                <div class="col s12 l5">
                    {{--<i class="fa fa-tag prefix"></i>--}}
                    <div class="input-field">
-                       {{ Form::label('marital',' الحاله الاجتماعيه  ') }}
-                       {{ Form::select('marital', array('' => '') + $co_info->Seasons->lists('name','id'),null,array('id'=>'marital')) }}
+                       {{ Form::label('','  ') }}
+                       {{ Form::select('marital', $marital ,null,array('id'=>'marital')) }}
                        <p class="parsley-required">{{ $errors ->first('marital') }} </p>
                    </div>
 
@@ -173,22 +174,20 @@
                      <div class="col s12 l5">
                          {{--<i class="fa fa-tag prefix"></i>--}}
                          <div class="input-field">
-                             {{ Form::label('religion','الديانه ') }}
-                             {{ Form::select('religion', array('' => '') + $co_info->Seasons->lists('name','id'),null,array('id'=>'religion')) }}
+                             {{ Form::label('',' ') }}
+                             {{ Form::select('religion',  $religion,null,array('id'=>'religion')) }}
                              <p class="parsley-required">{{ $errors ->first('religion') }} </p>
                          </div>
                      </div>
                  <div class="col s12 l5">
                          {{--<i class="fa fa-tag prefix"></i>--}}
                          <div class="input-field">
-                             {{ Form::label('militaryService', 'موقف التجنيد') }}
-                             {{ Form::select('militaryService', array('' => '') + $co_info->Seasons->lists('name','id'),null,array('id'=>'militaryService')) }}
-                             <p class="parsley-required">{{ $errors ->first('militaryService') }} </p>
+                             {{ Form::label('', '') }}
+                             {{ Form::select('military_service', $military_service ,null,array('id'=>'military_service')) }}
+                             <p class="parsley-required">{{ $errors ->first('military_service') }} </p>
                          </div>
                      </div>
-
                      {{Form::submit('العمولات لمراحل التشغيل ')}}
-
                  </div>
 
             </div>
@@ -274,23 +273,28 @@
                   </div>
           </div>
               <div class="row">
-                  {{Form::submit('  جديد ')}}
-                  {{Form::submit('  حفظ ')}}
-                  {{Form::submit('  الاقسام ')}}
-                  {{Form::submit('  الوظائف ')}}
-                  {{Form::submit(' بنود الاستحقاقات  ')}}
-                  {{Form::submit(' بنود الراتب الثابته للموظف  ')}}
+                  <button type="submit" class="waves-effect btn">جديد </button>
+                  <button type="submit" class="waves-effect btn">حفظ </button>
+                  <button type="submit" class="waves-effect btn">الاقسام </button>
+                  <button type="submit" class="waves-effect btn">الوظائف </button>
+                  <button type="submit" class="waves-effect btn"> بنود الاستحقاقات </button>
+                  <button type="submit" class="waves-effect btn">  بنود الراتب الثابته للموظف </button>
+                  {{--{{Form::submit('   ')}}--}}
+                  {{--{{Form::submit('   ')}}--}}
+                  {{--{{Form::submit('  الاقسام ')}}--}}
+                  {{--{{Form::submit('   ')}}--}}
+                  {{--{{Form::submit(' بنود الاستحقاقات  ')}}--}}
+                  {{--{{Form::submit(' بنود الراتب الثابته للموظف  ')}}--}}
 
               </div>
                   <div class="row">
                       <div class="col s12 l12">
                           @if(Route::currentRouteName() == 'addEmp')
-                              {{Form::submit('  اضف ')}}
-                              {{--<button type="submit" class="waves-effect btn">اضف </button>--}}
+                              {{--{{Form::submit('  اضف ')}}--}}
+                              <button type="submit" class="waves-effect btn">اضف </button>
                           @elseif(Route::currentRouteName() == 'editEmp')
-                              {{Form::submit('  تعديل ')}}
-
-                              {{--<button type="submit" class="waves-effect btn">تعديل </button>--}}
+                              {{--{{Form::submit('  تعديل ')}}--}}
+                              <button type="submit" class="waves-effect btn">تعديل </button>
                           @endif
                       </div>
                       {{ Form::close() }}

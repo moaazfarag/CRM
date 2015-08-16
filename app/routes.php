@@ -165,7 +165,11 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('editLoans/{id}',array('uses'=>'LoansController@editLoans','as'=>'editLoans'));
         Route::post('updateLoans/{id}',array('before'=>'csrf','uses'=>'LoansController@updateLoans','as'=>'updateLoans'));
 
-
+    //DesDed Page
+        Route::get('addDesded',array('uses'=>'DesdedController@addDesded','as'=>'addDesded'));
+        Route::post('storeDesded',array('before'=>'csrf','uses'=>'DesdedController@storeDesded','as'=>'storeDesded'));
+        Route::get('editDesded/{id}',array('uses'=>'DesdedController@editDesded','as'=>'editDesded'));
+        Route::post('updateDesded/{id}',array('before'=>'csrf','uses'=>'DesdedController@updateDesded','as'=>'updateDesded'));
 
 
 

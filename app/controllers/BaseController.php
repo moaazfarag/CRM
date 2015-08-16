@@ -53,5 +53,8 @@ class BaseController extends Controller {
     {
      return Branches::find(Auth::user()->br_code)->br_name;
     }
-
+    public function strToTime($date)
+    {
+        return date("Y-m-d", strtotime($date));
+    }
 }
