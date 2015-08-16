@@ -32,7 +32,7 @@ class CreateHrEmployeesTable extends Migration {
             $table->char('cancel_cause','200');
             $table->enum('sex',array('انثى ','ذكر '));
             $table->enum('marital',array('اعزب ',' متزوج'));
-            $table->enum('religion',array('مسيحى ',' مسلم'));
+            $table->enum('religion',array('مسلم ',' مسيحى'));
             $table->enum('military_service',array('تم الخدمه ',' معافى ','تاجيل'));
             $table->char('tel','200');
             $table->char('address','200');

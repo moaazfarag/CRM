@@ -25,7 +25,6 @@ class ItemController extends BaseController
 //                                        ->lists('acc_name','id');// suppliers from accounts table
         return View::make('dashboard.product_product',$data);
     }
-
     public  function storeItem()
     {
         $validation = Validator::make(Input::all(), Items::$store_rules);
@@ -59,7 +58,6 @@ class ItemController extends BaseController
             return Redirect::route('addItem');
         }
     }
-
     public  function editItem($id)
     {
         $data['title']     = Lang::get('main.editItem'); // page title
@@ -78,10 +76,7 @@ class ItemController extends BaseController
         }else{
             return "item not here";
         }
-
-
     }
-
     public  function updateItem($id)
     {
         $validation = Validator::make(Input::all(), Items::$update_rules);
@@ -117,6 +112,4 @@ class ItemController extends BaseController
             }
         }
     }
-
-
 }

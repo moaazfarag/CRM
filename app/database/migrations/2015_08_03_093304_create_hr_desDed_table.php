@@ -16,6 +16,7 @@ class CreateHrDesDedTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('ds_id');
+            $table->integer('co_id');
             $table->char('name','50');
             $table->char('ds_type','50');
             $table->char('ds_cat','50');

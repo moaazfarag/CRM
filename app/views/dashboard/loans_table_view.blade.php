@@ -17,7 +17,7 @@
         @foreach($tablesData as $tableData)
             <tr>
                 <th>{{ $tableData->id }}</th>
-                <td>{{ $tableData->employees }}</td>
+                <td>{{ $tableData->employees->name }}</td>
                 <td>{{ $tableData->loan_date }}</td>
                 <td>{{ $tableData->loan_val }}</td>
                 <td>{{ $tableData->loan_currBal }}</td>
