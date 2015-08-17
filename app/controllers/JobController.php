@@ -58,4 +58,25 @@ class JobController extends BaseController
         $data['tablesData']         = Job::all();
         return $data;
     }
+
+    public function deleteJop($id)
+    {
+        $dep = Job::find($id);
+        if(!empty($dep)){
+
+            $employees = Employees::where('job_id',$id)->first();
+//            var_dump($employees); die();
+            if(!empty($employees)){
+
+                Session::flash('error','لا يمكن حذف هذه الوظيفة لوجود موظفين بها ');
+                return Redirect::back();
+            }else{
+                $dep->delete();
+                Session::flash('success','لقد تم حذف الوظيفة بنجاح ');
+                return Redirect::back();
+
+            }//end else employees
+
+        }// end if dep
+    }
 }
