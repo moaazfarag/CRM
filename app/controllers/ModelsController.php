@@ -27,6 +27,7 @@ class ModelsController extends BaseController
     {
         $model           = new Models ;
         $model->name     = Input::get('name'); //season name from input
+        $model->marks_id = Input::get('marks_id'); // mark id from input
         $model->co_id    = Auth::user()->co_id; // company id
         $model->user_id  = Auth::id();// user who add this record
         $model->save();
@@ -45,9 +46,10 @@ class ModelsController extends BaseController
     public function updateModel($id)
     {
         $model           = Models::findOrFail($id) ;
-        $model->name = Input::get('name'); //season name from input
+        $model->name = Input::get('name'); // name from input
+        $model->marks_id = Input::get('marks_id'); //marks_id from input
         $model->co_id    = Auth::user()->co_id; // company id
-        $model->user_id  = Auth::id();// user who add this record
+        $model->user_id  = Auth::id();// user who update this record
         $model->update();
         return Redirect::route('addModel');
 
@@ -67,8 +69,9 @@ class ModelsController extends BaseController
         $data['seasonInputName']    = "seasons";
         $data['asideOpen']          = 'open' ;
         $data['modelMini']          = "";
-        $data['arabicName']         = $marka;
         $data['tablesData']         = Models::all();
+        $data['arabicName']         = $marka;
+        $data['co_info']             = CoData::where('id','=',$this->coAuth())->first();
         return $data;
     }
 }

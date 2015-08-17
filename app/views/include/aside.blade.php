@@ -59,6 +59,10 @@
                     <a href="{{ URL::route('addModel') }}" class="waves-effect waves-blue">  @lang('main.models') </a>
                 </li>
                 <li>
+                    <a href="{{ URL::route('addMark') }}" class="waves-effect waves-blue">  @lang('main.markes') </a>
+                </li>
+
+                <li>
                     <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue"> @lang('main.items')</a>
                 </li>
                 <li>
