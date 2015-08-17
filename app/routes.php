@@ -179,7 +179,11 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('updateDesded/{id}',array('before'=>'csrf','uses'=>'DesdedController@updateDesded','as'=>'updateDesded'));
 
 
-
+        //EmpDesDed Page
+        Route::get('addEmpdesded',array('uses'=>'EmpdesdedController@addEmpdesded','as'=>'addEmpdesded'));
+        Route::post('storeEmpdesded',array('before'=>'csrf','uses'=>'EmpdesdedController@storeEmpdesded','as'=>'storeEmpdesded'));
+        Route::get('editEmpdesded/{id}',array('uses'=>'EmpdesdedController@editEmpdesded','as'=>'editEmpdesded'));
+        Route::post('updateEmpdesded/{id}',array('before'=>'csrf','uses'=>'EmpdesdedController@updateEmpdesded','as'=>'updateEmpdesded'));
 
     });
 

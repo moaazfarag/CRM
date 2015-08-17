@@ -6,6 +6,7 @@ class hrDesDedSeeder extends Seeder{
         DB::table('hr_desDed')->insert(array(
             array(
             'ds_id'          => '1',
+            'co_id'          => '1',
             'name'           => 'ahmed',
             'ds_type'        => 'text',
             'ds_cat'         => 'category',
@@ -13,6 +14,7 @@ class hrDesDedSeeder extends Seeder{
             'user_id'        => '166',
             ), array(
             'ds_id'          => '13',
+            'co_id'          => '1',
             'name'           => 'mohamed',
             'ds_type'        => 'text',
             'ds_cat'         => 'category',
@@ -20,21 +22,27 @@ class hrDesDedSeeder extends Seeder{
             'user_id'        => '66',
             ), array(
             'ds_id'          => '6',
-            'name'           => 'ahmed',
+                'co_id'          => '1',
+
+                'name'           => 'ahmed',
             'ds_type'        => 'text',
             'ds_cat'         => 'category',
             'deleted'        => '1',
             'user_id'        => '566',
             ), array(
             'ds_id'          => '15',
-            'name'           => 'tarek',
+                'co_id'          => '1',
+
+                'name'           => 'tarek',
             'ds_type'        => 'text',
             'ds_cat'         => 'category',
             'deleted'        => '1',
             'user_id'        => '131566',
             ), array(
             'ds_id'          => '16',
-            'name'           => 'gamal',
+                'co_id'          => '1',
+
+                'name'           => 'gamal',
             'ds_type'        => 'text',
             'ds_cat'         => 'category',
             'deleted'        => '1',

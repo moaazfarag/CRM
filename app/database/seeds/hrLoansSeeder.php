@@ -6,6 +6,7 @@ class hrLoansSeeder extends Seeder {
         DB::table('hr_loans')->insert(array(
             array(
                 'employee_id'            => '2',
+                'co_id'                  => '1',
                 'loan_date'              => '',
                 'loan_val'                => '1200',
                 'loan_start'             => '',
@@ -16,6 +17,7 @@ class hrLoansSeeder extends Seeder {
             ),
             array(
                 'employee_id'            => '21',
+                'co_id'                  => '1',
                 'loan_date'              => '',
                 'loan_val'                => '1700',
                 'loan_start'             => '',
@@ -26,6 +28,7 @@ class hrLoansSeeder extends Seeder {
             ),
             array(
                 'employee_id'            => '22',
+                'co_id'                  => '1',
                 'loan_date'              => '',
                 'loan_val'                => '1900',
                 'loan_start'             => '',
@@ -36,6 +39,7 @@ class hrLoansSeeder extends Seeder {
             ),
             array(
                 'employee_id'            => '15',
+                'co_id'                  => '1',
                 'loan_date'              => '',
                 'loan_val'                => '2000',
                 'loan_start'             => '',
@@ -46,6 +50,7 @@ class hrLoansSeeder extends Seeder {
             ),
             array(
                 'employee_id'            => '5',
+                'co_id'                  => '1',
                 'loan_date'              => '',
                 'loanVal'                => '2200',
                 'loan_start'             => '',

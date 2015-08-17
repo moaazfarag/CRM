@@ -6,6 +6,7 @@ class hrEmpDesDedSeeder extends Seeder {
         DB::table('hr_empDesDed')->insert(array(
             array(
                 'employee_id'     => '1 ',
+                'co_id'           => '1',
                 'des_ded'         => '54',
                 'val'             => '54.65',
                 'deleted'         => '1',
@@ -13,6 +14,7 @@ class hrEmpDesDedSeeder extends Seeder {
             ),
             array(
                 'employee_id'     => '2 ',
+                'co_id'           => '1',
                 'des_ded'         => '5',
                 'val'             => '54.5',
                 'deleted'         => '1',
@@ -20,6 +22,7 @@ class hrEmpDesDedSeeder extends Seeder {
             ),
             array(
                 'employee_id'     => '3 ',
+                'co_id'           => '1',
                 'des_ded'         => '4',
                 'val'             => '4.6',
                 'deleted'         => '1',
@@ -27,6 +30,7 @@ class hrEmpDesDedSeeder extends Seeder {
             ),
             array(
                 'employee_id'     => '4 ',
+                'co_id'           => '1',
                 'des_ded'         => '5',
                 'val'             => '5.65',
                 'deleted'         => '1',
@@ -34,6 +38,7 @@ class hrEmpDesDedSeeder extends Seeder {
             ),
             array(
                 'employee_id'     => '5 ',
+                'co_id'           => '1',
                 'des_ded'         => '55',
                 'val'             => '99.65',
                 'deleted'         => '1',

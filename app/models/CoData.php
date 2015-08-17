@@ -80,4 +80,16 @@ class CoData extends Eloquent {
     {
         return $this->hasMany('Job','co_id');
     }
+    public function loans()
+    {
+        return $this->hasMany('Loans','co_id');
+    }
+    public function desded()
+    {
+        return $this->hasMany('Desded','co_id');
+    }
+    public function empdesded()
+    {
+        return $this->hasMany('Empdesded','co_id');
+    }
 }

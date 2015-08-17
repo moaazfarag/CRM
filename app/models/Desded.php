@@ -9,15 +9,16 @@ class Desded extends Eloquent {
 
     protected $table = 'hr_desded';
     public static $store_rules = array(
-        'name'                  => 'required|min:3|alpha',
+        'name'                  => 'required|min:3',
         'ds_type'               => 'required',
         'ds_cat'                => 'required'
 
     );
     public static $update_rules = array(
-        'name'                  => 'required|min:3|alpha',
+        'name'                  => 'required|min:3',
         'ds_type'               => 'required',
         'ds_cat'                => 'required'
 
     );
+
 }

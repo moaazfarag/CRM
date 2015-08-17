@@ -16,6 +16,7 @@ class CreateHrEmpDesDedTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('employee_id');
+            $table->integer('co_id');
             $table->integer('des_ded');
             $table->decimal('val',18 ,2);
             $table->boolean('deleted');
