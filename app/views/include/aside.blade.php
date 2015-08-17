@@ -115,6 +115,7 @@
                         <a href="{{ URL::route('addJob') }}" class="waves-effect waves-blue">الوظائف   </a>
                         <a href="{{ URL::route('addLoans') }}" class="waves-effect waves-blue">القروض   </a>
                         <a href="{{ URL::route('addDesded') }}" class="waves-effect waves-blue">بنود الاستحقاقات </a>
+                        <a href="{{ URL::route('addEmpdesded') }}" class="waves-effect waves-blue"> بنود الاستحقاقات للموظف </a>
                     </li>
                 </ul>
 

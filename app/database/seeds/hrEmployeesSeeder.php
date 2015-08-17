@@ -6,6 +6,7 @@ class hrEmployeesSeeder extends Seeder {
         DB::table('hr_employees')->insert(array(
             array(
                 'employee_id'             => '2',
+                'co_id'                   => '1',
                 'name'                    => 'ahmed',
                 'branch_id'               => '123456789987456123',
                 'employee_date'           => '',
@@ -39,6 +40,7 @@ class hrEmployeesSeeder extends Seeder {
             ),
             array(
                 'employee_id'             => '5',
+                'co_id'                   => '1',
                 'name'                    => 'moaaz',
                 'branch_id'               => '123',
                 'employee_date'           => '',
@@ -72,6 +74,7 @@ class hrEmployeesSeeder extends Seeder {
             ),
             array(
                 'employee_id'             => '8',
+                'co_id'                   => '1',
                 'name'                    => 'omar',
                 'branch_id'               => '456123',
                 'employee_date'           => '',
@@ -105,6 +108,7 @@ class hrEmployeesSeeder extends Seeder {
             ),
              array(
                 'employee_id'             => '1',
+                 'co_id'                   => '1',
                 'name'                    => 'hafez',
                 'branch_id'               => '23',
                 'employee_date'           => '',
@@ -138,6 +142,7 @@ class hrEmployeesSeeder extends Seeder {
             ),
              array(
                 'employee_id'             => '2',
+                 'co_id'                   => '1',
                 'name'                    => 'kareem',
                 'branch_id'               => '123',
                 'employee_date'           => '',
