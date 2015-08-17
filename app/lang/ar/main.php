@@ -11,7 +11,8 @@ return  array(
     'branchInfo'       => 'بيانات الفروع',
     'itemCat'          => 'فئات الاصناف ',
     'seasons'          => 'المواسم',
-    'models'            => 'الماركات والموديلات ',
+    'models'            => 'الموديلات  ',
+    'markes'            => 'الماركات ',
     'items'            => 'الاصناف',
     'items'            => 'الاصناف',
     'accounts'         => 'اكواد الحسابات',
@@ -162,7 +163,10 @@ return  array(
 
 
 
-
+    // mark page
+    'addNewMark'   => 'أضف ماركة جديدة ',
+    'markCat'      => 'إضافة ماركة جديدة ',
+    'select_mark' => '  اسم الماركة ',
 
 
 

@@ -95,11 +95,9 @@
               <?php $print_size=Lang::get('main.print_size') ?>
               {{ Form::label('ecommerce-printsize',$print_size) }}
           </div>
-          <div class="col s2 l5">
 
-              {{ Form::select('co_print_size', $printSize, $companyInfo['co_print_size'],array('id'=>'ecommerce-printsize') ) }}
 
-          </div>
+
         </div>
 
         <div class="row">

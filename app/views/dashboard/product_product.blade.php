@@ -121,7 +121,9 @@
                   <i class="fa fa-cube prefix"></i>
                   <?php $category=Lang::get('main.category') ?>
                   {{ Form::label('cat_id',$category) }}
+
                   {{ Form::select('cat_id', array('' => 'اختر الفئة') + $co_info->cat->lists('name','id'),null,array('id'=>'cat_id')) }}
+
                 <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>
               </div> {{--category--}}
               @if($co_info->co_supplier_must)

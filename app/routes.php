@@ -62,6 +62,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::get('editSeason/{id}',array('uses'=>'SeasonController@editSeason','as'=>'editSeason'));
     Route::post('updateSeason/{id}',array('before'=>'csrf','uses'=>'SeasonController@updateSeason','as'=>'updateSeason'));
 
+//    markes area
+    Route::get('addMark',array('uses'=>'MarkesController@addMark','as'=>'addMark'));
+    Route::post('storeMark',array('uses'=>'MarkesController@storeMark','as'=>'storeMark'));
+    Route::get('editMark/{id}',array('uses'=>'MarkesController@editMark','as'=>'editMark'));
+    Route::post('updateMark/{id}',array('uses'=>'MarkesController@updateMark','as'=>'updateMark'));
+
+
     /**
      * Model Area
      */

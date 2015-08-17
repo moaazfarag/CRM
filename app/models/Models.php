@@ -17,14 +17,24 @@ class Models extends Eloquent {
 	 * @var array
 	 */
 
-    public function co_data()
-    {
-        return $this->belongsTo('Co_data','co_id');
+//    public function co_data()
+//    {
+//        return $this->belongsTo('CoData','co_id');
+//    }
+
+    public function getMarkName(){
+
+
+        return Markes::where('id','=',$this->marks_id)->first()->name;
     }
 
-    public function marks()
+
+    public function markes()
     {
-        return $this->hasMany('Models','marks_id');
+        return $this->belongsTo('Markes','id');
     }
+
+
+
 
 }

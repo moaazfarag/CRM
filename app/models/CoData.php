@@ -43,7 +43,7 @@ class CoData extends Eloquent {
 
     public function marks()
     {
-        return $this->hasMany('Marks','co_id');
+        return $this->hasMany('Markes','co_id');
     }
 
     public function models()
