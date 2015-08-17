@@ -162,7 +162,7 @@ return  array(
     'Jop'           =>'الوظيفه',
 
 
-
+    'delete' => 'حذف',
     // mark page
     'addNewMark'   => 'أضف ماركة جديدة ',
     'markCat'      => 'إضافة ماركة جديدة ',

@@ -95,6 +95,8 @@
               </script>
                       {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
       <script>
+
+
         /*
          * Revenue Line Chart
          */
@@ -327,8 +329,20 @@
             }
           });
         });
+
+
+
+
+
       </script>
 
-    </body>
+
+      <script type='text/javascript'>
+          $(document).ready( function() {
+              $('#hidden').delay(5000).fadeOut();
+
+          });
+      </script>
+      </body>
 
     </html>

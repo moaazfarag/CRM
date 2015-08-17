@@ -83,4 +83,21 @@ class DesdedController extends BaseController
         return $data;
 
     }
+
+    public function deleteDesded($id)
+    {
+
+        $desded = Desded::find($id);
+
+        if (!empty($desded)) {
+            $desded->delete();
+
+            Session::flash('success', 'لقد تم حذف البند بنجاح ');
+            return Redirect::back();
+
+        }
+
+    }
+
+
     }

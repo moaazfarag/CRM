@@ -158,12 +158,16 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeDep',array('before'=>'csrf','uses'=>'DepController@storeDep','as'=>'storeDep'));
         Route::get('editDep/{id}',array('uses'=>'DepController@editDep','as'=>'editDep'));
         Route::post('updateDep/{id}',array('before'=>'csrf','uses'=>'DepController@updateDep','as'=>'updateDep'));
+        Route::get('deleteDep/{id}',array('uses'=>'DepController@deleteDep','as'=>'deleteDep'));
+
+//        Route::get('deleteDep/{id}','DepController@deleteDep');
+
          //Job Page
         Route::get('addJob',array('uses'=>'JobController@addJob','as'=>'addJob'));
         Route::post('storeJob',array('before'=>'csrf','uses'=>'JobController@storeJob','as'=>'storeJob'));
         Route::get('editJob/{id}',array('uses'=>'JobController@editJob','as'=>'editJob'));
         Route::post('updateJob/{id}',array('before'=>'csrf','uses'=>'JobController@updateJob','as'=>'updateJob'));  //Job Page
-
+        Route::get('deleteJop/{id}',array('uses'=>'JobController@deleteJop','as'=>'deleteJop'));
 
 
         //Loans Page
@@ -177,7 +181,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeDesded',array('before'=>'csrf','uses'=>'DesdedController@storeDesded','as'=>'storeDesded'));
         Route::get('editDesded/{id}',array('uses'=>'DesdedController@editDesded','as'=>'editDesded'));
         Route::post('updateDesded/{id}',array('before'=>'csrf','uses'=>'DesdedController@updateDesded','as'=>'updateDesded'));
-
+        Route::get('deleteDesded/{id}',array('uses'=>'DesdedController@deleteDesded','as'=>'deleteDesded'));
 
         //EmpDesDed Page
         Route::get('addEmpdesded',array('uses'=>'EmpdesdedController@addEmpdesded','as'=>'addEmpdesded'));
