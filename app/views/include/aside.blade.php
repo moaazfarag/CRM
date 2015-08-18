@@ -113,14 +113,15 @@
             <li class="{{@$employees}}">
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  شؤون العاملين <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
-                    <li>
-                        <a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف موظف  </a>
-                        <a href="{{ URL::route('addDep') }}" class="waves-effect waves-blue">الاقسام   </a>
-                        <a href="{{ URL::route('addJob') }}" class="waves-effect waves-blue">الوظائف   </a>
-                        <a href="{{ URL::route('addLoans') }}" class="waves-effect waves-blue">القروض   </a>
-                        <a href="{{ URL::route('addDesded') }}" class="waves-effect waves-blue">بنود الاستحقاقات </a>
-                        <a href="{{ URL::route('addEmpdesded') }}" class="waves-effect waves-blue"> بنود الاستحقاقات للموظف </a>
-                    </li>
+
+                      <li> <a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف موظف  </a> </li>
+                      <li> <a href="{{ URL::route('addDep') }}" class="waves-effect waves-blue">الاقسام   </a> </li>
+                      <li> <a href="{{ URL::route('addJob') }}" class="waves-effect waves-blue">الوظائف   </a>  </li>
+                      <li> <a href="{{ URL::route('addLoans') }}" class="waves-effect waves-blue">القروض   </a>  </li>
+                      <li> <a href="{{ URL::route('addDesded') }}" class="waves-effect waves-blue">بنود الاستحقاقات </a>  </li>
+                      <li> <a href="{{ URL::route('addEmpdesded') }}" class="waves-effect waves-blue"> بنود الاستحقاقات للموظف </a> </li>
+                      <li> <a href="{{ URL::route('addMonthChange') }}" class="waves-effect waves-blue">التغيرات الشهريه</a> </li>
+
                 </ul>
 
             </li>

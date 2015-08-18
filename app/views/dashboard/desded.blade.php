@@ -46,7 +46,7 @@
                 <div class="col s2 l2">
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
-                        {{ Form::radio('ds_cat','متغير',array('id'=>'change_cat','required')) }}
+                        {{ Form::radio('ds_cat','متغير',null,array('id'=>'change_cat','required')) }}
                         {{ Form::label('change_cat','متغير') }}
 
                         <p class="parsley-required">{{ $errors ->first('ds_cat') }} </p>

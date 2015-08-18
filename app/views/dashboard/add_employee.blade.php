@@ -42,7 +42,7 @@
                           <div class="col s2 l7">
                               <div class="input-field">
                                   <i class="fa fa-tag prefix"></i>
-                                  {{ Form::text('card_no',null,array('required','id'=>'card_no',)) }}
+                                  {{ Form::text('card_no',null,array('required','id'=>'card_no','length'=>"14")) }}
                                   {{ Form::label('card_no',  'الرقم القومى' )     }}
                                   <p class="parsley-required">{{ $errors ->first('card_no') }} </p>
                               </div>
@@ -141,7 +141,7 @@
                             <div class="col s2 l12">
                                 <div class="input-field" >
                                     <i class="fa fa-tag prefix"></i>
-                                    {{ Form::textarea('cancel_cause',null,array('id'=>'cancel_cause',)) }}
+                                    {{ Form::textarea('cancel_cause',null,array('id'=>'cancel_cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
                                     {{ Form::label('cancel_cause',  ' سبب الالغاء ' )     }}
                                     <p class="parsley-required">{{ $errors ->first('cancel_cause') }} </p>
                                 </div>
@@ -155,8 +155,6 @@
                        {{ Form::select('sex',$sex ,null,array('id'=>'sex')) }}
                        <p class="parsley-required">{{ $errors ->first('sex') }} </p>
                    </div>
-
-
                </div>
                <div class="col s12 l5">
                    {{--<i class="fa fa-tag prefix"></i>--}}
@@ -266,7 +264,7 @@
                   <div class="col s2 l12">
                       <div class="input-field" >
                           <i class="fa fa-tag prefix"></i>
-                          {{ Form::textarea('remark',null,array('id'=>'remark')) }}
+                          {{ Form::textarea('remark',null,array('id'=>'remark','class'=>"materialize-textarea" ,'length'=>"200")) }}
                           {{ Form::label('remark',  ' ملاحظات  ' )     }}
                           <p class="parsley-required">{{ $errors ->first('remark') }} </p>
                       </div>
