@@ -18,7 +18,6 @@ class CreateItemsBalancesTable extends Migration {
             $table->integer('co_id');
             $table->integer('item_id');
             $table->integer('user_id');
-
             $table->string('bar_code');
             $table->integer('qty');
             $table->float('cost');

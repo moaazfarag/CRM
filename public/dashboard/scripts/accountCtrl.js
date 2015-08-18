@@ -1,65 +1,59 @@
 /**
  * Created by moaaz on 7/27/2015.
  */
-angular.module('mainCtrl', [])
+angular.module('accountCtrl', [])
+    .controller('accountController', function($scope, $http, Account) {
 
-    .controller('mainController', function($scope, $http, Item) {
         // object to hold all the data for the new comment form
         $scope.itemData = {};
-        //$scope.item = {};
+        //$scope.account = {};
         $scope.value = "";
-        $scope.invoiceItems = [
+        $scope.addedAccounts = [
         ];
         // loading variable to show the spinning loading icon
         $scope.loading = true;
 
         // get all the comments first and bind it to the $scope.comments object
-        Item.get()
+        Account.get()
             .success(function(data) {
-                $scope.items = data.items;
-                $scope.users = data.users;
+                $scope.accounts = data.accounts;
+                //$scope.users = data.users;
                 $scope.loading = false;
             });
 
 
-         //function to handle submitting the form
-        //$scope.submitItem = function() {
-        //    $scope.loading = true;
-        //    console.log($scope.invoiceItems);
-        //
-        //    // save the comment. pass in comment data from the form
-        //    Item.save($scope.invoiceItems)
-        //        .success(function(data) {
-        //            console.log($scope.invoiceItems);
-        //
-        //            $scope.invoiceItems = {};
-        //             //if successful, we'll need to refresh the comment list
-        //            Item.get()
-        //                .success(function(getData) {
-        //                    $scope.invoiceItems = getData;
-        //                    $scope.loading = false;
-        //                });
-        //
-        //        })
-        //        .error(function(data) {
-        //
-        //        });
-        //};
-        $scope.addItem = function () {
+        //function to handle submitting the form
+        $scope.submitItem = function() {
+            $scope.loading = true;
+            console.log($scope.form);
 
-            $scope.invoiceItems.push($scope.item);
+            // save the comment. pass in comment data from the form
+            Account.save($scope.addedAccounts)
+                .success(function(data) {
+                    console.log($scope.form);
+                    $scope.itemData = {};
+                    //$scope.account = {};
+                    $scope.value = "";
+                    $scope.addedAccounts = [
+                    ];
+
+                })
+                .error(function(data) {
+
+                });
+        };
+            $scope.addAccount = function () {
+            $scope.addedAccounts.push($scope.account);
             // Clear input fields after push
-            $scope.item = "";
+            $scope.account = "";
             $scope.form.$setUntouched();
-            //foucus into item name after add
-            document.getElementById('item_id').focus();
+            document.getElementById('account_id').focus();
+                //foucus into item name after add
         };
 
-        $scope.selectItem = function(itemName,itemId){
-            $scope.item.name = itemName;
-            $scope.item.id   = itemId;
-            document.getElementById('quantity').focus();
-            document.getElementById('itemsView').style.display = 'none';
+        $scope.selectItem = function(accountName,accountId){
+            $scope.account.name = accountName;
+            $scope.account.id   = accountId;
         };
         $scope.displayOn = function(){
             console.log();
@@ -73,27 +67,27 @@ angular.module('mainCtrl', [])
             });
             return total;
         }
-        $scope.removeItem =  function(item){
-            $scope.invoiceItems.splice($scope.invoiceItems.indexOf(item), 1)
+        $scope.removeAccount =  function(item){
+            $scope.addedAccounts.splice($scope.addedAccounts.indexOf(item), 1)
         };
-        $scope.hasInvoiceItems =  function(){
-            if( $scope.invoiceItems.length>0 ){
+        $scope.hasBalances =  function(){
+            if( $scope.addedAccounts.length>0 ){
                 return false;
             }else{
                 return true;
             }
 
         };
-        $scope.hasItem =  function(item){
-            if( item  > 0 && $scope.item.name.length>0 ){
+        $scope.hassalance =  function(item){
+            if( item  > 0 && $scope.account.name.length>0 ){
                 return false;
             }else{
                 return true;
             }
 
         };
-        $scope.hasItemBalance =  function(item){
-            if( item  > 0 && $scope.item.name.length > 0){
+        $scope.hasBalance =  function(){
+            if(($scope.form.credit.$viewValue > 0 ||$scope.form.debit.$viewValue > 0) && $scope.account.id > 0){
                 return false;
             }else{
                 return true;

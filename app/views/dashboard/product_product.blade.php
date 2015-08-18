@@ -189,4 +189,5 @@
       @include('include.search')
 
 </section>
+    {{--{{             dd(DB::getQueryLog()); }}--}}
 @stop

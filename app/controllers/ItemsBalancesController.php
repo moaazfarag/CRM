@@ -43,18 +43,22 @@ class ItemsBalancesController extends BaseController {
             dd(ItemsBalances::rulesCreator($inputs));
 
         }else {
+            $newData = array();//create array to insert into database on  one query
             foreach(TransDetails::countOfInputs($inputs) as $k => $v){
-                $itemsBalances               = new ItemsBalances;
-                $itemsBalances->co_id        = $this->coAuth();
-                $itemsBalances->user_id      = Auth::id();
-                $itemsBalances->item_id      = Input::get('id_'.$k);
-//            $itemsBalances->bar_code     = Input::get('bar_code');
-                $itemsBalances->qty          = Input::get('quantity_'.$k);
-                $itemsBalances->cost         = Input::get('cost_'.$k) * Input::get('quantity_'.$k);
-//            $itemsBalances->serial_no    = Input::get('serial_no');
-
-                $itemsBalances->save();
-            }
+                $newData[]= array
+                (
+                    'co_id'        => $this->coAuth(),
+                    'user_id'      => Auth::id(),
+                    'item_id'      => Input::get('id_'.$k),
+//                  'bar_code'     => Input::get('bar_code'),
+                    'qty'          => Input::get('quantity_'.$k),
+                    'cost'         => Input::get('cost_'.$k) * Input::get('quantity_'.$k),
+//                  'serial_no     => Input::get('serial_no'),
+                    'created_at'   => date('Y-m-d H:i:s'),
+                    'updated_at'   => date('Y-m-d H:i:s')
+                );//end of array
+            }//end foreach
+            ItemsBalances::insert($newData);//insert  data
 
 
             return Response::json(array('success' => true));

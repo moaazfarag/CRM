@@ -81,7 +81,7 @@
       </div>{{--seconud row end--}}
           @include('dashboard.view_table_selected_additems_discountitems')
         <br>
-    <div class="row">
+        <div class="row">
             <div class="col s12 l12">
                 <button ng-disabled="form.$invalid || hasInvoiceItems()" type="submit" class="waves-effect btn">@lang('main.add')</button>
             </div>
