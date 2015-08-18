@@ -11,13 +11,13 @@ class Employees extends Eloquent {
     public static $store_rules = array(
 
 //        'co_id'           => 'required|integer',
-        'name'                  => 'required|min:3|alpha',
+        'name'                  => 'required|min:3',
         'branch_id'             => 'required',
         'department_id'         => 'required',
-        'ins_no'                => 'required',
+        'ins_no'                => 'required|integer',
         'certificate'           => 'required',
         'cert_location'         => 'required',
-        'tel'                   => 'required|integer',
+        'tel'                   => 'required',
         'card_no'               => 'required|min:14|max:14',
         'cancel_cause'          => 'required|min:3|max:200',
         'address'               => 'required|min:3|max:200',
@@ -33,19 +33,19 @@ class Employees extends Eloquent {
         'military_service'      => 'required',
         'salary'                => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
         'ins_salary'            => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
-        'ins_val'                  => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
+        'ins_val'               => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
 
     );
     public static  $update_rules = array(
 
 //        'co_id'           => 'required|integer',
-        'name'                  => 'required|min:3|alpha',
+        'name'                  => 'required|min:3',
         'branch_id'             => 'required',
         'department_id'         => 'required',
-        'ins_no'                => 'required',
+        'ins_no'                => 'required|integer',
         'certificate'           => 'required',
         'cert_location'         => 'required',
-        'tel'                   => 'required|integer',
+        'tel'                   => 'required',
         'card_no'               => 'required|min:14|max:14',
         'cancel_cause'          => 'required|min:3|max:200',
         'address'               => 'required|min:3|max:200',
@@ -66,16 +66,16 @@ class Employees extends Eloquent {
 
     public function departments()
     {
-        return $this->belongsTo('Dep','co_id','id');
+        return $this->hasOne('Dep','co_id','id');
     }
     public function jobs()
     {
-        return $this->belongsTo('Job','co_id','id');
+        return $this->hasOne('Job','co_id','id');
     }
     public function loans()
     {
 //        die('sddsd');
-        return $this->belongsTo('Loans','id','id');
+        return $this->hasOne('Loans','id','id');
     }
 
 }

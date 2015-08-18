@@ -92,4 +92,8 @@ class CoData extends Eloquent {
     {
         return $this->hasMany('Empdesded','co_id');
     }
+    public function monthchange()
+    {
+        return $this->hasMany('MonthChange','id');
+    }
 }

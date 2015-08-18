@@ -17,7 +17,4 @@ class Markes extends Eloquent
     {
         return $this->hasMany('Models','marks_id','id');
     }
-
-
-
 }
