@@ -9,7 +9,12 @@
 
 class TransHeaderController extends BaseController {
 
-
+    public function jsonData()
+    {
+        $data['items']= Items::with('cat')->get();
+        $data['users']= User::get();
+        return Response::make(json_encode($data));
+    }
 
     /**
      * @return mixed
@@ -106,7 +111,7 @@ class TransHeaderController extends BaseController {
     }
 
     /**
-     * store data into trans table 
+     * store data into trans table
      * @param $type of trans
      * @return mixed
      */
@@ -138,13 +143,14 @@ class TransHeaderController extends BaseController {
                     $newInvoiceItems[] =   array
                     (
                         'trans_header_id' => $transHeaderId,
-                        'qty'           => $inputs['quantity_'.$k],
-                        'item_id'       => $inputs['id_'.$k],
+                        'qty'               => $inputs['quantity_'.$k],
+                        'item_id'           => $inputs['id_'.$k],
+                        'created_at'        => date('Y-m-d H:i:s'),
+                        'updated_at'        => date('Y-m-d H:i:s')
                     );
                 }
             $newHeader->save();
             TransDetails::insert($newInvoiceItems);
-            dd(DB::getQueryLog());
             return Response::json(array('success' => true));
 //
 //            echo "scusess";
@@ -180,5 +186,19 @@ class TransHeaderController extends BaseController {
         }
         return $newArray;
     }
+public function test(){
 
+//
+//    $moaaz->invoice_type = Input::get('id_0');
+//    $moaaz->save();
+    $tests = Request::all();
+   dd($tests);
+foreach($tests as $test){
+    $moaaz = new TransHeader;
+   $moaaz->invoice_type =  $test['acc_type'];
+    $moaaz->save();
+}
+return  Response::json(Request::all());
+
+}
 } 

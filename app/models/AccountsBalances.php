@@ -17,26 +17,63 @@ class AccountsBalances extends Eloquent {
 	 * @var array
 	 */
 
-
     /**
-     * Store Rules
+     * The attributes excluded from the model's JSON form.
+     *
      * @var array
      */
-    public static  $store_rules = array
-                (
-                    'debit'          => 'integer',
-                    'credit'         => 'integer'
-                );
+    public static function rulesCreator($inputs)
+    {
+        $count = AccountsBalances::countOfInputs($inputs);
+        $store_rules = array(
+            'id_0' => 'required|integer',
+             self::defaultRule() => 'required|integer',
+        );
+        foreach($count as $k => $v)
+        {
+            $store_rules['id_'.$k]     = 'required|integer';
+            if($inputs['credit_'.$k] > 0 && $inputs['debit_'.$k] <=  0)
+            {
+                $store_rules['credit_'.$k] = 'required|integer';
+            }elseif($inputs['debit_'.$k] > 0 && $inputs['credit_'.$k] <= 0 )
+            {
+                $store_rules['debit_'.$k] = 'required|integer';
+            }
+        }
+        return $store_rules;
+    }
 
     /**
-     * update Rules
-     * @var array
+     * count of cost  input for using in foreach
+     * @param $inputs
+     * @return array
      */
-    public static  $update_rules = array
-                (
-                    'debit'          => 'integer',
-                    'credit'         => 'integer'
-                );
+    public static function countOfInputs($inputs)
+    {
+        $count = array();
+        foreach($inputs as $k => $v)
+        {
+            if(preg_match('/^id_/', $k))
+            {
+                $count[] = $v ;
+                if($v<=0){
+                    break;
+                }
+            }
+        }
+        return $count;
+    }
+
+    /**
+     * @return string
+     */
+    public static function defaultRule(){
+        if (Input::has('debit_0')) {
+            return 'debit_0';
+        } else {
+            return 'credit_0';
+        }
+    }
 
 
 }

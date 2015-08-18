@@ -1,7 +1,6 @@
 @extends('dashboard.main')
 @section('content')
 
-
     {{--{{         Request::header('application/json') }}--}}
     {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>--}}
     {{--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->--}}

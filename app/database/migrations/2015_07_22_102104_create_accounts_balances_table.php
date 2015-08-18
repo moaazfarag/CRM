@@ -15,10 +15,11 @@ class CreateAccountsBalancesTable extends Migration {
 		Schema::create('accounts_balances', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('co_id');
-            $table->integer('debit');
-            $table->integer('credit');
-            $table->integer('user_id');
+			$table->integer('account_id');
+			$table->integer('co_id');
+			$table->integer('debit');
+			$table->integer('credit');
+			$table->integer('user_id');
 
             $table->string('notes');
 			$table->timestamps();

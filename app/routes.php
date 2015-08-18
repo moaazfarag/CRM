@@ -33,7 +33,7 @@ Route::post('/login',array('uses'=>'UserController@checkLogin','as'=>'login','be
 Route::get('/', 'HomeController@index');
 
 Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
-    
+
     /**
      * company info area
      */
@@ -119,6 +119,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::group(array('prefix'=>'AccountsBalances'),function()
     {
         Route::get('Add-Accounts-Balances', array('uses' => 'AccountsBalancesController@addAccountsBalances','as' => 'addAccountsBalances'));
+        Route::get('Add-Accounts-Balances-data', array('uses' => 'AccountsBalancesController@sendData','as' => 'sendData'));
         Route::post('Store-Accounts-Balances',array('before'=>'csrf','uses'=>'AccountsBalancesController@storeAccountsBalances','as'=>'storeAccountsBalances')) ;
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'AccountsBalancesController@editAccountsBalances','as'=>'editAccountsBalances')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'AccountsBalancesController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
@@ -130,10 +131,12 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::group(array('prefix'=>'Transaction'),function()
     {
         Route::get('Add-Trans-Header/{type}', array('uses' => 'TransHeaderController@addTransHeader','as' => 'addTransHeader'));
+        Route::get('Add-Trans-Header-data', array('uses' => 'TransHeaderController@jsonData','as' => 'jsonData'));
         Route::post('transJson/{type}', array('uses' => 'TransHeaderController@transJson','as' => 'transJson'));
         Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'TransHeaderController@storeTransHeader','as'=>'storeTransHeader')) ;
         Route::get('Edit-Trans-Header/{invoiceId}',array('uses'=>'TransHeaderController@editTransHeader','as'=>'editTransHeader')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
+        Route::post('test',array('uses'=>'TransHeaderController@test','as'=>'test')) ;
     });
 
 

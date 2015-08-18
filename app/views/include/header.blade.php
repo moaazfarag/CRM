@@ -49,9 +49,7 @@
   <!--[if lt IE 9]>
     <script src="assets/html5shiv/html5shiv.min.js">
         {{ HTML::script('dashboard/assets/angular.min.js') }}
-        {{ HTML::script('dashboard/scripts/app.js') }}
-        {{ HTML::script('dashboard/scripts/itemService.js') }}
-        {{ HTML::script('dashboard/scripts/mainCtrl.js') }}
+
   <![endif]-->
 </head>
 <body>

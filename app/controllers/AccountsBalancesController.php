@@ -13,6 +13,11 @@ class AccountsBalancesController extends BaseController {
      * add Items Balances
      */
 
+    public function sendData()
+    {
+        $data['accounts'] = Accounts::where('co_id','=',$this->coAuth())->get();
+        return Response::make(json_encode($data));
+    }
     public function addAccountsBalances()
     {
         $addAccountBalance=Lang::get('main.addAccountBalance');
@@ -20,7 +25,6 @@ class AccountsBalancesController extends BaseController {
         $data['sideOpen']   = 'open' ;
 //        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = AccountsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
-
         return View::make('dashboard.accounts_balances',$data);
     }
 
@@ -32,23 +36,34 @@ class AccountsBalancesController extends BaseController {
 
     public function storeAccountsBalances()
     {
-        $validation = Validator::make(Input::all(), AccountsBalances::$store_rules);
+        $inputs = Input::all();
+
+        $validation = Validator::make(Input::all(), AccountsBalances::rulesCreator($inputs));
 
         if($validation->fails())
         {
+            echo "fail";
+            dd($validation->messages());
+            dd(AccountsBalances::rulesCreator($inputs));
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
-//            die('hi');
-                $accountsBalances = new AccountsBalances;
-
-            $accountsBalances->co_id      = $this->coAuth();
-            $accountsBalances->user_id    = Auth::id();
-            $accountsBalances->debit      = Input::get('debit');
-            $accountsBalances->credit     = Input::get('credit');
-            $accountsBalances->notes      = Input::get('notes');
-
-            $accountsBalances->save();
-
+            echo "suev=css";
+//            dd(AccountsBalances::rulesCreator($inputs));
+            $newData = array();//create array to insert into database on  one query
+            foreach(AccountsBalances::countOfInputs($inputs) as $k => $v){
+                $newData[]= array
+                (
+                    'co_id'           => $this->coAuth(),
+                    'user_id'         => Auth::id(),
+                    'account_id'      => Input::get('id_'.$k),
+                    'debit'           => Input::get('debit_'.$k),
+                    'credit'          => Input::get('credit_'.$k),
+                    'notes'           => Input::get('notes_'.$k),
+                    'created_at'   => date('Y-m-d H:i:s'),
+                    'updated_at'   => date('Y-m-d H:i:s')
+                );//end of array
+            }//end foreach
+            AccountsBalances::insert($newData);//insert  data
                 return Redirect::route('addAccountsBalances');
             }
         
