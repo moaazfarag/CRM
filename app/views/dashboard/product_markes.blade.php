@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        @include('dashboard.product_table_view')
+                    @include('dashboard.product_table_view')
     </div>
     <!-- /عرض الفروع -->
 

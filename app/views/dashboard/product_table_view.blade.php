@@ -3,8 +3,11 @@
         <thead>
         <tr>
             <th>@lang('main.number')</th>
-            <th>@lang('main.name') </th>
+                <th>@lang('main.name') </th>
+
+            @if(Route::currentRouteName() == 'addModel')
             <th>@lang('main.marka') </th>
+            @endif
             <th>@lang('main.statue') </th>
             <th>@lang('main.edit')</th>
 
@@ -16,7 +19,9 @@
             <tr>
                 <th>{{ $tableData->id }}</th>
                 <td>{{ $tableData->name }}</td>
+                @if(Route::currentRouteName() == 'addModel')
                 <td>{{ $tableData->getMarkName() }}</td>
+                @endif
                 <td class="green-text">Active</td>
                 <td>
                     <a href="{{ URL::route($catFunName,array($tableData->id)) }}" class="btn btn-small z-depth-0">
