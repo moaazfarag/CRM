@@ -77,6 +77,8 @@ class ItemController extends BaseController
             return "item not here";
         }
     }
+
+
     public  function updateItem($id)
     {
         $validation = Validator::make(Input::all(), Items::$update_rules);
@@ -111,5 +113,26 @@ class ItemController extends BaseController
                 return "this item snot found ";
             }
         }
+    }
+
+    public function deleteItem(){
+
+        $item = Job::find($id);
+        if(!empty($dep)){
+
+            $employees = Employees::where('job_id',$id)->first();
+//            var_dump($employees); die();
+            if(!empty($employees)){
+
+                Session::flash('error','áÇ íãßä ÍĞİ åĞå ÇáæÙíİÉ áæÌæÏ ãæÙİíä ÈåÇ ');
+                return Redirect::back();
+            }else{
+                $dep->delete();
+                Session::flash('success','áŞÏ Êã ÍĞİ ÇáæÙíİÉ ÈäÌÇÍ ');
+                return Redirect::back();
+
+            }//end else employees
+
+        }// end if dep
     }
 }
