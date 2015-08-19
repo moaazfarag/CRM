@@ -57,7 +57,7 @@ class EmployeesController extends BaseController
         $newEmp->cert_date                  = $this->strToTime($inputs['cert_date']);
         $newEmp->cert_location              = Input::get('cert_location');
         $newEmp->remark                     = Input::get('remark');
-//        $newEmp->userID             = Auth::id();
+        $newEmp->user_id                    = Auth::id();
 //        $newEmp->pic = Input::get('pic');
 //        $newEmp->fingerId = Input::get('fingerId');
 //        $newEmp->dHours = Input::get('dHours');
@@ -119,7 +119,7 @@ class EmployeesController extends BaseController
                 $oldEmp->cert_date                  = $this->strToTime($inputs['cert_date']);
                 $oldEmp->cert_location              = Input::get('cert_location');
                 $oldEmp->remark                     = Input::get('remark');
-//                $oldEmp->userID              = Auth::id();
+                $oldEmp->user_id                    = Auth::id();
 //                $oldEmp->pic                 =Input::get('pic');
 //                $oldEmp->fingerId            =Input::get('fingerId');
 //                $oldEmp->dHours              =Input::get('dHours');

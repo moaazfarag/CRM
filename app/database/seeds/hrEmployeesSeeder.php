@@ -5,7 +5,7 @@ class hrEmployeesSeeder extends Seeder {
         DB::table('hr_employees')->truncate();
         DB::table('hr_employees')->insert(array(
             array(
-                'employee_id'             => '2',
+//                'employee_id'             => '2',
                 'co_id'                   => '1',
                 'name'                    => 'ahmed',
                 'branch_id'               => '123456789987456123',
@@ -39,7 +39,7 @@ class hrEmployeesSeeder extends Seeder {
                 'comm2'                   =>'22'
             ),
             array(
-                'employee_id'             => '5',
+//                'employee_id'             => '5',
                 'co_id'                   => '1',
                 'name'                    => 'moaaz',
                 'branch_id'               => '123',
@@ -73,7 +73,7 @@ class hrEmployeesSeeder extends Seeder {
                 'comm2'                   =>'15'
             ),
             array(
-                'employee_id'             => '8',
+//                'employee_id'             => '8',
                 'co_id'                   => '1',
                 'name'                    => 'omar',
                 'branch_id'               => '456123',
@@ -107,7 +107,7 @@ class hrEmployeesSeeder extends Seeder {
                 'comm2'                   =>'23'
             ),
              array(
-                'employee_id'             => '1',
+//                'employee_id'             => '1',
                  'co_id'                   => '1',
                 'name'                    => 'hafez',
                 'branch_id'               => '23',
@@ -141,7 +141,7 @@ class hrEmployeesSeeder extends Seeder {
                 'comm2'                   =>'22'
             ),
              array(
-                'employee_id'             => '2',
+//                'employee_id'             => '2',
                  'co_id'                   => '1',
                 'name'                    => 'kareem',
                 'branch_id'               => '123',
