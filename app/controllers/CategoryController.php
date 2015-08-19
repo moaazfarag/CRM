@@ -16,7 +16,7 @@ class CategoryController extends  BaseController
         {
             $data = $this->categoryData();
             $data['catActive'] = "active";
-            return View::make('dashboard.product_cat',$data);
+            return View::make('dashboard.products.category.index',$data);
         }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends  BaseController
      */
         public function storeCategory()
             {
-                $category           = new Cat ;
+                $category           = new Category ;
                 $category->name     = Input::get('name'); //category name from input
                 $category->co_id    = Auth::user()->co_id; // company id
                 $category->user_id  = Auth::id();// user who add this record
@@ -37,13 +37,13 @@ class CategoryController extends  BaseController
                 //dd('saddsa');
                 $data = $this->categoryData();
                 $data['catActive'] = "active";
-                $data['editCategory']  = Cat::findOrFail($id);
-                return View::make('dashboard.product_cat',$data);
+                $data['editCategory']  = Category::findOrFail($id);
+                return View::make('dashboard.products.category.index',$data);
 
             }
         public function updateCategory($id)
             {
-                $category           = Cat::findOrFail($id) ;
+                $category           = Category::findOrFail($id) ;
                 $category->name     = Input::get('name'); //category name from input
                 $category->co_id    = Auth::user()->co_id; // company id
                 $category->user_id  = Auth::id();// user who add this record
@@ -66,7 +66,7 @@ class CategoryController extends  BaseController
             $data['catFunName']     = "editCategory";
             $data['categoryMini']   = "";
             $data['arabicName']     = $item;
-            $data['tablesData']     = Cat::all();
+            $data['tablesData']     = Category::all();
             return $data;
         }
 }

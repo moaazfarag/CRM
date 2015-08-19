@@ -66,7 +66,7 @@ class Employees extends Eloquent {
 
     public function departments()
     {
-        return $this->hasOne('Dep','co_id','id');
+        return $this->hasOne('Department','co_id','id');
     }
     public function jobs()
     {

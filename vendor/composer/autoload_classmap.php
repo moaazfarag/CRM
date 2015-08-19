@@ -1974,7 +1974,7 @@ return array(
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'TransDetails' => $baseDir . '/app/models/TransDetails.php',
     'TransHeader' => $baseDir . '/app/models/TransHeader.php',
-    'TransHeaderController' => $baseDir . '/app/controllers/TransHeaderController.php',
+    'SettleController' => $baseDir . '/app/controllers/SettleController.php',
     'User' => $baseDir . '/app/models/User.php',
     'UserController' => $baseDir . '/app/controllers/UserController.php',
     'Way\\Generators\\Commands\\ControllerGeneratorCommand' => $vendorDir . '/way/generators/src/Way/Generators/Commands/ControllerGeneratorCommand.php',

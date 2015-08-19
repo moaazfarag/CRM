@@ -17,7 +17,7 @@
         {
             $data = $this->settingData();//company info data
             $data['miniComInfo']  = "" ; //maxmizie company data on view
-            return View::make('dashboard.setting',$data);
+            return View::make('dashboard.company.index',$data);
         }
 
         /**

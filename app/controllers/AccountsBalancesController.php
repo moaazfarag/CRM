@@ -25,7 +25,7 @@ class AccountsBalancesController extends BaseController {
         $data['sideOpen']   = 'open' ;
 //        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['items']    = AccountsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
-        return View::make('dashboard.accounts_balances',$data);
+        return View::make('dashboard.account_balances.index',$data);
     }
 
 
@@ -87,7 +87,7 @@ class AccountsBalancesController extends BaseController {
         {
 //            $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
 
-            return View::make('dashboard.accounts_balances',$data);
+            return View::make('dashboard.account_balances.index',$data);
         }else{
             return "item not here";
         }

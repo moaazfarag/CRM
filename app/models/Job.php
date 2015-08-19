@@ -18,7 +18,7 @@ class Job extends Eloquent
 
     public function departments()
     {
-        return $this->belongsTo('Dep','cat_id','id');
+        return $this->belongsTo('Department','cat_id','id');
     }
     public function employees()
     {

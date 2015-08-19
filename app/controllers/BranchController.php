@@ -17,7 +17,7 @@ class BranchController extends  BaseController
     {
         $data = $this->settingData();
         $data['miniBranch']  = "" ;
-        return View::make('dashboard.setting', $data);
+        return View::make('dashboard.company.index', $data);
     }
         /**
      * store new  branch into database
@@ -46,7 +46,7 @@ class BranchController extends  BaseController
         $data                = $this->settingData(); //company info data
         $data['branch']      = Branches::findOrFail($id); //get branch will update
         $data['miniBranch']  = "" ; //to maxmize  branch card in view
-        return View::make('dashboard.setting', $data);
+        return View::make('dashboard.company.index', $data);
     }
 
     /**

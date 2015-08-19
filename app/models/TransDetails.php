@@ -24,10 +24,14 @@ class TransDetails extends Eloquent {
 
             foreach($count as $k => $v)
             {
+                $sarial = self::hasSarial($v);
+                if($sarial){
+                    $store_rules['serial_'.$k] = 'required';
+                }
                 $store_rules['quantity_'.$k] = 'required|integer';
                 $store_rules['id_'.$k] = 'required|integer';
             }
-
+//                dd($store_rules);
             return $store_rules;
         }
 
@@ -50,6 +54,15 @@ class TransDetails extends Eloquent {
             }
         }
         return $count;
+    }
+
+    /**
+     * @param $v
+     * @return mixed
+     */
+    private static function hasSarial($v)
+    {
+        return Items::find($v)->has_serial;
     }
 
     /**

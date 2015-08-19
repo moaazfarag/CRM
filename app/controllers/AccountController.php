@@ -17,7 +17,7 @@ class AccountController extends BaseController
             $data['asideOpen']   = 'open' ;
             $data['arabicName']   = Lang::get('main.'.$accountType);
             $data['navActive']      = "active";
-            return View::make('dashboard.account_bank',$data);
+            return View::make('dashboard.accounts.index',$data);
             }else{
                     return "type check error";
                 }
@@ -30,7 +30,7 @@ class AccountController extends BaseController
             $data['asideOpen']   = 'open' ;
             $data['account'] = Accounts::where('acc_type','=',$accountType)->where('id','=',$id)->first();
             if($data['account']) {
-                return View::make('dashboard.account_bank', $data);
+                return View::make('dashboard.accounts.index', $data);
             }else{
                 return "error";
             }

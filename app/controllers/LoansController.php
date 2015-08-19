@@ -13,7 +13,7 @@ class LoansController extends BaseController
         $data = $this->depData();
         $data['employees'] = "open";
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-        return View::make('dashboard.loans',$data);
+        return View::make('dashboard.hr.loans.index',$data);
 
     }
     public function storeLoans()
@@ -46,7 +46,7 @@ class LoansController extends BaseController
         $data = $this->depData();
         $data['employee'] = Loans::findOrFail($id);
        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-        return View::make('dashboard.loans',$data);
+        return View::make('dashboard.hr.loans.index',$data);
     }
 
     public function updateLoans($id)

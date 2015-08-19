@@ -56,7 +56,7 @@ class Items extends Eloquent {
 
     public function cat()
     {
-        return $this->belongsTo('Cat','cat_id','id');
+        return $this->belongsTo('Category','cat_id','id');
     }
 
     public function seasons()
