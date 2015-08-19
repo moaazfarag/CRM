@@ -17,7 +17,7 @@ class ModelsController extends BaseController
     {
         $data = $this->modelData();
         $data['catActive'] = "active";
-        return View::make('dashboard.product_models',$data);
+        return View::make('dashboard.products.models.index',$data);
     }
 
     /**
@@ -40,7 +40,7 @@ class ModelsController extends BaseController
         $data = $this->modelData();
         $data['catActive'] = "active";
         $data['editModel']  = Models::findOrFail($id);
-        return View::make('dashboard.product_models',$data);
+        return View::make('dashboard.products.models.index',$data);
 
     }
     public function updateModel($id)

@@ -21,8 +21,7 @@ class ItemsBalancesController extends BaseController {
 
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
 
-
-        return View::make('dashboard.items_balances',$data);
+        return View::make('dashboard.items_balances.index',$data);
     }
 
 
@@ -86,7 +85,7 @@ class ItemsBalancesController extends BaseController {
         {
             $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
 
-            return View::make('dashboard.items_balances',$data);
+            return View::make('dashboard.items_balances.index',$data);
         }else{
             return "item not here";
         }

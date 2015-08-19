@@ -14,7 +14,7 @@ class EmployeesController extends BaseController
         $data['title']     =  Lang::get('main.addEmployee')  ; // page title
         $data['employees'] = "open";
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-        return View::make('dashboard.add_employee',$data);
+        return View::make('dashboard.hr.employee.index',$data);
 
     }
     //Function Store Employee In Data Base
@@ -76,7 +76,7 @@ class EmployeesController extends BaseController
         $data['employees'] = "open";
         $data['employee'] = Employees::findOrFail($id);
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-          return View::make('dashboard.add_employee',$data);
+          return View::make('dashboard.hr.employee.index',$data);
   }
 
     //Function Update Employee In Data Base

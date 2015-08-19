@@ -14,7 +14,7 @@ class MonthChangeController extends BaseController
         $data['title'] = 'التغيرات الشهريه '; // page title
         $data['employees'] = "open";
         $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
-        return View::make('dashboard.monthchange', $data);
+        return View::make('dashboard.hr.month_change.index', $data);
 
     }
 
@@ -52,7 +52,7 @@ class MonthChangeController extends BaseController
         $data['employees'] = "open";
         $data['employee'] = MonthChange::findOrFail($id);
         $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
-        return View::make('dashboard.monthchange', $data);
+        return View::make('dashboard.hr.month_change.index', $data);
     }
 
     public function updateMonthChange($id)

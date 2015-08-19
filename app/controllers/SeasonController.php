@@ -17,7 +17,7 @@ class SeasonController extends BaseController
     {
         $data = $this->seasonData();
         $data['catActive'] = "active";
-        return View::make('dashboard.product_seasons',$data);
+        return View::make('dashboard.products.seasons.index',$data);
     }
 
     /**
@@ -39,7 +39,7 @@ class SeasonController extends BaseController
         $data = $this->seasonData();
         $data['catActive'] = "active";
         $data['editSeason']  = Seasons::findOrFail($id);
-        return View::make('dashboard.product_seasons',$data);
+        return View::make('dashboard.products.seasons.index',$data);
 
     }
     public function updateSeason($id)

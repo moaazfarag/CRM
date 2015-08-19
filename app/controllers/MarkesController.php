@@ -18,7 +18,7 @@ class MarkesController extends \BaseController {
 
 		$data = $this->markData();
 
-		return View::make('dashboard.product_markes',$data);
+		return View::make('dashboard.products.markes.index',$data);
 	}
 
 
@@ -38,7 +38,7 @@ class MarkesController extends \BaseController {
 		$data = $this->markData();
 		$data['catActive'] = "active";
 		$data['editMark']  = Markes::findOrFail($id);
-		return View::make('dashboard.product_markes',$data);
+		return View::make('dashboard.products.markes.index',$data);
 	}
 
 	public function updateMark($id)

@@ -132,6 +132,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('Store-Accounts-Balances',array('before'=>'csrf','uses'=>'AccountsBalancesController@storeAccountsBalances','as'=>'storeAccountsBalances')) ;
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'AccountsBalancesController@editAccountsBalances','as'=>'editAccountsBalances')) ;
         Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'AccountsBalancesController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
+
     });
 
     /**
@@ -139,13 +140,12 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      */
     Route::group(array('prefix'=>'Transaction'),function()
     {
-        Route::get('Add-Trans-Header/{type}', array('uses' => 'TransHeaderController@addTransHeader','as' => 'addTransHeader'));
-        Route::get('Add-Trans-Header-data', array('uses' => 'TransHeaderController@jsonData','as' => 'jsonData'));
-        Route::post('transJson/{type}', array('uses' => 'TransHeaderController@transJson','as' => 'transJson'));
-        Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'TransHeaderController@storeTransHeader','as'=>'storeTransHeader')) ;
-        Route::get('Edit-Trans-Header/{invoiceId}',array('uses'=>'TransHeaderController@editTransHeader','as'=>'editTransHeader')) ;
-        Route::post('Update-Accounts-Balances/{id}',array('before'=>'csrf','uses'=>'TransHeaderController@updateAccountsBalances','as'=>'updateAccountsBalances')) ;
-        Route::post('test',array('uses'=>'TransHeaderController@test','as'=>'test')) ;
+        Route::get('Add-Trans-Header/{type}', array('uses' => 'SettleController@addSettle','as' => 'addTransHeader'));
+        Route::get('Add-Trans-Header-data', array('uses' => 'SettleController@jsonData','as' => 'jsonData'));
+        Route::post('transJson/{type}', array('uses' => 'SettleController@storeSettle','as' => 'transJson'));
+        Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'SettleController@storeTransHeader','as'=>'storeTransHeader')) ;
+        Route::get('Edit-Trans-Header/{invoiceId}',array('uses'=>'SettleController@editSettle','as'=>'editTransHeader')) ;
+        Route::post('test',array('uses'=>'SettleController@test','as'=>'test')) ;
     });
 
 
@@ -159,13 +159,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
 
 
         //Departments Page
-        Route::get('addDep',array('uses'=>'DepController@addDep','as'=>'addDep'));
-        Route::post('storeDep',array('before'=>'csrf','uses'=>'DepController@storeDep','as'=>'storeDep'));
-        Route::get('editDep/{id}',array('uses'=>'DepController@editDep','as'=>'editDep'));
-        Route::post('updateDep/{id}',array('before'=>'csrf','uses'=>'DepController@updateDep','as'=>'updateDep'));
-        Route::post('deleteDep/{id}',array('uses'=>'DepController@deleteDep','as'=>'deleteDep'));
+        Route::get('addDep',array('uses'=>'DepartmentController@addDep','as'=>'addDep'));
+        Route::post('storeDep',array('before'=>'csrf','uses'=>'DepartmentController@storeDep','as'=>'storeDep'));
+        Route::get('editDep/{id}',array('uses'=>'DepartmentController@editDep','as'=>'editDep'));
+        Route::post('updateDep/{id}',array('before'=>'csrf','uses'=>'DepartmentController@updateDep','as'=>'updateDep'));
+        Route::post('deleteDep/{id}',array('uses'=>'DepartmentController@deleteDep','as'=>'deleteDep'));
 
-//        Route::get('deleteDep/{id}','DepController@deleteDep');
+//        Route::get('deleteDep/{id}','DepartmentController@deleteDep');
 
          //Job Page
         Route::get('addJob',array('uses'=>'JobController@addJob','as'=>'addJob'));
@@ -181,18 +181,18 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('editLoans/{id}',array('uses'=>'LoansController@editLoans','as'=>'editLoans'));
         Route::post('updateLoans/{id}',array('before'=>'csrf','uses'=>'LoansController@updateLoans','as'=>'updateLoans'));
 
-    //DesDed Page
-        Route::get('addDesded',array('uses'=>'DesdedController@addDesded','as'=>'addDesded'));
-        Route::post('storeDesded',array('before'=>'csrf','uses'=>'DesdedController@storeDesded','as'=>'storeDesded'));
-        Route::get('editDesded/{id}',array('uses'=>'DesdedController@editDesded','as'=>'editDesded'));
-        Route::post('updateDesded/{id}',array('before'=>'csrf','uses'=>'DesdedController@updateDesded','as'=>'updateDesded'));
-        Route::post('deleteDesded/{id}',array('uses'=>'DesdedController@deleteDesded','as'=>'deleteDesded'));
+    //Deduction  Page
+        Route::get('addDesded',array('uses'=>'DeductionController@addDesded','as'=>'addDesded'));
+        Route::post('storeDesded',array('before'=>'csrf','uses'=>'DeductionController@storeDesded','as'=>'storeDesded'));
+        Route::get('editDesded/{id}',array('uses'=>'DeductionController@editDesded','as'=>'editDesded'));
+        Route::post('updateDesded/{id}',array('before'=>'csrf','uses'=>'DeductionController@updateDesded','as'=>'updateDesded'));
+        Route::post('deleteDesded/{id}',array('uses'=>'DeductionController@deleteDesded','as'=>'deleteDesded'));
 
         //EmpDesDed Page
-        Route::get('addEmpdesded',array('uses'=>'EmpdesdedController@addEmpdesded','as'=>'addEmpdesded'));
-        Route::post('storeEmpdesded',array('before'=>'csrf','uses'=>'EmpdesdedController@storeEmpdesded','as'=>'storeEmpdesded'));
-        Route::get('editEmpdesded/{id}',array('uses'=>'EmpdesdedController@editEmpdesded','as'=>'editEmpdesded'));
-        Route::post('updateEmpdesded/{id}',array('before'=>'csrf','uses'=>'EmpdesdedController@updateEmpdesded','as'=>'updateEmpdesded'));
+        Route::get('addEmpdesded',array('uses'=>'EmployeeDeductionController@addEmpdesded','as'=>'addEmpdesded'));
+        Route::post('storeEmpdesded',array('before'=>'csrf','uses'=>'EmployeeDeductionController@storeEmpdesded','as'=>'storeEmpdesded'));
+        Route::get('editEmpdesded/{id}',array('uses'=>'EmployeeDeductionController@editEmpdesded','as'=>'editEmpdesded'));
+        Route::post('updateEmpdesded/{id}',array('before'=>'csrf','uses'=>'EmployeeDeductionController@updateEmpdesded','as'=>'updateEmpdesded'));
 
 
         //EmpDesDed Page

@@ -52,7 +52,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function cat()
 
     {
-        return $this->hasMany('Cat','user_id');
+        return $this->hasMany('Category','user_id');
     }
 
     public function seasons()

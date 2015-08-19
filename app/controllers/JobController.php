@@ -15,7 +15,7 @@ class JobController extends BaseController
     public function addJob()
     {
         $data = $this->JobData();
-        return View::make('dashboard.jobs',$data);
+        return View::make('dashboard.hr.jobs.index',$data);
     }
 
     public function storeJob()
@@ -33,7 +33,7 @@ class JobController extends BaseController
         //dd('saddsa');
         $data = $this->JobData();
         $data['editJob']  = Job::findOrFail($id);
-        return View::make('dashboard.jobs',$data);
+        return View::make('dashboard.hr.jobs.index',$data);
 
     }
     public function updateJob($id)

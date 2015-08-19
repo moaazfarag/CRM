@@ -17,7 +17,7 @@ class dashboardController extends BaseController {
 
 	public function index()
 	{
-		return View::make('dashboard.dashboard');
+		return View::make('dashboard.home.index');
 	}
 
     public function createSetting()

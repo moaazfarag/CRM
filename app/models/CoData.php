@@ -33,7 +33,7 @@ class CoData extends Eloquent {
 
     public function cat()
     {
-        return $this->hasMany('Cat','co_id');
+        return $this->hasMany('Category','co_id');
     }
 
     public function seasons()
@@ -73,7 +73,7 @@ class CoData extends Eloquent {
 
     public function departments()
     {
-        return $this->hasMany('Dep','co_id');
+        return $this->hasMany('Department','co_id');
     }
 
     public function jobs()
@@ -86,11 +86,11 @@ class CoData extends Eloquent {
     }
     public function desded()
     {
-        return $this->hasMany('Desded','co_id');
+        return $this->hasMany('Deduction','co_id');
     }
     public function empdesded()
     {
-        return $this->hasMany('Empdesded','co_id');
+        return $this->hasMany('EmployeeDeduction','co_id');
     }
     public function monthchange()
     {

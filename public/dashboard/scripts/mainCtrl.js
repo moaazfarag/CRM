@@ -46,20 +46,45 @@ angular.module('mainCtrl', [])
         //        });
         //};
         $scope.addItem = function () {
-
-            $scope.invoiceItems.push($scope.item);
-            // Clear input fields after push
-            $scope.item = "";
-            $scope.form.$setUntouched();
-            //foucus into item name after add
-            document.getElementById('item_id').focus();
+            if($scope.item.has_serial){
+            }else{
+                $scope.invoiceItems.push($scope.item);
+                // Clear input fields after push
+                $scope.item = "";
+                $scope.form.$setUntouched();
+                //foucus into item name after add
+                document.getElementById('item_id').focus();
+            }
         };
+        $scope.addItemHasSerial = function(quantity){
+            itemHasSerial = {};
+            itemHasSerial.quantity = 1;
+            itemHasSerial.name = $scope.item.name;
+            itemHasSerial.id   = $scope.item.id;
+            itemHasSerial.serial  = $scope.new.serial;
+            $scope.invoiceItems.push(itemHasSerial);
+            // Clear input fields after push
+            $scope.new.serial = "";
+            //foucus into item name after add
+            $('#serial').focus();
+        };
+            $scope.finishAddItemHasSerial=function(){
+            $scope.item =  "";
 
-        $scope.selectItem = function(itemName,itemId){
-            $scope.item.name = itemName;
-            $scope.item.id   = itemId;
+        };
+        $scope.selectItem = function(itemName,itemId,hasSerial){
+            $scope.item.name         = itemName;
+            $scope.item.id           = itemId;
+            $scope.item.has_serial   = hasSerial;
             document.getElementById('quantity').focus();
             document.getElementById('itemsView').style.display = 'none';
+        };
+        $scope.hasSerial = function(serial){
+            if (serial) {
+                return false;
+            }  else{
+                return true
+            }
         };
         $scope.displayOn = function(){
             console.log();

@@ -58,7 +58,7 @@ class UserController extends BaseController
         $data['button']  = $add;
         $data['asideOpen']   = 'open' ;
         $data['title']  = $addUser;
-        return View::make('dashboard.add_user',$data);
+        return View::make('dashboard.users.index',$data);
     }
     public  function storeUser()
     {
@@ -90,7 +90,7 @@ class UserController extends BaseController
         $data['title']  = $editUser;
         if ($data['user'])
         {
-            return View::make('dashboard.add_user',$data);
+            return View::make('dashboard.users.index',$data);
         }else{
             return 'user not found !!';
         }
@@ -130,7 +130,7 @@ class UserController extends BaseController
 
     //set_password
     public  function set_password() {
-        return View::make('dashboard.set_password');
+        return View::make('dashboard.users.set_password');
     }
     public  function storeNewPassword()
     {
@@ -155,7 +155,7 @@ class UserController extends BaseController
               //  $oldUser->email = Input::get('email');
                 $oldUser->update();
             }
-            return View::make('dashboard.set_password');
+            return View::make('dashboard.users.set_password');
         }else{
             return "there ara no user ";
         }

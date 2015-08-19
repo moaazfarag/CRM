@@ -23,7 +23,7 @@ class ItemController extends BaseController
 //                                        ->where('co_id','=',Auth::user()->co_id)
 //                                        ->get()
 //                                        ->lists('acc_name','id');// suppliers from accounts table
-        return View::make('dashboard.product_product',$data);
+        return View::make('dashboard.products.items.index',$data);
     }
     public  function storeItem()
     {
@@ -72,7 +72,7 @@ class ItemController extends BaseController
 //                ->where('co_id','=',Auth::user()->co_id)
 //                ->get()
 //                ->lists('acc_name','id');// suppliers from accounts table
-            return View::make('dashboard.product_product',$data);
+            return View::make('dashboard.products.items.index',$data);
         }else{
             return "item not here";
         }
@@ -124,11 +124,11 @@ class ItemController extends BaseController
 //            var_dump($employees); die();
             if(!empty($employees)){
 
-                Session::flash('error','áÇ íãßä ÍĞİ åĞå ÇáæÙíİÉ áæÌæÏ ãæÙİíä ÈåÇ ');
+                Session::flash('error','ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ');
                 return Redirect::back();
             }else{
                 $dep->delete();
-                Session::flash('success','áŞÏ Êã ÍĞİ ÇáæÙíİÉ ÈäÌÇÍ ');
+                Session::flash('success','ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ');
                 return Redirect::back();
 
             }//end else employees
