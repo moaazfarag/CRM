@@ -75,7 +75,7 @@ class Employees extends Eloquent {
     public function loans()
     {
 //        die('sddsd');
-        return $this->hasOne('Loans','id','id');
+        return $this->hasOne('Loans','id','employee_id');
     }
 
 }

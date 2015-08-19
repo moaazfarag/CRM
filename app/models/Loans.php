@@ -26,6 +26,6 @@ class Loans extends Eloquent
     public function employees()
     {
 //        die('sddsd');
-        return $this->belongsTo('Employees','id','id');
+        return $this->belongsTo('Employees','employee_id');
     }
 }

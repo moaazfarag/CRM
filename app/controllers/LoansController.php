@@ -33,6 +33,7 @@ class LoansController extends BaseController
             $newLoans->loan_start             = $this->strToTime($inputs['loan_start']);
             $newLoans->loan_end               = $this->strToTime($inputs['loan_end']);
             $newLoans->loan_currBal           = $inputs['loan_currBal'];
+//            $newLoans->user_id                    = Auth::id();
             $newLoans->save();
             return Redirect::route('addLoans');
         }
@@ -71,6 +72,7 @@ class LoansController extends BaseController
                 $oldLoans->loan_start             = $this->strToTime($inputs['loan_start']);
                 $oldLoans->loan_end               = $this->strToTime($inputs['loan_end']);
                 $oldLoans->loan_currBal           = $inputs['loan_currBal'];
+//                $oldLoans->user_id                    = Auth::id();
                 $oldLoans->update();
                 return Redirect::route('addLoans');
             }
