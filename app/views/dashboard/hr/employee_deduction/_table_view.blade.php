@@ -3,9 +3,9 @@
         <thead>
         <tr>
 
-            <th>????? </th>
-            <th>??????</th>
-            <th> ????  </th>
+            <th>البند </th>
+            <th>القيمه </th>
+            <th> تغديل  </th>
 
         </tr>
         </thead>
@@ -13,7 +13,7 @@
         @foreach($tablesData as $tableData)
             <tr>
                 <td>{{ $tableData->desded->name }}</td>
-                <td>{{ $tableData->name }}</td>
+                <td>{{ $tableData->val }}</td>
                 <td>
                     <a href="{{ URL::route('editEmpdesded',array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>

@@ -10,10 +10,11 @@ class MonthChangeController extends BaseController
     public function addMonthChange()
     {
 
-//        $data = $this->depData();
+        $data = $this->depData();
         $data['title'] = 'التغيرات الشهريه '; // page title
         $data['employees'] = "open";
-        $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
+        $data['monthchange'] = MonthChange::where('co_id', '=', $this->coAuth())->first();
+        $data['co_info'] = coData::where('id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.month_change.index', $data);
 
     }
@@ -47,11 +48,12 @@ class MonthChangeController extends BaseController
 
     public function editMonthChange($id)
     {
-//        $data = $this->depData() ;
+        $data = $this->depData() ;
         $data['title'] = 'تعديل فى التغيرات الشهريه    '; // page title
         $data['employees'] = "open";
         $data['employee'] = MonthChange::findOrFail($id);
-        $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
+        $data['monthchange'] = MonthChange::where('co_id', '=', $this->coAuth())->first();
+        $data['co_info'] = coData::where('co_id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.month_change.index', $data);
     }
 
@@ -84,12 +86,12 @@ class MonthChangeController extends BaseController
             }
         }
     }
-//    protected function depData()
-//    {
-//        $data['title']              = 'التغيرات الشهريه';
-//        $data['employees']          = 'open' ;
-//        $data['tablesData']        = MonthChange::where('id','=',$this->coAuth())->get();
-//        return $data;
-//    }
+    protected function depData()
+{
+    $data['title']              = 'التغيرات الشهريه';
+    $data['employees']          = 'open' ;
+    $data['tablesData']        = MonthChange::where('id','=',$this->coAuth())->get();
+    return $data;
+}
 
 }
