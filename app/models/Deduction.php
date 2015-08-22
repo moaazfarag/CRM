@@ -20,5 +20,13 @@ class Deduction extends Eloquent {
         'ds_cat'                => 'required'
 
     );
+    public function employee_ded()
+    {
+        return $this->hasOne('EmployeeDeduction','id');
+    }
+    public function monthchange()
+    {
+        return $this->belongsTO('MonthChange','desDed_id');
+    }
 
 }

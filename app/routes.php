@@ -195,7 +195,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('updateEmpdesded/{id}',array('before'=>'csrf','uses'=>'EmployeeDeductionController@updateEmpdesded','as'=>'updateEmpdesded'));
 
 
-        //EmpDesDed Page
+        //ChangeMonth Page
         Route::get('addMonthChange',array('uses'=>'MonthChangeController@addMonthChange','as'=>'addMonthChange'));
         Route::post('storeMonthChange',array('before'=>'csrf','uses'=>'MonthChangeController@storeMonthChange','as'=>'storeMonthChange'));
         Route::get('editMonthChange/{id}',array('uses'=>'MonthChangeController@editMonthChange','as'=>'editMonthChange'));

@@ -7,7 +7,7 @@
  */
 class MonthChange extends Eloquent {
 
-    protected $table = 'hr_monthchange';
+    protected $table = 'hr_monthchanges';
     public static $store_rules = array(
         'trans_date'      => 'required|date',
         'trans_serial'    => 'required',
@@ -35,5 +35,9 @@ class MonthChange extends Eloquent {
     public function loans()
     {
         return $this->belongsTo('Loans','co_id','id');
+    }
+    public function desded()
+    {
+        return $this->belongsTo('Deduction','desDed_id');
     }
 }

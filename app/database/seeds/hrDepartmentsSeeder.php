@@ -7,47 +7,47 @@ class hrDepartmentsSeeder extends Seeder {
         DB::table('hr_departments')->truncate();
         DB::table('hr_departments')->insert(array(
             array(
-                'department_id'             => '12',
+                'department_id'             => '1',
                 'co_id'                     => '1',
-                'name'                      => 'ahmed',
+                'name'                      => 'developers',
                 'deleted'                   => '1',
-                'user_id'                   => '294'
+                'user_id'                   => '1'
 
 
             ),
             array(
-                'department_id'             => '13',
+                'department_id'             => '2',
                 'co_id'                     => '1',
-                'name'                      => 'omar',
+                'name'                      => 'designers',
                 'deleted'                   => '1',
-                'user_id'                   => '295'
+                'user_id'                   => '2'
 
 
             ),
             array(
-                'department_id'             => '14',
+                'department_id'             => '3',
                 'co_id'                     => '1',
-                'name'                      => 'mohamed',
+                'name'                      => 'sales',
                 'deleted'                   => '1',
-                'user_id'                   => '214'
+                'user_id'                   => '3'
 
 
             ),
             array(
-                'department_id'             => '16',
+                'department_id'             => '4',
                 'co_id'                     => '1',
-                'name'                      => 'moaaz',
+                'name'                      => 'accounting',
                 'deleted'                   => '1',
-                'user_id'                   => '224'
+                'user_id'                   => '4'
 
 
             ),
             array(
-                'department_id'             => '46',
+                'department_id'             => '5',
                 'co_id'                     => '1',
-                'name'                      => 'hazem',
+                'name'                      => 'marketing',
                 'deleted'                   => '1',
-                'user_id'                   => '24'
+                'user_id'                   => '5'
 
 
             ),
