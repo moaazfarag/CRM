@@ -1,6 +1,7 @@
 @extends('dashboard.main')
 @section('content')
-
+        <!-- Main Content -->
+<section class="content-wrap ecommerce-dashboard">
     {{--{{         Request::header('application/json') }}--}}
     {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>--}}
     {{--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->--}}
@@ -27,10 +28,10 @@
                         {{ Form::label('item_id','الصنف') }}
                     </div>
                     <div class="col s2 l3">
-                        <i class="wi wi-day-cloudy"></i>
+                        <i class="mdi-action-label"></i>
                         <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.name" id="item_id" autofocus="autofocus">
                         <ul id="itemsView" class="drop-down-menu"  ng-show="item">
-                            <li  ng-model="item.name" class="li-drop-down-menu"  ng-repeat="dbitem in items| filter:item.name" ng-click="selectItem(dbitem.item_name,dbitem.id)">@{{dbitem.item_name }}</li>
+                            <li  ng-model="item.name" class="li-drop-down-menu"  ng-repeat="dbitem in items| filter:item.name" ng-click="selectItem(dbitem.item_name,dbitem.id,dbitem.has_serial)">@{{dbitem.item_name }}</li>
                         </ul>
                         <p class="parsley-required">
                             {{ $errors ->first('item_id') }}
@@ -38,7 +39,7 @@
                     </div>  {{-- item div--}}
                     <div class="col s12 l2">
                         <div class="input-field">
-                            <i class="mdi mdi-editor-attach-money prefix"></i>
+                            <i class="fa fa-database prefix"></i>
                             {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
                             <div class="error-div" ng-show="form.$submitted || form.quantity.$touched">
                                 <span ng-show="form.quantity.$error.pattern">
@@ -71,9 +72,12 @@
                     </div> {{-- cost div --}}
                     <div class="col s12 l2">
                         <div class="input-field">
-                            <i class="mdi mdi-editor-attach-money prefix"></i>
                             <label for="item_id">
-                                <button  type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
+                                <button ng-hide="item.has_serial" href="#addItem" type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
+                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                                    اضف
+                                </button >
+                                @include('dashboard.settle._popup_div')
                             </label>
                         </div>
                     </div> {{-- button of one item div--}}

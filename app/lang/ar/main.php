@@ -170,7 +170,17 @@ return  array(
     'markCat'      => 'إضافة ماركة جديدة ',
     'select_mark' => '  اسم الماركة ',
     'chosemark'   => 'أختر الماركة',
-    'mark'        =>'الماركة'
+    'mark'        =>'الماركة',
+    // settle && invoice page
+    'invoiceNum'    => 'رقم الفاتورة',
+    'view'          => 'عرض',
+    'theType'          => 'النوع',
+    'settles'          => 'التسويات',
+
+
+
+
+
 
 
 

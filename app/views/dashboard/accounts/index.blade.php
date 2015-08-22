@@ -1,5 +1,7 @@
 @extends('dashboard.main')
 @section('content')
+        <!-- Main Content -->
+<section class="content-wrap ecommerce-dashboard">
     @include('dashboard.accounts._nav')
       <div id="account_bank" class="col s12">
             @if(Route::currentRouteName() == 'addAccount')

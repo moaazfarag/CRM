@@ -93,10 +93,15 @@
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.stores')<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
-                        <a href="{{ URL::route('addTransHeader',array('addItems')) }}" class="waves-effect waves-blue">@lang('main.settleAdd')  </a>
+                        <a href="{{ URL::route('addSettle',array('settleAdd')) }}" class="waves-effect waves-blue">@lang('main.settleAdd')  </a>
                     </li>
                     <li>
-                        <a href="{{ URL::route('addTransHeader',array('discountItems')) }}" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
+                        <a href="{{ URL::route('addSettle',array('settleDiscount')) }}" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
+                    </li>
+                    <li>
+                        <a href="{{ URL::route('viewSettles') }}" class="waves-effect waves-blue">
+                            @lang('main.settles')
+                        </a>
                     </li>
                     <li>
                         <a href="#" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
@@ -135,7 +140,6 @@
   <!-- /Yay Sidebar -->
 
 
-  <!-- Main Content -->
-  <section class="content-wrap ecommerce-dashboard">
+
 
 

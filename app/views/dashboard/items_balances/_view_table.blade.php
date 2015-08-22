@@ -7,6 +7,7 @@
       <th> الكمية</th>
       <th> التكلفة </th>
       <th> االكلى  </th>
+      <th> السريال  </th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,14 @@
         <th>
             @{{ invoiceItem.cost * invoiceItem.quantity  }}
         </th>{{--invoice Item TOTAL--}}
+        <td>
+            <input ng-required="isRequired(invoiceItem.has_serial)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.serial" type="text" />
+            <div class="error-div-for-table" ng-show="form.$submitted || form.serial_@{{ invoiceItems.indexOf(invoiceItem) }}.$touched">
+                <div ng-show="form.serial_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.required">
+حقل مطلوب
+                </div>
+            </div>
+        </td>
     </tr>
   </tbody>
 </table>

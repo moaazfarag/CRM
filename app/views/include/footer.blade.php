@@ -340,14 +340,12 @@
       </script>
 
 
-      <script type='text/javascript'>
-          $(document).ready( function() {
-              $('#hidden').delay(5000).fadeOut();
-
-          });
+      @include('dashboard._flash_msg');
 
 
-      </script>
+
+
+
 
       <script>
 
@@ -375,6 +373,7 @@
           }
       </script>
       {{--xmlhttp.open("GET","getuser.php?q="+str,true);--}}
+
 
       </body>
 

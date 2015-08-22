@@ -20,6 +20,10 @@ class ItemsBalances extends Eloquent {
         $store_rules = array();
         foreach($count as $k => $v)
         {
+            $sarial = self::hasSarial($v);
+            if($sarial){
+                $store_rules['serial_'.$k] = 'required';
+            }
             $store_rules['cost_'.$k] = 'required|integer';
             $store_rules['quantity_'.$k] = 'required|integer';
             $store_rules['id_'.$k] = 'required|integer';
@@ -27,7 +31,14 @@ class ItemsBalances extends Eloquent {
 
         return $store_rules;
     }
-
+    /**
+     * @param $v
+     * @return mixed
+     */
+    private static function hasSarial($v)
+    {
+        return Items::find($v)->has_serial;
+    }
     /**
 	 * update Rules
 	 * @var array

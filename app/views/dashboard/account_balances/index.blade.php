@@ -1,6 +1,7 @@
 @extends('dashboard.main')
 @section('content')
-
+        <!-- Main Content -->
+<section class="content-wrap ecommerce-dashboard">
       <div id="bank" class="col s12">
 
 <div ng-app="accountApp" ng-controller="accountController" class="card">

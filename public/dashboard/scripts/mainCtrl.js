@@ -59,9 +59,11 @@ angular.module('mainCtrl', [])
         $scope.addItemHasSerial = function(quantity){
             itemHasSerial = {};
             itemHasSerial.quantity = 1;
-            itemHasSerial.name = $scope.item.name;
-            itemHasSerial.id   = $scope.item.id;
+            itemHasSerial.name    = $scope.item.name;
+            itemHasSerial.id      = $scope.item.id;
             itemHasSerial.serial  = $scope.new.serial;
+            itemHasSerial.cost    = $scope.item.cost;
+            itemHasSerial.has_serial   = 1;
             $scope.invoiceItems.push(itemHasSerial);
             // Clear input fields after push
             $scope.new.serial = "";
@@ -70,7 +72,7 @@ angular.module('mainCtrl', [])
         };
             $scope.finishAddItemHasSerial=function(){
             $scope.item =  "";
-
+            $('#item_id').focus();
         };
         $scope.selectItem = function(itemName,itemId,hasSerial){
             $scope.item.name         = itemName;
@@ -84,6 +86,20 @@ angular.module('mainCtrl', [])
                 return false;
             }  else{
                 return true
+            }
+        };
+        $scope.hasSerialInvoiceItem = function(serial){
+            if (serial == 0) {
+                return true;
+            }  else{
+                return false;
+            }
+        };
+        $scope.isRequired = function(serial){
+            if (serial == 0) {
+                return false;
+            }  else{
+                return true;
             }
         };
         $scope.displayOn = function(){

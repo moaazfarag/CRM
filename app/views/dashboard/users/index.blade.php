@@ -1,5 +1,7 @@
  @extends('dashboard.main')
  @section('content')
+         <!-- Main Content -->
+ <section class="content-wrap ecommerce-dashboard">
      <!-- Breadcrumb -->
      <div class="ecommerce-title">
 
