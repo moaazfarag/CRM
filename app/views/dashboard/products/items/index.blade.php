@@ -2,6 +2,9 @@
 @section('content')
 
       <div id="bank" class="col s12">
+
+
+
             @if(Route::currentRouteName() == 'addItem')
         {{ Form::open(array('route'=>array('storeItem'))) }}
             @elseif(Route::currentRouteName() == 'editItem')
@@ -147,6 +150,18 @@
               </div> {{--season--}}
               @endif
               @if($co_info->co_use_markes_models)
+
+                  <div class="col s2 l3">
+                      <i class="fa fa-tags prefix"></i>
+                      <?php $mark =Lang::get('main.mark');
+                      $chosemark =Lang::get('main.chosemark') ?>
+                      {{ Form::label('mark_id',$mark) }}
+                      {{ Form::select('markes_id', array('' => $chosemark )+$co_info->marks->lists('name','id'),null,array('id'=>'mark_id','onchange'=>"showUser(this.value)")) }}
+                      <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
+                  </div> {{--marks--}}
+
+            <div id="Model">
+
               <div class="col s2 l3">
                   <i class="fa fa-tags prefix"></i>
                   <?php $model=Lang::get('main.model');
@@ -155,6 +170,9 @@
                   {{ Form::select('models_id', array('' => $choseModel )+$co_info->models->lists('name','id'),null,array('id'=>'models_id')) }}
                   <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
               </div> {{--models--}}
+
+            </div>
+
               @endif
           </div> {{--third row end--}}
           <div class="row no-margin-top">

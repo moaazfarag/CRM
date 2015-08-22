@@ -27,7 +27,8 @@ class ItemController extends BaseController
     }
     public  function storeItem()
     {
-        $validation = Validator::make(Input::all(), Items::$store_rules);
+        $inputs = Input::all();
+        $validation = Validator::make($inputs, Items::$store_rules);
 
         if($validation->fails())
         {
@@ -37,22 +38,23 @@ class ItemController extends BaseController
 
             $newItem->co_id = $this->coAuth();
 
-            $newItem->cat_id           = Input::get('cat_id');
-            $newItem->item_name        = Input::get('item_name');
-            $newItem->unit             = Input::get('unit');
-            $newItem->supplier_id      = Input::get('supplier_id');
-            $newItem->seasons_id       = Input::get('seasons_id');
-            $newItem->models_id        = Input::get('models_id');
-            $newItem->bar_code         = Input::get('bar_code');
-            $newItem->buy              = Input::get('buy');
-            $newItem->sell_users       = Input::get('sell_users');
-            $newItem->sell_nos_gomla   = Input::get('sell_nos_gomla');
-            $newItem->sell_gomla       = Input::get('sell_gomla');
-            $newItem->sell_gomla_gomla = Input::get('sell_gomla_gomla');
-            $newItem->limit            = Input::get('limit');
-            $newItem->notes            = Input::get('notes');
+            $newItem->cat_id           = $inputs['cat_id'];
+            $newItem->item_name        = $inputs['item_name'];
+            $newItem->unit             = $inputs['unit'];
+            $newItem->supplier_id      = isset($inputs['supplier_id'])?$inputs['supplier_id']:0;
+            $newItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['supplier_id']:0;
+            $newItem->models_id        = isset($inputs['models_id'])?$inputs['supplier_id']:0;
+            $newItem->bar_code         = isset($inputs['bar_code'])?$inputs['supplier_id']:0;
+            $newItem->buy              = $inputs['buy'];
+            $newItem->sell_users       = $inputs['sell_users'];
+            $newItem->sell_nos_gomla   = $inputs['sell_nos_gomla'];
+            $newItem->sell_gomla       = $inputs['sell_gomla'];
+            $newItem->sell_gomla_gomla = $inputs['sell_gomla_gomla'];
+            $newItem->limit            = $inputs['limit'];
+            $newItem->notes            = $inputs['notes'];
+            $newItem->has_serial       = isset($inputs['has_serial'])?$inputs['supplier_id']:0;
+
             $newItem->user_id          = Auth::id();
-            $newItem->has_serial       =Input::get('has_serial');
 
             $newItem->save();
             return Redirect::route('addItem');
@@ -115,24 +117,22 @@ class ItemController extends BaseController
         }
     }
 
-    public function deleteItem(){
+    public function deleteItems($id){
 
-        $item = Job::find($id);
-        if(!empty($dep)){
+        $item = Items::find($id);
 
-            $employees = Employees::where('job_id',$id)->first();
-//            var_dump($employees); die();
-            if(!empty($employees)){
+        if(!empty($item)){
 
-                Session::flash('error','�� ���� ��� ��� ������� ����� ������ ��� ');
-                return Redirect::back();
-            }else{
-                $dep->delete();
-                Session::flash('success','��� �� ��� ������� ����� ');
-                return Redirect::back();
+           $item->deleted = 1;
+           $item->save();
 
-            }//end else employees
+            Session::flash('success','تم إلغاء الصنف بنجاح');
+            return Redirect::route('addItem','#all-items');
 
-        }// end if dep
+
+
+        }// end if item
+
+        return 'ok';
     }
 }

@@ -24,8 +24,11 @@ class Models extends Eloquent {
 
     public function getMarkName(){
 
-
-        return Markes::where('id','=',$this->marks_id)->first()->name;
+        $mark_name = Markes::where('id','=',$this->marks_id)->first();
+        if(!empty($mark_name))
+        return $mark_name->name;
+        else
+        return "no name ";
     }
 
 

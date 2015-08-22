@@ -53,7 +53,7 @@ class CoData extends Eloquent {
 
     public function items()
     {
-        return $this->hasMany('Items','co_id');
+        return $this->hasMany('Items','co_id')->where('deleted','=',0);
     }
 
     public function accounts()
