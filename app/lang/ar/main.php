@@ -163,12 +163,14 @@ return  array(
 
 
     'delete' => 'حذف',
+    'cancel' => 'إلغاء',
+
     // mark page
     'addNewMark'   => 'أضف ماركة جديدة ',
     'markCat'      => 'إضافة ماركة جديدة ',
     'select_mark' => '  اسم الماركة ',
-
-
+    'chosemark'   => 'أختر الماركة',
+    'mark'        =>'الماركة'
 
 
 

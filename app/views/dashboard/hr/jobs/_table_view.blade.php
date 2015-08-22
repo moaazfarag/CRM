@@ -35,7 +35,7 @@
                     </a>
                 </td>
                 <td>
-                    <a  onclick="return confirm('هل تريد بالفعل حذف الوظيفة')" href="{{ URL::route('deleteJop',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
+                    <a  onclick="return confirm('هل تريد بالفعل حذف الوظيفة')" href="{{ URL::route('deleteJob',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
                 </td>
             </tr>
 
