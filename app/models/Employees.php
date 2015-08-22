@@ -82,7 +82,7 @@ class Employees extends Eloquent {
     }
     public function monthchange()
     {
-        return $this->hasOne('Employees','id');
+        return $this->belongsTO('MonthChange','id');
     }
 
 }

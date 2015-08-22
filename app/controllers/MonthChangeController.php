@@ -25,21 +25,24 @@ class MonthChangeController extends BaseController
         $validation = Validator::make(Input::all(), MonthChange::$store_rules);
 
         if ($validation->fails()) {
-            //dd($validation->messages());
+            dd($validation->messages());
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
 
             $inputs = Input::all();
 
             $newMonthChange = new MonthChange;
-            $newMonthChange->id = $this->coAuth();
-            $newMonthChange->trans_date = $this->strToTime($inputs['employee_date']);
-            $newMonthChange->trans_serial = Input::get('trans_serial');
-            $newMonthChange->for_year = Input::get('trans_serial');
+            $newMonthChange->co_id = $this->coAuth();
+            $newMonthChange->employee_id = $this->coAuth();
+            $newMonthChange->desded_id = $this->coAuth();
+            $newMonthChange->trans_date = $this->strToTime($inputs['trans_date']);
+//            $newMonthChange->trans_serial = Input::get('trans_serial');
+            $newMonthChange->for_year = Input::get('for_year');
             $newMonthChange->for_month = Input::get('for_month');
             $newMonthChange->day_cost = Input::get('day_cost');
             $newMonthChange->val = Input::get('val');
             $newMonthChange->cause = Input::get('cause');
+            $newMonthChange->cancel_cause         = Input::get('cancel_cause');
 
             $newMonthChange->save();
             return Redirect::route('addMonthChange');
@@ -71,9 +74,11 @@ class MonthChangeController extends BaseController
             if ($oldMonthChange) {
                 $oldMonthChange = MonthChange::find($id);
                 $oldMonthChange->id = $this->coAuth();
+                $oldMonthChange->employee_id = $this->coAuth();
+                $oldMonthChange->desded_id = $this->coAuth();
                 $oldMonthChange->trans_date           = $this->strToTime($inputs['employee_date']);
-                $oldMonthChange->trans_serial         = Input::get('trans_serial');
-                $oldMonthChange->for_year             = Input::get('trans_serial');
+//                $oldMonthChange->trans_serial         = Input::get('trans_serial');
+                $oldMonthChange->for_year             = Input::get('for_year');
                 $oldMonthChange->for_month            = Input::get('for_month');
                 $oldMonthChange->day_cost             = Input::get('day_cost');
                 $oldMonthChange->val                  = Input::get('val');
@@ -90,7 +95,7 @@ class MonthChangeController extends BaseController
 {
     $data['title']              = 'التغيرات الشهريه';
     $data['employees']          = 'open' ;
-    $data['tablesData']        = MonthChange::where('id','=',$this->coAuth())->get();
+    $data['tablesData']        = MonthChange::where('co_id','=',$this->coAuth())->get();
     return $data;
 }
 

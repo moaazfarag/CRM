@@ -23,7 +23,7 @@ class CreateHrMonthChangesTable extends Migration {
             $table->integer('for_month');
             $table->integer('desDed_id');
             $table->char('day_cost','25');
-            $table->decimal('val',18,2);
+            $table->integer('val');
             $table->char('cause','200');
             $table->integer('user_id');
             $table->boolean('canceled');

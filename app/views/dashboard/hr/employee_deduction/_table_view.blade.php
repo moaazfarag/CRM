@@ -5,14 +5,14 @@
 
             <th>البند </th>
             <th>القيمه </th>
-            <th> تغديل  </th>
+            <th> تعديل  </th>
 
         </tr>
         </thead>
         <tbody>
         @foreach($tablesData as $tableData)
             <tr>
-                <td>{{ $tableData->desded->name }}</td>
+                <td>{{ $tableData->desded->first()->name}}</td>
                 <td>{{ $tableData->val }}</td>
                 <td>
                     <a href="{{ URL::route('editEmpdesded',array($tableData->id)) }}" class="btn btn-small z-depth-0">

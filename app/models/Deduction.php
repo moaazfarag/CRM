@@ -22,9 +22,9 @@ class Deduction extends Eloquent {
     );
     public function employee_ded()
     {
-        return $this->hasOne('EmployeeDeduction','id');
+        return $this->belongsTO('EmployeeDeduction','ds_id','id');
     }
-    public function monthchange()
+    public function month_change()
     {
         return $this->belongsTO('MonthChange','desDed_id');
     }

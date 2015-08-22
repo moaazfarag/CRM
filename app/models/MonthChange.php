@@ -10,7 +10,7 @@ class MonthChange extends Eloquent {
     protected $table = 'hr_monthchanges';
     public static $store_rules = array(
         'trans_date'      => 'required|date',
-        'trans_serial'    => 'required',
+//        'trans_serial'    => 'required',
         'for_year'        => 'required',
         'for_month'       => 'required',
         'day_cost'        => 'required',
@@ -22,10 +22,10 @@ class MonthChange extends Eloquent {
     );
     public static $update_rules = array(
         'trans_date'      => 'required|date',
-        'trans_serial'    => 'required',
+//        'trans_serial'    => 'required',
         'for_year'        => 'required',
         'for_month'       => 'required',
-        'day_cost'        => 'required|integer',
+        'day_cost'        => 'required',
         'val'             => 'required|integer',
         'cause'           => 'required',
         'cancel_cause'    => 'required',
@@ -39,5 +39,9 @@ class MonthChange extends Eloquent {
     public function desded()
     {
         return $this->belongsTo('Deduction','desDed_id');
+    }
+    public function employees()
+    {
+        return $this->belongsTo('Employees','employee_id');
     }
 }

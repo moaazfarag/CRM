@@ -8,8 +8,8 @@
             <th> لسنه</th>
             <th>لشهر </th>
             <th>البند</th>
-            <th>مبلغ/ايام</th>
             <th>القيمه</th>
+            <th>مبلغ/ايام</th>
             <th>السبب</th>
             {{--<th>ملغاه</th>--}}
             <th>سبب الالغاء</th>
@@ -23,8 +23,8 @@
                 <th>{{ $tableData->for_year }}</th>
                 <th>{{ $tableData->for_month }}</th>
                 <th>{{ $tableData->desded->name }}</th>
-                <th>{{ $tableData->day_cost }}</th>
                 <th>{{ $tableData->val }}</th>
+                <th>{{ $tableData->day_cost }}</th>
                 <th>{{ $tableData->cause }}</th>
                 <th>{{ $tableData->cancel_cause }}</th>
                 <td>
