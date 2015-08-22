@@ -22,12 +22,12 @@ class SettleController extends BaseController {
      */
     public function addSettle($type)
     {
-        $types = array('addItems','discountItems');
+        $types = array('settleAdd','settleDiscount');
         if(in_array($type,$types) ){
-            if($type == 'addItems')
+            if($type == 'settleAdd')
             {
                 $name = 'اضافة';
-            }elseif($type == 'discountItems'){
+            }elseif($type == 'settleDiscount'){
                 $name = 'خصم';
             }
 
@@ -48,35 +48,48 @@ class SettleController extends BaseController {
     }
 
     /**
-     * edit trans invoice
-     * @param $type       type of trans
+     * view all  invoices of settles
      * @param $invoiceId  edit invoice by id
      * @return string
      */
-    public function editSettle($invoiceId)
+    public function viewSettles()
     {
-        $trans = TransHeader::findOrFail($invoiceId);
+        $trans = TransHeader::where('co_id',$this->coAuth())->whereIn('invoice_type',array('settleDiscount','settleAdd'))->get();
         if($trans){
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
-            $data['co_info']     = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-            $data['branch']      = $this->isAllBranch(); //
-            $data['newArray']    = $this->itemsToJson($invoiceId);
-
-//            dd(json_encode( $data['newArray'] ));
-            return View::make('dashboard.settle.index',$data,compact('type'));
+            $data['invoices']    = $trans;
+            return View::make('dashboard.settle.view_settles',$data);
 
         }else{
 
             return "that's not correct page : type check fail";
 
         }
-
     }
+    /**
+     * view one  invoice of settle
+     * @param $invoiceId  edit invoice by id
+     * @return string
+     */
+    public function viewSettle($invoiceId)
+    {
+        $trans = TransHeader::findOrFail($invoiceId);
+        if($trans){
+            $data['title']       = " تعديل تسوية اضافة " ; // page title
+            $data['TransOpen']   = 'open' ;
+            $data['co_info']     = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['newArray']    = $this->itemsToJson($invoiceId);
+            $data['invoice']     = $trans;
+            $data['type']        = $data['invoice']->invoice_type;
+            return View::make('dashboard.settle.invoice',$data);
 
+        }else{
 
+            return "that's not correct page : type check fail";
 
-
+        }
+    }
 
     /**
      * store data into trans table
@@ -92,14 +105,19 @@ class SettleController extends BaseController {
 
         if($validation->fails())
         {
+
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
+            $data['type']        = 'type' ;
             $data['co_info']     = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
             $data['branch']      = $this->isAllBranch(); //
             $data['newArray']    = $this->itemsToJsonForError($inputs);
+            $data['errors']      = $validation->messages();
 //            dd($data['newArray']);
+//            dd($validation->messages()   );
 //            return   View::make('dashboard.settle.index',$data,compact('type'));
-            return Redirect::back()->with($data)->withInput()->withErrors($validation->messages());
+            Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
+            return View::make('dashboard.settle.index',$data);
 
 
         }else {
@@ -110,23 +128,24 @@ class SettleController extends BaseController {
             $transHeaderId              = $newHeader->max('invoice_no')+1;
             $newHeader->invoice_no      = $transHeaderId;
             $newHeader->invoice_type    = $type;
-            $newHeader->date            = $inputs['date'];
+            $newHeader->date            = $this->strToTime($inputs['date']) ;
             $newInvoiceItems = array();//create array to insert into database on save
             foreach (TransDetails::countOfInputs($inputs) as $k=>$v)
                 {
                     $newInvoiceItems[] =   array
                     (
                         'trans_header_id'   => $transHeaderId,
-                        'qty'               => $inputs['quantity_'.$k],
+                        'qty'               => isset($inputs['serial_'.$k])?1:$inputs['quantity_'.$k],
                         'item_id'           => $inputs['id_'.$k],
-                        'serial_no'         => $inputs['serial_'.$k],
+                        'serial_no'         => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
                         'created_at'        => date('Y-m-d H:i:s'),
                         'updated_at'        => date('Y-m-d H:i:s')
                     );
                 }
             $newHeader->save();
             TransDetails::insert($newInvoiceItems);
-            return Response::json(array('success' => true));
+            Session::flash('success','تم اضافة التسوية بنجاح');
+            return Redirect::back();
 //
 //            echo "scusess";
 //            dd(TransDetails::rulesCreator($inputs));
@@ -156,7 +175,8 @@ class SettleController extends BaseController {
                 'name'=> Items::find($invoiceItem['item_id'])->item_name,
                 'id'=> $invoiceItem['item_id'],
                 'quantity'=> $invoiceItem['qty'],
-                'cost'=> $invoiceItem['cost']/$invoiceItem['qty']
+                'serial'=> $invoiceItem['serial_no'],
+//                'cost'=> $invoiceItem['cost']/$invoiceItem['qty']
             ) ;
         }
         return $newArray;
@@ -169,8 +189,8 @@ class SettleController extends BaseController {
             $newArray[] = array
             (
                 'name'     => $inputs['name_'.$k],
-                'id'       => $inputs['id_'.$k],
-                'quantity' => $inputs['quantity_'.$k],
+                'id'       => intval($inputs['id_'.$k]),
+                'quantity' => intval($inputs['quantity_'.$k]),
                 'serial'   => $inputs['serial_'.$k],
             ) ;
         }
@@ -192,4 +212,4 @@ foreach($tests as $test){
 return  Response::json(Request::all());
 
 }
-} 
+}

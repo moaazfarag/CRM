@@ -140,11 +140,12 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      */
     Route::group(array('prefix'=>'Transaction'),function()
     {
-        Route::get('Add-Trans-Header/{type}', array('uses' => 'SettleController@addSettle','as' => 'addTransHeader'));
+        Route::get('Add-Trans-Header/{type}', array('uses' => 'SettleController@addSettle','as' => 'addSettle'));
         Route::get('Add-Trans-Header-data', array('uses' => 'SettleController@jsonData','as' => 'jsonData'));
-        Route::post('transJson/{type}', array('uses' => 'SettleController@storeSettle','as' => 'transJson'));
+        Route::post('Add-Trans-Header/{type}', array('uses' => 'SettleController@storeSettle','as' => 'storeSettle'));
         Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'SettleController@storeTransHeader','as'=>'storeTransHeader')) ;
-        Route::get('Edit-Trans-Header/{invoiceId}',array('uses'=>'SettleController@editSettle','as'=>'editTransHeader')) ;
+        Route::get('view-settle/{invoiceId}',array('uses'=>'SettleController@viewSettle','as'=>'viewSettle')) ;
+        Route::get('view-settles/',array('uses'=>'SettleController@viewSettles','as'=>'viewSettles')) ;
         Route::post('test',array('uses'=>'SettleController@test','as'=>'test')) ;
     });
 

@@ -340,12 +340,8 @@
       </script>
 
 
-      <script type='text/javascript'>
-          $(document).ready( function() {
-              $('#hidden').delay(5000).fadeOut();
+      @include('dashboard._flash_msg');
 
-          });
-      </script>
       </body>
 
     </html>

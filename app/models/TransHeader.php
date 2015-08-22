@@ -38,5 +38,12 @@ class TransHeader extends Eloquent {
 //                    'credit'         => 'integer'
 //                );
 
+public function branch(){
+    return $this->hasOne('Branches','id','br_code');
 
+}
+    public function details(){
+
+        return $this->hasMany('TransDetails','trans_header_id','invoice_no');
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Mohamed Hafez
+ * User: moaaz farag
  * Date: 22/7/2015
  * Time: 3:49 PM
  */
@@ -18,9 +18,7 @@ class ItemsBalancesController extends BaseController {
         $addItemsBalances =Lang::get('main.addItemsBalances');
         $data['title']     = $addItemsBalances; // page title
         $data['sideOpen']   = 'open' ;
-
         $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-
         return View::make('dashboard.items_balances.index',$data);
     }
 
@@ -52,15 +50,15 @@ class ItemsBalancesController extends BaseController {
 //                  'bar_code'     => Input::get('bar_code'),
                     'qty'          => Input::get('quantity_'.$k),
                     'cost'         => Input::get('cost_'.$k) * Input::get('quantity_'.$k),
-//                  'serial_no     => Input::get('serial_no'),
+                    'serial_no'    => Input::get('serial_'.$k),
                     'created_at'   => date('Y-m-d H:i:s'),
                     'updated_at'   => date('Y-m-d H:i:s')
                 );//end of array
             }//end foreach
             ItemsBalances::insert($newData);//insert  data
 
-
-            return Response::json(array('success' => true));
+            Session::flash('success','تم اضافة الرصيد الافتتاحي بنجاح');
+            return Redirect::back();
 
 //                return Redirect::route('addItemsBalances');
             }

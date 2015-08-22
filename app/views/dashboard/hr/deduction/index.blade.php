@@ -1,6 +1,7 @@
 @extends('dashboard.main')
 @section('content')
-
+        <!-- Main Content -->
+<section class="content-wrap ecommerce-dashboard">
     @if(Route::currentRouteName() == 'addDesded')
         {{ Form::open(array('route'=>array('storeDesded'))) }}
     @elseif(Route::currentRouteName() == 'editDesded')

@@ -166,7 +166,12 @@ return  array(
     // mark page
     'addNewMark'   => 'أضف ماركة جديدة ',
     'markCat'      => 'إضافة ماركة جديدة ',
-    'select_mark' => '  اسم الماركة ',
+    'select_mark'  => '  اسم الماركة ',
+    // invoice page
+    'invoiceNum'    => 'رقم الفاتورة',
+    'view'          => 'عرض',
+    'theType'          => 'النوع',
+    'settles'          => 'التسويات',
 
 
 
