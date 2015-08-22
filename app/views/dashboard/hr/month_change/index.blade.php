@@ -54,10 +54,10 @@
             </div>
             <div class="row">
                 <div class="col s2 l5">
+                    {{--<i class="fa fa-tag prefix"></i>--}}
                     <div class="input-field">
-                        {{--<i class="fa fa-tag prefix"></i>--}}
                         {{ Form::label('ds_id',' ') }}
-                        {{ Form::select('ds_id', array(NULL => '         البنود ') +$monthchange->desded->lists('name','id'),null,array('id'=>'ds_id','required')) }}
+                        {{ Form::select('ds_id', array(NULL => 'البنود') +$co_info->desded->lists('name','id'),null,array('id'=>'ds_id','required')) }}
                         <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
                     </div>
                 </div>
@@ -72,8 +72,8 @@
                 <div class="col s2 l1">
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
-                        {{ Form::radio('day_cost','مبلغ',null,array('id'=>'day_cot','required')) }}
-                        {{ Form::label('day_cot','مبلغ') }}
+                        {{ Form::radio('day_cost','مبلغ',null,array('id'=>'day_co','required')) }}
+                        {{ Form::label('day_co','مبلغ') }}
 
                         <p class="parsley-required">{{ $errors ->first('day_cost') }} </p>
                     </div>
@@ -130,7 +130,7 @@
             </div>{{--submit  row end--}}
         </div>
         </div>
-    {{--@include('dashboard.hr.month_change._table_view');--}}
+    @include('dashboard.hr.month_change._table_view');
 
     </section>
     @stop

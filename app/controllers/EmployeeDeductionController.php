@@ -7,6 +7,9 @@
  */
 class EmployeeDeductionController extends BaseController
 {
+    /**
+     * @return mixed
+     */
     public function addEmpdesded()
     {
 
@@ -14,7 +17,6 @@ class EmployeeDeductionController extends BaseController
         $data['title'] = 'اضف بند موظف جديد'; // page title
         $data['employees'] = "open";
         $data = $this->depData();
-
         $data['deduction'] = Deduction::where('co_id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.employee_deduction.index', $data);
 
@@ -32,6 +34,8 @@ class EmployeeDeductionController extends BaseController
         {
             $newEmpdesded                             = new EmployeeDeduction;
             $newEmpdesded->co_id                      = $this->coAuth();
+            $newEmpdesded->employee_id                      = $this->coAuth();
+            $newEmpdesded->des_ded                      = $this->coAuth();
             $newEmpdesded->val                       = Input::get('val');
 
             $newEmpdesded->save();
@@ -48,7 +52,7 @@ class EmployeeDeductionController extends BaseController
         $data = $this->depData();
 
         $data['employee'] = EmployeeDeduction::findOrFail($id);
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['deduction']   = Deduction::where('id','=',$this->coAuth())->first();
         return View::make('dashboard.hr.employee_deduction.index',$data);
     }
     public function updateDesded($id)
@@ -63,7 +67,9 @@ class EmployeeDeductionController extends BaseController
             $newEmpdesded  = EmployeeDeduction::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();
             if($newEmpdesded){
                 $newEmpdesded = Deduction::find($id);
-                $newEmpdesded->co_id                      = $this->coAuth();
+                $newEmpdesded->co_id                     = $this->coAuth();
+                $newEmpdesded->employee_id               = $this->coAuth();
+                $newEmpdesded->des_ded                   = $this->coAuth();
                 $newEmpdesded->val                       = Input::get('val');
                 $newEmpdesded->update();
                 return Redirect::route('addDesded');

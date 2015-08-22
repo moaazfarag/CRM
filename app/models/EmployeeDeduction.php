@@ -20,7 +20,7 @@ class EmployeeDeduction extends Eloquent {
     }
     public function desded()
     {
-        return $this->belongsTo('Deduction','ds_id');
+        return $this->hasMany('Deduction','ds_id','des_ded');
     }
 
 }
