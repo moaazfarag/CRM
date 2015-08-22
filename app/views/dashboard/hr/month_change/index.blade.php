@@ -57,7 +57,7 @@
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
                         {{ Form::label('ds_id',' ') }}
-                        {{ Form::select('ds_id', array(NULL => '         البنود ') +$co_info->desded->lists('name','id'),null,array('id'=>'ds_id','required')) }}
+                        {{ Form::select('ds_id', array(NULL => '         البنود ') +$monthchange->desded->lists('name','id'),null,array('id'=>'ds_id','required')) }}
                         <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
             </div>{{--submit  row end--}}
         </div>
         </div>
-    {{--@include('dashboard.month_change._table_view');--}}
+    {{--@include('dashboard.hr.month_change._table_view');--}}
 
     </section>
     @stop

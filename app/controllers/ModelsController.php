@@ -69,9 +69,31 @@ class ModelsController extends BaseController
         $data['seasonInputName']    = "seasons";
         $data['asideOpen']          = 'open' ;
         $data['modelMini']          = "";
-        $data['tablesData']         = Models::all();
+        $data['tablesData']         = Models::where('co_id','=',$this->coAuth())->get();
         $data['arabicName']         = $marka;
         $data['co_info']             = CoData::where('id','=',$this->coAuth())->first();
         return $data;
+    }
+    public function deleteModel($id){
+
+        $model = Models::where('co_id','=',$this->coAuth())->first();
+        $items  = Items::where('models_id','=',$id)->where('co_id','=',$this->coAuth())->first();
+
+
+       if(!empty($model)){
+
+        if(!empty($items)) {
+//            die(var_dump($items));
+           Session::flash('error', 'لا يمكن الحذف ...   هناك أصناف تحمل اسم هذا الموديل ');
+           return Redirect::back();
+       }else{
+
+                $model->delete();
+                Session::flash('success','تم حذف الموديل بنجاح ');
+                return Redirect::back();
+
+            }//end else employees
+
+        }// model
     }
 }

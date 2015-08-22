@@ -14,8 +14,13 @@ class EmployeeDeduction extends Eloquent {
     public static $update_rules = array(
         'val'                  => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
     );
+    public function employees()
+    {
+        return $this->hasMany('Employees','employee_id');
+    }
     public function desded()
     {
-        return $this->hasMany('Deduction','des_ded');
+        return $this->belongsTo('Deduction','ds_id');
     }
+
 }

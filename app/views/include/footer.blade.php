@@ -342,6 +342,39 @@
 
       @include('dashboard._flash_msg');
 
+
+
+
+
+
+      <script>
+
+          function showUser(str) {
+
+              document.getElementById("Model").innerHTML="";
+
+              if (str=="") {
+                  document.getElementById("Model").innerHTML="";
+                  return;
+              }
+              if (window.XMLHttpRequest) {
+                  // code for IE7+, Firefox, Chrome, Opera, Safari
+                  xmlhttp=new XMLHttpRequest();
+              } else { // code for IE6, IE5
+                  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xmlhttp.onreadystatechange=function() {
+                  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                      document.getElementById("Model").innerHTML=xmlhttp.responseText;
+                  }
+              }
+              xmlhttp.open("/admin/addItem?q="+str,true);
+              xmlhttp.send();
+          }
+      </script>
+      {{--xmlhttp.open("GET","getuser.php?q="+str,true);--}}
+
+
       </body>
 
     </html>

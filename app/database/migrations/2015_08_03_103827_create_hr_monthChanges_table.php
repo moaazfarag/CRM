@@ -15,6 +15,7 @@ class CreateHrMonthChangesTable extends Migration {
 		Schema::create('hr_monthChanges', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('co_id');
             $table->integer('employee_id');
             $table->dateTime('trans_date');
             $table->integer('trans_serial');

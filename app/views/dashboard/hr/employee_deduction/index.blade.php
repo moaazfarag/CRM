@@ -21,7 +21,7 @@
             {{--<i class="fa fa-tag prefix"></i>--}}
             <div class="input-field">
                 {{ Form::label('ds_id',' ') }}
-                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$co_info->desded->lists('name','id'),null,array('id'=>'ds_id','required')) }}
+                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$deduction->lists('name','id'),null,array('id'=>'ds_id','required')) }}
                 <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
             </div>
         </div>
@@ -48,6 +48,6 @@
         </div>{{--submit  row end--}}
 
     </div>
-    {{--@include('dashboard.employee_deduction._table_view');--}}
+    @include('dashboard.hr.employee_deduction._table_view');
    </section>
     @stop

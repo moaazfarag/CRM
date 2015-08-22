@@ -67,7 +67,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::post('storeMark',array('uses'=>'MarkesController@storeMark','as'=>'storeMark'));
     Route::get('editMark/{id}',array('uses'=>'MarkesController@editMark','as'=>'editMark'));
     Route::post('updateMark/{id}',array('uses'=>'MarkesController@updateMark','as'=>'updateMark'));
-
+    Route::get('deleteMark/{id}',array('uses'=>'MarkesController@deleteMark','as'=>'deleteMark' ));
 
     /**
      * Model Area
@@ -76,6 +76,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::post('storeModel',array('before'=>'csrf','uses'=>'ModelsController@storeModel','as'=>'storeModel'));
     Route::get('editModel/{id}',array('uses'=>'ModelsController@editModel','as'=>'editModel'));
     Route::post('updateModel/{id}',array('before'=>'csrf','uses'=>'ModelsController@updateModel','as'=>'updateModel'));
+    Route::get('deleteModel/{id}',array('uses'=>'ModelsController@deleteModel','as'=>'deleteModel' ));
+
     /**
      * Item Area
      */
@@ -83,7 +85,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::post('storeItem',array('before'=>'csrf','uses'=>'ItemController@storeItem','as'=>'storeItem'));
     Route::get('editItem/{id}',array('uses'=>'ItemController@editItem','as'=>'editItem'));
     Route::post('updateItem/{id}',array('before'=>'csrf','uses'=>'ItemController@updateItem','as'=>'updateItem'));
-    Route::post('deleteItem/{id}',array('uses'=>'ItemController@deleteItem','as'=>'deleteItem'));
+    Route::get('deleteItems/{id}',array('uses'=>'ItemController@deleteItems','as'=>'deleteItems'));
 
     /**
      * Account Area
@@ -164,7 +166,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeDep',array('before'=>'csrf','uses'=>'DepartmentController@storeDep','as'=>'storeDep'));
         Route::get('editDep/{id}',array('uses'=>'DepartmentController@editDep','as'=>'editDep'));
         Route::post('updateDep/{id}',array('before'=>'csrf','uses'=>'DepartmentController@updateDep','as'=>'updateDep'));
-        Route::post('deleteDep/{id}',array('uses'=>'DepartmentController@deleteDep','as'=>'deleteDep'));
+        Route::get('deleteDep/{id}',array('uses'=>'DepartmentController@deleteDep','as'=>'deleteDep'));
 
 //        Route::get('deleteDep/{id}','DepartmentController@deleteDep');
 
@@ -173,7 +175,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeJob',array('before'=>'csrf','uses'=>'JobController@storeJob','as'=>'storeJob'));
         Route::get('editJob/{id}',array('uses'=>'JobController@editJob','as'=>'editJob'));
         Route::post('updateJob/{id}',array('before'=>'csrf','uses'=>'JobController@updateJob','as'=>'updateJob'));  //Job Page
-        Route::post('deleteJop/{id}',array('uses'=>'JobController@deleteJop','as'=>'deleteJop'));
+        Route::get('deleteJob/{id}',array('uses'=>'JobController@deleteJob','as'=>'deleteJob'));
 
 
         //Loans Page
@@ -187,7 +189,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeDesded',array('before'=>'csrf','uses'=>'DeductionController@storeDesded','as'=>'storeDesded'));
         Route::get('editDesded/{id}',array('uses'=>'DeductionController@editDesded','as'=>'editDesded'));
         Route::post('updateDesded/{id}',array('before'=>'csrf','uses'=>'DeductionController@updateDesded','as'=>'updateDesded'));
-        Route::post('deleteDesded/{id}',array('uses'=>'DeductionController@deleteDesded','as'=>'deleteDesded'));
+        Route::get('deleteDesded/{id}',array('uses'=>'DeductionController@deleteDesded','as'=>'deleteDesded'));
 
         //EmpDesDed Page
         Route::get('addEmpdesded',array('uses'=>'EmployeeDeductionController@addEmpdesded','as'=>'addEmpdesded'));
@@ -196,7 +198,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('updateEmpdesded/{id}',array('before'=>'csrf','uses'=>'EmployeeDeductionController@updateEmpdesded','as'=>'updateEmpdesded'));
 
 
-        //EmpDesDed Page
+        //ChangeMonth Page
         Route::get('addMonthChange',array('uses'=>'MonthChangeController@addMonthChange','as'=>'addMonthChange'));
         Route::post('storeMonthChange',array('before'=>'csrf','uses'=>'MonthChangeController@storeMonthChange','as'=>'storeMonthChange'));
         Route::get('editMonthChange/{id}',array('uses'=>'MonthChangeController@editMonthChange','as'=>'editMonthChange'));

@@ -34,6 +34,7 @@ class CreateItemsTable extends Migration {
 			$table->integer('user_id');
             $table->decimal('avg_cost',10,3);
             $table->boolean('has_serial');
+			$table->boolean('deleted');
 
 			$table->timestamps();
 		});

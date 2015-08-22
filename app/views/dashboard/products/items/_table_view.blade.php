@@ -1,5 +1,5 @@
 
-          <thead>
+          <thead id="all-items">
           @if(Session::has('error'))
               <div id="hidden" class="alert" >
 
@@ -26,7 +26,7 @@
               <th> @lang('main.sellLimit') </th>
               <th>@lang('main.notes')</th>
               <th>@lang('main.edit')</th>
-              <th>@lang('main.delete')</th>
+              <th>@lang('main.cancel')</th>
 
             </tr>
           </thead>
@@ -48,9 +48,9 @@
                     <i class="mdi mdi-editor-mode-edit"></i>
                 </a>
               </td>
-                {{--<td>--}}
-                    {{--<a  onclick="return confirm('هل تريد بالفعل حذف هذا الصنف ')" href="{{ URL::route('deleteJop',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>--}}
-                {{--</td>--}}
+                <td>
+                    <a  onclick="return confirm('هل تريد بالفعل إلغاء هذا الصنف')" href="{{ URL::route('deleteItems',array($item->id)) }}" class="btn btn-danger red">[X]</a>
+                </td>
             </tr>
             @endforeach
 

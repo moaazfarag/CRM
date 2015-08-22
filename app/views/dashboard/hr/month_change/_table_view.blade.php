@@ -7,7 +7,7 @@
             <th>الموظف </th>
             <th> لسنه</th>
             <th>لشهر </th>
-            {{--<th>البند</th>--}}
+            <th>البند</th>
             <th>مبلغ/ايام</th>
             <th>القيمه</th>
             <th>السبب</th>
@@ -22,7 +22,7 @@
                 <th>{{ $tableData->employees->name }}</th>
                 <th>{{ $tableData->for_year }}</th>
                 <th>{{ $tableData->for_month }}</th>
-                {{--<th>{{ $tableData->loans->name }}</th>--}}
+                <th>{{ $tableData->desded->name }}</th>
                 <th>{{ $tableData->day_cost }}</th>
                 <th>{{ $tableData->val }}</th>
                 <th>{{ $tableData->cause }}</th>

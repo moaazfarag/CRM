@@ -15,7 +15,7 @@ class EmployeeDeductionController extends BaseController
         $data['employees'] = "open";
         $data = $this->depData();
 
-        $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
+        $data['deduction'] = Deduction::where('co_id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.employee_deduction.index', $data);
 
     }
