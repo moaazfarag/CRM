@@ -66,11 +66,11 @@ class Employees extends Eloquent {
 
     public function departments()
     {
-        return $this->hasOne('Department','co_id','id');
+        return $this->belongsTO('Department','department_id','id');
     }
     public function jobs()
     {
-        return $this->hasOne('Job','co_id','id');
+        return $this->belongsTo('Job','job_id','id');
     }
     public function loans()
     {
@@ -78,7 +78,7 @@ class Employees extends Eloquent {
     }
     public function employee_ded()
     {
-        return $this->hasOne('EmployeeDeduction','employee_id');
+        return $this->hasOne('EmployeeDeduction','id','employee_id');
     }
     public function monthchange()
     {

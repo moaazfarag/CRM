@@ -23,7 +23,7 @@ class Department extends Eloquent
     }
     public function employees()
     {
-        return $this->belongsTo('Employees','cat_id','id');
+        return $this->belongsTo('Employees','department_id');
     }
     public function hr_jobs()
     {

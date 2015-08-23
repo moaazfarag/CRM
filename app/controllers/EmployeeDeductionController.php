@@ -18,6 +18,7 @@ class EmployeeDeductionController extends BaseController
         $data['employees'] = "open";
         $data = $this->depData();
         $data['deduction'] = Deduction::where('co_id', '=', $this->coAuth())->first();
+        $data['co_info'] = coData::where('id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.employee_deduction.index', $data);
 
     }
@@ -51,8 +52,10 @@ class EmployeeDeductionController extends BaseController
         $data['employees'] = "open";
         $data = $this->depData();
 
-        $data['employee'] = EmployeeDeduction::findOrFail($id);
-        $data['deduction']   = Deduction::where('id','=',$this->coAuth())->first();
+//        $data['employee'] = EmployeeDeduction::findOrFail($id);
+        $data['deduction']   = Deduction::where('co_id','=',$this->coAuth())->first();
+        $data['co_info'] = coData::where('id', '=', $this->coAuth())->first();
+
         return View::make('dashboard.hr.employee_deduction.index',$data);
     }
     public function updateDesded($id)

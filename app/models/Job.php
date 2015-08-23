@@ -22,7 +22,7 @@ class Job extends Eloquent
     }
     public function employees()
     {
-        return $this->belongsTo('Employees','cat_id','id');
+        return $this->belongsTo('Employees','job_id');
     }
 
 

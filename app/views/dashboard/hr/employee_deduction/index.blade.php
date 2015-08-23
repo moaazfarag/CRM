@@ -17,7 +17,15 @@
             </a>
         </div>
         <div class="row">
-        <div class="col s2 l5">
+            <div class="col s12 l4">
+                {{--<i class="fa fa-tag prefix"></i>--}}
+                <div class="input-field">
+                    {{ Form::label('employee_id',' ') }}
+                    {{ Form::select('employee_id', array(NULL => 'اختار الموظف ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id','required')) }}
+                    <p class="parsley-required">{{ $errors ->first('employee_id') }} </p>
+                </div>
+            </div>
+        <div class="col s2 l4">
             {{--<i class="fa fa-tag prefix"></i>--}}
             <div class="input-field">
                 {{ Form::label('ds_id',' ') }}
@@ -28,7 +36,7 @@
             <div class="col s12 l3">
                 <div class="input-field">
                     <i class="mdi mdi-action-language prefix"></i>
-                    {{ Form::text('val',null,array('required','id'=>'val',)) }}
+                    {{ Form::number('val',null,array('required','id'=>'val',)) }}
                     {{ Form::label('val',  'القيمه' )     }}
                     <p class="parsley-required">{{ $errors ->first('val') }} </p>
                 </div>

@@ -16,7 +16,7 @@ class EmployeeDeduction extends Eloquent {
     );
     public function employees()
     {
-        return $this->hasMany('Employees','employee_id');
+        return $this->belongsTO('Employees','employee_id');
     }
     public function desded()
     {

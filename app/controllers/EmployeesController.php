@@ -137,6 +137,9 @@ class EmployeesController extends BaseController
         }
          public function staticData()
          {
+         $data['title']              = 'اضافه موظف';
+         $data['employees']          = 'open' ;
+         $data['tablesData']        = Employees::where('co_id','=',$this->coAuth())->get();
             $data['sex'] = array(
                 '' => 'الجنس',
                 'ذكر'=>'ذكر',
