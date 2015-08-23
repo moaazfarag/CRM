@@ -12,6 +12,7 @@
     .yay-push     - push content to right
     .yay-shrink   - shrink content width
 -->
+
   <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
 
     <div class="top">
@@ -38,7 +39,13 @@
 
         <ul>
 
-          <li  class="label">@lang('main.mainInfo') </li>
+          <li  class="label">
+              <h5>
+                  @lang('main.mainInfo')
+              </h5>
+
+          </li>
+
         <li class="{{@$asideOpen}}">
             <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.mainList')<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
@@ -98,11 +105,11 @@
                     <li>
                         <a href="{{ URL::route('addSettle',array('settleDiscount')) }}" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
                     </li>
-                    <li>
-                        <a href="{{ URL::route('viewSettles') }}" class="waves-effect waves-blue">
-                            @lang('main.settles')
-                        </a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="{{ URL::route('viewSettles') }}" class="waves-effect waves-blue">--}}
+                            {{--@lang('main.settles')--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
                     <li>
                         <a href="#" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
                     </li>

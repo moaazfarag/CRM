@@ -2,7 +2,6 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
-
 <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]' }}' ng-app="itemApp"  ng-controller="mainController" class="card">
     {{ Form::open(array('route'=>array('storeSettle',$type),'name'=>'form','novalidate')) }}
     <div class="title">
@@ -12,6 +11,9 @@
         </h5>
         <a class="minimize" href="#">
           <i class="mdi-navigation-expand-less"></i>
+        </a>
+        <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewSettles',array('type'=>$type)) }}" class="btn btn-small z-depth-0">
+            عرض تسويات {{ @$name}}
         </a>
     </div>
     <div class="content">

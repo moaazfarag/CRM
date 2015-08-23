@@ -32,6 +32,7 @@ class SettleController extends BaseController {
             }
 
             $data['title']    = " تسوية $name " ; // page title
+            $data['name']    = $name; // page title
             $data['TransOpen']   = 'open' ;
             $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
             $data['branch']      = $this->isAllBranch();
@@ -54,7 +55,7 @@ class SettleController extends BaseController {
      */
     public function viewSettles()
     {
-        $trans = TransHeader::where('co_id',$this->coAuth())->whereIn('invoice_type',array('settleDiscount','settleAdd'))->get();
+        $trans = TransHeader::where('co_id',$this->coAuth())->where('invoice_type',Input::get('type'))->get();
         if($trans){
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
@@ -137,6 +138,7 @@ class SettleController extends BaseController {
                         'trans_header_id'   => $transHeaderId,
                         'qty'               => isset($inputs['serial_'.$k])?1:$inputs['quantity_'.$k],
                         'item_id'           => $inputs['id_'.$k],
+                        'avg_cost'          => Items::findOrFail($inputs['id_'.$k])->first()->avg_cost,
                         'serial_no'         => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
                         'created_at'        => date('Y-m-d H:i:s'),
                         'updated_at'        => date('Y-m-d H:i:s')
@@ -145,7 +147,7 @@ class SettleController extends BaseController {
             $newHeader->save();
             TransDetails::insert($newInvoiceItems);
             Session::flash('success','تم اضافة التسوية بنجاح');
-            return Redirect::back();
+            return Redirect::route('viewSettle',array($transHeaderId));
 //
 //            echo "scusess";
 //            dd(TransDetails::rulesCreator($inputs));

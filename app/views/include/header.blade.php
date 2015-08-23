@@ -81,9 +81,12 @@
       <!-- Menu -->
       <ul>
         <li>
-            <a href="#!" class="search-bar-toggle">
-                <i class="mdi-action-search"></i>
-            </a>
+          {{ 'معالجة في'. round(microtime(true) - LARAVEL_START,2) .'ثانية '}}
+
+        </li>
+        <li>
+          <i class="ion-speedometer"></i>
+
         </li>
         <li class="user">
           <a class="dropdown-button" href="#!" data-activates="user-dropdown">
