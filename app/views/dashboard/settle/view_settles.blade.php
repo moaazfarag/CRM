@@ -2,6 +2,7 @@
 @section('content')
         <!-- Main Content -->
 <section   class="content-wrap ecommerce-invoice">
+    <div class="card">
     <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -17,7 +18,6 @@
         <tbody>
         @foreach($invoices as $k => $invoice)
             <tr>
-
                 <th>{{ $k }}</th>
                 <td>{{ $invoice->branch->br_name }}</td>
                 <td>
@@ -27,14 +27,15 @@
                 <td class="green-text">{{ $invoice->date }}</td>
                 <td>
                     <a href="{{ URL::route('viewSettle',array($invoice->id)) }}" class="btn btn-small z-depth-0">
-                        <i class="mdi mdi-editor-mode-edit"></i>
+                        <i class="mdi mdi-action-pageview"></i>
                     </a>
                 </td>
             </tr>
         @endforeach
-
         </tbody>
     </table>
+    </div>
 </section>
 <!-- /Main Content -->
+
 @stop

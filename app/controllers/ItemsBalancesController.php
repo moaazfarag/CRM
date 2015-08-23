@@ -42,19 +42,25 @@ class ItemsBalancesController extends BaseController {
         }else {
             $newData = array();//create array to insert into database on  one query
             foreach(TransDetails::countOfInputs($inputs) as $k => $v){
+                $item           =  Items::findOrFail($inputs['id_'.$k]);
+                $item->avg_cost = $inputs['cost_'.$k];
+                $item->update();//update avg cost of item
+//              echo $inputs['id_'.$k];
                 $newData[]= array
                 (
                     'co_id'        => $this->coAuth(),
                     'user_id'      => Auth::id(),
-                    'item_id'      => Input::get('id_'.$k),
-//                  'bar_code'     => Input::get('bar_code'),
-                    'qty'          => Input::get('quantity_'.$k),
-                    'cost'         => Input::get('cost_'.$k) * Input::get('quantity_'.$k),
-                    'serial_no'    => Input::get('serial_'.$k),
+                    'item_id'      => $inputs['id_'.$k],
+//                  'bar_code'     => $inputs['bar_code'],
+                    'qty'          => $inputs['quantity_'.$k],
+                    'cost'         => $inputs['cost_'.$k] * $inputs['quantity_'.$k],
+                    'serial_no'    => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
                     'created_at'   => date('Y-m-d H:i:s'),
                     'updated_at'   => date('Y-m-d H:i:s')
                 );//end of array
+
             }//end foreach
+//           die("finish");
             ItemsBalances::insert($newData);//insert  data
 
             Session::flash('success','تم اضافة الرصيد الافتتاحي بنجاح');

@@ -61,14 +61,31 @@ angular.module('mainCtrl', [])
             itemHasSerial.quantity = 1;
             itemHasSerial.name    = $scope.item.name;
             itemHasSerial.id      = $scope.item.id;
-            itemHasSerial.serial  = $scope.new.serial;
             itemHasSerial.cost    = $scope.item.cost;
-            itemHasSerial.has_serial   = 1;
-            $scope.invoiceItems.push(itemHasSerial);
-            // Clear input fields after push
-            $scope.new.serial = "";
-            //foucus into item name after add
-            $('#serial').focus();
+            if($scope.range == 'oneByone'){
+
+                itemHasSerial.serial  = $scope.new.serial;
+                itemHasSerial.has_serial   = 1;
+                $scope.invoiceItems.push(itemHasSerial);
+                // Clear input fields after push
+                $scope.new.serial = "";
+                //foucus into item name after add
+                $('#serial').focus();
+
+            }else if($scope.range == 'range'){
+                for (i = $scope.new.form; i < $scope.new.to+1; i++) {
+                    itemHasSerial.quantity = 1;
+                    itemHasSerial.name    = $scope.item.name;
+                    itemHasSerial.id      = $scope.item.id;
+                    itemHasSerial.cost    = $scope.item.cost;
+                    itemHasSerial.serial  = $scope.new.prefix+''+i;
+                    itemHasSerial.has_serial   = 1;
+                    $scope.invoiceItems.push(itemHasSerial);
+                    itemHasSerial = {};
+                }
+                $scope.finishAddItemHasSerial();
+            }
+
         };
             $scope.finishAddItemHasSerial=function(){
             $scope.item =  "";

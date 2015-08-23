@@ -5,6 +5,8 @@
               <strong>
                   ClickForData
               </strong>
+              {{ 'معالجة في'. round(microtime(true) - LARAVEL_START,2) .'ثانية '}}
+
           </a>
       </footer>
       <!-- DEMO [REMOVE IT ON PRODUCTION] -->
