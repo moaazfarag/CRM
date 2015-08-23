@@ -3,6 +3,7 @@
         <thead>
         <tr>
 
+            <th>الموظف </th>
             <th>البند </th>
             <th>القيمه </th>
             <th> تعديل  </th>
@@ -12,6 +13,7 @@
         <tbody>
         @foreach($tablesData as $tableData)
             <tr>
+                <td>{{ $tableData->employees->name }}</td>
                 <td>{{ $tableData->desded->first()->name}}</td>
                 <td>{{ $tableData->val }}</td>
                 <td>

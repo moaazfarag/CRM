@@ -1,4 +1,4 @@
-             <div class="row">
+<div class="row">
                               <div class="col  l12">
        <div class="card-panel">
 
@@ -7,102 +7,35 @@
 
           <thead>
             <tr>
-
-              <th>رقم  المسلسل</th>
-              <th>@lang('main.name')</th>
-              <th>@lang('main.joinDate') </th>
-              <th>@lang('main.branchName') </th>
-              <th>@lang('main.section')</th>
-              <th>@lang('main.salary')</th>
-              <th>@lang('main.commission') </th>
-              <th>@lang('main.tel') </th>
-              <th>@lang('main.insureNum') </th>
-              <th>@lang('main.statue') </th>
-              <th>@lang('main.edit')</th>
+              <th>الاسم</th>
+              <th>الوظيفه</th>
+              <th>القسم</th>
+              <th>الراتب</th>
+              <th>الديانه</th>
+              <th>العنوان</th>
+              <th>المؤهل</th>
+              <th>تعديل</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+          @foreach($tablesData as $tableData)
+              <tr>
+                  <td>{{ $tableData->name }}</td>
+                  <td>{{ $tableData->jobs->name }}</td>
+                  <td>{{ $tableData->departments->name }}</td>
+                  <td>{{ $tableData->salary }}</td>
+                  <td>{{ $tableData->religion }}</td>
+                  <td>{{ $tableData->address }}</td>
+                  <td>{{ $tableData->certificate }}</td>
 
-              <th>#00782</th>
-              <td> محمد احمد</td>
-             <td>12-12-2015</td>
-              <td>النزهة</td>
-              <td>المبيعات
-              </td>
+                  <td>
+                      <a href="{{ URL::route('editEmp',array($tableData->id)) }}" class="btn btn-small z-depth-0">
+                          <i class="mdi mdi-editor-mode-edit"></i>
+                      </a>
+                  </td>
+              </tr>
 
-              <td>$699.00</td>
-              <td>                   <input name="enter_supplier3" type="checkbox" id="enter_supplier3" value="enter_supplier3" >
-                                     <label for="enter_supplier3"></label>
-</td>
-<td> 12345678912340</td>
-<td> 12345678912340</td>
-              <td class="green-text">Active</td>
-              <td><a href="ecommerce-product-single.html" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
-              </td>
-            </tr>            <tr>
-
-              <th>#00782</th>
-              <td> محمد احمد</td>
-             <td>12-12-2015</td>
-              <td>النزهة</td>
-              <td>المبيعات
-              </td>
-
-              <td>$699.00</td>
-              <td>                   <input name="enter_supplier3" type="checkbox" id="enter_supplier3" value="enter_supplier3" >
-                                     <label for="enter_supplier3"></label>
-</td>
-<td> 12345678912340</td>
-<td> 12345678912340</td>
-              <td class="green-text">Active</td>
-              <td><a href="ecommerce-product-single.html" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
-              </td>
-            </tr>            <tr>
-
-              <th>#00782</th>
-              <td> محمد احمد</td>
-             <td>12-12-2015</td>
-              <td>النزهة</td>
-              <td>المبيعات
-              </td>
-
-              <td>$699.00</td>
-              <td>                   <input name="enter_supplier3" type="checkbox" id="enter_supplier2" value="enter_supplier3" >
-                                     <label for="enter_supplier3"></label>
-</td>
-<td> 12345678912340</td>
-<td> 12345678912340</td>
-              <td class="green-text">Active</td>
-              <td><a href="ecommerce-product-single.html" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
-              </td>
-            </tr>            <tr>
-
-              <th>#00782</th>
-              <td> محمد احمد</td>
-             <td>12-12-2015</td>
-              <td>النزهة</td>
-              <td>المبيعات
-              </td>
-
-              <td>$699.00</td>
-              <td>                   <input name="enter_supplier3" type="checkbox" id="enter_supplier2" value="enter_supplier3" >
-                                     <label for="enter_supplier3"></label>
-</td>
-<td> 12345678912340</td>
-<td> 12345678912340</td>
-              <td class="green-text">Active</td>
-              <td><a href="ecommerce-product-single.html" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
-              </td>
-            </tr>
-
-
-
-
-
-
-
-
+          @endforeach
 
 
           </tbody>

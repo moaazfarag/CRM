@@ -190,7 +190,7 @@
                  </div>
 
             </div>
-            </div>
+
       <div class="row">
           <div class="col s12 l9">
               <div class="input-field">
@@ -278,13 +278,6 @@
                   <button type="submit" class="waves-effect btn">الوظائف </button>
                   <button type="submit" class="waves-effect btn"> بنود الاستحقاقات </button>
                   <button type="submit" class="waves-effect btn">  بنود الراتب الثابته للموظف </button>
-                  {{--{{Form::submit('   ')}}--}}
-                  {{--{{Form::submit('   ')}}--}}
-                  {{--{{Form::submit('  الاقسام ')}}--}}
-                  {{--{{Form::submit('   ')}}--}}
-                  {{--{{Form::submit(' بنود الاستحقاقات  ')}}--}}
-                  {{--{{Form::submit(' بنود الراتب الثابته للموظف  ')}}--}}
-
               </div>
                   <div class="row">
                       <div class="col s12 l12">
@@ -298,18 +291,11 @@
                       </div>
                       {{ Form::close() }}
                   </div>{{--submit  row end--}}
-
-
       </div>
-
-    </div>
+        </div>
     <!-- /Store Settings -->
-
-{{--@include('dashboard.hr_view_table')--}}
-
-
+@include('dashboard.hr.employee._view_table')
   </section>
   <!-- /Main Content -->
-
 {{----}}
   @stop
