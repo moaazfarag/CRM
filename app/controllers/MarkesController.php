@@ -17,6 +17,26 @@ class MarkesController extends \BaseController
 
 	public function addMark()
 	{
+		$company_info  = DB::table('co_data')
+			->join('branches', 'co_data.id', '=', 'branches.co_id')
+			->join('items','co_data.id', '=', 'items.co_id')
+			->where('co_data.id',$this->coAuth())
+			->select('co_data.co_name AS company_name','co_data.co_address AS company_address','branches.br_name AS branch_name','branches.br_address AS branch_address')
+			->get();
+
+
+		foreach($company_info as $info){
+
+			echo 'اسم الشركة : ' . $info->company_name;
+			echo 'اسم الفرع: ' . $info->branch_name;
+
+		}
+//		foreach ($test as $t){
+//			echo $t->name;
+//			echo '<br/>';
+//	}
+	dd($company);
+
 
 		$data = $this->markData();
 

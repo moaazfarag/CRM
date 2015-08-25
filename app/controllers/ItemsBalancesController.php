@@ -15,6 +15,18 @@ class ItemsBalancesController extends BaseController {
 
     public function addItemsBalances()
     {
+        $get_type = DB::table('trans_details')
+        ->join('trans_header','trans_header.id','=','trans_details.trans_header_sid')
+        ->join('items','items.id','=','trans_details.item_id')
+        ->select('trans_details.trans_header_id AS invoice_id',
+            'trans_header.invoice_type AS invoice_type',
+            'trans_details.qty AS qty',
+            'item_name AS item_name',
+            'trans_header.date AS date'
+        )
+//            ->join('trans_header','trans_ditals.trans_header_id','=','trans_header.id')
+            ->get();
+        dd($get_type);
         $addItemsBalances =Lang::get('main.addItemsBalances');
         $data['title']     = $addItemsBalances; // page title
         $data['sideOpen']   = 'open' ;

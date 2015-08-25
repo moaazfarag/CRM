@@ -157,22 +157,19 @@
                       <?php $mark =Lang::get('main.mark');
                       $chosemark =Lang::get('main.chosemark') ?>
                       {{ Form::label('mark_id',$mark) }}
-                      {{ Form::select('markes_id', array('' => $chosemark )+$co_info->marks->lists('name','id'),null,array('id'=>'mark_id','onchange'=>"showUser(this.value)")) }}
+                      {{ Form::select('markes_id', array('' => $chosemark )+$co_info->marks->lists('name','id'),null,array('id'=>'mark_select')) }}
                       <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
                   </div> {{--marks--}}
 
-            <div id="Model">
 
-              <div class="col s2 l3">
-                  <i class="fa fa-tags prefix"></i>
-                  <?php $model=Lang::get('main.model');
-                  $choseModel=Lang::get('main.choseModel') ?>
-                  {{ Form::label('models_id',$model) }}
-                  {{ Form::select('models_id', array('' => $choseModel )+$co_info->models->lists('name','id'),null,array('id'=>'models_id')) }}
-                  <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
-              </div> {{--models--}}
+                      <div class="col s2 l3" id="model_select">
+                            <?php
+                                  $json = json_decode(file_get_contents("php://input"));
+                            ?>
+                      </div> {{--models--}}
 
-            </div>
+
+
 
               @endif
           </div> {{--third row end--}}

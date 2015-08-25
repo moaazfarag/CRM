@@ -116,7 +116,56 @@ class ItemController extends BaseController
             }
         }
     }
+    public function select_mark()
+{
 
+    if ( Session::token() !== Input::get( '_token' ) ) {
+
+        return 'عفوا هذه الطريقة غير مسموح بها ';
+
+    }
+
+    if(intval(Input::get('id')) != 0 ) {
+        $models = Models::where('co_id', $this->coAuth())->where('marks_id', Input::get('id'))->get();
+
+        if (!empty($models)) {
+//
+            $select =  '<select name="model_">';
+            foreach ($models as $model) {
+
+                $select .=   '<option value="'.$model->id.'">' . $model->name . '</option>';
+            }
+
+            $select .= '</select>';
+
+            echo $select;
+        }
+    }
+
+}
+
+    public function select_mark_json()
+    {
+
+        if ( Session::token() !== Input::get( '_token' ) ) {
+
+            $msg = array( 'عفوا هذه الطريقة غير مسموح بها ');
+            return Response::json($msg);
+
+        }
+
+        $models = Models::where('co_id', $this->coAuth())->where('marks_id', Input::get('id'))->get();
+
+            if (!empty($models)) {
+
+              return Response::json($models);
+
+
+        }else{
+
+            return Response::json(array('CCCC'));
+        }
+    }
     public function deleteItems($id){
 
         $item = Items::find($id);

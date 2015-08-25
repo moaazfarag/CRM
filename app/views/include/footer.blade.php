@@ -14,6 +14,8 @@
 
       <!-- jQuery -->
       {{ HTML::script('dashboard/assets/jquery/jquery.min.js') }}
+      {{--<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>--}}
+      {{--<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>--}}
 
       <!-- jQuery RAF (improved animation performance) -->
       {{ HTML::script('dashboard/assets/jqueryRAF/jquery.requestAnimationFrame.min.js') }}
@@ -350,29 +352,56 @@
 
 
       <script>
+                  $(document).ready(function(){
+                      $('#mark_select').change(function(){
+                          $.ajax({
+                              url: '/admin/addItem/select_mark',
+                              type: 'post',
+                              dataType: 'html',
+                              data: {'id':$('select[name=markes_id]').val(), '_token': $('input[name=_token]').val()},
 
-          function showUser(str) {
+                              success:function(data){
 
-              document.getElementById("Model").innerHTML="";
+                                  var text1 = data;
+//                                  document.getElementById('model_select').innerHTML += text1;
+//                               $('#model_select').append(text1);
 
-              if (str=="") {
-                  document.getElementById("Model").innerHTML="";
-                  return;
-              }
-              if (window.XMLHttpRequest) {
-                  // code for IE7+, Firefox, Chrome, Opera, Safari
-                  xmlhttp=new XMLHttpRequest();
-              } else { // code for IE6, IE5
-                  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-              }
-              xmlhttp.onreadystatechange=function() {
-                  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                      document.getElementById("Model").innerHTML=xmlhttp.responseText;
-                  }
-              }
-              xmlhttp.open("/admin/addItem?q="+str,true);
-              xmlhttp.send();
-          }
+                                  alert(text1)
+
+                                  },
+
+
+                              error: function(xhr,textStatus,thrownError){
+                                  alert('عذرا يوجد خطأ');
+                              }
+                          });
+                      });
+                  });
+
+//        $(document).ready(function(){
+//            $('#mark_select').change(function(){
+//                $.ajax({
+//                    url: '/admin/addItem/select_mark',
+//                    type: 'POST',
+//                    cache: true,
+//                    dataType: 'json',
+//                    data: {'id':$('select[name=markes_id]').val(), '_token': $('input[name=_token]').val()},
+//
+//                    success: function(data){
+//
+////                        $('#model_select').append(data);
+//
+//                        alert(JSON.stringify(data))
+//
+//                    },
+//
+//
+//                    error: function(xhr,textStatus,thrownError){
+//                        alert('عذرا يوجد خطأ');
+//                    }
+//                });
+//            });
+//});
       </script>
       {{--xmlhttp.open("GET","getuser.php?q="+str,true);--}}
 
