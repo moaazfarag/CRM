@@ -31,11 +31,13 @@ class SettleController extends BaseController {
                 $name = 'خصم';
             }
 
-            $data['title']    = " تسوية $name " ; // page title
-            $data['name']    = $name; // page title
-            $data['TransOpen']   = 'open' ;
-            $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-            $data['branch']      = $this->isAllBranch();
+            $data['title']      = " تسوية $name " ; // page title
+            $data['name']       = $name; // page title
+            $data['TransOpen']  = 'open' ;
+            $data['co_info']    = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['branch']     = $this->isAllBranch();
+            $data['pay_type']     = array('نقدى ','فيزا','اجل');
+            $data['account_type'] = array('العملاء','الموردين','المصروفات','جارى الشركاء','ايرادات اخرى');
 //            $data['newArray']    = $this->itemsToJson($invoiceId);
 //            dd(json_encode($newArray));
             return View::make('dashboard.settle.index',$data,compact('type'));

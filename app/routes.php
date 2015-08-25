@@ -86,6 +86,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::get('editItem/{id}',array('uses'=>'ItemController@editItem','as'=>'editItem'));
     Route::post('updateItem/{id}',array('before'=>'csrf','uses'=>'ItemController@updateItem','as'=>'updateItem'));
     Route::get('deleteItems/{id}',array('uses'=>'ItemController@deleteItems','as'=>'deleteItems'));
+    Route::post('addItem/select_mark',array('uses'=>'ItemController@select_mark','as'=>'select_mark'));
 
     /**
      * Account Area

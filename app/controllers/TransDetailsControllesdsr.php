@@ -15,6 +15,7 @@ class ItemsBalancesController extends BaseController {
 
     public function addItemsBalances()
     {
+
         $addItemsBalances  =Lang::get('main.addItemsBalances');
         $data['title']     =$addItemsBalances; // page title
         $data['TransOpen']   = 'open' ;
