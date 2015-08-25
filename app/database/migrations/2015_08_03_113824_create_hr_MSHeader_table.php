@@ -15,6 +15,7 @@ class CreateHrMSHeaderTable extends Migration {
 		Schema::create('hr_MSHeader', function(Blueprint $table)
 		{
 			$table->increments('id');
+            $table->integer('co_id');
             $table->integer('employee_id');
             $table->integer('for_year');
             $table->integer('for_month');

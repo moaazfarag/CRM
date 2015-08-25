@@ -7,6 +7,7 @@
 
           <thead>
             <tr>
+              <th>المسلسل</th>
               <th>الاسم</th>
               <th>الوظيفه</th>
               <th>القسم</th>
@@ -20,6 +21,7 @@
           <tbody>
           @foreach($tablesData as $tableData)
               <tr>
+                  <td>{{ $tableData->id }}</td>
                   <td>{{ $tableData->name }}</td>
                   <td>{{ $tableData->jobs->name }}</td>
                   <td>{{ $tableData->departments->name }}</td>

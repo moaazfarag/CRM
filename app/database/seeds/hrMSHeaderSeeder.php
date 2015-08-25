@@ -7,6 +7,7 @@ class hrMSHeaderSeeder extends Seeder {
             array(
                 'employee_id'               => '2',
                 'for_year'                  => '2015',
+                'co_id'                     => '1',
                 'for_month'                 => '5',
                 'fixed_salary'              => '1500.20',
                 'deserves'                  => '2000',
@@ -20,6 +21,7 @@ class hrMSHeaderSeeder extends Seeder {
             array(
                 'employee_id'               => '3',
                 'for_year'                  => '2015',
+                'co_id'                     => '1',
                 'for_month'                 => '5',
                 'fixed_salary'              => '150',
                 'deserves'                  => '2050',
@@ -32,6 +34,7 @@ class hrMSHeaderSeeder extends Seeder {
             ),
             array(
                 'employee_id'               => '4',
+                'co_id'                     => '1',
                 'for_year'                  => '2015',
                 'for_month'                 => '5',
                 'fixed_salary'              => '200.25',
@@ -45,6 +48,7 @@ class hrMSHeaderSeeder extends Seeder {
             ),
             array(
                 'employee_id'               => '5',
+                'co_id'                     => '1',
                 'for_year'                  => '2015',
                 'for_month'                 => '5',
                 'fixed_salary'              => '800.2',
@@ -58,6 +62,7 @@ class hrMSHeaderSeeder extends Seeder {
             ),
             array(
                 'employee_id'               => '6',
+                'co_id'                     => '1',
                 'for_year'                  => '2015',
                 'for_month'                 => '5',
                 'fixed_salary'              => '700.2',

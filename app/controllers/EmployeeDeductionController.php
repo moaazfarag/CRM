@@ -87,7 +87,7 @@ class EmployeeDeductionController extends BaseController
     {
         $data['title']              = 'بنود الموظف';
         $data['employees']          = 'open' ;
-        $data['tablesData']        = EmployeeDeduction::where('co_id','=',$this->coAuth())->get();
+        $data['tablesData']         = EmployeeDeduction::where('co_id','=',$this->coAuth())->get();
         return $data;
     }
 }
