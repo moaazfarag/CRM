@@ -29,7 +29,7 @@
             {{--<i class="fa fa-tag prefix"></i>--}}
             <div class="input-field">
                 {{ Form::label('ds_id',' ') }}
-                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$deduction->lists('name','id'),null,array('id'=>'ds_id','required')) }}
+                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$deduction->where('ds_cat','ثابت')->lists('name','id'),null,array('id'=>'ds_id','required')) }}
                 <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
             </div>
         </div>

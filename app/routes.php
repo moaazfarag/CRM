@@ -203,6 +203,11 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeMonthChange',array('before'=>'csrf','uses'=>'MonthChangeController@storeMonthChange','as'=>'storeMonthChange'));
         Route::get('editMonthChange/{id}',array('uses'=>'MonthChangeController@editMonthChange','as'=>'editMonthChange'));
         Route::post('updateMonthChange/{id}',array('before'=>'csrf','uses'=>'MonthChangeController@updateMonthChange','as'=>'updateMonthChange'));
+
+        Route::get('addMsHeader',array('uses'=>'MsHeaderController@addMsHeader','as'=>'addMsHeader'));
+        Route::post('storeMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@storeMsHeader','as'=>'storeMsHeader'));
+        Route::post('searchMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@searchMsHeader','as'=>'searchMsHeader'));
+
     });
 
 

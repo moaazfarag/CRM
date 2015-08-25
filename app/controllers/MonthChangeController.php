@@ -9,14 +9,12 @@ class MonthChangeController extends BaseController
 {
     public function addMonthChange()
     {
-
         $data = $this->depData();
         $data['title'] = 'التغيرات الشهريه '; // page title
         $data['employees'] = "open";
         $data['monthchange'] = MonthChange::where('co_id', '=', $this->coAuth())->first();
         $data['co_info'] = coData::where('id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.month_change.index', $data);
-
     }
 
     //Function Store Employee In Data Base

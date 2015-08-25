@@ -46,7 +46,7 @@
                 </div>
                 <div class="col s1 l2">
                     <div class="input-field">
-                        {{ Form::selectRange('for_year',2000,2050) }}
+                        {{ Form::selectRange('for_year',2014,2017) }}
                         {{ Form::label('for_year ',' سنه  ') }}
                         <p class="parsley-required">{{ $errors ->first('for_year') }} </p>
                     </div>
@@ -57,7 +57,7 @@
                     {{--<i class="fa fa-tag prefix"></i>--}}
                     <div class="input-field">
                         {{ Form::label('ds_id',' ') }}
-                        {{ Form::select('ds_id', array(NULL => 'البنود') +$co_info->desded->lists('name','id'),null,array('id'=>'ds_id','required')) }}
+                        {{ Form::select('ds_id', array(NULL => 'البنود') +$co_info->desded()->where('ds_cat','مؤقت')->lists('name','id'),null,array('id'=>'ds_id','required')) }}
                         <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
                     </div>
                 </div>

@@ -43,7 +43,7 @@
                           <div class="col s2 l7">
                               <div class="input-field">
                                   <i class="fa fa-tag prefix"></i>
-                                  {{ Form::text('card_no',null,array('required','id'=>'card_no','length'=>"14")) }}
+                                  {{ Form::number('card_no',null,array('required','id'=>'card_no','length'=>"14")) }}
                                   {{ Form::label('card_no',  'الرقم القومى' )     }}
                                   <p class="parsley-required">{{ $errors ->first('card_no') }} </p>
                               </div>
@@ -96,7 +96,7 @@
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('salary',null,array('required','id'=>'salary',)) }}
+                              {{ Form::number('salary',null,array('required','id'=>'salary',)) }}
                               {{ Form::label('salary',  ' الراتب ' )     }}
                               <p class="parsley-required">{{ $errors ->first('salary') }} </p>
                           </div>
@@ -104,7 +104,7 @@
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('ins_salary',null,array('required','id'=>'ins_salary',)) }}
+                              {{ Form::number('ins_salary',null,array('required','id'=>'ins_salary',)) }}
                               {{ Form::label('ins_salary',  ' مرتب التامينات ' )     }}
                               <p class="parsley-required">{{ $errors ->first('ins_salary') }} </p>
                           </div>
@@ -112,7 +112,7 @@
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('ins_val',null,array('required','id'=>'ins_val',)) }}
+                              {{ Form::number('ins_val',null,array('required','id'=>'ins_val',)) }}
                               {{ Form::label('ins_val',  ' خصم التامين' )     }}
                               <p class="parsley-required">{{ $errors ->first('ins_val') }} </p>
                           </div>

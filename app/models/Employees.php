@@ -84,5 +84,9 @@ class Employees extends Eloquent {
     {
         return $this->belongsTO('MonthChange','id');
     }
+    public function msheader()
+    {
+        return $this->belongsTO('MsHeader','id');
+    }
 
 }
