@@ -39,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col s12 l12">
-                        @if(Route::currentRouteName() == 'searchMsHeader')
+                        @if(Route::currentRouteName() == 'addMsHeader')
                             <button type="submit" class="waves-effect btn">تجهيز رواتب الشهر </button>
                         @endif
                     </div>

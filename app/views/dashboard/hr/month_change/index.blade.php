@@ -101,10 +101,10 @@
                 <div class="col s1 l2">
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
-                        {{ Form::checkbox('cancel_cause',1,null,array('id'=>'cancel_cause')) }}
-                        {{ Form::label('cancel_cause','الغاء الحركه   ') }}
+                        {{ Form::checkbox('canceled',1,null,array('id'=>'canceled')) }}
+                        {{ Form::label('canceled','الغاء الحركه   ') }}
 
-                        <p class="parsley-required">{{ $errors ->first('cancel_date') }} </p>
+                        <p class="parsley-required">{{ $errors ->first('canceled') }} </p>
                     </div>
                 </div>
                 <div class="col s2 l10">
