@@ -93,6 +93,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return $this->belongsTo('set_Password','user_id');
     }
+    public function monthchange()
+
+    {
+        return $this->belongsTo('MonthChange','user_id');
+    }
 
 
 }

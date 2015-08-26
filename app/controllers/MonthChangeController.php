@@ -31,6 +31,7 @@ class MonthChangeController extends BaseController
 
             $newMonthChange = new MonthChange;
             $newMonthChange->co_id = $this->coAuth();
+            $newMonthChange->user_id = $this->coAuth();
             $newMonthChange->employee_id = $this->coAuth();
             $newMonthChange->desded_id = $this->coAuth();
             $newMonthChange->trans_date = $this->strToTime($inputs['trans_date']);
@@ -72,6 +73,7 @@ class MonthChangeController extends BaseController
             if ($oldMonthChange) {
                 $oldMonthChange = MonthChange::find($id);
                 $oldMonthChange->id = $this->coAuth();
+                $oldMonthChange->user_id = $this->coAuth();
                 $oldMonthChange->employee_id = $this->coAuth();
                 $oldMonthChange->desded_id = $this->coAuth();
                 $oldMonthChange->trans_date           = $this->strToTime($inputs['employee_date']);

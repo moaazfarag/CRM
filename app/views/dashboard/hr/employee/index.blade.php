@@ -186,7 +186,6 @@
                              <p class="parsley-required">{{ $errors ->first('military_service') }} </p>
                          </div>
                      </div>
-                     {{Form::submit('العمولات لمراحل التشغيل ')}}
                  </div>
 
             </div>
@@ -272,11 +271,11 @@
                   </div>
           </div>
               <div class="row">
-                  <button type="submit" class="waves-effect btn">جديد </button>
-                  <button type="submit" class="waves-effect btn">حفظ </button>
-                  <button type="submit" class="waves-effect btn">الاقسام </button>
-                  <button type="submit" class="waves-effect btn">الوظائف </button>
-                  <button type="submit" class="waves-effect btn"> بنود الاستحقاقات </button>
+                  {{--<button type="submit" class="waves-effect btn">جديد </button>--}}
+                  {{--<button type="submit" class="waves-effect btn">حفظ </button>--}}
+                  {{--<button type="submit" class="waves-effect btn">الاقسام </button>--}}
+                  {{--<button type="submit" class="waves-effect btn">الوظائف </button>--}}
+                  {{--<button type="submit" class="waves-effect btn"> بنود الاستحقاقات </button>--}}
                   <button type="submit" class="waves-effect btn">  بنود الراتب الثابته للموظف </button>
               </div>
                   <div class="row">

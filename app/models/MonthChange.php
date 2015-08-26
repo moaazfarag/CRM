@@ -44,4 +44,8 @@ class MonthChange extends Eloquent {
     {
         return $this->belongsTo('Employees','employee_id');
     }
+    public function users()
+    {
+        return $this->belongsTo('User','user_id');
+    }
 }
