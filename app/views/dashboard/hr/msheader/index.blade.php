@@ -17,7 +17,7 @@
                 <div class="row">
                 <div class="col s1 l2">
                     <div class="input-field">
-                        {{ Form::selectMonth('for_month') }}
+                        {{ Form::selectRange('for_month','1','12') }}
                         {{ Form::label('for_month ',' عن شهر ') }}
                         <p class="parsley-required">{{ $errors ->first('for_month') }} </p>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="col s12 l5">
                         <div class="input-field">
                             {{ Form::label('employee_id',' ') }}
-                            {{ Form::select('employee_id', array(NULL => 'الموظف  ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id','required')) }}
+                            {{ Form::select('employee_id', array(NULL => 'الموظف  ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id')) }}
                             <p class="parsley-required">{{ $errors ->first('employee_id') }} </p>
                         </div>
                     </div>
@@ -41,6 +41,8 @@
                     <div class="col s12 l12">
                         @if(Route::currentRouteName() == 'addMsHeader')
                             <button type="submit" class="waves-effect btn">تجهيز رواتب الشهر </button>
+                            @elseif(Route::currentRouteName() == 'storeMsHeader')
+                                <button type="submit" class="waves-effect btn">تجهيز رواتب الشهر </button>
                         @endif
                     </div>
                     {{ Form::close() }}
