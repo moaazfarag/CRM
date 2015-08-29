@@ -23,7 +23,7 @@
                           @lang('main.name')
                       </label>
                     </div>
-                    <div class="col s12 l3">
+                    <div class="col s12 l4">
                       <div class="input-field">
                         <i class="mdi mdi-social-person prefix"></i>
                           <?php $name=Lang::get('main.name') ?>
@@ -31,51 +31,34 @@
                         {{--<input name="account_name" id="branch-name" type="text" placeholder="  الاسم   ">--}}
                       </div>
                     </div>
-@if($accountType == 'customers'||$accountType == 'suppliers')
-                     <div class="row no-margin-top">
-                            <div class="col s12 l2">
-                              <label for="credit-limit">
-                                  @lang('main.credit')
-                              </label>
-                            </div>
-                            <div class="col s12 l3">
-                              <div class="input-field">
-                                  <?php $credit=Lang::get('main.credit') ?>
-                                <i class="mdi mdi-social-person prefix"></i>
-                                  {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>$credit)) }}
-                                  {{--<input name="credit_limit" id="credit-limit" type="text" placeholder="   حد الائتمان  ">--}}
-                              </div>
-                        </div>
-                    </div>
-@endif
+
                       @if($accountType == 'bank'||$accountType == 'expenses'||$accountType == 'partners'||$accountType == 'multiple_revenue' )
 
                       @else
-                  </div>
-                  <div class="row no-margin-top">
-                    <div class="col s12 l2">
-                      <label for="account-email">
-                          @lang('main.mail')
-                      </label>
-                    </div>
-                    <div class="col s12 m6 l6">
-                      <div class="input-field">
-                        <i class="mdi mdi-social-person prefix"></i>
-                          <?php $mail=Lang::get('main.mail') ?>
-                          {{ Form::text('acc_email',null,array('id'=>'account-email','placeholder'=>$mail)) }}
 
-                          {{--<input  name="account_email" id="account-email" type="text" placeholder="  الاميل   ">--}}
-                      </div>
-                    </div>
+                          <div class="col s12 l1">
+                              <label for="account-email">
+                                  @lang('main.mail')
+                              </label>
+                          </div>
+                          <div class="col s12 l4 ">
+                              <div class="input-field">
+                                  <i class="mdi mdi-social-person prefix"></i>
+                                  <?php $mail=Lang::get('main.mail') ?>
+                                  {{ Form::text('acc_email',null,array('id'=>'account-email','placeholder'=>$mail)) }}
 
+                                  {{--<input  name="account_email" id="account-email" type="text" placeholder="  الاميل   ">--}}
+                              </div>
+                          </div>
                   </div>
+
                   <div class="row no-margin-top">
                             <div class="col s12 l2">
                               <label for="account-address">
                                   @lang('main.address')
                               </label>
                             </div>
-                            <div class="col s12 m6 l8">
+                            <div class="col s12 m6 l9">
                               <div class="input-field">
                                 <i class="mdi mdi-social-person prefix"></i>
                                   <?php $address=Lang::get('main.address') ?>
@@ -85,23 +68,42 @@
                             </div>
 
                           </div>
+
+              {{--phone number start  --}}
                   <div class="row no-margin-top">
                             <div class="col s12 l2">
-                              <label for="account-numbers">
-                                  @lang('main.phoneNum')
-                              </label>
-                            </div>
-                            <div class="col s12 m6 l8">
-                              <div class="input-field">
-                                <i class="mdi mdi-social-person prefix"></i>
-                                  <?php $phoneNum=Lang::get('main.phoneNum') ?>
-                                  {{ Form::text('acc_tel',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
-                                  {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
-                              </div>
-                            </div>
+                          <label for="account-numbers">
+                             رقم الهاتف 1
+                          </label>
+                      </div>
+                      <div class="col s12  l4">
+                          <div class="input-field">
+                              <i class="mdi mdi-social-person prefix"></i>
+                              <?php $phoneNum=Lang::get('main.phoneNum') ?>
+                              {{ Form::text('acc_tel',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
+                              {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
+                          </div>
+                      </div>
+
+                      <div class="col s12 l1">
+                          <label for="account-numbers">
+                             رقم الهاتف 2
+                          </label>
+                      </div>
+                      <div class="col s12  l4">
+                          <div class="input-field">
+                              <i class="mdi mdi-social-person prefix"></i>
+                              <?php $phoneNum=Lang::get('main.phoneNum') ?>
+                              {{ Form::text('acc_tel',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
+                              {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
+                          </div>
+                      </div>
 
                           </div>
+              {{--phone number end--}}
               @endif
+
+
               @if($accountType == 'expenses'||$accountType == 'partners'||$accountType == 'multiple_revenue' )
 
                   @else
@@ -137,13 +139,45 @@
 </div>
                       @endif
                   </div>
+
+                  @if($accountType == 'customers'||$accountType == 'suppliers')
+                      <div class="row no-margin-top">
+                          <div class="col s12 l2">
+                              <label for="credit-limit">
+                                  @lang('main.credit')
+                              </label>
+                          </div>
+                          <div class="col s12 l4">
+                              <div class="input-field">
+                                  <?php $credit=Lang::get('main.credit') ?>
+                                  <i class="mdi mdi-social-person prefix"></i>
+                                  {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>$credit)) }}
+                                  {{--<input name="credit_limit" id="credit-limit" type="text" placeholder="   حد الائتمان  ">--}}
+                              </div>
+                          </div>
+
+                          <div class="col s12 l2">
+                              <label for="credit-limit">
+                                  نظام التسعير
+                              </label>
+                          </div>
+                          <div class="col s12 l3">
+
+                              {{ Form::select('pricing', array('' => 'أختر النظام ') + $pricing ,null,array('id'=>'mark_id')) }}
+
+                          </div>
+
+                      </div>
+                  @endif
+
+
                   <div class="row no-margin-top">
                                       <div class="col s12 l2">
                                         <label for="account-notes">
                                             @lang('main.notes')
                                         </label>
                                       </div>
-                                      <div class="col s12 m6 l6">
+                                      <div class="col s12  l9">
                                         <div class="input-field">
                                           <i class="mdi mdi-social-person prefix"></i>
                                             <?php $notes=Lang::get('main.notes') ?>

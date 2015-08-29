@@ -23,16 +23,17 @@ class CreateItemsTable extends Migration {
 			$table->integer('supplier_id');
 			$table->integer('seasons_id');
 			$table->integer('models_id');
+			$table->integer('marks_id');
 			$table->string('bar_code');
-			$table->float('buy');
-			$table->float('sell_users');
-			$table->float('sell_nos_gomla');
-			$table->float('sell_gomla');
-			$table->float('sell_gomla_gomla');
+			$table->decimal('buy',10,2);
+			$table->decimal('sell_users',10,2);
+			$table->decimal('sell_nos_gomla',10,2);
+			$table->decimal('sell_gomla',10,2);
+			$table->decimal('sell_gomla_gomla',10,2);
 			$table->string('limit');
 			$table->longText('notes');
 			$table->integer('user_id');
-            $table->decimal('avg_cost',10,3);
+            $table->decimal('avg_cost',10,2);
             $table->boolean('has_serial');
 			$table->boolean('deleted');
 

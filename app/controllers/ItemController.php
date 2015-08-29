@@ -42,9 +42,10 @@ class ItemController extends BaseController
             $newItem->item_name        = $inputs['item_name'];
             $newItem->unit             = $inputs['unit'];
             $newItem->supplier_id      = isset($inputs['supplier_id'])?$inputs['supplier_id']:0;
-            $newItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['supplier_id']:0;
-            $newItem->models_id        = isset($inputs['models_id'])?$inputs['supplier_id']:0;
-            $newItem->bar_code         = isset($inputs['bar_code'])?$inputs['supplier_id']:0;
+            $newItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
+            $newItem->models_id        = isset($inputs['models_id'])?$inputs['models_id']:0;
+            $newItem->marks_id         = isset($inputs['marks_id'])?$inputs['marks_id']:0;
+            $newItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:0;
             $newItem->buy              = $inputs['buy'];
             $newItem->sell_users       = $inputs['sell_users'];
             $newItem->sell_nos_gomla   = $inputs['sell_nos_gomla'];
@@ -52,7 +53,7 @@ class ItemController extends BaseController
             $newItem->sell_gomla_gomla = $inputs['sell_gomla_gomla'];
             $newItem->limit            = $inputs['limit'];
             $newItem->notes            = $inputs['notes'];
-            $newItem->has_serial       = isset($inputs['has_serial'])?$inputs['supplier_id']:0;
+            $newItem->has_serial       = isset($inputs['has_serial'])?$inputs['has_serial']:0;
 
             $newItem->user_id          = Auth::id();
 
@@ -128,17 +129,19 @@ class ItemController extends BaseController
     if(intval(Input::get('id')) != 0 ) {
         $models = Models::where('co_id', $this->coAuth())->where('marks_id', Input::get('id'))->get();
 
-        if (!empty($models)) {
-//
-            $select =  '<select name="model_">';
+        if (@$models->first()->name) {
+
+
+
             foreach ($models as $model) {
 
-                $select .=   '<option value="'.$model->id.'">' . $model->name . '</option>';
+                $select =   '<option value="'.$model->id.'">' . $model->name . '</option> ';
             }
 
-            $select .= '</select>';
+            return $select;
+        }else{
+            return '<option value=""  style="color: red">لا يوجد موديلات لهذه الماركة </option>';
 
-            echo $select;
         }
     }
 

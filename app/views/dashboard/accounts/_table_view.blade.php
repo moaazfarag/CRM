@@ -5,14 +5,17 @@
               <th>@lang('main.name') </th>
               <th>@lang('main.mail')  </th>
               <th>@lang('main.address')</th>
-              <th>@lang('main.phoneNum')</th>
-              <th>@lang('main.regComm') </th>
+              <th> رقم الهاتف 1 </th>
+              <th>رقم الهاتف 2 </th>
+              <th> @lang('main.regComm') </th>
               <th> @lang('main.taxCard')</th>
+              <th>التسعير</th>
               <th>@lang('main.notes')</th>
               <th>@lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>
+
         @foreach($rowsData as $rowData)
             <tr>
               <th>{{$rowData->id}}</th>
@@ -20,7 +23,9 @@
               <td>{{$rowData->acc_email}}</td>
               <td>{{$rowData->acc_address}}</td>
               <th>{{$rowData->acc_tel}}</th>
+              <th>{{$rowData->acc_tel2}}</th>
               <th>{{$rowData->acc_commercial_registration}}</th>
+              <th>{{  AccountController::pricing_name($rowData->pricing) }}</th>
               <th>{{$rowData->acc_tax_card}}</th>
               <th>{{$rowData->acc_notes}}</th>
               <td>

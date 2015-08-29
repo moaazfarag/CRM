@@ -17,16 +17,18 @@ class CreateAccountsTable extends Migration {
 			$table->increments('id');
 			$table->integer('co_id');
 			
-			$table->string('acc_type');
-			$table->string('acc_name');
-			$table->string('acc_num');
-			$table->string('acc_address');
-			$table->string('acc_tel');
-			$table->string('acc_commercial_registration');
-			$table->string('acc_tax_card');
-			$table->string('acc_email');
-			$table->integer('acc_limit');
-			$table->string('acc_notes');
+			$table->string('acc_type')->nullable();
+			$table->string('acc_name')->nullable();
+			$table->string('acc_num')->nullable();
+			$table->string('pricing')->nullable();
+			$table->string('acc_address')->nullable();
+			$table->string('acc_tel')->nullable();
+			$table->string('acc_tel2')->nullable();
+			$table->string('acc_commercial_registration')->nullable();
+			$table->string('acc_tax_card')->nullable();
+			$table->string('acc_email')->nullable();
+			$table->integer('acc_limit')->nullable();
+			$table->string('acc_notes')->nullable();
 			$table->integer('user_id');
 			$table->timestamps();
 		});

@@ -13,10 +13,11 @@
                     <th>سلفه دوريه</th>
                     <th>الصافى </th>
                     <th>تم الصرف </th>
-                    <th>القائم بالصرف</th>
+                    {{--<th>القائم بالصرف</th>--}}
                 </tr>
                 </thead>
                 <tbody>
+
                <?php //print_r($tablesData);die(); ?>
                 @foreach($net as $k=>$tableData )
                     <tr>
@@ -28,9 +29,9 @@
                         <td>{{ $tableData->deduction }}</td>
                         <td>{{ $tableData->Loans }}</td>
                         <td>
-                           <?php
-                                $net = $tableData->Fixed_Salary -($tableData->Deserves + $tableData->deduction +  $tableData->Loans);
-                                echo $net ;
+                            <?php
+                            $net = $tableData->Fixed_Salary -($tableData->Deserves + $tableData->deduction +  $tableData->Loans);
+                            echo $net ;
                             ?>
                         </td>
                         <td>
@@ -45,3 +46,4 @@
         </div>
     </div>
 </div>
+
