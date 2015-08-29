@@ -65,10 +65,18 @@ class Items extends Eloquent {
     }
 
 
+
     public function models()
     {
         return $this->belongsTo('Models','models_id');
     }
+
+
+    public function marks()
+    {
+        return $this->belongsTo('Markes','marks_id');
+    }
+
     public function accounts()
     {
         return $this->belongsTo('Accounts','supplier_id');

@@ -53,6 +53,19 @@ class MsHeaderController extends BaseController
     }
     public function searchMsHeader()
     {
+        $validation = Validator::make(Input::all(), MsHeader::$store_rules);
+
+        if ($validation->fails()) {
+            //dd($validation->messages());
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        } else {
+            $for_month   = Input::get('for_month');
+            $for_year    = Input::get('for_year');
+            $employee_id = Input::get('employee_id');
+
+
+        }
+//for_month for_year employee_id
 
     }
 }

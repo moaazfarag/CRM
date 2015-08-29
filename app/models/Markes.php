@@ -13,8 +13,15 @@ class Markes extends Eloquent
 
 
 
+
+
     public function model_rel()
     {
         return $this->hasMany('Models','marks_id','id');
+    }
+
+    public function coData()
+    {
+        return $this->belongsTo('CoData','id');
     }
 }

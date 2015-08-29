@@ -22,6 +22,7 @@
               <th> @lang('main.category') </th>
               <th>@lang('main.supplier') </th>
               <th>@lang('main.season') </th>
+              <th>@lang('main.mark') </th>
               <th>@lang('main.model') </th>
               <th> @lang('main.sellLimit') </th>
               <th>@lang('main.notes')</th>
@@ -40,6 +41,7 @@
               <th>{{@$item->cat->name}}</th>
               <th>{{@$item->accounts->acc_name}}</th>
               <th>{{@$item->seasons->name}}</th>
+              <th>{{@$item->marks->name}}</th>
               <th>{{@$item->models->name}}</th>
               <th>{{$item->limit}}</th>
               <th>{{$item->notes}}</th>

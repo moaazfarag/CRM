@@ -16,7 +16,7 @@ class ItemsBalancesController extends BaseController {
     public function addItemsBalances()
     {
         $get_type = DB::table('trans_details')
-        ->join('trans_header','trans_header.id','=','trans_details.trans_header_sid')
+        ->join('trans_header','trans_header.id','=','trans_details.trans_header_id')
         ->join('items','items.id','=','trans_details.item_id')
         ->select('trans_details.trans_header_id AS invoice_id',
             'trans_header.invoice_type AS invoice_type',
@@ -26,7 +26,9 @@ class ItemsBalancesController extends BaseController {
         )
 //            ->join('trans_header','trans_ditals.trans_header_id','=','trans_header.id')
             ->get();
-        dd($get_type);
+//        dd($get_type);
+        $data['branch']     = $this->isAllBranch();
+
         $addItemsBalances =Lang::get('main.addItemsBalances');
         $data['title']     = $addItemsBalances; // page title
         $data['sideOpen']   = 'open' ;
@@ -67,6 +69,7 @@ class ItemsBalancesController extends BaseController {
                     'qty'          => $inputs['quantity_'.$k],
                     'cost'         => $inputs['cost_'.$k] * $inputs['quantity_'.$k],
                     'serial_no'    => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
+                    'branch_id'    => isset($inputs['branch_id'.$k])?$inputs['branch_id'.$k]:0,
                     'created_at'   => date('Y-m-d H:i:s'),
                     'updated_at'   => date('Y-m-d H:i:s')
                 );//end of array
@@ -130,6 +133,7 @@ class ItemsBalancesController extends BaseController {
                 $itemsBalances->qty          = Input::get('qty');
                 $itemsBalances->cost         = Input::get('cost');
                 $itemsBalances->serial_no    = Input::get('serial_no');
+                $itemsBalances->branch_id    =  isset($inputs['branch_id'.$k])?$inputs['branch_id'.$k]:0;
 
                 $itemsBalances->update();
 

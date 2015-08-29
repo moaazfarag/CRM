@@ -10,7 +10,7 @@
           </a>
       </footer>
       <!-- DEMO [REMOVE IT ON PRODUCTION] -->
-      {{ HTML::script('dashboard/assets/_con/js/_demo.js') }}
+      {{--{{ HTML::script('dashboard/assets/_con/js/_demo.js') }}--}}
 
       <!-- jQuery -->
       {{ HTML::script('dashboard/assets/jquery/jquery.min.js') }}
@@ -52,6 +52,7 @@
       {{ HTML::script('dashboard/scripts/accountApp.js') }}
       {{ HTML::script('dashboard/scripts/accountService.js') }}
       {{ HTML::script('dashboard/scripts/accountCtrl.js') }}
+      {{ HTML::script('dashboard/scripts/select_model.js') }}
 
       <script>
                 $('#table_customers').DataTable({
@@ -351,58 +352,6 @@
 
 
 
-      <script>
-                  $(document).ready(function(){
-                      $('#mark_select').change(function(){
-                          $.ajax({
-                              url: '/admin/addItem/select_mark',
-                              type: 'post',
-                              dataType: 'html',
-                              data: {'id':$('select[name=markes_id]').val(), '_token': $('input[name=_token]').val()},
-
-                              success:function(data){
-
-                                  var text1 = data;
-//                                  document.getElementById('model_select').innerHTML += text1;
-//                               $('#model_select').append(text1);
-
-                                  alert(text1)
-
-                                  },
-
-
-                              error: function(xhr,textStatus,thrownError){
-                                  alert('عذرا يوجد خطأ');
-                              }
-                          });
-                      });
-                  });
-
-//        $(document).ready(function(){
-//            $('#mark_select').change(function(){
-//                $.ajax({
-//                    url: '/admin/addItem/select_mark',
-//                    type: 'POST',
-//                    cache: true,
-//                    dataType: 'json',
-//                    data: {'id':$('select[name=markes_id]').val(), '_token': $('input[name=_token]').val()},
-//
-//                    success: function(data){
-//
-////                        $('#model_select').append(data);
-//
-//                        alert(JSON.stringify(data))
-//
-//                    },
-//
-//
-//                    error: function(xhr,textStatus,thrownError){
-//                        alert('عذرا يوجد خطأ');
-//                    }
-//                });
-//            });
-//});
-      </script>
       {{--xmlhttp.open("GET","getuser.php?q="+str,true);--}}
 
 

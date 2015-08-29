@@ -35,7 +35,7 @@ class MarkesController extends \BaseController
 //			echo $t->name;
 //			echo '<br/>';
 //	}
-	dd($company);
+//	dd($company);
 
 
 		$data = $this->markData();

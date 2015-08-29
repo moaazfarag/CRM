@@ -3,18 +3,18 @@
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
     @if(Route::currentRouteName() == 'addMsHeader')
-        {{ Form::open(array('route'=>array('storeMsHeader'))) }}
+        {{ Form::open(array('route'=>array('searchMsHeader'))) }}
     @endif
-        <div class=" card ">
-            <div class="title">
-                <h5>
-                    <i class="fa fa-cog"></i> التجهيزات الشهريه   </h5>
-                <a class="minimize" href="#">
-                    <i class="mdi-navigation-expand-less"></i>
-                </a>
-            </div>
-            <div class="content">
-                <div class="row">
+    <div class=" card ">
+        <div class="title">
+            <h5>
+                <i class="fa fa-cog"></i> التجهيزات الشهريه   </h5>
+            <a class="minimize" href="#">
+                <i class="mdi-navigation-expand-less"></i>
+            </a>
+        </div>
+        <div class="content">
+            <div class="row">
                 <div class="col s1 l2">
                     <div class="input-field">
                         {{ Form::selectMonth('for_month') }}
@@ -29,25 +29,26 @@
                         <p class="parsley-required">{{ $errors ->first('for_year') }} </p>
                     </div>
                 </div>
-                    <div class="col s12 l5">
-                        <div class="input-field">
-                            {{ Form::label('employee_id',' ') }}
-                            {{ Form::select('employee_id', array(NULL => 'الموظف  ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id','required')) }}
-                            <p class="parsley-required">{{ $errors ->first('employee_id') }} </p>
-                        </div>
+                <div class="col s12 l5">
+                    <div class="input-field">
+                        {{ Form::label('employee_id',' ') }}
+                        {{ Form::select('employee_id', array(NULL => 'الموظف  ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id','required')) }}
+                        <p class="parsley-required">{{ $errors ->first('employee_id') }} </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col s12 l12">
-                        @if(Route::currentRouteName() == 'searchMsHeader')
-                            <button type="submit" class="waves-effect btn">تجهيز رواتب الشهر </button>
-                        @endif
-                    </div>
-                    {{ Form::close() }}
-                </div>{{--submit  row end--}}
             </div>
+            <div class="row">
+                <div class="col s12 l12">
+                    @if(Route::currentRouteName() == 'addMsHeader')
+                        <button type="submit" class="waves-effect btn">تجهيز رواتب الشهر </button>
+                    @endif
+                </div>
+                {{ Form::close() }}
+            </div>{{--submit  row end--}}
         </div>
-        @include('dashboard.hr.msheader._table_view');
+    </div>
+    @include('dashboard.hr.msheader._table_view');
 
 </section>
 @stop
+

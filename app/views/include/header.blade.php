@@ -7,6 +7,7 @@
 <!--<![endif]-->
 
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>الراصد | {{ @$title }} </title>
@@ -22,6 +23,7 @@
           @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
         </style>
   <!-- nanoScroller -->
+
 
     {{ HTML::style('dashboard/assets/nanoScroller/nanoscroller.css') }}
 

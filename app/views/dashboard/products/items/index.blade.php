@@ -157,15 +157,24 @@
                       <?php $mark =Lang::get('main.mark');
                       $chosemark =Lang::get('main.chosemark') ?>
                       {{ Form::label('mark_id',$mark) }}
-                      {{ Form::select('markes_id', array('' => $chosemark )+$co_info->marks->lists('name','id'),null,array('id'=>'mark_select')) }}
+                      {{ Form::select('marks_id', array('' => $chosemark )+$co_info->marks->lists('name','id'),null,array('id'=>'mark_select')) }}
                       <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
                   </div> {{--marks--}}
 
 
-                      <div class="col s2 l3" id="model_select">
-                            <?php
-                                  $json = json_decode(file_get_contents("php://input"));
-                            ?>
+                      <div class="col s2 l3" id="model_select_contenir" style="display: none">
+
+                          <div class="select-wrapper" >
+                              <i class="fa fa-tags prefix"></i>
+                                 <label for="model"/> الموديل </label>
+
+                                   <select  class="browser-default" id="model_select" name="models_id">
+
+
+                                   </select>
+
+                              <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
+                           </div>
                       </div> {{--models--}}
 
 
