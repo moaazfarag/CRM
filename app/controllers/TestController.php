@@ -54,7 +54,7 @@ class TestController extends BaseController
         {
             Items::destroy($id);
 
-            return Response::json(array('success' => true));
+            return Response::json(array('success' => true,'data'));
         }
 
 }

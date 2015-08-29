@@ -10,14 +10,23 @@ angular.module('mainCtrl', [])
         $scope.value = "";
         $scope.invoiceItems = [
         ];
+        $scope.accounts= {};
         // loading variable to show the spinning loading icon
         $scope.loading = true;
+        $scope.getAccountsByType = function(){
+            Item.getAccountsByType($scope.account).success(function (data) {
+                $scope.accounts = data.accounts;
 
+            })
+                .error(function (data) {
+
+                });
+
+        };
         // get all the comments first and bind it to the $scope.comments object
-        Item.get()
+        Item.getItems()
             .success(function(data) {
                 $scope.items = data.items;
-                $scope.users = data.users;
                 $scope.loading = false;
             });
 
@@ -91,10 +100,12 @@ angular.module('mainCtrl', [])
             $scope.item =  "";
             $('#item_id').focus();
         };
-        $scope.selectItem = function(itemName,itemId,hasSerial){
+        $scope.selectItem = function(itemName,itemId,hasSerial,itemCost){
             $scope.item.name         = itemName;
             $scope.item.id           = itemId;
+            $scope.item.cost         = itemCost;
             $scope.item.has_serial   = hasSerial;
+
             document.getElementById('quantity').focus();
             document.getElementById('itemsView').style.display = 'none';
         };
@@ -120,7 +131,11 @@ angular.module('mainCtrl', [])
             }
         };
         $scope.displayOn = function(){
-            console.log();
+            Item.getItems()
+                .success(function(data) {
+                    $scope.items = data.items;
+                    $scope.loading = false;
+                });
             $scope.prefs = false;
             document.getElementById('itemsView').style.display = '';
         };
@@ -170,21 +185,6 @@ angular.module('mainCtrl', [])
 
         }*/
 
-        // function to handle deleting a comment
-        $scope.deleteItem = function(id) {
-            $scope.loading = true;
 
-            Item.destroy(id)
-                .success(function(data) {
-
-                    // if successful, we'll need to refresh the comment list
-                    Item.get()
-                        .success(function(getData) {
-                            $scope.items = getData;
-                            $scope.loading = false;
-                        });
-
-                });
-        };
 
     });
