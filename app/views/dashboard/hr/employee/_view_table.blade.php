@@ -12,7 +12,6 @@
               <th>الوظيفه</th>
               <th>القسم</th>
               <th>الراتب</th>
-              <th>الديانه</th>
               <th>العنوان</th>
               <th>المؤهل</th>
               <th>تعديل</th>
@@ -26,7 +25,6 @@
                   <td>{{ $tableData->jobs->name }}</td>
                   <td>{{ $tableData->departments->name }}</td>
                   <td>{{ $tableData->salary }}</td>
-                  <td>{{ $tableData->religion }}</td>
                   <td>{{ $tableData->address }}</td>
                   <td>{{ $tableData->certificate }}</td>
 

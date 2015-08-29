@@ -17,7 +17,6 @@
                 </a>
             </div>
               <div class="content">
-
                   <div class="row no-margin-top">
                       <div class="col s12 l7">
                           <div class="input-field">
@@ -27,7 +26,6 @@
                               <p class="parsley-required">{{ $errors ->first('name') }} </p>
                           </div>
                       </div>
-
                       <div class="col s12 l5">
                           <div class="input-field">
                               <i class="mdi mdi-action-language prefix"></i>
@@ -37,8 +35,6 @@
                               </label>
                           </div>
                       </div>
-
-
                       <div class="row">
                           <div class="col s2 l7">
                               <div class="input-field">
@@ -48,7 +44,6 @@
                                   <p class="parsley-required">{{ $errors ->first('card_no') }} </p>
                               </div>
                           </div>
-
                           <div class="col s2 l5">
                               <div class="input-field">
 
@@ -57,7 +52,6 @@
                                   <p class="parsley-required">{{ $errors ->first('ins_no') }} </p>
                               </div>
                           </div>
-
                           </div>
                           <div class="row">
                               <div class="col s8 l3">
@@ -79,7 +73,6 @@
                                   {{--{{ Form::label('','') }}--}}
                                   {{ Form::select('department_id', array('' => 'الاقسام') + $co_info->departments->lists('name','id'),null,array('id'=>'department_id')) }}
                                       <p class="parsley-required">{{ $errors ->first('department_id') }} </p>
-
                                   </div>
                               </div>
                               <div class="col s8 l3">
@@ -90,13 +83,12 @@
                                   </div>
                               </div>
                   </div>
-
                   <div class="row">
 
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::number('salary',null,array('required','id'=>'salary',)) }}
+                              {{ Form::number('salary',null,array('required','id'=>'salary', 'step'=>'0.01')) }}
                               {{ Form::label('salary',  ' الراتب ' )     }}
                               <p class="parsley-required">{{ $errors ->first('salary') }} </p>
                           </div>
@@ -104,7 +96,7 @@
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::number('ins_salary',null,array('required','id'=>'ins_salary',)) }}
+                              {{ Form::number('ins_salary',null,array('required','id'=>'ins_salary','step'=>'0.01')) }}
                               {{ Form::label('ins_salary',  ' مرتب التامينات ' )     }}
                               <p class="parsley-required">{{ $errors ->first('ins_salary') }} </p>
                           </div>
@@ -112,21 +104,18 @@
                       <div class="col s2 l4">
                           <div class="input-field">
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::number('ins_val',null,array('required','id'=>'ins_val',)) }}
+                              {{ Form::number('ins_val',null,array('required','id'=>'ins_val','step'=>'0.01')) }}
                               {{ Form::label('ins_val',  ' خصم التامين' )     }}
                               <p class="parsley-required">{{ $errors ->first('ins_val') }} </p>
                           </div>
                       </div>
                   </div>
-
-
                   <div class="row">
                       <div class="col s2 l2">
                           <div class="input-field">
                               {{--<i class="fa fa-tag prefix"></i>--}}
                               {{ Form::checkbox('cancel_date',1,null,array('id'=>'cancel_date')) }}
                               {{ Form::label('cancel_date','الغاء العمل فى تاريخ') }}
-
                               <p class="parsley-required">{{ $errors ->first('cancel_date') }} </p>
                           </div>
                       </div>
@@ -134,7 +123,6 @@
                       <div class="input-field">
                           {{--<i class="mdi mdi-action-language prefix"></i>--}}
                           {{ Form::text('cancel_date',null,array('required','id'=>'cancel_date','class'=>'pikaday')) }}
-
                       </div>
                       </div>
                  </div>
@@ -164,8 +152,6 @@
                        {{ Form::select('marital', $marital ,null,array('id'=>'marital')) }}
                        <p class="parsley-required">{{ $errors ->first('marital') }} </p>
                    </div>
-
-
                </div>
            </div>
              <div class="row">
@@ -186,11 +172,8 @@
                              <p class="parsley-required">{{ $errors ->first('military_service') }} </p>
                          </div>
                      </div>
-                     {{Form::submit('العمولات لمراحل التشغيل ')}}
                  </div>
-
             </div>
-
       <div class="row">
           <div class="col s12 l9">
               <div class="input-field">
@@ -208,7 +191,6 @@
                   <p class="parsley-required">{{ $errors ->first('tel') }} </p>
               </div>
           </div>
-
     </div>
           <div class="row">
               <div class="col s2 l1">
@@ -224,14 +206,13 @@
                   <div class="input-field">
                       {{--<i class="mdi mdi-action-language prefix"></i>--}}
                       {{ Form::text('birth_date',null,array('required','id'=>'birth_date','class'=>'pikaday')) }}
-
                   </div>
               </div>
               <div class="col s12 l9">
                   <div class="input-field">
                       <i class="fa fa-tag prefix"></i>
                       {{ Form::text('certificate',null,array('required','id'=>'certificate')) }}
-                      {{ Form::label('certificate', 'الؤهل ')     }}
+                      {{ Form::label('certificate', 'المؤهل ')     }}
                       <p class="parsley-required">{{ $errors ->first('certificate') }} </p>
                   </div>
               </div>
@@ -242,7 +223,6 @@
                       {{--<i class="fa fa-tag prefix"></i>--}}
                       {{ Form::checkbox('cert_date',1,null,array('id'=>'cert_date')) }}
                       {{ Form::label('cert_date','تاريخ المؤهل    ') }}
-
                       <p class="parsley-required">{{ $errors ->first('cert_date') }} </p>
                   </div>
               </div>
@@ -251,7 +231,6 @@
                       {{--<i class="mdi mdi-action-language prefix"></i>--}}
 {{--                      {{ Form::text('certDate',null,array('required','id'=>'certificate',)) }}--}}
                       {{ Form::text('cert_date',null,array('required','id'=>'cert_date','class'=>'pikaday')) }}
-
                   </div>
               </div>
               <div class="col s12 l9">
@@ -271,14 +250,6 @@
                       </div>
                   </div>
           </div>
-              <div class="row">
-                  <button type="submit" class="waves-effect btn">جديد </button>
-                  <button type="submit" class="waves-effect btn">حفظ </button>
-                  <button type="submit" class="waves-effect btn">الاقسام </button>
-                  <button type="submit" class="waves-effect btn">الوظائف </button>
-                  <button type="submit" class="waves-effect btn"> بنود الاستحقاقات </button>
-                  <button type="submit" class="waves-effect btn">  بنود الراتب الثابته للموظف </button>
-              </div>
                   <div class="row">
                       <div class="col s12 l12">
                           @if(Route::currentRouteName() == 'addEmp')
@@ -286,16 +257,16 @@
                               <button type="submit" class="waves-effect btn">اضف </button>
                           @elseif(Route::currentRouteName() == 'editEmp')
                               {{--{{Form::submit('  تعديل ')}}--}}
-                              <button type="submit" class="waves-effect btn">تعديل </button>
+                              <a style="float: right;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('addEmpdesded') }}" class="btn btn-small z-depth-0">
+                                  بنود الراتب الثابته للموظف
+                              </a><br>
+                              <button type="submit" class="waves-effect btn" style="float:left">تعديل </button>
                           @endif
                       </div>
                       {{ Form::close() }}
-                  </div>{{--submit  row end--}}
+                  </div>
       </div>
         </div>
-    <!-- /Store Settings -->
 @include('dashboard.hr.employee._view_table')
   </section>
-  <!-- /Main Content -->
-{{----}}
   @stop

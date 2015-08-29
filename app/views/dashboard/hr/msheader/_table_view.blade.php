@@ -17,8 +17,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php //print_r($tablesData);die(); ?>
-                @foreach($net as $tableData )
+
+               <?php //print_r($tablesData);die(); ?>
+                @foreach($net as $k=>$tableData )
                     <tr>
                         <td>{{ $tableData->for_year }}</td>
                         <td>{{ $tableData->for_month }}</td>
@@ -34,8 +35,8 @@
                             ?>
                         </td>
                         <td>
-                            <input name="enter_supplier3" type="checkbox" id="enter_supplier2" value="enter_supplier3" >
-                            <label for="enter_supplier3"></label>
+                            <input name="got_sal_{{$k}}" type="checkbox" id="got_sal_{{$k}}" >
+                            <label for="got_sal_{{$k}}"></label>
                         </td>
                         {{--<td>{{ $tableData->admin }}</td>--}}
                     </tr>
