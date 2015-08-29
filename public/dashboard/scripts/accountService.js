@@ -13,7 +13,7 @@ angular.module('accountService', [])
                 return $http.get('api/comments/' + id);
             },
             save : function(addedAccounts) {
-                console.log(addedAccounts);
+                //console.log(addedAccounts);
                 return $http({
                     method: 'POST',
                     url: '/admin/Transaction/test',

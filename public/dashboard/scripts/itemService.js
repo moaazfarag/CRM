@@ -6,8 +6,13 @@ angular.module('itemService', [])
     .factory('Item', function($http) {
 
         return {
-            get : function() {//get data for using in drop menu
-                return $http.get('/admin/Transaction/Add-Trans-Header-data');
+            getItems: function() {//get data for using in drop menu
+                return $http({
+                    method:'POST',
+                    url: '/admin/invoice/items-data',
+                    headers: { 'Content-Type' : 'application/json' },
+                    data:   JSON.stringify()
+                });
             },
             show : function(id) {
                 return $http.get('api/comments/' + id);
@@ -18,6 +23,14 @@ angular.module('itemService', [])
                     url: '/admin/Transaction/test',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param(invoiceItems)
+                });
+            },
+            getAccountsByType : function(type){
+                return $http({
+                    method:'POST',
+                    url: '/admin/invoice/accounts-data',
+                    headers: { 'Content-Type' : 'application/json' },
+                    data:   JSON.stringify(type)
                 });
             },
             destroy : function(id) {

@@ -139,7 +139,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     });
 
     /**
-     *  Trans Header Area
+     *  settle  Area
      */
     Route::group(array('prefix'=>'Transaction'),function()
     {
@@ -150,6 +150,16 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('view-settle/{invoiceId}',array('uses'=>'SettleController@viewSettle','as'=>'viewSettle')) ;
         Route::get('view-settles/',array('uses'=>'SettleController@viewSettles','as'=>'viewSettles')) ;
         Route::post('test',array('uses'=>'SettleController@test','as'=>'test')) ;
+    });
+    /**
+     *
+     */
+    Route::group(array('prefix'=>'invoice'),function(){
+        Route::get('add-sales-invoice', array('uses' => 'InvoiceController@addSalesInvoice','as' => 'addSalesInvoice'));
+        Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
+        Route::post('items-data', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
+
+
     });
 
 

@@ -36,13 +36,6 @@
              <p class="parsley-required">{{ $errors ->first('data') }} </p>
           </div> {{--data--}}
 
-          <div class="col s2 l3">
-
-              <i class="mdi mdi-editor-attach-money prefix active"></i>
-              {{ Form::label('pay_type','طرق السداد') }}
-              {{ Form::select('pay_type',array(null=>"أختر طريقة السداد ")+ $pay_type,null,array('id'=>'pay_type')) }}
-              <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
-          </div>{{--pay_type--}}
 
 
       </div>{{--first row end--}}
@@ -50,13 +43,7 @@
         {{-- start acount,item and quaintity  --}}
         <div class="row no-margin-top">
 
-            <div class="col s2 l3">
 
-                <i class="mdi mdi-communication-import-export"></i>
-                {{ Form::label('account','الحساب ') }}
-                {{ Form::select('account',array(null=>"اختر   نوع الحساب ")+ $account_type,null,array('id'=>'account')) }}
-                <p class="parsley-required">{{ $errors ->first('account') }} </p>
-            </div>{{--account--}}
             <div class="col s2 l1">
                 {{ Form::label('item_id','الصنف') }}
             </div>
@@ -84,72 +71,28 @@
                     <p class="parsley-required">{{ $errors ->first('quantity') }} </p>
                 </div>
             </div> {{-- quantity div--}}
+            <div class="col s2 ">
+                <div class="input-field">
+                    <label for="item_id">
+                        <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                            اضف
+                        </button >
+                        <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
+                            اضف
+                        </button >
+                        </label>
+                </div>
+            </div>{{-- single item button  div --}}
 
 
         </div>{{-- row end--}}
         {{-- end acount,item and quaintity  --}}
 
 
-        {{-- start sum , discount ,tax and net--}}
-        <div class="row no-margin-top">
-
-            <div class="col s2 ">
-
-                <i class="fa fa-cart-arrow-down"></i>
-                {{ Form::label('sum',' الإجمالى') }}
-                {{ Form::text('sum',null,array('id'=>'sum')) }}
-                <p class="parsley-required">{{ $errors ->first('sum') }} </p>
-            </div>{{--sum--}}
-            <div class="col s2 ">
-
-                <i class="mdi mdi-content-remove-circle"></i>
-                {{ Form::label('discount','الخصم') }}
-                {{ Form::text('discount',null,array('id'=>'discount')) }}
-                <p class="parsley-required">{{ $errors ->first('discount') }} </p>
-            </div>{{--discount--}}
-
-
-            <div class="col s2 ">
-
-                <i class="mdi mdi-maps-local-atm"></i>
-                {{ Form::label('tax','ضريبة') }}
-                {{ Form::text('discount',null,array('id'=>'tax')) }}
-                <p class="parsley-required">{{ $errors ->first('tax') }} </p>
-            </div>{{--tax--}}
-
-            <div class="col s2 ">
-
-                <i class="fa fa-exchange"></i>
-                {{ Form::label('net','الصافى') }}
-                {{ Form::text('discount',null,array('id'=>'net')) }}
-                <p class="parsley-required">{{ $errors ->first('net') }} </p>
-            </div>{{--net--}}
-
-            <div class="col s2 ">
-                <div class="input-field">
-                    <label for="item_id">
-                        <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
-                            اضف
-                        </button >
-                </div>
-            </div>{{--button--}}
-
-
-        </div>
-        {{-- end sum , discount ,tax and net --}}
 
         @include('dashboard.settle._popup_div')
 
-        <div class="row no-margin-top">
-             <div class="col s12 l2">
-                     <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
-                         اضف
-                     </button >
 
-                 </label>
-            </div>
-         {{-- single item button  div --}}
-      </div>{{--seconud row end--}}
 
         <br>
         @include('dashboard.settle._view_table')

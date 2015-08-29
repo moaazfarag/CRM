@@ -133,8 +133,15 @@
                       <li> <a href="{{ URL::route('addMonthChange') }}" class="waves-effect waves-blue">التغيرات الشهريه</a> </li>
                       <li> <a href="{{ URL::route('addMsHeader') }}" class="waves-effect waves-blue">تجهيز المرتبات الشهريه </a> </li>
                 </ul>
-
             </li>
+            <li class="{{@$invoices}}">
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الفواتير <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('addSalesInvoice') }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                    </li>
+
+                </ul>
           </ul>
 
 

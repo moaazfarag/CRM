@@ -213,7 +213,7 @@ foreach($tests as $test){
    $moaaz->invoice_type =  $test['acc_type'];
     $moaaz->save();
 }
-return  Response::json(Request::all());
+//return  Response::json(Request::all());
 
 }
 }
