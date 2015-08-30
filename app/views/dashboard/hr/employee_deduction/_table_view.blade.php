@@ -19,7 +19,7 @@
                 <td>{{ $tableData->val }}</td>
                 <td>
                     <input name="deleted" type="checkbox"selected="select" id="deletedd" value="deleted" >
-                    <label for="deletedd"></label>
+                    <label for="deleted"></label>
                 </td>
                 <td>
                     <a href="{{ URL::route('editEmpdesded',array($tableData->id)) }}" class="btn btn-small z-depth-0">

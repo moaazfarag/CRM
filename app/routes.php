@@ -170,6 +170,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('Store-Employees',array('before'=>'csrf','uses'=>'EmployeesController@storeEmp','as'=>'storeEmp')) ;
         Route::get('Edit-Employees/{id}',array('uses'=>'EmployeesController@editEmp','as'=>'editEmp')) ;
         Route::post('Update-Employees/{id}',array('before'=>'csrf','uses'=>'EmployeesController@updateEmp','as'=>'updateEmp')) ;
+        Route::post('employee-dep-dis-data',array('uses'=>'EmployeesController@employeeDepDisData','as'=>'employeeDepDisData')) ;
+        Route::post('store-emp-des-ded-pop',array('uses'=>'EmployeeDeductionController@storeEmpdesdedPop','as'=>'storeEmpdesdedPop')) ;
 
 
         //Departments Page

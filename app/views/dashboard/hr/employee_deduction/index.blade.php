@@ -36,7 +36,7 @@
             <div class="col s12 l3">
                 <div class="input-field">
                     <i class="mdi mdi-action-language prefix"></i>
-                    {{ Form::number('val',null,array('required','id'=>'val',)) }}
+                    {{ Form::number('val',null,array('required','id'=>'val')) }}
                     {{ Form::label('val',  'القيمه' )     }}
                     <p class="parsley-required">{{ $errors ->first('val') }} </p>
                 </div>
