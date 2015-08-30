@@ -76,7 +76,7 @@ class EmployeesController extends BaseController
         $data['employees'] = "open";
         $data['employee'] = Employees::findOrFail($id);
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
-          return View::make('dashboard.hr.employee.index',$data);
+        return View::make('dashboard.hr.employee.index',$data);
   }
 
     //Function Update Employee In Data Base
@@ -134,6 +134,17 @@ class EmployeesController extends BaseController
 
         }
 
+        }
+
+    public function employeeDepDisData()
+        {
+            $data['deduction']    = Deduction::where('co_id',$this->coAuth())->where('ds_cat','ثابت')->get();
+            $data['empDeduction'] = DB::table('hr_empdesded')
+                                        ->join('hr_desded','hr_empdesded.des_ded','=','hr_desded.id')
+                                        ->where('hr_empdesded.co_id',$this->coAuth())
+                                        ->where('hr_empdesded.employee_id',Input::get(0))
+                                        ->get();
+           return $data ;
         }
          public function staticData()
          {
