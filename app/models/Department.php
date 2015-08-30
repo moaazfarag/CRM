@@ -16,7 +16,10 @@ class Department extends Eloquent
      */
     protected $table = 'hr_departments';
 
+    public static $ruels = array(
 
+        'name'=>'required'
+    );
     public function employee()
     {
         return $this->hasMany('Employees','cat_id','id');

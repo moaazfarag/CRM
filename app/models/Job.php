@@ -25,5 +25,8 @@ class Job extends Eloquent
         return $this->belongsTo('Employees','job_id');
     }
 
+    public static $ruels = array(
 
+        'name'=>'required'
+    );
 }

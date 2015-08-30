@@ -42,3 +42,10 @@ div.error-div {
     font-size: 8pt;
 
 }
+
+.error-validation{
+
+    color: red;
+    font-size: 10pt;
+    float:right;
+}

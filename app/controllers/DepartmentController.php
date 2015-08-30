@@ -15,12 +15,23 @@ class DepartmentController extends BaseController
 
     public function storeDep()
     {
-        $dep = new Department;
-        $dep->name = Input::get('name');
-        $dep->co_id = Auth::user()->co_id; // company id
-        $dep->user_id = Auth::id();// user who add this record
-        $dep->save();
-        return Redirect::route('addDep');
+        $inputs = Input::all();
+        $validation = Validator::make($inputs,Department::$ruels,BaseController::$messages);
+        if($validation->fails()){
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        }else {
+
+
+            $dep = new Department;
+            $dep->name = Input::get('name');
+            $dep->co_id = Auth::user()->co_id; // company id
+            $dep->user_id = Auth::id();// user who add this record
+            $dep->save();
+            return Redirect::route('addDep');
+        }
+
     }
 
     public function editDep($id)

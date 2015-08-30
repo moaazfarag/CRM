@@ -90,4 +90,20 @@ class EmployeeDeductionController extends BaseController
         $data['tablesData']         = EmployeeDeduction::where('co_id','=',$this->coAuth())->get();
         return $data;
     }
+
+    public function deleteEmpdesded($id)
+    {
+
+        $Empdesded = EmployeeDeduction::find($id);
+
+        if (!empty($Empdesded)) {
+
+                 $Empdesded->delete();
+
+                Session::flash('success', 'لقد تم حذف البند بنجاح ');
+                return Redirect::back();
+            }
+        }
+
+
 }

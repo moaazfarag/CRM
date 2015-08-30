@@ -90,11 +90,19 @@ class DeductionController extends BaseController
         $desded = Deduction::find($id);
 
         if (!empty($desded)) {
-            $desded->delete();
+            $employee = EmployeeDeduction::where('des_ded',$id);
+              if (!empty($employee)) {
 
-            Session::flash('success', 'لقد تم حذف البند بنجاح ');
-            return Redirect::back();
+                  Session::flash('error', 'هذا البند مستخدم فى بنود استحقاقات الموظفين .. لا يمكن الحذف  ');
+                  return Redirect::back();
 
+              }else{
+
+                  $desded->delete();
+
+                  Session::flash('success', 'لقد تم حذف البند بنجاح ');
+                  return Redirect::back();
+              }
         }
 
     }
