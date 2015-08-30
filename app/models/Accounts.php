@@ -15,9 +15,32 @@ class Accounts extends Eloquent {
 	 *
 	 * @var array
 	 */
+
+    public $account_rule = array(
+
+
+    );
     public function co_data()
     {
         return $this->belongsTo('Co_data','co_id');
+    }
+
+
+    public static function ruels($type){
+
+        $ruels              = array();
+        $ruels['acc_name']  = 'required';
+        $ruels['acc_email'] = 'email';
+        $ruels['acc_limit'] = 'numeric';
+
+        $account_group = array('customers','suppliers');
+
+        if(in_array($type,$account_group)){
+
+            $ruels['pricing'] = 'required';
+        }
+//        var_dump($ruels);die();
+        return $ruels;
     }
 
 }

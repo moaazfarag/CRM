@@ -32,6 +32,7 @@
                             <i class="mdi mdi-social-person prefix"></i>
                             {{Form::text('name',null,array('required','placeholder'=>"". @$arabicName,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
+                            <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,7 @@ class Loans extends Eloquent
         'loan_val'        => 'required|integer',
         'loan_currBal'    => 'required|integer',
     );
+
     public static $update_rules = array(
         'loan_date'       => 'required|date',
         'loan_start'      => 'required|date',

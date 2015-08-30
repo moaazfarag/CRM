@@ -82,9 +82,21 @@ class AccountController extends BaseController
             return "type check error";
             }
         }
-    public function storeAccount($accountType)
+
+         public function storeAccount($accountType)
         {
-            if($this->checkType($accountType)) {
+            if ($this->checkType($accountType)) {
+
+            $inputs = Input::all();
+
+            $validation = Validator::make($inputs,Accounts::ruels($accountType),BaseController::$messages);
+            if($validation->fails()){
+
+                return Redirect::back()->withInput()->withErrors($validation->messages());
+
+            }else {
+
+
                 $account = new Accounts;
                 $account->co_id = Auth::user()->co_id;
                 $account->acc_type = $accountType;
@@ -103,9 +115,11 @@ class AccountController extends BaseController
                 $account->save();
                 $data['accountType'] = $accountType;
                 return Redirect::route('addAccount', $accountType);
-            }else{
-            return "type check error";
-        }
+            }
+            }else {
+                    return "type check error";
+                }
+
         }
     public function updateAccount($accountType,$id)
         {

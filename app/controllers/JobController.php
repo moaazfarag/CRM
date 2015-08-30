@@ -20,12 +20,20 @@ class JobController extends BaseController
 
     public function storeJob()
     {
+        $inputs = Input::all();
+        $validation = Validator::make($inputs,Job::$ruels,BaseController::$messages);
+        if($validation->fails()){
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        }else {
         $jop           = new Job ;
         $jop->name     = Input::get('name');
         $jop->co_id    = Auth::user()->co_id;
 //        $dep->user_id  = Auth::id();
         $jop->save();
         return Redirect::route('addJob');
+        }
     }
 
     public function editJob($id)

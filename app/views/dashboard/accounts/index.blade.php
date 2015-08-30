@@ -29,6 +29,8 @@
                           <?php $name=Lang::get('main.name') ?>
                           {{ Form::text('acc_name',null,array('required','id'=>'account-name','placeholder'=>$name)) }}
                         {{--<input name="account_name" id="branch-name" type="text" placeholder="  الاسم   ">--}}
+                          <p class="parsley-required error-validation">{{ $errors ->first('acc_name') }} </p>
+
                       </div>
                     </div>
 
@@ -46,6 +48,7 @@
                                   <i class="mdi mdi-social-person prefix"></i>
                                   <?php $mail=Lang::get('main.mail') ?>
                                   {{ Form::text('acc_email',null,array('id'=>'account-email','placeholder'=>$mail)) }}
+                                  <p class="parsley-required error-validation">{{ $errors ->first('acc_email') }} </p>
 
                                   {{--<input  name="account_email" id="account-email" type="text" placeholder="  الاميل   ">--}}
                               </div>
@@ -94,7 +97,7 @@
                           <div class="input-field">
                               <i class="mdi mdi-social-person prefix"></i>
                               <?php $phoneNum=Lang::get('main.phoneNum') ?>
-                              {{ Form::text('acc_tel',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
+                              {{ Form::text('acc_tel2',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
                               {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
                           </div>
                       </div>
@@ -153,6 +156,8 @@
                                   <i class="mdi mdi-social-person prefix"></i>
                                   {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>$credit)) }}
                                   {{--<input name="credit_limit" id="credit-limit" type="text" placeholder="   حد الائتمان  ">--}}
+                                      <p class="parsley-required error-validation">{{ $errors ->first('acc_limit') }} </p>
+
                               </div>
                           </div>
 
@@ -164,6 +169,7 @@
                           <div class="col s12 l3">
 
                               {{ Form::select('pricing', array('' => 'أختر النظام ') + $pricing ,null,array('id'=>'mark_id')) }}
+                              <p class="parsley-required error-validation">{{ $errors ->first('pricing') }} </p>
 
                           </div>
 

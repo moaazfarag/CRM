@@ -21,8 +21,8 @@
                     {{--<i class="fa fa-tag prefix"></i>--}}
                     <div class="input-field">
                         {{ Form::label('employee_id',' ') }}
-                        {{ Form::select('employee_id', array(NULL => 'اختار الموظف ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id','required')) }}
-                        <p class="parsley-required">{{ $errors ->first('employee_id') }} </p>
+                        {{ Form::select('employee_id', array(NULL => 'اختار الموظف ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id')) }}
+                        <p class="parsley-required error-validation">{{ $errors ->first('employee_id') }} </p>
                     </div>
                     </div>
                     <div class="col s12 l3">
@@ -30,7 +30,7 @@
                             <i class="mdi mdi-action-language prefix"></i>
                             {{ Form::text('loan_val',null,array('required','id'=>'loan_val',)) }}
                             {{ Form::label('loan_val',  'المبلغ' )     }}
-                            <p class="parsley-required">{{ $errors ->first('loan_val') }} </p>
+                            <p class="parsley-required error-validation">{{ $errors ->first('loan_val') }} </p>
                         </div>
                     </div>
                 <div class="col s12 l4">
@@ -38,7 +38,7 @@
                             <i class="mdi mdi-action-language prefix"></i>
                             {{ Form::text('loan_currBal',null,array('required','id'=>'loan_currBal',)) }}
                             {{ Form::label('loan_currBal',  'القسط الشهرى' )     }}
-                            <p class="parsley-required">{{ $errors ->first('loan_currBal') }} </p>
+                            <p class="parsley-required error-validation">{{ $errors ->first('loan_currBal') }} </p>
                         </div>
                     </div>
                 <div class="row">
@@ -47,7 +47,7 @@
                             <i class="fa fa-tag prefix"></i>
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_date','  ت.السلفه  ') }}
-                            <p class="parsley-required">{{ $errors ->first('loan_date') }} </p>
+                            <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
                         </div>
                     </div>
                     <div class="col s2 l2">
@@ -63,7 +63,7 @@
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_start','  بدء القسط  ') }}
 
-                            <p class="parsley-required">{{ $errors ->first('loan_start') }} </p>
+                            <p class="parsley-required error-validation">{{ $errors ->first('loan_start') }} </p>
                         </div>
                     </div>
                     <div class="col s2 l2">
@@ -80,7 +80,7 @@
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_end','  انتهاء الاقساط   ') }}
 
-                            <p class="parsley-required">{{ $errors ->first('loan_end') }} </p>
+                            <p class="parsley-required error-validation">{{ $errors ->first('loan_end') }} </p>
                         </div>
                     </div>
                     <div class="col s2 l2">

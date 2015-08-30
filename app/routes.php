@@ -207,6 +207,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('storeEmpdesded',array('before'=>'csrf','uses'=>'EmployeeDeductionController@storeEmpdesded','as'=>'storeEmpdesded'));
         Route::get('editEmpdesded/{id}',array('uses'=>'EmployeeDeductionController@editEmpdesded','as'=>'editEmpdesded'));
         Route::post('updateEmpdesded/{id}',array('before'=>'csrf','uses'=>'EmployeeDeductionController@updateEmpdesded','as'=>'updateEmpdesded'));
+        Route::get('deleteEmpdesded/{id}',array('uses'=>'EmployeeDeductionController@deleteEmpdesded','as'=>'deleteEmpdesded'));
 
 
         //ChangeMonth Page

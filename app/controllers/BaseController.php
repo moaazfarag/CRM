@@ -14,6 +14,26 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 	}
+    public function coAuth()
+    {
+        return Auth::user()->co_id;
+    }
+
+    public static function companyAuth()
+    {
+        return Auth::user()->co_id;
+    }
+   public static function isBelongToCompany($table,$col,$id){
+
+        $check = DB::table($table)->where($col,intval($id))->where('co_id',self::companyAuth())->first();
+
+       if(!empty($check)){
+           return true;
+       }else{
+           return false;
+       }
+
+}
 
     protected function settingData()
     {
@@ -32,10 +52,7 @@ class BaseController extends Controller {
     /**
      * @return mixed
      */
-    public function coAuth()
-    {
-        return Auth::user()->co_id;
-    }
+
     /*
      *  check if  user can controller all barnches or not
      *
@@ -57,4 +74,12 @@ class BaseController extends Controller {
     {
         return date("Y-m-d", strtotime($date));
     }
+
+
+    public static  $messages = array(
+        'required'=>'هذا الحقل مطلوب',
+        'email'=>'يرجى إدخال الإيميل بشكل صحيح ',
+        'acc_limit.numeric'=>'يرجى ادخال حد الإتمان على شكل أرقام فقط ',
+
+    );
 }

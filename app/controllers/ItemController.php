@@ -33,7 +33,9 @@ class ItemController extends BaseController
         if($validation->fails())
         {
             return Redirect::back()->withInput()->withErrors($validation->messages());
+
         }else {
+
             $newItem = new Items;
 
             $newItem->co_id = $this->coAuth();
