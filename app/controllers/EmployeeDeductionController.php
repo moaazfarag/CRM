@@ -33,12 +33,12 @@ class EmployeeDeductionController extends BaseController
         }
         else
         {
-            $newEmpdesded                             = new EmployeeDeduction;
-            $newEmpdesded->co_id                      = $this->coAuth();
-            $newEmpdesded->employee_id                      = $this->coAuth();
-            $newEmpdesded->des_ded                      = $this->coAuth();
-            $newEmpdesded->val                       = Input::get('val');
-
+            $newEmpdesded               = new EmployeeDeduction;
+            $newEmpdesded->co_id        = $this->coAuth();
+            $newEmpdesded->employee_id  = Input::get('employee_id');
+            $newEmpdesded->des_ded      = Input::get('ds_id');
+            $newEmpdesded->val          = Input::get('val');
+            $newEmpdesded->user_id      = Auth::id();
             $newEmpdesded->save();
             return Redirect::route('addEmpdesded');
         }
@@ -70,10 +70,11 @@ class EmployeeDeductionController extends BaseController
             $newEmpdesded  = EmployeeDeduction::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();
             if($newEmpdesded){
                 $newEmpdesded = Deduction::find($id);
-                $newEmpdesded->co_id                     = $this->coAuth();
-                $newEmpdesded->employee_id               = $this->coAuth();
-                $newEmpdesded->des_ded                   = $this->coAuth();
-                $newEmpdesded->val                       = Input::get('val');
+                $newEmpdesded->co_id        = $this->coAuth();
+                $newEmpdesded->employee_id  = Input::get('employee_id');
+                $newEmpdesded->des_ded      = Input::get('ds_id');
+                $newEmpdesded->val          = Input::get('val');
+                $newEmpdesded->user_id      = Auth::id();
                 $newEmpdesded->update();
                 return Redirect::route('addDesded');
             }else{
@@ -82,7 +83,31 @@ class EmployeeDeductionController extends BaseController
 
         }
     }
+    /*
+     * add  form add employee pop up
+     */
+    public function storeEmpdesdedPop()
+    {
 
+        $validation = Validator::make(Input::all(), EmployeeDeduction::$store_rules);
+
+        if($validation->fails())
+        {
+            return Response::json(array('success'=>false));
+        }
+        else
+        {
+            $newEmpdesded               = new EmployeeDeduction;
+            $newEmpdesded->co_id        = $this->coAuth();
+            $newEmpdesded->employee_id  = Input::get('empId');
+            $newEmpdesded->des_ded      = Input::get('ds_id');
+            $newEmpdesded->val          = Input::get('val');
+            $newEmpdesded->user_id      = Auth::id();
+            $newEmpdesded->save();
+            return Response::json(array('success'=>true));
+        }
+
+    }
     protected function depData()
     {
         $data['title']              = 'بنود الموظف';

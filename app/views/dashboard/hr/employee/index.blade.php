@@ -257,9 +257,15 @@
                               <button type="submit" class="waves-effect btn">اضف </button>
                           @elseif(Route::currentRouteName() == 'editEmp')
                               {{--{{Form::submit('  تعديل ')}}--}}
-                              <a style="float: right;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('addEmpdesded') }}" class="btn btn-small z-depth-0">
+                                  <!-- POPUP form بنود الاستحقاقات  الثابته زرار Trigger -->
+                              <a class="waves-effect waves-light btn modal-trigger" href="#addDud">
                                   بنود الراتب الثابته للموظف
-                              </a><br>
+
+                              </a>
+
+                              <!-- pop up بنود الاستحاقات الثابته -->
+                          @include('dashboard.hr.employee._pop_up')
+                              <!-- end pop up بنود الاستحاقات الثابته -->
                               <button type="submit" class="waves-effect btn" style="float:left">تعديل </button>
                           @endif
                       </div>
