@@ -18,10 +18,7 @@
                 <td>{{ $tableData->employees->name }}</td>
                 <td>{{ $tableData->desded->first()->name}}</td>
                 <td>{{ $tableData->val }}</td>
-                <td>
-                    <input name="deleted" type="checkbox"selected="select" id="deletedd" value="deleted" >
-                    <label for="deleted"></label>
-                </td>
+
                 <td>
                     <a href="{{ URL::route('editEmpdesded',array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>

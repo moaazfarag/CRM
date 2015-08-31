@@ -56,6 +56,7 @@
       {{ HTML::script('dashboard/scripts/employeeService.js') }}
       {{ HTML::script('dashboard/scripts/employeeCtrl.js') }}
       {{ HTML::script('dashboard/scripts/select_model.js') }}
+      {{ HTML::script('dashboard/scripts/required_msg.js') }}
 
       <script>
                 $('#table_customers').DataTable({

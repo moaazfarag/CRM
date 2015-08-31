@@ -18,7 +18,7 @@ class LoansController extends BaseController
     }
     public function storeLoans()
     {
-        $validation = Validator::make(Input::all(), Loans::$store_rules);
+        $validation = Validator::make(Input::all(), Loans::$rules,BaseController::$messages);
 
         if($validation->fails())
         {
@@ -51,11 +51,11 @@ class LoansController extends BaseController
 
     public function updateLoans($id)
     {
-        $validation = Validator::make(Input::all(), Loans::$update_rules);
+        $validation = Validator::make(Input::all(), Loans::$rules,BaseController::$messages);
 
         if($validation->fails())
         {
-            return Redirect::back()->withInput()->withErrors($validation->messages());
+            return Redirect::back()->withInput()->withErrors();
         }
         else
         {

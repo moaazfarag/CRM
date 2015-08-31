@@ -8,12 +8,13 @@
 class EmployeeDeduction extends Eloquent {
 
     protected $table = 'hr_empdesded';
-    public static $store_rules = array(
-        'val'                  => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
+    public static $rules = array(
+        'val'          => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
+        'employee_id'  => 'required',
+        'ds_id'        => 'required',
+
     );
-    public static $update_rules = array(
-        'val'                  => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
-    );
+
     public function employees()
     {
         return $this->belongsTO('Employees','employee_id');

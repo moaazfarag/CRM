@@ -9,21 +9,15 @@ class Loans extends Eloquent
 {
 
     protected $table = 'hr_loans';
-    public static $store_rules = array(
+    public static $rules = array(
+        'employee_id'     => 'required',
         'loan_date'       => 'required|date',
         'loan_start'      => 'required|date',
-        'loan_end'        => 'required|date',
-        'loan_val'        => 'required|integer',
-        'loan_currBal'    => 'required|integer',
+        'loan_currBal'        => 'required|date',
+        'loan_val'        => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
+        'loan_currBal'    => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
     );
 
-    public static $update_rules = array(
-        'loan_date'       => 'required|date',
-        'loan_start'      => 'required|date',
-        'loan_end'        => 'required|date',
-        'loan_val'        => 'required|integer',
-        'loan_currBal'    => 'required|integer',
-    );
     public function employees()
     {
 //        die('sddsd');
