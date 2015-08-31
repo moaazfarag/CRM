@@ -14,9 +14,9 @@
         <tbody>
         @foreach($tablesData as $tableData)
             <tr>
-                <td>{{ $tableData->employees->name }}</td>
-                <td>{{ $tableData->desded->first()->name}}</td>
-                <td>{{ $tableData->val }}</td>
+                <td>{{ @$tableData->employees->name }}</td>
+                <td>{{ @$tableData->desded()->first()->name}}</td>
+                <td>{{ @$tableData->val }}</td>
 
                 <td>
                     <a href="{{ URL::route('editEmpdesded',array($tableData->id)) }}" class="btn btn-small z-depth-0">
