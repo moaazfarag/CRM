@@ -57,7 +57,7 @@
                     {{--<i class="fa fa-tag prefix"></i>--}}
                     <div class="input-field">
                         {{ Form::label('ds_id',' ') }}
-                        {{ Form::select('ds_id', array(NULL => 'البنود') +$co_info->desded()->where('ds_cat','مؤقت')->lists('name','id'),null,array('id'=>'ds_id','required')) }}
+                        {{ Form::select('ds_id', array(NULL => 'البنود') +$co_info->desded()->where('ds_cat','متغير')->lists('name','id'),null,array('id'=>'ds_id','required')) }}
                         <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
                     </div>
                 </div>

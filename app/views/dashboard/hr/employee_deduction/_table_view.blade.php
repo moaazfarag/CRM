@@ -1,12 +1,11 @@
 <div class="card-panel">
-    <table class="table table-hover">
+    <table  id="table_customers" class="table table-hover">
         <thead>
         <tr>
 
             <th>الموظف </th>
             <th>البند </th>
             <th>القيمه </th>
-
             <th> تعديل  </th>
             <th> إلغاء  </th>
 
@@ -18,10 +17,7 @@
                 <td>{{ $tableData->employees->name }}</td>
                 <td>{{ $tableData->desded->first()->name}}</td>
                 <td>{{ $tableData->val }}</td>
-                <td>
-                    <input name="deleted" type="checkbox"selected="select" id="deletedd" value="deleted" >
-                    <label for="deleted"></label>
-                </td>
+
                 <td>
                     <a href="{{ URL::route('editEmpdesded',array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>

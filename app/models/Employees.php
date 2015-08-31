@@ -74,15 +74,51 @@ class Employees extends Eloquent {
     }
     public function loans()
     {
-        return $this->hasOne('Loans','id','employee_id');
+        return $this->hasMany('Loans','employee_id','id');
     }
-    public function employee_ded()
+    public function loansValue()
     {
-        return $this->hasOne('EmployeeDeduction','id','employee_id');
+        $value = 0;
+        foreach ($this->hasMany('Loans','employee_id','id')->get() as $loan ) {
+            $value += $loan->loan_val;
+        }
+        return $value ;
+    }
+    public function employeeDeds()
+    {
+        return $this->hasMany('EmployeeDeduction','employee_id','id');
+    }
+    public function employeeDudValue($type)
+    {
+        $value = 0;
+        $duds = EmployeeDeduction::where('hr_empdesded.employee_id',$this->id)
+            ->where('hr_empdesded.co_id',Auth::user()->co_id)
+            ->join('hr_desded','hr_desded.id','=','hr_empdesded.des_ded')
+           ->where('hr_desded.ds_type',$type)
+            ->get();
+        $changes = MonthChange::where('hr_monthchanges.employee_id',2)
+            ->where('hr_monthchanges.co_id',Auth::user()->co_id)
+            ->join('hr_desded','hr_desded.id','=','hr_monthchanges.desded_id')
+           ->where('hr_desded.ds_type',$type)->where('hr_monthchanges.for_month',5)
+            ->get();
+
+        foreach($duds as $dud ){
+            $value += $dud->val;
+        }
+        foreach($changes as $change ){
+            if($change->daycost = "ايام")
+            {
+                $value += (($this->salary /30) * $change->val ) ;
+            }elseif($change->daycost = "مبلغ"){
+                $value += $change->val;
+            }
+        }
+
+        return $value;
     }
     public function monthchange()
     {
-        return $this->belongsTO('MonthChange','id');
+        return $this->hasMany('MonthChange','employee_id','id');
     }
     public function msheader()
     {

@@ -8,15 +8,15 @@ class hrEmpDesDedSeeder extends Seeder {
                 'employee_id'     => '1 ',
                 'co_id'           => '1',
                 'des_ded'         => '1',
-                'val'             => '54.65',
+                'val'             => '200',
                 'deleted'         => '1',
                 'user_id'         => '1'
             ),
             array(
                 'employee_id'     => '2 ',
-                'co_id'           => '1',
+                'co_id'           => '2',
                 'des_ded'         => '2',
-                'val'             => '54.5',
+                'val'             => '50',
                 'deleted'         => '1',
                 'user_id'         => '2'
             ),
@@ -24,23 +24,23 @@ class hrEmpDesDedSeeder extends Seeder {
                 'employee_id'     => '3 ',
                 'co_id'           => '1',
                 'des_ded'         => '3',
-                'val'             => '4.6',
+                'val'             => '200',
                 'deleted'         => '1',
                 'user_id'         => '3'
             ),
             array(
                 'employee_id'     => '4 ',
-                'co_id'           => '1',
+                'co_id'           => '2',
                 'des_ded'         => '5',
-                'val'             => '5.65',
+                'val'             => '300',
                 'deleted'         => '1',
                 'user_id'         => '4'
             ),
             array(
                 'employee_id'     => '5 ',
                 'co_id'           => '1',
-                'des_ded'         => '5',
-                'val'             => '99.65',
+                'des_ded'         => '1',
+                'val'             => '400',
                 'deleted'         => '1',
                 'user_id'         => '5'
             ),

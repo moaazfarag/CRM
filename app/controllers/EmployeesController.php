@@ -143,6 +143,7 @@ class EmployeesController extends BaseController
                                         ->join('hr_desded','hr_empdesded.des_ded','=','hr_desded.id')
                                         ->where('hr_empdesded.co_id',$this->coAuth())
                                         ->where('hr_empdesded.employee_id',Input::get(0))
+                                        ->select('hr_desded.name AS name','hr_empdesded.val AS val','hr_empdesded.id AS id')
                                         ->get();
            return $data ;
         }
