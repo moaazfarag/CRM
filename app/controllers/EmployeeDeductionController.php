@@ -18,14 +18,14 @@ class EmployeeDeductionController extends BaseController
         $data['employees'] = "open";
         $data = $this->depData();
         $data['deduction'] = Deduction::where('co_id', '=', $this->coAuth())->first();
-        $data['co_info'] = coData::where('id', '=', $this->coAuth())->first();
+        $data['co_info']   = coData::where('id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.employee_deduction.index', $data);
 
     }
 
     public function storeEmpdesded()
     {
-        $validation = Validator::make(Input::all(), EmployeeDeduction::$store_rules);
+        $validation = Validator::make(Input::all(), EmployeeDeduction::$rules,BaseController::$messages);
 
         if($validation->fails())
         {
@@ -60,7 +60,7 @@ class EmployeeDeductionController extends BaseController
     }
     public function updateDesded($id)
     {
-        $validation = Validator::make(Input::all(), EmployeeDeduction::$update_rules);
+        $validation = Validator::make(Input::all(), EmployeeDeduction::$rules,BaseController::$messages);
 
         if($validation->fails())
         {

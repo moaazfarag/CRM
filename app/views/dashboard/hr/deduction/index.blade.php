@@ -18,12 +18,12 @@
         </div>
         <div class="content">
             <div class="row">
-                <div class="col s12 l12">
+                <div class="col s12 l4 ">
                     <div class="input-field">
                         <i class="fa fa-tag prefix"></i>
                         {{ Form::text('name',null,array('required','id'=>'name',)) }}
-                        {{ Form::label('name',  'البند' )     }}
-                        <p class="parsley-required">{{ $errors ->first('name') }} </p>
+                        {{ Form::label('name','البند' )     }}
+                        <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                         <i class="fa fa-tag prefix"></i>
                         {{ Form::select('ds_type', $ds_type ,null,array('id'=>'ds_type','required')) }}
                         {{ Form::label('ds_type',' نوع البند') }}
-                        <p class="parsley-required">{{ $errors ->first('ds_type') }} </p>
+                        <p class="parsley-required error-validation">{{ $errors ->first('ds_type') }} </p>
                     </div>
                 </div>
                 <div class="col s2 l1">
@@ -41,7 +41,6 @@
                         {{--<i class="fa fa-tag prefix"></i>--}}
                         {{ Form::radio('ds_cat','ثابت',null,array('id'=>'ds_cat','required')) }}
                         {{ Form::label('ds_cat','ثابت') }}
-                        <p class="parsley-required">{{ $errors ->first('ds_cat') }} </p>
                     </div>
                 </div>
                 <div class="col s2 l2">
@@ -50,7 +49,7 @@
                         {{ Form::radio('ds_cat','متغير',null,array('id'=>'change_cat','required')) }}
                         {{ Form::label('change_cat','متغير') }}
 
-                        <p class="parsley-required">{{ $errors ->first('ds_cat') }} </p>
+                        <p class="parsley-required error-validation">{{ $errors ->first('ds_cat') }} </p>
                     </div>
                 </div>
             </div>

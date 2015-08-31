@@ -9,24 +9,24 @@ class MonthChange extends Eloquent {
 
     protected $table = 'hr_monthchanges';
     public static $store_rules = array(
+//        employee_id ds_id trans_date for_month for_year day_cost val
+
+        'employee_id'     => 'required',
+        'ds_id'           => 'required',
         'trans_date'      => 'required|date',
-//        'trans_serial'    => 'required',
         'for_year'        => 'required',
         'for_month'       => 'required',
         'day_cost'        => 'required',
-        'val'             => 'required|integer',
-        'cause'           => 'required',
-        'cancel_cause'    => 'required',
-
-
+        'val'             => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
     );
     public static $update_rules = array(
+        'employee_id'     => 'required',
+        'ds_id'           => 'required',
         'trans_date'      => 'required|date',
-//        'trans_serial'    => 'required',
         'for_year'        => 'required',
         'for_month'       => 'required',
         'day_cost'        => 'required',
-        'val'             => 'required|integer',
+        'val'             => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
         'cause'           => 'required',
         'cancel_cause'    => 'required',
 

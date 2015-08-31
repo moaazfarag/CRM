@@ -19,7 +19,7 @@ class DeductionController extends BaseController
     }
     public function storeDesded()
     {
-        $validation = Validator::make(Input::all(), Deduction::$store_rules);
+        $validation = Validator::make(Input::all(), Deduction::$store_rules, BaseController::$messages);
 
         if($validation->fails())
         {
@@ -48,7 +48,7 @@ class DeductionController extends BaseController
     }
     public function updateDesded($id)
     {
-        $validation = Validator::make(Input::all(), Deduction::$update_rules);
+        $validation = Validator::make(Input::all(), Deduction::$update_rules , BaseController::$messages);
 
         if($validation->fails())
         {
@@ -90,7 +90,7 @@ class DeductionController extends BaseController
         $desded = Deduction::find($id);
 
         if (!empty($desded)) {
-            $employee = EmployeeDeduction::where('des_ded',$id);
+            $employee = EmployeeDeduction::where('des_ded',$id)->first();
               if (!empty($employee)) {
 
                   Session::flash('error', 'هذا البند مستخدم فى بنود استحقاقات الموظفين .. لا يمكن الحذف  ');

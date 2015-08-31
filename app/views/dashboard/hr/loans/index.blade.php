@@ -38,17 +38,19 @@
                             <i class="mdi mdi-action-language prefix"></i>
                             {{ Form::text('loan_currBal',null,array('required','id'=>'loan_currBal',)) }}
                             {{ Form::label('loan_currBal',  'القسط الشهرى' )     }}
-                            <p class="parsley-required error-validation">{{ $errors ->first('loan_currBal') }} </p>
                         </div>
-                    </div>
+                    <p class="parsley-required error-validation">{{ $errors ->first('loan_currBal') }} </p>
+
+                </div>
                 <div class="row">
                     <div class="col s1 l2">
                         <div class="input-field">
                             <i class="fa fa-tag prefix"></i>
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_date','  ت.السلفه  ') }}
-                            <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
                         </div>
+                        <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
+
                     </div>
                     <div class="col s2 l2">
                         <div class="input-field">
@@ -63,8 +65,9 @@
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_start','  بدء القسط  ') }}
 
-                            <p class="parsley-required error-validation">{{ $errors ->first('loan_start') }} </p>
                         </div>
+                        <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
+
                     </div>
                     <div class="col s2 l2">
                         <div class="input-field">
@@ -80,8 +83,9 @@
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_end','  انتهاء الاقساط   ') }}
 
-                            <p class="parsley-required error-validation">{{ $errors ->first('loan_end') }} </p>
                         </div>
+                        <p class="parsley-required error-validation">{{ $errors ->first('loan_end') }} </p>
+
                     </div>
                     <div class="col s2 l2">
                         <div class="input-field">
@@ -89,6 +93,8 @@
                             {{ Form::text('loan_end',null,array('required','id'=>'loan_end','class'=>'pikaday')) }}
 
                         </div>
+                        <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
+
                     </div>
 
 
