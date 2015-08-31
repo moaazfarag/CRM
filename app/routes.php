@@ -172,6 +172,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('Update-Employees/{id}',array('before'=>'csrf','uses'=>'EmployeesController@updateEmp','as'=>'updateEmp')) ;
         Route::post('employee-dep-dis-data',array('uses'=>'EmployeesController@employeeDepDisData','as'=>'employeeDepDisData')) ;
         Route::post('store-emp-des-ded-pop',array('uses'=>'EmployeeDeductionController@storeEmpdesdedPop','as'=>'storeEmpdesdedPop')) ;
+        Route::delete('delete-emp-des-ded-pop/{id}',array('uses'=>'EmployeeDeductionController@deleteEmpdesdedPop','as'=>'deleteEmpdesdedPop')) ;
 
 
         //Departments Page

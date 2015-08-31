@@ -29,8 +29,7 @@ angular.module('employeeService', [])
                 });
             },
             destroy : function(id) {
-                return $http.delete('/admin/testdelete/' + id);
-
+                return $http.delete('/admin/hr/delete-emp-des-ded-pop/' + id);
             }
         }
 

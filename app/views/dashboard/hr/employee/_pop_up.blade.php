@@ -2,7 +2,8 @@
 <div ng-app="employeeApp" ng-controller="employeeController" ng-init="dudDis.empId = {{ $employee->id }} "  id="addDud" class="modal">
     <div class="modal-content">
         <h4>
-{{$employee->name}}            استحاقات ثابته للموظف
+            استحقاقات ثابته للموظف
+          <strong>{{ $employee->name }}</strong>
         </h4>
 
         <table class="table table-hover">
@@ -22,8 +23,8 @@
                         @{{ embDudDis.val }}
                     </td>
                     <td>
-                        <input name="deleted" type="checkbox"selected="select" id="deletedd" value="deleted" >
-                        <label for="deleted"></label>
+                        <button type="button"  ng-click="deleteEmpDudDes(embDudDis.id)"
+                            class="btn btn-danger red">[X]</button>
                     </td>
                 </tr>
             </tbody>
@@ -45,7 +46,7 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="mdi mdi-action-language prefix"></i>
-                            {{ Form::number('val',null,array('required','ng-model'=>'dudDis.val','id'=>'val')) }}
+                            {{ Form::number('val',null,array('ng-required'=>"displayCondition",'ng-model'=>'dudDis.val','id'=>'val')) }}
                             {{ Form::label('val',  'القيمه' )     }}
                             <p class="parsley-required">{{ $errors ->first('val') }} </p>
                         </div>

@@ -129,6 +129,20 @@ class EmployeeDeductionController extends BaseController
                 return Redirect::back();
             }
         }
+    public function deleteEmpdesdedPop($id){
+        $Empdesded = EmployeeDeduction::where('co_id',$this->coAuth())
+                                       ->where('id',$id)
+                                       ->first();
+        if (!empty($Empdesded)) {
 
+            $Empdesded->delete();
+
+            Session::flash('success', 'لقد تم حذف البند بنجاح ');
+            return Response::json(array('success'=>true));
+        }else{
+            return Response::json(array('success'=>false));
+
+        }
+    }
 
 }

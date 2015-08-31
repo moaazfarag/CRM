@@ -1,12 +1,11 @@
 <div class="card-panel">
-    <table class="table table-hover">
+    <table  id="table_customers" class="table table-hover">
         <thead>
         <tr>
 
             <th>الموظف </th>
             <th>البند </th>
             <th>القيمه </th>
-
             <th> تعديل  </th>
             <th> إلغاء  </th>
 
