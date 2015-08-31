@@ -20,10 +20,10 @@ class MonthChangeController extends BaseController
     //Function Store Employee In Data Base
     public function storeMonthChange()
     {
-        $validation = Validator::make(Input::all(), MonthChange::$store_rules);
+        $validation = Validator::make(Input::all(), MonthChange::$store_rules,BaseController::$messages);
 
         if ($validation->fails()) {
-            dd($validation->messages());
+//            dd($validation->messages());
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
 
@@ -40,8 +40,6 @@ class MonthChangeController extends BaseController
             $newMonthChange->for_month = Input::get('for_month');
             $newMonthChange->day_cost = Input::get('day_cost');
             $newMonthChange->val = Input::get('val');
-            $newMonthChange->cause = Input::get('cause');
-            $newMonthChange->cancel_cause         = Input::get('cancel_cause');
 
             $newMonthChange->save();
             return Redirect::route('addMonthChange');
@@ -61,7 +59,7 @@ class MonthChangeController extends BaseController
 
     public function updateMonthChange($id)
     {
-        $validation = Validator::make(Input::all(), MonthChange::$update_rules);
+        $validation = Validator::make(Input::all(), MonthChange::$update_rules,BaseController::$messages);
 
         if ($validation->fails()) {
 

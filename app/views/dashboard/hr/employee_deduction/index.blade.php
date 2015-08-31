@@ -21,24 +21,24 @@
                 {{--<i class="fa fa-tag prefix"></i>--}}
                 <div class="input-field">
                     {{ Form::label('employee_id',' ') }}
-                    {{ Form::select('employee_id', array(NULL => 'اختار الموظف ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id','required')) }}
-                    <p class="parsley-required">{{ $errors ->first('employee_id') }} </p>
+                    {{ Form::select('employee_id', array(NULL => 'اختار الموظف ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id')) }}
+                    <p class="parsley-required error-validation">{{ $errors ->first('employee_id') }} </p>
                 </div>
             </div>
         <div class="col s2 l4">
             {{--<i class="fa fa-tag prefix"></i>--}}
             <div class="input-field">
                 {{ Form::label('ds_id',' ') }}
-                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$deduction->where('ds_cat','ثابت')->lists('name','id'),null,array('id'=>'ds_id','required')) }}
-                <p class="parsley-required">{{ $errors ->first('ds_id') }} </p>
+                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$deduction->where('ds_cat','ثابت')->lists('name','id'),null,array('id'=>'ds_id')) }}
+                <p class="parsley-required error-validation">{{ $errors ->first('ds_id') }} </p>
             </div>
         </div>
             <div class="col s12 l3">
                 <div class="input-field">
                     <i class="mdi mdi-action-language prefix"></i>
-                    {{ Form::number('val',null,array('required','id'=>'val')) }}
-                    {{ Form::label('val',  'القيمه' )     }}
-                    <p class="parsley-required">{{ $errors ->first('val') }} </p>
+                    {{ Form::number('val',null,array('id'=>'val','step'=>'0.01')) }}
+                    {{ Form::label('val',  'القيمه' )}}
+                    <p class="parsley-required error-validation">{{ $errors ->first('val') }} </p>
                 </div>
             </div>
         </div>
