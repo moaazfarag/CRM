@@ -20,7 +20,7 @@ class EmployeesController extends BaseController
     //Function Store Employee In Data Base
     public function storeEmp()
     {
-        $validation = Validator::make(Input::all(), Employees::$store_rules);
+        $validation = Validator::make(Input::all(), Employees::$store_rules,BaseController::$messages);
 
         if($validation->fails())
         {
@@ -51,6 +51,7 @@ class EmployeesController extends BaseController
         $newEmp->religion                   = Input::get('religion');
         $newEmp->military_service           = Input::get('military_service');
         $newEmp->tel                        = Input::get('tel');
+        $newEmp->tel2                       = Input::get('tel2');
         $newEmp->address                    = Input::get('address');
         $newEmp->birth_date                 = $this->strToTime($inputs['birth_date']);
         $newEmp->certificate                = Input::get('certificate');

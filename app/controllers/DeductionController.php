@@ -77,7 +77,7 @@ class DeductionController extends BaseController
         $data['employees']          = 'open' ;
         $data['tablesData']        = Deduction::where('co_id','=',$this->coAuth())->get();
         $data['ds_type'] = array(
-            '' => '        النوع',
+            '' => 'نوع البند ',
             'استحقاق' => '           استحقاق',
             'استقطاع' => '         استقطاع ');
         return $data;
