@@ -3,18 +3,19 @@
        <div class="card-panel">
 
 
+
                    <table id="table_customers" class="display table table-bordered table-striped table-hover">
 
           <thead>
             <tr>
-              <th>المسلسل</th>
-              <th>الاسم</th>
-              <th>الوظيفه</th>
-              <th>القسم</th>
-              <th>الراتب</th>
-              <th>العنوان</th>
-              <th>المؤهل</th>
-              <th>تعديل</th>
+              <th> @lang('main.serial')</th>
+              <th> @lang('main.name')</th>
+              <th> @lang('main.position')</th>
+              <th> @lang('main.section')</th>
+              <th> @lang('main.salary')</th>
+              <th> @lang('main.address')</th>
+              <th> @lang('main.qualification')</th>
+              <th> @lang('main.edit')</th>
             </tr>
           </thead>
           <tbody>

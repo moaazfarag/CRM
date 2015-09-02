@@ -177,43 +177,107 @@ return  array(
     'theType'          => 'النوع',
     'settles'          => 'التسويات',
 
+    ########## add employee page  ###############
 
+    'employe_name'       => 'اسم الموظف ',
+    'national_id'		 =>'الرقم القومى',
+    'insurance_number'   =>'رقم التأمين',
+    'position'			 =>'الوظيفة',
+    'departments'		 =>'الأقسام',
+    'insurance_salary'   => 'مرتب التامينات ',
+    'discount_insurance' => 'خصم التامين',
+    'cancellation_work'  =>'الغاء العمل فى تاريخ',
+    'cancellation_reason'=> 'سبب الالغاء',
+    'phone_number_1'	 => 'رقم الهاتف 1',
+    'phone_number_2'	 => 'رقم الهاتف 2',
+    'birthday'    		 =>'تاريخ الميلاد  ' ,
+    'face_qualification' =>'جهه المؤهل ',
+    'date_qualification' =>'تاريخ المؤهل ',
+    'comments'			 =>'ملاحظات',
+    'other_fixed_salary' =>'بنود الراتب الثابته للموظف',
+    'edit_employee' => 'تعديل فى بيانات الموظف',
+    'sex'=>'الجنس',
 
+    // add employee controller
+    'add_employee'		  =>'اضافه موظف',
+    'male'				  =>'ذكر',
+    'female'			  =>'انثى',
+    'religion'			  =>'الديانه',
+    'muslim'			  =>'مسلم',
+    'christian'			  =>'مسيحي',
+    'contract_type'       =>'نوع التعاقد',
+    'permanent'           =>'دائم',
+    'temporary'           =>'مؤقت',
+    'social_status'  	  =>'الحاله الاجتماعيه',
+    'married'			  =>'متزوج',
+    'single'			  =>'اعزب',
+    'position_recruitment'=>'موقف التجنيد',
+    'exemption'           =>'معافاة',
+    'delay'               =>'تاجيل',
+    'presented_service'   =>'أدى الخدمه',
 
+    // add employee table view
 
+    'serial'	=>'المسلسل',
 
+    ######### Department page ###########
 
+    'delete_department_error_msg'  =>'لا يمكن حذف هذا القسم لأنة يحتوى على موظفين ',
+    'delete_department_success_msg'=>'لقد تم حذف القسم بنجاح',
 
+    ######### job page ###########
 
+    'delete_job_error_msg'  =>'لا يمكن حذف هذه الوظيفة لوجود موظفين بها',
+    'delete_job_success_msg'=>'لقد تم حذف الوظيفة بنجاح ',
 
+    ######## loans page ###########
 
+    'salary_loan'      =>'المبلغ',
+    'add_new_loan'     =>'اضف قرض جديد',
+    'chose_employee'   =>'اختار الموظف ',
+    'monthly_quantity' =>'القسط الشهرى',
+    'loan_date'        =>'تاريخ السلفه',
+    'loan_start'       =>' بداية  الأقساط',
+    'loan_end'         =>' انتهاء الاقساط',
+    'loan_request'     =>'طلب قرض',
+    'loan_edit'        =>'تعديل فى بيانات القروض',
+    'loans'            => 'القروض',
+    'balance'          =>'الرصيد',
+    'finished'         => 'منتهى',
+    'employee'         => 'الموظف',
 
+    ############# add desded page #######
 
+    'add_new_clause'   => 'أضف بند جديد',
+     'clause'          => 'البند',
+     'clause_type'     => 'نوع البند',
+    'clause_nature'    =>'طبيعة البند ',
+    'fixed'            =>'ثابت',
+    'variable'         =>'متغير',
+    'edit_clause_debt' => 'تعديل فى بنود الاستحقاق',
+    'debt'             =>'استحقاق',
+    'credit'           =>'استقطاع',
+    'delete_clause_error_msg' => 'هذا البند مستخدم فى بنود استحقاقات الموظفين .. لا يمكن الحذف ',
+    'delete_clause_success_msg' => 'لقد تم حذف البند بنجاح ',
 
+    ######### addMonthChange #########
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    'month_change'		=>'التغيرات الشهرية ',
+    'month_change_edit'	=>'تعديل فى التغيرات الشهرية',
+    // in index page
+    'add_monthly_changes'=>'أضف تغيرات شهرية ',
+//    'employee'           =>'الموظف',
+    'clauses'            =>'البنود',
+//    'date'               =>'التاريخ',
+    'for_the_month'      =>'عن شهر',
+    'select_month'       =>'أختر الشهر',
+    'year'               =>'سنة',
+    'select_year'        =>'أختر السنة',
+    'days'	             =>'أيام ',
+//    'salary'             =>'مبلغ',
+    'reason'             =>'السبب',
+    'delete_movement'    =>'ألغاء الحركة ',
+    'cancellation_reason'=>'سبب الإلغاء',
 
 
 );

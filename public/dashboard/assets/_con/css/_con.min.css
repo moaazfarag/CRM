@@ -3081,7 +3081,7 @@ span.badge.new:after {
 
 .row .col {
     float: left;
-    padding-bottom: 1.3rem;
+    /*padding-bottom: 1.3rem;*/
     padding-right: 1.3rem
 }
 
@@ -4906,7 +4906,7 @@ input[type=date].invalid, input[type=date]:focus.invalid, input[type=datetime-lo
 
 .input-field {
     position: relative;
-    margin-top: 1rem
+    /*margin-top: 1rem*/
 }
 
 .input-field label {

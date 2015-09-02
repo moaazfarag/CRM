@@ -3,16 +3,16 @@
         <thead>
         <tr>
 
-            <th>التسلسل </th>
-            <th>الموظف </th>
-            <th>تاريخ السلفه</th>
-            <th>المبلغ </th>
-            <th>القسط</th>
-            <th>تاريخ البدايه  </th>
-            <th>تاريخ الانتهاء  </th>
-            <th>الرصيد   </th>
-            <th>منتهى</th>
-            <th>تعديل</th>
+            <th>@lang('main.serial')</th>
+            <th>@lang('main.employee')</th>
+            <th>@lang('main.loan_date')</th>
+            <th>@lang('main.salary_loan')</th>
+            <th>@lang('main.monthly_quantity')</th>
+            <th>@lang('main.loan_start')</th>
+            <th>@lang('main.loan_end')</th>
+            <th>@lang('main.finished')</th>
+            <th>@lang('main.balance')</th>
+            <th>@lang('main.edit')</th>
 
 
         </tr>
