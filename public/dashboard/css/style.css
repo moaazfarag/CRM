@@ -43,9 +43,11 @@ div.error-div {
 
 }
 
-.error-validation{
+.parsley-required{
 
     color: red;
     font-size: 10pt;
+    text-align: right;
     float:right;
+    direction: rtl;
 }

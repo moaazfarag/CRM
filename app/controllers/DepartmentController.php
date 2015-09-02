@@ -73,11 +73,11 @@ class DepartmentController extends BaseController
 //            var_dump($employees); die();
             if(!empty($employees)){
 
-                Session::flash('error','لا يمكن حذف هذا القسم لأنة يحتوى على موظفين ');
+                Session::flash('error',Lang::get('main.delete_department_error_msg'));
             return Redirect::back();
         }else{
                 $dep->delete();
-                  Session::flash('success','لقد تم حذف القسم بنجاح');
+                  Session::flash('success',Lang::get('main.delete_department_success_msg'));
                   return Redirect::back();
 
             }//end else employees

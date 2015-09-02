@@ -8,12 +8,11 @@
     <table class="table table-hover">
         <thead>
         <tr>
-
-            <th>البند </th>
-            <th>نوع البند </th>
-            <th>طبيعه البند </th>
-            <th>تعديل</th>
-            <th>حذف</th>
+            <th>@lang('main.clause') </th>
+            <th>@lang('main.clause_type')  </th>
+            <th>@lang('main.clause_nature') </th>
+            <th> @lang('main.edit') </th>
+            <th>@lang('main.delete') </th>
 
         </tr>
         </thead>

@@ -11,7 +11,7 @@ class DeductionController extends BaseController
     {
 
         $data = $this->staticData() ;
-        $data['title']     = 'اضف بند جديد '  ; // page title
+        $data['title']     = Lang::get('main.add_new_clause'); // page title
         $data['employees'] = "open";
         $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.deduction.index',$data);
@@ -40,7 +40,7 @@ class DeductionController extends BaseController
     public  function editDesded($id)
     {
         $data = $this->staticData() ;
-        $data['title']     = 'تعديل فى بنود الاستحقاق'; // page title
+        $data['title']     = Lang::get('main.edit_clause_debt'); // page title
         $data['employees'] = "open";
         $data['employee'] = Deduction::findOrFail($id);
         $data['co_info']   = CoData::thisCompany()->first();
@@ -77,9 +77,9 @@ class DeductionController extends BaseController
         $data['employees']          = 'open' ;
         $data['tablesData']        = Deduction::company()->get();
         $data['ds_type'] = array(
-            '' => '        النوع',
-            'استحقاق' => '           استحقاق',
-            'استقطاع' => '         استقطاع ');
+            '' => Lang::get('main.clause_type'),
+            Lang::get('main.debt') =>  Lang::get('main.debt'),
+            Lang::get('main.credit')=>  Lang::get('main.credit'));
         return $data;
 
     }
@@ -93,14 +93,14 @@ class DeductionController extends BaseController
             $employee = EmployeeDeduction::where('des_ded',$id)->first();
               if (!empty($employee)) {
 
-                  Session::flash('error', 'هذا البند مستخدم فى بنود استحقاقات الموظفين .. لا يمكن الحذف  ');
+                  Session::flash('error',Lang::get('main.delete_clause_error_msg'));
                   return Redirect::back();
 
               }else{
 
                   $desded->delete();
 
-                  Session::flash('success', 'لقد تم حذف البند بنجاح ');
+                  Session::flash('success', Lang::get('main.delete_clause_success_msg'));
                   return Redirect::back();
               }
         }

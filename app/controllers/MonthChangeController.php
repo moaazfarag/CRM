@@ -10,7 +10,7 @@ class MonthChangeController extends BaseController
     public function addMonthChange()
     {
         $data = $this->depData();
-        $data['title'] = 'التغيرات الشهريه '; // page title
+        $data['title'] = Lang::get('main.month_change'); // page title
         $data['employees'] = "open";
         $data['monthchange'] = MonthChange::company()->first();
         $data['co_info'] = coData::thisCompany()->first();
@@ -49,7 +49,7 @@ class MonthChangeController extends BaseController
     public function editMonthChange($id)
     {
         $data = $this->depData() ;
-        $data['title'] = 'تعديل فى التغيرات الشهريه    '; // page title
+        $data['title'] = Lang::get('main.month_change_edit'); // page title
         $data['employees'] = "open";
         $data['employee'] = MonthChange::findOrFail($id);
         $data['monthchange'] = MonthChange::company()->first();
@@ -91,7 +91,7 @@ class MonthChangeController extends BaseController
     }
     protected function depData()
             {
-                $data['title']              = 'التغيرات الشهريه';
+                $data['title']              = Lang::get('main.month_change');
                 $data['employees']          = 'open' ;
                 $data['tablesData']        = MonthChange::company()->get();
                 return $data;

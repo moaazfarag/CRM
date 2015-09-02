@@ -76,11 +76,11 @@ class JobController extends BaseController
 //            var_dump($employees); die();
             if(!empty($employees)){
 
-                Session::flash('error','لا يمكن حذف هذه الوظيفة لوجود موظفين بها ');
+                Session::flash('error',Lang::get('main.delete_job_error_msg'));
                 return Redirect::back();
             }else{
                 $job->delete();
-                Session::flash('success','لقد تم حذف الوظيفة بنجاح ');
+                Session::flash('success',Lang::get('main.delete_job_success_msg'));
                 return Redirect::back();
 
             }//end else employees

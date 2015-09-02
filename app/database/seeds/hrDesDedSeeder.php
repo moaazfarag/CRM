@@ -2,8 +2,8 @@
 class hrDesDedSeeder extends Seeder{
     public function run()
     {
-        DB::table('hr_desDed')->truncate();
-        DB::table('hr_desDed')->insert(array(
+        DB::table('hr_desded')->truncate();
+        DB::table('hr_desded')->insert(array(
             array(
             'co_id'          => '1',
             'name'           => 'طبيعة عمل',
@@ -20,6 +20,7 @@ class hrDesDedSeeder extends Seeder{
             'deleted'        => '1',
             'user_id'        => '5',
             ), array(
+
                 'co_id'          => '1',
                 'name'           => 'خصم غياب',
                 'ds_type'        => 'استقطاع',

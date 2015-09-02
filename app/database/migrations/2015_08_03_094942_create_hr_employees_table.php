@@ -27,14 +27,15 @@ class CreateHrEmployeesTable extends Migration {
             $table->decimal('ins_salary',18,2);
             $table->decimal('ins_val',18,2);
             $table->char('ins_no','50');
-            $table->char('card_no','14');
+            $table->char('card_no','14')->unique();
             $table->dateTime('cancel_date');
             $table->char('cancel_cause','200');
             $table->enum('sex',array('انثى ','ذكر '));
             $table->enum('marital',array('اعزب ',' متزوج'));
             $table->enum('religion',array('مسلم ',' مسيحى'));
             $table->enum('military_service',array('تم الخدمه ',' معافى ','تاجيل'));
-            $table->char('tel','200');
+            $table->char('tel','20');
+            $table->char('tel2','20');
             $table->char('address','200');
             $table->dateTime('birth_date');
             $table->char('certificate','50');
