@@ -19,9 +19,8 @@ class hrDesDedSeeder extends Seeder{
             'ds_cat'         => 'ثابت',
             'deleted'        => '1',
             'user_id'        => '5',
-            ),
-            array(
-                'ds_id'          => '2',
+            ), array(
+
                 'co_id'          => '1',
                 'name'           => 'خصم غياب',
                 'ds_type'        => 'استقطاع',
