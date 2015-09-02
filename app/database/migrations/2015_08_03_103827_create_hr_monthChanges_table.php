@@ -21,7 +21,7 @@ class CreateHrMonthChangesTable extends Migration {
             $table->integer('trans_serial');
             $table->integer('for_year');
             $table->integer('for_month');
-            $table->integer('desDed_id');
+            $table->integer('des_ded_id');
             $table->char('day_cost','25');
             $table->decimal('val','10',2);
             $table->char('cause','200')->nullable();

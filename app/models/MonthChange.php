@@ -38,7 +38,7 @@ class MonthChange extends Eloquent {
     }
     public function desded()
     {
-        return $this->belongsTo('Deduction','desded_id');
+        return $this->belongsTo('Deduction','des_ded_id');
     }
     public function employees()
     {

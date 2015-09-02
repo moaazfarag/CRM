@@ -12,7 +12,7 @@ public function addSalesInvoice(){
     $data['title']      = " تسوية  " ; // page title
     $data['name']       = "sd"; // page title
     $data['invoices']  = 'open' ;
-    $data['co_info']    = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+    $data['co_info']    = CoData::thisCompany()->first();//select info models category seasons
     $data['branch']     = $this->isAllBranch();
     $data['pay_type']     = array('نقدى ','فيزا','اجل');
     $data['account_type'] = array('customers'=>'العملاء','suppliers'=>'الموردين','partners'=>'جارى الشركاء');

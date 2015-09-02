@@ -72,7 +72,7 @@ class JobController extends BaseController
         $job = Job::find($id);
         if(!empty($job)){
 
-            $employees = Employees::where('job_id',$id)->where('co_id','=',$this->coAuth())->first();
+            $employees = Employees::where('job_id',$id)->company()->first();
 //            var_dump($employees); die();
             if(!empty($employees)){
 

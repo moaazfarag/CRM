@@ -8,7 +8,7 @@
 class MsHeader extends Eloquent
 {
 
-    protected $table = 'hr_msheader';
+    protected $table = 'hr_ms_header';
 
     public function employees()
     {

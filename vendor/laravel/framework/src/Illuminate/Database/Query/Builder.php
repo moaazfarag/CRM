@@ -5,6 +5,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
+use Illuminate\Support\Facades\Auth;
 
 class Builder {
 
@@ -1343,6 +1344,26 @@ class Builder {
 	public function find($id, $columns = array('*'))
 	{
 		return $this->where('id', '=', $id)->first($columns);
+	}
+
+	/**
+	 * return data how belong to user base on auth
+	 * custom function
+	 * @return Builder
+	 */
+	public function company()
+	{
+		return $this->where('co_id', '=', Auth::user()->co_id);
+	}
+	/**
+	 * return data how belong to user base on auth
+	 * for co_data table
+	 * custom function
+	 * @return Builder
+	 */
+	public function thisCompany()
+	{
+		return $this->where('id', '=', Auth::user()->co_id);
 	}
 
 	/**

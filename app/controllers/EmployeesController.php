@@ -13,7 +13,7 @@ class EmployeesController extends BaseController
         $data = $this->staticData() ;
         $data['title']     =  Lang::get('main.addEmployee')  ; // page title
         $data['employees'] = "open";
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.employee.index',$data);
 
     }
@@ -76,7 +76,7 @@ class EmployeesController extends BaseController
         $data['title']     = Lang::get('main.edit_employee'); // page title
         $data['employees'] = "open";
         $data['employee'] = Employees::findOrFail($id);
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.employee.index',$data);
   }
 
@@ -152,13 +152,11 @@ class EmployeesController extends BaseController
          {
          $data['title']              = Lang::get('main.add_employee');
          $data['employees']          = 'open' ;
-         $data['tablesData']        = Employees::where('co_id','=',$this->coAuth())->get();
-
-             $data['sex'] = array(
+         $data['tablesData']        = Employees::company()->get();
+            $data['sex'] = array(
                 '' => Lang::get('main.sex'),
                 Lang::get('main.male')  => Lang::get('main.male'),
                 Lang::get('main.female')=> Lang::get('main.female'));
-
              $data['religion'] = array(
                  ''=>Lang::get('main.religion'),
                  Lang::get('main.muslim')    => Lang::get('main.muslim'),
