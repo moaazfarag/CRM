@@ -13,7 +13,7 @@ class DeductionController extends BaseController
         $data = $this->staticData() ;
         $data['title']     = 'اضف بند جديد '  ; // page title
         $data['employees'] = "open";
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.deduction.index',$data);
 
     }
@@ -43,7 +43,7 @@ class DeductionController extends BaseController
         $data['title']     = 'تعديل فى بنود الاستحقاق'; // page title
         $data['employees'] = "open";
         $data['employee'] = Deduction::findOrFail($id);
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.deduction.index',$data);
     }
     public function updateDesded($id)
@@ -75,7 +75,7 @@ class DeductionController extends BaseController
     public function staticData()
     {
         $data['employees']          = 'open' ;
-        $data['tablesData']        = Deduction::where('co_id','=',$this->coAuth())->get();
+        $data['tablesData']        = Deduction::company()->get();
         $data['ds_type'] = array(
             '' => '        النوع',
             'استحقاق' => '           استحقاق',

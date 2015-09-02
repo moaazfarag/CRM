@@ -79,8 +79,14 @@ class Employees extends Eloquent {
     public function loansValue()
     {
         $value = 0;
+
         foreach ($this->hasMany('Loans','employee_id','id')->get() as $loan ) {
-            $value += $loan->loan_val;
+            $endMonth = date('m',strtotime($loan->loan_end));
+            $endYear  = date('Y',strtotime($loan->loan_end));
+
+            if($endMonth >= Input::get('for_month') && $endYear >= Input::get('for_year')){
+                $value += $loan->loan_val;
+            }
         }
         return $value ;
     }
@@ -91,25 +97,27 @@ class Employees extends Eloquent {
     public function employeeDudValue($type)
     {
         $value = 0;
-        $duds = EmployeeDeduction::where('hr_empdesded.employee_id',$this->id)
-            ->where('hr_empdesded.co_id',Auth::user()->co_id)
-            ->join('hr_desded','hr_desded.id','=','hr_empdesded.des_ded')
-           ->where('hr_desded.ds_type',$type)
-            ->get();
-        $changes = MonthChange::where('hr_monthchanges.employee_id',2)
-            ->where('hr_monthchanges.co_id',Auth::user()->co_id)
-            ->join('hr_desded','hr_desded.id','=','hr_monthchanges.desded_id')
-           ->where('hr_desded.ds_type',$type)->where('hr_monthchanges.for_month',5)
-            ->get();
+        $duds = EmployeeDeduction::where('hr_empdesded.co_id',Auth::user()->co_id)
+                                    ->where('hr_empdesded.employee_id',$this->id)
+                                    ->join('hr_desded','hr_desded.id','=','hr_empdesded.des_ded')
+                                    ->where('hr_desded.ds_type',$type)
+                                    ->get();
+        $changes = MonthChange::where('hr_monthchanges.co_id',Auth::user()->co_id)
+                                    ->where('hr_monthchanges.employee_id',$this->id)
+                                    ->where('hr_monthchanges.for_month',Input::get('for_month'))
+                                    ->where('hr_monthchanges.for_year',Input::get('for_year'))
+                                    ->join('hr_desded','hr_desded.id','=','hr_monthchanges.des_ded_id')
+                                    ->where('hr_desded.ds_type',$type)
+                                    ->get();
 
         foreach($duds as $dud ){
             $value += $dud->val;
         }
         foreach($changes as $change ){
-            if($change->daycost = "ايام")
+            if($change->day_cost == "ايام")
             {
                 $value += (($this->salary /30) * $change->val ) ;
-            }elseif($change->daycost = "مبلغ"){
+            }elseif($change->day_cost == "مبلغ"){
                 $value += $change->val;
             }
         }

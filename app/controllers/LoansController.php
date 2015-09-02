@@ -12,7 +12,7 @@ class LoansController extends BaseController
         $data['title']     = 'طلب قرض'  ; // page title
         $data = $this->depData();
         $data['employees'] = "open";
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.loans.index',$data);
 
     }
@@ -45,7 +45,7 @@ class LoansController extends BaseController
         $data['employees'] = "open";
         $data = $this->depData();
         $data['employee'] = Loans::findOrFail($id);
-       $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+       $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.loans.index',$data);
     }
 
@@ -55,7 +55,7 @@ class LoansController extends BaseController
 
         if($validation->fails())
         {
-            return Redirect::back()->withInput()->withErrors();
+            return Redirect::back()->withInput()->withErrors($validation->messages());
         }
         else
         {
@@ -86,7 +86,7 @@ class LoansController extends BaseController
     {
         $data['title']              = 'القروض';
         $data['employees']          = 'open' ;
-        $data['tablesData']        = Loans::where('co_id','=',$this->coAuth())->get();
+        $data['tablesData']        = Loans::company()->get();
         return $data;
     }
 

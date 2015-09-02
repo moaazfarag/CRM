@@ -60,7 +60,7 @@ class DepartmentController extends BaseController
         $data['employees'] = 'open';
         $data['modelMini'] = "";
         $data['arabicName'] = $parts;
-        $data['tablesData'] = Department::where('co_id', '=', $this->coAuth())->get();
+        $data['tablesData'] = Department::company()->get();
         return $data;
     }
 

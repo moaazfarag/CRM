@@ -13,7 +13,7 @@ class EmployeesController extends BaseController
         $data = $this->staticData() ;
         $data['title']     =  Lang::get('main.addEmployee')  ; // page title
         $data['employees'] = "open";
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.employee.index',$data);
 
     }
@@ -75,7 +75,7 @@ class EmployeesController extends BaseController
         $data['title']     = 'تعديل فى بيانات الموظف'; // page title
         $data['employees'] = "open";
         $data['employee'] = Employees::findOrFail($id);
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.employee.index',$data);
   }
 
@@ -151,7 +151,7 @@ class EmployeesController extends BaseController
          {
          $data['title']              = 'اضافه موظف';
          $data['employees']          = 'open' ;
-         $data['tablesData']        = Employees::where('co_id','=',$this->coAuth())->get();
+         $data['tablesData']        = Employees::company()->get();
             $data['sex'] = array(
                 '' => 'الجنس',
                 'ذكر'=>'ذكر',

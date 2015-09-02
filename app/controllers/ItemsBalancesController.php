@@ -32,7 +32,7 @@ class ItemsBalancesController extends BaseController {
         $addItemsBalances =Lang::get('main.addItemsBalances');
         $data['title']     = $addItemsBalances; // page title
         $data['sideOpen']   = 'open' ;
-        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+        $data['co_info']  = CoData::thisCompany()->first();//select info models category seasons
         return View::make('dashboard.items_balances.index',$data);
     }
 
@@ -97,12 +97,12 @@ class ItemsBalancesController extends BaseController {
         $editItemsBalances =Lang::get('main.editItemsBalances');
         $data['title']     = $editItemsBalances; // page title
         $data['sideOpen']   = 'open' ;
-        $data['items']     = ItemsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
+        $data['items']     = ItemsBalances::company()->get(); //  get all item to view in table
         $data['item']      = ItemsBalances::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
 //        dd($data['item']);
         if($data['item'])
         {
-            $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['co_info']  = CoData::thisCompany()->first();//select info models category seasons
 
             return View::make('dashboard.items_balances.index',$data);
         }else{

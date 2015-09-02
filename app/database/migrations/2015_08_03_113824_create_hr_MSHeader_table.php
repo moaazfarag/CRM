@@ -12,7 +12,7 @@ class CreateHrMSHeaderTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('hr_MSHeader', function(Blueprint $table)
+		Schema::create('hr_ms_header', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->integer('co_id');

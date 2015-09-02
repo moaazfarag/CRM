@@ -17,8 +17,8 @@ class ItemController extends BaseController
 
         $data['title']     =  Lang::get('main.addItem')  ; // page title
         $data['asideOpen']      = "open";
-//        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
-        $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+//        $data['items']     = Items::company()->get(); //  get all item to view in table
+        $data['co_info']   = CoData::thisCompany()->first();//select info models category seasons
 //        $data['accounts']  = Accounts::where('acc_type','=','suppliers')
 //                                        ->where('co_id','=',Auth::user()->co_id)
 //                                        ->get()
@@ -67,12 +67,12 @@ class ItemController extends BaseController
     {
         $data['title']     = Lang::get('main.editItem'); // page title
         $data['mainasideOpen']      = "open";
-//        $data['items']     = Items::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
+//        $data['items']     = Items::company()->get(); //  get all item to view in table
         $data['item']      = Items::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
 //        dd($data['item']);
         if($data['item'])
         {
-            $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['co_info']  = CoData::thisCompany()->first();//select info models category seasons
 //            $data['accounts'] = Accounts::where('acc_type','=','suppliers')
 //                ->where('co_id','=',Auth::user()->co_id)
 //                ->get()
