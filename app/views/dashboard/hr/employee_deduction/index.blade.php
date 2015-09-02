@@ -30,7 +30,7 @@
             <div class="input-field">
                 {{ Form::label('ds_id',' ') }}
 
-                {{ Form::select('ds_id', array(NULL => '             بنود الاستحقاق والاستقطاع') +$deduction->where('ds_cat','ثابت')->lists('name','id'),null,array('id'=>'ds_id')) }}
+                {{ Form::select('ds_id', array(NULL =>'بنود الاستحقاق والاستقطاع') +$deduction->where('ds_cat','ثابت')->lists('name','id'),null,array('id'=>'ds_id')) }}
                 <p class="parsley-required error-validation">{{ $errors ->first('ds_id') }} </p>
             </div>
         </div>

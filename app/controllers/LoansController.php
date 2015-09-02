@@ -9,7 +9,7 @@ class LoansController extends BaseController
 {
     public function addLoans()
     {
-        $data['title']     = 'طلب قرض'  ; // page title
+        $data['title']     = Lang::get('main.loan_request'); // page title
         $data = $this->depData();
         $data['employees'] = "open";
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
@@ -41,7 +41,7 @@ class LoansController extends BaseController
 
     public  function editLoans($id)
     {
-        $data['title']     = 'تعديل فى بيانات القروض   '; // page title
+        $data['title']     = Lang::get('main.loan_edit');// page title
         $data['employees'] = "open";
         $data = $this->depData();
         $data['employee'] = Loans::findOrFail($id);
@@ -84,7 +84,7 @@ class LoansController extends BaseController
     }
     protected function depData()
     {
-        $data['title']              = 'القروض';
+        $data['title']              = Lang::get('main.loans');
         $data['employees']          = 'open' ;
         $data['tablesData']        = Loans::where('co_id','=',$this->coAuth())->get();
         return $data;

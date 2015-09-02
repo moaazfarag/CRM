@@ -11,7 +11,7 @@
     <div class=" card ">
         <div class="title">
             <h5>
-                <i class="fa fa-cog"></i> اضف بند جدبد  </h5>
+                <i class="fa fa-cog"></i> @lang('main.add_new_clause') </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
             </a>
@@ -22,7 +22,7 @@
                     <div class="input-field">
                         <i class="fa fa-tag prefix"></i>
                         {{ Form::text('name',null,array('required','id'=>'name',)) }}
-                        {{ Form::label('name','البند' )     }}
+                        {{ Form::label('name',Lang::get("main.clause") )}}
                         <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                     </div>
                 </div>
@@ -38,16 +38,16 @@
                 <div class="col s12 l1">
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
-                        {{ Form::radio('ds_cat','ثابت',null,array('id'=>'ds_cat')) }}
-                        {{ Form::label('ds_cat','ثابت') }}
+                        {{ Form::radio('ds_cat',lang::get('main.fixed'),null,array('id'=>'ds_cat')) }}
+                        {{ Form::label('ds_cat',lang::get('main.fixed')) }}
                     </div>
 
                 </div>
                 <div class="col s12 l1">
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
-                        {{ Form::radio('ds_cat','متغير',null,array('id'=>'change_cat')) }}
-                        {{ Form::label('change_cat','متغير') }}
+                        {{ Form::radio('ds_cat',lang::get('main.variable'),null,array('id'=>'change_cat')) }}
+                        {{ Form::label('change_cat',lang::get('main.variable')) }}
 
                     </div>
 
@@ -63,10 +63,10 @@
                 <div class="col s12 l12">
                     @if(Route::currentRouteName() == 'addDesded')
                         {{--{{Form::submit('  اضف ')}}--}}
-                        <button type="submit" class="waves-effect btn">اضف </button>
+                        <button type="submit" class="waves-effect btn">@lang('main.add') </button>
                     @elseif(Route::currentRouteName() == 'editDesded')
                         {{--{{Form::submit('  تعديل ')}}--}}
-                        <button type="submit" class="waves-effect btn">تعديل </button>
+                        <button type="submit" class="waves-effect btn">@lang('main.edit') </button>
                     @endif
                 </div>
                 {{ Form::close() }}

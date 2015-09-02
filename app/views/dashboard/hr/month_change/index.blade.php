@@ -10,7 +10,7 @@
     <div class=" card ">
         <div class="title">
             <h5>
-                <i class="fa fa-cog"></i> اضف تغيرات شهريه </h5>
+                <i class="fa fa-cog"></i> 1 </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
             </a>

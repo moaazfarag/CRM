@@ -73,7 +73,7 @@ class EmployeesController extends BaseController
    public  function editEmp($id)
     {
         $data = $this->staticData() ;
-        $data['title']     = 'تعديل فى بيانات الموظف'; // page title
+        $data['title']     = Lang::get('main.edit_employee'); // page title
         $data['employees'] = "open";
         $data['employee'] = Employees::findOrFail($id);
         $data['co_info']   = CoData::where('id','=',$this->coAuth())->first();
@@ -150,30 +150,36 @@ class EmployeesController extends BaseController
         }
          public function staticData()
          {
-         $data['title']              = 'اضافه موظف';
+         $data['title']              = Lang::get('main.add_employee');
          $data['employees']          = 'open' ;
          $data['tablesData']        = Employees::where('co_id','=',$this->coAuth())->get();
-            $data['sex'] = array(
-                '' => 'الجنس',
-                'ذكر'=>'ذكر',
-                'انثى'=>'انثى ');
+
+             $data['sex'] = array(
+                '' => Lang::get('main.sex'),
+                Lang::get('main.male')  => Lang::get('main.male'),
+                Lang::get('main.female')=> Lang::get('main.female'));
+
              $data['religion'] = array(
-                 ''=>'الديانه',
-                'مسلم'=>'مسلم',
-                'مسيحي'=>'مسيحي ');
+                 ''=>Lang::get('main.religion'),
+                 Lang::get('main.muslim')    => Lang::get('main.muslim'),
+                 Lang::get('main.christian') => Lang::get('main.christian'));
+
              $data['work_nature'] = array(
-                 '' => ' نوع التعاقد',
-                 'دائم'=>'دائم',
-                 'مؤقت'=>'مؤقت');
+                 '' => Lang::get('main.contract_type'),
+                 Lang::get('main.permanent')=>Lang::get('main.permanent'),
+                 Lang::get('main.temporary')=>Lang::get('main.temporary'));
+
              $data['marital'] = array(
-                 '' => ' الحاله الاجتماعيه ',
-                 'متزوج'=>'متزوج',
-                 'اعزب'=>'اعزب');
+                 ''=> Lang::get('main.social_status'),
+                 Lang::get('main.married')=> Lang::get('main.married'),
+                 Lang::get('main.single')=> Lang::get('main.single'));
+
              $data['military_service'] = array(
-                 '' => ' موقف التجنيد ',
-                 'معافى '=>'معافى',
-                 'تاجيل'=>'تاجيل',
-                 'تم الخدمه'=>'تم الخدمه ');
+                 '' =>  Lang::get('main.position_recruitment'),
+                 Lang::get('main.exemption')=> Lang::get('main.exemption'),
+                 Lang::get('main.delay')    =>Lang::get('main.delay'),
+                 Lang::get('main.presented_service')=>Lang::get('main.presented_service'));
+
             return $data;
 
          }
