@@ -2,6 +2,7 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
+    @if(Route::currentRouteName() == "addMsHeader")
         {{ Form::open(array('route'=>array('prepMsHeader'))) }}
     <div class=" card ">
         <div class="title">
@@ -44,12 +45,11 @@
                     {{ Form::close() }}
                 </div>{{--submit  row end--}}
             </div>
-
+        @endif
     </div>
             @if(Route::currentRouteName() == "prepMsHeader")
                 @include('dashboard.hr.msheader._table_view');
-
-    @endif
+            @endif
 </section>
 @stop
 

@@ -88,8 +88,8 @@ class EmployeeDeductionController extends BaseController
      */
     public function storeEmpdesdedPop()
     {
-
-        $validation = Validator::make(Input::all(), EmployeeDeduction::$store_rules);
+//dd('sad');
+        $validation = Validator::make(Input::all(), EmployeeDeduction::$rules);
 
         if($validation->fails())
         {
