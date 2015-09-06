@@ -5,11 +5,11 @@
               <th>@lang('main.name') </th>
               <th>@lang('main.mail')  </th>
               <th>@lang('main.address')</th>
-              <th> رقم الهاتف 1 </th>
-              <th>رقم الهاتف 2 </th>
-              <th> @lang('main.regComm') </th>
-              <th> @lang('main.taxCard')</th>
-              <th>التسعير</th>
+              <th>@lang('main.phone_number_1')</th>
+              <th>@lang('main.phone_number_2')</th>
+              <th>@lang('main.regComm') </th>
+              <th>@lang('main.taxCard')</th>
+              <th>@lang('main.pricing')</th>
               <th>@lang('main.notes')</th>
               <th>@lang('main.edit')</th>
             </tr>

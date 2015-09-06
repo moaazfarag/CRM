@@ -2,7 +2,7 @@
     {{--id="table_bank"--}}
 <thead>
             <tr>
-                <th> الحذف </th>
+                <th> @lang('main.delete') </th>
                 <th> @lang('main.number') </th>
                 <th> @lang('main.name')   </th>
                 <th> @lang('main.debit')  </th>
@@ -27,7 +27,7 @@
                   <input  ng-pattern="/^[0-9]+$/" class="input-without-border"  name="debit_@{{ addedAccounts.indexOf(addedAccount) }}"  ng-model="addedAccount.debit" type="number" value="@{{ addedAccount.debit }}"/>
                   <div class="error-div-for-table" ng-show="form.$submitted || form.debit_@{{ addedAccounts.indexOf(addedAccount) }}.$touched">
                       <div ng-show="form.debit_@{{ addedAccounts.indexOf(addedAccount) }}.$error.pattern">
-                          برجاء ادخال رقم صحيح
+                        @lang('main.please_enter_valid_number')
                       </div>
                   </div>
               </td>{{--account Item quantity--}}
@@ -35,7 +35,7 @@
                   <input  ng-pattern="/^[0-9]+$/" class="input-without-border" name="credit_@{{ addedAccounts.indexOf(addedAccount) }}" ng-model="addedAccount.credit" type="number" value="@{{ addedAccount.credit }}"  />
                   <div class="error-div-for-table" ng-show="form.$submitted || form.credit_@{{ addedAccounts.indexOf(addedAccount) }}.$touched">
                       <div ng-show="form.credit_@{{ addedAccounts.indexOf(addedAccount) }}.$error.pattern">
-                          برجاء ادخال رقم صحيح
+                          @lang('main.please_enter_valid_number')
                       </div>
                   </div>
                   <input hidden  class="input-without-border" name="notes_@{{ addedAccounts.indexOf(addedAccount) }}" ng-model="addedAccount.note" type="text" value="@{{ addedAccount.note }}"  />

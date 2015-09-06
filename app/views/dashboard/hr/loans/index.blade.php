@@ -77,25 +77,25 @@
                         </div>
                     </div>
 
-                    <div class="col s1 l2">
-                        <div class="input-field">
-                            <i class="fa fa-tag prefix"></i>
+                    {{--<div class="col s1 l2">--}}
+                        {{--<div class="input-field">--}}
+                            {{--<i class="fa fa-tag prefix"></i>--}}
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
-                            {{ Form::label('loan_end',lang::get('main.loan_end')) }}
+                            {{--{{ Form::label('loan_end',lang::get('main.loan_end')) }}--}}
 
-                        </div>
-                        <p class="parsley-required error-validation">{{ $errors ->first('loan_end') }} </p>
+                        {{--</div>--}}
+                        {{--<p class="parsley-required error-validation">{{ $errors ->first('loan_end') }} </p>--}}
 
-                    </div>
-                    <div class="col s2 l2">
-                        <div class="input-field">
+                    {{--</div>--}}
+                    {{--<div class="col s2 l2">--}}
+                        {{--<div class="input-field">--}}
                             {{--<i class="mdi mdi-action-language prefix"></i>--}}
-                            {{ Form::text('loan_end',null,array('required','id'=>'loan_end','class'=>'pikaday')) }}
+                            {{--{{ Form::text('loan_end',null,array('required','id'=>'loan_end','class'=>'pikaday')) }}--}}
 
-                        </div>
-                        <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
+                        {{--</div>--}}
+                        {{--<p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>--}}
 
-                    </div>
+                    {{--</div>--}}
 
 
                 </div>

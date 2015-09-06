@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('hrMonthChangesSeeder');
         $this->call('hrMSDetailsSeeder');
         $this->call('hrMSHeaderSeeder');
+        $this->call('settleSeeder');
 
     }
 

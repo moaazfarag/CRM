@@ -45,7 +45,7 @@
                       {{ Form::label('debit',$debit) }}
                       <div class="error-div-for-table" ng-show="form.$submitted || form.debit.$touched">
                           <div ng-show="form.debit.$error.pattern">
-                              برجاء ادخال رقم صحيح
+                              @lang('main.please_enter_valid_number')
                           </div>
                       </div>
                       <p class="parsley-required">{{ $errors ->first('debit') }} </p>
@@ -60,7 +60,7 @@
                       {{ Form::label('credit',$Credit) }}
                       <div class="error-div-for-table" ng-show="form.$submitted || form.credit.$touched">
                           <div ng-show="form.credit.$error.pattern">
-                              برجاء ادخال رقم صحيح
+                              @lang('main.please_enter_valid_number')
                           </div>
                       </div>
                       <p class="parsley-required">{{ $errors ->first('credit') }} </p>

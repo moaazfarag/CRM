@@ -141,6 +141,15 @@
                         <a href="{{ URL::route('addSalesInvoice') }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
                     </li>
 
+                    <li>
+                        <a class="yay-sub-toggle waves-effect waves-blue">     المرتجعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                        <li><a href="{{ URL::route('allInvoices') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>
+                        {{--<li><a href="{{ URL::route('purchasesReturns') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>--}}
+                        {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
+                         </ul>
+                    </li>
+
                 </ul>
           </ul>
 

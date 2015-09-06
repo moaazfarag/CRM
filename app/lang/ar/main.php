@@ -177,7 +177,7 @@ return  array(
     'theType'          => 'النوع',
     'settles'          => 'التسويات',
 
-    ########## add employee page  ###############
+    ##########{{ add employee page  }}###############
 
     'employe_name'       => 'اسم الموظف ',
     'national_id'		 =>'الرقم القومى',
@@ -220,17 +220,17 @@ return  array(
 
     'serial'	=>'المسلسل',
 
-    ######### Department page ###########
+    #########{{ Department page }}###########
 
     'delete_department_error_msg'  =>'لا يمكن حذف هذا القسم لأنة يحتوى على موظفين ',
     'delete_department_success_msg'=>'لقد تم حذف القسم بنجاح',
 
-    ######### job page ###########
+    #########{{ job page }}###########
 
     'delete_job_error_msg'  =>'لا يمكن حذف هذه الوظيفة لوجود موظفين بها',
     'delete_job_success_msg'=>'لقد تم حذف الوظيفة بنجاح ',
 
-    ######## loans page ###########
+    ########{{ loans page }}###########
 
     'salary_loan'      =>'المبلغ',
     'add_new_loan'     =>'اضف قرض جديد',
@@ -246,7 +246,7 @@ return  array(
     'finished'         => 'منتهى',
     'employee'         => 'الموظف',
 
-    ############# add desded page #######
+    #############{{ add desded page }}#######
 
     'add_new_clause'   => 'أضف بند جديد',
      'clause'          => 'البند',
@@ -260,24 +260,85 @@ return  array(
     'delete_clause_error_msg' => 'هذا البند مستخدم فى بنود استحقاقات الموظفين .. لا يمكن الحذف ',
     'delete_clause_success_msg' => 'لقد تم حذف البند بنجاح ',
 
-    ######### addMonthChange #########
+    #########{{ addMonthChange }}#########
 
     'month_change'		=>'التغيرات الشهرية ',
     'month_change_edit'	=>'تعديل فى التغيرات الشهرية',
-    // in index page
     'add_monthly_changes'=>'أضف تغيرات شهرية ',
-//    'employee'           =>'الموظف',
     'clauses'            =>'البنود',
-//    'date'               =>'التاريخ',
     'for_the_month'      =>'عن شهر',
     'select_month'       =>'أختر الشهر',
     'year'               =>'سنة',
     'select_year'        =>'أختر السنة',
     'days'	             =>'أيام ',
-//    'salary'             =>'مبلغ',
     'reason'             =>'السبب',
     'delete_movement'    =>'ألغاء الحركة ',
-    'cancellation_reason'=>'سبب الإلغاء',
+    'for_year'           =>'لسنة',
+    'for_month'          =>'لشهر',
+    'value'              =>'القيمة',
+    'amount_or_days'     =>'مبلغ /أيام',
+    'canceld'            =>'ملغاه',
+    'data_entry'         =>'مدخل البيانات',
 
+    ######{{ Monthly salary equipment  }}########
+
+
+    'monthly_salary_equipment' =>'تجهيزات المرتبات الشهريه',
+    'salary_equipment'         =>'التجهيزات الشهرية ' ,
+    'all_debt'                 => 'ج . الاستحقاقات',
+    'all_credit'               => 'ج.الإستقطاعات',
+    'employee_name'            => 'اسم الموظف ',
+    'basic'                    => 'الأساسى',
+    'periodic_loan'            =>'سلفة دورية',
+    'net'                      =>'الصافى',
+
+    ######{{ addEmpdesded  }}########
+
+    'add_new_employee_clause'   =>'أضف بند موظف جديد',
+    'edit_debt_employee_clause' =>'تعديل فى بنود الاستحقاق للموظف',
+    'employee_clause'	        =>'بنود الموظف',
+    'employee_debt_clause'      =>'بنود استحقاقات الموظف',
+    'select_employee'           =>'اختر الموظف ',
+    'debt_credit_clause'        =>'بنود الاستحقاق والاستقطاع',
+    'cancel_'                   =>'إلغاء',
+
+    ######{{ empdsded pop up   }}########
+    'fixed_debt_for_employee' => 'إستحقاقات ثابتة للموظف',
+    'canceld_'                => 'ملغى',
+
+    //////////{{  ItemBalance }}\\\\\\\\\\\\\
+    'please_enter_valid_number' =>'برجاء ادخال رقم صحيح',
+
+    'banks'         =>'البنوك',
+    'other_income'  =>'ايرادات اخرى',
+    'count_partners'=>'جارى الشركاء',
+    'pricing'       => 'التسعير',
+
+    //////////{{  add-sales-invoice }}\\\\\\\\\\\\\
+
+    'pricing_system' =>'نظام التسعير',
+    'select_system'  =>'أختر النظام',
+    'num'            =>'الرقم',
+    'item_name' 	 =>'اسم الصنف',
+    'quantity'		 =>' الكمية',
+    'item_prise'     =>'سعر الوحدة',
+    'sum'			 =>' الاجمالي',
+    'serial_'		 =>'السيريال',
+    'show_settle'	 =>'عرض تسويات',
+    'select_branch'  =>'اختر الفرع',
+    'payment'		 =>'طرق السداد',
+    'select_payment' =>'اختر طريقة السداد',
+    'select_account' =>'أختر نوع الحساب',
+    'total'          =>'الإجمالى',
+    'discount_'      =>'الخصم',
+    'tax_'           =>'الضريبة',
+    'on_account'     =>'اجل',
+    'settle'         =>'تسوية',
+    'visa'           =>'فيزا',
+    'cash'           =>'نقدى',
+    'customers_'     =>'العملاء',
+    'suppliers_'     =>'الموردين',
+    'partners_'      =>'جارى الشركاء',
+    'search'         =>'بحث',
 
 );

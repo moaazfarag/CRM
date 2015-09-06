@@ -29,6 +29,25 @@ array(
 	    	'notes'           =>'بنطلون باجى ازرق اللون مقاس 37 ',
 	    	'user_id'         =>'1',
 	    ),
+			array(
+
+				'co_id'           =>'1',
+				'cat_id'        =>'1',
+				'item_name'       =>'تيشيرت اديداس مقاس 32',
+				'unit'            =>'قطعة',
+				'supplier_id'        =>'مصنع ملابس',
+				'seasons_id'          =>'فصل الشتاء',
+				'models_id'           =>'بنطلون',
+				'bar_code'        =>'no',
+				'buy'             =>'90.20',
+				'sell_users'      =>'125.35',
+				'sell_nos_gomla'  =>'12.33',
+				'sell_gomla'      =>'105.22',
+				'sell_gomla_gomla'=>'100.78',
+				'limit'           =>'4',
+				'notes'           =>'تيشرت ',
+				'user_id'         =>'1',
+			),
 	    array(
 
 	    	'co_id'           =>'2',

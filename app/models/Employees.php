@@ -14,7 +14,7 @@ class Employees extends Eloquent {
         'ins_no'                => 'integer',
         'employee_date'         => 'required|date',
 
-        'card_no'               => 'required|min:14|max:14|unique:card_no',
+        'card_no'               => 'required|min:14|max:14|unique:hr_employees',
         'cancel_cause'          => 'min:3|max:200',
         'address'               => 'min:3|max:200',
         'remark'                => 'min:3|max:200',
@@ -38,13 +38,14 @@ class Employees extends Eloquent {
         'ins_val'               => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
 
     );
-    public static  $update_rules = array(
+    public function updateRuels($id){
+
+        $update_rules =  array(
 
         'name'                  => 'required|min:3',
         'ins_no'                => 'integer',
         'employee_date'         => 'required|date',
-
-        'card_no'               => 'required|min:14|max:14|unique:card_no',
+        'card_no'               => 'required|min:14|max:14|unique:hr_employees,id,'.$id,
         'cancel_cause'          => 'min:3|max:200',
         'address'               => 'min:3|max:200',
         'remark'                => 'min:3|max:200',
@@ -69,6 +70,8 @@ class Employees extends Eloquent {
 
         );
 
+        return $update_rules;
+    }
     public function departments()
     {
         return $this->belongsTO('Department','department_id','id');

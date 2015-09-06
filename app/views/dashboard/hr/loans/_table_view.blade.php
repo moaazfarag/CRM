@@ -22,11 +22,11 @@
             <tr>
                 <th>{{ $tableData->id }}</th>
                 <td>{{ $tableData->employees->name }}</td>
-                <td>{{ $tableData->loan_date }}</td>
+                <td>{{ BaseController::ViewDateAndTime($tableData->loan_date) }}</td>
                 <td>{{ $tableData->loan_val }}</td>
                 <td>{{ $tableData->loan_currBal }}</td>
-                <td>{{ $tableData->loan_start }}</td>
-                <td>{{ $tableData->loan_end }}</td>
+                <td>{{ BaseController::ViewDate($tableData->loan_start) }}</td>
+                <td>{{ BaseController::ViewDate($tableData->loan_end) }}</td>
                 <td>{{ $tableData->employees->salary }}</td>
                 <td>
                     <input name="finish_{{$k}}" type="checkbox" id="finish_{{$k}}" >

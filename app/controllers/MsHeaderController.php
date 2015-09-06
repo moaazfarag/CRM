@@ -10,7 +10,7 @@ class MsHeaderController extends BaseController
     public function addMsHeader()
     {
         $data = $this->depData();
-        $data['title'] = 'تجهيزات المرتبات الشهريه'; // page title
+        $data['title'] = Lang::get('main.monthly_salary_equipment'); // page title
         $data['employees'] = "open";
         $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
         return View::make('dashboard.hr.msheader.index', $data);
@@ -20,7 +20,7 @@ class MsHeaderController extends BaseController
     public function storeMsHeader()
     {
         $data = $this->depData();
-        $data['title'] = 'تجهيزات المرتبات الشهريه'; // page title
+        $data['title'] = Lang::get('main.monthly_salary_equipment');  // page title
         $data['employees'] = "open";
         $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();
 //        dd(Input::get('employee_id'));
@@ -29,7 +29,7 @@ class MsHeaderController extends BaseController
 
     protected function depData()
     {
-        $data['title']     = 'التجهيزات الشهريه ';
+        $data['title']     = Lang::get('main.salary_equipment');
         $data['employees'] = 'open';
         $data['net']       = Employees::where('co_id',$this->coAuth())->get();
         return $data;
