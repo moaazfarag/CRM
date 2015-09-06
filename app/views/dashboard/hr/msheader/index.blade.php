@@ -2,9 +2,8 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
-    @if(Route::currentRouteName() == 'addMsHeader')
-        {{ Form::open(array('route'=>array('searchMsHeader'))) }}
-    @endif
+    @if(Route::currentRouteName() == "addMsHeader")
+        {{ Form::open(array('route'=>array('prepMsHeader'))) }}
     <div class=" card ">
         <div class="title">
             <h5>
@@ -38,30 +37,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col s12 l12">
-                        @if(Route::currentRouteName() == 'addMsHeader')
-                            <button type="submit" class="waves-effect btn">@lang('main.monthly_salary_equipment')</button>
-                            @elseif(Route::currentRouteName() == 'storeMsHeader')
-                                <button type="submit" class="waves-effect btn">  @lang('main.monthly_salary_equipment') </button>
-                        @endif
-                    </div>
-                    {{ Form::close() }}
-                </div>{{--submit  row end--}}
 
             </div>
+
             <div class="row">
                 <div class="col s12 l12">
-                    @if(Route::currentRouteName() == 'addMsHeader')
+
                         <button type="submit" class="waves-effect btn">  @lang('main.monthly_salary_equipment') </button>
                     @endif
                 </div>
                 {{ Form::close() }}
             </div>{{--submit  row end--}}
         </div>
-    </div>
-    @include('dashboard.hr.msheader._table_view');
 
+
+
+    </div>
+            @if(Route::currentRouteName() == "prepMsHeader")
+                @include('dashboard.hr.msheader._table_view');
+            @endif
 </section>
 @stop
 

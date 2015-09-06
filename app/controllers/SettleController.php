@@ -34,7 +34,7 @@ class SettleController extends BaseController {
             $data['title']      = " تسوية $name " ; // page title
             $data['name']       = $name; // page title
             $data['TransOpen']  = 'open' ;
-            $data['co_info']    = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['co_info']    = CoData::thisCompany()->first();//select info models category seasons
             $data['branch']     = $this->isAllBranch();
             $data['pay_type']     = array('نقدى ','فيزا','اجل');
             $data['account_type'] = array('العملاء','الموردين','المصروفات','جارى الشركاء','ايرادات اخرى');
@@ -81,7 +81,7 @@ class SettleController extends BaseController {
         if($trans){
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
-            $data['co_info']     = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
             $data['newArray']    = $this->itemsToJson($invoiceId);
             $data['invoice']     = $trans;
             $data['type']        = $data['invoice']->invoice_type;
@@ -112,7 +112,7 @@ class SettleController extends BaseController {
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
             $data['type']        = 'type' ;
-            $data['co_info']     = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+            $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
             $data['branch']      = $this->isAllBranch(); //
             $data['newArray']    = $this->itemsToJsonForError($inputs);
             $data['errors']      = $validation->messages();

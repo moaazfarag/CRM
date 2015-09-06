@@ -15,7 +15,7 @@ class AccountsBalancesController extends BaseController {
 
     public function sendData()
     {
-        $data['accounts'] = Accounts::where('co_id','=',$this->coAuth())->get();
+        $data['accounts'] = Accounts::company()->get();
         return Response::make(json_encode($data));
     }
     public function addAccountsBalances()
@@ -23,8 +23,8 @@ class AccountsBalancesController extends BaseController {
         $addAccountBalance=Lang::get('main.addAccountBalance');
         $data['title']     = $addAccountBalance ; // page title
         $data['sideOpen']   = 'open' ;
-//        $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
-        $data['items']    = AccountsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
+//        $data['co_info']  = CoData::thisCompany()->first();//select info models category seasons
+        $data['items']    = AccountsBalances::company()->get(); //  get all item to view in table
         return View::make('dashboard.account_balances.index',$data);
     }
 
@@ -80,12 +80,12 @@ class AccountsBalancesController extends BaseController {
         $editAccountsBalances=Lang::get('main.editAccountsBalances');
         $data['title']     = $editAccountsBalances; // page title
         $data['sideOpen']   = 'open' ;
-        $data['items']     = AccountsBalances::where('co_id','=',$this->coAuth())->get(); //  get all item to view in table
+        $data['items']     = AccountsBalances::company()->get(); //  get all item to view in table
         $data['item']      = AccountsBalances::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();//item will edit
 //        dd($data['item']);
         if($data['item'])
         {
-//            $data['co_info']  = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
+//            $data['co_info']  = CoData::thisCompany()->first();//select info models category seasons
 
             return View::make('dashboard.account_balances.index',$data);
         }else{

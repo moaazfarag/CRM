@@ -26,7 +26,7 @@ class Deduction extends Eloquent {
     }
     public function month_change()
     {
-        return $this->belongsTO('MonthChange','desDed_id');
+        return $this->belongsTO('MonthChange','des_ded_id');
     }
 
 }

@@ -69,15 +69,15 @@ class ModelsController extends BaseController
         $data['seasonInputName']    = "seasons";
         $data['asideOpen']          = 'open' ;
         $data['modelMini']          = "";
-        $data['tablesData']         = Models::where('co_id','=',$this->coAuth())->get();
+        $data['tablesData']         = Models::company()->get();
         $data['arabicName']         = $marka;
-        $data['co_info']             = CoData::where('id','=',$this->coAuth())->first();
+        $data['co_info']             = CoData::thisCompany()->first();
         return $data;
     }
     public function deleteModel($id){
 
-        $model = Models::where('co_id','=',$this->coAuth())->first();
-        $items  = Items::where('models_id','=',$id)->where('co_id','=',$this->coAuth())->first();
+        $model = Models::company()->first();
+        $items  = Items::where('models_id','=',$id)->company()->first();
 
 
        if(!empty($model)){

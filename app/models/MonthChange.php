@@ -38,7 +38,7 @@ class MonthChange extends Eloquent {
     }
     public function desded()
     {
-        return $this->belongsTo('Deduction','desded_id');
+        return $this->belongsTo('Deduction','des_ded_id');
     }
     public function employees()
     {
@@ -48,4 +48,35 @@ class MonthChange extends Eloquent {
     {
         return $this->belongsTo('User','user_id');
     }
+    /**
+     * return change  of this employee
+     * base  on auth.company , input.for_month , input.for_year $type
+     * @param $employee_id
+     * @param $type استحقاق او استقطاع
+     * @return mixed
+     */
+    public static function getMonthChange($employee_id,$type){
+       $q =  self::where('hr_monthchanges.co_id',Auth::user()->co_id)
+            ->where('hr_monthchanges.employee_id',$employee_id)
+            ->where('hr_monthchanges.for_month',Input::get('for_month'))
+            ->where('hr_monthchanges.for_year',Input::get('for_year'))
+            ->join('hr_desded','hr_desded.id','=','hr_monthchanges.des_ded_id');
+           if($type){
+              return $q ->where('hr_desded.ds_type',$type);
+           }else{
+               return $q ;
+           }
+    }
+    public static function getMonthAllChange($employee_id){
+       $q =  self::getMonthChange($employee_id,'')
+           ->where('employee_id',$employee_id)
+           ->select('val', DB::raw('SUM(val) as total_val'),'hr_desded.name AS desded_name','ds_type','hr_monthchanges.*')
+           ->groupBy('des_ded_id')
+           ->groupBy('day_cost')
+           ->groupBy('hr_desded.id')
+           ->get();
+               return $q ;
+
+    }
+
 }

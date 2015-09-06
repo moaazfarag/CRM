@@ -17,8 +17,8 @@ class EmployeeDeductionController extends BaseController
         $data['title'] = Lang::get('add_new_employee_clause'); // page title
         $data['employees'] = "open";
         $data = $this->depData();
-        $data['deduction'] = Deduction::where('co_id', '=', $this->coAuth())->first();
-        $data['co_info']   = coData::where('id', '=', $this->coAuth())->first();
+        $data['deduction'] = Deduction::company()->first();
+        $data['co_info']   = coData::thisCompany()->first();
         return View::make('dashboard.hr.employee_deduction.index', $data);
 
     }
@@ -53,8 +53,8 @@ class EmployeeDeductionController extends BaseController
         $data = $this->depData();
 
 //        $data['employee'] = EmployeeDeduction::findOrFail($id);
-        $data['deduction']   = Deduction::where('co_id','=',$this->coAuth())->first();
-        $data['co_info'] = coData::where('id', '=', $this->coAuth())->first();
+        $data['deduction']   = Deduction::company()->first();
+        $data['co_info']     = coData::thisCompany()->first();
 
         return View::make('dashboard.hr.employee_deduction.index',$data);
     }
@@ -88,8 +88,8 @@ class EmployeeDeductionController extends BaseController
      */
     public function storeEmpdesdedPop()
     {
-
-        $validation = Validator::make(Input::all(), EmployeeDeduction::$store_rules);
+//dd('sad');
+        $validation = Validator::make(Input::all(), EmployeeDeduction::$rules);
 
         if($validation->fails())
         {
@@ -112,7 +112,7 @@ class EmployeeDeductionController extends BaseController
     {
         $data['title']              = Lang::get('main.employee_clause');
         $data['employees']          = 'open' ;
-        $data['tablesData']         = EmployeeDeduction::where('co_id','=',$this->coAuth())->get();
+        $data['tablesData']         = EmployeeDeduction::company()->get();
         return $data;
     }
 

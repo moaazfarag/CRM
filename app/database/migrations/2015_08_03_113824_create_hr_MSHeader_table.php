@@ -12,10 +12,11 @@ class CreateHrMSHeaderTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('hr_MSHeader', function(Blueprint $table)
+		Schema::create('hr_ms_header', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->integer('co_id');
+            $table->integer('ms_trans_id');
             $table->integer('employee_id');
             $table->integer('for_year');
             $table->integer('for_month');
@@ -38,7 +39,7 @@ class CreateHrMSHeaderTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('hr_MSHeader');
+		Schema::drop('hr_ms_header');
 	}
 
 }

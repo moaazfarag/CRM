@@ -223,7 +223,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
 
         Route::get('addMsHeader',array('uses'=>'MsHeaderController@addMsHeader','as'=>'addMsHeader'));
         Route::post('storeMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@storeMsHeader','as'=>'storeMsHeader'));
-        Route::post('searchMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@searchMsHeader','as'=>'searchMsHeader'));
+        Route::post('prepMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@prepMsHeader','as'=>'prepMsHeader'));
+        Route::post('readyToPay',array('before'=>'csrf','uses'=>'MsHeaderController@readyToPay','as'=>'readyToPay'));
 
     });
 

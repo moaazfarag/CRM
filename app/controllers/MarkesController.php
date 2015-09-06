@@ -10,7 +10,7 @@ class MarkesController extends \BaseController
 		$data['title'] = $itemCat;
 		$data['asideOpen'] = 'open';
 		$data['modelMini'] = "";
-		$data['tablesData'] = Markes::where('co_id','=',$this->coAuth())->get();
+		$data['tablesData'] = Markes::company()->get();
 
 		return $data;
 	}
@@ -82,9 +82,9 @@ class MarkesController extends \BaseController
 	public function deleteMark($id)
 	{
 
-		$markes = Markes::find($id)->where('co_id', '=', $this->coAuth())->first();
-		$model = DB::table('models')->where('co_id', '=', $this->coAuth())->where('marks_id', '=', $id)->first();
-//		$items =  DB::table('items')->where('co_id', '=', $this->coAuth())->where('marks_id', '=', $id)->first();
+		$markes = Markes::find($id)->company()->first();
+		$model = DB::table('models')->company()->where('marks_id', '=', $id)->first();
+//		$items =  DB::table('items')->company()->where('marks_id', '=', $id)->first();
 
 //		var_dump($markes);
 //		echo '<br/>';
