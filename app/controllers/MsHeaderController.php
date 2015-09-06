@@ -9,8 +9,9 @@ class MsHeaderController extends BaseController
 {
     public function addMsHeader()
     {
-        $data['title']     = 'التجهيزات الشهريه ';
-        $data['employees'] = 'open';
+
+        $data = $this->depData();
+        $data['title'] = Lang::get('main.monthly_salary_equipment'); // page title
         $data['co_info'] = CoData::thisCompany()->first();
         return View::make('dashboard.hr.msheader.index', $data);
 
@@ -19,6 +20,9 @@ class MsHeaderController extends BaseController
     public function storeMsHeader()
     {
         $data = $this->depData();
+
+        $data['title'] = Lang::get('main.monthly_salary_equipment');  // page title
+        $data['employees'] = "open";
         $data['co_info'] = CoData::thisCompany()->first();
 //        dd(Input::get('employee_id'));
         return View::make('dashboard.hr.msheader.index', $data);
@@ -103,7 +107,7 @@ class MsHeaderController extends BaseController
     }
     protected function depData()
     {
-        $data['title']     = 'التجهيزات الشهريه ';
+        $data['title']     = Lang::get('main.salary_equipment');
         $data['employees'] = 'open';
         $haveSalary           = MsHeader::hasSalary()->get();
         $data['haveSalary']   = MsHeader::hasSalary()->whereIn('employee_id',$haveSalary->lists('employee_id'))->get();

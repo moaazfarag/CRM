@@ -2,16 +2,16 @@
 <div ng-app="employeeApp" ng-controller="employeeController" ng-init="dudDis.empId = {{ $employee->id }} "  id="addDud" class="modal">
     <div class="modal-content">
         <h4>
-            استحقاقات ثابته للموظف
+        @lang('main.fixed_debt_for_employee')
           <strong>{{ $employee->name }}</strong>
         </h4>
 
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>البند </th>
-                    <th>القيمه </th>
-                    <th>ملغى  </th>
+                    <th>@lang('main.clause') </th>
+                    <th>@lang('main.value') </th>
+                    <th>@lang('main.canceld')</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,15 +47,15 @@
                         <div class="input-field">
                             <i class="mdi mdi-action-language prefix"></i>
                             {{ Form::number('val',null,array('ng-required'=>"displayCondition",'ng-model'=>'dudDis.val','id'=>'val')) }}
-                            {{ Form::label('val',  'القيمه' )     }}
+                            {{ Form::label('val',  lang::get('main.value') )     }}
                             <p class="parsley-required">{{ $errors ->first('val') }} </p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 l12">
-                            <button type="button" ng-click="storeEmpDud(dudDis)" class="waves-effect btn">اضف </button>
-                        <button type="button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">انهاء </button>
+                            <button type="button" ng-click="storeEmpDud(dudDis)" class="waves-effect btn">@lang('main.add')</button>
+                        <button type="button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat "> </button>
                     </div>
                     {{ Form::close() }}
                 </div>{{--submit  row end--}}

@@ -118,6 +118,28 @@ class BaseController extends Controller {
 
         );
 
+
+    public static function ViewDate($date){
+       $date_format =  date('d /m / Y',strtotime($date));
+
+        return $date_format;
+    }
+
+
+    public static function ViewDateAndTime($date_and_time)
+    {
+        $date_format = date('d /m / Y ', strtotime($date_and_time));
+        $date_format .= '<br/>';
+        $date_format .= date('h:i  ', strtotime($date_and_time));
+
+        $a = date('a', strtotime($date_and_time));
+        if ($a == 'am') {
+            $date_format .= 'صباحاً';
+        } else {
+            $date_format .= 'مساءً';
+        }
+        return $date_format;
+    }
     /**
      * search array of array
      * return index of array has same $key and $value

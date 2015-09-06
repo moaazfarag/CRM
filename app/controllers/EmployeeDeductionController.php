@@ -14,7 +14,7 @@ class EmployeeDeductionController extends BaseController
     {
 
 //        $data = $this->staticData();
-        $data['title'] = 'اضف بند موظف جديد'; // page title
+        $data['title'] = Lang::get('add_new_employee_clause'); // page title
         $data['employees'] = "open";
         $data = $this->depData();
         $data['deduction'] = Deduction::company()->first();
@@ -48,7 +48,7 @@ class EmployeeDeductionController extends BaseController
     public  function editEmpdesded($id)
     {
 //        $data = $this->staticData() ;
-        $data['title']     = 'تعديل فى بنود الاستحقاق للموظف'; // page title
+        $data['title']     = Lang::get('main.edit_debt_employee_clause'); // page title
         $data['employees'] = "open";
         $data = $this->depData();
 
@@ -110,7 +110,7 @@ class EmployeeDeductionController extends BaseController
     }
     protected function depData()
     {
-        $data['title']              = 'بنود الموظف';
+        $data['title']              = Lang::get('main.employee_clause');
         $data['employees']          = 'open' ;
         $data['tablesData']         = EmployeeDeduction::company()->get();
         return $data;
@@ -119,13 +119,15 @@ class EmployeeDeductionController extends BaseController
     public function deleteEmpdesded($id)
     {
 
-        $Empdesded = EmployeeDeduction::find($id);
+        $Empdesded = EmployeeDeduction::where('co_id',$this->coAuth())
+            ->where('id',$id)
+            ->first();
 
         if (!empty($Empdesded)) {
 
                  $Empdesded->delete();
 
-                Session::flash('success', 'لقد تم حذف البند بنجاح ');
+                Session::flash('success', Lang::get('main.delete_clause_success_msg'));
                 return Redirect::back();
             }
         }
@@ -137,7 +139,7 @@ class EmployeeDeductionController extends BaseController
 
             $Empdesded->delete();
 
-            Session::flash('success', 'لقد تم حذف البند بنجاح ');
+            Session::flash('success', Lang::get('main.delete_clause_success_msg'));
             return Response::json(array('success'=>true));
         }else{
             return Response::json(array('success'=>false));

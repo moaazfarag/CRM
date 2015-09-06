@@ -3,18 +3,18 @@
         <thead>
         <tr>
 
-            <th>التاريخ </th>
-            <th>الموظف </th>
-            <th> لسنه</th>
-            <th>لشهر </th>
-            <th>البند</th>
-            <th>القيمه</th>
-            <th>مبلغ/ايام</th>
-            <th>السبب</th>
-            <th>ملغاه</th>
-            <th>سبب الالغاء</th>
-            <th>مدخل البيانات </th>
-            <th>تعديل</th>
+            <th>@lang('main.date') </th>
+            <th>@lang('main.employee')  </th>
+            <th>@lang('main.for_year') </th>
+            <th>@lang('main.for_month') </th>
+            <th>@lang('main.clause')</th>
+            <th>@lang('main.value') </th>
+            <th>@lang('main.amount_or_days')</th>
+            <th>@lang('main.reason')</th>
+            <th>@lang('main.canceld')</th>
+            <th>@lang('main.cancellation_reason') </th>
+            <th>@lang('main.data_entry')</th>
+            <th>@lang('main.edit')</th>
         </tr>
         </thead>
         <tbody>

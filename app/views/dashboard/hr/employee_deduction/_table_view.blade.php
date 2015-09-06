@@ -3,11 +3,11 @@
         <thead>
         <tr>
 
-            <th>الموظف </th>
-            <th>البند </th>
-            <th>القيمه </th>
-            <th> تعديل  </th>
-            <th> إلغاء  </th>
+            <th>@lang('main.employee') </th>
+            <th>@lang('main.clause') </th>
+            <th>@lang('main.value') </th>
+            <th> @lang('main.edit')  </th>
+            <th> @lang('main.cancel_')  </th>
 
         </tr>
         </thead>
@@ -24,7 +24,7 @@
                     </a>
                 </td>
                 <td>
-                    <a  onclick="return confirm('هل تريد بالفعل حذف هذا الإستحقاق ')" href="{{ URL::route('deleteEmpdesded',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
+                    <a  onclick="return confirm('هل تريد بالفعل إلغاء هذا الإستحقاق ')" href="{{ URL::route('deleteEmpdesded',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
                 </td>
 
             </tr>

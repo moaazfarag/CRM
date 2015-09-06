@@ -76,13 +76,13 @@
                   <div class="row no-margin-top">
                             <div class="col s12 l2">
                           <label for="account-numbers">
-                             رقم الهاتف 1
+                            @lang('main.phone_number_1')
                           </label>
                       </div>
                       <div class="col s12  l4">
                           <div class="input-field">
                               <i class="mdi mdi-social-person prefix"></i>
-                              <?php $phoneNum=Lang::get('main.phoneNum') ?>
+                              <?php $phoneNum=Lang::get('main.phone_number_1') ?>
                               {{ Form::text('acc_tel',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
                               {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
                           </div>
@@ -90,13 +90,13 @@
 
                       <div class="col s12 l1">
                           <label for="account-numbers">
-                             رقم الهاتف 2
+                              @lang('main.phone_number_2')
                           </label>
                       </div>
                       <div class="col s12  l4">
                           <div class="input-field">
                               <i class="mdi mdi-social-person prefix"></i>
-                              <?php $phoneNum=Lang::get('main.phoneNum') ?>
+                              <?php $phoneNum=Lang::get('main.phone_number_2') ?>
                               {{ Form::text('acc_tel2',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
                               {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
                           </div>
@@ -163,12 +163,12 @@
 
                           <div class="col s12 l2">
                               <label for="credit-limit">
-                                  نظام التسعير
+                                  @lang('main.pricing_system')
                               </label>
                           </div>
                           <div class="col s12 l3">
 
-                              {{ Form::select('pricing', array('' => 'أختر النظام ') + $pricing ,null,array('id'=>'mark_id')) }}
+                              {{ Form::select('pricing', array('' => lang::get('main.select_system') + $pricing ,null,array('id'=>'mark_id')) }}
                               <p class="parsley-required error-validation">{{ $errors ->first('pricing') }} </p>
 
                           </div>

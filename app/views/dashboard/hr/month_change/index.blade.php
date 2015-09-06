@@ -10,7 +10,7 @@
     <div class=" card ">
         <div class="title">
             <h5>
-                <i class="fa fa-cog"></i> 1 </h5>
+                <i class="fa fa-cog"></i> @lang('main.month_change') </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
             </a>
@@ -22,7 +22,7 @@
                 <div class="col s12 l5">
                     <div class="input-field">
                         {{ Form::label('employee_id',' ') }}
-                        {{ Form::select('employee_id', array(NULL => 'الموظف  ') +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id')) }}
+                        {{ Form::select('employee_id', array(NULL => lang::get('main.employee')) +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id')) }}
                         <p class="parsley-required error-validation">{{ $errors ->first('employee_id') }} </p>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     {{--<i class="fa fa-tag prefix"></i>--}}
                     <div class="input-field">
                         {{ Form::label('ds_id',' ') }}
-                        {{ Form::select('ds_id', array(NULL => 'البنود') +$co_info->desded()->where('ds_cat','متغير')->lists('name','id'),null,array('id'=>'ds_id')) }}
+                        {{ Form::select('ds_id', array(NULL => lang::get("main.clauses")) +$co_info->desded()->where('ds_cat','متغير')->lists('name','id'),null,array('id'=>'ds_id')) }}
                         <p class="parsley-required error-validation">{{ $errors ->first('ds_id') }} </p>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="col  l1">
                     <div class="input-field">
                         <i class="mdi mdi-action-language prefix"></i>
-                        {{ Form::label('trans_date','   التاريخ') }}
+                        {{ Form::label('trans_date',lang::get('main.date')) }}
                     </div>
                 </div>
                 <div class="col  l2">
@@ -53,13 +53,13 @@
                 <div class="col  l1">
                     <div class="input-field">
 
-                        {{ Form::label('for_month',' عن شهر ') }}
+
                     </div>
                 </div>
 
                 <div class="col  l3">
                     <div class="input-field">
-                        {{ Form::select('for_month', array(NULL => 'أختر الشهر') +BaseController::$months,null,array('id'=>'for_month')) }}
+                        {{ Form::select('for_month', array(NULL => lang::get('main.select_month')) +BaseController::$months,null,array('id'=>'for_month')) }}
                         <p class="parsley-required error-validation">{{ $errors ->first('for_month') }} </p>
 
 
@@ -68,7 +68,6 @@
 
                 <div class="col  l1 s12">
                     <div class="input-field">
-                        {{ Form::label('for_year ',' سنه  ') }}
                     </div>
                 </div>
 
@@ -76,7 +75,7 @@
                     <div class="input-field">
 
 
-                        {{ Form::select('for_year', array(NULL => 'أختر السنة ') +BaseController::$years,null,array('id'=>'for_year')) }}
+                        {{ Form::select('for_year', array(NULL => lang::get('main.select_year')) +BaseController::$years,null,array('id'=>'for_year')) }}
                         <p class="parsley-required error-validation">{{ $errors ->first('for_year') }} </p>
 
 
@@ -88,13 +87,13 @@
             <div class="col  l2 s12">
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
-                        {{ Form::radio('day_cost','ايام',null,array('id'=>'day_cost')) }}
-                        {{ Form::label('day_cost','ايام') }}
+                        {{ Form::radio('day_cost',lang::get('main.days'),null,array('id'=>'day_cost')) }}
+                        {{ Form::label('day_cost',lang::get('main.days')) }}
                     </div>
                 <div class="input-field">
                     {{--<i class="fa fa-tag prefix"></i>--}}
-                    {{ Form::radio('day_cost','مبلغ',null,array('id'=>'day_co')) }}
-                    {{ Form::label('day_co','مبلغ') }}
+                    {{ Form::radio('day_cost',lang::get('main.salary'),null,array('id'=>'day_co')) }}
+                    {{ Form::label('day_co',lang::get('main.salary')) }}
 
                 </div>
                 <p class="parsley-required error-validation">{{ $errors ->first('day_cost') }} </p>
@@ -116,7 +115,7 @@
                     <div class="input-field" >
                         <i class="fa fa-tag prefix"></i>
                         {{ Form::textarea('cause',null,array('id'=>'cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
-                        {{ Form::label('cause',  ' السبب  ' )     }}
+                        {{ Form::label('cause',  lang::get('main.reason'))     }}
                         <p class="parsley-required error-validation">{{ $errors ->first('cause') }} </p>
                     </div>
                 </div>
@@ -127,7 +126,7 @@
                     <div class="input-field">
                         {{--<i class="fa fa-tag prefix"></i>--}}
                         {{ Form::checkbox('canceled',1,null,array('id'=>'canceled')) }}
-                        {{ Form::label('canceled','الغاء الحركه   ') }}
+                        {{ Form::label('canceled',lang::get('main.delete_movement')) }}
 
                         <p class="parsley-required error-validation">{{ $errors ->first('canceled') }} </p>
                     </div>
@@ -136,7 +135,7 @@
                     <div class="input-field" >
                         {{--<i class="fa fa-tag prefix"></i>--}}
                         {{ Form::textarea('cancel_cause',null,array('id'=>'cancel_cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
-                        {{ Form::label('cancel_cause','سبب الالغاء') }}
+                        {{ Form::label('cancel_cause',lang::get('main.cancellation_reason')) }}
                         <p class="parsley-required error-validation">{{ $errors ->first('cancel_cause') }} </p>
                     </div>
                 </div>
@@ -146,10 +145,10 @@
                 <div class="col s12 l12">
                     @if(Route::currentRouteName() == 'addMonthChange')
                         {{--{{Form::submit('  اضف ')}}--}}
-                        <button type="submit" class="waves-effect btn">اضف </button>
+                        <button type="submit" class="waves-effect btn">@lang('main.add') </button>
                     @elseif(Route::currentRouteName() == 'editMonthChange')
                         {{--{{Form::submit('  تعديل ')}}--}}
-                        <button type="submit" class="waves-effect btn">تعديل </button>
+                        <button type="submit" class="waves-effect btn">@lang('main.edit') </button>
                     @endif
                 </div>
                 {{ Form::close() }}

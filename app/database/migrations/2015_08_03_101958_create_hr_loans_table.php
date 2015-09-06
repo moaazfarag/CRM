@@ -17,10 +17,10 @@ class CreateHrLoansTable extends Migration {
 			$table->increments('id');
             $table->integer('employee_id');
 			$table->integer('co_id');
-            $table->dateTime('loan_date');
+            $table->date('loan_date');
             $table->integer('loan_val');
-            $table->dateTime('loan_start');
-            $table->dateTime('loan_end');
+            $table->date('loan_start');
+            $table->date('loan_end');
             $table->integer('user_id');
             $table->integer('loan_currBal');
             $table->boolean('finish');

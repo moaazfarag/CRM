@@ -1,13 +1,14 @@
 <table  class="display table table-bordered table-striped table-hover">
     <thead>
     <tr>
-        <th>حذف</th>
-        <th>الرقم</th>
-        <th>اسم الصنف </th>
-        <th> الكمية</th>
-        <th> سعر الواحدة</th>
-        <th> الاجمالي</th>
-        <th> السيريال</th>
+
+        <th> @lang('main.delete')</th>
+        <th> @lang('main.num')</th>
+        <th> @lang('main.item_name')</th>
+        <th> @lang('main.quantity')</th>
+        <th> @lang('main.item_prise') </th>
+        <th> @lang('main.sum')</th>
+        <th> @lang('main.serial_')</th>
 
     </tr>
     </thead>
@@ -29,7 +30,7 @@
             <input  ng-pattern="/^[0-9]+$/" class="input-without-border" required name="quantity_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.quantity" type="number" value="@{{ invoiceItem.quantity }}"/>
             <div class="error-div-for-table" ng-show="form.$submitted || form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$touched">
                 <div ng-show="form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.pattern">
-                    برجاء ادخال رقم صحيح
+                    @lang('main.please_enter_valid_number')
                 </div>
             </div>
         </td>{{--invoice Item quantity--}}
