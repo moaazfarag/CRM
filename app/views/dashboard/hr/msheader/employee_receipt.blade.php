@@ -2,7 +2,7 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
-<div class="card    ">
+<div class="card">
     @foreach($headers as $header)
             <!-- Invoice Number and Date -->
     <div class="col s12 l4">

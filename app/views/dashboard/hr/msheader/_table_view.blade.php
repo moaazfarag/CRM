@@ -70,7 +70,7 @@
                         <td>{{ $dis }}</td>
                         <td>{{ $loan }}</td>
                         <td>
-                            {{ ($dud+$tableData->fixed_salary)-($dis +$loan)  }}
+                            {{ $tableData->net  }}
                         </td>
                         <td>
 <span class="green-text">

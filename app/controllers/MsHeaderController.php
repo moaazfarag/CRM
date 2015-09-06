@@ -34,8 +34,8 @@ class MsHeaderController extends BaseController
         } else {
             foreach ($chosenEmployees as $chosenEmployee) {
 
-                $allDis = $chosenEmployee->employeeDudValue('استحقاق');
-                $allDud = $chosenEmployee->employeeDudValue('استقطاع');
+                $allDis = $chosenEmployee->employeeDudValue('استقطاع') ;
+                $allDud = $chosenEmployee->employeeDudValue('استحقاق');
                 $loan = $chosenEmployee->loansValue();
                 $salary = $chosenEmployee->salary;
                 
@@ -47,8 +47,8 @@ class MsHeaderController extends BaseController
                 $newHeader->for_year = Input::get('for_year');
                 $newHeader->for_month = Input::get('for_month');
                 $newHeader->fixed_salary = $salary;
-                $newHeader->deserves = $allDis;
-                $newHeader->deductions = $allDud;
+                $newHeader->deserves = $allDud;
+                $newHeader->deductions = $allDis;
                 $newHeader->loan = $loan;
                 $newHeader->net = ($salary + $allDud) - ($allDis + $loan);
                 $newHeader->user_id = Auth::id();
@@ -86,11 +86,14 @@ class MsHeaderController extends BaseController
                         'updated_at'   => date('Y-m-d H:i:s')
                     );
                 }
-                    MsDetails::insert($newDetails);
-                    $newHeader->save();
 
-//            dd(Input::get('for_year'));
+                $newHeader->save();
         }
+            if(isset($newDetails)){
+                MsDetails::insert($newDetails);
+            }else{
+            }
+
             $data['headers'] = MsHeader::company()->whereIn('employee_id',Input::get('employeeId'))
                 ->where('for_month',Input::get('for_month'))
                 ->where('for_year' ,Input::get('for_year'))->get();
