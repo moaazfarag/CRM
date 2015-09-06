@@ -84,7 +84,7 @@ class EmployeesController extends BaseController
     public function updateEmp($id)
     {
         $validation = Validator::make(Input::all(), Employees::$update_rules);
-
+//        dd(Input::all());
         if($validation->fails())
         {
 

@@ -83,6 +83,7 @@ class Employees extends Eloquent {
     }
     public function loansValue()
     {
+
         $value = 0;
 
         foreach ($this->hasMany('Loans','employee_id','id')->get() as $loan ) {
@@ -101,20 +102,12 @@ class Employees extends Eloquent {
     }
     public function employeeDudValue($type)
     {
-        $value = 0;
-        $duds = EmployeeDeduction::where('hr_empdesded.co_id',Auth::user()->co_id)
-                                    ->where('hr_empdesded.employee_id',$this->id)
-                                    ->join('hr_desded','hr_desded.id','=','hr_empdesded.des_ded')
-                                    ->where('hr_desded.ds_type',$type)
-                                    ->get();
-        $changes = MonthChange::where('hr_monthchanges.co_id',Auth::user()->co_id)
-                                    ->where('hr_monthchanges.employee_id',$this->id)
-                                    ->where('hr_monthchanges.for_month',Input::get('for_month'))
-                                    ->where('hr_monthchanges.for_year',Input::get('for_year'))
-                                    ->join('hr_desded','hr_desded.id','=','hr_monthchanges.des_ded_id')
-                                    ->where('hr_desded.ds_type',$type)
-                                    ->get();
 
+        $value = 0;
+        $employee_id = $this->id;
+        $duds        = EmployeeDeduction::getDisDed($employee_id,$type)->get();
+        $changes     = MonthChange::getMonthChange($employee_id,$type)->get();
+//        dd($duds);
         foreach($duds as $dud ){
             $value += $dud->val;
         }
@@ -137,5 +130,35 @@ class Employees extends Eloquent {
     {
         return $this->belongsTO('MsHeader','id');
     }
+public  function test(){
 
+    $q = self::where('hr_employees.co_id',1)
+        ->join('hr_empdesded','hr_empdesded.employee_id','=','hr_employees.id')
+        ->join('hr_monthchanges','hr_monthchanges.employee_id','=','hr_employees.id')
+        ->join('hr_desded','hr_desded.id','=','hr_empdesded.des_ded')
+        ->join('hr_loans','hr_loans.id','=','hr_employees.id')
+//            ->groupBy('hr_employees.id')
+//        ->groupBy('day_cost')
+//        ->groupBy('des_ded_id')
+        ->select('hr_employees.name as emp_name',
+            'hr_employees.salary',
+            'hr_desded.name',
+            'hr_desded.name AS des_ded_name',
+            'hr_desded.ds_type',
+            'hr_desded.ds_cat',
+            'hr_monthchanges.for_year',
+            'hr_monthchanges.for_month',
+//            DB::raw('hr_monthchanges.for_year = 2017 AND hr_monthchanges.for_month = 9 as this_enter'),
+//            'hr_desded.name AS name',
+            'hr_monthchanges.day_cost',
+            'hr_monthchanges.val AS month_change_value')
+
+
+//            ->join('hr_desded','hr_desded.id','=','hr_monthchanges.des_ded_id')
+////            ->where('hr_desded.ds_type',$type)
+//            ->groupBy('des_ded_id')
+//            ->groupBy('day_cost')
+        ->get();
+   return dd(DB::getQueryLog());
+}
 }

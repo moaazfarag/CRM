@@ -117,4 +117,25 @@ class BaseController extends Controller {
         // salary  ins_salary  ins_val
 
         );
+
+    /**
+     * search array of array
+     * return index of array has same $key and $value
+     * @param $array
+     * @param $key
+     * @param $value
+     * @return int|string
+     */
+    public static function arraySearch($array,$key,$value){
+        if(is_object($array)){
+            foreach($array as $k=>$v){
+                if ($v[$key] == $value) {
+                    return $k;
+                    break;
+                }
+            }
+        }else{
+            return "asd";
+        }
+    }
 }

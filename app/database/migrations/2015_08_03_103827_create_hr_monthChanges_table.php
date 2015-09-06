@@ -17,7 +17,7 @@ class CreateHrMonthChangesTable extends Migration {
 			$table->increments('id');
 			$table->integer('co_id');
             $table->integer('employee_id');
-            $table->dateTime('trans_date');
+            $table->date('trans_date');
             $table->integer('trans_serial');
             $table->integer('for_year');
             $table->integer('for_month');
