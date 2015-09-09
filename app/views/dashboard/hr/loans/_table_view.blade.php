@@ -20,7 +20,7 @@
         <tbody>
         @foreach($tablesData as $k=>$tableData)
             <tr>
-                <th>{{ $tableData->id }}</th>
+                <th>{{ $tableData->true_id }}</th>
                 <td>{{ $tableData->employees->name }}</td>
                 <td>{{ BaseController::ViewDateAndTime($tableData->loan_date) }}</td>
                 <td>{{ $tableData->loan_val }}</td>

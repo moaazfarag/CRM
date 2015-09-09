@@ -109,7 +109,7 @@
                   <td ></td>
                    </tr>
                 <tr>
-                    
+
                   <td class="right-align no-border"><strong>الضرائب</strong>
                   </td>
                   <td class="right-align no-border" colspan="2">{{ $invoice->tax }}</td>

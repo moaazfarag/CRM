@@ -30,23 +30,25 @@ class MsHeaderController extends BaseController
     public function readyToPay()
     {
         $haveSalary = MsHeader::hasSalary()->lists('employee_id');
-        $chosenEmployees = Employees::company()->whereNotIn('id', $haveSalary)->whereIn('id', Input::get('employeeId'))->get();
+
+        $chosenEmployees = Employees::whereNotIn('id', $haveSalary)->whereIn('id', Input::get('employeeId'))->get();
         if ($chosenEmployees->isEmpty()) {
 
-//            return 'برجاء اختيار الموظفيت المراد الصرف لهم ';
+            return 'برجاء اختيار الموظفيت المراد الصرف لهم ';
 
         } else {
             foreach ($chosenEmployees as $chosenEmployee) {
 
                 $allDis = $chosenEmployee->employeeDudValue('استقطاع') ;
+
                 $allDud = $chosenEmployee->employeeDudValue('استحقاق');
                 $loan = $chosenEmployee->loansValue();
                 $salary = $chosenEmployee->salary;
                 
                 $newHeader = new  MsHeader;
                 $newHeader->co_id = $this->coAuth();
-                $msHeaderId = $newHeader->company()->max('ms_trans_id') + 1;
-                $newHeader->ms_trans_id = $msHeaderId;
+                $msHeaderId = $newHeader->company()->max('ms_header_id') + 1;
+                $newHeader->ms_header_id = $msHeaderId;
                 $newHeader->employee_id = $chosenEmployee->id;
                 $newHeader->for_year = Input::get('for_year');
                 $newHeader->for_month = Input::get('for_month');
@@ -137,6 +139,7 @@ class MsHeaderController extends BaseController
 //for_month for_year employee_id
 
     }
+
 }
 
 

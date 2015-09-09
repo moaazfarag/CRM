@@ -12,21 +12,22 @@ class catSeeder extends Seeder {
 
 	    array(
 
+			'true_id'  => '1',
 	    	'co_id'    =>'1',
 	    	'name' =>'بنطلون',
 	    	'user_id'  =>'1',
 	    ),
 
 	    array(
-
+			'true_id'  => '1',
 	    	'co_id'    =>'2',
-	    	'name' =>'سيارات',
+	    	'name' 	   =>'سيارات',
 	    	'user_id'  =>'2',
 	    ),
 
 
 	    array(
-
+			'true_id'  => '1',
 	    	'co_id'    =>'3',
 	    	'name' =>'مكرونة',
 	    	'user_id'  =>'3',

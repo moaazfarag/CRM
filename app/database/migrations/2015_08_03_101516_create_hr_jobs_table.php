@@ -15,7 +15,7 @@ class CreateHrJobsTable extends Migration {
 		Schema::create('hr_jobs', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('job_id');
+			$table->string('true_id');
 			$table->integer('co_id');
             $table->char('name','50');
             $table->boolean('deleted');

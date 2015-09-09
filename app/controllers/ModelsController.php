@@ -26,6 +26,7 @@ class ModelsController extends BaseController
     public function storeModel()
     {
         $model           = new Models ;
+        $model->true_id    = BaseController::maxId($model);
         $model->name     = Input::get('name'); //season name from input
         $model->marks_id = Input::get('marks_id'); // mark id from input
         $model->co_id    = Auth::user()->co_id; // company id
@@ -89,9 +90,11 @@ class ModelsController extends BaseController
        }else{
 
                 $model->delete();
-                Session::flash('success','تم حذف الموديل بنجاح ');
+            $edit_ids = BaseController::editIds('models','Models','true_id');
+            if($edit_ids) {
+                Session::flash('success', 'تم حذف الموديل بنجاح ');
                 return Redirect::back();
-
+                }
             }//end else employees
 
         }// model

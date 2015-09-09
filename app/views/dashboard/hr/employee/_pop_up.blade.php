@@ -49,6 +49,7 @@
                             {{ Form::number('val',null,array('ng-required'=>"displayCondition",'ng-model'=>'dudDis.val','id'=>'val')) }}
                             {{ Form::label('val',  lang::get('main.value') )     }}
                             <p class="parsley-required">{{ $errors ->first('val') }} </p>
+                           <span style="font-size: large"> @{{  message }}</span>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 
-      <footer>
+      <footer class="no-print">
           &copy; برمجة و تطوير شركة
           <a href="http://www.clickfordata.net/">
               <strong>
