@@ -37,9 +37,8 @@ class ItemController extends BaseController
         }else {
 
             $newItem = new Items;
-
+            $newItem->true_id    = BaseController::maxId($newItem);
             $newItem->co_id = $this->coAuth();
-
             $newItem->cat_id           = $inputs['cat_id'];
             $newItem->item_name        = $inputs['item_name'];
             $newItem->unit             = $inputs['unit'];

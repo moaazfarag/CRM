@@ -168,7 +168,7 @@
                           </div>
                           <div class="col s12 l3">
 
-                              {{ Form::select('pricing', array('' => lang::get('main.select_system') + $pricing ,null,array('id'=>'mark_id')) }}
+                              {{ Form::select('pricing', array('' => lang::get('main.select_system')) + $pricing ,null,array('id'=>'mark_id')) }}
                               <p class="parsley-required error-validation">{{ $errors ->first('pricing') }} </p>
 
                           </div>

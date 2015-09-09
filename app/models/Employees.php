@@ -90,11 +90,12 @@ class Employees extends Eloquent {
         $value = 0;
 
         foreach ($this->hasMany('Loans','employee_id','id')->get() as $loan ) {
-            $endMonth = date('m',strtotime($loan->loan_end));
-            $endYear  = date('Y',strtotime($loan->loan_end));
-
-            if($endMonth >= Input::get('for_month') && $endYear >= Input::get('for_year')){
-                $value += $loan->loan_val;
+            $endMonth   = date('m',strtotime($loan->loan_end));
+            $endYear    = date('Y',strtotime($loan->loan_end));
+            $startMonth = date('m',strtotime($loan->loan_start));
+            $startyear  = date('Y',strtotime($loan->loan_start));
+            if($endMonth >= Input::get('for_month') && $endYear >= Input::get('for_year')&& $startyear <= Input::get('for_year') && $startMonth <= Input::get('for_month') ){
+                $value += $loan->loan_currBal;
             }
         }
         return $value ;
@@ -115,7 +116,7 @@ class Employees extends Eloquent {
             $value += $dud->val;
         }
         foreach($changes as $change ){
-            if($change->day_cost == "ايام")
+            if($change->day_cost == "أيام")
             {
                 $value += (($this->salary /30) * $change->val ) ;
             }elseif($change->day_cost == "مبلغ"){

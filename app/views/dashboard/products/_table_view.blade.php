@@ -32,7 +32,7 @@
         <tbody>
         @foreach($tablesData as $tableData)
             <tr>
-                <th>{{ $tableData->id }}</th>
+                <th>{{ $tableData->true_id }}</th>
                 <td>{{ $tableData->name }}</td>
                 @if(Route::currentRouteName() == 'addModel')
                 <td>{{ $tableData->getMarkName() }}</td>

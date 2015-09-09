@@ -10,7 +10,7 @@ class seasonsSeeder extends Seeder {
 		DB::table('seasons')->insert(array(
 
 	    array(
-
+			'true_id'  => '1',
 	    	'co_id'      =>'1',
 	    	'name' =>'فصل الشتاء',
 	    	'user_id'    =>'1',
@@ -18,13 +18,15 @@ class seasonsSeeder extends Seeder {
 	    ), 
 
 	      array(
+			  'true_id'  => '1',
 
 	    	'co_id'      =>'2',
 	    	'name' =>'فصل الصيف ',
 	    	'user_id'    =>'2',
 	
-	    ),   array(
-
+	    ),
+			array(
+			'true_id'  => '1',
 	    	'co_id'      =>'3',
 	    	'name' =>' طوال العام',
 	    	'user_id'    =>'3',

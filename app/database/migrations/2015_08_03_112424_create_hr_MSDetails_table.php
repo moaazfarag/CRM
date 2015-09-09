@@ -15,7 +15,7 @@ class CreateHrMSDetailsTable extends Migration {
 		Schema::create('hr_ms_details', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('trans_header_id');
+            $table->integer('ms_header_id');
             $table->integer('employee_id');
             $table->integer('for_year');
             $table->integer('for_month');

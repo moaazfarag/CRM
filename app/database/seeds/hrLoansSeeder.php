@@ -5,6 +5,7 @@ class hrLoansSeeder extends Seeder {
         DB::table('hr_loans')->truncate();
         DB::table('hr_loans')->insert(array(
             array(
+                'true_id'                => '1',
                 'employee_id'            => '2',
                 'co_id'                  => '1',
                 'loan_date'              =>  new DateTime(),
@@ -16,6 +17,7 @@ class hrLoansSeeder extends Seeder {
                 'finish'                 => '1',
             ),
             array(
+                'true_id'                => '2',
                 'employee_id'            => '1',
                 'co_id'                  => '1',
                 'loan_date'              => new DateTime(),
@@ -27,6 +29,7 @@ class hrLoansSeeder extends Seeder {
                 'finish'                 => '1',
             ),
             array(
+                'true_id'                => '3',
                 'employee_id'            => '3',
                 'co_id'                  => '1',
                 'loan_date'              => new DateTime(),
@@ -38,6 +41,7 @@ class hrLoansSeeder extends Seeder {
                 'finish'                 => '1',
             ),
             array(
+                'true_id'                => '4',
                 'employee_id'            => '5',
                 'co_id'                  => '1',
                 'loan_date'              => new DateTime(),
@@ -49,6 +53,7 @@ class hrLoansSeeder extends Seeder {
                 'finish'                 => '1',
             ),
             array(
+                'true_id'                => '5',
                 'employee_id'            => '5',
                 'co_id'                  => '1',
                 'loan_date'              => new DateTime(),

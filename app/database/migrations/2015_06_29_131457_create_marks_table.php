@@ -15,6 +15,7 @@ class CreateMarksTable extends Migration {
 		Schema::create('marks', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('true_id');
 			$table->integer('co_id');
 			$table->string('name');
 			$table->integer('user_id');

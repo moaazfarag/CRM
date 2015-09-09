@@ -13,7 +13,7 @@
           @foreach($branches as $branch)
             <tr>
 
-              <th>{{ $branch->id }}</th>
+              <th>{{ $branch->true_id }}</th>
               <td>{{ $branch->br_name }}</td>
               <td>
                 <a href="ecommerce-product-single.html">

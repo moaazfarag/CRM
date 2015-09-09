@@ -124,7 +124,20 @@ class BaseController extends Controller {
 
         return $date_format;
     }
+    public static function ViewTime($date)
+    {
 
+        $date_format = date('h:i ', strtotime($date));
+
+        $a = date('a', strtotime($date));
+        if ($a == 'am') {
+            $date_format .= 'صباحاً';
+        } else {
+            $date_format .= 'مساءً';
+        }
+        return $date_format;
+
+    }
 
     public static function ViewDateAndTime($date_and_time)
     {
@@ -159,5 +172,41 @@ class BaseController extends Controller {
         }else{
             return "asd";
         }
+    }
+
+   public static function editIds($table_name,$model_name,$col_name)
+    {
+        // get all data from table
+        $rows = DB::table($table_name)->lists("$col_name");
+
+        // count the data
+        $counts = count($rows);
+
+        for ($i = 0; $i < $counts; $i++) {
+
+            // get first row in table
+            $first_row = DB::select(DB::raw("select * from $table_name"))[$i];
+
+            if (!empty($first_row)) {
+
+                $row_edit = $model_name::find($first_row->id);
+
+                if (!empty($row_edit)) {
+                    $row_edit->$col_name = $i + 1;
+                    $row_edit->save();
+
+                }
+
+
+            }
+        }
+        return true;
+    }
+
+
+    public static function maxId ($var_name)
+    {
+        $true_id = $var_name->max('true_id') + 1;
+        return $true_id;
     }
 }

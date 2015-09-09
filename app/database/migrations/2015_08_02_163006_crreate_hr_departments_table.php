@@ -15,6 +15,7 @@ class CrreateHrDepartmentsTable extends Migration {
 		Schema::create('hr_departments', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('true_id');
 			$table->integer('co_id');
             $table->integer('department_id');
             $table->char('name','50');

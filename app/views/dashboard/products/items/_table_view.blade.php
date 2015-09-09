@@ -34,7 +34,7 @@
           <tbody>
         @foreach($co_info->items as $item)
             <tr>
-              <th>{{$item->id}}</th>
+              <th>{{$item->true_id}}</th>
               <td>{{$item->item_name}}</td>
               <td>{{$item->buy}}</td>
               <td>{{$item->unit}}</td>

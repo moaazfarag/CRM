@@ -125,6 +125,7 @@ class SettleController extends BaseController {
 
         }else {
             $newHeader                  = new TransHeader;
+            $newHeader->true_id         = BaseController::maxId($newHeader);
             $newHeader->co_id           = $this->coAuth();
             $newHeader->user_id         = Auth::id();
             $newHeader->br_code         = $inputs['branch_id'];

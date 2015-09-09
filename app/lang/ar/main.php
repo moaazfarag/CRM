@@ -4,6 +4,8 @@ return  array(
     'password'         => 'كلمة المرور',
     'confirm_password' => 'تاكيد كلمة المرور' ,
     'submit'           => 'حفظ',
+    'yes'               =>'نعم',
+    'no'               =>'لا',
     // Aside Page
     'mainInfo'         => 'البيانات الاساسية',
     'mainList'         => 'القائمة الرئيسية',
@@ -279,7 +281,7 @@ return  array(
     'amount_or_days'     =>'مبلغ /أيام',
     'canceld'            =>'ملغاه',
     'data_entry'         =>'مدخل البيانات',
-
+    'amount' => 'مبلغ',
     ######{{ Monthly salary equipment  }}########
 
 
@@ -341,4 +343,16 @@ return  array(
     'partners_'      =>'جارى الشركاء',
     'search'         =>'بحث',
 
+    //////////{{  readyToPay }}\\\\\\\\\\\\\
+    'delivery_no'  	=>'ايصال رقم /',
+    'exchange_date'	=>'تاريخ الصرف /',
+//    'for_month'		=>'عن شهر /',
+    'main/'			=>'الاساسي /',
+//    'sum'			=>'الاجمالي /',
+//	'loans'			=>'القروض /',
+	'receipt_salary'=>'وصل إستلام مرتب للموظف /',
+    'for_year_'		=>'سنة /',
+    'employee/' 	=>'أسم الموظف /',
+    'job/'          => 'الوظيفة /',
+    'department/'   => 'القسم/',
 );
