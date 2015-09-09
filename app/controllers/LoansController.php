@@ -26,15 +26,21 @@ class LoansController extends BaseController
         }else {
             $inputs = Input::all();
             $newLoans                         = new Loans;
+            $newLoans->true_id                = BaseController::maxId($newLoans);
             $newLoans->co_id                  = $this->coAuth();
             $newLoans->loan_date              = $this->strToTime($inputs['loan_date']);
             $newLoans->employee_id            = $inputs['employee_id'];
             $newLoans->loan_val               = $inputs['loan_val'];
             $newLoans->loan_start             = $this->strToTime($inputs['loan_start']);
 
-            $months = ceil(($inputs['loan_val'] /  $inputs['loan_currBal'] ));
-            $newLoans->loan_end = date('Y-m-d', strtotime("+$months months"));
 
+            $months = ceil($inputs['loan_val'] /  $inputs['loan_currBal'] )-1;
+
+
+            $newLoans->loan_end =date('Y-m-d', strtotime($newLoans->loan_start ."+$months months"));
+
+//            $test = date('Y-m-d', strtotime($newLoans->loan_start ."+$months months"));
+//            var_dump($test); die();
             $newLoans->loan_currBal           = $inputs['loan_currBal'];
 //            $newLoans->user_id                    = Auth::id();
             $newLoans->save();
@@ -77,8 +83,8 @@ class LoansController extends BaseController
 
                 $oldLoans->loan_start             = $this->strToTime($inputs['loan_start']);
 
-                $months = ceil(($inputs['loan_val'] /  $inputs['loan_currBal'] ));
-                $oldLoans->loan_end = date('Y-m-d', strtotime("+$months months"));
+                $months = ceil($inputs['loan_val'] /  $inputs['loan_currBal'] )-1;
+                $oldLoans->loan_end = date('Y-m-d', strtotime($oldLoans->loan_start ."+$months months"));;
 
                 $oldLoans->loan_currBal           = $inputs['loan_currBal']; // ÇáŞÓØ ÇáÔåÑì
 //                $oldLoans->user_id                    = Auth::id();

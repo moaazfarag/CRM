@@ -55,7 +55,7 @@ class settleSeeder extends Seeder
         DB::table('trans_header')->insert(array(
 
             array(
-
+                'true_id'       => '1',
                 'co_id'         => '1',
                 'user_id'       =>'1',
                 'br_code'       =>'1',
@@ -67,7 +67,7 @@ class settleSeeder extends Seeder
             ),
 
             array(
-
+                'true_id'  => '2',
                 'co_id'         => '1',
                 'user_id'       =>'1',
                 'br_code'       =>'1',
@@ -80,6 +80,7 @@ class settleSeeder extends Seeder
 
             array(
 
+                'true_id'       => '1',
                 'co_id'         => '1',
                 'user_id'       =>'1',
                 'br_code'       =>'1',
@@ -92,7 +93,7 @@ class settleSeeder extends Seeder
             ),
 
             array(
-
+                'true_id'       => '2',
                 'co_id'         => '1',
                 'user_id'       =>'1',
                 'br_code'       =>'1',

@@ -11,7 +11,7 @@ class itemsSeeder extends Seeder {
 		DB::table('items')->insert(array(
 
 array(
-
+			'true_id'  => '1',
 	    	'co_id'           =>'1',
 	    	'cat_id'        =>'1',
 	    	'item_name'       =>'بنطلون مقاس 32',
@@ -30,7 +30,7 @@ array(
 	    	'user_id'         =>'1',
 	    ),
 			array(
-
+				'true_id'  => '2',
 				'co_id'           =>'1',
 				'cat_id'        =>'1',
 				'item_name'       =>'تيشيرت اديداس مقاس 32',
@@ -49,7 +49,7 @@ array(
 				'user_id'         =>'1',
 			),
 	    array(
-
+			'true_id'  => '1',
 	    	'co_id'           =>'2',
 	    	'cat_id'          =>'2',
 	    	'item_name'       =>'سيارة موديل 2012 ',
@@ -67,7 +67,7 @@ array(
 	    	'notes'           =>'السيارة 2500 cc حمراء اللون ',
 	    	'user_id'         =>'2',
 	    ), array(
-
+			'true_id'  => '1',
 	    	'co_id'           =>'3',
 	    	'cat_id'          =>'3',
 	    	'item_name'       =>'مكرونة الملكة اكيلو جرام ',

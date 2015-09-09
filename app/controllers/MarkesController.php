@@ -48,6 +48,7 @@ class MarkesController extends \BaseController
 	{
 
 		$mark = new Markes;
+		$mark->true_id    = BaseController::maxId($mark);
 		$mark->name = Input::get('name');
 		$mark->co_id = Auth::user()->co_id; // company id
 		$mark->user_id = Auth::id();// user who add this record
@@ -112,10 +113,11 @@ class MarkesController extends \BaseController
 			} else {
 
 				$markes->delete();
-
-				Session::flash('success', 'تم حذف الماركة بنجاح ');
-				return Redirect::back();
-
+				$edit_ids = BaseController::editIds('marks','Markes','true_id');
+				if($edit_ids) {
+					Session::flash('success', 'تم حذف الماركة بنجاح ');
+					return Redirect::back();
+				}
 			}
 		}
 	}

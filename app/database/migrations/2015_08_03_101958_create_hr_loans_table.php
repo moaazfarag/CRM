@@ -15,7 +15,8 @@ class CreateHrLoansTable extends Migration {
 		Schema::create('hr_loans', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('employee_id');
+			$table->string('true_id');
+			$table->integer('employee_id');
 			$table->integer('co_id');
             $table->date('loan_date');
             $table->integer('loan_val');

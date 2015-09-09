@@ -27,11 +27,12 @@ class JobController extends BaseController
             return Redirect::back()->withInput()->withErrors($validation->messages());
 
         }else {
-        $jop           = new Job ;
-        $jop->name     = Input::get('name');
-        $jop->co_id    = Auth::user()->co_id;
+        $job           = new Job ;
+        $job->true_id  = BaseController::maxId($job);
+        $job->name     = Input::get('name');
+        $job->co_id    = Auth::user()->co_id;
 //        $dep->user_id  = Auth::id();
-        $jop->save();
+        $job->save();
         return Redirect::route('addJob');
         }
     }
@@ -79,11 +80,16 @@ class JobController extends BaseController
                 Session::flash('error',Lang::get('main.delete_job_error_msg'));
                 return Redirect::back();
             }else{
-                $job->delete();
-                Session::flash('success',Lang::get('main.delete_job_success_msg'));
-                return Redirect::back();
 
+                $job->delete();
+
+              $edit_ids = BaseController::editIds('hr_jobs','Job','true_id');
+                if($edit_ids) {
+                    Session::flash('success', Lang::get('main.delete_job_success_msg'));
+                    return Redirect::back();
+                }
             }//end else employees
+
 
         }// end if dep
     }

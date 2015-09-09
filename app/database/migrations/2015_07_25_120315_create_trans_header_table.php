@@ -15,6 +15,7 @@ class CreateTransHeaderTable extends Migration {
 		Schema::create('trans_header', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('true_id');
             $table->integer('co_id');
             $table->integer('user_id');
             $table->integer('br_code');

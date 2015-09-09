@@ -35,11 +35,49 @@ class MsHeader extends Eloquent
         return self::company()->where('for_month',Input::get('for_month'))
             ->where('for_year',Input::get('for_year'));
     }
-    public function details(){
-        return $this->hasMany('MsDetails','ms_header_id','ms_trans_id');
+    public function detailsDes(){
+        return $this->hasMany('MsDetails','ms_header_id','ms_header_id')->where('des_ded_type','استحقاق');
+
     }
+
+
+    public function detailsDed(){
+        return $this->hasMany('MsDetails','ms_header_id','ms_header_id')->where('des_ded_type','استقطاع');
+    }
+
+//    public function sumDesded ($employee_id){
+//
+//       $all_desded_array = array()
+//        $i               = 0;
+//        $all_desded = Deduction::all();
+//
+//    foreach($all_desded as $desded ) {
+//
+//        $result = DB::table('hr_monthChanges')
+//            ->where('des_ded_id', $desded->id)
+//            ->where('employee_id', $employee_id)
+//            ->where('for_month', Input::get('for_month'))
+//            ->where('for_year', Input::get('for_year'));
+//        if (!empty($result)) {
+//            $all_desded_array [$i] = $result;
+//        }
+//    }
+//
+//        return $all_desded_array;
+//
+//}
     public function employee(){
         return $this->hasOne('Employees','id','employee_id');
+    }
+
+    public function job(){
+
+        return $this->hasOne('Job','id','employee_id');
+    }
+
+    public function department(){
+
+        return $this->hasOne('Department','id','employee_id');
     }
 
 }
