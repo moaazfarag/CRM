@@ -155,10 +155,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      *
      */
     Route::group(array('prefix'=>'invoice'),function(){
-        Route::get('add-sales-invoice', array('uses' => 'InvoiceController@addSalesInvoice','as' => 'addSalesInvoice'));
+        Route::get('add-{type}-invoice', array('uses' => 'InvoiceController@addInvoice','as' => 'addInvoice'));
+        Route::post('add-{type}-invoice', array('uses' => 'InvoiceController@storeInvoice','as' => 'storeInvoice'));
+        Route::get('view-invoice/{headerId}', array('uses' => 'InvoiceController@viewInvoice','as' => 'viewInvoice'));
         Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
         Route::get('sales-returns', array('uses' => 'InvoiceController@salesReturns','as' => 'salesReturns'));
         Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
+        Route::post('accounts-by-id', array('uses' => 'InvoiceController@accountById','as' => 'accountById'));
         Route::post('items-data', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
 
 

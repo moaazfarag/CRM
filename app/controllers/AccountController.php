@@ -69,7 +69,7 @@ class AccountController extends BaseController
             $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
             $data['accountType'] = $accountType;
             $data['asideOpen']   = 'open' ;
-            $data['pricing'] = $this->pricing;
+            $data['pricing']   = $this->pricing;
             $data['navActive']      = "active";
             $data['arabicName']   = Lang::get('main.'.$accountType);
             $data['account'] = Accounts::where('acc_type','=',$accountType)->where('id','=',$id)->first();

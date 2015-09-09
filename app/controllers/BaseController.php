@@ -160,4 +160,41 @@ class BaseController extends Controller {
             return "asd";
         }
     }
+    public function IsItemBelongToCompany()
+    {
+       $postedItems = Items::whereNotIn('id',TransDetails::countOfInputs(Input::all()))->get();
+//        dd($postedItems);
+        if($postedItems->isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+    public function IsAccountBelongToCompany()
+    {
+        $accountId = Input::get('account_id');
+//        dd($accountId);
+        if($accountId>0){
+            $postedAccount = Accounts::company()->where('id',$accountId)->get();
+            if($postedAccount->isEmpty()){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+
+        }
+    }
+    public function priceBaseOnAccount($accountId = null,$itemId){
+        if(isset($accountId)){
+
+            return Items::company()->find($itemId)->sell_users;
+
+        }else{
+            return Items::company()->find($itemId)->sell_users;
+        }
+
+    }
 }

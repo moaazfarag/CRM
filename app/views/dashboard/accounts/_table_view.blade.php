@@ -8,8 +8,8 @@
               <th>@lang('main.phone_number_1')</th>
               <th>@lang('main.phone_number_2')</th>
               <th>@lang('main.regComm') </th>
-              <th>@lang('main.taxCard')</th>
-              <th>@lang('main.pricing')</th>
+                <th>@lang('main.pricing')</th>
+                <th>@lang('main.taxCard')</th>
               <th>@lang('main.notes')</th>
               <th>@lang('main.edit')</th>
             </tr>

@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col s12 l12">
                             <button type="button" ng-click="storeEmpDud(dudDis)" class="waves-effect btn">@lang('main.add')</button>
-                        <button type="button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat "> </button>
+                        <button type="button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat "> @lang('main.cancel')</button>
                     </div>
                     {{ Form::close() }}
                 </div>{{--submit  row end--}}
