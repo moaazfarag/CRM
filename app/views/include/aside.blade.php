@@ -138,7 +138,7 @@
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الفواتير <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
-                        <a href="{{ URL::route('addSalesInvoice') }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                        <a href="{{ URL::route('addInvoice',"sales") }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
                     </li>
 
                     <li>

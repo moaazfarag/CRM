@@ -14,7 +14,6 @@
     </thead>
     <tbody>
     <tr ng-repeat="invoiceItem in invoiceItems">
-        @{{  item }}
         <td>
             <a href ng-click="removeItem(invoiceItem)" class="btn btn-danger">[X]</a>
         </td>{{--invoice Item DELETE BUTTON --}}
@@ -23,8 +22,8 @@
         </td>{{--invoice Item COUNT --}}
         <td>
             <input hidden class="input-without-border" ng-pattern="/^[0-9]+$/" name="id_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.id" type="number" value="@{{ invoiceItem.id }}"/>
-            <input disabled class="input-without-border" name="name_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.name" type="text" />
-            <input hidden class="input-without-border" name="name_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.name" type="text" />
+            <input disabled class="input-without-border" name="name_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.item_name" type="text" />
+            <input hidden class="input-without-border" name="name_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.item_name" type="text" />
         </td>{{--invoice Item NAME & ID--}}
         <td>
             <input  ng-pattern="/^[0-9]+$/" class="input-without-border" required name="quantity_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.quantity" type="number" value="@{{ invoiceItem.quantity }}"/>
@@ -35,10 +34,11 @@
             </div>
         </td>{{--invoice Item quantity--}}
         <td>
-            @{{ invoiceItem.cost   }}
+
+                @{{ cost(invoiceItem)   }}
         </td>{{--invoice Item cost --}}
         <td>
-            @{{ invoiceItem.cost * invoiceItem.quantity  }}
+            @{{ cost(invoiceItem) * invoiceItem.quantity  }}
         </td>{{--invoice Item TOTAL--}}
         <td>
             <input ng-required="isRequired(invoiceItem.has_serial)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.serial" type="text" />

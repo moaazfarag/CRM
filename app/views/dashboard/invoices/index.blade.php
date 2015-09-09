@@ -3,7 +3,7 @@
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
 <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]' }}' ng-app="itemApp"  ng-controller="mainController" class="card">
-    {{ Form::open(array('route'=>array('storeSettle',@$type),'name'=>'form','novalidate')) }}
+    {{ Form::open(array('route'=>array('storeInvoice',@$type),'name'=>'form','novalidate')) }}
     <div class="title">
         <h5>
             <i class="mdi mdi-notification-event-available"></i>
@@ -55,16 +55,20 @@
 
                 <i class="mdi mdi-communication-import-export"></i>
                 {{ Form::label('account',lang::get('main.account')) }}
-                {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == 1','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
+                {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
                 <p class="parsley-required">{{ $errors ->first('account') }} </p>
             </div>{{--account--}}
             <div ng_show="account.type" class="col s2 l3">
 
                 <i class="mdi mdi-communication-import-export"></i>
                 {{ Form::label('account',Lang::get('main.account')) }}
-                <select  class='browser-default'>
+                <select  name="account_id" ng-required='pay_type == "on_account"' ng-change='getAccountInfo()' ng-model="account.id"  class='browser-default'>
                         <option value="@{{ account.id }}" ng-repeat="account in accounts">@{{ account.acc_name }}</option>
                 </select>
+              <span style="color: red">
+                  @{{ isLimit() }}
+              </span>
+                @{{  seletedAccount.pricing }}
                 {{--{{ Form::select('account',array(null=>"اختر   نوع الحساب ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
                 <p class="parsley-required">{{ $errors ->first('account') }} </p>
             </div>{{--account--}}
@@ -75,10 +79,16 @@
             </div>
             <div class="col s2 l3">
                 <i class="mdi-action-label"></i>
-                <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.name" id="item_id" autofocus="autofocus">
+                <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
                 <ul id="itemsView" class="drop-down-menu" ng-show="item">
-                    <li  ng-model="item.name" class="li-drop-down-menu"  ng-repeat="dbitem in items| filter:item.name" ng-click="selectItem(dbitem.item_name,dbitem.id,dbitem.has_serial,dbitem.sell_users)">@{{dbitem.item_name }}</li>
+                    <li  ng-model="item.item_name"
+                         class="li-drop-down-menu"
+                         ng-repeat="dbitem in items| filter:item.item_name"
+                         ng-click="selectItem(dbitem)">
+                        @{{dbitem.item_name }}
+                    </li>
                 </ul>
+
                 <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
             </div> {{-- item div --}}
             <div class="col s12 l2">
@@ -101,7 +111,7 @@
                 <div class="col s2 ">
                     <div class="input-field">
                         <label for="item_id">
-                            <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
                                 @lang('main.add')
                             </button >
                             <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
@@ -115,8 +125,7 @@
 
         {{-- end acount,item and quaintity  --}}
 
-
-
+        {{--@{{  form.pay_type }}--}}
 
         @include('dashboard.settle._popup_div')
 
@@ -139,7 +148,7 @@
 
                 <i class="mdi mdi-content-remove-circle"></i>
                 {{ Form::label('discount',Lang::get('main.discount_')) }}
-                {{ Form::text('discount',null,array('id'=>'discount','ng-model'=>'discount')) }}
+                {{ Form::number('discount',0,array('id'=>'discount','ng-model'=>'discount')) }}
                 <p class="parsley-required">{{ $errors ->first('discount') }} </p>
             </div>{{--discount--}}
 
@@ -148,7 +157,7 @@
 
                 <i class="mdi mdi-maps-local-atm"></i>
                 {{ Form::label('tax',Lang::get('main.tax_')) }}
-                {{ Form::number('discount',null,array('id'=>'tax')) }}
+                {{ Form::number('tax',null,array('id'=>'tax')) }}
                 <p class="parsley-required">{{ $errors ->first('tax') }} </p>
             </div>{{--tax--}}
 
@@ -156,7 +165,7 @@
 
                 <i class="fa fa-exchange"></i>
                 <br>
-                @{{ invoice_sub_total() - (invoice_sub_total()*(discount/100)) }}
+                @{{ afterDiscount() }}
                 <p class="parsley-required">{{ $errors ->first('net') }} </p>
             </div>{{--net--}}
 

@@ -99,7 +99,7 @@ class MsHeaderController extends BaseController
                 MsDetails::insert($newDetails);
             }else{
             }
-
+            isset($newDetails)? MsDetails::insert($newDetails):null;
             $data['headers'] = MsHeader::company()->whereIn('employee_id',Input::get('employeeId'))
                 ->where('for_month',Input::get('for_month'))
                 ->where('for_year' ,Input::get('for_year'))->get();

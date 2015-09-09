@@ -32,7 +32,18 @@ angular.module('itemService', [])
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(type)
                 });
+
             },
+            getAccountInfo : function(id){
+                return $http({
+                    method:'POST',
+                    url: '/admin/invoice/accounts-by-id',
+                    headers: { 'Content-Type' : 'application/json' },
+                    data:   JSON.stringify(id)
+                });
+
+            },
+
             destroy : function(id) {
                 return $http.delete('/admin/testdelete/' + id);
 

@@ -1,5 +1,7 @@
                      <!-- pop up  Structure -->
- <div id="addItem" class="modal">
+ <div id="addItem"  class="modal">
+
+     <a ng-click="clearItemForm()" class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
      <div class="modal-content">
          <div class="alert blue lighten-2 white-text">
              <h5>هذا المنتج يحتاج الى ادخال سيريال</h5>
@@ -51,7 +53,7 @@
         </div>
     <div class="col s12 l4">
         <div class="input-field">
-            {{ Form::number('form',null,array('ng-model'=>"new.form",'ng-minlength'=>"1",'id'=>'form')) }}
+                        {{ Form::number('form',null,array('ng-model'=>"new.form",'ng-minlength'=>"1",'id'=>'form')) }}
             <div ng-show="form.$submitted || form.from.$touched">
                         <span ng-show="form.serial.$error.required">
                                 هذا الحقل مطلوب
@@ -84,13 +86,19 @@
                  class="waves-effect btn">
              اضف
          </button >
-         <button ng-show="range == 'range'" ng-disabled="new.to<new.form || (new.to - new.form) >100 || new.serial"
-                 href="#addItem"  type="button"
+         <button ng-show="range == 'range'"
+                 ng-disabled="new.to<new.form || (new.to - new.form) >100 || (!new.prefix || !new.form || !new.to)"
+                 href="#addItem"
+                 type="button"
                  ng-click="addItemHasSerial($scope.item.quantity) "
-                 class="waves-effect btn modal-action modal-close">
+                 class="waves-effect btn ">
              اضف
          </button >
+
 <div></div>
-         <button type="button"  ng-click="finishAddItemHasSerial()" class="modal-action modal-close btn">انهاء</button>
+         <div ng-click="clearItemForm()" >
+
+             <button type="button"  class="modal-action modal-close btn">انهاء</button>
+         </div>
      </div>
  </div>

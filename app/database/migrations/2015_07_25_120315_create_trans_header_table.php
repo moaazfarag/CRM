@@ -29,7 +29,7 @@ class CreateTransHeaderTable extends Migration {
             $table->date('date');
             $table->string('pay_type');
             $table->integer('deleted');
-
+			$table->unique(array('invoice_no', 'invoice_type','co_id'));
 			$table->timestamps();
 		});
 	}
