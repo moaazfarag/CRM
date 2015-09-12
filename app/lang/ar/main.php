@@ -355,4 +355,6 @@ return  array(
     'employee/' 	=>'أسم الموظف /',
     'job/'          => 'الوظيفة /',
     'department/'   => 'القسم/',
+    'buy'   => 'مشتريات',
+    'view_invoices' => 'عرض فواتير'
 );

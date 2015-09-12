@@ -106,7 +106,7 @@ class MonthChangeController extends BaseController
             {
                 $data['title']              = Lang::get('main.month_change');
                 $data['employees']          = 'open' ;
-                $data['tablesData']        = MonthChange::company()->get();
+                $data['tablesData']         = MonthChange::company()->get();
                 return $data;
             }
 

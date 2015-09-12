@@ -174,7 +174,7 @@ class BaseController extends Controller {
         }
     }
 
-    public function IsItemBelongToCompany()
+    public function IsItemsBelongToCompany()
     {
        $postedItems = Items::whereNotIn('id',TransDetails::countOfInputs(Input::all()))->get();
 //        dd($postedItems);
@@ -201,14 +201,26 @@ class BaseController extends Controller {
 
         }
     }
-    public function priceBaseOnAccount($accountId = null,$itemId)
+    public function priceBaseOnAccount($accountId = null,$item)
     {
         if (isset($accountId)) {
-
-            return Items::company()->find($itemId)->sell_users;
+            $account = Accounts::company()->find($accountId);
+            if($account){
+                if ($account->pricing == "sell_nos_gomla" && $item->sell_nos_gomla > 0) {
+                    return $item->sell_nos_gomla;
+                }elseif ($account->pricing == "sell_gomla" && $item->sell_gomla > 0) {
+                    return $item->sell_gomla;
+                }elseif ($account->pricing == "sell_gomla_gomla" && $item->sell_gomla_gomla > 0) {
+                    return $item->sell_gomla_gomla;
+                }else{
+                    return $item->sell_users;
+                }
+            }else{
+                return $item->sell_users;
+            }
 
         } else {
-            return Items::company()->find($itemId)->sell_users;
+            return $item->sell_users;
         }
 
     }
@@ -234,8 +246,6 @@ class BaseController extends Controller {
                     $row_edit->save();
 
                 }
-
-
             }
         }
         return true;

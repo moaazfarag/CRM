@@ -2,7 +2,7 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
-    @if(Route::currentRouteName() == "addMsHeader")
+    @if(Route::currentRouteName() == "monthSalarySearch")
         {{ Form::open(array('route'=>array('prepMsHeader'))) }}
     <div class=" card ">
         <div class="title">

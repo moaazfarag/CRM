@@ -12,8 +12,8 @@
         <a class="minimize" href="#">
           <i class="mdi-navigation-expand-less"></i>
         </a>
-        <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewSettles',array('type'=>@$type)) }}" class="btn btn-small z-depth-0">
-            @lang('main.show_settle')  {{ @$name}}
+        <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewInvoices',array('type'=>@$type)) }}" class="btn btn-small z-depth-0">
+            @lang('main.view_invoices')  {{ @$name}}
         </a>
     </div>
     <div class="content">

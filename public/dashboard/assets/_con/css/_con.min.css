@@ -11,6 +11,15 @@
 img, legend {
     border: 0
 }
+@media print
+{
+    .no-print {
+        display: none;
+    }
+    #print-content {
+        width: 100%; margin: 0; float: none;
+    }
+}
 
 legend, ul {
     padding: 0

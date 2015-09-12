@@ -22,10 +22,10 @@ class CreateTransHeaderTable extends Migration {
             $table->integer('invoice_no');
             $table->string('invoice_type');
             $table->integer('account');
-            $table->float('in_total');
-            $table->float('discount');
-            $table->float('tax');
-            $table->float('net');
+            $table->decimal('in_total',10,2);
+            $table->decimal('discount',10,2);
+            $table->decimal('tax',10,2);
+            $table->decimal('net',10,2);
             $table->date('date');
             $table->string('pay_type');
             $table->integer('deleted');

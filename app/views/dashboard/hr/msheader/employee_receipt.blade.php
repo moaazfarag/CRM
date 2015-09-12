@@ -55,8 +55,7 @@
         </style>
 
         <style type="text/css" media="print">
-            .no-print { display: none; }
-            #print-content { width: 100%; margin: 0; float: none; }
+
         </style>
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard" id="print-content">
@@ -66,7 +65,7 @@
     </div>
 
     @foreach($headers as $header)
-        <div class="card-panel border-solid" style="padding:2%">
+        <div class="card-panel border-solid" style="padding:2% ;min-height: 450px">
     <div class="card-panel grey lighten-4 border-solid" style="text-align: center;">
         @lang('main.receipt_salary') <strong> {{ $header->employee->name }} </strong>
     </div>
@@ -100,11 +99,6 @@
 
     <br>
 
-    {{--@lang('main.sum')--}}
-    {{--{{ $header->net }}--}}
-    {{--@lang('main.loans')--}}
-    {{--{{ $header->loan }}--}}
-
             <!-- Table with products -->
             <div class="row padding-1">
             @if(!$header->detailsDes->isEmpty())
@@ -124,24 +118,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php
-
-                            ?>
-
-
                                 @foreach($header->detailsDes as $k => $detail)
-
-
                                 <tr>
                                 <td>
-                                    {{ Deduction::find($detail->des_ded_id)->name }}
+                                    {{ $detail->name }}
                                 </td>
                                 <td>
-                                    {{ $detail->des_ded_val}}
+                                    {{ $detail->total_val}}
                                 </td>
 
                                 <td>
-                                {{ Deduction::find($detail->des_ded_id)->ds_cat }}
+                                {{ $detail->ds_cat  }}
                                 </td>
                             </tr>
                             @endforeach
@@ -174,14 +161,14 @@
                                 @foreach($header->detailsDed as $k => $detail)
                                     <tr>
                                         <td>
-                                            {{ Deduction::find($detail->des_ded_id)->name }}
+                                            {{ $detail->name }}
                                         </td>
                                         <td>
-                                            {{ $detail->des_ded_val}}
+                                            {{ $detail->total_val}}
                                         </td>
 
                                         <td>
-                                            {{ Deduction::find($detail->des_ded_id)->ds_cat }}
+                                            {{ $detail->ds_cat }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -217,9 +204,9 @@
 
                                         <td> {{ $header->fixed_salary }}  </td>
 
-                                        <td> @if($header->deserves == '') 0 @else {{ $header->deserves }} @endif  </td>
+                                        <td>  {{ $header->deserves or 0}}   </td>
 
-                                        <td> @if($header->deducations == '') 0 @else {{ $header->deducations }} @endif  </td>
+                                        <td>  {{ $header->deductions or 0 }}   </td>
 
                                         <td class="bold-text">{{ $header->net }}</td>
                                     </tr>
@@ -232,14 +219,6 @@
             {{--end sum--}}
         </div>
         @endforeach
-
-
-
-
-
-
-
-
 </section>
 @stop
 

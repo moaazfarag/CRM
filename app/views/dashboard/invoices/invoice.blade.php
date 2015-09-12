@@ -1,7 +1,7 @@
 @extends('dashboard.main')
 @section('content')
   <!-- Main Content -->
-  <section  ng-app="itemApp"  ng-controller="mainController" class="content-wrap ecommerce-invoice">
+  <section id="print-content"  ng-app="itemApp"  ng-controller="mainController" class="content-wrap ecommerce-invoice">
 
     <div class="card-panel">
 {{--{{ dd($invoice); }}--}}
@@ -22,6 +22,11 @@
         <!-- Invoice From -->
         <div class="col s12 l4">
           فاتورة من :
+            @if($type == 'buy')
+                @if($invoice->accountInfo)
+                    {{$invoice->accountInfo->acc_name }}
+                @endif
+            @endif
           <h4>{{ $co_info->co_name }}
             <br>
           فرع :
@@ -37,12 +42,14 @@
         <!-- Invoice To -->
         <div class="col s12 l4">
           الى
-          <h4>@lang('main.'.$type)</h4>
-          {{--<address>--}}
-          {{--6008 Cotton Nook, Arminto,--}}
-          {{--<br>Montana, 59114-7319, US,--}}
-          {{--<br><i class="mdi-communication-phone"></i> (406) 500-7506--}}
-        {{--</address>--}}
+            @if($type == 'buy')
+                {{ $invoice->branch->br_name }}
+            @else
+            @if($invoice->accountInfo)
+                    {{ $invoice->accountInfo->acc_name }}
+                @endif
+            @endif
+            <h4>@lang('main.'.$type)</h4>
         </div>
         <!-- /Invoice To -->
 
@@ -59,6 +66,7 @@
             <div class="date">@lang('main.date'):
               <span class="right">
                 {{ $invoice->date }}
+
               </span>
             </div>
             </h4>
@@ -117,7 +125,7 @@
                 <tr>
                   <td class="right-align no-border"><strong>تخفيض</strong>
                   </td>
-                  <td class="right-align no-border" colspan="2">{{ $invoice->discount }}</td>
+                  <td class="right-align no-border" colspan="2">{{ $invoice->discount }}%</td>
                 </tr>
                 <tr>
                   <td class="right-align"><strong>الاجمالي</strong>
