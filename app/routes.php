@@ -158,7 +158,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('add-{type}-invoice', array('uses' => 'InvoiceController@addInvoice','as' => 'addInvoice'));
         Route::post('add-{type}-invoice', array('uses' => 'InvoiceController@storeInvoice','as' => 'storeInvoice'));
         Route::get('view-invoice/{headerId}', array('uses' => 'InvoiceController@viewInvoice','as' => 'viewInvoice'));
-        Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
+        Route::get('all-invoices', array('uses' => 'InvoiceController@viewInvoices','as' => 'viewInvoices'));
         Route::get('sales-returns', array('uses' => 'InvoiceController@salesReturns','as' => 'salesReturns'));
         Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'InvoiceController@accountById','as' => 'accountById'));
@@ -224,9 +224,10 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('editMonthChange/{id}',array('uses'=>'MonthChangeController@editMonthChange','as'=>'editMonthChange'));
         Route::post('updateMonthChange/{id}',array('before'=>'csrf','uses'=>'MonthChangeController@updateMonthChange','as'=>'updateMonthChange'));
 
-        Route::get('addMsHeader',array('uses'=>'MsHeaderController@addMsHeader','as'=>'addMsHeader'));
+        Route::get('month-salary-search',array('uses'=>'MsHeaderController@monthSalarySearch','as'=>'monthSalarySearch'));
         Route::post('storeMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@storeMsHeader','as'=>'storeMsHeader'));
         Route::post('prepMsHeader',array('before'=>'csrf','uses'=>'MsHeaderController@prepMsHeader','as'=>'prepMsHeader'));
+        Route::get('printReceipt',array('uses'=>'MsHeaderController@printReceipt','as'=>'printReceipt'));
         Route::post('readyToPay',array('before'=>'csrf','uses'=>'MsHeaderController@readyToPay','as'=>'readyToPay'));
 
     });

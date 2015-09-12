@@ -131,20 +131,21 @@
                       <li> <a href="{{ URL::route('addDesded') }}" class="waves-effect waves-blue">بنود الاستحقاقات </a>  </li>
                       <li> <a href="{{ URL::route('addEmpdesded') }}" class="waves-effect waves-blue"> بنود الاستحقاقات للموظف </a> </li>
                       <li> <a href="{{ URL::route('addMonthChange') }}" class="waves-effect waves-blue">التغيرات الشهريه</a> </li>
-                      <li> <a href="{{ URL::route('addMsHeader') }}" class="waves-effect waves-blue">تجهيز المرتبات الشهريه </a> </li>
+                      <li> <a href="{{ URL::route('monthSalarySearch') }}" class="waves-effect waves-blue">تجهيز المرتبات الشهريه </a> </li>
                 </ul>
             </li>
-            <li class="{{@$invoices}}">
+            <li class="{{@$invoices_open}}">
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الفواتير <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
                     <li>
                         <a href="{{ URL::route('addInvoice',"sales") }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                        <a href="{{ URL::route('addInvoice',"buy") }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
                     </li>
 
                     <li>
                         <a class="yay-sub-toggle waves-effect waves-blue">     المرتجعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
-                        <li><a href="{{ URL::route('allInvoices') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>
+                        <li><a href="{{ URL::route('viewInvoices',array('type'=>'sales')) }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>
                         {{--<li><a href="{{ URL::route('purchasesReturns') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>--}}
                         {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
                          </ul>

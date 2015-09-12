@@ -36,13 +36,21 @@ class MsHeader extends Eloquent
             ->where('for_year',Input::get('for_year'));
     }
     public function detailsDes(){
-        return $this->hasMany('MsDetails','ms_header_id','ms_header_id')->where('des_ded_type','استحقاق');
+        return $this->hasMany('MsDetails','ms_header_id','ms_header_id')
+            ->where('des_ded_type','استحقاق')
+            ->join('hr_desded','hr_desded.id','=','hr_ms_details.des_ded_id')
+            ->select('des_ded_val', DB::raw('SUM(des_ded_val) as total_val'),'hr_ms_details.*','hr_desded.name','hr_desded.ds_cat')
+            ->groupBy('des_ded_id');
 
     }
 
 
     public function detailsDed(){
-        return $this->hasMany('MsDetails','ms_header_id','ms_header_id')->where('des_ded_type','استقطاع');
+        return $this->hasMany('MsDetails','ms_header_id','ms_header_id')
+            ->where('des_ded_type','استقطاع')
+            ->join('hr_desded','hr_desded.id','=','hr_ms_details.des_ded_id')
+            ->select('des_ded_val', DB::raw('SUM(des_ded_val) as total_val'),'hr_ms_details.*','hr_desded.name','hr_desded.ds_cat')
+            ->groupBy('des_ded_id');
     }
 
 //    public function sumDesded ($employee_id){

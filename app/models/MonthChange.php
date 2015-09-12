@@ -53,7 +53,7 @@ class MonthChange extends Eloquent {
     }
     public function employees()
     {
-        return $this->belongsTo('Employees','employee_id');
+        return $this->belongsTo('Employees','employee_id')->company();
     }
     public function users()
     {

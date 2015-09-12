@@ -1,7 +1,7 @@
 @extends('dashboard.main')
 @section('content')
   <!-- Main Content -->
-  <section  ng-app="itemApp"  ng-controller="mainController" class="content-wrap ecommerce-invoice">
+  <section id="print-content"  ng-app="itemApp"  ng-controller="mainController" class="content-wrap ecommerce-invoice">
 
     <div class="card-panel">
 {{--{{ dd($invoice); }}--}}

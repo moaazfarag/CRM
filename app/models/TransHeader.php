@@ -48,4 +48,10 @@ public function branch(){
             ->join('items','items.id','=','trans_details.item_id')
             ->select('trans_details.*','items.item_name');
     }
+    public function accountInfo(){
+
+        return $this->hasOne('Accounts','id','account')
+            ->company()
+            ->whereIn('acc_type',['customers','suppliers','partners']);
+    }
 }
