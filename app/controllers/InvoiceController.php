@@ -128,6 +128,7 @@ public function addInvoice($type){
      *
      */
 
+
     public function viewInvoices()
     {
         $trans = TransHeader::company()->where('invoice_type',Input::get('type'))->get();
@@ -138,6 +139,7 @@ public function addInvoice($type){
             return View::make('dashboard.invoices.view_invoices',$data);
 
         }else{
+
 
             return "that's not correct page : type check fail";
 
