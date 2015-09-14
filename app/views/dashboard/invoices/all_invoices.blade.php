@@ -4,7 +4,6 @@
 <section class="content-wrap ecommerce-dashboard">
 
     <div id="product_cat" class="col s12">
-        <!-- ???????  -->
         <div class="card {{ @$modelMini }}">
             <div class="title">
                 <h5>
@@ -31,31 +30,21 @@
                     </div>
                     @endif
                     {{--branch end--}}
-
                     {{--invoice number start--}}
-
-                    <div class="col s12 l2 ">
-                        <i class="mdi mdi-action-description prefix"></i>
-                        <label for="invoic_num">
-                            رقم الفاتورة
-                        </label>
-                    </div>
-
                     <div class="col s12 m6 l3">
                         <div class="input-field">
-                            {{ Form::select('invoic_num', array('' => 'أختر رقم الفاتورة') + $tablesData->lists('id','id'),null,array('id'=>'invoic_num')) }}
-                            <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#returnsInvoice">
+                                المرتجعات
+                            </a>
                         </div>
+                        @include('dashboard.invoices._pop_up')
                     </div>
                     {{--invoice number start--}}
-
                     <div class="col s12 l2">
-                        <button class="waves-effect btn">@lang('main.search') </button>
+                        {{--<button class="waves-effect btn">@lang('main.search') </button>--}}
                         {{ Form::close() }}
                     </div>
                 </div>
-
-
             </div>
         </div>
         @include('dashboard.invoices.all_invoices_table_view')

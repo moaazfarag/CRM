@@ -27,7 +27,8 @@ public function addSalesInvoice(){
      */
 
     public function allInvoices(){
-
+//        $crtl = new  InvoiceReturnController;
+//        dd($crtl->returnsInvoiceData());
         $data['title']      = "فواتير المبيعات" ; // page title
         $data['name']       = "فواتير المبيعات "; // page title
         $data['invoices']  = 'open' ;
