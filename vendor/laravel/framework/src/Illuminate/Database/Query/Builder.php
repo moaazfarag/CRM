@@ -1355,6 +1355,12 @@ class Builder {
 	{
 		return $this->where('co_id', '=', Auth::user()->co_id);
 	}
+
+
+	public function dateBetween($col,$date_start,$date_end){
+
+		return $this->company()->whereBetween($col,array($date_start,$date_end));
+	}
 	/**
 	 * return data how belong to user base on auth
 	 * for co_data table

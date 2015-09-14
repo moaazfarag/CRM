@@ -114,6 +114,9 @@ class BaseController extends Controller {
         'card_no.max'         => ' يرجى ادخال الرقم القومى بشكل صحيح',
         'card_no.min'         => ' يرجى ادخال الرقم القومى بشكل صحيح',
         'card_no.unique'      => 'هذا الرقم مستخدم من قبل ',
+        'password_confirm.same' => 'كلمتان السر غير متطابقتان',
+        'email.unique'         =>'هذا الإيميل مستخدم من قبل ',
+        'username.unique'         =>'هذا الأسم مستخدم من قبل',
         // salary  ins_salary  ins_val
 
         );

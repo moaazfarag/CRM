@@ -157,7 +157,7 @@ class EmployeesController extends BaseController
             $data['sex'] = array(
                 '' => Lang::get('main.sex'),
                 Lang::get('main.male')  => Lang::get('main.male'),
-                Lang::get('main.female')=> Lang::get('main.female'));
+                Lang::get('main.female') => Lang::get('main.female'));
              $data['religion'] = array(
                  ''=>Lang::get('main.religion'),
                  Lang::get('main.muslim')    => Lang::get('main.muslim'),

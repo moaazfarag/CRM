@@ -97,5 +97,15 @@ class CoData extends Eloquent {
         return $this->hasMany('MonthChange','co_id');
     }
 
+    public static $store_company = array(
+
+        'co_name'    => 'required',
+        'co_address' => 'required',
+        'co_tel'     => 'required',
+        'username'  => 'required|unique:users',
+        'password'   => 'required',
+        'email'     => 'required|email|unique:users',
+        'password_confirm' =>'required|same:password',
+    );
 
 }

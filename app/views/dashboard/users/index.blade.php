@@ -81,7 +81,7 @@
                   {{ Form::model($user,array('route'=>array('updateUser',$user->id),'data-parsley-validate')) }}
                   @endif
                   <div class="row">
-                      <div class="col m6 s6">
+                      <div class="col m5 s12">
                           <div class="input-field">
                               <i class="fa fa-user prefix"></i>
                               {{ Form::text('name',null,array('required','id'=>'name')) }}
@@ -91,7 +91,7 @@
                               </ul>
                           </div>
                       </div>
-                      <div class="col m6 s6">
+                      <div class="col m5 s12">
                           <div class="input-field">
                               <i class="fa fa-user prefix"></i>
                               {{ Form::text('username',null,array('required','id'=>'username')) }}
@@ -103,19 +103,45 @@
                       </div>
                   </div>
 
-                  <div class="input-field">
-                      <i class="fa fa-envelope prefix"></i>
-                      {{ Form::email('email',null,array('id'=>'email')) }}
-                      <label for="email"> @lang('main.mail')</label>
-                      <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                          <li class="parsley-required">{{ $errors ->First('email') }} </li>
-                      </ul>
-                  </div>
+
 
                   <div class="row">
-                      <div class="col m6 s12">
+                      <div class="col m5 s12">
+                      <div class="input-field">
+                          <i class="fa fa-envelope prefix"></i>
+                          {{ Form::email('email',null,array('id'=>'email')) }}
+                          <label for="email"> @lang('main.email')</label>
+                          <ul class="parsley-errors-list filled" id="parsley-id-5202">
+                              <li class="parsley-required">{{ $errors ->First('email') }} </li>
+                          </ul>
+                      </div>
+                      </div>
+                      <div class="col s12 l4">
+                          <?php $branch =Lang::get('main.branch');
+                          $choseBranch =Lang::get('main.choseBranch') ?>
+                          {{--{{ Form::label('br_code',$branch) }}--}}
+                          {{ Form::select('br_code', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_code')) }}
+                          <p class="parsley-required">
+                              {{ $errors ->first('br_code') }}
+                          </p>
+                      </div>
+                      <div class="col s12 l2">
+                          <p>
+                          <?php $allParts= Lang::get('main.allParts') ?>
+                          {{ Form::checkbox('all_br',1,null,array('id'=>'all_br')) }}
+                          {{ Form::label('all_br',$allParts) }}
+                          <p class="parsley-required">
+                              {{ $errors ->first('all_br') }}
+                          </p>
+                          {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
+                          </p>
+                      </div>
+                      </div>
+
+                      <div class="row">
+                      <div class="col m5 s12">
                           <div class="input-field">
-                              <i class="fa fa-unlock-alt prefix"></i>
+                              <i class="mdi mdi-action-lock prefix active"></i>
                               {{ Form::password('password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'password')) }}
                               <label for="password">@lang('main.password')</label>
                               <ul class="parsley-errors-list filled" id="parsley-id-5202">
@@ -123,9 +149,9 @@
                               </ul>
                           </div>
                       </div>
-                      <div class="col m6 s12">
+                      <div class="col m5 s12">
                           <div class="input-field">
-                              <i class="fa fa-unlock-alt prefix"></i>
+                              <i class="mdi mdi-action-lock prefix active"></i>
                               {{ Form::password('confirm_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'confirm_password')) }}
                               <label for="confirm_password"> @lang('main.confirm_password') </label>
                               <ul class="parsley-errors-list filled" id="parsley-id-5202">
@@ -136,26 +162,7 @@
                   </div>
 
                   <div class="row">
-                      <div class="col s2 l6">
-                          <?php $branch =Lang::get('main.branch');
-                                $choseBranch =Lang::get('main.choseBranch') ?>
-                          {{ Form::label('br_code',$branch) }}
-                          {{ Form::select('br_code', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_code')) }}
-                          <p class="parsley-required">
-                              {{ $errors ->first('br_code') }}
-                          </p>
-                      </div>
-                      <div class="col s2 l6">
-                          <p>
-                              <?php $allParts= Lang::get('main.allParts') ?>
-                              {{ Form::checkbox('all_br',1,null,array('id'=>'all_br')) }}
-                              {{ Form::label('all_br',$allParts) }}
-                              <p class="parsley-required">
-                                  {{ $errors ->first('all_br') }}
-                              </p>
-                              {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
-                          </p>
-                      </div>
+
                   </div>
                   <div class="row">
                       <div class="col s10 l10">

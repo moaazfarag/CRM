@@ -52,7 +52,7 @@
                 @lang('main.companyName')
             </label>
           </div>
-          <div class="col s4 m6 l5">
+          <div class="col s12 m6 l5">
             <div class="input-field">
               <i class="mdi mdi-action-home prefix"></i>
                 <?php $companyName=Lang::get('main.companyName') ?>
@@ -62,12 +62,12 @@
           </div>
 
 
-          <div class="col s2 l1">
+          <div class="col s12 l1">
             <label for="ecommerce-adress">
                 @lang('main.address')
             </label>
           </div>
-          <div class="col s4 l5">
+          <div class="col s12 l5">
             <div class="input-field">
               <i class="mdi mdi-action-language prefix"></i>
                 <?php $address=Lang::get('main.address') ?>
@@ -78,12 +78,12 @@
         </div>
 
          <div class="row no-margin-top">
-          <div class="col s2 l1">
+          <div class="col s12 l1">
             <label for="ecommerce-tel">
                 @lang('main.phoneNum')
             </label>
           </div>
-          <div class="col s4 l5">
+          <div class="col s12 l5">
             <div class="input-field">
               <i class="mdi mdi-communication-phone prefix"></i>
                 <?php $phoneNum=Lang::get('main.phoneNum') ?>
@@ -93,22 +93,29 @@
             </div>
           </div>
 
-          <div class="col s2 l1">
+          <div class="col s12 l1">
               <?php $print_size=Lang::get('main.print_size') ?>
-              {{ Form::label('ecommerce-printsize',$print_size) }}
+             {{ Form::label('ecommerce-printsize',$print_size) }}
+                 </div>
+                  <div class="col s12 l5">
+
+             <div class="input-field">
+
+
+                 {{ Form::select('co_print_size', array('' => lang::get('main.print_size')) + $print_size_types,null,array('id'=>'ecommerce-printsize')) }}
+
+                 <p dir="rtl" class="parsley-required">{{ $errors ->first('branch_id') }} </p>
+             </div>
           </div>
-
-
-
         </div>
 
         <div class="row">
-          <div class="col s2 l1">
+          <div class="col s12 l1">
             <label for="ecommerce-currency">
                 @lang('main.currency')
             </label>
           </div>
-          <div class="col s4 l5">
+          <div class="col s12 l5">
             <div class="input-field">
               <i class="mdi mdi-editor-attach-money prefix"></i>
                 <?php $currency=Lang::get('main.currency') ?>
@@ -118,31 +125,44 @@
 
           </div>
         </div>
+          <hr />
                 <div class="row">
-          <div class="col s2 l2">
+          <div class="col s12 l2" style="padding-bottom:2% ">
             <label for="">
                 @lang('main.settingSit')
             </label>
             </div>
-        <p>
+                </div>
+
+          <div class="row">
+              <div class="col s12 l5">
+
             {{ Form::checkbox('co_use_serial', 1,null,array('id'=>'co_use_serial')) }}
-          {{--<input name="co_use_serial" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
           <label for="co_use_serial">@lang('main.co_use_serial')</label>
+              </div>
+              <div class="col s12 l5">
             {{ Form::checkbox('co_supplier_must', 1,null,array('id'=>'co_supplier_must')) }}
-            {{--<input name="co_supplier_must" type="checkbox" id="co_supplier_must" value="enter_supplier" >--}}
           <label for="co_supplier_must">@lang('main.co_supplier_must')</label>
+                </div>
+          </div>{{--end row --}}
+
+          <div class="row">
+              <div class="col s12 l5">
+
             {{ Form::checkbox('co_use_season', 1,null,array('id'=>'co_use_season')) }}
-            {{--<input name="co_season_use" type="checkbox" id="use_season" value="use_season">--}}
-          <label for="co_use_season">@lang('main.co_use_season')</label>
-          {{--<input name="co_use_markes_models" type="checkbox" id="use_trademark" value="use_trademark">--}}
+            <label for="co_use_season">@lang('main.co_use_season')</label>
+              </div>
+              <div class="col s12 l5">
+
             {{ Form::checkbox('co_use_markes_models', 1,null,array('id'=>'co_use_markes_models')) }}
             <label for="co_use_markes_models">@lang('main.co_use_markes_models')</label>
+            </div>
+              </div>
 
 
-        </p>
-    </div>
+
       <div class="row">
-        <div class="col s10 l10">
+        <div class="col s12 l10" style="padding:2%;">
 
             <button  class="waves-effect btn">@lang('main.edit') </button>
             {{ Form::close() }}

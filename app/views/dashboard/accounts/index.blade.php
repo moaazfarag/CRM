@@ -40,12 +40,12 @@
 
                           <div class="col s12 l1">
                               <label for="account-email">
-                                  @lang('main.mail')
+                                  @lang('main.email')
                               </label>
                           </div>
                           <div class="col s12 l4 ">
                               <div class="input-field">
-                                  <i class="mdi mdi-social-person prefix"></i>
+                                  <i class="mdi mdi-communication-email prefix active"></i>
                                   <?php $mail=Lang::get('main.mail') ?>
                                   {{ Form::text('acc_email',null,array('id'=>'account-email','placeholder'=>$mail)) }}
                                   <p class="parsley-required error-validation">{{ $errors ->first('acc_email') }} </p>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="col s12 m6 l9">
                               <div class="input-field">
-                                <i class="mdi mdi-social-person prefix"></i>
+                                <i class="mdi mdi-communication-location-on prefix"></i>
                                   <?php $address=Lang::get('main.address') ?>
                                   {{ Form::text('acc_address',null,array('id'=>'account-address','placeholder'=>$address)) }}
                                   {{--<input name="account_address" id="account-address" type="text" placeholder="العنوان  ">--}}
@@ -81,7 +81,7 @@
                       </div>
                       <div class="col s12  l4">
                           <div class="input-field">
-                              <i class="mdi mdi-social-person prefix"></i>
+                              <i class="mdi mdi-maps-local-phone prefix"></i>
                               <?php $phoneNum=Lang::get('main.phone_number_1') ?>
                               {{ Form::text('acc_tel',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
                               {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
@@ -95,7 +95,7 @@
                       </div>
                       <div class="col s12  l4">
                           <div class="input-field">
-                              <i class="mdi mdi-social-person prefix"></i>
+                              <i class="mdi mdi-maps-local-phone prefix"></i>
                               <?php $phoneNum=Lang::get('main.phone_number_2') ?>
                               {{ Form::text('acc_tel2',null,array('id'=>'account-numbers','placeholder'=>$phoneNum)) }}
                               {{--<input id="account-numbers" type="text" placeholder="ارقام الهاتف ">--}}
@@ -118,7 +118,7 @@
                     </div>
                     <div class="col s12  l4">
                       <div class="input-field">
-                        <i class="mdi mdi-social-person prefix"></i>
+                        <i class="mdi mdi-action-subject prefix"></i>
                           <?php $regComm=Lang::get('main.regComm') ?>
                           {{ Form::text('acc_commercial_registration',null,array('id'=>'account-commercial-registration','placeholder'=>$regComm)) }}
                           {{--<input name="account_commercial_registration" id="account-commercial-registration" type="text" placeholder="    سجل تجاري  ">--}}
@@ -132,7 +132,7 @@
                     </div>
                     <div class="col s12 l3">
                       <div class="input-field">
-                        <i class="mdi mdi-social-person prefix"></i>
+                        <i class="mdi mdi-action-label-outline prefix"></i>
                           <?php $taxCard=Lang::get('main.taxCard') ?>
 
                           {{ Form::text('acc_tax_card',null,array('id'=>'tax-card','placeholder'=>$taxCard )) }}
@@ -153,7 +153,7 @@
                           <div class="col s12 l4">
                               <div class="input-field">
                                   <?php $credit=Lang::get('main.credit') ?>
-                                  <i class="mdi mdi-social-person prefix"></i>
+                                  <i class="mdi mdi-content-remove-circle prefix"></i>
                                   {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>$credit)) }}
                                   {{--<input name="credit_limit" id="credit-limit" type="text" placeholder="   حد الائتمان  ">--}}
                                       <p class="parsley-required error-validation">{{ $errors ->first('acc_limit') }} </p>
@@ -165,6 +165,7 @@
                               <label for="credit-limit">
                                   @lang('main.pricing_system')
                               </label>
+
                           </div>
                           <div class="col s12 l3">
 
@@ -185,7 +186,7 @@
                                       </div>
                                       <div class="col s12  l9">
                                         <div class="input-field">
-                                          <i class="mdi mdi-social-person prefix"></i>
+                                          <i class="fa fa-pencil-square-o prefix"></i>
                                             <?php $notes=Lang::get('main.notes') ?>
 
                                             {{ Form::text('acc_notes',null,array('id'=>'branch-notes','placeholder'=>$notes)) }}

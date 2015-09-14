@@ -69,7 +69,7 @@ class SeasonController extends BaseController
         $data['seasonInputName'] = "seasons";
         $data['seasonMini'] = "";
         $data['arabicName'] = $season;
-        $data['tablesData'] = Seasons::all();
+        $data['tablesData'] = Seasons::company();
         return $data;
     }
 }
