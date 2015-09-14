@@ -128,7 +128,20 @@ public function addInvoice($type){
      *
      */
 
+    public function allInvoices()
+    {
+//        $crtl = new  InvoiceReturnController;
+//        dd($crtl->returnsInvoiceData());
+        $data['title'] = "فواتير المبيعات"; // page title
+        $data['name'] = "فواتير المبيعات "; // page title
+        $data['invoices'] = 'open';
+        $data['co_info'] = CoData::where('id', '=', $this->coAuth())->first();//select info models category seasons
+        $data['branch'] = $this->isAllBranch();
+        $data['tablesData'] = TransHeader::where('co_id', '=', $this->coAuth())->get();
+//        $data['invoices_id'] = TransHeader::where('co_id', '=', $this->coAuth())->get()->lists('id');
+        return View::make('dashboard.invoices.all_invoices',$data);
 
+    }
     public function viewInvoices()
     {
         $trans = TransHeader::company()->where('invoice_type',Input::get('type'))->get();
