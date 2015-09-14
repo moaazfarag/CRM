@@ -15,6 +15,7 @@ class CreateModelsTable extends Migration {
 		Schema::create('models', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('true_id');
 			$table->integer('co_id');
 			$table->integer('marks_id');
 			$table->string('name');

@@ -15,20 +15,21 @@ class CreateTransHeaderTable extends Migration {
 		Schema::create('trans_header', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('true_id');
             $table->integer('co_id');
             $table->integer('user_id');
             $table->integer('br_code');
             $table->integer('invoice_no');
             $table->string('invoice_type');
             $table->integer('account');
-            $table->float('in_total');
-            $table->float('discount');
-            $table->float('tax');
-            $table->float('net');
+            $table->decimal('in_total',10,2);
+            $table->decimal('discount',10,2);
+            $table->decimal('tax',10,2);
+            $table->decimal('net',10,2);
             $table->date('date');
             $table->string('pay_type');
             $table->integer('deleted');
-
+			$table->unique(array('invoice_no', 'invoice_type','co_id'));
 			$table->timestamps();
 		});
 	}

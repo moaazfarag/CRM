@@ -12,7 +12,7 @@ class modelsSeeder extends Seeder {
 		DB::table('models')->insert(array(
 
 	array(
-
+			'true_id'  => '1',
 	    	'co_id'       =>'1',
 	    	'marks_id'   =>'1',
 	    	'name'  =>'بنطلون',
@@ -21,7 +21,7 @@ class modelsSeeder extends Seeder {
 	    ),
   
   	array(
-
+			'true_id'  => '1',
 	    	'co_id'       =>'2',
 	    	'marks_id'   =>'2',
 	    	'name'  =>'x5',
@@ -30,11 +30,11 @@ class modelsSeeder extends Seeder {
 	    ),
   
   	array(
-
-	    	'co_id'       =>'3',
-	    	'marks_id'   =>'3',
-	    	'name'  =>'الملكة',
-	    	'user_id'     =>'3',
+			'true_id'  => '1',
+	    	'co_id'    =>'3',
+	    	'marks_id' =>'3',
+	    	'name'     =>'الملكة',
+	    	'user_id'  =>'3',
 	
 	    ),
 

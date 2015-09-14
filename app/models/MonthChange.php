@@ -27,7 +27,18 @@ class MonthChange extends Eloquent {
         'for_month'       => 'required',
         'day_cost'        => 'required',
         'val'             => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
-        'cause'           => 'required',
+
+
+    );
+
+    public static $update_rules_with_cause = array(
+        'employee_id'     => 'required',
+        'ds_id'           => 'required',
+        'trans_date'      => 'required|date',
+        'for_year'        => 'required',
+        'for_month'       => 'required',
+        'day_cost'        => 'required',
+        'val'             => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
         'cancel_cause'    => 'required',
 
 
@@ -42,7 +53,7 @@ class MonthChange extends Eloquent {
     }
     public function employees()
     {
-        return $this->belongsTo('Employees','employee_id');
+        return $this->belongsTo('Employees','employee_id')->company();
     }
     public function users()
     {

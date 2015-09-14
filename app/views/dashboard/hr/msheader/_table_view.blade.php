@@ -15,7 +15,6 @@
                 <thead>
                 <tr>
 
-<<<<<<< HEAD
                         <th>@lang('main.employee_name')</th>
                         <th> @lang('main.basic')</th>
                         <th>@lang('main.all_debt')</th>
@@ -23,18 +22,12 @@
                         <th>@lang('main.periodic_loan')</th>
                         <th>@lang('main.net') </th>
 
-=======
-                    <th>اسم الموظف</th>
-                    <th>الاساسى </th>
-                    <th>ج.الاستحقاقات</th>
-                    <th>ج.الاستقطاعات</th>
-                    <th>سلفه دوريه</th>
-                    <th>الصافى </th>
+
                     <th>صرف </th>
                     <th> تاريخ الصرف</th>
                     {{--<th>القائم بالصرف</th>--}}
                     <th>صرف بواسطة</th>
->>>>>>> origin/master
+
                 </tr>
                 </thead>
                 <tbody>

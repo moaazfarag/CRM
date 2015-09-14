@@ -10,7 +10,7 @@
             <th>@lang('main.clause')</th>
             <th>@lang('main.value') </th>
             <th>@lang('main.amount_or_days')</th>
-            <th>@lang('main.reason')</th>
+            {{--<th>@lang('main.reason')</th>--}}
             <th>@lang('main.canceld')</th>
             <th>@lang('main.cancellation_reason') </th>
             <th>@lang('main.data_entry')</th>
@@ -18,6 +18,7 @@
         </tr>
         </thead>
         <tbody>
+        @if($tablesData->isEmpty())
         @foreach($tablesData as $k=>$tableData)
             <tr>
                 <th>{{ $tableData->trans_date }}</th>
@@ -27,10 +28,15 @@
                 <th>{{ $tableData->desded->name }}</th>
                 <th>{{ $tableData->val }}</th>
                 <th>{{ $tableData->day_cost }}</th>
-                <th>{{ $tableData->cause }}</th>
+                {{--<th>{{ $tableData->cause }}</th>--}}
                 <td>
-                    <input name="canceled_{{$k}}" type="checkbox" id="canceled_{{$k}}">
-                    <label for="canceled_{{$k}}"></label>
+                   @if($tableData->canceled == '0')
+                       @lang('main.no')
+                    @else
+                        @lang('main.yes')
+                    @endif
+                        {{--<input name="canceled_{{$k}}" type="checkbox" id="canceled_{{$k}}">--}}
+                    {{--<label for="canceled_{{$k}}"></label>--}}
                 </td>
 
                 <th>{{ $tableData->cancel_cause }}</th>
@@ -43,7 +49,14 @@
             </tr>
 
         @endforeach
+            @else
+            <tr>
 
+                <td style="text-align: center" colspan="11">
+                    لا يوجد تغيرات شهرية
+                </td>
+            </tr>
+@endif
         </tbody>
     </table>
 </div>

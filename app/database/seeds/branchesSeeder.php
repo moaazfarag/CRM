@@ -11,7 +11,7 @@ class branchesSeeder extends Seeder {
 		DB::table('branches')->insert(array(
 
 	    array(
-
+			'true_id'  => '1',
 	    	'co_id'     => '1',
 	    	'br_name'   => 'الحمد 2',
 	    	'br_address'=> 'الاسكندرية 55 شارع خالد بن الوليد ',
@@ -21,7 +21,7 @@ class branchesSeeder extends Seeder {
 	    ),
 
     array(
-
+			'true_id'  => '2',
 	    	'co_id'     => '1',
 	    	'br_name'   => 'الحمد 3',
 	    	'br_address'=> 'مصر القديمة  55 شارع عمرو بن العاص ',
@@ -31,7 +31,7 @@ class branchesSeeder extends Seeder {
 	    ),
 
    array(
-
+	   		'true_id'  => '1',
 	    	'co_id'     => '2',
 	    	'br_name'   => 'البركة 2',
 	    	'br_address'=> 'دمياط 55 شارع سعد بن ابى وقاص  ',

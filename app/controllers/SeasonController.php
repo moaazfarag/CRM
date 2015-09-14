@@ -26,7 +26,8 @@ class SeasonController extends BaseController
     public function storeSeason()
     {
         $season           = new Seasons ;
-        $season->name = Input::get('name'); //season name from input
+        $season->true_id  = BaseController::maxId($season);
+        $season->name     = Input::get('name'); //season name from input
         $season->co_id    = Auth::user()->co_id; // company id
         $season->user_id  = Auth::id();// user who add this record
         $season->save();

@@ -21,7 +21,7 @@
           <tbody>
           @foreach($tablesData as $tableData)
               <tr>
-                  <td>{{ $tableData->id }}</td>
+                  <td>{{ $tableData->true_id }}</td>
                   <td>{{ $tableData->name }}</td>
                   <td>{{ $tableData->jobs->name }}</td>
                   <td>{{ $tableData->departments->name }}</td>

@@ -92,8 +92,8 @@
                     </div>
                 <div class="input-field">
                     {{--<i class="fa fa-tag prefix"></i>--}}
-                    {{ Form::radio('day_cost',lang::get('main.salary'),null,array('id'=>'day_co')) }}
-                    {{ Form::label('day_co',lang::get('main.salary')) }}
+                    {{ Form::radio('day_cost',lang::get('main.amount'),null,array('id'=>'day_co')) }}
+                    {{ Form::label('day_co',lang::get('main.amount')) }}
 
                 </div>
                 <p class="parsley-required error-validation">{{ $errors ->first('day_cost') }} </p>
@@ -110,22 +110,27 @@
                 </div>
             </div>
             @if(Route::currentRouteName() != 'addMonthChange')
-            <div class="row">
-                <div class="col s12 l12">
-                    <div class="input-field" >
-                        <i class="fa fa-tag prefix"></i>
-                        {{ Form::textarea('cause',null,array('id'=>'cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
-                        {{ Form::label('cause',  lang::get('main.reason'))     }}
-                        <p class="parsley-required error-validation">{{ $errors ->first('cause') }} </p>
-                    </div>
-                </div>
-            </div>
+            {{--<div class="row">--}}
+                {{--<div class="col s12 l12">--}}
+                    {{--<div class="input-field" >--}}
+                        {{--<i class="fa fa-tag prefix"></i>--}}
+                        {{--{{ Form::textarea('cause',null,array('id'=>'cause','class'=>"materialize-textarea" ,'length'=>"200")) }}--}}
+                        {{--{{ Form::label('cause',  lang::get('main.reason'))     }}--}}
+                        {{--<p class="parsley-required error-validation">{{ $errors ->first('cause') }} </p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <div class="row">
                 <div class="col s12 l2">
                     <div class="input-field">
+
                         {{--<i class="fa fa-tag prefix"></i>--}}
+                        @if(Route::currentRouteName() == 'editMonthChange')
                         {{ Form::checkbox('canceled',1,null,array('id'=>'canceled')) }}
+                        @else
+                        {{ Form::checkbox('canceled',1,true,array('id'=>'canceled')) }}
+                        @endif
                         {{ Form::label('canceled',lang::get('main.delete_movement')) }}
 
                         <p class="parsley-required error-validation">{{ $errors ->first('canceled') }} </p>

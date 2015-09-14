@@ -1,13 +1,13 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: ahmed
-     * Date: 8/24/2015
+ * User: Moaaz Farag
+ * Date: 8/24/2015
  * Time: 12:07 PM
  */
 class MsHeaderController extends BaseController
 {
-    public function addMsHeader()
+    public function monthSalarySearch()
     {
 
         $data = $this->depData();
@@ -17,49 +17,39 @@ class MsHeaderController extends BaseController
 
     }
 
-    public function storeMsHeader()
-    {
-        $data = $this->depData();
-
-        $data['title'] = Lang::get('main.monthly_salary_equipment');  // page title
-        $data['employees'] = "open";
-        $data['co_info'] = CoData::thisCompany()->first();
-//        dd(Input::get('employee_id'));
-        return View::make('dashboard.hr.msheader.index', $data);
-    }
     public function readyToPay()
     {
         $haveSalary = MsHeader::hasSalary()->lists('employee_id');
-        $chosenEmployees = Employees::company()->whereNotIn('id', $haveSalary)->whereIn('id', Input::get('employeeId'))->get();
+
+        $chosenEmployees = Employees::whereNotIn('id', $haveSalary)->whereIn('id', Input::get('employeeId'))->get();
         if ($chosenEmployees->isEmpty()) {
-
-//            return 'برجاء اختيار الموظفيت المراد الصرف لهم ';
-
+            return Redirect::route('printReceipt',array('employeeId'=>Input::get('employeeId'),'for_month'=>Input::get('for_month'),'for_year'=>Input::get('for_year')));
         } else {
             foreach ($chosenEmployees as $chosenEmployee) {
 
                 $allDis = $chosenEmployee->employeeDudValue('استقطاع') ;
+
                 $allDud = $chosenEmployee->employeeDudValue('استحقاق');
-                $loan = $chosenEmployee->loansValue();
+                $loan   = $chosenEmployee->loansValue();
                 $salary = $chosenEmployee->salary;
                 
                 $newHeader = new  MsHeader;
                 $newHeader->co_id = $this->coAuth();
-                $msHeaderId = $newHeader->company()->max('ms_trans_id') + 1;
-                $newHeader->ms_trans_id = $msHeaderId;
-                $newHeader->employee_id = $chosenEmployee->id;
-                $newHeader->for_year = Input::get('for_year');
-                $newHeader->for_month = Input::get('for_month');
+                $msHeaderId = $newHeader->company()->max('ms_header_id') + 1;
+                $newHeader->ms_header_id = $msHeaderId;
+                $newHeader->employee_id  = $chosenEmployee->id;
+                $newHeader->for_year     = Input::get('for_year');
+                $newHeader->for_month    = Input::get('for_month');
                 $newHeader->fixed_salary = $salary;
-                $newHeader->deserves = $allDud;
-                $newHeader->deductions = $allDis;
-                $newHeader->loan = $loan;
-                $newHeader->net = ($salary + $allDud) - ($allDis + $loan);
-                $newHeader->user_id = Auth::id();
-                $monthChanges = MonthChange::getMonthAllChange($chosenEmployee->id);
-                $fixDesDuds   = EmployeeDeduction::getAllDisDed($chosenEmployee->id);
+                $newHeader->deserves     = $allDud;
+                $newHeader->deductions   = $allDis;
+                $newHeader->loan         = $loan;
+                $newHeader->net          = ($salary + $allDud) - ($allDis + $loan);
+                $newHeader->user_id      = Auth::id();
+                $monthChanges           = MonthChange::getMonthAllChange($chosenEmployee->id);
+                $fixDesDuds             = EmployeeDeduction::getAllDisDed($chosenEmployee->id);
                 foreach ($monthChanges as $monthChange) {
-                    if($monthChange->day_cost == "ايام"){
+                    if($monthChange->day_cost == "أيام"){
                         $day_cost = ($salary/30)*$monthChange->total_val;
                     }else{
                         $day_cost = $monthChange->total_val;
@@ -93,15 +83,8 @@ class MsHeaderController extends BaseController
 
                 $newHeader->save();
         }
-            if(isset($newDetails)){
-                MsDetails::insert($newDetails);
-            }else{
-            }
-
-            $data['headers'] = MsHeader::company()->whereIn('employee_id',Input::get('employeeId'))
-                ->where('for_month',Input::get('for_month'))
-                ->where('for_year' ,Input::get('for_year'))->get();
-            return View::make('dashboard.hr.msheader.employee_receipt',$data);
+            isset($newDetails)? MsDetails::insert($newDetails):null;
+            return Redirect::route('printReceipt',array('employeeId'=>Input::get('employeeId'),'for_month'=>Input::get('for_month'),'for_year'=>Input::get('for_year')));
         }
 
     }
@@ -114,12 +97,21 @@ class MsHeaderController extends BaseController
         if(Input::has('employee_id')){
             $data['net']   = Employees::company()->where('id',Input::get('employee_id'))->get();
         }else{
-//            dd(  $data['haveSalary']);
+
             $data['net']          = Employees::company()->whereNotIn('id',$haveSalary->lists('employee_id'))->get();
         }
         return $data;
     }
-
+    public function printReceipt(){
+        $data['title']     = Lang::get('main.salary_equipment');
+        $data['employees'] = 'open';
+            $data['headers'] = MsHeader::company()
+            ->whereIn('employee_id',Input::get('employeeId'))
+            ->where('for_month',Input::get('for_month'))
+            ->where('for_year' ,Input::get('for_year'))->get();
+//        dd($data['headers']->detailsDed);
+        return View::make('dashboard.hr.msheader.employee_receipt',$data);
+    }
     public function prepMsHeader()
     {
         $validation = Validator::make(Input::all(), MsHeader::$store_rules);
@@ -137,6 +129,7 @@ class MsHeaderController extends BaseController
 //for_month for_year employee_id
 
     }
+
 }
 
 

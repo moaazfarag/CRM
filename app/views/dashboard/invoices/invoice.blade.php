@@ -22,6 +22,11 @@
         <!-- Invoice From -->
         <div class="col s12 l4">
           فاتورة من :
+            @if($type == 'buy')
+                @if($invoice->accountInfo)
+                    {{$invoice->accountInfo->acc_name }}
+                @endif
+            @endif
           <h4>{{ $co_info->co_name }}
             <br>
           فرع :
@@ -37,12 +42,14 @@
         <!-- Invoice To -->
         <div class="col s12 l4">
           الى
-          <h4>@lang('main.'.$type)</h4>
-          {{--<address>--}}
-          {{--6008 Cotton Nook, Arminto,--}}
-          {{--<br>Montana, 59114-7319, US,--}}
-          {{--<br><i class="mdi-communication-phone"></i> (406) 500-7506--}}
-        {{--</address>--}}
+            @if($type == 'buy')
+                {{ $invoice->branch->br_name }}
+            @else
+            @if($invoice->accountInfo)
+                    {{ $invoice->accountInfo->acc_name }}
+                @endif
+            @endif
+            <h4>@lang('main.'.$type)</h4>
         </div>
         <!-- /Invoice To -->
 
@@ -59,6 +66,7 @@
             <div class="date">@lang('main.date'):
               <span class="right">
                 {{ $invoice->date }}
+
               </span>
             </div>
             </h4>
@@ -79,6 +87,8 @@
                   <th>الرقم</th>
                   <th class="center-align">الاسم</th>
                   <th class="center-align">العدد</th>
+                  <th class="center-align">سعر الوحدة</th>
+                  <th class="center-align">الاجمالي</th>
                   <th class="right-align">السيريال</th>
                 </tr>
               </thead>
@@ -92,42 +102,38 @@
                     <strong> {{ $detail->item_name }}</strong>
                   </td>
                   <td class="center-align">{{ $detail->qty }}</td>
+                  <td class="center-align">{{ $detail->unit_price }}</td>
+                  <td class="center-align">{{ $detail->item_total }}</td>
                   <td class="center-align">{{ $detail->serial_no }}</td>
                 </tr>
                 @endforeach
-                <tr>
-                  <td colspan="2" rowspan="4">
-                    <h4>
-                      ملاحظات
-                    </h4>
-                    <p class="grey-text">
-                      لايوجد
-                    </p>
-
+                    <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td class="center-align"><strong>الاجمالي</strong>
                   </td>
-                  <td></td>
-                  <td></td>
-                  {{--<td class="right-align"><strong>Subtotal</strong>--}}
-                  {{--</td>--}}
-                  {{--<td class="right-align" colspan="2">$4,942.00</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                  {{--<td class="right-align no-border"><strong>Shipping</strong>--}}
-                  {{--</td>--}}
-                  {{--<td class="right-align no-border" colspan="2">$10.00</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                  {{--<td class="right-align no-border"><strong>VAT</strong>--}}
-                  {{--</td>--}}
-                  {{--<td class="right-align no-border" colspan="2">$0.00</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                  {{--<td class="right-align"><strong>Total</strong>--}}
-                  {{--</td>--}}
-                  {{--<td class="right-align" colspan="2">--}}
-                    {{--<strong class="h2">$4,952.00</strong>--}}
-                  {{--</td>--}}
-                {{--</tr>--}}
+                  <td class="center-align">{{ $invoice->in_total }}</td>
+                  <td ></td>
+                   </tr>
+                <tr>
+
+                  <td class="right-align no-border"><strong>الضرائب</strong>
+                  </td>
+                  <td class="right-align no-border" colspan="2">{{ $invoice->tax }}</td>
+                </tr>
+                <tr>
+                  <td class="right-align no-border"><strong>تخفيض</strong>
+                  </td>
+                  <td class="right-align no-border" colspan="2">{{ $invoice->discount }}%</td>
+                </tr>
+                <tr>
+                  <td class="right-align"><strong>الاجمالي</strong>
+                  </td>
+                  <td class="right-align" colspan="2">
+                    <strong class="h2">{{ $invoice->net }}</strong>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

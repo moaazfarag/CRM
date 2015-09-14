@@ -27,7 +27,7 @@
         <tbody>
         @foreach($tablesData as $tableData)
             <tr>
-                <th>{{ $tableData->id }}</th>
+                <th>{{ $tableData->true_id }}</th>
                 <td>{{ $tableData->name }}</td>
                 <td>
                     <a href="{{ URL::route('editJob',array($tableData->id)) }}" class="btn btn-small z-depth-0">

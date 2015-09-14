@@ -10,6 +10,7 @@ angular.module('mainCtrl', [])
         $scope.value = "";
         $scope.invoiceItems = [
         ];
+        $scope.seletedAccount = {};
         $scope.accounts= {};
         // loading variable to show the spinning loading icon
         $scope.loading = true;
@@ -23,7 +24,15 @@ angular.module('mainCtrl', [])
         $scope.getAccountsByType = function(){
             Item.getAccountsByType($scope.account).success(function (data) {
                 $scope.accounts = data.accounts;
+            })
+                .error(function (data) {
 
+                });
+
+        };
+        $scope.getAccountInfo = function(){
+            Item.getAccountInfo($scope.account).success(function (data) {
+                $scope.seletedAccount = data.selectedAccount;
             })
                 .error(function (data) {
 
@@ -68,16 +77,31 @@ angular.module('mainCtrl', [])
                 // Clear input fields after push
                 $scope.item = "";
                 $scope.form.$setUntouched();
+
                 //foucus into item name after add
                 document.getElementById('item_id').focus();
             }
         };
         $scope.addItemHasSerial = function(quantity){
             itemHasSerial = {};
+            itemHasSerial =
+            {
+                id : $scope.item.id,
+                item_name : $scope.item.item_name,
+                unit : $scope.item.unit,
+                supplier_id : $scope.item.supplier_id,
+                buy : $scope.item.buy,
+                sell_users : $scope.item.sell_users,
+                sell_nos_gomla : $scope.item.sell_nos_gomla,
+                sell_gomla : $scope.item.sell_gomla,
+                sell_gomla_gomla : $scope.item.sell_gomla_gomla,
+                limit : $scope.item.limit,
+                avg_cost : $scope.item.avg_cost,
+                has_serial : $scope.item.has_serial,
+            }
+
             itemHasSerial.quantity = 1;
-            itemHasSerial.name    = $scope.item.name;
-            itemHasSerial.id      = $scope.item.id;
-            itemHasSerial.cost    = $scope.item.cost;
+
             if($scope.range == 'oneByone'){
 
                 itemHasSerial.serial  = $scope.new.serial;
@@ -87,32 +111,45 @@ angular.module('mainCtrl', [])
                 $scope.new.serial = "";
                 //foucus into item name after add
                 $('#serial').focus();
+                itemHasSerial = {};
 
             }else if($scope.range == 'range'){
+
                 for (i = $scope.new.form; i < $scope.new.to+1; i++) {
+                    itemHasSerial =
+                    {
+                        id : $scope.item.id,
+                        item_name : $scope.item.item_name,
+                        unit : $scope.item.unit,
+                        supplier_id : $scope.item.supplier_id,
+                        buy : $scope.item.buy,
+                        sell_users : $scope.item.sell_users,
+                        sell_nos_gomla : $scope.item.sell_nos_gomla,
+                        sell_gomla : $scope.item.sell_gomla,
+                        sell_gomla_gomla : $scope.item.sell_gomla_gomla,
+                        limit : $scope.item.limit,
+                        avg_cost : $scope.item.avg_cost,
+                        has_serial : $scope.item.has_serial,
+                    }
                     itemHasSerial.quantity = 1;
-                    itemHasSerial.name    = $scope.item.name;
-                    itemHasSerial.id      = $scope.item.id;
-                    itemHasSerial.cost    = $scope.item.cost;
                     itemHasSerial.serial  = $scope.new.prefix+''+i;
                     itemHasSerial.has_serial   = 1;
                     $scope.invoiceItems.push(itemHasSerial);
+                    //itemHasSerial.id      = $scope.item.id;
+                    //itemHasSerial.sell_users    = $scope.item.sell_users;
                     itemHasSerial = {};
+
                 }
+                $scope.new = "";
                 $scope.finishAddItemHasSerial();
             }
 
         };
             $scope.finishAddItemHasSerial=function(){
-            $scope.item =  "";
             $('#item_id').focus();
         };
-        $scope.selectItem = function(itemName,itemId,hasSerial,itemCost){
-            $scope.item.name         = itemName;
-            $scope.item.id           = itemId;
-            $scope.item.cost         = itemCost;
-            $scope.item.has_serial   = hasSerial;
-
+        $scope.selectItem = function(item){
+            $scope.item         = item;
             document.getElementById('quantity').focus();
             document.getElementById('itemsView').style.display = 'none';
         };
@@ -149,10 +186,27 @@ angular.module('mainCtrl', [])
         $scope.invoice_sub_total = function() {
             var total = 0.00;
             angular.forEach($scope.invoiceItems, function(item, key){
-                total += (item.quantity * item.cost);
+                total += (item.quantity *  $scope.cost(item));
             });
             return total;
         }
+        $scope.cost = function(item){
+        if( $scope.seletedAccount.pricing ){
+            if($scope.seletedAccount.pricing=="sell_users"){
+                return item.sell_users;
+            }else if($scope.seletedAccount.pricing=="sell_gomla" && item.sell_gomla>0 ){
+                return item.sell_gomla;
+            }else if($scope.seletedAccount.pricing=="sell_gomla_gomla" && item.sell_gomla_gomla>0 ){
+                return item.sell_gomla_gomla;
+            }else if($scope.seletedAccount.pricing=="sell_nos_gomla" && item.sell_nos_gomla>0 ){
+                return item.sell_nos_gomla;
+            }else{
+                return item.sell_users;
+            }
+        }else{
+            return item.sell_users;
+        }
+        };
         $scope.removeItem =  function(item){
             $scope.invoiceItems.splice($scope.invoiceItems.indexOf(item), 1)
         };
@@ -165,7 +219,7 @@ angular.module('mainCtrl', [])
 
         };
         $scope.hasItem =  function(item){
-            if( item  > 0 && $scope.item.name.length>0 ){
+            if( item  > 0 && $scope.item.item_name.length>0 ){
                 return false;
             }else{
                 return true;
@@ -179,6 +233,24 @@ angular.module('mainCtrl', [])
                 return true;
             }
 
+        };
+        $scope.isLimit =  function() {
+            if ($scope.invoice_sub_total() > $scope.seletedAccount.acc_limit) {
+                return " هذا العميل قد تخطى الحد المسموح به ";
+            }else{
+                return null;
+            }
+        };
+        $scope.afterDiscount =  function() {
+
+            if ($scope.discount) {
+                return $scope.invoice_sub_total() - ($scope.invoice_sub_total()*($scope.discount/100));
+            }else{
+                return $scope.invoice_sub_total();
+            }
+        };
+        $scope.clearItemForm =  function() {
+            $scope.item = "";
         };
 /*        $scope.pushItem = function() {
             //$scope.data =  JSON.parse(localStorage["data"]);

@@ -59,7 +59,13 @@ class MonthChangeController extends BaseController
 
     public function updateMonthChange($id)
     {
-        $validation = Validator::make(Input::all(), MonthChange::$update_rules,BaseController::$messages);
+        if(Input::has('canceled')){
+            $ruels = MonthChange::$update_rules_with_cause;
+        }else{
+            $ruels = MonthChange::$update_rules;
+        }
+
+        $validation = Validator::make(Input::all(), $ruels,BaseController::$messages);
 
         if ($validation->fails()) {
 
@@ -70,8 +76,8 @@ class MonthChangeController extends BaseController
             $oldMonthChange = MonthChange::where('id', '=', $id)->thisCompany()->first();
 
                 $oldMonthChange                       = MonthChange::find($id);
-                $oldMonthChange->id                   = $this->coAuth();
-                $oldMonthChange->user_id              = Auth::id();
+                $oldMonthChange->co_id                 = $this->coAuth();
+                 $oldMonthChange->user_id              = Auth::id();
                 $oldMonthChange->employee_id          = Input::get('employee_id');
                 $oldMonthChange->des_ded_id            = Input::get('ds_id');
                 $oldMonthChange->trans_date           = $this->strToTime($inputs['trans_date']);
@@ -80,8 +86,15 @@ class MonthChangeController extends BaseController
                 $oldMonthChange->for_month            = Input::get('for_month');
                 $oldMonthChange->day_cost             = Input::get('day_cost');
                 $oldMonthChange->val                  = Input::get('val');
-                $oldMonthChange->cause                = Input::get('cause');
-                $oldMonthChange->cancel_cause         = Input::get('cancel_cause');
+                if(Input::has('canceled')) {
+
+                    $oldMonthChange->canceled      = @Input::get('canceled');
+                    $oldMonthChange->cancel_cause  = @Input::get('cancel_cause');
+                }
+//                $oldMonthChange->cause                = Input::get('cause');
+
+
+
 
                 $oldMonthChange->update();
                 return Redirect::route('addMonthChange');
@@ -93,7 +106,7 @@ class MonthChangeController extends BaseController
             {
                 $data['title']              = Lang::get('main.month_change');
                 $data['employees']          = 'open' ;
-                $data['tablesData']        = MonthChange::company()->get();
+                $data['tablesData']         = MonthChange::company()->get();
                 return $data;
             }
 

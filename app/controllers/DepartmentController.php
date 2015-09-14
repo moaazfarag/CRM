@@ -25,6 +25,7 @@ class DepartmentController extends BaseController
 
 
             $dep = new Department;
+            $dep->true_id    = BaseController::maxId($dep);
             $dep->name = Input::get('name');
             $dep->co_id = Auth::user()->co_id; // company id
             $dep->user_id = Auth::id();// user who add this record
@@ -76,10 +77,13 @@ class DepartmentController extends BaseController
                 Session::flash('error',Lang::get('main.delete_department_error_msg'));
             return Redirect::back();
         }else{
-                $dep->delete();
-                  Session::flash('success',Lang::get('main.delete_department_success_msg'));
-                  return Redirect::back();
 
+                $dep->delete();
+                $edit_ids = BaseController::editIds('hr_departments','Department','true_id');
+                if($edit_ids) {
+                    Session::flash('success', Lang::get('main.delete_department_success_msg'));
+                    return Redirect::back();
+                }
             }//end else employees
 
         }// end if dep

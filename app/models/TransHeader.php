@@ -44,6 +44,14 @@ public function branch(){
 }
     public function details(){
 
-        return $this->hasMany('TransDetails','trans_header_id','invoice_no');
+        return $this->hasMany('TransDetails','trans_header_id','id')
+            ->join('items','items.id','=','trans_details.item_id')
+            ->select('trans_details.*','items.item_name');
+    }
+    public function accountInfo(){
+
+        return $this->hasOne('Accounts','id','account')
+            ->company()
+            ->whereIn('acc_type',['customers','suppliers','partners']);
     }
 }

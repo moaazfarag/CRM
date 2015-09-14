@@ -16,7 +16,7 @@ class TransDetails extends Eloquent {
 	 *
 	 * @var array
 	 */
-    public static function rulesCreator($inputs)
+        public static function rulesCreator($inputs)
         {
             $store_rules['date'] = 'required|date';
             $store_rules['branch_id'] = 'required|integer';

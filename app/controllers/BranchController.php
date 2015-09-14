@@ -28,6 +28,7 @@ class BranchController extends  BaseController
     {
     //d(Input::get('branch_name') );
         $branch             = new Branches; //object from branch will add
+        $branch->true_id    = BaseController::maxId($branch);
         $branch->br_name    = Input::get('branch_name');
         $branch->br_address = Input::get('branch_address');
         $branch->user_id    = Auth::id();  // id of user  who add  this branch

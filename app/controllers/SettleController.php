@@ -44,7 +44,7 @@ class SettleController extends BaseController {
 
         }else{
 
-            return "that's not correct page : type check fail";
+            return "that's not correct page : type check fail".$type;
 
         }
 
@@ -57,7 +57,7 @@ class SettleController extends BaseController {
      */
     public function viewSettles()
     {
-        $trans = TransHeader::where('co_id',$this->coAuth())->where('invoice_type',Input::get('type'))->get();
+        $trans = TransHeader::company()->where('invoice_type',Input::get('type'))->get();
         if($trans){
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
@@ -77,12 +77,14 @@ class SettleController extends BaseController {
      */
     public function viewSettle($invoiceId)
     {
-        $trans = TransHeader::findOrFail($invoiceId);
+
+        $trans = TransHeader::company()->where('id',$invoiceId)
+            ->whereIn('invoice_type',['settleAdd','settleDiscount'])
+            ->first();
         if($trans){
             $data['title']       = " تعديل تسوية اضافة " ; // page title
             $data['TransOpen']   = 'open' ;
             $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
-            $data['newArray']    = $this->itemsToJson($invoiceId);
             $data['invoice']     = $trans;
             $data['type']        = $data['invoice']->invoice_type;
             return View::make('dashboard.settle.invoice',$data);
@@ -125,31 +127,35 @@ class SettleController extends BaseController {
 
         }else {
             $newHeader                  = new TransHeader;
+            $newHeader->true_id         = BaseController::maxId($newHeader);
             $newHeader->co_id           = $this->coAuth();
             $newHeader->user_id         = Auth::id();
             $newHeader->br_code         = $inputs['branch_id'];
-            $transHeaderId              = $newHeader->max('invoice_no')+1;
+
+            $transHeaderId              = $newHeader->company()->where('invoice_type',$type)->max('invoice_no')+1;
             $newHeader->invoice_no      = $transHeaderId;
             $newHeader->invoice_type    = $type;
             $newHeader->date            = $this->strToTime($inputs['date']) ;
+            $newHeader->save();
+
             $newInvoiceItems = array();//create array to insert into database on save
             foreach (TransDetails::countOfInputs($inputs) as $k=>$v)
-                {
-                    $newInvoiceItems[] =   array
-                    (
-                        'trans_header_id'   => $transHeaderId,
-                        'qty'               => isset($inputs['serial_'.$k])?1:$inputs['quantity_'.$k],
-                        'item_id'           => $inputs['id_'.$k],
-                        'avg_cost'          => Items::findOrFail($inputs['id_'.$k])->first()->avg_cost,
-                        'serial_no'         => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
-                        'created_at'        => date('Y-m-d H:i:s'),
-                        'updated_at'        => date('Y-m-d H:i:s')
-                    );
-                }
-            $newHeader->save();
+            {
+                $newInvoiceItems[] =   array
+                (
+                    'trans_header_id'   =>  $newHeader->id,
+                    'qty'               => isset($inputs['serial_'.$k])?1:$inputs['quantity_'.$k],
+                    'item_id'           => $inputs['id_'.$k],
+                    'avg_cost'          => Items::findOrFail($inputs['id_'.$k])->first()->avg_cost,
+                    'serial_no'         => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
+                    'created_at'        => date('Y-m-d H:i:s'),
+                    'updated_at'        => date('Y-m-d H:i:s')
+                );
+            }
+
             TransDetails::insert($newInvoiceItems);
             Session::flash('success','تم اضافة التسوية بنجاح');
-            return Redirect::route('viewSettle',array($transHeaderId));
+            return Redirect::route('viewSettle',array($newHeader->id));
 //
 //            echo "scusess";
 //            dd(TransDetails::rulesCreator($inputs));
@@ -169,14 +175,14 @@ class SettleController extends BaseController {
      * @param $invoiceId
      * @return array
      */
-    private function itemsToJson($invoiceId)
+    protected function itemsToJson($invoiceId)
     {
         $invoiceItems      = TransDetails::where('trans_header_id','=',$invoiceId)->get(); //  get all item of this trans to view in table
         $newArray = array();
         foreach($invoiceItems as $invoiceItem ){
             $newArray[] = array
             (
-                'name'=> Items::find($invoiceItem['item_id'])->item_name,
+                'item_name'=> Items::find($invoiceItem['item_id'])->item_name,
                 'id'=> $invoiceItem['item_id'],
                 'quantity'=> $invoiceItem['qty'],
                 'serial'=> $invoiceItem['serial_no'],
@@ -195,7 +201,7 @@ class SettleController extends BaseController {
                 'name'     => $inputs['name_'.$k],
                 'id'       => intval($inputs['id_'.$k]),
                 'quantity' => intval($inputs['quantity_'.$k]),
-                'serial'   => $inputs['serial_'.$k],
+                'serial'   => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:null,
             ) ;
         }
 //        dd($newArray);
