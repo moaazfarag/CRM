@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        @include('dashboard.invoices.all_invoices_table_view')
+        {{--@include('dashboard.invoices.all_invoices_table_view')--}}
     </div>
     <!-- /??? ?????? -->
 
