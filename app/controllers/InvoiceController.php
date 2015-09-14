@@ -10,6 +10,8 @@ class InvoiceController extends BaseController
 {
 public function addInvoice($type){
 
+
+
     $types = ['sales','buy'];
     if(in_array($type,$types))
     {

@@ -6,90 +6,124 @@
     <div class="card-panel">
 {{--{{ dd($invoice); }}--}}
       <!-- Logo -->
-      <div class="row invoice-top">
-        <div class="col s12 m6">
-          <img src="{{ URL::asset('dashboard/assets/_con/images/logo.png') }}" alt="Logo">
-          <br>{{ $co_info->co_name }}
-        </div>
-        <div class="col s12 m6">
-          <h3>فاتورة</h3>
-        </div>
-      </div>
-      <!-- /Logo -->
-      <br>
 
-      <div class="row">
-        <!-- Invoice From -->
-        <div class="col s12 l4">
-          فاتورة من :
-            @if($type == 'buy')
-                @if($invoice->accountInfo)
-                    {{$invoice->accountInfo->acc_name }}
-                @endif
-            @endif
-          <h4>{{ $co_info->co_name }}
-            <br>
-          فرع :
-            <strong>{{ $invoice->branch->br_name }}</strong>
-          </h4>
-          <address>
-            {{ $invoice->branch->br_address }}
-          <br> {{ $co_info->co_tel }}<i class="mdi-communication-phone"></i>
-        </address>
-        </div>
-        <!-- /Invoice From -->
+        <div class="row invoice-top">
+            <div class="col s3 m3">
+                <img src="{{ URL::asset('dashboard/assets/_con/images/logo.png') }}" alt="Logo">
+                <br>
+                @lang('main.the_company') :
+                {{ $co_info->co_name }}
+                <br>
+                @lang('main.the_branch') &nbsp;&nbsp;&nbsp; :
+                    <strong>{{ $invoice->branch->br_name }}</strong>
 
-        <!-- Invoice To -->
-        <div class="col s12 l4">
-          الى
-            @if($type == 'buy')
-                {{ $invoice->branch->br_name }}
-            @else
-            @if($invoice->accountInfo)
-                    {{ $invoice->accountInfo->acc_name }}
-                @endif
-            @endif
-            <h4>@lang('main.'.$type)</h4>
-        </div>
-        <!-- /Invoice To -->
+            </div>
+            <div class="col s6 m6" >
+                <div style=" font-size: 1.5em; font-weight: 500; text-decoration: underline;  text-align: center;" >
+                    @lang('main.invoice') @lang('main.'.$type)
+                </div>
+                <div style=" font-size: 1.3em; font-weight: 500; text-align: center;" >
 
-        <!-- Invoice Number and Date -->
-        <div class="col s12 l4">
-          <div class="invoice-num">
-            <div class="num">
-              @lang('main.invoiceNum'):
+                {{@ $invoice->accountInfo->acc_name }}
+               </div>
+                <div style=" font-size: 1.3em; font-weight: 500; text-align: center;" >
+
+                    {{@ Lang::get("main.$invoice->pay_type"._); }}
+                </div>
+
+                <br/>
+
+
+            </div>
+
+            <div class="col s3 m3">
+                <div class="invoice-num">
+                    <div class="num">
+                        @lang('main.invoiceNum'):
               <span class="right">
                 <strong>{{ $invoice->invoice_no }}</strong>
               </span>
-            </div>
-            </h4>
-            <div class="date">@lang('main.date'):
+                    </div>
+                    </h4>
+                    <div class="date">@lang('main.date'):
               <span class="right">
                 {{ $invoice->date }}
-
               </span>
+                    </div>
+                    </h4>
+                </div>
+
             </div>
-            </h4>
-          </div>
+
+            <hr/>
         </div>
-        <!-- /Invoice Number and Date -->
-      </div>
-      <br>
+        <!-- /Logo -->
+        <br>
+        <hr/>
+        {{--<div class="row">--}}
+        {{--<!-- Invoice From -->--}}
+        {{--<div class="col s4 l4">--}}
+        {{--فاتورة من :--}}
+        {{--<h4>{{ $co_info->co_name }}--}}
+        {{--<br>--}}
+        {{--فرع :--}}
+        {{--<strong>{{ $invoice->branch->br_name }}</strong>--}}
+        {{--</h4>--}}
+        {{--<address>--}}
+        {{--{{ $invoice->branch->br_address }}--}}
+        {{--<br> {{ $co_info->co_tel }}<i class="mdi-communication-phone"></i>--}}
+        {{--</address>--}}
+        {{--</div>--}}
+        {{--<!-- /Invoice From -->--}}
+
+        {{--<!-- Invoice To -->--}}
+        {{--<div class="col s12 l4">--}}
+        {{--الى--}}
+        {{--<h4>@lang('main.'.$type)</h4>--}}
+        {{--<address>--}}
+        {{--6008 Cotton Nook, Arminto,--}}
+        {{--<br>Montana, 59114-7319, US,--}}
+        {{--<br><i class="mdi-communication-phone"></i> (406) 500-7506--}}
+        {{--</address>--}}
+        {{--</div>--}}
+        {{--<!-- /Invoice To -->--}}
+
+        {{--<!-- Invoice Number and Date -->--}}
+        {{--<div class="col s4 l4">--}}
+        {{--<div class="invoice-num">--}}
+        {{--<div class="num">--}}
+        {{--@lang('main.invoiceNum'):--}}
+        {{--<span class="right">--}}
+        {{--<strong>{{ $invoice->invoice_no }}</strong>--}}
+        {{--</span>--}}
+        {{--</div>--}}
+        {{--</h4>--}}
+        {{--<div class="date">@lang('main.date'):--}}
+        {{--<span class="right">--}}
+        {{--{{ $invoice->date }}--}}
+        {{--</span>--}}
+        {{--</div>--}}
+        {{--</h4>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<!-- /Invoice Number and Date -->--}}
+        {{--</div>--}}
+        <br>
 
       <!-- Table with products -->
       <div class="row">
         <div class="col s12">
 
           <div class="table-responsive">
-            <table class="table table-responsive invoice-table">
+            <table id="table1" class="display table table-bordered table-hover" >
               <thead>
                 <tr>
                   <th>الرقم</th>
                   <th class="center-align">الاسم</th>
                   <th class="center-align">العدد</th>
                   <th class="center-align">سعر الوحدة</th>
-                  <th class="center-align">الاجمالي</th>
-                  <th class="right-align">السيريال</th>
+                    <th class="right-align">السيريال</th>
+                    <th class="center-align">الاجمالي</th>
                 </tr>
               </thead>
               <tbody>
@@ -103,42 +137,69 @@
                   </td>
                   <td class="center-align">{{ $detail->qty }}</td>
                   <td class="center-align">{{ $detail->unit_price }}</td>
-                  <td class="center-align">{{ $detail->item_total }}</td>
-                  <td class="center-align">{{ $detail->serial_no }}</td>
+                    <td class="center-align">{{ $detail->serial_no }}</td>
+                    <td class="center-align">{{ $detail->item_total }}</td>
                 </tr>
                 @endforeach
+
+
                     <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td class="center-align"><strong>الاجمالي</strong>
-                  </td>
+                  <td><strong>الاجمالي</strong></td>
+                  <td style="border-right:none;border-left:none;"></td>
+                  <td style="border-right:none;border-left:none;"></td>
+                  <td style="border-right:none;border-left:none;"></td>
+                  <td style="border-right:none;border-left:none;"></td>
                   <td class="center-align">{{ $invoice->in_total }}</td>
-                  <td ></td>
                    </tr>
                 <tr>
 
-                  <td class="right-align no-border"><strong>الضرائب</strong>
-                  </td>
-                  <td class="right-align no-border" colspan="2">{{ $invoice->tax }}</td>
-                </tr>
-                <tr>
-                  <td class="right-align no-border"><strong>تخفيض</strong>
-                  </td>
-                  <td class="right-align no-border" colspan="2">{{ $invoice->discount }}%</td>
-                </tr>
-                <tr>
-                  <td class="right-align"><strong>الاجمالي</strong>
-                  </td>
-                  <td class="right-align" colspan="2">
-                    <strong class="h2">{{ $invoice->net }}</strong>
-                  </td>
-                </tr>
+
+
               </tbody>
             </table>
           </div>
 
         </div>
+          <div class="col s12">
+
+              <div class="table-responsive">
+                  <table id="table1" class="display table table-bordered table-hover" >
+                      <thead>
+                      <tr>
+                          <td><strong>الاجمالي</strong></td>
+                          <td class="right-align no-border"><strong>تخفيض</strong></td>
+                          <td class="right-align no-border"><strong>الضرائب</strong></td>
+                          <td class="right-align no-border"><strong>الصافى </strong></td>
+                      </tr>
+                      </thead>
+                      <tbody>
+
+                          <tr>
+                              <td> {{ $invoice->net }}</td>
+                              <td>{{ $invoice->discount }}%</td>
+                              <td>{{ $invoice->tax }}</td>
+                              <td>{{ $invoice->net }}</td>
+
+
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+              <address>
+              عنوان الشركة الرئيسى
+                  /
+                  {{ $co_info->co_address }}
+تيلفون /
+                   {{ $co_info->co_mobile_1 }} <i class="mdi-communication-phone"></i>
+              @if($co_info->co_mobile_2 !='')
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                      تيلفون2 <i class="mdi-communication-phone"></i>
+                     {{ $co_info->co_mobile_2 }}  <i class="mdi-communication-phone"></i>
+                  @endif
+              </address>
+          </div>
+
       </div>
       <!-- /Table with products -->
 

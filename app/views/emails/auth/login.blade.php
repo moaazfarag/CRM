@@ -82,7 +82,9 @@
             </ul>
           </div>
           <label for="password-input">كلمة المرور</label>
+
         </div>
+
         <!-- /Password -->
  @if(Session::has('error'))
   <div style="text-align: right;">
@@ -95,9 +97,12 @@
        
 
         <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover">تسجيل الدخول</button>
+          <div dir="rtl">
+              <a style="font-size: 14px !important; text-align: right; text-decoration: underline; " href="add-new-company"> تسجيل شركة جديدة  </a>
+          </div>
+
       </div>
 
-  
       {{ Form::close() }}
     <!-- /Sign In Form -->
 

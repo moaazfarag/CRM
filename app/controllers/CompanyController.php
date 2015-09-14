@@ -8,15 +8,67 @@
  */
     class CompanyController extends BaseController
             {
+
+    public function addNewCompany(){
+
+        return View::make('dashboard.company.add_new_company');
+    }
+
+    public function storeNewCompany (){
+
+        $inputs = Input::all();
+//       return  var_dump($inputs);
+        $validation = Validator::make($inputs, CoData::$store_company,BaseController::$messages);
+
+        if($validation->fails())
+        {
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        }else {
+
+            $company               = new CoData;
+            $company->co_name      = $inputs['co_name'];
+            $company->co_address   = $inputs['co_address'];
+            $company->co_tel       = $inputs['co_tel'];
+            $company->save();
+
+            if($company->save()) {
+
+                $user = new User;
+                $user->co_id     = $company->id;
+                $user->username  = $inputs['username'];
+                $user->password  = Hash::make($inputs['password']);
+                $user->email     = $inputs['email'];
+                $user->save();
+                $user_login = new UserController;
+                Session::flash('success','مرحباً بكم فى موقع الراصد لإدارة الشركات ');
+                return $user_login->checkLogin();
+            }else{
+                return 'no';
+            }
+
+        }
+    }
+
+
         /**
          * ـعديل ملومات الشركة
          * @return mixed
          * edit company data
          */
+
+
         public function editCompanyInfo()
         {
             $data = $this->settingData();//company info data
             $data['miniComInfo']  = "" ; //maxmizie company data on view
+            $data['print_size_types'] = array(
+
+                "A3"=>"A3",
+                "A4"=>"A4",
+                "A5"=>"A5",
+
+            );
             return View::make('dashboard.company.index',$data);
         }
 
@@ -49,5 +101,8 @@
 
 
         }
+
+
+
 
             }

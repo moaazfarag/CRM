@@ -17,6 +17,13 @@ class BranchController extends  BaseController
     {
         $data = $this->settingData();
         $data['miniBranch']  = "" ;
+        $data['print_size_types'] = array(
+
+            "A3"=>"A3",
+            "A4"=>"A4",
+            "A5"=>"A5",
+
+        );
         return View::make('dashboard.company.index', $data);
     }
         /**

@@ -6,9 +6,13 @@ return  array(
     'submit'           => 'حفظ',
     'yes'               =>'نعم',
     'no'               =>'لا',
+    'email'            => 'البريد الألكترونى ',
+    'chose_supplier'   => 'أختر المورد',
     // Aside Page
     'mainInfo'         => 'البيانات الاساسية',
     'mainList'         => 'القائمة الرئيسية',
+    'the_company'      => 'الشركة',
+    'the_branch'       => 'الفرع',
     'companyInfo'      => 'بيانات الشركة ',
     'branchInfo'       => 'بيانات الفروع',
     'itemCat'          => 'فئات الاصناف ',
@@ -29,6 +33,7 @@ return  array(
     'itemCart'         => 'كارت الصنف',
     'inventoryStore'   => 'جرد المخزن ',
     'balanceStores'    => 'ارصده المخازن',
+    'name_of'          => 'اسم',
     //Accounts Pages ...
     'addAccount'       => 'اضف حساب',
     'new'              => 'جديد',
@@ -65,7 +70,7 @@ return  array(
     'qualification'    => 'المؤهل',
     'job'              => 'الوظيفه',
     'chosePart'        => 'اختار القسم',
-    'sales'            => 'المبيعات',
+    'sales'            => 'مبيعات',
     'counting'         => 'الحسابات',
     'userSetting'      => 'اعدادات المستخدم ',
     'usedSys'          => 'مستخدم للنظام',
@@ -132,6 +137,7 @@ return  array(
     'yourAccount'      => 'حسابك',
     'settings'         => 'الاعدادات',
     'login'            => 'تسجيل الدخول',
+
     ///---------------------------------------------------------------------///
     //Controller PageS.....
     //AccountController..
@@ -176,8 +182,12 @@ return  array(
     // settle && invoice page
     'invoiceNum'    => 'رقم الفاتورة',
     'view'          => 'عرض',
+    'invoice'       =>'فاتورة',
     'theType'          => 'النوع',
     'settles'          => 'التسويات',
+    'cash_'           => '(نقداً)',
+    'on_account_'    => '(اجل)',
+    'visa_'           => '(Visa Card)',
 
     ##########{{ add employee page  }}###############
 
@@ -192,6 +202,10 @@ return  array(
     'cancellation_reason'=> 'سبب الالغاء',
     'phone_number_1'	 => 'رقم الهاتف 1',
     'phone_number_2'	 => 'رقم الهاتف 2',
+    'password'           => 'كلمة المرور',
+    'password_confirm'           => 'أعد كتابة كلمة المرور',
+
+    'phone'              => 'رقم الهاتف',
     'birthday'    		 =>'تاريخ الميلاد  ' ,
     'face_qualification' =>'جهه المؤهل ',
     'date_qualification' =>'تاريخ المؤهل ',

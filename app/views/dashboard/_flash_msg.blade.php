@@ -1,3 +1,4 @@
+<div class="no-print">
 @if(Session::has('success'))
     <script type='text/javascript'>
         $(document).ready( function() {
@@ -11,3 +12,4 @@
         });
     </script>
 @endif
+</div>

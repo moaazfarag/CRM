@@ -29,7 +29,8 @@ Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
  * check username and password
  * */
 Route::post('/login',array('uses'=>'UserController@checkLogin','as'=>'login','before'=>'csrf'));
-
+Route::get('/add-new-company',array('uses'=>'CompanyController@addNewCompany','as'=>'addNewCompany'));
+Route::post('/storeNewCompany',array('uses'=>'CompanyController@storeNewCompany','as'=>'storeNewCompany','before'=>'csrf'));
 Route::get('/', 'HomeController@index');
 
 Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
