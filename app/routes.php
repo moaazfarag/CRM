@@ -249,6 +249,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::get('accounts','dashboardController@accounts');
     Route::get('hrr','dashboardController@hr');
 
+    Route::get('add-direct-movement',array('uses'=>'AccountController@addDirectMovement','as'=>'addDirectMovement'));
+    Route::post('store-direct-movement',array('uses'=>'AccountController@storeDirectMovement','as'=>'storeDirectMovement'));
 
 
 });

@@ -160,5 +160,41 @@ class AccountController extends BaseController
     }
 
 
+    public function addDirectMovement(){
+
+        $data['of_account'] = array(
+
+            ''=>'أختر الحساب',
+            'customers'=>'العملاء',
+            'suppliers'=>'الموردين',
+            'partners' =>'جارى الشركاء',
+            'bank'     =>'البنك',
+        );
+
+        $data['title']      = 'إضافة حركة مباشرة ';
+        $data['company']    = CoData::find(Auth::user()->co_id);
+        $data['branch']     = $this->isAllBranch();
+
+        return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
+    }
+
+    public function storeDirectMovement(){
+
+        $inputs = Input::all();
+        $ruels =  Accounts::$store_direct_movement;
+        if($this->isAllBranch() == 1) {
+            $ruels["br_code"] = "required";
+        }
+//        $validation = Validator::make(Input::all(), Employees::$store_rules,BaseController::$messages);
+        $validation = Validator::make($inputs,Accounts::$store_direct_movement,BaseController::$messages);
+        if($validation->fails())
+        {
+            //dd($validation->messages());
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }else {
+
+
+        }
+    }
 }
 

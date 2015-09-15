@@ -66,6 +66,17 @@ class BaseController extends Controller {
             return $this->branchName();
         }
     }
+
+    public function isHaveBranch()
+    {
+        //check if  user can controller all barnches or not
+        if(Auth::user()->all_br && !empty(Branches::company()) ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function branchName()
     {
      return Branches::find(Auth::user()->br_code)->br_name;
