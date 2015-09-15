@@ -43,6 +43,16 @@ angular.module('itemService', [])
                 });
 
             },
+            getInvoiceById :function(id){
+                return $http({
+                    method: 'POST',
+                    url: '/admin/invoice/returns-invoice-data',
+                    headers: { 'Content-Type' :  'application/json' },
+                    data:   JSON.stringify(id)
+                });
+
+            },
+
 
             destroy : function(id) {
                 return $http.delete('/admin/testdelete/' + id);

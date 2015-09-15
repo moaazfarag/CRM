@@ -14,6 +14,13 @@ angular.module('mainCtrl', [])
         $scope.accounts= {};
         // loading variable to show the spinning loading icon
         $scope.loading = true;
+        $scope.returnInvoiceData = function(id){
+            console.log('dsds');
+            Item.getInvoiceById(id).success(function(data){
+
+                $scope.invoiceData = data.invoices;
+           })
+        };
         $scope.getAccountsByType = function(){
             Item.getAccountsByType($scope.account).success(function (data) {
                 $scope.accounts = data.accounts;
