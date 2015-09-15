@@ -13,6 +13,7 @@ public function addInvoice($type){
 
 
     $types = ['sales','buy'];
+    dd(TransHeader::itemBalance());
     if(in_array($type,$types))
     {
         $data['name']          = Lang::get('main.'.$type); // page title
@@ -90,7 +91,9 @@ public function addInvoice($type){
                     $newHeader->in_total        = $total ;
                     $newHeader->discount        = $discount;
                     $newHeader->tax             = $tax;
-                    $newHeader->net             = $total - ($total)*($discount)/100;
+                    $net                        = $total - ($total)*($discount)/100;
+                    $newHeader->net             = $net;
+                    AccountTrans::saveTrans(Input::all(),$newHeader->id,$type,$net);
                     $newHeader->save();
                     TransDetails::insert($newInvoiceItems);
                     Session::flash('success','تم اضافة الفاتورة بنجاح');
@@ -194,8 +197,9 @@ public function addInvoice($type){
      */
     public function itemsData()
         {
-          $data['items']  =  Items::where('co_id',$this->coAuth())
-                                ->get();
+            $q = new   TransHeader;
+          $data['items']  =  $q->itemBalance();
+
           return Response::json($data);
         }
 }

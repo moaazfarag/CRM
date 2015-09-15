@@ -49,7 +49,10 @@ class MsHeader extends Eloquent
         return $this->hasMany('MsDetails','ms_header_id','ms_header_id')
             ->where('des_ded_type','استقطاع')
             ->join('hr_desded','hr_desded.id','=','hr_ms_details.des_ded_id')
-            ->select('des_ded_val', DB::raw('SUM(des_ded_val) as total_val'),'hr_ms_details.*','hr_desded.name','hr_desded.ds_cat')
+            ->select('des_ded_val', DB::raw('SUM(des_ded_val) as total_val')
+                ,'hr_ms_details.*',
+                'hr_desded.name',
+                'hr_desded.ds_cat')
             ->groupBy('des_ded_id');
     }
 

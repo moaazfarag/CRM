@@ -48,9 +48,12 @@
                     </div>
                     <div class="col s2 l3">
                         <i class="mdi-action-label"></i>
-                        <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.name" id="item_id" autofocus="autofocus">
+                        <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
                         <ul id="itemsView" class="drop-down-menu"  ng-show="item">
-                            <li  ng-model="item.name" class="li-drop-down-menu"  ng-repeat="dbitem in items| filter:item.name" ng-click="selectItem(dbitem.item_name,dbitem.id,dbitem.has_serial)">@{{dbitem.item_name }}</li>
+                            <li  ng-model="item.name"
+                                 class="li-drop-down-menu"
+                                 ng-repeat="dbitem in items| filter:item.name"
+                                 ng-click="selectItem(dbitem)">@{{dbitem.item_name }}</li>
                         </ul>
                         <p class="parsley-required">
                             {{ $errors ->first('item_id') }}
@@ -75,7 +78,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <i class="mdi mdi-editor-attach-money prefix"></i>
-                            {{ Form::number('cost',null,array('ng-pattern'=>"/^[0-9]+$/", 'ng-model'=>"item.cost",'id'=>'cost')) }}
+                            {{ Form::number('cost',null,array( 'ng-model'=>"item.cost",'id'=>'cost')) }}
                             <div class="error-div" ng-show="form.$submitted || form.cost.$touched">
                                 <span class="errorMessage" ng-show="form.cost.$error.pattern">
                                     برجاء ادخل رقم صحيح

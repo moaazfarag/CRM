@@ -272,4 +272,11 @@ class BaseController extends Controller {
         return $true_id;
 
     }
+    public function itemBalance()
+    {
+
+        $q = new   TransHeader;
+        $q->itemBalance()->where('item_id');
+//        dd($q->itemBalance(2));
+    }
 }
