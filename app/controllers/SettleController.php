@@ -22,6 +22,7 @@ class SettleController extends BaseController {
      */
     public function addSettle($type)
     {
+        $this->itemBalance(1);
         $types = array('settleAdd','settleDiscount');
         if(in_array($type,$types) ){
             if($type == 'settleAdd')
