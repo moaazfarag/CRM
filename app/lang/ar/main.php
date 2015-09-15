@@ -49,6 +49,7 @@ return  array(
     //Account Table Page
     'number'           => 'الرقم' ,
     'edit'             => 'تعديل',
+    'save'             => 'حفظ',
     //Account Balance Page
     'Credit'           => 'دائن',
     'debit'            => 'مدين ',
@@ -370,5 +371,7 @@ return  array(
     'job/'          => 'الوظيفة /',
     'department/'   => 'القسم/',
     'buy'   => 'مشتريات',
-    'view_invoices' => 'عرض فواتير'
+    'view_invoices' => 'عرض فواتير',
+    'prise' => 'المبلغ',
+    'note'  => 'ملاحظات',
 );

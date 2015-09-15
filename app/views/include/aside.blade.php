@@ -152,6 +152,19 @@
                     </li>
 
                 </ul>
+            </li>
+            <li class="">
+                <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الخزينة <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('addInvoice',"sales") }}" class="waves-effect waves-blue"> يومية الخزينة </a>
+                        <a href="{{ URL::route('addDirectMovement') }}" class="waves-effect waves-blue"> الحركات المباشرة </a>
+                    </li>
+
+
+
+                </ul>
+            </li>
           </ul>
 
 
