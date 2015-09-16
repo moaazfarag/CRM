@@ -123,7 +123,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('Store-Items-Balances',array('before'=>'csrf','uses'=>'ItemsBalancesController@storeItemsBalances','as'=>'storeItemsBalances')) ;
         Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
         Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
-
+        Route::get('View-Items-Balances/',array('uses'=>'ItemsBalancesController@viewItemsBalances','as'=>'viewItemsBalances')) ;
     });
 
     /**
@@ -251,6 +251,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
 
     Route::get('add-direct-movement',array('uses'=>'AccountController@addDirectMovement','as'=>'addDirectMovement'));
     Route::post('store-direct-movement',array('uses'=>'AccountController@storeDirectMovement','as'=>'storeDirectMovement'));
+    Route::get('edit-direct-movement/{id}',array('uses'=>'AccountController@editDirectMovement','as'=>'editDirectMovement'));
+    Route::post('update-direct-movement/{id}',array('uses'=>'AccountController@updateDirectMovement','as'=>'updateDirectMovement'));
 
 
 });

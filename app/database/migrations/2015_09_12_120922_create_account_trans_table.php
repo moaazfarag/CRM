@@ -26,6 +26,8 @@ class CreateAccountTransTable extends Migration {
 //			$table->decimal('trans_val',10,2);
 			$table->date('date');
 			$table->string('pay_type');
+			$table->string('account');
+			$table->string('type');
 			$table->string('notes');
 			$table->boolean('deleted');
 //			$table->unique(array('co_id', 'invoice_type','co_id'));

@@ -21,6 +21,9 @@
                 <a class="minimize" href="#">
                     <i class="mdi-navigation-expand-less"></i>
                 </a>
+                <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewItemsBalances') }}" class="btn btn-small z-depth-0">
+                    عرض أرصدة الأصناف
+                </a>
             </div>
             <div class="content">
 
