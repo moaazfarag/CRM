@@ -8,20 +8,19 @@
  */
 class InvoiceController extends BaseController
 {
-public function addInvoice($type){
+public function addInvoice($type,$br_id){
 
-
-
+    $branch =  Branches::company()->find($br_id);
     $types = ['sales','buy'];
-    dd(TransHeader::itemBalance());
-    if(in_array($type,$types))
+    if(in_array($type,$types) && $branch)
     {
         $data['name']          = Lang::get('main.'.$type); // page title
         $data['title']         = " فاتورة " .$data['name'] ; // page title
         $data['invoices_open'] = 'open' ;
         $data['co_info']       = CoData::thisCompany()->first();//select info models category seasons
-        $data['branch']        = $this->isAllBranch();
+        $data['branch']        = $branch;
         $data['type']          = $type;
+        $data['br_id']          = $br_id;
         $data['pay_type']      = array('cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         return View::make('dashboard.invoices.index',$data);
@@ -29,10 +28,12 @@ public function addInvoice($type){
         return "404 error";
     }
 }
-    public function storeInvoice($type)
+    public function storeInvoice($type,$br_id)
     {
+        $branch =  Branches::company()->find($br_id);
         $types = ['sales','buy'];
-        if(in_array($type,$types))
+
+        if(in_array($type,$types) && $branch)
         {
             $inputs = Input::all();
 
@@ -44,6 +45,7 @@ public function addInvoice($type){
                 $data['title']       = " تعديل تسوية اضافة " ; // page title
                 $data['TransOpen']   = 'open' ;
                 $data['type']        = 'type' ;
+                $data['br_id']          = $br_id;
                 $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
                 $data['branch']      = $this->isAllBranch(); //
                 $data['newArray']    = $this->itemsToJsonForError($inputs);
@@ -56,7 +58,7 @@ public function addInvoice($type){
                     $newHeader                  = new TransHeader;
                     $newHeader->co_id           = $this->coAuth();
                     $newHeader->user_id         = Auth::id();
-                    $newHeader->br_code         = $inputs['branch_id'];
+                    $newHeader->br_id           = $branch->id;
                     $newHeader->pay_type        = $inputs['pay_type'];
                     $newHeader->account         = $inputs['account_id'];
                     $invoice_no                 = $newHeader->company()->where('invoice_type',$type)->max('invoice_no')+1;
@@ -145,7 +147,6 @@ public function addInvoice($type){
         $data['tablesData'] = TransHeader::where('co_id', '=', $this->coAuth())->get();
 //        $data['invoices_id'] = TransHeader::where('co_id', '=', $this->coAuth())->get()->lists('id');
         return View::make('dashboard.invoices.all_invoices',$data);
-
     }
     public function viewInvoices()
     {
@@ -155,12 +156,9 @@ public function addInvoice($type){
             $data['invoices_open']   = 'open' ;
             $data['invoices']    = $trans;
             return View::make('dashboard.invoices.view_invoices',$data);
-
         }else{
 
-
             return "that's not correct page : type check fail";
-
         }
     }
     public function salesReturns(){
@@ -170,7 +168,6 @@ public function addInvoice($type){
         $data['invoices']  = 'open' ;
         $data['co_info']    = CoData::where('id','=',$this->coAuth())->first();//select info models category seasons
         $data['branch']     = $this->isAllBranch();
-
         $data['pay_type']     = array(Lang::get('main.cash'),Lang::get('main.visa'),Lang::get('main.on_account'));
         $data['account_type'] = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         return View::make('dashboard.invoices.returns',$data);
@@ -197,9 +194,7 @@ public function addInvoice($type){
      */
     public function itemsData()
         {
-            $q = new   TransHeader;
-          $data['items']  =  $q->itemBalance();
-
-          return Response::json($data);
+          $data['items']  = Items::getItemsWithBalance() ;
+           return Response::json($data);
         }
 }

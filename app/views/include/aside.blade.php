@@ -137,11 +137,28 @@
             <li class="{{@$invoices_open}}">
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الفواتير <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
+                    <?php $branches = BaseController::getBranchId()    ?>
+@if($branches['all_br'] == "all_br")
+                        <li>
+                            <a class="yay-sub-toggle waves-effect waves-blue">     فاتورة مبيعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                            <ul>
+                                <li>
+                                    @foreach($branches['branches'] as $branch)
+                                    <a href="{{ URL::route('addInvoice',array("sales",$branch->id)) }}" class="waves-effect waves-blue">
+                                    فرع {{$branch->br_name}}
+                                    </a>
+                                    @endforeach
+                                </li>
+                                {{--<li><a href="{{ URL::route('purchasesReturns') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>--}}
+                                {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
+                            </ul>
+                        </li>
+    @else
                     <li>
-                        <a href="{{ URL::route('addInvoice',"sales") }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
-                        <a href="{{ URL::route('addInvoice',"buy") }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
+                        <a href="{{ URL::route('addInvoice',array("sales",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                        <a href="{{ URL::route('addInvoice',array("buy",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
                     </li>
-
+@endif
                     <li>
                         <a class="yay-sub-toggle waves-effect waves-blue">     المرتجعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>

@@ -6,12 +6,12 @@ angular.module('itemService', [])
     .factory('Item', function($http) {
 
         return {
-            getItems: function() {//get data for using in drop menu
+            getItems: function(brId) {//get data for using in drop menu
                 return $http({
                     method:'POST',
                     url: '/admin/invoice/items-data',
                     headers: { 'Content-Type' : 'application/json' },
-                    data:   JSON.stringify()
+                    data:   JSON.stringify(brId)
                 });
             },
             show : function(id) {

@@ -1355,6 +1355,10 @@ class Builder {
 	{
 		return $this->where('co_id', '=', Auth::user()->co_id);
 	}
+	public function branche()
+	{
+		return $this->where('co_id', '=', Auth::user()->co_id);
+	}
 
 
 	public function dateBetween($col,$date_start,$date_end){

@@ -19,11 +19,11 @@
     <div class="content">
       <div class="row no-margin-top">
          <div class="col s2 l3">
-             @if($have_branch == 1)
+             @if($branch)
                  <i class="mdi mdi-notification-event-available"></i>
-                 {{ Form::label('branch_id','الفرع') }}
-                 {{ Form::select('branch_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
-                    <p class="parsley-required">{{ $errors ->first('branch_id') }} </p>
+                 {{ Form::label('br_id','الفرع') }}
+                 {{ Form::select('br_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
+                    <p class="parsley-required">{{ $errors ->first('br_id') }} </p>
              @else
                     <br>
                 <b> فرع :{{ $branch }}</b>

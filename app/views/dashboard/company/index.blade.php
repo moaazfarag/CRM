@@ -104,7 +104,7 @@
 
                  {{ Form::select('co_print_size', array('' => lang::get('main.print_size')) + $print_size_types,null,array('id'=>'ecommerce-printsize')) }}
 
-                 <p dir="rtl" class="parsley-required">{{ $errors ->first('branch_id') }} </p>
+                 <p dir="rtl" class="parsley-required">{{ $errors ->first('br_id') }} </p>
              </div>
           </div>
         </div>

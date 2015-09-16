@@ -34,7 +34,7 @@ class EmployeesController extends BaseController
         $newEmp                             = new Employees;
         $newEmp->co_id                      = $this->coAuth();
         $newEmp->name                       = Input::get('name');
-        $newEmp->branch_id                  = Input::get('branch_id');
+        $newEmp->br_id                  = Input::get('br_id');
         $newEmp->employee_date              = $this->strToTime($inputs['employee_date']);
         $newEmp->work_nature                = Input::get('work_nature');
         $newEmp->department_id              = Input::get('department_id');
@@ -98,7 +98,7 @@ class EmployeesController extends BaseController
                 $oldEmp = Employees::find($id);
                 $oldEmp->co_id                      = $this->coAuth();
                 $oldEmp->name                       = Input::get('name');
-                $oldEmp->branch_id                  = Input::get('branch_id');
+                $oldEmp->br_id                  = Input::get('br_id');
                 $oldEmp->employee_date              = $this->strToTime($inputs['employee_date']);
                 $oldEmp->work_nature                = Input::get('work_nature');
                 $oldEmp->department_id              = Input::get('department_id');

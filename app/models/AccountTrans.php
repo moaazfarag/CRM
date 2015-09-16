@@ -24,7 +24,7 @@ class AccountTrans extends Eloquent {
             $Base = new BaseController;
             $newAccountTrans = new AccountTrans;
             $newAccountTrans->co_id      = $Base->coAuth();
-            $newAccountTrans->br_id      = $inputs['branch_id'];
+            $newAccountTrans->br_id      = $inputs['br_id'];
             $newAccountTrans->user_id    = Auth::id();
             $newAccountTrans->account_id = $inputs['account_id'];
             $newAccountTrans->trans_id   = $transHeaderId;

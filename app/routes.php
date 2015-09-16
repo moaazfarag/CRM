@@ -157,11 +157,10 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      */
     Route::group(array('prefix'=>'invoice'),function(){
 
-        Route::get('add-sales-invoice', array('uses' => 'InvoiceController@addSalesInvoice','as' => 'addSalesInvoice'));
-        Route::get('add-{type}-invoice', array('uses' => 'InvoiceController@addInvoice','as' => 'addInvoice'));
-        Route::post('add-{type}-invoice', array('uses' => 'InvoiceController@storeInvoice','as' => 'storeInvoice'));
+        Route::get('add-{type}-invoice/{br_id}', array('uses' => 'InvoiceController@addInvoice','as' => 'addInvoice'));
+        Route::post('add-{type}-invoice/{br_id}', array('uses' => 'InvoiceController@storeInvoice','as' => 'storeInvoice'));
         Route::get('view-invoice/{headerId}', array('uses' => 'InvoiceController@viewInvoice','as' => 'viewInvoice'));
-        Route::get('all-invoices', array('uses' => 'InvoiceController@viewInvoices','as' => 'viewInvoices'));
+        Route::get('view-invoices', array('uses' => 'InvoiceController@viewInvoices','as' => 'viewInvoices'));
         Route::get('sales-returns', array('uses' => 'InvoiceController@salesReturns','as' => 'salesReturns'));
         Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'InvoiceController@accountById','as' => 'accountById'));

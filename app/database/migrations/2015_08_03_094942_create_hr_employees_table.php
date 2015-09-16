@@ -19,7 +19,7 @@ class CreateHrEmployeesTable extends Migration {
 //            $table->integer('employee_id');
             $table->integer('co_id');
             $table->char('name','75');
-            $table->integer('branch_id');
+            $table->integer('br_id');
             $table->dateTime('employee_date');
             $table->enum('work_nature',array('دائم','مؤقت'));
             $table->integer('department_id');

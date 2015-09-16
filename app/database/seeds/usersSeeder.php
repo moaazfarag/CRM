@@ -12,7 +12,7 @@ class usersSeeder extends Seeder {
 	    array(
 
 	    	'co_id'      =>'1',
-	    	'br_code'    =>'1',
+	    	'br_id'    =>'1',
 	    	'all_br'     =>'1',
 	    	'name'       =>'mohamed',
 	    	'username'  =>'admin',
@@ -25,7 +25,7 @@ class usersSeeder extends Seeder {
  		array(
 
 	    	'co_id'      =>'2',
-	    	'br_code'    =>'2',
+	    	'br_id'    =>'2',
 	    	'all_br'     =>'1',
 	    	'name'       =>'ahmed',
 	    	'username'  =>'admin_2',
@@ -38,7 +38,7 @@ class usersSeeder extends Seeder {
  		array(
 
 	    	'co_id'      =>'3',
-	    	'br_code'    =>'0',
+	    	'br_id'    =>'0',
 	    	'all_br'     =>'1',
 	    	'name'       =>'sayed',
 	    	'username'  =>'admin_3',

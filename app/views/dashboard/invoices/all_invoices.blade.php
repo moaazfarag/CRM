@@ -21,12 +21,12 @@
                     @if($branch == 1)
                     <div class="col s12 l1">
                             <i class="mdi mdi-notification-event-available"></i>
-                            {{ Form::label('branch_id',Lang::get('main.branch')) }}
+                            {{ Form::label('br_id',Lang::get('main.branch')) }}
                     </div>
                     <div class="col s2 l3">
                             <?php $select_branch = Lang::get('main.select_branch'); ?>
-                            {{ Form::select('branch_id',array(null=>$select_branch)+ $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
-                            <p class="parsley-required">{{ $errors ->first('branch_id') }} </p>
+                            {{ Form::select('br_id',array(null=>$select_branch)+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
+                            <p class="parsley-required">{{ $errors ->first('br_id') }} </p>
                     </div>
                     @endif
                     {{--branch end--}}

@@ -1,9 +1,10 @@
 @extends('dashboard.main')
 @section('content')
+        {{--{{ dd(BaseController::getBranchId()) }}--}}
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
 <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]' }}' ng-app="itemApp"  ng-controller="mainController" class="card">
-    {{ Form::open(array('route'=>array('storeInvoice',@$type),'name'=>'form','novalidate')) }}
+    {{ Form::open(array('route'=>array('storeInvoice',$type,$br_id),'name'=>'form','novalidate')) }}
     <div class="title">
         <h5>
             <i class="mdi mdi-notification-event-available"></i>
@@ -19,16 +20,10 @@
     <div class="content">
       <div class="row no-margin-top">
          <div class="col s2 l3">
-             @if($branch == 1)
-                 <i class="mdi mdi-notification-event-available"></i>
-                 {{ Form::label('branch_id',Lang::get('main.branch')) }}
-             <?php $select_branch = Lang::get('main.select_branch'); ?>
-                 {{ Form::select('branch_id',array(null=>$select_branch)+ $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
-                    <p class="parsley-required">{{ $errors ->first('branch_id') }} </p>
-             @else
+
                     <br>
-                <b> @lang('main.branch') :{{ $branch }}</b>
-             @endif
+                <b> @lang('main.branch') :{{ $branch->br_name }}</b>
+
          </div>{{--branch--}}
          <div class="col s2 l3">
              <i class="fa fa-calendar"></i>
@@ -37,9 +32,9 @@
              <p class="parsley-required">{{ $errors ->first('data') }} </p>
           </div> {{--data--}}
 
+{{--{{  dd(Items::getItemsWithBalance()); }}--}}
 
 
-{{--@{{ accounts }}--}}
       </div>{{--first row end--}}
 
         {{-- start acount,item and quaintity  --}}
@@ -48,7 +43,7 @@
 
                 <i class="mdi mdi-editor-attach-money prefix active"></i>
                 {{ Form::label('pay_type',Lang::get('main.payment')) }}
-                {{ Form::select('pay_type',array(null=>Lang::get('main.select_payment'))+ $pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type')) }}
+                {{ Form::select('pay_type',$pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type','required', 'class'=>'browser-default')) }}
                 <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
             </div>{{--pay_type--}}
             <div class="col s2 l3">
@@ -79,7 +74,7 @@
             </div>
             <div class="col s2 l3">
                 <i class="mdi-action-label"></i>
-                <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
+                <input   ng-focus="displayOn({{ $br_id }})"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
                 <ul id="itemsView" class="drop-down-menu" ng-show="item">
                     <li  ng-model="item.item_name"
                          class="li-drop-down-menu"
@@ -88,7 +83,7 @@
                         @{{dbitem.item_name }}
                     </li>
                 </ul>
-
+                {{--@{{ item.balance }}--}}
                 <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
             </div> {{-- item div --}}
             <div class="col s12 l2">

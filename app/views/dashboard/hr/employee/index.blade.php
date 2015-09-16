@@ -62,9 +62,9 @@
                                   <div class="input-field">
 
 
-                                  {{ Form::select('branch_id', array('' => lang::get('main.branch')) + $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
+                                  {{ Form::select('br_id', array('' => lang::get('main.branch')) + $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
 
-                                      <p dir="rtl" class="parsley-required">{{ $errors ->first('branch_id') }} </p>
+                                      <p dir="rtl" class="parsley-required">{{ $errors ->first('br_id') }} </p>
                                   </div>
                               </div>
                               <div class="col s12 l3">

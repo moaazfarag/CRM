@@ -22,7 +22,7 @@ class SettleController extends BaseController {
      */
     public function addSettle($type)
     {
-        $this->itemBalance(1);
+//        $this->itemBalance(1);
         $types = array('settleAdd','settleDiscount');
         if(in_array($type,$types) ){
             if($type == 'settleAdd')
@@ -131,7 +131,7 @@ class SettleController extends BaseController {
             $newHeader->true_id         = BaseController::maxId($newHeader);
             $newHeader->co_id           = $this->coAuth();
             $newHeader->user_id         = Auth::id();
-            $newHeader->br_code         = $inputs['branch_id'];
+            $newHeader->br_id         = $inputs['br_id'];
 
             $transHeaderId              = $newHeader->company()->where('invoice_type',$type)->max('invoice_no')+1;
             $newHeader->invoice_no      = $transHeaderId;

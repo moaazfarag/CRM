@@ -174,8 +174,9 @@ angular.module('mainCtrl', [])
                 return true;
             }
         };
-        $scope.displayOn = function(){
-            Item.getItems()
+        $scope.displayOn = function(brId){
+            console.log(brId);
+            Item.getItems(brId)
                 .success(function(data) {
                     $scope.items = data.items;
                     $scope.loading = false;
@@ -211,7 +212,7 @@ angular.module('mainCtrl', [])
             $scope.invoiceItems.splice($scope.invoiceItems.indexOf(item), 1)
         };
         $scope.hasInvoiceItems =  function(){
-            if( $scope.invoiceItems.length>0 ){
+            if( $scope.invoiceItems.length>0  ){
                 return false;
             }else{
                 return true;
