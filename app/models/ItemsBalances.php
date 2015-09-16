@@ -14,6 +14,11 @@ class ItemsBalances extends Eloquent {
 	 * Store Rules
 	 * @var array
 	 */
+
+    public function items()
+    {
+        return $this->hasMany('Items','item_id');
+    }
     public static function rulesCreator($inputs)
     {
         $count = TransDetails::countOfInputs($inputs);
