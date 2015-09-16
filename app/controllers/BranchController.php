@@ -50,7 +50,7 @@ class BranchController extends  BaseController
      */
     public  function editBranch()
     {
-        $id                  = Input::get('branch_id');
+        $id                  = Input::get('br_id');
         $data                = $this->settingData(); //company info data
         $data['branch']      = Branches::findOrFail($id); //get branch will update
         $data['miniBranch']  = "" ; //to maxmize  branch card in view
@@ -72,6 +72,6 @@ class BranchController extends  BaseController
         $branch->co_id      = Auth::user()->co_id; // id of company related this branch
         $branch->update();
         return Redirect::route('addBranch');
-//        return Redirect::route('editBranch',array("branch_id"=>$branch->id));
+//        return Redirect::route('editBranch',array("br_id"=>$branch->id));
     }
 }

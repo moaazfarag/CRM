@@ -22,7 +22,7 @@
               </td>
               <td class="green-text">Active</td>
               <td>
-                  <a href="{{ URL::route('editBranch',array("branch_id"=>$branch->id)) }}" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
+                  <a href="{{ URL::route('editBranch',array("br_id"=>$branch->id)) }}" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
               </td>
             </tr>
 @endforeach

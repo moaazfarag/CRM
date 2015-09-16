@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->boolean('co_id');
-			$table->integer('br_code');
+			$table->integer('br_id');
 			$table->string('all_br');
 
 			$table->string('name');

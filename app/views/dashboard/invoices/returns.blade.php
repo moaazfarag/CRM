@@ -21,10 +21,10 @@
                 <div class="col s2 l3">
                     @if($branch == 1)
                         <i class="mdi mdi-notification-event-available"></i>
-                        {{ Form::label('branch_id',Lang::get('main.branch')) }}
+                        {{ Form::label('br_id',Lang::get('main.branch')) }}
                         <?php $select_branch = Lang::get('main.select_branch'); ?>
-                        {{ Form::select('branch_id',array(null=>$select_branch)+ $co_info->branches->lists('br_name','id'),null,array('id'=>'branch_id')) }}
-                        <p class="parsley-required">{{ $errors ->first('branch_id') }} </p>
+                        {{ Form::select('br_id',array(null=>$select_branch)+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
+                        <p class="parsley-required">{{ $errors ->first('br_id') }} </p>
                     @else
                         <br>
                         <b> @lang('main.branch') :{{ $branch }}</b>
@@ -65,7 +65,7 @@
                     <select  class='browser-default'>
                         <option value="@{{ account.id }}" ng-repeat="account in accounts">@{{ account.acc_name }}</option>
                     </select>
-                    {{--{{ Form::select('account',array(null=>"ÇÎÊÑ   äæÚ ÇáÍÓÇÈ ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
+                    {{--{{ Form::select('account',array(null=>"ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
                     <p class="parsley-required">{{ $errors ->first('account') }} </p>
                 </div>{{--account--}}
             </div>
@@ -172,7 +172,7 @@
             {{--<div class="input-field">--}}
             {{--<i class="fa fa-barcode prefix"></i>--}}
             {{--{{ Form::text('serial_no',null,array('id'=>'serial_no')) }}--}}
-            {{--{{ Form::label('serial_no','ÇáÓíÑíÇá') }}--}}
+            {{--{{ Form::label('serial_no','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½') }}--}}
             {{--<p class="parsley-required">{{ $errors ->first('serial_no') }} </p>--}}
             {{--</div>--}}
             {{--</div>--}}{{--bar_code--}}

@@ -66,6 +66,21 @@ class BaseController extends Controller {
             return $this->branchName();
         }
     }
+    public static function  getBranchId()
+    {
+        //check if  user can controller all barnches or not
+        $branches =Branches::company()->get();
+        if(Auth::user()->all_br && $branches->count()>1){
+            $data['branches'] = $branches;
+            $data['all_br'] = "all_br";
+            return $data;
+        }elseif(!Auth::user()->all_br && $branches->count()>1)
+        {
+            return Auth::user()->br_id;
+        }else{
+            return $branches->first()->id;
+        }
+    }
 
     public function isHaveBranch()
     {
@@ -79,7 +94,7 @@ class BaseController extends Controller {
 
     public function branchName()
     {
-     return Branches::find(Auth::user()->br_code)->br_name;
+     return Branches::find(Auth::user()->br_id)->br_name;
     }
     public function strToTime($date)
     {
@@ -272,11 +287,5 @@ class BaseController extends Controller {
         return $true_id;
 
     }
-    public function itemBalance()
-    {
 
-        $q = new   TransHeader;
-        $q->itemBalance()->where('item_id');
-//        dd($q->itemBalance(2));
-    }
 }

@@ -183,7 +183,7 @@ class AccountController extends BaseController
         $inputs = Input::all();
         $ruels =  Accounts::$store_direct_movement;
         if($this->isAllBranch() == 1) {
-            $ruels["br_code"] = "required";
+            $ruels["br_id"] = "required";
         }
 //        $validation = Validator::make(Input::all(), Employees::$store_rules,BaseController::$messages);
         $validation = Validator::make($inputs,Accounts::$store_direct_movement,BaseController::$messages);

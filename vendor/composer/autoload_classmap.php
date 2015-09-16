@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AccountController' => $baseDir . '/app/controllers/AccountController.php',
+    'AccountTrans' => $baseDir . '/app/models/AccountTrans.php',
     'Accounts' => $baseDir . '/app/models/Accounts.php',
     'AccountsBalances' => $baseDir . '/app/models/AccountsBalances.php',
     'AccountsBalancesController' => $baseDir . '/app/controllers/AccountsBalancesController.php',
@@ -60,6 +61,7 @@ return array(
     'CreateTransDetailsTable' => $baseDir . '/app/database/migrations/2015_07_25_122734_create_trans_details_table.php',
     'CreateTransHeaderTable' => $baseDir . '/app/database/migrations/2015_07_25_120315_create_trans_header_table.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2015_06_29_135802_create_users_table.php',
+    'CreateViewMakerName' => $baseDir . '/app/database/migrations/2015_09_16_102450_create_view_maker_name.php',
     'CrreateHrDepartmentsTable' => $baseDir . '/app/database/migrations/2015_08_02_163006_crreate_hr_departments_table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
     'Crypt_Base' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
@@ -458,6 +460,7 @@ return array(
     'Illuminate\\Workbench\\Starter' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/Starter.php',
     'Illuminate\\Workbench\\WorkbenchServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/WorkbenchServiceProvider.php',
     'InvoiceController' => $baseDir . '/app/controllers/InvoiceController.php',
+    'InvoiceReturnController' => $baseDir . '/app/controllers/InvoiceReturnController.php',
     'ItemController' => $baseDir . '/app/controllers/ItemController.php',
     'Items' => $baseDir . '/app/models/Items.php',
     'ItemsBalances' => $baseDir . '/app/models/ItemsBalances.php',
@@ -1028,6 +1031,7 @@ return array(
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/Psr/Log/NullLogger.php',
     'Psr\\Log\\Test\\DummyTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
     'Psr\\Log\\Test\\LoggerInterfaceTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+    'ReturnsInvoice' => $baseDir . '/app/models/ReturnsInvoice.php',
     'SeasonController' => $baseDir . '/app/controllers/SeasonController.php',
     'Seasons' => $baseDir . '/app/models/Seasons.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',

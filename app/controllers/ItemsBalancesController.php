@@ -69,7 +69,7 @@ class ItemsBalancesController extends BaseController {
                     'qty'          => $inputs['quantity_'.$k],
                     'cost'         => $inputs['cost_'.$k] * $inputs['quantity_'.$k],
                     'serial_no'    => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
-                    'branch_id'    => isset($inputs['branch_id'.$k])?$inputs['branch_id'.$k]:0,
+                    'br_id'    => isset($inputs['br_id'.$k])?$inputs['br_id'.$k]:0,
                     'created_at'   => date('Y-m-d H:i:s'),
                     'updated_at'   => date('Y-m-d H:i:s')
                 );//end of array
@@ -133,7 +133,7 @@ class ItemsBalancesController extends BaseController {
                 $itemsBalances->qty          = Input::get('qty');
                 $itemsBalances->cost         = Input::get('cost');
                 $itemsBalances->serial_no    = Input::get('serial_no');
-                $itemsBalances->branch_id    =  isset($inputs['branch_id'.$k])?$inputs['branch_id'.$k]:0;
+                $itemsBalances->br_id    =  isset($inputs['br_id'.$k])?$inputs['br_id'.$k]:0;
 
                 $itemsBalances->update();
 

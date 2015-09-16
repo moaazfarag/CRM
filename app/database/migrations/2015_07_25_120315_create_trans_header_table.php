@@ -18,7 +18,7 @@ class CreateTransHeaderTable extends Migration {
 			$table->string('true_id');
             $table->integer('co_id');
             $table->integer('user_id');
-            $table->integer('br_code');
+            $table->integer('br_id');
             $table->integer('invoice_no');
             $table->string('invoice_type');
             $table->integer('account');

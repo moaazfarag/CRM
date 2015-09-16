@@ -69,7 +69,7 @@ class UserController extends BaseController
             $newUser = new User;
             $newUser->co_id = Auth::user()->co_id;
             $data['asideOpen']   = 'open' ;
-            $newUser->br_code = Input::get('br_code');
+            $newUser->br_id = Input::get('br_id');
             $newUser->id =  User::max('id')+1 ;
             $newUser->all_br = Input::get('all_br');
             $newUser->name = Input::get('name');
@@ -114,7 +114,7 @@ class UserController extends BaseController
                 return Redirect::back()->withInput()->withErrors($validation->messages());
             } else {
                 $oldUser->co_id = Auth::user()->co_id;
-                $oldUser->br_code = Input::get('br_code');
+                $oldUser->br_id = Input::get('br_id');
                 $oldUser->all_br = Input::get('all_br');
                 $oldUser->name = Input::get('name');
                 $oldUser->username = Input::get('username');
@@ -147,7 +147,7 @@ class UserController extends BaseController
                 return Redirect::back()->withInput()->withErrors($validation->messages());
             } else {
                 $oldUser->co_id = Auth::user()->co_id;
-//                $oldUser->br_code = Input::get('br_code');
+//                $oldUser->br_id = Input::get('br_id');
 //                $oldUser->all_br = Input::get('all_br');
 //                $oldUser->name = Input::get('name');
 //                $oldUser->username = Input::get('username');

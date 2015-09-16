@@ -82,4 +82,14 @@ class Items extends Eloquent {
         return $this->belongsTo('Accounts','supplier_id');
     }
 
+    public static function getItemsWithBalance()
+    {
+        return DB::table('items_balance')
+            ->groupBy('item_id')
+            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*' )
+            ->get();
+
+    }
+
+
 }
