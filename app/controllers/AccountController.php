@@ -174,25 +174,120 @@ class AccountController extends BaseController
         $data['title']      = 'إضافة حركة مباشرة ';
         $data['company']    = CoData::find(Auth::user()->co_id);
         $data['branch']     = $this->isAllBranch();
-
+        $data['rowsData']   = AccountTrans::company()->where('type','direct_movement')->get();
         return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
     }
 
     public function storeDirectMovement(){
 
         $inputs = Input::all();
-        $ruels =  Accounts::$store_direct_movement;
-        if($this->isAllBranch() == 1) {
-            $ruels["br_code"] = "required";
+
+        $ruels =  Accounts::$ruels_direct_movement;
+        if($this->isHaveBranch() == 1) {
+            $ruels["br_id"] = "required";
         }
-//        $validation = Validator::make(Input::all(), Employees::$store_rules,BaseController::$messages);
-        $validation = Validator::make($inputs,Accounts::$store_direct_movement,BaseController::$messages);
+
+        $validation = Validator::make($inputs,$ruels,BaseController::$messages);
         if($validation->fails())
         {
-            //dd($validation->messages());
+
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
 
+
+            $movement           = new AccountTrans;
+            $movement->co_id    = Auth::user()->co_id;
+            $movement->br_id    = @$inputs['br_id'];
+            $movement->account  = $inputs['account'];
+            $movement->type     = 'direct_movement';
+            $movement->pay_type = 'cash';
+            $movement->date     = $this->strToTime($inputs['date']);
+            $movement->notes    = $inputs['notes'];
+
+            $movement->user_id  = Auth::id();
+
+            if($inputs['price_type'] == 'credit'){
+
+                $movement->credit   =  $inputs['price'] ;
+
+            }elseif($inputs['price_type'] == 'debit') {
+                $movement->debit =  $inputs['price'];
+            }
+
+            $movement->save();
+            Session::flash('success','تمت الإضافة بنجاح ');
+            return Redirect::back();
+
+        }
+    }
+
+
+    public function editDirectMovement($id){
+        $data['movement']   =  AccountTrans::company()->find($id);
+//        dd();
+        if(!empty($data['movement'])) {
+            $data['of_account'] = array(
+
+                '' => 'أختر الحساب',
+                'customers' => 'العملاء',
+                'suppliers' => 'الموردين',
+                'partners'  => 'جارى الشركاء',
+                'bank'      => 'البنك',
+            );
+
+            $data['title'] = 'تعديل حركة مباشرة';
+            $data['company'] = CoData::find(Auth::user()->co_id);
+            $data['branch'] = $this->isAllBranch();
+            $data['rowsData'] = AccountTrans::company()->where('type', 'direct_movement')->get();
+
+//        var_dump($data['rowsData']); die();
+            return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
+        }else{
+            return 'not found this movement';
+        }
+    }
+
+
+    public function updateDirectMovement($id){
+
+        $inputs = Input::all();
+//        var_dump($inputs); die();
+        $ruels =  Accounts::$ruels_direct_movement;
+        if($this->isHaveBranch() == 1) {
+            $ruels["br_id"] = "required";
+        }
+
+        $validation = Validator::make($inputs,$ruels,BaseController::$messages);
+        if($validation->fails())
+        {
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }else {
+
+
+            $movement           =  AccountTrans::company()->where('id',$id)->first();
+
+            $movement->co_id    = Auth::user()->co_id;
+            $movement->br_id    = @$inputs['br_id'];
+            $movement->account  = $inputs['account'];
+            $movement->type     = 'direct_movement';
+            $movement->pay_type = 'cash';
+            $movement->date     = $this->strToTime($inputs['date']);
+            $movement->notes    = $inputs['notes'];
+            $movement->user_id  = Auth::id();
+
+            if($inputs['price_type'] == 'credit'){
+
+                $movement->credit   =  $inputs['price'] ;
+                $movement->debit    = 0;
+            }elseif($inputs['price_type'] == 'debit') {
+                $movement->debit =  $inputs['price'];
+                $movement->credit= 0;
+            }
+
+            $movement->update();
+            Session::flash('success','تم التعديل بنجاح');
+            return Redirect::route('addDirectMovement');
 
         }
     }

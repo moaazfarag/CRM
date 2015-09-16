@@ -6,7 +6,7 @@ class DatabaseSeeder extends Seeder {
 	public function run()
 	{
 		Eloquent::unguard();
-
+		$this->call('directMovementSeeder');
 		$this->call('companyDataSeeder');
 		$this->call('branchesSeeder');
 		$this->call('seasonsSeeder');
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('hrMSDetailsSeeder');
         $this->call('hrMSHeaderSeeder');
         $this->call('settleSeeder');
+
 
     }
 

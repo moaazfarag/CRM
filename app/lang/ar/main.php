@@ -372,6 +372,9 @@ return  array(
     'department/'   => 'القسم/',
     'buy'   => 'مشتريات',
     'view_invoices' => 'عرض فواتير',
-    'prise' => 'المبلغ',
+    'price' => 'المبلغ',
     'note'  => 'ملاحظات',
+    'of_account' => 'حساب',
+    'debit_'     => 'مدين',
+    'credit_'    =>'دائن',
 );

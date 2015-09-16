@@ -146,6 +146,21 @@ class ItemsBalancesController extends BaseController {
 
 
 
+    public function viewItemsBalances (){
 
+        $all_item_balances = TransHeader::company()->get();
+        if($all_item_balances){
+            $data['title']       = " تعديل تسوية اضافة " ; // page title
+            $data['TransOpen']   = 'open' ;
+            $data['balances']    = $all_item_balances;
+            return View::make('dashboard.items_balances.view_balances',$data);
+
+        }else{
+
+            return "that's not correct page : type check fail";
+
+        }
+
+ }
 
 } 
