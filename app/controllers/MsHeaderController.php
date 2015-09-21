@@ -130,6 +130,27 @@ class MsHeaderController extends BaseController
 
     }
 
+    public function searchOutgoingSalariesReport(){
+
+        $data['title'] = 'المرتبات المنصرفة '; // page title
+        $data['co_info'] = CoData::thisCompany()->first();
+        return View::make('dashboard.hr.report',$data);
+    }
+
+    public function outgoingSalariesReport(){
+
+        $inputs = Input::all();
+
+        $validation = Validator::make($inputs,MsHeader::$report_ruels,BaseController::$messages);
+        if($validation->fails()) {
+        }else{
+           $date =  $this->strToTime($inputs['date'])
+        }
+
+        $data['title'] = 'المرتبات المنصرفة '; // page title
+        $data['co_info'] = CoData::thisCompany()->first();
+        return View::make('dashboard.hr.report',$data);
+    }
 }
 
 
