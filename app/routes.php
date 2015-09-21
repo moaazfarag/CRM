@@ -167,7 +167,9 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('sales-returns', array('uses' => 'InvoiceController@salesReturns','as' => 'salesReturns'));
         Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'InvoiceController@accountById','as' => 'accountById'));
-        Route::post('items-data', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
+        Route::post('items-data-br', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
+        Route::post('serial-items-data', array('uses' => 'InvoiceController@serialItemsData','as' => 'serialItemsData'));
+        Route::post('items-data', array('uses' => 'InvoiceController@items','as' => 'items'));
         Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
         Route::post('returns-invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'itemsData'));
         Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'InvoiceController@cancelInvoice','as'=>'cancelInvoice')) ;

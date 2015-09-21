@@ -1,9 +1,10 @@
                      <!-- pop up  Structure -->
- <div id="addItem"  class="modal">
 
-     <a ng-click="clearItemForm()" class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
-     <div class="modal-content">
-         <div class="alert blue lighten-2 white-text">
+
+<div  id="addItem"  class="modal">
+    <a ng-click="clearItemForm()" class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
+    <div class="modal-content">
+        <div class="alert blue lighten-2 white-text">
              <h5>هذا المنتج يحتاج الى ادخال سيريال</h5>
          </div>
          <div class="row">
@@ -27,9 +28,15 @@
              </div>
 <div class="row">
          <div  ng-show="range == 'oneByone' " class="col s12 l4">
-        <div class="input-field">
+        <div  class="input-field">
             <i class="fa fa-barcode prefix"></i>
-            {{ Form::text('serial',null,array('ng-model'=>"new.serial",'ng-minlength'=>"1",'id'=>'serial')) }}
+            {{ Form::text('serial',null,array('ng-model'=>"new.serial",'ng-minlength'=>"1",' ng-focus'=>"unselectedSerialOfItem(item.id)",'id'=>'serial')) }}
+            <div class="error-div" ng-show="serialError">
+                هذا السيريال  غير مسجل
+            </div>
+            <div class="error-div" ng-show="serialInInvoiceError">
+                لقد قمت بادخال هذا  السيريال من قبل
+            </div>
             <div ng-show="form.$submitted || form.serial.$touched">
                     <span ng-show="form.serial.$error.required">
                             هذا الحقل مطلوب
@@ -63,22 +70,31 @@
         </div>
         </div>
         <div class="col s12 l4">
-        <div class="input-field">
-            {{ Form::number('to',null,array('ng-model'=>"new.to",'ng-minlength'=>"1",'id'=>'to')) }}
-            <div>
-                        <span ng-show="new.to < new.form" >
-يجب ادخال رقم اكبر
-                        </span>
-                <span ng-show="(new.to - new.form) >100" >
-                لا تستطيع ادخال اكثر من منتج من 100 في المرة الواحدة
-                </span>
+            <div class="input-field">
+                {{ Form::number('to',null,array('ng-model'=>"new.to",'ng-minlength'=>"1",'id'=>'to')) }}
+                <div>
+                            <span ng-show="new.to < new.form" >
+    يجب ادخال رقم اكبر
+                            </span>
+                    <span ng-show="(new.to - new.form) >100" >
+                    لا تستطيع ادخال اكثر من منتج من 100 في المرة الواحدة
+                    </span>
+                </div>
+                {{ Form::label('to','الى') }}
             </div>
-            {{ Form::label('to','الى') }}
+            <div class="green-text" ng-show="all || added">
+                تم اضافة
+                @{{ added  }}
+                من اصل
+                @{{ all  }}
+
+            </div>
         </div>
-    </div>
+
     </div>
 </div>
      </div>
+
      <div class="modal-footer">
          <button ng-show="range == 'oneByone'" ng-disabled="hasSerial(new.serial)"
                  type="button"

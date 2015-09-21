@@ -51,7 +51,7 @@
                     </div>
                     <div class="col s2 l3">
                         <i class="mdi-action-label"></i>
-                        <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
+                        <input   ng-focus="displayOnAllItem()"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
                         <ul id="itemsView" class="drop-down-menu"  ng-show="item">
                             <li  ng-model="item.name"
                                  class="li-drop-down-menu"

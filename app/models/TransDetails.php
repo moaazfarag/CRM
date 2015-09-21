@@ -62,7 +62,13 @@ class TransDetails extends Eloquent {
      */
     private static function hasSarial($v)
     {
-        return Items::find($v)->has_serial;
+        $item = Items::company()->find($v);
+        if($item){
+            return Items::company()->find($v)->has_serial;
+        }else{
+            return false;
+        }
+
     }
 
     /**

@@ -23,7 +23,11 @@ public function addInvoice($type,$br_id){
         $data['br_id']          = $br_id;
         $data['pay_type']      = array('cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
-        return View::make('dashboard.invoices.index',$data);
+        if($type == "sales"){
+            return View::make('dashboard.invoices.salesIndex',$data);
+        }else{
+            return View::make('dashboard.invoices.index',$data);
+        }
     }else{
         return "404 error";
     }
@@ -45,7 +49,7 @@ public function addInvoice($type,$br_id){
                 $data['title']       = " تعديل تسوية اضافة " ; // page title
                 $data['TransOpen']   = 'open' ;
                 $data['type']        = 'type' ;
-                $data['br_id']          = $br_id;
+                $data['br_id']       = $br_id;
                 $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
                 $data['branch']      = $this->isAllBranch(); //
                 dd($validation->messages());
@@ -58,6 +62,7 @@ public function addInvoice($type,$br_id){
                 return View::make('dashboard.settle.index',$data);
 
             }else {
+//                dd(Input::all());
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany()) {
                     $newHeader                  = new TransHeader;
                     $newHeader->co_id           = $this->coAuth();
@@ -100,7 +105,8 @@ public function addInvoice($type,$br_id){
                     $net                        = $total - ($total)*($discount)/100;
                     $newHeader->net             = $net;
 
-                    AccountTrans::saveTrans(Input::all(),$newHeader->id,$type,$net);
+                    //if select account save record into account_trans
+                    AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
                     $newHeader->save();
                     TransDetails::insert($newInvoiceItems);
                     Session::flash('success','تم اضافة الفاتورة بنجاح');
@@ -193,13 +199,34 @@ public function addInvoice($type,$br_id){
           return Response::json($data);
         }
     /**
-     * return items base on company
+     * return items base on company and branch
      * @return mixed
      *
      */
     public function itemsData()
         {
-          $data['items']  = Items::getItemsWithBalance() ;
+          $data['items']  = Items::getItemsWithBalanceByBrId(Input::get('br_id')) ;
+           return Response::json($data);
+        }
+    /**
+     * return items base on company and branch
+     * @return mixed
+     *
+     */
+    public function serialItemsData()
+        {
+          $data['items']  = Items::getSerialItemsWithBalanceByBrId(Input::get('br_id'),Input::get('item_id')) ;
+//            dd($data['items']);
+           return Response::json($data);
+        }
+    /**
+     * return items base on company and branch
+     * @return mixed
+     *
+     */
+    public function items()
+        {
+          $data['items']  = Items::company()->get() ;
            return Response::json($data);
         }
 

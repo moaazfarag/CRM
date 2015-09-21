@@ -18,19 +18,21 @@ class AccountTrans extends Eloquent {
 	 */
 
 
+
     public function accountName(){
         return $this->hasOne('Accounts','id','account_id');
     }
 
 
-    public static function saveTrans($inputs,$transHeaderId,$type,$net)
+    public static function saveAccountTrans($inputs,$transHeaderId,$type,$net,$branchId)
+
     {
         $account = Accounts::company()->find($inputs['account_id']);
         if ($account) {
             $Base = new BaseController;
             $newAccountTrans = new AccountTrans;
             $newAccountTrans->co_id      = $Base->coAuth();
-            $newAccountTrans->br_id      = $inputs['br_id'];
+            $newAccountTrans->br_id      = $branchId;
             $newAccountTrans->user_id    = Auth::id();
             $newAccountTrans->account_id = $inputs['account_id'];
             $newAccountTrans->trans_id   = $transHeaderId;
@@ -49,8 +51,6 @@ class AccountTrans extends Eloquent {
                 return "undefind type";
             }
             $newAccountTrans->save() ;
-        }else{
-
         }
 
     }

@@ -153,6 +153,20 @@
                                 {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
                             </ul>
                         </li>
+                            <li>
+                            <a class="yay-sub-toggle waves-effect waves-blue">     فاتورة مشتريات  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                            <ul>
+                                <li>
+                                    @foreach($branches['branches'] as $branch)
+                                    <a href="{{ URL::route('addInvoice',array("buy",$branch->id)) }}" class="waves-effect waves-blue">
+                                    فرع {{$branch->br_name}}
+                                    </a>
+                                    @endforeach
+                                </li>
+                                {{--<li><a href="{{ URL::route('purchasesReturns') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>--}}
+                                {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
+                            </ul>
+                        </li>
     @else
                     <li>
                         <a href="{{ URL::route('addInvoice',array("sales",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>

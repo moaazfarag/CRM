@@ -9,9 +9,25 @@ angular.module('itemService', [])
             getItems: function(brId) {//get data for using in drop menu
                 return $http({
                     method:'POST',
+                    url: '/admin/invoice/items-data-br',
+                    headers: { 'Content-Type' : 'application/json' },
+                    data:   JSON.stringify(brId)
+                });
+            },
+            getCoItem: function(brId) {//get data for using in drop menu
+                return $http({
+                    method:'POST',
                     url: '/admin/invoice/items-data',
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(brId)
+                });
+            },
+            getSerialItem: function(info) {//get data for using in drop menu
+                return $http({
+                    method:'POST',
+                    url: '/admin/invoice/serial-items-data',
+                    headers: { 'Content-Type' : 'application/json' },
+                    data:   JSON.stringify(info)
                 });
             },
             show : function(id) {
