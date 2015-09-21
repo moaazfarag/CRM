@@ -28,7 +28,7 @@
          <div class="col s2 l3">
              <i class="fa fa-calendar"></i>
              {{ Form::label('data',Lang::get('main.date')) }}
-             {{ Form::text('date',null,array('class'=>'pikaday','required','ng-model'=>'date','id'=>'data')) }}
+             {{ Form::text('date',null,array('class'=>'pikaday','required','ng-model'=>'date',"autofocus",'id'=>'data')) }}
              <p class="parsley-required">{{ $errors ->first('data') }} </p>
           </div> {{--data--}}
 
@@ -72,9 +72,8 @@
                 {{ Form::label('item_id',lang::get('main.item')) }}
             </div>
             <div class="col s2 l3">
-                <i class="mdi-action-label"></i>
-                    <input   ng-focus="displayOn({{ $br_id }})"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
-
+                {{--<i class="mdi-action-label"></i>--}}
+                    <input   ng-focus="displayOn({{ $br_id }})"   autocomplete="off" ng-model="item.item_name" id="item_id" >
                 <ul id="itemsView" class="drop-down-menu" ng-show="item">
                     <li  ng-model="item.item_name"
                          class="li-drop-down-menu"
@@ -83,13 +82,15 @@
                         @{{dbitem.item_name }}
                     </li>
                 </ul>
-
+{{--@{{  item }}--}}
                 <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
             </div> {{-- item div --}}
             <div class="col s12 l2">
                 <div class="input-field">
                     <i class="fa fa-database prefix"></i>
                     {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
+
+
                     <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
                         @lang('main.please_enter_valid_number')
@@ -103,19 +104,34 @@
                     <p class="parsley-required">{{ $errors ->first('quantity') }} </p>
                 </div>
             </div> {{-- quantity div--}}
-                <div class="col s2 ">
-                    <div class="input-field">
+
+                <div class="col s12 l1 ">
+                    {{--<div class="input-field">--}}
                         <label for="item_id">
-                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) || itemBalance()" ng-click=" serialItem({{ $br_id}},item.id)"   class="waves-effect btn modal-trigger">
                                 @lang('main.add')
                             </button >
-                            <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
-                                @lang('main.add')
-                            </button >
+
+                                <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) || itemBalance()" ng-click="addItem()" class="waves-effect btn">
+                                    @lang('main.add')
+                                </button>
+
                         </label>
-                    </div>
+                    {{--</div>--}}
                 </div>{{-- single item button  div --}}
+
+                <div style="margin-right:10px" class="col s12 l2  " ng-show="item.item_name && item.id" >
+                    الرصيد الحالي هو
+                    @{{ item.balance - item.quantity }}
+                    <div style="color: #ea1c18;clear: both"  ng-show="itemBalance() && item.id">
+                        لا يوجد رصيد لهذا المنتج
+                    </div>
+                </div>
+
             </div>
+
+        <div>
+        </div>
 
 
         {{-- end acount,item and quaintity  --}}

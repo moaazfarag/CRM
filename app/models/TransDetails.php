@@ -19,7 +19,7 @@ class TransDetails extends Eloquent {
         public static function rulesCreator($inputs)
         {
             $store_rules['date'] = 'required|date';
-            $store_rules['br_id'] = 'required|integer';
+//            $store_rules['br_id'] = 'required|integer';
             $count = TransDetails::countOfInputs($inputs);
 
             foreach($count as $k => $v)
@@ -62,7 +62,13 @@ class TransDetails extends Eloquent {
      */
     private static function hasSarial($v)
     {
-        return Items::find($v)->has_serial;
+        $item = Items::company()->find($v);
+        if($item){
+            return Items::company()->find($v)->has_serial;
+        }else{
+            return false;
+        }
+
     }
 
     /**

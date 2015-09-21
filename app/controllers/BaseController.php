@@ -205,9 +205,9 @@ class BaseController extends Controller {
 
     public function IsItemsBelongToCompany()
     {
-       $postedItems = Items::whereNotIn('id',TransDetails::countOfInputs(Input::all()))->get();
-//        dd($postedItems);
-        if($postedItems->isEmpty()){
+       $ids         =  array_unique(TransDetails::countOfInputs(Input::all()));
+       $postedItems = Items::company()->whereIn('id',$ids)->get();
+        if($postedItems->count() != count($ids)){
             return false;
         }else{
             return true;

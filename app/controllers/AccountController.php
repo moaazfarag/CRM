@@ -255,7 +255,7 @@ class AccountController extends BaseController
 //        var_dump($inputs); die();
         $ruels =  Accounts::$ruels_direct_movement;
         if($this->isHaveBranch() == 1) {
->>>>>>> moaaz_branch
+
             $ruels["br_id"] = "required";
         }
 

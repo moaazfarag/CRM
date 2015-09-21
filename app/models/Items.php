@@ -82,14 +82,31 @@ class Items extends Eloquent {
         return $this->belongsTo('Accounts','supplier_id');
     }
 
-    public static function getItemsWithBalance()
+    public static function getItemsWithBalanceByBrId($brId)
     {
-        return DB::table('items_balance')
-            ->groupBy('item_id')
-            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*' )
-            ->get();
-
+        $itemsTrans =  DB::table('items_balance')
+                            ->company()
+                            ->groupBy('br_id')
+                            ->groupBy('item_id')
+                            ->where('br_id',$brId)
+                            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
+        $items      = Items::company()->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
+        return array_merge($itemsTrans->get(),$items->toArray());
     }
+    public static function getSerialItemsWithBalanceByBrId($brId,$itemId)
+    {
+        $itemsTrans =  DB::table('items_balance')
+                            ->whereRaw('co_id ='.Auth::user()->co_id)
+                            ->whereRaw('br_id ='.$brId)
+                            ->whereRaw('item_id ='.$itemId)
+                            ->select(DB::raw('SUM(item_bal) AS balance'),'items_balance.*')
+                            ->groupBy('br_id')
+                            ->groupBy('item_id')
+                            ->groupBy('serial_no')->toSql();
+          $SerialItem=  DB::select('SELECT  items_balance.* FROM (' . $itemsTrans.')AS items_balance  WHERE `balance`= 1');
+        return $SerialItem;
+    }
+
 
 
 }
