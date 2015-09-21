@@ -124,6 +124,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
         Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
         Route::get('View-Items-Balances/',array('uses'=>'ItemsBalancesController@viewItemsBalances','as'=>'viewItemsBalances')) ;
+        Route::get('Delete-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@deleteItemsBalances','as'=>'deleteItemsBalances')) ;
     });
 
     /**
@@ -132,6 +133,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::group(array('prefix'=>'AccountsBalances'),function()
     {
         Route::get('Add-Accounts-Balances', array('uses' => 'AccountsBalancesController@addAccountsBalances','as' => 'addAccountsBalances'));
+        Route::get('View-Accounts-Balances', array('uses' => 'AccountsBalancesController@viewAccountsBalances','as' => 'viewAccountsBalances'));
+        Route::get('delete-Accounts-Balances/{id}', array('uses' => 'AccountsBalancesController@deleteAccountsBalances','as' => 'deleteAccountsBalances'));
         Route::get('Add-Accounts-Balances-data', array('uses' => 'AccountsBalancesController@sendData','as' => 'sendData'));
         Route::post('Store-Accounts-Balances',array('before'=>'csrf','uses'=>'AccountsBalancesController@storeAccountsBalances','as'=>'storeAccountsBalances')) ;
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'AccountsBalancesController@editAccountsBalances','as'=>'editAccountsBalances')) ;
@@ -167,6 +170,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('items-data', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
         Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
         Route::post('returns-invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'itemsData'));
+        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'InvoiceController@cancelInvoice','as'=>'cancelInvoice')) ;
 
 
     });
@@ -253,5 +257,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::get('edit-direct-movement/{id}',array('uses'=>'AccountController@editDirectMovement','as'=>'editDirectMovement'));
     Route::post('update-direct-movement/{id}',array('uses'=>'AccountController@updateDirectMovement','as'=>'updateDirectMovement'));
 
-
+    App::missing(function()
+    {
+        return  View::make('errors.missing');
+    });
 });

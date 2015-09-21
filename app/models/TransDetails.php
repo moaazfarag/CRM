@@ -19,7 +19,7 @@ class TransDetails extends Eloquent {
         public static function rulesCreator($inputs)
         {
             $store_rules['date'] = 'required|date';
-            $store_rules['br_id'] = 'required|integer';
+//            $store_rules['br_id'] = 'required|integer';
             $count = TransDetails::countOfInputs($inputs);
 
             foreach($count as $k => $v)
