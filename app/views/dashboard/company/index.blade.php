@@ -93,11 +93,13 @@
             </div>
           </div>
 
+
           <div class="col s12 l1">
               <?php $print_size=Lang::get('main.print_size') ?>
              {{ Form::label('ecommerce-printsize',$print_size) }}
                  </div>
-                  <div class="col s12 l5">
+
+             <div class="col s12 l5">
 
              <div class="input-field">
 

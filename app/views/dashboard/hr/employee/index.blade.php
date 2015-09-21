@@ -129,8 +129,8 @@
                       <div class="col s12 l7">
                           <div class="input-field" >
                               <i class="fa fa-tag prefix"></i>
-                              {{ Form::text('cancel_cause',null,array('id'=>'cancel_cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
                               {{ Form::label('cancel_cause',lang::get('main.cancellation_reason'))     }}
+                              {{ Form::text('cancel_cause',null,array('id'=>'cancel_cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
                               <p class="parsley-required">{{ $errors ->first('cancel_cause') }} </p>
                           </div>
                       </div>

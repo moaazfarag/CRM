@@ -75,5 +75,11 @@ class AccountsBalances extends Eloquent {
         }
     }
 
+    public function ofAccount(){
+
+      return  $this->hasOne('Accounts','id','account_id');
+    }
+
+
 
 }

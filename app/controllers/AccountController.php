@@ -174,8 +174,9 @@ class AccountController extends BaseController
         $data['title']      = 'إضافة حركة مباشرة ';
         $data['company']    = CoData::find(Auth::user()->co_id);
         $data['branch']     = $this->isAllBranch();
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['rowsData']   = AccountTrans::company()->where('type','direct_movement')->get();
-        return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
+        return View::make('dashboard.accounts.treasury_account.index', $data);
     }
 
     public function storeDirectMovement(){
@@ -200,6 +201,7 @@ class AccountController extends BaseController
             $movement->co_id    = Auth::user()->co_id;
             $movement->br_id    = @$inputs['br_id'];
             $movement->account  = $inputs['account'];
+            $movement->account_id  = $inputs['account_id'];
             $movement->type     = 'direct_movement';
             $movement->pay_type = 'cash';
             $movement->date     = $this->strToTime($inputs['date']);
@@ -237,12 +239,13 @@ class AccountController extends BaseController
             );
 
             $data['title'] = 'تعديل حركة مباشرة';
-            $data['company'] = CoData::find(Auth::user()->co_id);
-            $data['branch'] = $this->isAllBranch();
-            $data['rowsData'] = AccountTrans::company()->where('type', 'direct_movement')->get();
+            $data['company']       = CoData::find(Auth::user()->co_id);
+            $data['branch']        = $this->isAllBranch();
+            $data['rowsData']      = AccountTrans::company()->where('type', 'direct_movement')->get();
+            $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
 
 //        var_dump($data['rowsData']); die();
-            return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
+            return View::make('dashboard.accounts.treasury_account.index', $data);
         }else{
             return 'not found this movement';
         }
@@ -272,6 +275,7 @@ class AccountController extends BaseController
             $movement->co_id    = Auth::user()->co_id;
             $movement->br_id    = @$inputs['br_id'];
             $movement->account  = $inputs['account'];
+            $movement->account_id  = $inputs['account_id'];
             $movement->type     = 'direct_movement';
             $movement->pay_type = 'cash';
             $movement->date     = $this->strToTime($inputs['date']);

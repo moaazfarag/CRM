@@ -40,7 +40,13 @@ class BranchController extends  BaseController
         $branch->br_address = Input::get('branch_address');
         $branch->user_id    = Auth::id();  // id of user  who add  this branch
         $branch->co_id      = Auth::user()->co_id;// id of company related this branch
-        $branch->save();
+//        $branch->save();
+        if  (1 == 1 )
+        $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+        Session::flash('error',$msg);
+//        return Redirect::back();
+        
+
         return Redirect::route('addBranch');
     }
     /**
@@ -52,6 +58,13 @@ class BranchController extends  BaseController
     {
         $id                  = Input::get('br_id');
         $data                = $this->settingData(); //company info data
+        $data['print_size_types'] = array(
+
+            "A3"=>"A3",
+            "A4"=>"A4",
+            "A5"=>"A5",
+
+        );
         $data['branch']      = Branches::findOrFail($id); //get branch will update
         $data['miniBranch']  = "" ; //to maxmize  branch card in view
         return View::make('dashboard.company.index', $data);

@@ -17,7 +17,15 @@ class AccountTrans extends Eloquent {
 	 * @var array
 	 */
 
+
+
+    public function accountName(){
+        return $this->hasOne('Accounts','id','account_id');
+    }
+
+
     public static function saveAccountTrans($inputs,$transHeaderId,$type,$net,$branchId)
+
     {
         $account = Accounts::company()->find($inputs['account_id']);
         if ($account) {

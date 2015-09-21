@@ -16,14 +16,14 @@ class ItemsBalancesController extends BaseController {
     public function addItemsBalances()
     {
         $get_type = DB::table('trans_details')
-        ->join('trans_header','trans_header.id','=','trans_details.trans_header_id')
-        ->join('items','items.id','=','trans_details.item_id')
-        ->select('trans_details.trans_header_id AS invoice_id',
-            'trans_header.invoice_type AS invoice_type',
-            'trans_details.qty AS qty',
-            'item_name AS item_name',
-            'trans_header.date AS date'
-        )
+            ->join('trans_header','trans_header.id','=','trans_details.trans_header_id')
+            ->join('items','items.id','=','trans_details.item_id')
+            ->select('trans_details.trans_header_id AS invoice_id',
+                'trans_header.invoice_type AS invoice_type',
+                'trans_details.qty AS qty',
+                'item_name AS item_name',
+                'trans_header.date AS date'
+            )
 //            ->join('trans_header','trans_ditals.trans_header_id','=','trans_header.id')
             ->get();
 //        dd($get_type);
@@ -67,7 +67,7 @@ class ItemsBalancesController extends BaseController {
                     'item_id'      => $inputs['id_'.$k],
 //                  'bar_code'     => $inputs['bar_code'],
                     'qty'          => $inputs['quantity_'.$k],
-                    'cost'         => $inputs['cost_'.$k] * $inputs['quantity_'.$k],
+                    'cost'         => $inputs['cost_'.$k],
                     'serial_no'    => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
                     'br_id'        => isset($inputs['br_id'])?$inputs['br_id']:0,
                     'created_at'   => date('Y-m-d H:i:s'),
@@ -82,8 +82,8 @@ class ItemsBalancesController extends BaseController {
             return Redirect::back();
 
 //                return Redirect::route('addItemsBalances');
-            }
-        
+        }
+
     }
 
 
@@ -110,47 +110,15 @@ class ItemsBalancesController extends BaseController {
         }
     }
 
-    /**
-     * @return mixed
-     * update Items Balances
-     */
-    public  function updateItemsBalances($id)
-    {
-        $validation = Validator::make(Input::all(), ItemsBalances::$update_rules);
 
-        if($validation->fails())
-        {
-            return Redirect::back()->withInput()->withErrors($validation->messages());
-        }else {
-
-            $itemsBalances  = ItemsBalances::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();
-
-            if($itemsBalances) {
-
-                $itemsBalances->user_id      = Auth::id();
-                $itemsBalances->item_id      = Input::get('item_id');
-                $itemsBalances->bar_code     = Input::get('bar_code');
-                $itemsBalances->qty          = Input::get('qty');
-                $itemsBalances->cost         = Input::get('cost');
-                $itemsBalances->serial_no    = Input::get('serial_no');
-                $itemsBalances->br_id    =  isset($inputs['br_id'.$k])?$inputs['br_id'.$k]:0;
-
-                $itemsBalances->update();
-
-                return Redirect::route('addItemsBalances');
-            }else{
-                return "This Items Balances Not Found ";
-            }
-        }
-    }
 
 
 
     public function viewItemsBalances (){
 
-        $all_item_balances = TransHeader::company()->get();
+        $all_item_balances = ItemsBalances::company()->select(DB::raw('SUM(qty) AS sum_qty'),DB::raw('AVG(cost) AS avg_cost'),'items_balances.*')->groupBy('item_id')->get();
         if($all_item_balances){
-            $data['title']       = " تعديل تسوية اضافة " ; // page title
+            $data['title']       = "أرصدة الأصناف الافتتاحية " ; // page title
             $data['TransOpen']   = 'open' ;
             $data['balances']    = $all_item_balances;
             return View::make('dashboard.items_balances.view_balances',$data);
@@ -161,6 +129,25 @@ class ItemsBalancesController extends BaseController {
 
         }
 
- }
+    }
 
-} 
+    public function deleteItemsBalances($id){
+
+        $item_balance = ItemsBalances::where('item_id',$id)->get();
+
+        if($item_balance) {
+
+            foreach($item_balance as $item ) {
+                $item = $item->items->item_name;
+            }
+
+            $delete_item_balance = DB::table('items_balances')->where('item_id', $id)->delete();
+            if($delete_item_balance){
+
+                Session::flash('success', "تم حذف الرصيد الإفتتاحى للصنف ". $item);
+                return Redirect::back();
+            }
+        }
+    }
+
+}

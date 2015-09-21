@@ -38,7 +38,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     /**
      * company info area
      */
-    Route::get('/','dashboardController@index');
+    Route::get('/',array('uses'=>'dashboardController@index','as'=>'index'));
     Route::get('setting',array('uses'=>'CompanyController@editCompanyInfo','as'=>'editCompanyInfo'));
     Route::post('updateSetting/{id}',array('before'=>'csrf','uses'=>'CompanyController@updateCompanyInfo','as'=>'updateCompanyInfo'));
     /**
@@ -124,6 +124,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('Edit-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@editItemsBalances','as'=>'editItemsBalances')) ;
         Route::post('Update-Items-Balances/{id}',array('before'=>'csrf','uses'=>'ItemsBalancesController@updateItemsBalances','as'=>'updateItemsBalances')) ;
         Route::get('View-Items-Balances/',array('uses'=>'ItemsBalancesController@viewItemsBalances','as'=>'viewItemsBalances')) ;
+        Route::get('Delete-Items-Balances/{id}',array('uses'=>'ItemsBalancesController@deleteItemsBalances','as'=>'deleteItemsBalances')) ;
     });
 
     /**
@@ -132,6 +133,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::group(array('prefix'=>'AccountsBalances'),function()
     {
         Route::get('Add-Accounts-Balances', array('uses' => 'AccountsBalancesController@addAccountsBalances','as' => 'addAccountsBalances'));
+        Route::get('View-Accounts-Balances', array('uses' => 'AccountsBalancesController@viewAccountsBalances','as' => 'viewAccountsBalances'));
+        Route::get('delete-Accounts-Balances/{id}', array('uses' => 'AccountsBalancesController@deleteAccountsBalances','as' => 'deleteAccountsBalances'));
         Route::get('Add-Accounts-Balances-data', array('uses' => 'AccountsBalancesController@sendData','as' => 'sendData'));
         Route::post('Store-Accounts-Balances',array('before'=>'csrf','uses'=>'AccountsBalancesController@storeAccountsBalances','as'=>'storeAccountsBalances')) ;
         Route::get('Edit-Accounts-Balances/{id}',array('uses'=>'AccountsBalancesController@editAccountsBalances','as'=>'editAccountsBalances')) ;
@@ -169,6 +172,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('items-data', array('uses' => 'InvoiceController@items','as' => 'items'));
         Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
         Route::post('returns-invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'itemsData'));
+        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'InvoiceController@cancelInvoice','as'=>'cancelInvoice')) ;
 
 
     });
@@ -238,8 +242,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
 
     });
 
-
-    Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
+    Route::group(array('prefix'=>'report'),function()
+    {
+        // reports
+        Route::get('search-outgoing-salaries',array('uses'=>'MsHeaderController@searchOutgoingSalariesReport','as'=>'searchOutgoingSalariesReport'));
+        Route::get('the-outgoing-salaries',array('uses'=>'MsHeaderController@outgoingSalariesReport','as'=>'outgoingSalariesReport'));
+    });
+        Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
     Route::get('addtest',array('uses'=>'TestController@addTest','as'=>'addTest'));
     Route::delete('testdelete/{id}',array('uses'=>'TestController@destroy','as'=>'testdelete'));
     Route::get('tests',array('uses'=>'TestController@view','as'=>'testsIndex'));
@@ -254,6 +263,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::post('store-direct-movement',array('uses'=>'AccountController@storeDirectMovement','as'=>'storeDirectMovement'));
     Route::get('edit-direct-movement/{id}',array('uses'=>'AccountController@editDirectMovement','as'=>'editDirectMovement'));
     Route::post('update-direct-movement/{id}',array('uses'=>'AccountController@updateDirectMovement','as'=>'updateDirectMovement'));
+
+
+
+    App::missing(function()
+    {
+        return  View::make('errors.missing');
+    });
 
 
 });
