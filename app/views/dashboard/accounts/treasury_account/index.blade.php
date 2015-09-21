@@ -9,7 +9,7 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section class="content-wrap ecommerce-dashboard">
+<section ng-app="itemApp"  ng-controller="mainController"  class="content-wrap ecommerce-dashboard">
 
 
 
@@ -44,7 +44,7 @@
             <div class="row">
 
                 {{--date--}}
-                <div class="col m5 s12">
+                <div class="col m4 s12">
                     <div class="input-field">
                         <i class="fa fa-user prefix"></i>
                         {{ Form::text('date',null,array('required','id'=>'date','class'=>'pikaday')) }}
@@ -71,22 +71,22 @@
                 </div>
                 @endif
 
-
+            </div>
 
             <div class="row">
 
                 {{--of_account--}}
-                <div class="col m4 s12" >
-                    <div class="input-field" style="padding-right: 4%;">
-                        {{ Form::select('account', $of_account,null,array('id'=>'account')) }}
-                        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                            <li class="parsley-required">{{ $errors ->First('account') }} </li>
-                        </ul>
-                    </div>
-                </div>
+                {{--<div class="col m4 s12" >--}}
+                    {{--<div class="input-field" style="padding-right: 4%;">--}}
+                        {{--{{ Form::select('account', $of_account,null,array('id'=>'account')) }}--}}
+                        {{--<ul class="parsley-errors-list filled" id="parsley-id-5202">--}}
+                            {{--<li class="parsley-required">{{ $errors ->First('account') }} </li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
                 {{--price--}}
-                <div class="col m3 s12">
+                <div class="col m2 s12">
                     <div class="input-field">
                         <i class="mdi mdi-editor-attach-money prefix active"></i>
                         {{ Form::number('price',isset($price) ? $price:null,array('id'=>'price','step'=>'0.01')) }}
@@ -99,7 +99,7 @@
                 </div>
 
                 {{--credit & debit--}}
-                <div class="col s12 l2">
+                <div class="col s12 l1">
 
                         <input name="price_type"  {{ isset($credit) ?'checked':'' }} value="credit" type="radio" id="radios1-1"  />
                         <label for="radios1-1">قبض</label>
@@ -109,20 +109,17 @@
 
                 </div>
 
-            </div>
 
-
-            <div class="row">
 
                {{--account  name--}}
-                <div class="col s2 l3">
+                <div class="col s12 l2">
 
                     <i class="mdi mdi-communication-import-export"></i>
                     {{ Form::label('account',lang::get('main.account')) }}
                     {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
                     <p class="parsley-required">{{ $errors ->first('account') }} </p>
                 </div>{{--account--}}
-                <div ng_show="account.type" class="col s2 l3">
+                <div ng_show="account.type" class="col s12 l2">
 
                     <i class="mdi mdi-communication-import-export"></i>
                     {{ Form::label('account',Lang::get('main.account')) }}
@@ -139,7 +136,10 @@
 
                 {{--end account name --}}
 
+            </div>
 
+
+                <div class="row">
 
                 {{--notes--}}
                 <div class="col s12 l9">

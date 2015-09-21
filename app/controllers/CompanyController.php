@@ -11,10 +11,18 @@
 
     public function addNewCompany(){
 
-        return View::make('dashboard.company.add_new_company');
+        if(Auth::check()){
+
+            return Redirect::route('index');
+            
+        }else{
+
+            return View::make('dashboard.company.add_new_company');
+        }
     }
 
     public function storeNewCompany (){
+
 
         $inputs = Input::all();
 //       return  var_dump($inputs);
@@ -40,15 +48,15 @@
                 $user->password  = Hash::make($inputs['password']);
                 $user->email     = $inputs['email'];
                 $user->save();
-            if($user->save()) {
-                $user_login = new UserController;
-                Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
-                return $user_login->checkLogin();
-            }else{
-                $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
-                Session::flash('error',$msg);
-                return Redirect::back();
-            }
+                if($user->save()) {
+                    $user_login = new UserController;
+                    Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
+                    return $user_login->checkLogin();
+                }else{
+                    $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                    Session::flash('error',$msg);
+                    return Redirect::back();
+                }
 
             }else{
 

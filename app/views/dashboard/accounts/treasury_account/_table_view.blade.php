@@ -23,18 +23,21 @@
 </tr>
 </thead>
 <tbody>
-<?php $i = 0; ?>
-@foreach($rowsData as $rowData)
+
+@foreach($rowsData as $k => $rowData)
    <?php
-   $i++;
+
   $account =  $rowData->account;
 
    ?>
     <tr>
-        <th>{{ $i }}</th>
+        <th>{{ $k +1}}</th>
 
         <td>@lang('main.'.$account)</td>
-        <td>--</td>
+        <td>
+
+            {{ $rowData->accountName->acc_name }}
+        </td>
         <td>{{ BaseController::ViewDateAndTime($rowData->date) }}</td>
         <td>{{ $rowData->debit}}</td>
         <td>{{ $rowData->credit }}</td>

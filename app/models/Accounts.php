@@ -45,11 +45,11 @@ class Accounts extends Eloquent {
 
     public static $ruels_direct_movement = array(
 
-        "date" =>"required",
-        "account"    =>"required",
-        "price"         =>"required",
-        "price_type"    =>"required",
-
+        "date"         =>"required",
+        "account"      =>"required",
+        "price"        =>"required",
+        "price_type"   =>"required",
+        "account_id"   => "required",
 
     );
 }
