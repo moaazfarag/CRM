@@ -17,8 +17,18 @@ class ItemsBalances extends Eloquent {
 
     public function items()
     {
-        return $this->hasMany('Items','item_id');
+        return $this->hasOne('Items','id','item_id');
     }
+
+//    public function getItemName(){
+//
+//        $item_name = Markes::where('id','=',$this->item_id)->first();
+//        if(!empty($item_name))
+//            return $item_name->name;
+//        else
+//            return "no name ";
+//    }
+
     public static function rulesCreator($inputs)
     {
         $count = TransDetails::countOfInputs($inputs);

@@ -174,8 +174,9 @@ class AccountController extends BaseController
         $data['title']      = 'إضافة حركة مباشرة ';
         $data['company']    = CoData::find(Auth::user()->co_id);
         $data['branch']     = $this->isAllBranch();
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['rowsData']   = AccountTrans::company()->where('type','direct_movement')->get();
-        return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
+        return View::make('dashboard.accounts.treasury_account.index', $data);
     }
 
     public function storeDirectMovement(){
@@ -240,6 +241,7 @@ class AccountController extends BaseController
             $data['company'] = CoData::find(Auth::user()->co_id);
             $data['branch'] = $this->isAllBranch();
             $data['rowsData'] = AccountTrans::company()->where('type', 'direct_movement')->get();
+            $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
 
 //        var_dump($data['rowsData']); die();
             return View::make('dashboard.accounts.treasury_account.direct_movement', $data);
@@ -255,7 +257,6 @@ class AccountController extends BaseController
 //        var_dump($inputs); die();
         $ruels =  Accounts::$ruels_direct_movement;
         if($this->isHaveBranch() == 1) {
->>>>>>> moaaz_branch
             $ruels["br_id"] = "required";
         }
 

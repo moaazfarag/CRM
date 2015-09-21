@@ -98,7 +98,7 @@ return  array(
     'model'            => 'الموديل ',
     'sellLimit'        => 'حد البيع',
     'item'             => 'الصنف',
-    'cost'             => 'التكلفه',
+    'cost'             => 'متوسط التكلفة ',
     'bar_code'         => 'الباركود',
     'serial_no'        => 'السيريال',
     'qty'              => 'الكميه',
@@ -377,4 +377,5 @@ return  array(
     'of_account' => 'حساب',
     'debit_'     => 'مدين',
     'credit_'    =>'دائن',
+    'cancel_cause' => 'سبب الإلغاء',
 );

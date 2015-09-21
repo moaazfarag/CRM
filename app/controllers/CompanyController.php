@@ -40,11 +40,21 @@
                 $user->password  = Hash::make($inputs['password']);
                 $user->email     = $inputs['email'];
                 $user->save();
+            if($user->save()) {
                 $user_login = new UserController;
-                Session::flash('success','مرحباً بكم فى موقع الراصد لإدارة الشركات ');
+                Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
                 return $user_login->checkLogin();
             }else{
-                return 'no';
+                $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                Session::flash('error',$msg);
+                return Redirect::back();
+            }
+
+            }else{
+
+                $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                Session::flash('error',$msg);
+                return Redirect::back();
             }
 
         }

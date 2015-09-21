@@ -5,7 +5,7 @@
       <div id="bank" class="col s12">
 
 <div ng-app="accountApp" ng-controller="accountController" class="card">
-{{--        {{ Form::open(array('route'=>array('test'),'ng-submit'=>"submitItem()",'name'=>'form')) }}--}}
+        {{ Form::open(array('route'=>array('storeAccountsBalances'),'ng-submit'=>"submitItem()",'name'=>'form')) }}
     <form ng-submit='submitItem()' name='form'>
 
           <div class="title">
@@ -13,6 +13,9 @@
                 <a class="minimize" href="#">
                   <i class="mdi-navigation-expand-less"></i>
                 </a>
+              <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewAccountsBalances') }}" class="btn btn-small z-depth-0">
+ عرض أرصدة الحسابات
+              </a>
           </div>
       <div class="content">
           <div class="row no-margin-top">
@@ -45,7 +48,7 @@
                       {{ Form::label('debit',$debit) }}
                       <div class="error-div-for-table" ng-show="form.$submitted || form.debit.$touched">
                           <div ng-show="form.debit.$error.pattern">
-                              @lang('main.please_enter_valid_number')
+                              @lang('mai    n.please_enter_valid_number')
                           </div>
                       </div>
                       <p class="parsley-required">{{ $errors ->first('debit') }} </p>
@@ -120,8 +123,8 @@
         <br>
         <div class="row">
             <div class="col s12 l2">
-                <button type="submit" ng-disabled="form.$invalid || hasBalances()"
-
+                <button type="submit"
+                        ng-disabled="form.$invalid || hasBalances()"
                         class="waves-effect btn">
                     @lang('main.add')
                 </button>

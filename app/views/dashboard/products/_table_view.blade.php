@@ -45,8 +45,8 @@
                 </td>
                 <td>
                     @if(Route::currentRouteName() == 'addModel')
-                    <a  onclick="return confirm('هل تريد بالفعل حذف  الموديل')" href="{{ URL::route('deleteModel',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
-                     @elseif(Route::currentRouteName() == 'addMark')
+                        <a  onclick="return confirm('هل تريد بالفعل حذف  الموديل')" href="{{ URL::route('deleteModel',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
+                    @elseif(Route::currentRouteName() == 'addMark')
                         <a  onclick="return confirm('هل تريد بالفعل حذف  الماركة ')" href="{{ URL::route('deleteMark',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
 
                     @endif

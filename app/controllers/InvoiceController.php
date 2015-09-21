@@ -48,8 +48,12 @@ public function addInvoice($type,$br_id){
                 $data['br_id']          = $br_id;
                 $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
                 $data['branch']      = $this->isAllBranch(); //
+                dd($validation->messages());
+                die();
                 $data['newArray']    = $this->itemsToJsonForError($inputs);
                 $data['errors']      = $validation->messages();
+
+
                 Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
                 return View::make('dashboard.settle.index',$data);
 
@@ -95,6 +99,7 @@ public function addInvoice($type,$br_id){
                     $newHeader->tax             = $tax;
                     $net                        = $total - ($total)*($discount)/100;
                     $newHeader->net             = $net;
+
                     AccountTrans::saveTrans(Input::all(),$newHeader->id,$type,$net);
                     $newHeader->save();
                     TransDetails::insert($newInvoiceItems);
@@ -197,4 +202,36 @@ public function addInvoice($type,$br_id){
           $data['items']  = Items::getItemsWithBalance() ;
            return Response::json($data);
         }
+
+    public function cancelInvoice()
+    {
+
+        $inputs = Input::all();
+
+        $validation = Validator::make($inputs, TransHeader::$delete_ruels);
+
+        if ($validation->fails()) {
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }else{
+            $invoice_no   = $inputs['invoice_no'];
+            $invoice_type = $inputs['invoice_type'];
+            $cancel_cause = $inputs['cancel_cause'];
+
+            $invoice    = TransHeader::company()
+                        ->where('invoice_no',$invoice_no)
+                        ->where('invoice_type',$invoice_type)->first();
+            if(!empty($invoice)){
+
+                $invoice->deleted = 1;
+                $invoice->notes   = $cancel_cause;
+                $invoice->update();
+
+                $msg = 'تم إلغاء الفاتورة بنجاح ';
+
+                Session::flash('success',$msg);
+                Return Redirect::back();
+            }
+        }
+    }
 }
