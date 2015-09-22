@@ -9,24 +9,31 @@ class settleSeeder extends Seeder
         DB::table('trans_details')->insert(array(
 
            array(
+
+               
                'trans_header_id' => '1',
+               'co_id'           => '1',
                'item_id'         => '1',
                'qty'             => '2',
                'created_at'      => new DateTime,
-               'updated_at'    => new DateTime,
+               'updated_at'      => new DateTime,
 
            ),
 
             array(
+
                 'trans_header_id' => '2',
+                'co_id'           => '1',
                 'item_id'         => '1',
                 'qty'             => '4',
                 'created_at'      => new DateTime,
-                'updated_at'    => new DateTime,
+                'updated_at'      => new DateTime,
 
             ),
             array(
+                
                 'trans_header_id' => '3',
+                'co_id'           => '1',
                 'item_id'         => '1',
                 'qty'             => '6',
                 'created_at'      => new DateTime,
@@ -37,6 +44,7 @@ class settleSeeder extends Seeder
 
             array(
                 'trans_header_id' => '4',
+                'co_id'           => '1',
                 'item_id'         => '2',
                 'qty'             => '8',
                 'created_at'      => new DateTime,
@@ -58,7 +66,7 @@ class settleSeeder extends Seeder
                 'true_id'       => '1',
                 'co_id'         => '1',
                 'user_id'       =>'1',
-                'br_id'       =>'1',
+                'br_id'         =>'1',
                 'invoice_no'    =>'1',
                 'invoice_type'  =>'settleDiscount',
                 'date'          => new dateTime,
@@ -67,10 +75,10 @@ class settleSeeder extends Seeder
             ),
 
             array(
-                'true_id'  => '2',
+                'true_id'       => '2',
                 'co_id'         => '1',
                 'user_id'       =>'1',
-                'br_id'       =>'1',
+                'br_id'          =>'1',
                 'invoice_no'    =>'2',
                 'invoice_type'  =>'settleDiscount',
                 'date'          => new dateTime,
@@ -83,7 +91,7 @@ class settleSeeder extends Seeder
                 'true_id'       => '1',
                 'co_id'         => '1',
                 'user_id'       =>'1',
-                'br_id'       =>'1',
+                'br_id'         =>'1',
                 'invoice_no'    =>'3',
                 'invoice_type'  =>'settleAdd',
                 'date'          => new dateTime,

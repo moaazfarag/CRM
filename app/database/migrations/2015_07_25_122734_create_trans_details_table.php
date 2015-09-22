@@ -15,7 +15,8 @@ class CreateTransDetailsTable extends Migration {
 		Schema::create('trans_details', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('trans_header_id');
+			$table->integer('co_id');
+			$table->integer('trans_header_id');
             $table->integer('item_id');
             $table->integer('qty');
             $table->decimal('unit_price',10,2);

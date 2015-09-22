@@ -25,7 +25,8 @@ class MsHeaderController extends BaseController
         if ($chosenEmployees->isEmpty()) {
             return Redirect::route('printReceipt',array('employeeId'=>Input::get('employeeId'),'for_month'=>Input::get('for_month'),'for_year'=>Input::get('for_year')));
         } else {
-            foreach ($chosenEmployees as $chosenEmployee) {
+           
+           foreach ($chosenEmployees as $chosenEmployee) {
 
                 $allDis = $chosenEmployee->employeeDudValue('استقطاع') ;
 
@@ -46,8 +47,8 @@ class MsHeaderController extends BaseController
                 $newHeader->loan         = $loan;
                 $newHeader->net          = ($salary + $allDud) - ($allDis + $loan);
                 $newHeader->user_id      = Auth::id();
-                $monthChanges           = MonthChange::getMonthAllChange($chosenEmployee->id);
-                $fixDesDuds             = EmployeeDeduction::getAllDisDed($chosenEmployee->id);
+                $monthChanges            = MonthChange::getMonthAllChange($chosenEmployee->id);
+                $fixDesDuds              = EmployeeDeduction::getAllDisDed($chosenEmployee->id);
                 foreach ($monthChanges as $monthChange) {
                     if($monthChange->day_cost == "أيام"){
                         $day_cost = ($salary/30)*$monthChange->total_val;
@@ -55,6 +56,7 @@ class MsHeaderController extends BaseController
                         $day_cost = $monthChange->total_val;
                     }
                     $newDetails[] = array(
+                        'co_id'        => $this->coAuth(),
                         'ms_header_id' => $msHeaderId,
                         'employee_id'  => $chosenEmployee->id,
                         'for_year'     => Input::get('for_year'),
@@ -132,25 +134,50 @@ class MsHeaderController extends BaseController
 
     public function searchOutgoingSalariesReport(){
 
-        $data['title'] = 'المرتبات المنصرفة '; // page title
+        $data['title']   = 'المرتبات المنصرفة '; // page title
         $data['co_info'] = CoData::thisCompany()->first();
-        return View::make('dashboard.hr.report',$data);
+        return View::make('dashboard.hr.report.index',$data);
     }
 
-    public function outgoingSalariesReport(){
+    public function outGoingSalariesReport(){
 
         $inputs = Input::all();
 
         $validation = Validator::make($inputs,MsHeader::$report_ruels,BaseController::$messages);
         if($validation->fails()) {
-        }else{
-           $date =  $this->strToTime($inputs['date'])
-        }
 
-        $data['title'] = 'المرتبات المنصرفة '; // page title
-        $data['co_info'] = CoData::thisCompany()->first();
-        return View::make('dashboard.hr.report',$data);
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        }else{
+
+           $date_from =  $this->strToTime($inputs['date_from']);
+           $date_to   =  $this->strToTime($inputs['date_to']);
+            
+           $out_going_salaries =  MsHeader::dateBetween('created_at',$date_from,$date_to)->get();
+            // var_dump($out_going_salaries); die();
+            $data['tablesData'] = $out_going_salaries;
+            $data['title']      = 'عرض المرتبات المنصرفة '; // page title
+            $data['co_info']    = CoData::thisCompany()->first();
+            $data['date_from']  = $date_from;
+            $data['date_to']    = $date_to;
+            
+            return View::make('dashboard.hr.report',$data);
+
+        }
     }
+
+    public function ViewOutGoingSalariesDetails($id){
+
+        
+
+            $data['headers'] = MsHeader::company()->where('id',$id)->get();
+            $data['title']   = 'عرض المرتبات المنصرفة '; // page title
+            return View::make('dashboard.hr.report.view_outgoing_salary_details',$data);
+            
+
+    }
+
+    
 }
 
 

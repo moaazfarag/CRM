@@ -85,6 +85,7 @@ public function addInvoice($type,$br_id){
                         $serial_no = isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0;
                         $newInvoiceItems[] =   array
                         (
+                            'co_id'             => $this->coAuth(),
                             'trans_header_id'   => $newHeader->id,
                             'qty'               => $quantity,
                             'item_id'           => $inputs['id_'.$k],

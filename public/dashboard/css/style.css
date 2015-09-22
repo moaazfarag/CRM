@@ -51,3 +51,16 @@ div.error-div {
     float:right;
     direction: rtl;
 }
+
+.sub_title{
+
+        font-size: 1.3em;
+
+    } 
+
+.date_style{
+
+    color: #333;
+    font-style: italic;
+    font-size: 1em;
+}

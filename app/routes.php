@@ -246,9 +246,11 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     {
         // reports
         Route::get('search-outgoing-salaries',array('uses'=>'MsHeaderController@searchOutgoingSalariesReport','as'=>'searchOutgoingSalariesReport'));
-        Route::get('the-outgoing-salaries',array('uses'=>'MsHeaderController@outgoingSalariesReport','as'=>'outgoingSalariesReport'));
+        Route::get('view-outgoing-salaries-details/{id}',array('uses'=>'MsHeaderController@ViewOutGoingSalariesDetails','as'=>'ViewOutGoingSalariesDetails'));
+        Route::post('the-outgoing-salaries',array('before'=>'csrf','uses'=>'MsHeaderController@outGoingSalariesReport','as'=>'outGoingSalariesReport'));
     });
-        Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
+
+    Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
     Route::get('addtest',array('uses'=>'TestController@addTest','as'=>'addTest'));
     Route::delete('testdelete/{id}',array('uses'=>'TestController@destroy','as'=>'testdelete'));
     Route::get('tests',array('uses'=>'TestController@view','as'=>'testsIndex'));
