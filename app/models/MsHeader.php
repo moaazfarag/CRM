@@ -15,6 +15,12 @@ class MsHeader extends Eloquent
         return $this->belongsTo('Employees','employee_id');
     }
 
+
+
+    public function employeeName()
+    {
+        return $this->hasOne('Employees','id','employee_id');
+    }
     public static $report_ruels = array(
 
         'date_from' =>'required',

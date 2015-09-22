@@ -5,6 +5,8 @@ class hrMonthChangesSeeder extends Seeder {
         DB::table('hr_monthChanges')->truncate();
         DB::table('hr_monthChanges')->insert(array(
             array(
+
+                'co_id'              => '1',
                 'employee_id'            => '2',
                 'trans_date'             => '',
                 'trans_serial'           => '15',
@@ -19,6 +21,7 @@ class hrMonthChangesSeeder extends Seeder {
                 'cancel_cause'           => ' because the time to finish tasks is to late',
             ),
             array(
+                'co_id'              => '1',
                 'employee_id'            => '3',
                 'trans_date'             => '',
                 'trans_serial'           => '16',
@@ -33,6 +36,7 @@ class hrMonthChangesSeeder extends Seeder {
                 'cancel_cause'           => ' because the time to finish tasks is to late',
             ),
             array(
+                'co_id'              => '1',
                 'employee_id'            => '4',
                 'trans_date'             => '',
                 'trans_serial'           => '17',
@@ -47,6 +51,7 @@ class hrMonthChangesSeeder extends Seeder {
                 'cancel_cause'           => ' because the time to finish tasks is to late',
             ),
             array(
+                'co_id'              => '1',
                 'employee_id'            => '5',
                 'trans_date'             => '',
                 'trans_serial'           => '18',
@@ -61,6 +66,8 @@ class hrMonthChangesSeeder extends Seeder {
                 'cancel_cause'           => ' because the time to finish tasks is to late',
             ),
             array(
+
+                'co_id'              => '1',
                 'employee_id'            => '6',
                 'trans_date'             => '',
                 'trans_serial'           => '19',

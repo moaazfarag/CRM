@@ -378,4 +378,11 @@ return  array(
     'debit_'     => 'مدين',
     'credit_'    =>'دائن',
     'cancel_cause' => 'سبب الإلغاء',
+
+    // out going salary report 
+
+    'employee_name' =>'اسم الموظف',
+    'out_going_salaries_date' =>'تاريخ القبض',
+    'show_salary_detalis' =>'تفاصيل المرتب',
+
 );

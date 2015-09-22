@@ -58,8 +58,8 @@
 
 
         </div>
-        @if(Route::currentRouteName() == "outGoingSalariesReport")
-            @include('dashboard.hr.report._table_view');
+        @if(Route::currentRouteName() == "prepMsHeader")
+            @include('dashboard.hr.msheader._table_view');
         @endif
 </section>
 @stop

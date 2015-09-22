@@ -14,7 +14,7 @@
         if(Auth::check()){
 
             return Redirect::route('index');
-            
+
         }else{
 
             return View::make('dashboard.company.add_new_company');
@@ -33,7 +33,7 @@
             return Redirect::back()->withInput()->withErrors($validation->messages());
 
         }else {
-
+            // store company data
             $company               = new CoData;
             $company->co_name      = $inputs['co_name'];
             $company->co_address   = $inputs['co_address'];
@@ -41,18 +41,44 @@
             $company->save();
 
             if($company->save()) {
-
-                $user = new User;
+                // store owner user data
+                $user            = new User;
                 $user->co_id     = $company->id;
                 $user->username  = $inputs['username'];
                 $user->password  = Hash::make($inputs['password']);
                 $user->email     = $inputs['email'];
+                $user->owner     = 'acount_creator';
                 $user->save();
+               
                 if($user->save()) {
+                    // store mine branch data
+                    $branch             = new Branches;
+                    $branch->true_id    = BaseController::maxId($branch);
+                    $branch->br_name    = 'الفرع الرئيسى';
+                    $branch->br_address = $company->co_address;
+                    $branch->user_id    = $user->id;  // id of user  who add  this branch
+                    $branch->co_id      = $company->id;// id of company related this branch 
+                    $branch->save();
+
+                    if($branch->save()){
+                    
+                     // login 
                     $user_login = new UserController;
                     Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
                     return $user_login->checkLogin();
+
+                    }else{
+
+                    // if don't save branch data        
+                    $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                    Session::flash('error',$msg);
+                    return Redirect::back();
+                }
+       
+                  
                 }else{
+
+                    // if don't save user data 
                     $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
                     Session::flash('error',$msg);
                     return Redirect::back();
@@ -60,6 +86,7 @@
 
             }else{
 
+               // if don't save company data 
                 $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
                 Session::flash('error',$msg);
                 return Redirect::back();
