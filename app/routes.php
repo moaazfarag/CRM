@@ -244,10 +244,14 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
 
     Route::group(array('prefix'=>'report'),function()
     {
-        // reports
+        // outgoing-salaries
         Route::get('search-outgoing-salaries',array('uses'=>'MsHeaderController@searchOutgoingSalariesReport','as'=>'searchOutgoingSalariesReport'));
         Route::get('view-outgoing-salaries-details/{id}',array('uses'=>'MsHeaderController@ViewOutGoingSalariesDetails','as'=>'ViewOutGoingSalariesDetails'));
         Route::post('the-outgoing-salaries',array('before'=>'csrf','uses'=>'MsHeaderController@outGoingSalariesReport','as'=>'outGoingSalariesReport'));
+    
+        // settels 
+        Route::get('settle/{type}',array('uses'=>'SettleController@reportSettle','as'=>'reportSettle'));
+
     });
 
     Route::get('test',array('uses'=>'TestController@index','as'=>'testIndex'));
