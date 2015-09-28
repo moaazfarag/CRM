@@ -82,6 +82,9 @@ angular.module('mainCtrl', [])
                 document.getElementById('item_id').focus();
             }
         };
+        $scope.resetInvoiceItems = function () {
+            $scope.invoiceItems = [];
+        };
         $scope.addItemHasSerial = function(quantity){
             $scope.serialError = null;
             $scope.serialInInvoiceError = null;

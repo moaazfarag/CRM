@@ -20,7 +20,6 @@
     <div class="content">
       <div class="row no-margin-top">
          <div class="col s2 l3">
-
                     <br>
                 <b> @lang('main.branch') :{{ $branch->br_name }}</b>
 

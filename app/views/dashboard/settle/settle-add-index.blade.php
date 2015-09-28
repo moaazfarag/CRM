@@ -22,7 +22,7 @@
              @if($branch)
                  <i class="mdi mdi-notification-event-available"></i>
                  {{ Form::label('br_id','الفرع') }}
-                 {{ Form::select('br_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id','ng-model'=>'br_id','ng-change'=>'resetInvoiceItems()')) }}
+                 {{ Form::select('br_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
                     <p class="parsley-required">{{ $errors ->first('br_id') }} </p>
              @else
                     <br>
@@ -49,7 +49,7 @@
             </div>
             <div class="col s2 l3">
                 <i class="mdi-action-label"></i>
-                <input   ng-focus="displayOn(br_id)"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
+                <input   ng-focus="displayOn()"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
                 <ul id="itemsView" class="drop-down-menu" ng-show="item">
                     <li  ng-model="item.item_name"
                          class="li-drop-down-menu"
@@ -79,7 +79,7 @@
             <div class="col s2 ">
                 <div class="input-field">
                     <label for="item_id">
-                        <button ng-click=" serialItem(br_id,item.id)"  ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity)|| itemBalance() " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                        <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
                             اضف
                         </button >
                         <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
@@ -87,15 +87,8 @@
                         </button >
                         </label>
                 </div>
-
             </div>{{-- single item button  div --}}
-            <div style="margin-right:10px" class="col s12 l2  " ng-show="item.item_name && item.id" >
-                الرصيد الحالي هو
-                @{{ item.balance - item.quantity }}
-                <div style="color: #ea1c18;clear: both"  ng-show="itemBalance() && item.id">
-                    لا يوجد رصيد لهذا المنتج
-                </div>
-            </div>
+
 
         </div>{{-- row end--}}
         {{-- end acount,item and quaintity  --}}

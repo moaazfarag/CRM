@@ -207,6 +207,7 @@ public function addInvoice($type,$br_id){
     public function itemsData()
         {
           $data['items']  = Items::getItemsWithBalanceByBrId(Input::get('br_id')) ;
+
            return Response::json($data);
         }
     /**

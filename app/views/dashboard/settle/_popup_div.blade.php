@@ -1,6 +1,4 @@
                      <!-- pop up  Structure -->
-
-
 <div  id="addItem"  class="modal">
     <a ng-click="clearItemForm()" class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
     <div class="modal-content">
