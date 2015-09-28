@@ -216,7 +216,16 @@
                         </ul>
                     </li>
 
+                     <li>
+                        <a class="yay-sub-toggle waves-effect waves-blue">  المخازن <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
 
+                            <li>
+                                <a href="{{ URL::route('reportSettle','settleAdd') }}" class="waves-effect waves-blue"> تسويات الإضافة </a>
+                                <a href="{{ URL::route('reportSettle','settleDiscount') }}" class="waves-effect waves-blue"> تسويات الخصم </a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </li>

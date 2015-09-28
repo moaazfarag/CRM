@@ -71,6 +71,37 @@ class SettleController extends BaseController {
 
         }
     }
+
+    public function reportSettle($type){
+
+        $types = array('settleDiscount','settleAdd');
+
+        if(in_array($type, $types)){
+
+
+            $trans = TransHeader::company()->where('invoice_type',$type)->get();
+           
+             if($trans){
+               
+                $data['title']       = Lang::get("main.$type".'_statement') ; // page title
+                $data['TransOpen']   = 'open' ;
+                $data['invoices']    = $trans;
+                return View::make('dashboard.settle.report.index',$data);
+
+            }else{
+
+                return "that's not correct page : type check fail";
+
+        }// end else 
+
+        }else{
+
+                return "that's not correct page : type check fail";
+
+        }// end else 
+
+         
+    }
     /**
      * view one  invoice of settle
      * @param $invoiceId  edit invoice by id

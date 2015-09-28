@@ -173,6 +173,7 @@ return  array(
 
     'delete' => 'حذف',
     'cancel' => 'إلغاء',
+    'canceld' => 'ملغاه',
 
     // mark page
     'addNewMark'   => 'أضف ماركة جديدة ',
@@ -381,8 +382,10 @@ return  array(
 
     // out going salary report 
 
-    'employee_name' =>'اسم الموظف',
-    'out_going_salaries_date' =>'تاريخ القبض',
-    'show_salary_detalis' =>'تفاصيل المرتب',
+    'employee_name'             =>'اسم الموظف',
+    'out_going_salaries_date'   =>'تاريخ القبض',
+    'show_salary_detalis'       =>'تفاصيل المرتب',
+    'settleDiscount_statement'  => 'بيان تسويات الخصم ',
+    'settleAdd_statement'       => 'بيان تسويات الإضافة ',
 
 );
