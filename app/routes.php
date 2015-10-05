@@ -249,8 +249,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('view-outgoing-salaries-details/{id}',array('uses'=>'MsHeaderController@ViewOutGoingSalariesDetails','as'=>'ViewOutGoingSalariesDetails'));
         Route::post('the-outgoing-salaries',array('before'=>'csrf','uses'=>'MsHeaderController@outGoingSalariesReport','as'=>'outGoingSalariesReport'));
     
-        // settels 
-        Route::get('settle/{type}',array('uses'=>'SettleController@reportSettle','as'=>'reportSettle'));
+        // settels  
+        Route::get('search-settle/{type}',array('uses'=>'SettleController@reportSettleSearch','as'=>'reportSettleSearch'));
+        Route::post('settles/',array('uses'=>'SettleController@reportSettleResult','as'=>'reportSettleResult'));
+
+        // invoices
+       Route::get('search-invoices/{type}/{sum?}',array('uses'=>'InvoiceController@reportSearchInvoice','as'=>'searchReportInvoices'));
+       Route::post('invoices/',array('uses'=>'InvoiceController@reportResultInvoice','as'=>'InvoiceReport'));
 
     });
 
@@ -262,14 +267,26 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::get('product','dashboardController@manageProduct');
 
 
-    Route::get('accounts','dashboardController@accounts');
-    Route::get('hrr','dashboardController@hr');
 
-    Route::get('add-direct-movement',array('uses'=>'AccountController@addDirectMovement','as'=>'addDirectMovement'));
-    Route::post('store-direct-movement',array('uses'=>'AccountController@storeDirectMovement','as'=>'storeDirectMovement'));
-    Route::get('edit-direct-movement/{id}',array('uses'=>'AccountController@editDirectMovement','as'=>'editDirectMovement'));
-    Route::post('update-direct-movement/{id}',array('uses'=>'AccountController@updateDirectMovement','as'=>'updateDirectMovement'));
 
+    Route::group(array('prefix'=>'accounts'),function() {
+
+        // direct movement
+        Route::get('add-direct-movement', array('uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
+        Route::post('store-direct-movement', array('uses' => 'AccountController@storeDirectMovement', 'as' => 'storeDirectMovement'));
+        Route::get('edit-direct-movement/{id}', array('uses' => 'AccountController@editDirectMovement', 'as' => 'editDirectMovement'));
+        Route::post('update-direct-movement/{id}', array('uses' => 'AccountController@updateDirectMovement', 'as' => 'updateDirectMovement'));
+
+
+
+
+        //  accounts ( customers ,suppliers ,bank ,partners )
+        Route::get('search-accounts/{type}', array('uses' => 'AccountController@searchAccounts', 'as' => 'searchAccounts') );
+        Route::post('result-accounts', array('uses' => 'AccountController@resultAccounts', 'as' => 'resultAccounts') );
+        Route::post('add-new-direct-movement', array('uses' => 'AccountController@addNewDirectMovement', 'as' => 'addNewDirectMovement') );
+        Route::get('result-search-account', array('uses' => 'AccountController@resultSearchAccounts', 'as' => 'resultSearchAccounts') );
+
+    });
 
 
     App::missing(function()

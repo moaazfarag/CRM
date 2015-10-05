@@ -198,6 +198,11 @@
                             </ul>
                     </li>
 
+            <li> <a href="{{ URL::route('searchAccounts','customers') }}" class="waves-effect waves-blue"> @lang('main.accounts_customers')</a>  </li>
+            <li> <a href="{{ URL::route('searchAccounts','suppliers') }}" class="waves-effect waves-blue"> @lang('main.accounts_suppliers') </a>  </li>
+            <li> <a href="{{ URL::route('searchAccounts','bank') }}" class="waves-effect waves-blue">   @lang('main.accounts_bank')</a>  </li>
+            <li> <a href="{{ URL::route('searchAccounts','partners') }}" class="waves-effect waves-blue">  @lang('main.accounts_partners') </a>  </li>
+
 
 
                 </ul>
@@ -221,12 +226,27 @@
                         <ul>
 
                             <li>
-                                <a href="{{ URL::route('reportSettle','settleAdd') }}" class="waves-effect waves-blue"> تسويات الإضافة </a>
-                                <a href="{{ URL::route('reportSettle','settleDiscount') }}" class="waves-effect waves-blue"> تسويات الخصم </a>
+                                <a href="{{ URL::route('reportSettleSearch','settleAdd') }}" class="waves-effect waves-blue"> تسويات الإضافة </a>
+                                <a href="{{ URL::route('reportSettleSearch','settleDiscount') }}" class="waves-effect waves-blue"> تسويات الخصم </a>
                             </li>
                         </ul>
                     </li>
 
+                    <li>
+                        <a class="yay-sub-toggle waves-effect waves-blue">  الفواتير  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+
+                            <li>
+                                <a href="{{ URL::route('searchReportInvoices',array('sales',NULL)) }}" class="waves-effect waves-blue">  المبيعات ( تحليلى ) </a>
+                                <a href="{{ URL::route('searchReportInvoices',array('sales','sum')) }}" class="waves-effect waves-blue"> المبيعات ( إجمالى) </a>
+                                <a href="{{ URL::route('searchReportInvoices',array('sales-return',NULL)) }}" class="waves-effect waves-blue"> مرتجعات المبيعات  </a>
+                                <a href="{{ URL::route('searchReportInvoices','buy') }}" class="waves-effect waves-blue">  المشتريات ( تحليلى ) </a>
+                                <a href="{{ URL::route('searchReportInvoices',array('buy','sum')) }}" class="waves-effect waves-blue"> المشتريات ( إجمالى) </a>
+                                <a href="{{ URL::route('searchReportInvoices','buy-return') }}" class="waves-effect waves-blue">مردودات المشتريات</a>
+                                <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}" class="waves-effect waves-blue">أرباح المبيعات</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
           </ul>

@@ -143,7 +143,7 @@ class MsHeaderController extends BaseController
 
         $inputs = Input::all();
 
-        $validation = Validator::make($inputs,MsHeader::$report_ruels,BaseController::$messages);
+        $validation = Validator::make($inputs,MsHeader::$report_ruels_settle,BaseController::$messages);
         if($validation->fails()) {
 
             return Redirect::back()->withInput()->withErrors($validation->messages());
