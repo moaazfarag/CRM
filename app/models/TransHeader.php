@@ -22,21 +22,34 @@ class TransHeader extends Eloquent {
      * Store Rules
      * @var array
      */
+    public function transDitails(){
+
+        return $this->hasOne('TransDetails','trans_header_id','id');
+    }
     public static  $store_rules = array
                 (
                     'discount'       => 'integer',
-                    'tax'            => 'integer'
+                    'tax'            => 'integer',
                 );
-//
-//    /**
-//     * update Rules
-//     * @var array
-//     */
-//    public static  $update_rules = array
-//                (
-//                    'debit'          => 'integer',
-//                    'credit'         => 'integer'
-//                );
+
+
+    public static $report_ruels_saels = array(
+
+        'date_from'    =>'required',
+        'date_to'      =>'required',
+        'invoice_type' =>'required',
+
+    );
+    public static $report_ruels_saels_with_account = array(
+
+        'date_from'    =>'required',
+        'date_to'      =>'required',
+        'invoice_type' =>'required',
+        'account_id'   =>'not_in:? undefined:undefined ?',
+
+    );
+
+
 
     public function branch()
     {
@@ -51,12 +64,18 @@ class TransHeader extends Eloquent {
         'cancel_cause'=>'required',
     );
 
+    public static $settle_report_ruels = array(
+
+        'date_from'    =>'required',
+        'date_to'      =>'required',
+        'invoice_type' =>'required',
+    );
 
     public function details()
     {
         return $this->hasMany('TransDetails','trans_header_id','id')
             ->join('items','items.id','=','trans_details.item_id')
-            ->select('trans_details.*','items.item_name');
+            ->select('trans_details.*','items.item_name','items.cat_id','items.id','items.buy');
 //            ->whereIn('invoice_type',['sales','settleAdd']);
     }
     public function accountInfo(){

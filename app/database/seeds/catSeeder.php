@@ -33,6 +33,20 @@ class catSeeder extends Seeder {
 	    	'user_id'  =>'3',
 	    ),
 
+		array(
+			'true_id'  => '1',
+			'co_id'    =>'1',
+			'name'     =>'تيشرت',
+			'user_id'  =>'1',
+		),
+
+		array(
+			'true_id'  => '1',
+			'co_id'    =>'1',
+			'name'	   =>'جاكت',
+			'user_id'  =>'1',
+		),
+
 
 		));
 

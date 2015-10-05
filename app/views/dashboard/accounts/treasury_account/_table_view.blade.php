@@ -38,7 +38,7 @@
 
             {{ $rowData->accountName->acc_name }}
         </td>
-        <td>{{ BaseController::ViewDateAndTime($rowData->date) }}</td>
+        <td>{{ BaseController::ViewDate($rowData->date) }}</td>
         <td>{{ $rowData->debit}}</td>
         <td>{{ $rowData->credit }}</td>
         <td>{{ $rowData->notes }}</td>

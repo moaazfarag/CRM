@@ -21,7 +21,7 @@ class MsHeader extends Eloquent
     {
         return $this->hasOne('Employees','id','employee_id');
     }
-    public static $report_ruels = array(
+    public static $report_ruels_settle = array(
 
         'date_from' =>'required',
         'date_to'   =>'required',

@@ -29,7 +29,7 @@
 
         ?>
             <tr>
-                <td>{{ $k+1 }}</th>
+                <td>{{ $k+1 }}</td>
                 <td>{{ $tableData->employeeName->name }}</td>
                 <td>{{ BaseController::ViewDateAndTime($tableData->created_at)}}
                 <td>{{ $tableData->for_year }}</td>
