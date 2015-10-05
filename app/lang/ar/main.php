@@ -358,6 +358,8 @@ return  array(
     'suppliers_'     =>'الموردين',
     'partners_'      =>'جارى الشركاء',
     'search'         =>'بحث',
+    'buyReturn'      =>'مرتجعات مشتريات',
+    'salesReturn'     =>'مرتجعات مبيعات',
 
     //////////{{  readyToPay }}\\\\\\\\\\\\\
     'delivery_no'  	=>'ايصال رقم /',

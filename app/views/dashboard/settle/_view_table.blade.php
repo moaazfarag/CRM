@@ -23,7 +23,21 @@
             <input hidden class="input-without-border" name="name_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.item_name" type="text" />
         </td>{{--invoice Item NAME & ID--}}
         <td>
-            <input  ng-pattern="/^[0-9]+$/" class="input-without-border" required name="quantity_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.quantity" type="number" value="@{{ invoiceItem.quantity }}"/>
+            <input  ng-pattern="/^[0-9]+$/"
+                    id="@{{ invoiceItem.id }}"
+                    @if($type == "settleAdd")
+                    max="@{{ returnBalance(invoiceItem) }}"
+                    @else
+                    max="@{{ invoiceItem.balance }}"
+                    @endif
+
+                    min="1"
+                    class="input-without-border"
+                    required name="quantity_@{{ invoiceItems.indexOf(invoiceItem) }}"
+                    ng-model="invoiceItem.quantity"
+                    type="number"
+                    value="@{{ invoiceItem.quantity }}"/>
+            <div style="color: #ea1c18;background-color: #f0f4c3" id="@{{ invoiceItem.id}}div">
             <div class="error-div-for-table" ng-show="form.$submitted || form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$touched">
                 <div ng-show="form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.pattern">
                     برجاء ادخال رقم صحيح
@@ -31,7 +45,13 @@
             </div>
         </td>{{--invoice Item quantity--}}
         <td>
-            <input ng-required="isRequired(invoiceItem.has_serial)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.serial" type="text" />
+            <input readonly
+                   ng-required="isRequired(invoiceItem.has_serial)"
+                   ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)"
+                   class="input-without-border"
+                   name="serial_@{{ invoiceItems.indexOf(invoiceItem) }}"
+                   ng-model="invoiceItem.serial"
+                   type="text" />
         </td>
     </tr>
   </tbody>

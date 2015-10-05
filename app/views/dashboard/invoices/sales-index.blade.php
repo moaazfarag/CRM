@@ -20,7 +20,6 @@
     <div class="content">
       <div class="row no-margin-top">
          <div class="col s2 l3">
-
                     <br>
                 <b> @lang('main.branch') :{{ $branch->br_name }}</b>
 
@@ -28,9 +27,22 @@
          <div class="col s2 l3">
              <i class="fa fa-calendar"></i>
              {{ Form::label('data',Lang::get('main.date')) }}
-             {{ Form::text('date',null,array('class'=>'pikaday','required','ng-model'=>'date',"autofocus",'id'=>'data')) }}
+             <?php $date = new dateTime;
+             ?>
+             <input required="required"
+                    ng-model="date"
+                    autofocus="autofocus"
+                    id="data"
+                    max="{{$date->modify('+1 day')->format('Y-m-d')}}"
+                    min="{{$date->modify('-1 day')->format('Y-m-d')}}"
+                    name="date" type="date">
+             {{--{{ Form::text('date',null,array('class'=>'pikaday',--}}
+             {{--'required',--}}
+             {{--'ng-model'=>'date',--}}
+             {{--"autofocus",--}}
+             {{--'id'=>'data','max'=>$date->modify('+1 day')->format('Y/m/d'))) }}--}}
              <p class="parsley-required">{{ $errors ->first('data') }} </p>
-          </div> {{--data--}}
+          </div> {{--date--}}
 
 {{--{{  dd(Items::getItemsWithBalance()); }}--}}
 
@@ -89,8 +101,6 @@
                 <div class="input-field">
                     <i class="fa fa-database prefix"></i>
                     {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
-
-
                     <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
                         @lang('main.please_enter_valid_number')
@@ -138,7 +148,7 @@
 
         {{--@{{  form.pay_type }}--}}
 
-        @include('dashboard.settle._popup_div')
+        @include('dashboard.settle._discount_popup_div')
 
 
         <br>

@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="col s6 l4">
-                            {{ Form::select('br_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
+                            {{ Form::select('br_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id','ng-model'=>'br_id','ng-change'=>'resetInvoiceItems()')) }}
                             <p class="parsley-required">{{ $errors ->first('br_id') }} </p>
                         </div>
 
@@ -99,10 +99,10 @@
                         <div class="input-field">
                             <label for="item_id">
                                 <button ng-hide="item.has_serial" href="#addItem" type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
-                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) "  ng-click=" serialItem(br_id,item.id)" class="waves-effect btn modal-trigger">
                                     اضف
                                 </button >
-                                @include('dashboard.settle._popup_div')
+                                @include('dashboard.settle._add_popup_div')
                             </label>
                         </div>
                     </div> {{-- button of one item div--}}

@@ -72,7 +72,7 @@ class BaseController extends Controller {
         $branches =Branches::company()->get();
         if(Auth::user()->all_br && $branches->count()>1){
             $data['branches'] = $branches;
-            $data['all_br'] = "all_br";
+            $data['all_br']   = "all_br";
             return $data;
         }elseif(!Auth::user()->all_br && $branches->count()>1)
         {
@@ -149,7 +149,7 @@ class BaseController extends Controller {
 
 
     public static function ViewDate($date){
-       $date_format =  date('d /m / Y',strtotime($date));
+       $date_format =  date('d /m /Y',strtotime($date));
 
         return $date_format;
     }
@@ -205,6 +205,7 @@ class BaseController extends Controller {
 
     public function IsItemsBelongToCompany()
     {
+        
        $ids         =  array_unique(TransDetails::countOfInputs(Input::all()));
        $postedItems = Items::company()->whereIn('id',$ids)->get();
         if($postedItems->count() != count($ids)){
@@ -212,7 +213,16 @@ class BaseController extends Controller {
         }else{
             return true;
         }
-
+    }
+    public function IsSerialsBelongToCompany()
+    {
+       $ids         =  TransDetails::countOfInputs(Input::all());
+       $postedItems = Items::company()->where('has_serial',1)->whereIn('id',$ids)->get();
+        if($postedItems->count() != count($ids)){
+            return false;
+        }else{
+            return true;
+        }
     }
     public function IsAccountBelongToCompany()
     {

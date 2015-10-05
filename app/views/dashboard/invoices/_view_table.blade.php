@@ -26,10 +26,12 @@
 
         </td>{{--invoice Item NAME & ID--}}
         <td>
-
             <input id="@{{ invoiceItem.id }}"
+                   @if($type == "buy")
+                   max="@{{ returnBalance(invoiceItem) }}"
+                   @else
                    max="@{{ invoiceItem.balance }}"
-                   min="1"
+                   @endif
                    ng-pattern="/^[0-9]+$/"
                    class="input-without-border"
                    required name="quantity_@{{ invoiceItems.indexOf(invoiceItem) }}"
@@ -38,7 +40,7 @@
                    value="@{{ invoiceItem.quantity }}"/>
             <div style="color: #ea1c18;background-color: #f0f4c3" id="@{{ invoiceItem.id}}div">
         </div>
-            <div ng-show="invoiceItemBalance(invoiceItem)" style="color: #ea1c18">
+            <div ng-show="form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.max" style="color: #ea1c18">
 لايوجد رصيد كافي
         </div>
 

@@ -34,6 +34,23 @@ class TransDetails extends Eloquent {
 //                dd($store_rules);
             return $store_rules;
         }
+    public static function ReturnRulesCreator($inputs)
+        {
+            $store_rules['date'] = 'required|date';
+//            $store_rules['br_id'] = 'required|integer';
+            $count = TransDetails::countOfInputs($inputs);
+
+            foreach($count as $k => $v)
+            {
+                $sarial = self::hasSarial($v);
+                if($sarial){
+                    $store_rules['serial_'.$k] = 'required';
+                }
+                $store_rules['return_'.$k] = 'required|integer';
+                $store_rules['id_'.$k] = 'required|integer';
+            }
+            return $store_rules;
+        }
 
     /**
      * count of cost  input for using in foreach

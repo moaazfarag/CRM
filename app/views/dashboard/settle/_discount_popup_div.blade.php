@@ -1,6 +1,4 @@
                      <!-- pop up  Structure -->
-
-
 <div  id="addItem"  class="modal">
     <a ng-click="clearItemForm()" class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
     <div class="modal-content">
@@ -98,7 +96,7 @@
      <div class="modal-footer">
          <button ng-show="range == 'oneByone'" ng-disabled="hasSerial(new.serial)"
                  type="button"
-                 ng-click="addItemHasSerial($scope.item.quantity)"
+                 ng-click="discountItemHasSerial($scope.item.quantity)"
                  class="waves-effect btn">
              اضف
          </button >
@@ -106,7 +104,7 @@
                  ng-disabled="new.to<new.form || (new.to - new.form) >100 || (!new.prefix || !new.form || !new.to)"
                  href="#addItem"
                  type="button"
-                 ng-click="addItemHasSerial($scope.item.quantity) "
+                 ng-click="discountItemHasSerial($scope.item.quantity) "
                  class="waves-effect btn ">
              اضف
          </button >

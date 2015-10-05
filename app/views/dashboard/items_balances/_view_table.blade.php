@@ -31,7 +31,7 @@
             </div>
         </td>{{--invoice Item quantity--}}
         <td>
-            <input ng-pattern="/^[0-9]+$/" class="input-without-border" name="cost_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.cost" type="text" value="@{{ invoiceItem.cost }}"  />
+            <input readonly ng-pattern="/^[0-9]+$/" class="input-without-border" name="cost_@{{ invoiceItems.indexOf(invoiceItem) }}" ng-model="invoiceItem.cost" type="text" value="@{{ invoiceItem.cost }}"  />
             <div class="error-div-for-table" ng-show="form.$submitted || form.cost_@{{ invoiceItems.indexOf(invoiceItem) }}.$touched">
                 <div ng-show="form.cost_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.pattern">
                     برجاء ادخال رقم صحيح

@@ -103,10 +103,27 @@
                     <p class="parsley-required">{{ $errors ->first('quantity') }} </p>
                 </div>
             </div> {{-- quantity div--}}
+                <div class="col s12 l2">
+                <div class="input-field">
+                    <i class="fa fa-database prefix"></i>
+                    {{ Form::number('cost',null,array('ng-model'=>"item.cost",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'cost')) }}
+                    <div ng-show="form.$submitted || form.cost.$touched">
+                    <span ng-show="form.cost.$error.pattern">
+                        @lang('main.please_enter_valid_number')
+                    </span>
+                    <span ng-show="form.cost.$error.required">
+                         @lang('main.please_enter_valid_number')
+                    </span>
+
+                    </div>
+                    {{ Form::label('cost',Lang::get('main.cost')) }}
+                    <p class="parsley-required">{{ $errors ->first('cost') }} </p>
+                </div>
+            </div> {{-- cost div--}}
                 <div class="col s2 ">
                     <div class="input-field">
                         <label for="item_id">
-                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem() "  ng-click=" serialItem({{ $br_id}},item.id)" class="waves-effect btn modal-trigger">
                                 @lang('main.add')
                             </button >
                             <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
@@ -122,7 +139,7 @@
 
         {{--@{{  form.pay_type }}--}}
 
-        @include('dashboard.settle._popup_div')
+        @include('dashboard.settle._add_popup_div')
 
 
         <br>
