@@ -67,7 +67,8 @@ class CategoryController extends  BaseController
             $data['catFunName']     = "editCategory";
             $data['categoryMini']   = "";
             $data['arabicName']     = $item;
-            $data['tablesData']     = Category::company();
+            $data['tablesData']     = Category::company()->get();
+
             return $data;
         }
 }

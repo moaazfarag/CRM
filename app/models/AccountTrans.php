@@ -28,6 +28,7 @@ class AccountTrans extends Eloquent {
 
     {
         $account = Accounts::company()->find($inputs['account_id']);
+
         if ($account) {
             $Base = new BaseController;
             $newAccountTrans = new AccountTrans;
@@ -50,6 +51,7 @@ class AccountTrans extends Eloquent {
             }else{
                 return "undefind type";
             }
+
             $newAccountTrans->save() ;
         }
 

@@ -7,6 +7,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
         $this->call('settleSeeder');
+        $this->call('buyInvoiceSeeder');
 		$this->call('directMovementSeeder');
 		$this->call('companyDataSeeder');
 		$this->call('branchesSeeder');

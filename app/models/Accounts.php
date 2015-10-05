@@ -52,4 +52,13 @@ class Accounts extends Eloquent {
         "account_id"   => "required",
 
     );
+
+
+
+    public static $ruels_result_account = array(
+
+        'date_from'    =>'required',
+        'date_to'      =>'required',
+        'account_id'   => 'required',
+    );
 }

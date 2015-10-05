@@ -384,10 +384,48 @@ return  array(
 
     // out going salary report 
 
-    'employee_name'             =>'اسم الموظف',
     'out_going_salaries_date'   =>'تاريخ القبض',
     'show_salary_detalis'       =>'تفاصيل المرتب',
-    'settleDiscount_statement'  => 'بيان تسويات الخصم ',
-    'settleAdd_statement'       => 'بيان تسويات الإضافة ',
+    'settleDiscount_statement'  => ' بيان تسويات الخصم خلال فترة',
+    'settleAdd_statement'       => 'بيان تسويات الإضافة خلال فترة',
+
+    // invoice report
+    'sales_report'        =>' تقرير تحليلى للمبيعات ',
+    'sales_report_sum'    =>'تقرير إجمالى للمبيعات ',
+    'select_pay_type'     => 'أختر طريقة الدفع ',
+    'item_name_'          =>'اسم الصنف',
+    'qty_'                =>'الكمية',
+    'sum_'                =>'القيمة',
+    'result_sum'          =>'الإجمالى',
+    'sales-return_report' =>'مرتجعات المبيعات',
+    'buy_report'          => 'تقرير تحليلى للمشتريات',
+    'buy_report_sum'      => ' تقرير إجمالى للمشتريات ',
+    'buy-return_report'   => 'مردودات المشتريات',
+    'sales-earnings_report'      => 'أرباح فواتير المبيعات',
+    'buy_prise'             =>'سعر الشراء',
+    'sales_prise'           =>'سعر البيع ',
+    'earnings'           =>'الربح',
+
+
+    // accounts customers
+    'accounts_customers'    =>'حسابات العملاء',
+    'accounts_suppliers'    =>'حسابات الموردين',
+    'accounts_bank'         =>'حسابات البنوك',
+    'accounts_partners'     =>'حسابات جارى الشركاء',
+    'customers_for'    =>'للعميل',
+    'suppliers_for'    =>'للمورد',
+    'bank_for'         =>'لبنك',
+    'partners_for'     =>'للشريك',
+    'customers_title'    =>'العميل',
+    'suppliers_title'    =>'المورد',
+    'bank_title'         =>'بنك',
+    'partners_title'     =>'الشريك',
+    'review'                => 'إستعراض',
+    'add_direct_movement'   => 'أضف حركة مباشرة ',
+    'trans_type'            => 'نوع الحركة ',
+    'direct_movement_type'  =>'حركة مباشرة ',
+    'sales_type'            =>'مبيعات',
+    'buy_type'              =>'مشتريات',
+
 
 );
