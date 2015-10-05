@@ -50,6 +50,15 @@ angular.module('itemService', [])
                 });
 
             },
+            //getInvoiceByType : function(invoiceNo){
+            //    return $http({
+            //        method:'POST',
+            //        url: '/admin/invoice/invoice-data',
+            //        headers: { 'Content-Type' : 'application/json' },
+            //        data:   JSON.stringify(invoiceNo)
+            //    });
+            //
+            //},
             getAccountInfo : function(id){
                 return $http({
                     method:'POST',
@@ -59,12 +68,12 @@ angular.module('itemService', [])
                 });
 
             },
-            getInvoiceById :function(id){
+            getInvoiceById :function(invoice){
                 return $http({
                     method: 'POST',
                     url: '/admin/invoice/returns-invoice-data',
                     headers: { 'Content-Type' :  'application/json' },
-                    data:   JSON.stringify(id)
+                    data:   JSON.stringify(invoice)
                 });
 
             },

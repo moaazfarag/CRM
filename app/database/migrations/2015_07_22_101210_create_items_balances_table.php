@@ -22,7 +22,7 @@ class CreateItemsBalancesTable extends Migration {
             $table->string('bar_code');
             $table->integer('qty');
             $table->float('cost');
-            $table->string('serial_no');
+            $table->string('serial_no')->nullable();
 			$table->timestamps();
 		});
 	}

@@ -41,7 +41,11 @@ class SettleController extends BaseController {
             $data['account_type'] = array('العملاء','الموردين','المصروفات','جارى الشركاء','ايرادات اخرى');
 //            $data['newArray']    = $this->itemsToJson($invoiceId);
 //            dd(json_encode($newArray));
-            return View::make('dashboard.settle.index',$data,compact('type'));
+            if($type == "settleAdd"){
+                return View::make('dashboard.settle.settle-add-index',$data,compact('type'));
+            }elseif($type == "settleDiscount"){
+                return View::make('dashboard.settle.settle-discount-index',$data,compact('type'));
+            }
 
         }else{
 
@@ -148,11 +152,7 @@ class SettleController extends BaseController {
             $data['type']        = 'type' ;
             $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
             $data['branch']      = $this->isAllBranch(); //
-            $data['newArray']    = $this->itemsToJsonForError($inputs);
             $data['errors']      = $validation->messages();
-//            dd($data['newArray']);
-//            dd($validation->messages()   );
-//            return   View::make('dashboard.settle.index',$data,compact('type'));
             Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
             return View::make('dashboard.settle.index',$data);
 

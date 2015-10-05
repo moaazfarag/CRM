@@ -79,10 +79,10 @@
             <div class="col s2 ">
                 <div class="input-field">
                     <label for="item_id">
-                        <button ng-click=" serialItem(br_id,item.id)"  ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity)|| itemBalance() " ng-click="addItem()" class="waves-effect btn modal-trigger">
+                        <button ng-click=" serialItem(br_id,item.id)"  ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity)|| itemBalance() "  class="waves-effect btn modal-trigger">
                             اضف
                         </button >
-                        <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
+                        <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity)||itemBalance() " ng-click="addItem()" class="waves-effect btn">
                             اضف
                         </button >
                         </label>
@@ -102,7 +102,7 @@
 
 
 
-        @include('dashboard.settle._popup_div')
+        @include('dashboard.settle._discount_popup_div')
 
 
 

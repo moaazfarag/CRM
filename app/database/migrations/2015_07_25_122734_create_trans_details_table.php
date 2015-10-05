@@ -22,7 +22,7 @@ class CreateTransDetailsTable extends Migration {
             $table->decimal('unit_price',10,2);
             $table->decimal('item_total',10,2);
             $table->integer('avg_cost');
-            $table->string('serial_no');
+            $table->string('serial_no')->nullable();
 
             $table->timestamps();
 		});

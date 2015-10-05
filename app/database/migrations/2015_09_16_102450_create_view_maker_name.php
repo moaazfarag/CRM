@@ -16,7 +16,7 @@ class CreateViewMakerName extends Migration {
 			->select(DB::raw('SUM(qty) as item_bal'), 'trans_details.item_id','trans_header.br_id','trans_details.serial_no', 'items.*')
 			->join('trans_details', 'trans_details.trans_header_id', '=', 'trans_header.id')
 			->join('items', 'items.id', '=', 'trans_details.item_id')
-			->whereRaw("`invoice_type` IN ( 'buy', 'settleAdd' )")
+			->whereRaw("`invoice_type` IN ( 'buy', 'settleAdd' ,'salesReturn')")
 			->groupBy('trans_details.serial_no')
 			->groupBy('trans_details.item_id')
 			->groupBy('trans_header.br_id');
@@ -31,7 +31,7 @@ class CreateViewMakerName extends Migration {
 			->select(DB::raw('SUM(qty)*-1 as item_bal'), 'trans_details.item_id','trans_header.br_id','trans_details.serial_no', 'items.*')
 			->join('trans_details', 'trans_details.trans_header_id', '=', 'trans_header.id')
 			->join('items', 'items.id', '=', 'trans_details.item_id')
-			->whereRaw("`invoice_type` IN ( 'settleDiscount', 'sales' )")
+			->whereRaw("`invoice_type` IN ( 'settleDiscount', 'sales','buyReturn' )")
 			->groupBy('trans_details.serial_no')
 			->groupBy('trans_details.item_id')
 			->groupBy('trans_header.br_id')

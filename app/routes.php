@@ -164,12 +164,14 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('add-{type}-invoice/{br_id}', array('uses' => 'InvoiceController@storeInvoice','as' => 'storeInvoice'));
         Route::get('view-invoice/{headerId}', array('uses' => 'InvoiceController@viewInvoice','as' => 'viewInvoice'));
         Route::get('view-invoices', array('uses' => 'InvoiceController@viewInvoices','as' => 'viewInvoices'));
-        Route::get('sales-returns', array('uses' => 'InvoiceController@salesReturns','as' => 'salesReturns'));
+        Route::get('add-{type}-return-invoice/{br_id}', array('uses' => 'InvoiceReturnController@addReturnInvoice','as' => 'addReturnInvoice'));
+        Route::post('add-{type}-return-invoice/{br_id}', array('uses' => 'InvoiceReturnController@storeReturnInvoice','as' => 'storeReturnInvoice'));
         Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'InvoiceController@accountById','as' => 'accountById'));
         Route::post('items-data-br', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
         Route::post('serial-items-data', array('uses' => 'InvoiceController@serialItemsData','as' => 'serialItemsData'));
         Route::post('items-data', array('uses' => 'InvoiceController@items','as' => 'items'));
+        Route::post('invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'returnsInvoiceData'));
         Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
         Route::post('returns-invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'itemsData'));
         Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'InvoiceController@cancelInvoice','as'=>'cancelInvoice')) ;

@@ -39,13 +39,13 @@ class AccountTrans extends Eloquent {
             $newAccountTrans->trans_type = $type;
             $newAccountTrans->date       = $Base->strToTime($inputs['date']);
             $newAccountTrans->pay_type   = $inputs['pay_type'];
-            if(($type == "sales" || $type == "buy_back") && ($inputs['pay_type'] == "cash" || $inputs['pay_type'] == "visa") ){
+            if(($type == "sales" || $type == "buyReturn") && ($inputs['pay_type'] == "cash" || $inputs['pay_type'] == "visa") ){
                 $newAccountTrans->credit = $net ;
-            }elseif(($type == "buy" || $type == "sales_back") &&  ($inputs['pay_type'] == "cash" || $inputs['pay_type'] == "visa")  ){
+            }elseif(($type == "buy" || $type == "salesReturn") &&  ($inputs['pay_type'] == "cash" || $inputs['pay_type'] == "visa")  ){
                 $newAccountTrans->debit = $net ;
-            }elseif(($type == "sales" || $type == "buy_back") && $inputs['pay_type'] == "on_account" ){
+            }elseif(($type == "sales" || $type == "buyReturn") && $inputs['pay_type'] == "on_account" ){
                 $newAccountTrans->debit = $net ;
-            }elseif(($type == "buy" || $type == "sales_back") && $inputs['pay_type'] == "on_account" ){
+            }elseif(($type == "buy" || $type == "salesReturn") && $inputs['pay_type'] == "on_account" ){
                 $newAccountTrans->credit = $net ;
             }else{
                 return "undefind type";
