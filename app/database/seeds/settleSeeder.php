@@ -13,7 +13,7 @@ class settleSeeder extends Seeder
                
                'trans_header_id' => '1',
                'co_id'           => '1',
-               'item_id'         => '1',
+               'item_id'         => '3',
                'qty'             => '2',
                'created_at'      => new DateTime,
                'updated_at'      => new DateTime,
@@ -24,7 +24,7 @@ class settleSeeder extends Seeder
 
                 'trans_header_id' => '2',
                 'co_id'           => '1',
-                'item_id'         => '1',
+                'item_id'         => '2',
                 'qty'             => '4',
                 'created_at'      => new DateTime,
                 'updated_at'      => new DateTime,
@@ -34,7 +34,7 @@ class settleSeeder extends Seeder
                 
                 'trans_header_id' => '3',
                 'co_id'           => '1',
-                'item_id'         => '1',
+                'item_id'         => '2',
                 'qty'             => '6',
                 'created_at'      => new DateTime,
                 'updated_at'    => new DateTime,

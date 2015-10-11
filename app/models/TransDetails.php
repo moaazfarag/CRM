@@ -19,7 +19,10 @@ class TransDetails extends Eloquent {
         public static function rulesCreator($inputs)
         {
             $store_rules['date'] = 'required|date';
-//            $store_rules['br_id'] = 'required|integer';
+//            $store_rules['pay_type'] = 'required|in:cash,visa,on_account';
+            if(isset($inputs['pay_type'])&&$inputs['pay_type']=="on_account"){
+//                $store_rules['account_id'] = 'required|integer';
+            }
             $count = TransDetails::countOfInputs($inputs);
 
             foreach($count as $k => $v)
@@ -37,9 +40,11 @@ class TransDetails extends Eloquent {
     public static function ReturnRulesCreator($inputs)
         {
             $store_rules['date'] = 'required|date';
-//            $store_rules['br_id'] = 'required|integer';
+            $store_rules['pay_type'] = 'required|in:cash,visa,on_account';
+            if($inputs['pay_type']=="on_account"){
+                $store_rules['account_id'] = 'required|integer';
+            }
             $count = TransDetails::countOfInputs($inputs);
-
             foreach($count as $k => $v)
             {
                 $sarial = self::hasSarial($v);

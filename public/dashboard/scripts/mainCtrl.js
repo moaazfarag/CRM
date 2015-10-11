@@ -16,6 +16,7 @@ angular.module('mainCtrl', [])
         $scope.seletedAccount = {};
         $scope.accounts= {};
         $scope.transType= "";
+        $scope.account = 0;
         // loading variable to show the spinning loading icon
         $scope.loading = true;
         //$scope.returnInvoiceData = function(id){
@@ -31,22 +32,49 @@ angular.module('mainCtrl', [])
                 .error(function (data) {
                 });
         };
-        $scope.backItem = function(){
+        $scope.backItem = function(discount){
             $scope.backItems = [];
             angular.forEach($scope.invoiceItems,function(item,key){
                 if (item.return > 0) {
+                    item.discount   = Math.round( discount );
+                    item.account   = $scope.header.account;
+                    item.cost       = item.unit_price - (item.unit_price*(item.discount/100));
                     $scope.backItems.push(item) ;
                 }
             });
             return $scope.backItems;
 
         };
+        $scope.multiBackItem = function(discount){
+            if(!$scope.backItems){
+                $scope.backItems = []
+            }
+            angular.forEach($scope.invoiceItems,function(item,key){
+                $scope.finishReturnInvoice();
+                if (item.return > 0) {
+                    item.discount   = Math.round( discount );
+                    item.cost       = item.unit_price - (item.unit_price*(item.discount/100));
+                    $scope.backItems.push(item) ;
+                }
+            });
+            $scope.invoiceItems = [];
+            return $scope.backItems;
+        };
+        $scope.finishReturnInvoice = function(){
+            $scope.invoiceItems = [];
+            $scope.header = [];
+        };
         $scope.invoiceData = function(type,brId){
-           $scope.invoice.invoiceType = type ;
-           $scope.invoice.brId        = brId ;
+            $scope.invoiceItems = [];
+            $scope.invoice.invoiceType = type ;
+            $scope.invoice.brId        = brId ;
+            if($scope.account.id){
+                $scope.invoice.invoiceNo = "";
+                $scope.invoice.acc         =  $scope.account.id;
+            }
             Item.getInvoiceById($scope.invoice).success(function (data) {
                 $scope.invoiceItems = data.details;
-                $scope.header = data.header;
+                $scope.header       = data.header;
             })
                 .error(function (data) {
 
@@ -315,7 +343,7 @@ angular.module('mainCtrl', [])
             }
         };
         $scope.isRequired = function(serial){
-            if (serial == 0) {
+            if (serial == 0 || serial == null) {
                 return false;
             }  else{
                 return true;
@@ -388,9 +416,9 @@ angular.module('mainCtrl', [])
         };
         $scope.returnInvoiceTotal = function() {
             var total = 0.00;
-            angular.forEach($scope.invoiceItems, function(item, key){
+            angular.forEach($scope.backItems, function(item, key){
                 if(item.return>0){
-                    total += (item.return *  item.unit_price);
+                    total += (item.return *  item.cost);
                 }
             });
             return total;

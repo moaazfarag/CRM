@@ -190,4 +190,52 @@ class ItemController extends BaseController
 
         return 'ok';
     }
+    public function searchItemCard(){
+
+        $data['type']           = "item";
+        $data['title']           = "كارت الصنف";
+        $data['sum']            = NULL;
+        $data['co_info']        = CoData::thisCompany()->first();
+        $data['branch']         = $this->isAllBranch();
+        $data['pay_type']       = array(''=>Lang::get('main.select_pay_type'),'cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
+        $data['items']          = Items::company()->get()->lists('item_name','id');
+        $data['of_account']     = array( ''=>'أختر الحساب','customers'=>'العملاء','suppliers'=>'الموردين', 'partners' =>'جارى الشركاء', 'bank'  =>'البنك');
+        $data['account_type']   = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
+        return View::make('dashboard.products.items.report.report_search',$data);
+
+    }
+    public function reportResultItemCard (){
+
+        $inputs = Input::all();
+//        var_dump($inputs);die();
+
+        if(Input::Has('account')){
+            $ruels = TransHeader::$report_ruels_saels_with_account;
+        }else{
+            $ruels = TransHeader::$report_ruels_saels;
+        }
+//var_dump($ruels);die();
+
+        $validation = Validator::make($inputs,$ruels,BaseController::$messages);
+        if($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }else {
+            $itemsTrans     = TransHeader::getItems($inputs,false);
+            $items          = [];
+            $balBefore      = [];
+//            dd($itemsTrans->lists('item_id'));
+            foreach(array_unique($itemsTrans->lists('item_id')) as $itemId ){
+                $inputs['item_id']    = $itemId;
+                $items[]              = TransHeader::getItems($inputs,false)->get();
+                $balBefore[$itemId]['bal'] = array_sum(TransHeader::getItems($inputs,1)->lists('item_bal') );
+            }
+            $data['items']     = $items;
+            $data['balBefore'] = $balBefore;
+            $data['co_info']   = CoData::thisCompany()->first();
+            $data['date_from'] = $this->strToTime($inputs['date_from']);
+            $data['date_to']   = $this->strToTime($inputs['date_to']);
+            $data['title']     = "كارت  الصنف";
+            return View::make('dashboard.products.items.report.report_result',$data);
+        }
+    }
 }

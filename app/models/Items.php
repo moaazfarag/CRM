@@ -96,6 +96,8 @@ class Items extends Eloquent {
         $items      = Items::company()->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
         return array_merge($itemsTrans->get(),$items->toArray());
     }
+
+
     public static function getSerialItemsWithBalanceByBrId($brId,$itemId,$serial_no= null)
     {
 

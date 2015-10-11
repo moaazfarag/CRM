@@ -84,9 +84,36 @@ class TransHeader extends Eloquent {
             ->company()
             ->whereIn('acc_type',['customers','suppliers','partners']);
     }
-    public static function test(){
+    public static function getItems($inputs,$tBal)
+    {
+        $bCtrl = new BaseController;
+        $date_from = $bCtrl->strToTime($inputs['date_from']);
+        $date_to   = $bCtrl->strToTime($inputs['date_to']);
+        $cat_id = (!empty($inputs['cat_id'])) ? $inputs['cat_id'] : "";
+        $br_id = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+        $item_id = (!empty($inputs['item_id'])) ? $inputs['item_id'] : "";
+        $itemsTrans =  DB::table('items_balance')
+                        ->company()
+                        ->groupBy('br_id')
+                        ->groupBy('item_id')
+                        ->groupBy('invoice_type')
+                        ->groupBy('serial_no')
+                        ->groupBy('invoice_no')->where('deleted', 0)
+                        ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
 
+        if($tBal){
+            $itemsTrans->where('date','<',$date_from);
+        }else{
+            $itemsTrans->dateBetween('date', $date_from, $date_to);
+        }
+        if ($br_id != '') {
+            $itemsTrans->where('br_id', $br_id);
+        }if($item_id != '') {
+        $itemsTrans->where('item_id', $item_id);
+       }if($cat_id != ''){
+            $itemsTrans->where('cat_id',$cat_id);
+        }
+        return $itemsTrans;
     }
-
 
 }

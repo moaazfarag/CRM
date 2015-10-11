@@ -339,7 +339,7 @@ return  array(
     'num'            =>'الرقم',
     'item_name' 	 =>'اسم الصنف',
     'quantity'		 =>' الكمية',
-    'item_prise'     =>'سعر الوحدة',
+    'item_price'     =>'سعر الوحدة',
     'sum'			 =>' الاجمالي',
     'serial_'		 =>'السيريال',
     'show_settle'	 =>'عرض تسويات',
@@ -430,6 +430,9 @@ return  array(
     'direct_movement_type'  =>'حركة مباشرة ',
     'sales_type'            =>'مبيعات',
     'buy_type'              =>'مشتريات',
+    'type'            =>'النوع',
+    'item_balance'              =>'رصيد افتتاحي',
+
     'invoice_no'            => 'فاتورة رقم ',
     'catch_type'            => 'قبض' ,
     'pay_type'              => 'صرف',
@@ -443,6 +446,7 @@ return  array(
     'catch'          => 'حركة مباشرة (قبض)',
     'pay'            => 'حركة مباشرة (صرف)',
 //    'multiple_revenue' => 'إيرادات أخرى',
+
 
 
 );

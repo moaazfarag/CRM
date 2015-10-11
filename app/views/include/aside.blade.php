@@ -103,7 +103,7 @@
                         <a href="{{ URL::route('addSettle',array('settleAdd')) }}" class="waves-effect waves-blue">@lang('main.settleAdd')  </a>
                     </li>
                     <li>
-                        <a href="{{ URL::route('addSettle',array('settleDiscount')) }}" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
+                        <a href="" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
                     </li>
                     {{--<li>--}}
                         {{--<a href="{{ URL::route('viewSettles') }}" class="waves-effect waves-blue">--}}
@@ -111,7 +111,7 @@
                         {{--</a>--}}
                     {{--</li>--}}
                     <li>
-                        <a href="#" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
+                        <a href="{{ URL::route('searchItemCard') }}" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
                     </li>
                     <li>
                         <a href="#" class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>

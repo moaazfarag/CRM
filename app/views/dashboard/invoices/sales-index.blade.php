@@ -24,24 +24,21 @@
                 <b> @lang('main.branch') :{{ $branch->br_name }}</b>
 
          </div>{{--branch--}}
-         <div class="col s2 l3">
-             <i class="fa fa-calendar"></i>
-             {{ Form::label('data',Lang::get('main.date')) }}
-             <?php $date = new dateTime;
-             ?>
-             <input required="required"
-                    ng-model="date"
-                    autofocus="autofocus"
-                    id="data"
-                    max="{{$date->modify('+1 day')->format('Y-m-d')}}"
-                    min="{{$date->modify('-1 day')->format('Y-m-d')}}"
-                    name="date" type="date">
-             {{--{{ Form::text('date',null,array('class'=>'pikaday',--}}
-             {{--'required',--}}
-             {{--'ng-model'=>'date',--}}
-             {{--"autofocus",--}}
-             {{--'id'=>'data','max'=>$date->modify('+1 day')->format('Y/m/d'))) }}--}}
-             <p class="parsley-required">{{ $errors ->first('data') }} </p>
+          <div class="col s2 l3">
+              <i class="fa fa-calendar"></i>
+              {{ Form::label('data',Lang::get('main.date')) }}
+              <?php $date = new dateTime;
+              ?>
+              <input required="required"
+                     type="date"
+                      {{--ng-model="date = Date()"--}}
+                     autofocus="autofocus"
+                     id="data"
+                     value="{{$date->format('Y-m-d')}}"
+                     max="{{$date->modify('+1 day')->format('Y-m-d')}}"
+                     min="{{$date->modify('-1 day')->format('Y-m-d')}}"
+                     name="date">
+              <p class="parsley-required">{{ $errors ->first('data') }} </p>
           </div> {{--date--}}
 
 {{--{{  dd(Items::getItemsWithBalance()); }}--}}

@@ -4,7 +4,8 @@
         <th> @lang('main.num')</th>
         <th> @lang('main.item_name')</th>
         <th> @lang('main.quantity')</th>
-        <th> @lang('main.item_prise') </th>
+        <th> @lang('main.item_price') </th>
+        <th> نسبة الخصم </th>
         <th> @lang('main.sum')</th>
         <th> @lang('main.serial_')</th>
         <th> المرتجع</th>
@@ -13,7 +14,7 @@
     </thead>
     <tbody>
 
-    <tr  ng-repeat="(key,invoiceItem) in  backItem()" >
+    <tr ng-show="account.id"  ng-repeat="(key,invoiceItem) in backItems"  >
         <td>
             @{{ key+1 }}
         </td>{{--invoice Item COUNT --}}
@@ -48,17 +49,20 @@
             </div>
         </td>{{--invoice Item quantity--}}
         <td>
-
-                @{{ invoiceItem.unit_price  }}
+        <input hidden class="input-without-border" ng-pattern="/^[0-9]+$/" name="cost_@{{ key }}"  ng-model="invoiceItem.cost" type="number" value="@{{ invoiceItem.cost }}"/>
+        @{{ invoiceItem.cost  }}
         </td>{{--invoice Item cost --}}
         <td>
-            @{{ invoiceItem.item_total  }}
+            @{{ invoiceItem.discount  }}%
+        </td>{{-- discount --}}
+        <td>
+            @{{ invoiceItem.cost * invoiceItem.qty  }}
         </td>{{--invoice Item TOTAL--}}
         <td>
-            <input ng-required="isRequired(invoiceItem.has_serial)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ key }}"  ng-model="invoiceItem.serial_no" type="text" readonly />
+            <input ng-required="isRequired(invoiceItem.serial_no)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ key }}"  ng-model="invoiceItem.serial_no" type="text" readonly />
         </td>
         <td>
-            <input ng-required="isRequired(invoiceItem.has_serial)" max="@{{ invoiceItem.qty }}" min="1" class="input-without-border"  name="return_@{{ key }}"  ng-model="invoiceItem.return" type="number"  />
+            <input  max="@{{ invoiceItem.qty }}" min="1" class="input-without-border"  name="return_@{{ key }}"  ng-model="invoiceItem.return" type="number"  />
         </td>
     </tr>
     </tbody>
