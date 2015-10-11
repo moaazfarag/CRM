@@ -299,4 +299,15 @@ class BaseController extends Controller {
 
     }
 
+    public static function negativeValue($stock) {
+
+        if($stock < 0 ){
+            $num    = $stock * -1;
+            $result = '( '.$num.' )';
+        }else{
+            $result = $stock;
+        }
+        return $result;
+    }
+
 }

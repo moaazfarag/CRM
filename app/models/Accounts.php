@@ -59,6 +59,14 @@ class Accounts extends Eloquent {
 
         'date_from'    =>'required',
         'date_to'      =>'required',
-        'account_id'   => 'required',
+        "account_id"   => "required",
+
+
+    );
+
+    public static $ruels_treasury = array(
+
+        'date_from'    =>'required',
+        'date_to'      =>'required',
     );
 }

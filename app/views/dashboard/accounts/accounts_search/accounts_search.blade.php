@@ -15,7 +15,9 @@
 
     <div class=" card">
         <div class="btn-group" style="margin: 1%  1% 0 0;">
-            <a href="{{ URL::route('searchAccounts','bank') }}" class="btn btn-extra black-text grey lighten-2">   البنك</a>
+            <a href="{{ URL::route('searchAccounts','expenses') }}" class="btn btn-extra black-text grey lighten-2">   المصروفات</a>
+            <a href="{{ URL::route('searchAccounts','multiple_revenue') }}" class="btn btn-extra black-text grey lighten-2">   إيرادات أخرى</a>
+            <a href="{{ URL::route('searchAccounts','bank') }}" class="btn btn-extra black-text grey lighten-2">   البنوك</a>
             <a href="{{ URL::route('searchAccounts','partners') }}" class="btn btn-extra black-text grey lighten-2">  جارى الشركاء </a>
             <a href="{{ URL::route('searchAccounts','suppliers') }}" class="btn btn-extra black-text grey lighten-2">  الموردين </a>
             <a href="{{ URL::route('searchAccounts','customers') }}" class="btn btn-extra black-text grey lighten-2 "> العملاء</a>

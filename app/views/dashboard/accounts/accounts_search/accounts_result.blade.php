@@ -24,13 +24,13 @@
         </div>
         <div class="content">
 
-        {{ Form::open(array('route'=>'resultAccounts')) }}
+        {{ Form::open(array('route'=>'resultAccounts','name'=>'form_search')) }}
 
             <div class="row">
                 <div class="col s12 l3">
                     <div class="input-field">
                         <i class="mdi mdi-action-language prefix"></i>
-                        {{ Form::text('date_from',null,array('required','id'=>'date_from','class'=>'pikaday')) }}
+                        {{ Form::text('date_from',null,array('required','id'=>'date_from','ng-model'=>'date_from','class'=>'pikaday')) }}
                         <p class="parsley-required">{{ $errors ->first('date_from') }} </p>
 
                         <label for="date_from">
@@ -43,7 +43,7 @@
                 <div class="col s12 l3">
                     <div class="input-field">
                         <i class="mdi mdi-action-language prefix"></i>
-                        {{ Form::text('date_to',null,array('required','id'=>'date_to','class'=>'pikaday')) }}
+                        {{ Form::text('date_to',null,array('required','id'=>'date_to','ng-model'=>'date_to','class'=>'pikaday')) }}
                         <p class="parsley-required">{{ $errors ->first('date_to') }} </p>
 
                         <label for="date_to">
@@ -53,23 +53,21 @@
                 </div>
 
 
-
+                @if($type != 'expenses')
                 {{--account name--}}
                 <div class="col s12 l2">
 
-                    {{ Form::select('account_id', array('' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id')) }}
+                    {{ Form::select('account_id', array('' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id','required','ng-model'=>'account_id')) }}
 
                     <p class="parsley-required">{{ $errors ->first('account_id') }} </p>
                 </div>
                 {{--account name--}}
+                    @endif
             </div>
 
             <div class="row">
                 <div class="col s10 l10" style="margin: 1%">
-
-                    <button  class="waves-effect btn"> @lang('main.review') </button>
-
-
+                    <button  class="waves-effect btn" ng-disabled="form_search.$invalid" > @lang('main.review') </button>
                 </div>
 
                 {{ Form::hidden('type',$type) }}
@@ -86,14 +84,16 @@
 
     </div>
 
-    @unless($account_trans->isEmpty())
+    @unless(empty($account_trans))
     {{--table start--}}
     <table   class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <caption class="caption-style">
-                {{ Lang::get('main.'.$type.'_title').' ( '.$name .' )' }}
-
+                {{ Lang::get('main.'.$type.'_title') }}
+                @if(isset($name))
+                    {{ ' ( '.$name .' )' }}
+                @endif
                 الفترة من
                 {{ BaseController::ViewDate($date_from) }}
                 حتى
@@ -116,7 +116,7 @@
             <?php $all_credit = array(); $all_debit= array(); $i = 0;?>
             @foreach($account_trans as $k => $trans)
 
-               @if($trans->pay_type == "cash")
+               @if($trans->pay_type == "cash" && $trans->trans_type != 'direct_movement')
                    @if($trans->debit == 0)
                        <?php $prise = $trans->credit;  ?>
                    @else
@@ -151,11 +151,13 @@
                        <td>@if($trans->debit == 0) ---- @else {{  $trans->debit }} @endif</td>
                        <td>@if($trans->credit == 0) ---- @else{{  $trans->credit }}  @endif</td>
                        <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
-                       <td>{{  $trans->notes }}</td>
+                       <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
                    </tr>
 
                @endif
-                @if($trans->pay_type == "cash")
+
+               @if($trans->pay_type == "cash" && $trans->trans_type != 'direct_movement')
+
                     <?php
                     if($trans->debit == 0){ $price = $trans->credit;} else { $price = $trans->debit;}
 
@@ -192,6 +194,7 @@
 
                     <th>@lang('main.debit')</th>
                     <th>@lang('main.credit_')</th>
+                    <th>@lang('main.stock')</th>
 
                 </tr>
                 </thead>
@@ -199,6 +202,8 @@
                 <tr>
                     <td>{{ array_sum($all_debit) }}</td>
                     <td>{{ array_sum($all_credit) }}</td>
+                    <td><?php echo BaseController::negativeValue(array_sum($all_debit) - array_sum($all_credit)); ?></td>
+
                 </tr>
                 </tbody>
             </table>
@@ -218,8 +223,10 @@
                 <div class="modal-content">
                     <div class="card-panel indigo lighten-5">
                         <div style="text-align: center; font-size: 1.3em;">
-                            @lang('main.add_direct_movement')
-                            {{ Lang::get('main.'.$type.'_for').' ( '.$name .' )' }}
+                            {{ Lang::get('main.'.$type.'_title') }}
+                            @if(isset($name))
+                                {{ ' ( '.$name .' )' }}
+                            @endif
 
                         </div>
                     </div>
@@ -241,39 +248,61 @@
                     {{--end date--}}
 
 
-                    {{--price--}}
-                    <div class="col l3 s12">
-                        <div class="input-field">
-                            <i class="mdi mdi-editor-attach-money prefix active"></i>
-                            {{ Form::number('price',null,array('id'=>'price','ng-model'=>'price','step'=>'0.01')) }}
 
-                            <label for="price"> @lang('main.price')</label>
-                            <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                <li class="parsley-required">{{ $errors ->First('price') }} </li>
-                            </ul>
-                        </div>
-                    </div>
-                    {{--end price --}}
+                        {{--branch --}}
+                        @if($branch == 1)
 
-                    {{--credit & debit--}}
-                    <div class="col s12 l1">
+                            <div class="col s12 l3">
+                                <?php $branch =Lang::get('main.branch');
+                                $choseBranch =Lang::get('main.choseBranch') ?>
+                                {{--{{ Form::label('br_id',$branch) }}--}}
 
-                        <input name="price_type"  {{ isset($credit) ?'checked':'' }} value="credit" type="radio" ng-model="price_type" id="radios1-1"  />
-                        <label for="radios1-1">قبض</label>
-                        <input name="price_type" value="debit" {{ isset($debit) ?'checked':'' }} type="radio" id="radios1-2" />
-                        <label for="radios1-2">صرف</label>
+                                {{--{{ Form::label('br_code',$branch) }}--}}
 
+                                {{ Form::select('br_id', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_id','ng-model'=>'br_id','required')) }}
+                                <p class="parsley-required">
+                                    {{ $errors ->first('br_id') }}
+                                </p>
+                            </div>
+                        @endif
 
                     </div>
-                    {{-- end credit & debit--}}
-                    </div>
+
+
                     <div class="row">
+                        {{--price--}}
+                        <div class="col l3 s12">
+                            <div class="input-field">
+                                <i class="mdi mdi-editor-attach-money prefix active"></i>
+                                {{ Form::number('price',null,array('id'=>'price','required','ng-model'=>'price','step'=>'0.01')) }}
+
+                                <label for="price"> @lang('main.price')</label>
+                                <ul class="parsley-errors-list filled" id="parsley-id-5202">
+                                    <li class="parsley-required">{{ $errors ->First('price') }} </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {{--end price --}}
+
+                        {{--credit & debit--}}
+                        <div class="col s12 l1">
+
+                            <input name="price_type"  {{ isset($credit) ?'checked':'' }} value="credit" type="radio" required="required" ng-model="price_type" id="radios1-1"  />
+                            <label for="radios1-1">قبض</label>
+                            <input name="price_type" value="debit" {{ isset($debit) ?'checked':'' }} type="radio" id="radios1-2" />
+                            <label for="radios1-2">صرف</label>
+
+
+                        </div>
+                        {{-- end credit & debit--}}
+                        </div>
+                        <div class="row">
 
                         {{--notes--}}
                         <div class="col s12 l9">
                             <div class="input-field" >
                                 <i class="fa fa-tag prefix"></i>
-                                {{ Form::text('notes',null,array('id'=>'note','class'=>"materialize-textarea" ,'ng-model'=>'notes','length'=>"200")) }}
+                                {{ Form::text('notes',null,array('id'=>'note','class'=>"materialize-textarea" ,'required','ng-model'=>'notes','length'=>"200")) }}
                                 {{ Form::label('notes',lang::get('main.note'))     }}
                                 <p class="parsley-required">{{ $errors ->first('note') }} </p>
                             </div>

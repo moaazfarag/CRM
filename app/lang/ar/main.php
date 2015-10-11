@@ -412,14 +412,18 @@ return  array(
     'accounts_suppliers'    =>'حسابات الموردين',
     'accounts_bank'         =>'حسابات البنوك',
     'accounts_partners'     =>'حسابات جارى الشركاء',
-    'customers_for'    =>'للعميل',
-    'suppliers_for'    =>'للمورد',
-    'bank_for'         =>'لبنك',
-    'partners_for'     =>'للشريك',
-    'customers_title'    =>'العميل',
-    'suppliers_title'    =>'المورد',
-    'bank_title'         =>'بنك',
-    'partners_title'     =>'الشريك',
+    'accounts_expenses'     => 'حسابات المصروفات',
+    'accounts_multiple_revenue'=>'حسابات الإيرادات الأخرى',
+    'customers_for'         =>'للعميل',
+    'suppliers_for'         =>'للمورد',
+    'bank_for'              =>'لبنك',
+    'partners_for'          =>'للشريك',
+    'customers_title'       =>'العميل',
+    'suppliers_title'       =>'المورد',
+    'bank_title'            =>'بنك',
+    'partners_title'        =>'الشريك',
+    'expenses_title'        =>'المصروفات',
+    'multiple_revenue_title'=>'ايرادات أخرى',
     'review'                => 'إستعراض',
     'add_direct_movement'   => 'أضف حركة مباشرة ',
     'trans_type'            => 'نوع الحركة ',
@@ -428,6 +432,21 @@ return  array(
     'buy_type'              =>'مشتريات',
     'type'            =>'النوع',
     'item_balance'              =>'رصيد افتتاحي',
+
+    'invoice_no'            => 'فاتورة رقم ',
+    'catch_type'            => 'قبض' ,
+    'pay_type'              => 'صرف',
+    'stock'                 => 'الرصيد',
+
+    //daily_treasury
+
+    'daily_treasury' => 'يومية الخزينة',
+    'sales-return'   => 'مرتجع مبيعات',
+    'buy-return'     => 'مردود مشتريات',
+    'catch'          => 'حركة مباشرة (قبض)',
+    'pay'            => 'حركة مباشرة (صرف)',
+//    'multiple_revenue' => 'إيرادات أخرى',
+
 
 
 );

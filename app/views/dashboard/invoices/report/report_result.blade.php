@@ -95,7 +95,7 @@
             </thead>
             <tbody>
 
-            <?php  $all_net = array(); $i = 0;  ?>
+            <?php  $all_net = array(); $all_qty = array();  $i = 0; $all_invoice = array();  $all_items = array(); ?>
 
             @foreach($invoices as  $invoice)
 
@@ -135,7 +135,7 @@
                                 <td>{{  $details->qty * $details->unit_price}}</td>
 
                             </tr>
-                              <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                              <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                           @endif
 
                         @elseif($cat_id != '' &&  $item_id == '')
@@ -154,7 +154,7 @@
                                 <td>{{  $details->qty * $details->unit_price}}</td>
 
                             </tr>
-                              <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                              <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                           @endif
 
 
@@ -171,7 +171,7 @@
                                     <td>{{  $details->qty * $details->unit_price}}</td>
 
                             </tr>
-                            <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                            <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                      @endif
 
 
@@ -191,12 +191,16 @@
                     <tr>
                         <th>الإجمالى </th>
                         <th>عدد الفواتير </th>
+                        <th> إجمالى الكميات </th>
+                        <th> إجمالى الأصناف </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>{{ array_sum($all_net) }}</td>
-                        <td>{{ count($invoices) }}</td>
+                        <td>{{ count($all_invoice) }}</td>
+                        <td>{{ array_sum($all_qty) }}</td>
+                        <td>{{ count($all_items) }}</td>
                     </tr>
                     </tbody>
                 </table>

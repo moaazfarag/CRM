@@ -10,7 +10,7 @@
         {{ Form::open(array('route'=>array('storeItem'))) }}
             @elseif(Route::currentRouteName() == 'editItem')
               {{ Form::model($item,array('route'=>array('updateItem',$item->id))) }}
-              @endif
+          @endif
         <div class="card">
           <div class="title">
             <h5><i class="mdi mdi-notification-event-available"></i> {{ @$title }}  </h5>
@@ -30,18 +30,19 @@
                   </div>
              </div>  {{--name--}}
 
+              @if($co_info->co_use_serial)
               <div class="col s2 l2">
                   <p>
-                      <?php $bar_code=Lang::get('main.bar_code') ?>
+                      <?php $serial=Lang::get('main.serial') ?>
                       {{ Form::checkbox('has_serial',1,null,array('id'=>'has_serial')) }}
-                      {{ Form::label('has_serial',$bar_code) }}
+                      {{ Form::label('has_serial',$serial) }}
                   <p class="parsley-required">
                       {{ $errors ->first('has_serial') }}
                   </p>
                   {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
                   </p>
               </div>
-              @if($co_info->co_use_serial)
+              @endif
                   <div class="col s12  l4">
                       <div class="input-field">
                           <i class="fa fa-barcode prefix"></i>
@@ -51,7 +52,7 @@
                           <p class="parsley-required">{{ $errors ->first('bar_code') }} </p>
                       </div>
                   </div>{{--bra_code--}}
-              @endif
+
           </div> {{--first row end--}}
           <div class="row no-margin-top">
               <div class="col s12 l2">

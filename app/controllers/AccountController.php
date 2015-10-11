@@ -70,7 +70,7 @@ class AccountController extends BaseController
             $data['accountType'] = $accountType;
             $data['asideOpen']   = 'open' ;
             $data['pricing']   = $this->pricing;
-            $data['navActive']      = "active";
+            $data['navActive']    = "active";
             $data['arabicName']   = Lang::get('main.'.$accountType);
             $data['account'] = Accounts::where('acc_type','=',$accountType)->where('id','=',$id)->first();
             if($data['account']) {
@@ -170,11 +170,11 @@ class AccountController extends BaseController
             'partners' =>'جارى الشركاء',
             'bank'     =>'البنك',
         );
-
+        $data['branch']      = $this->isAllBranch();
         $data['title']      = 'إضافة حركة مباشرة ';
         $data['company']    = CoData::find(Auth::user()->co_id);
-        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'));
-        $data['rowsData']   = AccountTrans::company()->where('trans_type','direct_movement')->get();
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
+        $data['rowsData']   = AccountTrans::company()->whereIn('trans_type',['catch','pay'])->get();
         return View::make('dashboard.accounts.treasury_account.index', $data);
     }
 
@@ -182,7 +182,9 @@ class AccountController extends BaseController
 
         $inputs = Input::all();
         $ruels =  Accounts::$ruels_direct_movement;
-
+        if($this->isHaveBranch() == 1) {
+            $ruels["br_id"] = "required";
+        }
 
         $validation = Validator::make($inputs,$ruels,BaseController::$messages);
         if($validation->fails())
@@ -194,9 +196,9 @@ class AccountController extends BaseController
 
             $movement           = new AccountTrans;
             $movement->co_id    = Auth::user()->co_id;
+            $movement->br_id       = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
             $movement->account  = $inputs['account'];
             $movement->account_id  = $inputs['account_id'];
-            $movement->trans_type     = 'direct_movement';
             $movement->pay_type = 'cash';
             $movement->date     = $this->strToTime($inputs['date']);
             $movement->notes    = $inputs['notes'];
@@ -205,10 +207,20 @@ class AccountController extends BaseController
 
             if($inputs['price_type'] == 'credit'){
 
+                $account_trans_no           = AccountTrans::company()->where('trans_type','catch')->max('account_trans_no')+1;
+                $movement->account_trans_no = $account_trans_no;
+
                 $movement->credit   =  $inputs['price'] ;
+                $movement->trans_type     = 'catch';
 
             }elseif($inputs['price_type'] == 'debit') {
-                $movement->debit =  $inputs['price'];
+
+                $account_trans_no           = AccountTrans::company()->where('trans_type','pay')->max('account_trans_no')+1;
+                $movement->account_trans_no = $account_trans_no;
+
+                $movement->debit    =  $inputs['price'];
+                $movement->trans_type     = 'pay';
+
             }
 
             $movement->save();
@@ -235,7 +247,7 @@ class AccountController extends BaseController
             $data['title'] = 'تعديل حركة مباشرة';
             $data['company']       = CoData::find(Auth::user()->co_id);
             $data['rowsData']      = AccountTrans::company()->where('type', 'direct_movement')->get();
-            $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
+            $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
 
 //        var_dump($data['rowsData']); die();
             return View::make('dashboard.accounts.treasury_account.index', $data);
@@ -264,8 +276,8 @@ class AccountController extends BaseController
             $movement->co_id         = Auth::user()->co_id;
             $movement->account       = $inputs['account'];
             $movement->account_id    = $inputs['account_id'];
-            $movement->trans_type    = 'direct_movement';
             $movement->pay_type      = 'cash';
+            $movement->br_id       = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
             $movement->date          = $this->strToTime($inputs['date']);
             $movement->notes         = $inputs['notes'];
             $movement->user_id       = Auth::id();
@@ -273,11 +285,13 @@ class AccountController extends BaseController
             if($inputs['price_type'] == 'credit'){
 
                 $movement->credit   =  $inputs['price'] ;
+                $movement->trans_type    = 'catch';
                 $movement->debit    = 0;
 
             }elseif($inputs['price_type'] == 'debit') {
 
-                $movement->debit =  $inputs['price'];
+                $movement->debit         =  $inputs['price'];
+                $movement->trans_type    = 'pay';
                 $movement->credit= 0;
             }
 
@@ -293,7 +307,7 @@ class AccountController extends BaseController
     public  function searchAccounts($type){
 
 
-        $types = array('customers','suppliers','bank','partners');
+        $types = array('customers','suppliers','bank','partners','expenses','multiple_revenue');
 
         if(in_array($type,$types)){
 
@@ -319,42 +333,52 @@ class AccountController extends BaseController
 
     public function resultAccounts(){
 
-        $inputs = Input::all();
+        // VALIDATION
 
-        $validation = Validator::make($inputs,Accounts::$ruels_result_account,BaseController::$messages);
+         $inputs     = Input::all();
+         $validation = Validator::make($inputs,Accounts::$ruels_result_account,BaseController::$messages);
 
         if($validation->fails()) {
             return Redirect::to('resultAccounts')->withInput()->withErrors($validation->messages());
         }else{
 
+            // CHECK TYPE
+            $type  = $inputs['type'];
+            $types = array('customers','suppliers','bank','partners','expenses','multiple_revenue');
 
-            $date_from   = $this->strToTime($inputs['date_from']);
-            $date_to     = $this->strToTime($inputs['date_to']);
-            $account_id  = $inputs['account_id'];
-            $type        = $inputs['type'];
+            if(in_array($type,$types)){
 
-            $data['account_trans'] = AccountTrans::company()->dateBetween('date',$date_from,$date_to)->where('account_id',$account_id)->get();
-            $data['name']          = Accounts::find($account_id)->acc_name;
+            // FILL VARIABELS FROM INPUTS
+            $date_from          = $this->strToTime($inputs['date_from']);
+            $date_to            = $this->strToTime($inputs['date_to']);
+            $account_id         = $inputs['account_id'];
+
+
+
+            // MAKE QUERY
+            $account_trans     = AccountTrans::company()
+                                ->dateBetween('date',$date_from,$date_to)
+                                ->where('account_id', $account_id)->get();
+
+
+//            var_dump($account_trans); die();
+
+            // FILL DATA FROM INPUTS AND ACCOUNT TRANS RESULT
+
+            $data['account_trans'] = $account_trans;
             $data['date_from']     = $date_from;
             $data['date_to']       = $date_to;
             $data['type']          = $type;
             $data['account']       = $type;
             $data['account_id']    = $account_id;
-            // data for search
+            $data['company']       = CoData::find(Auth::user()->co_id);
+            $data['branch']        = $this->isAllBranch();
+            $data['co_info']       = CoData::thisCompany()->first();
+            $data['title']         = Lang::get('main.accounts_'.$type);
+            $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
+            $data['name']          = Accounts::find($account_id)->acc_name;
+            $data['select_account']='أختر '. Lang::get('main.'.$type);
 
-            $types = array('customers','suppliers','bank','partners');
-            if(in_array($type,$types)){
-
-                $data['co_info']   = CoData::thisCompany()->first();
-                $data['title']     = Lang::get('main.accounts_'.$type);
-                $data['accounts']  = Accounts::company()->where('acc_type',$type)->get();
-
-                if(empty($data['accounts'])){
-                    $data['accounts_empty'] = 'yes';
-                }else{
-                    $data['select_account'] ='أختر '. Lang::get('main.'.$type);
-                    $data['accounts_empty'] = 'no';
-                }
 
                 return View::make('dashboard.accounts.accounts_search.accounts_result',$data);
 
@@ -362,43 +386,63 @@ class AccountController extends BaseController
                 return 'type check error';
             }
 
+            // end data for search
 
         }
 
     }
 
-    public function addNewDirectMovement()
+    public function accountsAddNewDirectMovement()
     {
+
+
         // this function add new direct movement from general accounts pages
         $inputs = Input::all();
-
+//        var_dump($inputs); die();
         $ruels  = Accounts::$ruels_direct_movement;
 
+        if($this->isHaveBranch() == 1) {
+
+            $ruels["br_id"] = "required";
+
+        }
         $validation = Validator::make($inputs, $ruels, BaseController::$messages);
 
         if ($validation->fails()) {
 
-            return Redirect::back()->withInput()->withErrors($validation->messages());
+            return 'try in another time';
+
         } else {
 
-            $movement = new AccountTrans;
-            $movement->co_id = Auth::user()->co_id;
-            $movement->account = $inputs['account'];
-            $movement->account_id = $inputs['account_id'];
-            $movement->trans_type = 'direct_movement';
-            $movement->pay_type = 'cash';
-            $movement->date = $this->strToTime($inputs['date']);
-            $movement->notes = $inputs['notes'];
+            $movement               = new AccountTrans;
+            $movement->co_id        = Auth::user()->co_id;
+            $movement->account      = $inputs['account'];
+            $movement->br_id        = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+            $movement->account_id   = $inputs['account_id'];
+            $movement->pay_type     = 'cash';
+            $movement->date         = $this->strToTime($inputs['date']);
+            $movement->notes        = $inputs['notes'];
 
-            $movement->user_id = Auth::id();
+            $movement->user_id      = Auth::id();
 
             if ($inputs['price_type'] == 'credit') {
 
-                $movement->credit = $inputs['price'];
+                $account_trans_no           = AccountTrans::company()->where('trans_type','catch')->max('account_trans_no')+1;
+                $movement->account_trans_no = $account_trans_no;
+
+                $movement->credit           = $inputs['price'];
+                $movement->trans_type       = 'catch';
 
             } elseif ($inputs['price_type'] == 'debit') {
+
+                $account_trans_no = AccountTrans::company()->where('trans_type','pay')->max('account_trans_no')+1;
+                $movement->account_trans_no = $account_trans_no;
+
                 $movement->debit = $inputs['price'];
+                $movement->trans_type     = 'pay';
+
             }
+
 
             $movement->save();
 
@@ -415,48 +459,445 @@ class AccountController extends BaseController
             }// end if movement
         }
     }
-        public function resultSearchAccounts (){
+        public function resultSearchAccounts(){
 
             // this function redirect back to general accounts after store new direct movement
-            $type        =Input::get('type');
-            $account_id  =Input::get('account_id');
-            $date_from   =Input::get('date_from');
-            $date_to     =Input::get('date_to');
 
-            $data['account_trans'] = AccountTrans::company()->dateBetween('date',$date_from,$date_to)->where('account_id',$account_id)->get();
-            $data['name']          = Accounts::find($account_id)->acc_name;
-            $data['date_from']     = $date_from;
-            $data['date_to']       = $date_to;
-            $data['type']          = $type;
-            $data['account']       = $type;
-            $data['account_id']    = $account_id;
-            // data for search
 
-            $types = array('customers','suppliers','bank','partners');
+            // CHECK TYPE
+            $type        = Input::get('type');
+            $types = array('customers','suppliers','bank','partners','expenses','multiple_revenue');
 
             if(in_array($type,$types)){
 
-                $data['co_info']   = CoData::thisCompany()->first();
-                $data['title']     = Lang::get('main.accounts_'.$type);
-                $data['accounts']  = Accounts::company()->where('acc_type',$type)->get();
+                // FILL VARIABELS FROM INPUTS
+                $account_id  = Input::get('account_id');
+                $date_from   = Input::get('date_from');
+                $date_to     = Input::get('date_to');
 
 
-                if(empty($data['accounts'])){
-                    $data['accounts_empty'] = 'yes';
-                }else{
-                    $data['select_account'] ='أختر '. Lang::get('main.'.$type);
-                    $data['accounts_empty'] = 'no';
-                }
 
+                // MAKE QUERY
+                $account_trans     = AccountTrans::company()
+                    ->dateBetween('date',$date_from,$date_to)
+                    ->where('account_id', $account_id)->get();
+
+
+//            var_dump($account_trans); die();
+
+                // FILL DATA FROM INPUTS AND ACCOUNT TRANS RESULT
+
+                $data['account_trans'] = $account_trans;
+                $data['date_from']     = $date_from;
+                $data['date_to']       = $date_to;
+                $data['type']          = $type;
+                $data['account']       = $type;
+                $data['account_id']    = $account_id;
+                $data['company']       = CoData::find(Auth::user()->co_id);
+                $data['branch']        = $this->isAllBranch();
+                $data['co_info']       = CoData::thisCompany()->first();
+                $data['title']         = Lang::get('main.accounts_'.$type);
+                $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
+                $data['name']          = Accounts::find($account_id)->acc_name;
+                $data['select_account']='أختر '. Lang::get('main.'.$type);
+
+                Session::flash('success','تم إضافة الحركة المباشرة بنجاح');
                 return View::make('dashboard.accounts.accounts_search.accounts_result',$data);
 
             }else{
                 return 'type check error';
             }
 
+        }
+
+    // TREASURY START
+    public function dailyTreasurySearch(){
+
+        $data['title']       = Lang::get('main.daily_treasury');
+        $data['company']     = CoData::find(Auth::user()->co_id);
+        $data['branch']      = $this->isAllBranch();
+
+        return View::make('dashboard.accounts.daily_treasury.daily_treasury_search',$data);
+
+
+    }
+    public function dailyTreasuryResult(){
+
+
+        $inputs = Input::all();
+
+        $validation = Validator::make($inputs,Accounts::$ruels_treasury,BaseController::$messages);
+
+        if($validation->fails()){
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        }else{
+
+            $br_id          = $inputs['br_id'];
+            $date_from      = $this->strToTime($inputs['date_from']);
+            $date_to        = $this->strToTime($inputs['date_to']);
+
+            $debit_types    = array('buy','pay','sales-return');
+            $credit_types   = array('sales','catch','buy-return');
+            $movements      = array('pay','catch');
+            $debit          = array();
+            $credit         = array();
+
+            $data['company']        = CoData::find(Auth::user()->co_id);
+            $data['branch']         = $this->isAllBranch();
+            $data['title']          = Lang::get('main.daily_treasury');
+            $data['date_from']      = $date_from;
+            $data['date_to']        = $date_to;
+            $data['movements']      = $movements;
+            $data['debit_types']    = $debit_types;
+            $data['credit_types']   = $credit_types;
+             $data['br_id']         = $br_id  ;
+            $data['account_type']   = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
+
+
+            if(isset($br_id)&& $br_id !='' ){
+
+                $data['branch_name']    = Branches::find($br_id)->first()->br_name ;
+                $data['view_branch']  = 'one';
+                $last_balances = Treasury::company()->where('br_id',$br_id)->where('date','<',$date_from)->get();
+
+                if(!empty($last_balances)) {
+                    foreach ($last_balances as $k => $last_balance) {
+
+
+                        if (in_array($last_balance->type, $movements)) {
+
+                            $debit[$k] = $last_balance->credit;
+                            $credit[$k] = $last_balance->debit;
+
+                        } else {
+
+                            if (in_array($last_balance->type, $credit_types)) {
+
+                                $debit[$k] = $last_balance->credit;
+                                $credit[$k] = 0;
+
+                            } elseif (in_array($last_balance->type, $debit_types)) {
+
+                                $debit[$k] = 0;
+                                $credit[$k] = $last_balance->debit;
+                            }
+
+                        }// end else
+                    }
+
+                    $data['last_debit'] = array_sum($credit);
+                    $data['last_credit'] = array_sum($debit);
+
+                }else{
+
+                    $data['last_debit']  = 0;
+                    $data['last_credit'] = 0;
+                }
+
+
+                //--------------------- treasury_between_date ----------------------------------------
+
+                $data['treasury_between_date'] =  Treasury::company()->where('br_id',$br_id)->dateBetween('date',$date_from,$date_to)->get();
+
+
+//                var_dump($data['treasury_between_date']); die();
+                return View::make('dashboard.accounts.daily_treasury.daily_treasury_result',$data);
+
+            }// end if branch
+
+            else{
+
+                // get all branches
+
+                $all_branches    = Branches::company()->get();
+                $all_branches_id = array();
+                $data['view_branch']  = 'many';
+
+                foreach($all_branches as $i=>$branch ){
+
+                        $br_id                = $branch->id;
+                        $all_branches_id[$i]  = $branch->id;
+
+
+                        $last_balances = Treasury::company()->where('br_id',$branch->id)->where('date','<',$date_from)->get();
+
+                        if(!empty($last_balances)) {
+
+                            foreach ($last_balances as $k => $last_balance) {
+
+
+                                if (in_array($last_balance->type, $movements)) {
+
+                                    $debit[$k]  = $last_balance->credit;
+                                    $credit[$k] = $last_balance->debit;
+
+                                } else {
+
+                                    if (in_array($last_balance->type, $credit_types)) {
+
+                                        $debit[$k]  = $last_balance->credit;
+                                        $credit[$k] = 0;
+
+                                    } elseif (in_array($last_balance->type, $debit_types)) {
+
+                                        $debit[$k] = 0;
+                                        $credit[$k] = $last_balance->debit;
+                                    }
+
+                                }// end else
+                            }
+
+                            $data["last_debit"][$branch->id]  = array_sum($credit);
+                            $data["last_credit"][$branch->id] = array_sum($debit);
+
+                        }else{
+
+                            $data["last_debit"][$branch->id]  =  0;
+                            $data["last_credit"][$branch->id] = 0;
+                        }
+
+
+                        //--------------------- treasury_between_date ----------------------------------------
+                        $data['all_branches_id'] = $all_branches_id;
+                        $data["treasury_between_date"]["$br_id"] =  Treasury::company()->where('br_id',$br_id)->dateBetween('date',$date_from,$date_to)->get();
+
+
+                    }
+
+
+//                echo '<pre>';   print_r($data['last_credit']);  echo '</pre>';   die() ;
+
+                return View::make('dashboard.accounts.daily_treasury.daily_treasury_result',$data);
+
+            }// end else
+
+
+
+
+        }// end if validation
+
+
+
+    }
+
+    public function dailyTreasuryAddDirectMovement()
+    {
+
+        $inputs = Input::all();
+        $ruels = Accounts::$ruels_direct_movement;
+
+        if ($this->isHaveBranch() == 1) {
+            $ruels["br_id"] = "required";
+        }
+
+        $validation = Validator::make($inputs, $ruels, BaseController::$messages);
+        if ($validation->fails()) {
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        } else {
+
+
+            $movement               = new AccountTrans;
+            $movement->co_id        = Auth::user()->co_id;
+            $movement->br_id        = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+            $movement->account      = $inputs['account'];
+            $movement->account_id   = $inputs['account_id'];
+            $movement->pay_type     = 'cash';
+            $movement->date         = $this->strToTime($inputs['date']);
+            $movement->notes        = $inputs['notes'];
+            $movement->user_id      = Auth::id();
+
+            if ($inputs['price_type'] == 'credit') {
+
+                $account_trans_no = AccountTrans::company()->where('trans_type', 'catch')->max('account_trans_no') + 1;
+                $movement->account_trans_no = $account_trans_no;
+
+                $movement->credit = $inputs['price'];
+                $movement->trans_type = 'catch';
+
+            } elseif ($inputs['price_type'] == 'debit') {
+
+                $account_trans_no = AccountTrans::company()->where('trans_type', 'pay')->max('account_trans_no') + 1;
+                $movement->account_trans_no = $account_trans_no;
+
+                $movement->debit = $inputs['price'];
+                $movement->trans_type = 'pay';
+
+            }
+
+            $movement->save();
+
+            if ($movement->save()) {
+
+
+                $date_from  = $this->strToTime($inputs['date_from']);
+                $date_to    = $this->strToTime($inputs['date_to']);
+                $br_id      = $inputs['branch_id'];
+
+                Session::flash('success','تم إضافة الحركة المباشرة بنجاح ');
+
+//                return Redirect::r();
+                return Redirect::route('resultSearchDailyTreasury', array('date_from' => $date_from , 'date_to' => $date_to, 'br_id' => $br_id));
+            }// end if movement
+         ;
 
 
         }
+    }
+
+
+    public function resultSearchDailyTreasury(){
+
+
+        $br_id          = Input::get('br_id');
+        $date_from      = $this->strToTime(Input::get('date_from'));
+        $date_to        = $this->strToTime(Input::get('date_to'));
+
+
+        $debit_types    = array('buy','pay','sales-return');
+        $credit_types   = array('sales','catch','buy-return');
+        $movements      = array('pay','catch');
+        $debit          = array();
+        $credit         = array();
+
+        $data['company']        = CoData::find(Auth::user()->co_id);
+        $data['branch']         = $this->isAllBranch();
+        $data['title']          = Lang::get('main.daily_treasury');
+        $data['date_from']      = $date_from;
+        $data['date_to']        = $date_to;
+        $data['movements']      = $movements;
+        $data['debit_types']    = $debit_types;
+        $data['credit_types']   = $credit_types;
+        $data['br_id']         = $br_id  ;
+        $data['account_type']   = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
+
+
+        if(isset($br_id)&& $br_id !='' ){
+
+            $data['branch_name']    = Branches::find($br_id)->first()->br_name ;
+            $data['view_branch']  = 'one';
+            $last_balances = Treasury::company()->where('br_id',$br_id)->where('date','<',$date_from)->get();
+
+            if(!empty($last_balances)) {
+                foreach ($last_balances as $k => $last_balance) {
+
+
+                    if (in_array($last_balance->type, $movements)) {
+
+                        $debit[$k] = $last_balance->credit;
+                        $credit[$k] = $last_balance->debit;
+
+                    } else {
+
+                        if (in_array($last_balance->type, $credit_types)) {
+
+                            $debit[$k] = $last_balance->credit;
+                            $credit[$k] = 0;
+
+                        } elseif (in_array($last_balance->type, $debit_types)) {
+
+                            $debit[$k] = 0;
+                            $credit[$k] = $last_balance->debit;
+                        }
+
+                    }// end else
+                }
+
+                $data['last_debit'] = array_sum($credit);
+                $data['last_credit'] = array_sum($debit);
+
+            }else{
+
+                $data['last_debit']  = 0;
+                $data['last_credit'] = 0;
+            }
+
+
+            //--------------------- treasury_between_date ----------------------------------------
+
+            $data['treasury_between_date'] =  Treasury::company()->where('br_id',$br_id)->dateBetween('date',$date_from,$date_to)->get();
+
+
+//                var_dump($data['treasury_between_date']); die();
+            return View::make('dashboard.accounts.daily_treasury.daily_treasury_result',$data);
+
+        }// end if branch
+
+        else{
+
+            // get all branches
+
+            $all_branches    = Branches::company()->get();
+            $all_branches_id = array();
+            $data['view_branch']  = 'many';
+
+            foreach($all_branches as $i=>$branch ){
+
+                $br_id                = $branch->id;
+                $all_branches_id[$i]  = $branch->id;
+
+
+                $last_balances = Treasury::company()->where('br_id',$branch->id)->where('date','<',$date_from)->get();
+
+                if(!empty($last_balances)) {
+
+                    foreach ($last_balances as $k => $last_balance) {
+
+
+                        if (in_array($last_balance->type, $movements)) {
+
+                            $debit[$k]  = $last_balance->credit;
+                            $credit[$k] = $last_balance->debit;
+
+                        } else {
+
+                            if (in_array($last_balance->type, $credit_types)) {
+
+                                $debit[$k]  = $last_balance->credit;
+                                $credit[$k] = 0;
+
+                            } elseif (in_array($last_balance->type, $debit_types)) {
+
+                                $debit[$k] = 0;
+                                $credit[$k] = $last_balance->debit;
+                            }
+
+                        }// end else
+                    }
+
+                    $data["last_debit"][$branch->id]  = array_sum($credit);
+                    $data["last_credit"][$branch->id] = array_sum($debit);
+
+                }else{
+
+                    $data["last_debit"][$branch->id]  =  0;
+                    $data["last_credit"][$branch->id] = 0;
+                }
+
+
+                //--------------------- treasury_between_date ----------------------------------------
+                $data['all_branches_id'] = $all_branches_id;
+                $data["treasury_between_date"]["$br_id"] =  Treasury::company()->where('br_id',$br_id)->dateBetween('date',$date_from,$date_to)->get();
+
+
+            }
+
+
+//                echo '<pre>';   print_r($data['last_credit']);  echo '</pre>';   die() ;
+
+            return View::make('dashboard.accounts.daily_treasury.daily_treasury_result',$data);
+
+        }// end else
+
+
+
+
+    }// end if validation
+
+
 
 }
 

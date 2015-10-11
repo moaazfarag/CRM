@@ -218,7 +218,7 @@
                         <ul>
 
                         <li>
-                            <a href="{{ URL::route('addInvoice',"sales") }}" class="waves-effect waves-blue"> يومية الخزينة </a>
+                            <a href="{{ URL::route('dailyTreasurySearch') }}" class="waves-effect waves-blue"> يومية الخزينة </a>
                         <a href="{{ URL::route('addDirectMovement') }}" class="waves-effect waves-blue"> الحركات المباشرة </a>
                             </li>
                             </ul>
@@ -228,6 +228,8 @@
             <li> <a href="{{ URL::route('searchAccounts','suppliers') }}" class="waves-effect waves-blue"> @lang('main.accounts_suppliers') </a>  </li>
             <li> <a href="{{ URL::route('searchAccounts','bank') }}" class="waves-effect waves-blue">   @lang('main.accounts_bank')</a>  </li>
             <li> <a href="{{ URL::route('searchAccounts','partners') }}" class="waves-effect waves-blue">  @lang('main.accounts_partners') </a>  </li>
+            <li> <a href="{{ URL::route('searchAccounts','multiple_revenue') }}" class="waves-effect waves-blue">  @lang('main.accounts_multiple_revenue') </a>  </li>
+            <li> <a href="{{ URL::route('searchAccounts','expenses') }}" class="waves-effect waves-blue">  @lang('main.accounts_expenses') </a>  </li>
 
 
 
