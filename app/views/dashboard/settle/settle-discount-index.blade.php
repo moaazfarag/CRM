@@ -29,12 +29,22 @@
                 <b> فرع :{{ $branch }}</b>
              @endif
          </div>{{--branch--}}
-         <div class="col s2 l3">
-             <i class="fa fa-calendar"></i>
-             {{ Form::label('data','التاريخ') }}
-             {{ Form::text('date',null,array('class'=>'pikaday','required','ng-model'=>'date','id'=>'data')) }}
-             <p class="parsley-required">{{ $errors ->first('data') }} </p>
-          </div> {{--data--}}
+          <div class="col s2 l3">
+              <i class="fa fa-calendar"></i>
+              {{ Form::label('data',Lang::get('main.date')) }}
+              <?php $date = new dateTime;
+              ?>
+              <input required="required"
+                     type="date"
+                      {{--ng-model="date = Date()"--}}
+                     autofocus="autofocus"
+                     id="data"
+                     value="{{$date->format('Y-m-d')}}"
+                     max="{{$date->modify('+1 day')->format('Y-m-d')}}"
+                     min="{{$date->modify('-1 day')->format('Y-m-d')}}"
+                     name="date">
+              <p class="parsley-required">{{ $errors ->first('data') }} </p>
+          </div> {{--date--}}
 
 
 

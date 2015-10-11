@@ -242,6 +242,7 @@ class BaseController extends Controller {
     }
     public function priceBaseOnAccount($accountId = null,$item)
     {
+
         if (isset($accountId)) {
             $account = Accounts::company()->find($accountId);
             if($account){

@@ -1,8 +1,8 @@
-@extends('dashboard.main')
+    @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
 <section   class="content-wrap ecommerce-invoice" ng-app>
-    <div class="card">
+    <div id="print-content"  class="card">
     <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>

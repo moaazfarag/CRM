@@ -160,7 +160,7 @@ class buyInvoiceSeeder extends Seeder {
              array(
                 'co_id'             =>'1',
                 'trans_header_id'   =>'1',
-                'item_id'           =>'1',
+                'item_id'           =>'2',
                 'qty'               =>'2',
                 'unit_price'        =>'80',
                 'item_total'        =>'160',
@@ -186,7 +186,7 @@ class buyInvoiceSeeder extends Seeder {
             array(
                 'co_id'             =>'1',
                 'trans_header_id'   =>'2',
-                'item_id'           =>'1',
+                'item_id'           =>'2',
                 'qty'               =>'4',
                 'unit_price'        =>'80',
                 'item_total'        =>'320',
@@ -214,7 +214,7 @@ class buyInvoiceSeeder extends Seeder {
             array(
                 'co_id'             =>'1',
                 'trans_header_id'   =>'3',
-                'item_id'           =>'1',
+                'item_id'           =>'3',
                 'qty'               =>'100',
                 'unit_price'        =>'50',
                 'item_total'        =>'5000',
@@ -254,7 +254,7 @@ class buyInvoiceSeeder extends Seeder {
             array(
                 'co_id'             =>'1',
                 'trans_header_id'   =>'5',
-                'item_id'           =>'1',
+                'item_id'           =>'3',
                 'qty'               =>'1',
                 'unit_price'        =>'80',
                 'item_total'        =>'80',

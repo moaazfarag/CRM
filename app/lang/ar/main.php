@@ -339,7 +339,7 @@ return  array(
     'num'            =>'الرقم',
     'item_name' 	 =>'اسم الصنف',
     'quantity'		 =>' الكمية',
-    'item_prise'     =>'سعر الوحدة',
+    'item_price'     =>'سعر الوحدة',
     'sum'			 =>' الاجمالي',
     'serial_'		 =>'السيريال',
     'show_settle'	 =>'عرض تسويات',
@@ -426,6 +426,8 @@ return  array(
     'direct_movement_type'  =>'حركة مباشرة ',
     'sales_type'            =>'مبيعات',
     'buy_type'              =>'مشتريات',
+    'type'            =>'النوع',
+    'item_balance'              =>'رصيد افتتاحي',
 
 
 );

@@ -1,11 +1,24 @@
                      <!-- pop up  Structure -->
-<div  id="addItem"  class="modal">
+<div  id="addFromInvoices"  class="modal">
     <a class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
     <div class="modal-content">
         رقم الفاتورة : @{{ header.invoice_no }}
         تاريخ الفاتورة : @{{ header.date }}
         طريقة الدفع  : @{{ header.pay_type }}
-        <table ng-show="invoiceItems"  class="display table table-bordered table-striped table-hover">
+        <div class="col s12 l4">
+            <div class="input-field">
+                <i class="fa fa-database prefix"></i>
+                {{ Form::label('invoice_no_by_account',"رقم الفاتورة") }}
+                {{ Form::number('invoice_no_by_account',null,array('ng-model'=>"invoice.invoiceNoAcc",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'invoice_no')) }}
+
+                <button href="#addItem" ng-disabled="!invoice.invoiceNoAcc" type="button" ng-click="invoiceData('{{$type }}','{{ $branch->id}}',account.id)"   class="waves-effect btn">
+استعراض
+                </button >
+            </div>
+
+
+        </div>
+        <table  class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
                 <th> @lang('main.num')</th>
@@ -29,7 +42,7 @@
 
                 </td>{{--invoice Item NAME & ID--}}
                 <td>
-                    @{{ invoiceItem.qty }}
+                @{{ invoiceItem.qty }}
                 </td>{{--invoice Item quantity--}}
                 <td>
 
@@ -39,7 +52,7 @@
                     @{{ invoiceItem.item_total  }}
                 </td>{{--invoice Item TOTAL--}}
                 <td>
-                    <input ng-required="isRequired(invoiceItem.serial_no)" ng-disabled="hasSerialInvoiceItem(invoiceItem.serial_no)" class="input-without-border"  ng-model="invoiceItem.serial_no" type="text" readonly />
+                    <input ng-required="isRequired(invoiceItem.serial_no)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  ng-model="invoiceItem.serial_no" type="text" readonly />
                 </td>
                 <td>
                     <input  max="@{{ invoiceItem.qty }}" min="1" class="input-without-border"  ng-model="invoiceItem.return" type="number"  />
@@ -74,16 +87,17 @@
         </div>
 
      </div>
-    <div class="modal-footer">
+
+     <div class="modal-footer">
 
 
 <div></div>
-         <div ng-click="backItem(header.discount)" >
-
-             <button ng-click="backItem(header.discount)" type="button"  class="modal-action modal-close btn">اضف</button>
+         <div ng-click="multiBackItem(header.discount)">
+             <button ng-click="multiBackItem(header.discount)" type="button"  class="btn">اضف</button>
          </div>
          <div ng-click="finishReturnInvoice()" >
-        <button ng-click="finishReturnInvoice()" type="button"  class="modal-action modal-close btn">انهاء</button>
-          </div>
+             <button ng-click="finishReturnInvoice()" type="button"  class="modal-action modal-close btn">انهاء</button>
+         </div>
+
      </div>
-</div>
+ </div>

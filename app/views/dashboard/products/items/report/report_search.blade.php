@@ -11,7 +11,7 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
-    {{ Form::open(array('route'=>array('InvoiceReport'))) }}
+    {{ Form::open(array('route'=>array('reportResultItemCard'))) }}
     <div class=" card ">
         <div class="title">
             <h5>
@@ -73,37 +73,7 @@
 
                 <div class="row">
 
-                 {{--account    --}}
 
-                    <div class="col s12 l2">
-
-                        {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
-                        <p class="parsley-required">{{ $errors ->first('account') }} </p>
-                    </div>{{--account--}}
-                    <div ng_show="account.type" class="col s12 l2">
-
-                        <select  name="account_id" ng-required='pay_type == "on_account"' ng-change='getAccountInfo()' ng-model="account.id"  class='browser-default'>
-                            <option value="@{{ account.id }}" ng-repeat="account in accounts">@{{ account.acc_name }}</option>
-                        </select>
-                          <span style="color: red">
-                              @{{ isLimit() }}
-                          </span>
-                        @{{  seletedAccount.pricing }}
-                        {{--{{ Form::select('account',array(null=>"اختر   نوع الحساب ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
-                        <p class="parsley-required">{{ $errors ->first('account_id') }} </p>
-                    </div>{{--account--}}
-
-
-                 {{--end account--}}
-
-                 {{--pay type --}}
-
-                    <div class="col s2 l3">
-
-                        {{ Form::select('pay_type',$pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type')) }}
-                        <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
-                    </div>
-                    {{--end pay type--}}
 
 
                     {{--item --}}

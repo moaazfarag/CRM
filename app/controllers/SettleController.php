@@ -124,6 +124,7 @@ class SettleController extends BaseController {
             $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
             $data['branch']      = $this->isAllBranch(); //
             $data['errors']      = $validation->messages();
+            dd($data['errors']  );
             Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
             return View::make('dashboard.settle.index',$data);
 
@@ -133,7 +134,7 @@ class SettleController extends BaseController {
             $newHeader->true_id         = BaseController::maxId($newHeader);
             $newHeader->co_id           = $this->coAuth();
             $newHeader->user_id         = Auth::id();
-            $newHeader->br_id         = $inputs['br_id'];
+            $newHeader->br_id            = $inputs['br_id'];
 
             $transHeaderId              = $newHeader->company()->where('invoice_type',$type)->max('invoice_no')+1;
             $newHeader->invoice_no      = $transHeaderId;

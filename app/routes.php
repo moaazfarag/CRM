@@ -258,6 +258,9 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         // invoices
        Route::get('search-invoices/{type}/{sum?}',array('uses'=>'InvoiceController@reportSearchInvoice','as'=>'searchReportInvoices'));
        Route::post('invoices/',array('uses'=>'InvoiceController@reportResultInvoice','as'=>'InvoiceReport'));
+        // invoices
+       Route::get('items-card/items',array('uses'=>'ItemController@searchItemCard','as'=>'searchItemCard'));
+       Route::post('items-card-result/',array('uses'=>'ItemController@reportResultItemCard','as'=>'reportResultItemCard'));
 
     });
 
@@ -266,7 +269,6 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::delete('testdelete/{id}',array('uses'=>'TestController@destroy','as'=>'testdelete'));
     Route::get('tests',array('uses'=>'TestController@view','as'=>'testsIndex'));
 
-    Route::get('product','dashboardController@manageProduct');
 
 
 

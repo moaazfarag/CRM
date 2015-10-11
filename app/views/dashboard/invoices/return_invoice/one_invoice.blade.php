@@ -3,7 +3,7 @@
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
     <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]' }}' ng-app="itemApp"  ng-controller="mainController" class="card">
-        {{ Form::open(array('route'=>array('storeReturnInvoice',$type,$br_id),'name'=>'form','novalidate')) }}
+        {{ Form::open(array('route'=>array('storeInvoice',$type,$br_id),'name'=>'form','novalidate')) }}
         <div class="title">
             <h5>
                 <i class="mdi mdi-notification-event-available"></i>
@@ -39,8 +39,39 @@
                            name="date">
                     <p class="parsley-required">{{ $errors ->first('data') }} </p>
                 </div> {{--date--}}
+
             </div>{{--first row end--}}
-                <div class="row">
+            <div class="row">
+                <div class="col s2 l3">
+
+                    <i class="mdi mdi-editor-attach-money prefix active"></i>
+                    {{ Form::label('pay_type',Lang::get('main.payment')) }}
+                    {{ Form::select('pay_type',$pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type','required', 'class'=>'browser-default')) }}
+                    <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
+                </div>{{--pay_type--}}
+                <div class="col s2 l3">
+
+                    <i class="mdi mdi-communication-import-export"></i>
+                    {{ Form::label('account',lang::get('main.account')) }}
+                    {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
+                    <p class="parsley-required">{{ $errors ->first('account') }} </p>
+                </div>{{--account--}}
+                <div ng_show="account.type" class="col s2 l3">
+
+                    <i class="mdi mdi-communication-import-export"></i>
+                    {{ Form::label('account',Lang::get('main.account')) }}
+                    <select  name="account_id" ng-required='pay_type == "on_account"' ng-change='getAccountInfo()' ng-model="account.id"  class='browser-default'>
+                        <option value="@{{ account.id }}" ng-repeat="account in accounts">@{{ account.acc_name }}</option>
+                    </select>
+              <span style="color: red">
+                  @{{ isLimit() }}
+              </span>
+                    @{{  seletedAccount.pricing }}
+                    {{--{{ Form::select('account',array(null=>"اختر   نوع الحساب ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
+                    <p class="parsley-required">{{ $errors ->first('account') }} </p>
+                </div>{{--account--}}
+            </div>
+                <div  class="row">
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-database prefix"></i>
@@ -52,8 +83,14 @@
                             </button >
                         </div>
 
+                            <button ng-show="account.id" href="#addFromInvoices" ng-disabled=" !account.id" type="button" ng-click="invoiceData('{{$type }}','{{ $branch->id}}')"   class="waves-effect btn modal-trigger">
+                                مرتجعات من فواتير عميل محدد
+                            </button >
+
+
                     </div>
                 </div>
+
 
                 {{--@{{ accounts }}--}}
 
@@ -85,26 +122,13 @@
                     {{--{{ Form::text('sum',null,array('id'=>'sum')) }}--}}
                     <p class="parsley-required">{{ $errors ->first('sum') }} </p>
                 </div>{{--sum--}}
-                <div class="col s2 ">
 
-                    {{ Form::label('tax',Lang::get('main.discount_')) }}
-                    @{{ header.discount }} %
-                    <p class="parsley-required">{{ $errors ->first('discount') }} </p>
-                </div>{{--discount--}}
-
-
-                <div class="col s2 ">
-
-                    <i class="mdi mdi-maps-local-atm"></i>
-                    {{ Form::label('tax',Lang::get('main.tax_')) }}
-                    <p class="parsley-required">{{ $errors ->first('tax') }} </p>
-                </div>{{--tax--}}
 
                 <div class="col s2 ">
 
                     <i class="fa fa-exchange"></i>
                     <br>
-                    @{{ afterDiscountReturn() }}
+                    @{{ returnInvoiceTotal() }}
                     <p class="parsley-required">{{ $errors ->first('net') }} </p>
                 </div>{{--net--}}
 
@@ -112,10 +136,11 @@
             {{-- end sum , discount ,tax and net --}}
             <div class="row">
                 <div class="col s12 l12">
-                    <button ng-disabled="form.$valid" type="submit" class="waves-effect btn">@lang('main.add')</button>
+                    <button ng-disabled="form.$invalid" type="submit" class="waves-effect btn">@lang('main.add')</button>
                 </div>
                 {{ Form::close() }}
                 @include('dashboard.invoices.return_invoice._popup_div')
+                @include('dashboard.invoices.return_invoice._popup_from_invoices_div')
 
             </div>{{--submit  row end--}}
             {{--<div class="col s12 m6 l4">--}}

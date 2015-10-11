@@ -5,7 +5,8 @@
  * Website: http://nkdev.info
  * Support: http://nk.ticksy.com
  * Purchase: http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=nKdev
- * License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+ * License: You must have a valid license purchased only from themeforest(the above link) in order to legally
+            use the theme for your project.
  * Copyright 2015.
  */
 img, legend {
@@ -19,8 +20,32 @@ img, legend {
     #print-content {
         width: 100%; margin: 0; float: none;
     }
-}
+    .page {
+        width: 21cm;
+        min-height: 21.7cm;
+        padding: 1cm;
+        margin: 1cm auto;
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
 
+}
+@page {
+    size: A4;
+    margin: 0;
+}
+.page {
+    /*width: 21cm;*/
+    /*min-height: 21.7cm;*/
+    /*padding: 1cm;*/
+    /*margin: 1cm auto;*/
+}
 legend, ul {
     padding: 0
 }

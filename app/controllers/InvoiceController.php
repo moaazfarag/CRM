@@ -35,7 +35,7 @@ class InvoiceController extends BaseController
     public function storeInvoice($type,$br_id)
     {
         $branch =  Branches::company()->find($br_id);
-        $types = ['sales','buy'];
+        $types = ['sales','buy','salesReturn','buyReturn'];
 
         if(in_array($type,$types) && $branch)
         {
@@ -80,7 +80,11 @@ class InvoiceController extends BaseController
                     {
                         $item      = Items::findOrFail($inputs['id_'.$k]);
                         $serial_no = ($item->has_serial)?$inputs['serial_'.$k]:null;
-                        $unitPrice = $this->priceBaseOnAccount($inputs['account_id'],$item);// get price base in account price system
+                        if(isset($inputs['cost_'.$k]) && intval($inputs['cost_'.$k]) > 0 && $type == "buy"){
+                            $unitPrice =  intval($inputs['cost_'.$k] );// get price from input
+                        }else{
+                            $unitPrice = $this->priceBaseOnAccount($inputs['account_id'],$item);// get price base in account price system
+                        }
                         $quantity  = ($item->has_serial)?1:$inputs['quantity_'.$k];
                         $serialItem = Items::getSerialItemsWithBalanceByBrId($branch->id,$item->id,$serial_no);
 //                        dd($serialItem);
@@ -109,20 +113,25 @@ class InvoiceController extends BaseController
                         );
                         $total +=   $newInvoiceItems[$k]['item_total'];
                     }
-                    $discount = isset($inputs['discount'])?$inputs['discount']:0;
-                    $tax      = isset($inputs['tax'])?$inputs['tax']:0;
-                    $newHeader->in_total        = $total ;
-                    $newHeader->discount        = $discount;
-                    $newHeader->tax             = $tax;
-                    $net                        = $total - ($total)*($discount)/100;
-                    $newHeader->net             = $net;
+                    if(count($newInvoiceItems)>0){
+                        $discount = isset($inputs['discount'])?$inputs['discount']:0;
+                        $tax      = isset($inputs['tax'])?$inputs['tax']:0;
+                        $newHeader->in_total        = $total ;
+                        $newHeader->discount        = $discount;
+                        $newHeader->tax             = $tax;
+                        $net                        = $total - ($total)*($discount)/100;
+                        $newHeader->net             = $net;
+                        //if select account save record into account_trans
+                        AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
+                        $newHeader->save();
+                        TransDetails::insert($newInvoiceItems);
+                        Session::flash('success','تم اضافة الفاتورة بنجاح');
+                        return Redirect::route('viewInvoice',array($newHeader->id));
+                    }else{
+                        $newHeader->delete();
+                        return "الاتورة خالية من المنتجات";
+                    }
 
-                    //if select account save record into account_trans
-                    AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
-                    $newHeader->save();
-                    TransDetails::insert($newInvoiceItems);
-                    Session::flash('success','تم اضافة الفاتورة بنجاح');
-                    return Redirect::route('viewInvoice',array($newHeader->id));
                 }else{
                     return "لقد قمت بادخال بعض المدخلات بشكل خطا ";
                     //                dd(Input::all());
@@ -135,7 +144,7 @@ class InvoiceController extends BaseController
     public function storeSalesInvoice($type,$br_id)
     {
         $branch =  Branches::company()->find($br_id);
-        $types = ['sales','buy'];
+        $types = ['sales','buy','salesReturn'];
 
         if(in_array($type,$types) && $branch)
         {
