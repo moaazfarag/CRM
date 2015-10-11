@@ -16,6 +16,7 @@
     <th>@lang('main.date')</th>
     <th>@lang('main.debit_')</th>
     <th>@lang('main.credit_')</th>
+    <th>@lang('main.trans_type')</th>
     <th>@lang('main.notes')</th>
     <th>@lang('main.edit')</th>
 
@@ -41,6 +42,7 @@
         <td>{{ BaseController::ViewDate($rowData->date) }}</td>
         <td>{{ $rowData->debit}}</td>
         <td>{{ $rowData->credit }}</td>
+        <td>{{ lang::get('main.'.$rowData->type) }}</td>
         <td>{{ $rowData->notes }}</td>
         <td>
             <a href="{{ URL::route('editDirectMovement',array($rowData->id)) }}" class="btn btn-small z-depth-0">

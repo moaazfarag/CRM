@@ -102,11 +102,13 @@ class ItemController extends BaseController
                 $oldItem->seasons_id       = Input::get('seasons_id');
                 $oldItem->models_id        = Input::get('models_id');
                 $oldItem->bar_code         = Input::get('bar_code');
+                $oldItem->has_serial       = isset($inputs['has_serial'])?$inputs['has_serial']:0;
                 $oldItem->buy              = Input::get('buy');
                 $oldItem->sell_users       = Input::get('sell_users');
                 $oldItem->sell_nos_gomla   = Input::get('sell_nos_gomla');
                 $oldItem->sell_gomla       = Input::get('sell_gomla');
                 $oldItem->sell_gomla_gomla = Input::get('sell_gomla_gomla');
+
                 $oldItem->limit            = Input::get('limit');
                 $oldItem->notes            = Input::get('notes');
                 $oldItem->user_id          = Auth::id();

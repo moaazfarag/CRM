@@ -14,7 +14,7 @@ class InvoiceReturnController extends BaseController
         if(in_array($type,$types) && $branch)
         {
             $data['name']          = Lang::get('main.'.$type); // page title
-            $data['title'] = "   مرتجعات  " .$data['name'] ; // page title
+            $data['title']         ="   مرتجعات  " .$data['name'] ; // page title
             $data['invoices_open'] = 'open' ;
             $data['co_info']       = CoData::thisCompany()->first();//select info models category seasons
             $data['branch']        = $branch;
@@ -22,6 +22,7 @@ class InvoiceReturnController extends BaseController
             $data['br_id']         = $br_id;
             $data['pay_type']      = array('cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
             $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
+
             if($type == "salesReturn"){
                 return View::make('dashboard.invoices.return_invoice.one_invoice',$data);
             }else{

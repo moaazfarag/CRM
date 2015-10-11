@@ -12,6 +12,11 @@ class CreateViewMakerName extends Migration {
 	 */
 	public function up()
 	{
+
+
+
+
+
 		$addQ = DB::table('trans_header')
 			->select(DB::raw('SUM(qty) as item_bal'), 'trans_details.item_id','trans_header.br_id','trans_details.serial_no', 'items.*')
 			->join('trans_details', 'trans_details.trans_header_id', '=', 'trans_header.id')
@@ -38,8 +43,10 @@ class CreateViewMakerName extends Migration {
 			->union($itemBalance)
 			->union($addQ);
 		DB::statement('CREATE OR REPLACE VIEW items_balance AS' . $discountQ->toSql());
-
 	}
+
+
+
 	/**
 	 * Reverse the migrations.
 	 *

@@ -54,6 +54,28 @@
                         </ul>
                     </div>
                 </div>
+                {{--branch --}}
+                @if($branch == 1)
+
+                <div class="col s12 l4">
+                    <?php $branch =Lang::get('main.branch');
+                    $choseBranch =Lang::get('main.choseBranch') ?>
+                    {{--{{ Form::label('br_id',$branch) }}--}}
+
+                    {{--{{ Form::label('br_code',$branch) }}--}}
+
+                    {{ Form::select('br_id', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
+                    <p class="parsley-required">
+                        {{ $errors ->first('br_id') }}
+                    </p>
+                </div>
+                @endif
+
+            </div>
+
+            <div class="row">
+
+
 
                 {{--price--}}
                 <div class="col m2 s12">
@@ -75,7 +97,11 @@
                         <label for="radios1-1">قبض</label>
                         <input name="price_type" value="debit" {{ isset($debit) ?'checked':'' }} type="radio" id="radios1-2" />
                         <label for="radios1-2">صرف</label>
+
+
                 </div>
+
+
 
                {{--account  name--}}
                 <div class="col s12 l2">
@@ -108,7 +134,7 @@
                 <div class="row">
 
                 {{--notes--}}
-                <div class="col s12 l10">
+                <div class="col s12 l9">
                     <div class="input-field" >
                         <i class="fa fa-tag prefix"></i>
                         {{ Form::text('notes',null,array('id'=>'note','class'=>"materialize-textarea" ,'length'=>"200")) }}
