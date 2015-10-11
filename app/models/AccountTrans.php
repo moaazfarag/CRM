@@ -20,10 +20,21 @@ class AccountTrans extends Eloquent {
 
 
     public function accountName(){
-        return $this->hasOne('Accounts','id','account_id');
+
+            $account_name = $this->hasOne('Accounts','id','account_id');
+        if($account_name){
+
+            return $account_name;
+        }
+            else {
+                return ' ÛíÑ ãÍÏÏ ';
+            }
     }
 
+    public  function invoiceNo(){
 
+        return $this->hasOne('TransHeader','id','trans_id');
+    }
     public static function saveAccountTrans($inputs,$transHeaderId,$type,$net,$branchId)
 
     {

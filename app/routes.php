@@ -38,6 +38,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     /**
      * company info area
      */
+    Route::get('up','AccountController@run');
     Route::get('/',array('uses'=>'dashboardController@index','as'=>'index'));
     Route::get('setting',array('uses'=>'CompanyController@editCompanyInfo','as'=>'editCompanyInfo'));
     Route::post('updateSetting/{id}',array('before'=>'csrf','uses'=>'CompanyController@updateCompanyInfo','as'=>'updateCompanyInfo'));
@@ -279,13 +280,18 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::get('edit-direct-movement/{id}', array('uses' => 'AccountController@editDirectMovement', 'as' => 'editDirectMovement'));
         Route::post('update-direct-movement/{id}', array('uses' => 'AccountController@updateDirectMovement', 'as' => 'updateDirectMovement'));
 
+        // Daily treasury
+        Route::get('daily-treasury-search', array('uses' => 'AccountController@dailyTreasurySearch', 'as' => 'dailyTreasurySearch'));
+        Route::post('daily-treasury-result', array('uses' => 'AccountController@dailyTreasuryResult', 'as' => 'dailyTreasuryResult'));
+        Route::post('daily-treasury-add-direct-movement' , array('uses'=> 'AccountController@dailyTreasuryAddDirectMovement' , 'as'=>'dailyTreasuryAddDirectMovement'));
+        Route::get('result-search-daily-treasury' , array('uses'=> 'AccountController@resultSearchDailyTreasury' , 'as'=>'resultSearchDailyTreasury'));
 
 
 
         //  accounts ( customers ,suppliers ,bank ,partners )
         Route::get('search-accounts/{type}', array('uses' => 'AccountController@searchAccounts', 'as' => 'searchAccounts') );
         Route::post('result-accounts', array('uses' => 'AccountController@resultAccounts', 'as' => 'resultAccounts') );
-        Route::post('add-new-direct-movement', array('uses' => 'AccountController@addNewDirectMovement', 'as' => 'addNewDirectMovement') );
+        Route::post('add-new-direct-movement', array('uses' => 'AccountController@accountsAddNewDirectMovement', 'as' => 'addNewDirectMovement') );
         Route::get('result-search-account', array('uses' => 'AccountController@resultSearchAccounts', 'as' => 'resultSearchAccounts') );
 
     });

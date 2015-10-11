@@ -10,7 +10,7 @@ angular.module('mainCtrl', [])
         $scope.value = "";
         $scope.invoiceItems = [
         ];
-        $scope.date = Date();
+        //$scope.date = Date();
         $scope.header={}
         $scope.invoice={}
         $scope.seletedAccount = {};
