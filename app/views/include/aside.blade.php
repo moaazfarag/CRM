@@ -114,10 +114,11 @@
                         <a href="{{ URL::route('searchItemCard') }}" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
                     </li>
                     <li>
-                        <a href="#" class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
+                        <a href="{{ URL::route('searchTheBalanceOfTheStores','inventory_store') }}" class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
                     </li>
                     <li>
-                        <a href="#" class="waves-effect waves-blue">@lang('main.balanceStores')  </a>
+                        <a href="{{ URL::route('searchTheBalanceOfTheStores','balance_stores') }}" class="waves-effect waves-blue">@lang('main.balance_stores')  </a>
+                        <a href="{{ URL::route('searchTheBalanceOfTheStores','evaluation_stores') }}" class="waves-effect waves-blue">@lang('main.evaluation_stores')  </a>
                     </li>
                 </ul>
             </li>

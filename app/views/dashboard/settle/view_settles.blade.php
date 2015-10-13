@@ -81,6 +81,7 @@
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">تراجع</a>
                     {{ Form::hidden('invoice_no',$invoice->invoice_no) }}
                     {{ Form::hidden('invoice_type',$invoice->invoice_type) }}
+                    {{ Form::hidden('br_id',$invoice->br_id) }}
                     {{ Form::close() }}
                 </div>
             </div>

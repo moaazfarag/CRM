@@ -686,7 +686,7 @@ class AccountController extends BaseController
     {
 
         $inputs = Input::all();
-        $ruels = Accounts::$ruels_direct_movement;
+        $ruels  = Accounts::$ruels_direct_movement;
 
         if ($this->isHaveBranch() == 1) {
             $ruels["br_id"] = "required";

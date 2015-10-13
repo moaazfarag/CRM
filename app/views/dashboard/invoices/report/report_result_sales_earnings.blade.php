@@ -91,9 +91,8 @@
                         <th>@lang('main.item_name_')</th>
                         <th>@lang('main.category')</th>
                         <th>@lang('main.qty_')</th>
-                        <th>@lang('main.buy_prise')</th>
+                        <th>@lang('main.buy_prise_avg')</th>
                         <th>@lang('main.sales_prise')</th>
-                        <th>@lang('main.sum')</th>
                         <th>@lang('main.earnings')</th>
                     </tr>
                     </thead>
@@ -117,12 +116,12 @@
                                         <td>{{ $details->item_name }}</td>
                                         <td>{{ Category::find($details->cat_id)->name }}</td>
                                         <td>{{ $details->qty }}</td>
-                                        <td>{{ $details->buy }}</td>
+                                        <td>{{ $details->avg_cost }}</td>
                                         <td>{{ $details->unit_price }}</td>
-                                        <td>{{  $details->qty * $details->unit_price}}</td>
+                                        <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
 
                                     </tr>
-                                    <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                                    <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                                 @endif
 
                             @elseif($cat_id == '' &&  $item_id != '')
@@ -136,12 +135,12 @@
                                         <td>{{ $details->item_name }}</td>
                                         <td>{{ Category::find($details->cat_id)->name }}</td>
                                         <td>{{ $details->qty }}</td>
-                                        <td>{{ $details->buy }}</td>
+                                        <td>{{ $details->avg_cost }}</td>
                                         <td>{{ $details->unit_price }}</td>
-                                        <td>{{  $details->qty * $details->unit_price}}</td>
+                                        <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
 
                                     </tr>
-                                    <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                                    <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                                 @endif
 
                             @elseif($cat_id != '' &&  $item_id == '')
@@ -156,12 +155,11 @@
                                         <td>{{ $details->item_name }}</td>
                                         <td>{{ Category::find($details->cat_id)->name }}</td>
                                         <td>{{ $details->qty }}</td>
-                                        <td>{{ $details->buy }}</td>
+                                        <td>{{ $details->avg_cost }}</td>
                                         <td>{{ $details->unit_price }}</td>
-                                        <td>{{  $details->qty * $details->unit_price}}</td>
-
+                                        <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
                                     </tr>
-                                    <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                                    <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                                 @endif
 
 
@@ -174,12 +172,11 @@
                                     <td>{{ $details->item_name }}</td>
                                     <td>{{ Category::find($details->cat_id)->name }}</td>
                                     <td>{{ $details->qty }}</td>
-                                    <td>{{ $details->buy }}</td>
+                                    <td>{{ $details->avg_cost }}</td>
                                     <td>{{ $details->unit_price }}</td>
-                                    <td>{{  $details->qty * $details->unit_price}}</td>
-
+                                    <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
                                 </tr>
-                                <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
+                                <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                             @endif
 
 
@@ -197,17 +194,22 @@
                     <thead>
 
                     <tr>
-                        <th>الإجمالى </th>
                         <th>عدد الفواتير </th>
+                        <th> إجمالى الكميات </th>
+                        <th> إجمالى الأصناف </th>
+                        <th> إجمالى الأرباح </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{ array_sum($all_net) }}</td>
-                        <td>{{ count($invoices) }}</td>
+                        <td>{{ count($all_invoice) }}</td>
+                        <td>{{ array_sum($all_qty) }}</td>
+                        <td>{{ count($all_items) }}</td>
+                        <td>{{ array_sum($all_earnings) }}</td>
                     </tr>
                     </tbody>
                 </table>
+
 
 
 
