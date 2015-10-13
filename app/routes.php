@@ -259,9 +259,15 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         // invoices
        Route::get('search-invoices/{type}/{sum?}',array('uses'=>'InvoiceController@reportSearchInvoice','as'=>'searchReportInvoices'));
        Route::post('invoices/',array('uses'=>'InvoiceController@reportResultInvoice','as'=>'InvoiceReport'));
-        // invoices
+
+        // item card
        Route::get('items-card/items',array('uses'=>'ItemController@searchItemCard','as'=>'searchItemCard'));
-       Route::post('items-card-result/',array('uses'=>'ItemController@reportResultItemCard','as'=>'reportResultItemCard'));
+        Route::post('items-card-result/',array('uses'=>'ItemController@reportResultItemCard','as'=>'reportResultItemCard'));
+
+        // Balances Stores
+        Route::get('search-the-balance-of-the-stores/{type}',array('uses'=>'ItemController@searchTheBalanceOfTheStores','as'=>'searchTheBalanceOfTheStores'));
+        Route::post('result-the-balance-of-the-stores',array('uses'=>'ItemController@resultTheBalanceOfTheStores','as'=>'resultTheBalanceOfTheStores'));
+        Route::post('inventory-store',array('uses'=>'ItemController@inventoryResult','as'=>'inventoryResult'));
 
     });
 

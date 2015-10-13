@@ -321,20 +321,32 @@ class InvoiceController extends BaseController
     {
 
         $inputs = Input::all();
+        $ruels =  TransHeader::$delete_ruels;
 
+        if ($this->isHaveBranch() == 1) {
+            $ruels["br_id"] = "required";
+        }
         $validation = Validator::make($inputs, TransHeader::$delete_ruels);
 
         if ($validation->fails()) {
 
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else{
+
             $invoice_no   = $inputs['invoice_no'];
             $invoice_type = $inputs['invoice_type'];
             $cancel_cause = $inputs['cancel_cause'];
+            $br_id        = $inputs['br_id'];
 
-            $invoice    = TransHeader::company()
+            $invoice      = TransHeader::company()
                 ->where('invoice_no',$invoice_no)
-                ->where('invoice_type',$invoice_type)->first();
+                ->where('invoice_type',$invoice_type);
+            if ($this->isHaveBranch() == 1) {
+
+                $invoice->where('br_id',$br_id);
+            }
+
+             $invoice->first();
             if(!empty($invoice)){
 
                 $invoice->deleted = 1;
@@ -358,17 +370,19 @@ class InvoiceController extends BaseController
                 $data['title']   = Lang::get("main.$type".'_report');
                 $data['sum']     = NULL;
 
-            }elseif($sum == 'sum'){
+             }elseif($sum == 'sum'){
+
                 $data['title'] = Lang::get("main.$type" . '_report_sum');
                 $data['sum']   = 'sum';
 
-            }// end else
+            }
 
 
 
 
 
         $types = array('sales','sales-return','buy','buy-return','sales-earnings');
+
 
         if(in_array($type,$types)){
 

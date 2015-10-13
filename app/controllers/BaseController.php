@@ -168,6 +168,12 @@ class BaseController extends Controller {
 
     }
 
+    public static function LastOneDay($date_from){
+
+        $date = date_create($date_from);
+        date_sub($date, date_interval_create_from_date_string('1 days'));
+        return date_format($date, 'd-m-Y');
+    }
     public static function ViewDateAndTime($date_and_time)
     {
         $date_format = date('d /m / Y ', strtotime($date_and_time));
@@ -182,6 +188,8 @@ class BaseController extends Controller {
         }
         return $date_format;
     }
+
+
     /**
      * search array of array
      * return index of array has same $key and $value
@@ -190,6 +198,7 @@ class BaseController extends Controller {
      * @param $value
      * @return int|string
      */
+
     public static function arraySearch($array,$key,$value){
         if(is_object($array)){
             foreach($array as $k=>$v){
