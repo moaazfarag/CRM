@@ -239,4 +239,115 @@ class ItemController extends BaseController
             return View::make('dashboard.products.items.report.report_result',$data);
         }
     }
+
+    public function searchTheBalanceOfTheStores ($type){
+
+        if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
+
+            $data['type']           = $type;
+            $data['title']          = Lang::get('main.'.$type);
+            $data['co_info']        = CoData::thisCompany()->first();
+            $data['branch']         = $this->isAllBranch();
+
+            return View::make('dashboard.products.items.balance_report.balance_search',$data);
+
+        }else{
+
+           return 'type check error';
+        }
+
+
+    }
+
+    public function resultTheBalanceOfTheStores(){
+
+        $type = Input::get('type');
+
+        if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
+
+            $data['type']    = $type;
+            $data['title']   = Lang::get('main.'.$type);
+
+            $balances       =  DB::table('items_balance')
+                ->company()
+                ->groupBy('br_id')
+                ->groupBy('item_id');
+
+
+            if(Input::get('cat_id') != ''){
+
+                $balances->where('cat_id',Input::get('cat_id'));
+            }
+
+            if(Input::get('br_id') != ''){
+
+
+                $balances->where('br_id',Input::get('br_id'));
+            }
+
+                $balances->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
+
+            if(Input::get('with_zero_results') != ''){
+
+                $zero_results       = Items::company()->whereNotIn('id',$balances->lists('item_id'));
+
+                if(Input::get('cat_id') != ''){
+
+                    $zero_results->where('cat_id',Input::get('cat_id'));
+                }
+
+
+
+
+
+                $data['zero_results']       = $zero_results->get();
+                $data['zero_result_title']  = 'أرصدة المخازن الصفرية ';
+
+            }else {
+                $data['zero_results']  = 0;
+            }
+
+                $data['balances'] = $balances->get();
+
+
+            return View::make('dashboard.products.items.balance_report.balance_result',$data);
+
+        }else{
+
+            return 'type check error';
+        }
+
+
+    }
+
+    public function inventoryResult(){
+
+        $inputs         = Input::all();
+        $all_item       = explode('|',$inputs['all_item']);
+
+        $inventory_data = array();
+         $i             = 0 ;
+
+        foreach($all_item as $item_id){
+
+          if($inputs['inventory_'.$item_id] != ''){
+
+              $inventory_data[$i]['branch_name']   = $inputs['branchName_'.$item_id];
+              $inventory_data[$i]['cat_name']      = $inputs['catName_'.$item_id];
+              $inventory_data[$i]['item_name']     = $inputs['itemName_'.$item_id];
+              $inventory_data[$i]['balance_num']   = $inputs['balance_'.$item_id];
+              $inventory_data[$i]['inventory_num'] = $inputs['inventory_'.$item_id];
+              $inventory_data[$i]['item_id']       = $inputs['itemId_'.$item_id];
+          }
+
+            $i++;
+        }
+
+        $data['balances'] = $inventory_data;
+        $data['type']     = 'inventory_result';
+        $data['title']    = Lang::get('main.inventory_result');
+
+        return View::make('dashboard.products.items.balance_report.balance_result',$data);
+
+    }
 }

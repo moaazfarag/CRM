@@ -384,7 +384,7 @@ return  array(
     'credit_'    =>'دائن',
     'cancel_cause' => 'سبب الإلغاء',
 
-    // out going salary report 
+    // out going salary report
 
     'out_going_salaries_date'   =>'تاريخ القبض',
     'show_salary_detalis'       =>'تفاصيل المرتب',
@@ -404,7 +404,7 @@ return  array(
     'buy_report_sum'      => ' تقرير إجمالى للمشتريات ',
     'buy-return_report'   => 'مردودات المشتريات',
     'sales-earnings_report'      => 'أرباح فواتير المبيعات',
-    'buy_prise'             =>'سعر الشراء',
+    'buy_prise_avg'             =>'متوسط سعر الشراء',
     'sales_prise'           =>'سعر البيع ',
     'earnings'           =>'الربح',
 
@@ -449,6 +449,11 @@ return  array(
     'pay'            => 'حركة مباشرة (صرف)',
 //    'multiple_revenue' => 'إيرادات أخرى',
 
-
+    //balance_stores & evaluation_stores & inventory_store
+    'balance_stores'    =>'أرصدة المخازن',
+    'evaluation_stores' =>'تقييم المخازن',
+    'inventory_store'   => 'جرد المخازن',
+    'inventory'         => 'رصيد الجرد ',
+    'inventory_result'  => 'نتائج الجرد',
 
 );

@@ -121,11 +121,19 @@
                     </thead>
 
                     <tbody>
-
+                    <tr>
+                    <td>  {{ BaseController::LastOneDay($date_from) }} </td>
+                        <td>رصيد ما قبل</td>
+                        <td>{{ $last_debit }}</td>
+                        <td>{{ $last_credit }}</td>
+                    </tr>
                     <?php
 
                     $debit = array();
                     $credit= array();
+
+                    $debit['last_debit']   = $last_debit;
+                    $credit['last_credit'] = $last_credit;
                     ?>
                     @foreach($treasury_between_date as $k => $treasury)
 
@@ -193,18 +201,7 @@
                     </thead>
                     <tbody>
 
-                    <tr>
 
-
-                        <td> رصيد ما قبل
-                            {{ $date_from }}
-
-                        </td>
-
-                        <td>{{ $last_debit }}</td>
-                        <td>{{ $last_credit }}</td>
-                        <td><?php echo BaseController::negativeValue($last_debit - $last_credit); ?></td>
-                    </tr>
                     <tr>
 
                         <td>
@@ -263,11 +260,21 @@
                     </thead>
 
                     <tbody>
-
+                    <tr>
+                        <td>
+                            ما قبل
+                            {{ BaseController::LastOneDay($date_from) }}  </td>
+                        <td>رصيد ما قبل</td>
+                        <td>{{ $last_debit[$branch_id] }}</td>
+                        <td>{{ $last_credit[$branch_id]; }}</td>
+                    </tr>
                     <?php
 
                     $debit = array();
                     $credit= array();
+
+                    $debit['last_debit']   = $last_debit[$branch_id];
+                    $credit['last_credit'] = $last_credit[$branch_id];
                     ?>
                     @foreach($treasury_between_date[$branch_id] as $k => $treasury)
 
@@ -335,18 +342,7 @@
                     </thead>
                     <tbody>
 
-                    <tr>
 
-
-                        <td> رصيد ما قبل
-                            {{ $date_from }}
-
-                        </td>
-
-                        <td>{{ $last_debit[$branch_id] }}</td>
-                        <td>{{ $last_credit[$branch_id] }}</td>
-                        <td><?php echo BaseController::negativeValue($last_debit[$branch_id] - $last_credit[$branch_id]); ?></td>
-                    </tr>
                     <tr>
 
                         <td>
