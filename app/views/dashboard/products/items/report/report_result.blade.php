@@ -80,12 +80,9 @@
             </thead>
             <tbody>
             <tr>
-
-                    <tr>
                     <td colspan="4">رصيد ما قبل</td>
                     <td  colspan="4">{{$balBefore[$itemByItem[0]->item_id]['bal'] }}</td>
-                    </tr>
-
+            </tr>
             <?php $total = 0 ?>
             @foreach($itemByItem as $item )
                     <tr>
@@ -93,7 +90,7 @@
                             <td>@lang('main.'.$item->invoice_type) فاتورة رقم {{ $item->invoice_no }}</td>
                             <td>{{ $item->br_name }}</td>
                             <td>{{ Category::find($item->cat_id)->name }}</td>
-                            <td>{{ ($item->item_bal>0)?$item->item_bal:'('.(($item->item_bal)*-1).')' }}</td>
+                            <td>{{ BaseController::negativeValue($item->item_bal)  }}</td>
                             <td>{{ $item->unit_price }}</td>
                             <td>{{ $item->qty * $item->unit_price}}</td>
                             <td>{{ $item->serial_no}}</td>

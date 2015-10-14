@@ -3,7 +3,7 @@
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
     <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]' }}' ng-app="itemApp"  ng-controller="mainController" class="card">
-        {{ Form::open(array('route'=>array('storeInvoice',$type,$br_id),'name'=>'form','novalidate')) }}
+        {{ Form::open(array('route'=>array('storeTrans',$type,$branch->id),'name'=>'form','novalidate')) }}
         <div class="title">
             <h5>
                 <i class="mdi mdi-notification-event-available"></i>
@@ -12,7 +12,7 @@
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
             </a>
-            <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewInvoices',array('type'=>@$type)) }}" class="btn btn-small z-depth-0">
+            <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{URL::route('viewTransactions',[$type,$branch->id]) }}" class="btn btn-small z-depth-0">
                  {{ @$name}}
             </a>
         </div>
@@ -109,7 +109,7 @@
 
             </div>
 
-            @include('dashboard.invoices.return_invoice._view_table')
+            @include('dashboard.transaction._table._return')
             {{-- start sum , discount ,tax and net--}}
             <div class="row no-margin-top">
 
@@ -139,18 +139,10 @@
                     <button ng-disabled="form.$invalid" type="submit" class="waves-effect btn">@lang('main.add')</button>
                 </div>
                 {{ Form::close() }}
-                @include('dashboard.invoices.return_invoice._popup_div')
-                @include('dashboard.invoices.return_invoice._popup_from_invoices_div')
+                @include('dashboard.transaction._pop_up._return')
+                @include('dashboard.transaction._pop_up._return_invoices')
 
-            </div>{{--submit  row end--}}
-            {{--<div class="col s12 m6 l4">--}}
-            {{--<div class="input-field">--}}
-            {{--<i class="fa fa-barcode prefix"></i>--}}
-            {{--{{ Form::text('serial_no',null,array('id'=>'serial_no')) }}--}}
-            {{--{{ Form::label('serial_no','��������') }}--}}
-            {{--<p class="parsley-required">{{ $errors ->first('serial_no') }} </p>--}}
-            {{--</div>--}}
-            {{--</div>--}}{{--bar_code--}}
+            </div>
         </div> {{--secound row end--}}
 
     </div>

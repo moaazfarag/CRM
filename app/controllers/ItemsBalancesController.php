@@ -15,18 +15,7 @@ class ItemsBalancesController extends BaseController {
 
     public function addItemsBalances()
     {
-        $get_type = DB::table('trans_details')
-            ->join('trans_header','trans_header.id','=','trans_details.trans_header_id')
-            ->join('items','items.id','=','trans_details.item_id')
-            ->select('trans_details.trans_header_id AS invoice_id',
-                'trans_header.invoice_type AS invoice_type',
-                'trans_details.qty AS qty',
-                'item_name AS item_name',
-                'trans_header.date AS date'
-            )
-//            ->join('trans_header','trans_ditals.trans_header_id','=','trans_header.id')
-            ->get();
-//        dd($get_type);
+
         $data['branch']     = $this->isAllBranch();
 
         $addItemsBalances =Lang::get('main.addItemsBalances');
@@ -45,43 +34,49 @@ class ItemsBalancesController extends BaseController {
     public function storeItemsBalances()
     {
         $inputs = Input::all();
+        $br_id =  isset($inputs['br_id'])?$inputs['br_id']:0;
+        $branch =  Branches::company()->find($br_id);
+        if ($branch) {
+            $validation = Validator::make($inputs, ItemsBalances::rulesCreator($inputs));
 
-        $validation = Validator::make($inputs, ItemsBalances::rulesCreator($inputs));
+            if($validation->fails())
+            {
+                echo "fail";
+                dd(ItemsBalances::rulesCreator($inputs));
 
-        if($validation->fails())
-        {
-            echo "fail";
-            dd(ItemsBalances::rulesCreator($inputs));
-
-        }else {
-            $newData = array();//create array to insert into database on  one query
-            foreach(TransDetails::countOfInputs($inputs) as $k => $v){
-                $item           =  Items::findOrFail($inputs['id_'.$k]);
-                $item->avg_cost = $inputs['cost_'.$k];
-                $item->update();//update avg cost of item
+            }else {
+                $newData = array();//create array to insert into database on  one query
+                foreach(TransDetails::countOfInputs($inputs) as $k => $v){
+                    $item           =  Items::findOrFail($inputs['id_'.$k]);
+                    $item->avg_cost = $inputs['cost_'.$k];
+                    $item->update();//update avg cost of item
 //              echo $inputs['id_'.$k];
-                $newData[]= array
-                (
-                    'co_id'        => $this->coAuth(),
-                    'user_id'      => Auth::id(),
-                    'item_id'      => $inputs['id_'.$k],
+                    $newData[]= array
+                    (
+                        'co_id'        => $this->coAuth(),
+                        'user_id'      => Auth::id(),
+                        'item_id'      => $inputs['id_'.$k],
 //                  'bar_code'     => $inputs['bar_code'],
-                    'qty'          => $inputs['quantity_'.$k],
-                    'cost'         => $inputs['cost_'.$k],
-                    'serial_no'    => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
-                    'br_id'        => isset($inputs['br_id'])?$inputs['br_id']:0,
-                    'created_at'   => date('Y-m-d H:i:s'),
-                    'updated_at'   => date('Y-m-d H:i:s')
-                );//end of array
+                        'qty'          => $inputs['quantity_'.$k],
+                        'cost'         => $inputs['cost_'.$k],
+                        'serial_no'    => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:0,
+                        'br_id'        => isset($inputs['br_id'])?$inputs['br_id']:0,
+                        'created_at'   => date('Y-m-d H:i:s'),
+                        'updated_at'   => date('Y-m-d H:i:s')
+                    );//end of array
 
-            }//end foreach
+                }//end foreach
 //           die("finish");
-            ItemsBalances::insert($newData);//insert  data
+                ItemsBalances::insert($newData);//insert  data
 
-            Session::flash('success','تم اضافة الرصيد الافتتاحي بنجاح');
-            return Redirect::back();
+                Session::flash('success','تم اضافة الرصيد الافتتاحي بنجاح');
+                return Redirect::back();
 
 //                return Redirect::route('addItemsBalances');
+            }
+
+        }else{
+            return "الفرع غير موجود ";
         }
 
     }

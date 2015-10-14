@@ -18,23 +18,54 @@ class TransDetails extends Eloquent {
 	 */
         public static function rulesCreator($inputs)
         {
-            $store_rules['date'] = 'required|date';
-//            $store_rules['pay_type'] = 'required|in:cash,visa,on_account';
-            if(isset($inputs['pay_type'])&&$inputs['pay_type']=="on_account"){
-//                $store_rules['account_id'] = 'required|integer';
+//            dd($inputs);
+            $type     = $inputs['type'];
+            $br_id    = $inputs['br_id'];
+
+            $discount = ['sales','buyReturn',"settleDown"];
+            $add      = ['buy','salesReturn',"settleAdd"];
+            $settles  = ["settleAdd","settleDown"];
+
+            $date     = new dateTime;
+            $tomorrowDate  = $date->modify('+2 day')->format('Y-m-d');
+            $yesterdayDate = $date->modify('-3 day')->format('Y-m-d');
+//dd($yesterdayDate);
+            $store_rules['date'] = 'required|date|before:'.$tomorrowDate.'|after:'.$yesterdayDate;
+            if(!in_array($type,$settles)){
+
+                if(isset($inputs['pay_type'])&&$inputs['pay_type']=="on_account"){
+                    $store_rules['account_id'] = 'required|integer|exists:accounts,id,co_id,'.Auth::user()->co_id;
+                }
+                $store_rules['pay_type'] = 'required|in:cash,visa,on_account';
             }
             $count = TransDetails::countOfInputs($inputs);
-
             foreach($count as $k => $v)
             {
-                $sarial = self::hasSarial($v);
-                if($sarial){
-                    $store_rules['serial_'.$k] = 'required';
+                $store_rules['id_'.$k] = 'required|exists:items,id,co_id,'.Auth::user()->co_id;
+                $item = Items::getSerialItemsWithBalanceByBrId($br_id,$inputs['id_'.$k]);
+                $serials = implode(",",array_pluck($item,'serial_no'));
+                
+                $serial  = self::hasSarial($v);
+                if($serial){
+                    if(in_array($type,$add)){
+                        $store_rules['serial_'.$k] = 'required|not_in:'.$serials;
+                    }elseif(in_array($type,$discount)){
+                        $store_rules['serial_'.$k] = 'required|in:'.$serials;
+                    }
                 }
-                $store_rules['quantity_'.$k] = 'required|integer';
-                $store_rules['id_'.$k] = 'required|integer';
+//                dd(in_array($type,$discount));
+//                dd($item[0]->balance);
+                if(in_array($type,$discount)){
+                    $store_rules['quantity_'.$k] = 'required|integer|min:1|max:'.(($item)?$item[0]->balance:0);
+                }else{
+                    $store_rules['quantity_'.$k] = 'required|integer|min:1';
+                }
+
+                if( in_array($type,$add) && @$inputs['cost_'.$k] > 0 ){
+                    $store_rules['cost_'.$k]     = 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/';
+                    }
             }
-//                dd($store_rules);
+//            dd($store_rules);
             return $store_rules;
         }
     public static function ReturnRulesCreator($inputs)
@@ -45,11 +76,12 @@ class TransDetails extends Eloquent {
                 $store_rules['account_id'] = 'required|integer';
             }
             $count = TransDetails::countOfInputs($inputs);
+            dd($inputs);
             foreach($count as $k => $v)
             {
                 $sarial = self::hasSarial($v);
                 if($sarial){
-                    $store_rules['serial_'.$k] = 'required';
+                    $store_rules['serial_'.$k] = 'required|in:'.Items::getSerialItemsWithBalanceByBrId();
                 }
                 $store_rules['return_'.$k] = 'required|integer';
                 $store_rules['id_'.$k] = 'required|integer';
@@ -86,7 +118,7 @@ class TransDetails extends Eloquent {
     {
         $item = Items::company()->find($v);
         if($item){
-            return Items::company()->find($v)->has_serial;
+            return $item->has_serial;
         }else{
             return false;
         }
@@ -97,21 +129,6 @@ class TransDetails extends Eloquent {
      * Store Rules
      * @var array
      */
-//    public static  $store_rules = array
-//                (
-//                    'debit'          => 'integer',
-//                    'credit'         => 'integer'
-//                );
-//
-//    /**
-//     * update Rules
-//     * @var array
-//     */
-//    public static  $update_rules = array
-//                (
-//                    'debit'          => 'integer',
-//                    'credit'         => 'integer'
-//                );
 
 
 }

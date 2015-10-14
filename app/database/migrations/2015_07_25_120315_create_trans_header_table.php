@@ -21,16 +21,16 @@ class CreateTransHeaderTable extends Migration {
             $table->integer('br_id');
             $table->integer('invoice_no');
             $table->string('invoice_type');
-            $table->integer('account');
-            $table->decimal('in_total',10,2);
-            $table->decimal('discount',10,2);
-            $table->decimal('tax',10,2);
-            $table->decimal('net',10,2);
+            $table->integer('account')->nullable();
+            $table->decimal('in_total',10,2)->nullable();
+            $table->decimal('discount',10,2)->nullable();
+            $table->decimal('tax',10,2)->nullable();
+            $table->decimal('net',10,2)->nullable();
             $table->date('date');
-            $table->string('pay_type');
+            $table->string('pay_type')->nullable();
             $table->integer('deleted');
-            $table->string('notes');
-			$table->unique(array('invoice_no', 'invoice_type','co_id'));
+            $table->string('notes')->nullable();
+			$table->unique(array('invoice_no', 'invoice_type','co_id','br_id'));
 			$table->timestamps();
 		});
 	}

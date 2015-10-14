@@ -12,7 +12,7 @@
     .yay-push     - push content to right
     .yay-shrink   - shrink content width
 -->
-
+<?php $branches = BaseController::getBranchId()  ?>
   <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
 
     <div class="top">
@@ -99,17 +99,38 @@
             <li class="{{@$TransOpen}}">
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.stores')<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
-                    <li>
-                        <a href="{{ URL::route('addSettle',array('settleAdd')) }}" class="waves-effect waves-blue">@lang('main.settleAdd')  </a>
-                    </li>
-                    <li>
-                        <a href="" class="waves-effect waves-blue">  @lang('main.settleDiscount')   </a>
-                    </li>
-                    {{--<li>--}}
-                        {{--<a href="{{ URL::route('viewSettles') }}" class="waves-effect waves-blue">--}}
-                            {{--@lang('main.settles')--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
+                    @if($branches['all_br'] == "all_br")
+                        <li>
+                            <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleAdd')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                            <ul>
+                                <li>
+                                    @foreach($branches['branches'] as $branch)
+                                        <a href="{{ URL::route('addTrans',array("settleAdd",$branch->id)) }}" class="waves-effect waves-blue">
+                                            فرع {{$branch->br_name}}
+                                        </a>
+                                    @endforeach
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="yay-sub-toggle waves-effect waves-blue">  @lang('main.settleDown')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                            <ul>
+                                <li>
+                                    @foreach($branches['branches'] as $branch)
+                                        <a href="{{ URL::route('addTrans',array("settleDown",$branch->id)) }}" class="waves-effect waves-blue">
+                                            فرع {{$branch->br_name}}
+                                        </a>
+                                    @endforeach
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{ URL::route('addTrans',array("settleAdd",$branches)) }}" class="waves-effect waves-blue"> @lang('main.settleAdd')</a>
+                            <a href="{{ URL::route('addTrans',array("settleDown",$branches)) }}" class="waves-effect waves-blue">@lang('main.settleDiscount')</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ URL::route('searchItemCard') }}" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
                     </li>
@@ -137,14 +158,14 @@
             <li class="{{@$invoices_open}}">
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الفواتير <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
-                    <?php $branches = BaseController::getBranchId()    ?>
+
 @if($branches['all_br'] == "all_br")
                         <li>
                             <a class="yay-sub-toggle waves-effect waves-blue">     فاتورة مبيعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                             <ul>
                                 <li>
                                     @foreach($branches['branches'] as $branch)
-                                    <a href="{{ URL::route('addInvoice',array("sales",$branch->id)) }}" class="waves-effect waves-blue">
+                                    <a href="{{ URL::route('addTrans',array("sales",$branch->id)) }}" class="waves-effect waves-blue">
                                     فرع {{$branch->br_name}}
                                     </a>
                                     @endforeach
@@ -158,7 +179,7 @@
                             <ul>
                                 <li>
                                     @foreach($branches['branches'] as $branch)
-                                    <a href="{{ URL::route('addInvoice',array("buy",$branch->id)) }}" class="waves-effect waves-blue">
+                                    <a href="{{ URL::route('addTrans',array("buy",$branch->id)) }}" class="waves-effect waves-blue">
                                     فرع {{$branch->br_name}}
                                     </a>
                                     @endforeach
@@ -169,8 +190,8 @@
                         </li>
     @else
                     <li>
-                        <a href="{{ URL::route('addInvoice',array("sales",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
-                        <a href="{{ URL::route('addInvoice',array("buy",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
+                        <a href="{{ URL::route('addTrans',array("sales",$branches)) }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                        <a href="{{ URL::route('addTrans',array("buy",$branches)) }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
                     </li>
 @endif
                         @if($branches['all_br'] == "all_br")
@@ -179,7 +200,7 @@
                             <ul>
                                 <li>
                                     @foreach($branches['branches'] as $branch)
-                                    <a href="{{ URL::route('addReturnInvoice',array("salesReturn",$branch->id)) }}" class="waves-effect waves-blue">
+                                    <a href="{{ URL::route('addTrans',array("salesReturn",$branch->id)) }}" class="waves-effect waves-blue">
                                     فرع {{$branch->br_name}}
                                     </a>
                                     @endforeach
@@ -192,7 +213,7 @@
                                 <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مرتجعات مشتريات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>                            <ul>
                                 <li>
                                     @foreach($branches['branches'] as $branch)
-                                    <a href="{{ URL::route('addReturnInvoice',array("buyReturn",$branch->id)) }}" class="waves-effect waves-blue">
+                                    <a href="{{ URL::route('addTrans',array("buyReturn",$branch->id)) }}" class="waves-effect waves-blue">
                                     فرع {{$branch->br_name}}
                                     </a>
                                     @endforeach
@@ -203,8 +224,8 @@
                         </li>
     @else
                     <li>
-                        <a href="{{ URL::route('addReturnInvoice',array("salesReturn",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
-                        <a href="{{ URL::route('addReturnInvoice',array("buyReturn",BaseController::getBranchId())) }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
+                        <a href="{{ URL::route('addTrans',array("salesReturn",$branches)) }}" class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                        <a href="{{ URL::route('addTrans',array("buyReturn",$branches)) }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
                     </li>
 @endif
 

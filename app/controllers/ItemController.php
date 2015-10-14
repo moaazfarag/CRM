@@ -191,9 +191,9 @@ class ItemController extends BaseController
         return 'ok';
     }
     public function searchItemCard(){
-
         $data['type']           = "item";
         $data['title']           = "كارت الصنف";
+        $data['TransOpen']   = 'open' ;
         $data['sum']            = NULL;
         $data['co_info']        = CoData::thisCompany()->first();
         $data['branch']         = $this->isAllBranch();
@@ -230,6 +230,7 @@ class ItemController extends BaseController
                 $balBefore[$itemId]['bal'] = array_sum(TransHeader::getItems($inputs,1)->lists('item_bal') );
             }
             $data['items']     = $items;
+            $data['TransOpen']   = 'open' ;
             $data['balBefore'] = $balBefore;
             $data['co_info']   = CoData::thisCompany()->first();
             $data['date_from'] = $this->strToTime($inputs['date_from']);

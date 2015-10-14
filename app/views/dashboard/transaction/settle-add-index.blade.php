@@ -3,7 +3,7 @@
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
 <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]' }}' ng-app="itemApp"  ng-controller="mainController" class="card">
-    {{ Form::open(array('route'=>array('storeSettle',$type),'name'=>'form','novalidate')) }}
+    {{ Form::open(array('route'=>array('storeTrans',$type,$branch->id),'name'=>'form','novalidate')) }}
     <div class="title">
         <h5>
             <i class="mdi mdi-notification-event-available"></i>
@@ -12,23 +12,18 @@
         <a class="minimize" href="#">
           <i class="mdi-navigation-expand-less"></i>
         </a>
-        <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{ URL::route('viewSettles',array('type'=>$type)) }}" class="btn btn-small z-depth-0">
+        <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button" href="{{URL::route('viewTransactions',[$type,$branch->id]) }}" class="btn btn-small z-depth-0">
             عرض تسويات {{ @$name}}
         </a>
     </div>
     <div class="content">
       <div class="row no-margin-top">
-         <div class="col s2 l3">
-             @if($branch)
-                 <i class="mdi mdi-notification-event-available"></i>
-                 {{ Form::label('br_id','الفرع') }}
-                 {{ Form::select('br_id',array(null=>"اختر الفرع")+ $co_info->branches->lists('br_name','id'),null,array('id'=>'br_id','ng-model'=>'br_id','ng-change'=>'resetInvoiceItems()')) }}
-                    <p class="parsley-required">{{ $errors ->first('br_id') }} </p>
-             @else
-                    <br>
-                <b> فرع :{{ $branch }}</b>
-             @endif
-         </div>{{--branch--}}
+          <div class="col s2 l3">
+
+              <br>
+              <b> @lang('main.branch') :{{ $branch->br_name }}</b>
+
+          </div>{{--branch--}}
           <div class="col s2 l3">
               <i class="fa fa-calendar"></i>
               {{ Form::label('data',Lang::get('main.date')) }}
@@ -89,35 +84,28 @@
             <div class="col s2 ">
                 <div class="input-field">
                     <label for="item_id">
-                        <button ng-click=" serialItem(br_id,item.id)"  ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity)|| itemBalance() "  class="waves-effect btn modal-trigger">
+                        <button ng-click=" serialItem(br_id,item.id)" ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " class="waves-effect btn modal-trigger">
                             اضف
                         </button >
-                        <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity)||itemBalance() " ng-click="addItem()" class="waves-effect btn">
+                        <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
                             اضف
                         </button >
                         </label>
                 </div>
-
             </div>{{-- single item button  div --}}
-            <div style="margin-right:10px" class="col s12 l2  " ng-show="item.item_name && item.id" >
-                الرصيد الحالي هو
-                @{{ item.balance - item.quantity }}
-                <div style="color: #ea1c18;clear: both"  ng-show="itemBalance() && item.id">
-                    لا يوجد رصيد لهذا المنتج
-                </div>
-            </div>
+
 
         </div>{{-- row end--}}
         {{-- end acount,item and quaintity  --}}
 
 
 
-        @include('dashboard.settle._discount_popup_div')
+        @include('dashboard.transaction._pop_up._add')
 
 
 
         <br>
-        @include('dashboard.settle._view_table')
+        @include('dashboard.transaction._table._table')
         <div class="row">
             <div class="col s12 l12">
                 <button ng-disabled="form.$invalid || hasInvoiceItems()" type="submit" class="waves-effect btn">@lang('main.add')</button>
