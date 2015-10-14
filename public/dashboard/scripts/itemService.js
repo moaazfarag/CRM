@@ -9,7 +9,7 @@ angular.module('itemService', [])
             getItems: function(brId) {//get data for using in drop menu
                 return $http({
                     method:'POST',
-                    url: '/admin/invoice/items-data-br',
+                    url: '/admin/transaction/items-data-br',
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(brId)
                 });
@@ -17,7 +17,7 @@ angular.module('itemService', [])
             getCoItem: function(brId) {//get data for using in drop menu
                 return $http({
                     method:'POST',
-                    url: '/admin/invoice/items-data',
+                    url: '/admin/transaction/items-data',
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(brId)
                 });
@@ -25,7 +25,7 @@ angular.module('itemService', [])
             getSerialItem: function(info) {//get data for using in drop menu
                 return $http({
                     method:'POST',
-                    url: '/admin/invoice/serial-items-data',
+                    url: '/admin/transaction/serial-items-data',
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(info)
                 });
@@ -44,7 +44,7 @@ angular.module('itemService', [])
             getAccountsByType : function(type){
                 return $http({
                     method:'POST',
-                    url: '/admin/invoice/accounts-data',
+                    url: '/admin/transaction/accounts-data',
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(type)
                 });
@@ -53,7 +53,7 @@ angular.module('itemService', [])
             //getInvoiceByType : function(invoiceNo){
             //    return $http({
             //        method:'POST',
-            //        url: '/admin/invoice/invoice-data',
+            //        url: '/admin/transaction/invoice-data',
             //        headers: { 'Content-Type' : 'application/json' },
             //        data:   JSON.stringify(invoiceNo)
             //    });
@@ -62,7 +62,7 @@ angular.module('itemService', [])
             getAccountInfo : function(id){
                 return $http({
                     method:'POST',
-                    url: '/admin/invoice/accounts-by-id',
+                    url: '/admin/transaction/accounts-by-id',
                     headers: { 'Content-Type' : 'application/json' },
                     data:   JSON.stringify(id)
                 });
@@ -71,7 +71,7 @@ angular.module('itemService', [])
             getInvoiceById :function(invoice){
                 return $http({
                     method: 'POST',
-                    url: '/admin/invoice/returns-invoice-data',
+                    url: '/admin/transaction/returns-invoice-data',
                     headers: { 'Content-Type' :  'application/json' },
                     data:   JSON.stringify(invoice)
                 });

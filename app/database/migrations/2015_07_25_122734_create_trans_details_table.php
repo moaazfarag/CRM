@@ -19,8 +19,8 @@ class CreateTransDetailsTable extends Migration {
 			$table->integer('trans_header_id');
             $table->integer('item_id');
             $table->integer('qty');
-            $table->decimal('unit_price',10,2);
-            $table->decimal('item_total',10,2);
+            $table->decimal('unit_price',10,2)->nullable();
+            $table->decimal('item_total',10,2)->nullable();
             $table->integer('avg_cost');
             $table->string('serial_no')->nullable();
 

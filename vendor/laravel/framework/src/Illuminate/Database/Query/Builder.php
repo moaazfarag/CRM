@@ -1375,6 +1375,30 @@ class Builder {
 	{
 		return $this->where('id', '=', Auth::user()->co_id);
 	}
+	public function viewMake($q = null)
+	{
+		return $this
+			->select( \Illuminate\Support\Facades\DB::raw('SUM(qty)'.$q.' as item_bal'),
+				'trans_details.item_id',
+				'trans_details.unit_price',
+				'trans_details.qty',
+				'trans_header.br_id',
+				'branches.br_name AS br_name',
+				'trans_header.invoice_no',
+				'trans_header.date',
+				'trans_header.invoice_type',
+				'trans_details.serial_no',
+				'items.*')
+			->join('trans_details', 'trans_details.trans_header_id', '=', 'trans_header.id')
+			->join('items', 'items.id', '=', 'trans_details.item_id')
+			->join('branches', 'branches.id', '=', 'trans_header.br_id')
+			->groupBy('trans_details.serial_no',
+				'trans_details.item_id',
+				'trans_header.br_id',
+				'trans_header.invoice_type',
+				 'trans_header.co_id')
+			;
+	}
 
 	/**
 	 * Pluck a single column's value from the first result of a query.

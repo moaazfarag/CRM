@@ -14,7 +14,7 @@
     </thead>
     <tbody>
 
-    <tr ng-show="account.id"  ng-repeat="(key,invoiceItem) in backItems"  >
+    <tr  ng-repeat="(key,invoiceItem) in backItems"  >
         <td>
             @{{ key+1 }}
         </td>{{--invoice Item COUNT --}}

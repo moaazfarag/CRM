@@ -27,8 +27,9 @@
                 {{@ $invoice->accountInfo->acc_name }}
                </div>
                 <div style=" font-size: 1.3em; font-weight: 500; text-align: center;" >
-
+                    @if(!TransController::isSettle($type))
                     {{@ Lang::get("main.$invoice->pay_type"._); }}
+                    @endif
                 </div>
 
                 <br/>
@@ -121,9 +122,11 @@
                   <th>الرقم</th>
                   <th class="center-align">الاسم</th>
                   <th class="center-align">العدد</th>
-                  <th class="center-align">سعر الوحدة</th>
-                    <th class="right-align">السيريال</th>
+                @if(!TransController::isSettle($type))
+                    <th class="center-align">سعر الوحدة</th>
                     <th class="center-align">الاجمالي</th>
+                @endif
+                    <th class="right-align">السيريال</th>
                 </tr>
               </thead>
               <tbody>
@@ -136,12 +139,14 @@
                     <strong> {{ $detail->item_name }}</strong>
                   </td>
                   <td class="center-align">{{ $detail->qty }}</td>
-                  <td class="center-align">{{ $detail->unit_price }}</td>
+                @if(!TransController::isSettle($type))
+                        <td class="center-align">{{ $detail->unit_price }}</td>
+                        <td class="center-align">{{ $detail->item_total }}</td>
+                @endif
                     <td class="center-align">{{ $detail->serial_no }}</td>
-                    <td class="center-align">{{ $detail->item_total }}</td>
                 </tr>
                 @endforeach
-
+               @if(!TransController::isSettle($type))
 
                     <tr>
                   <td><strong>الاجمالي</strong></td>
@@ -153,7 +158,7 @@
                    </tr>
                 <tr>
 
-
+                @endif
 
               </tbody>
             </table>
@@ -161,7 +166,8 @@
 
         </div>
           <div class="col s12">
-
+              {{--{{  dd("dsfd");}}--}}
+              @if(!TransController::isSettle($type))
               <div class="table-responsive">
                   <table id="table1" class="display table table-bordered table-hover" >
                       <thead>
@@ -185,6 +191,7 @@
 
                       </tbody>
                   </table>
+                  @endif
               </div>
               <address>
               عنوان الشركة الرئيسى

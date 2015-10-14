@@ -93,14 +93,11 @@ class TransHeader extends Eloquent {
         $br_id = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
         $item_id = (!empty($inputs['item_id'])) ? $inputs['item_id'] : "";
         $itemsTrans =  DB::table('items_balance')
+                        ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
                         ->company()
-                        ->groupBy('br_id')
-                        ->groupBy('item_id')
-                        ->groupBy('invoice_type')
-                        ->groupBy('serial_no')
-                        ->groupBy('invoice_no')->where('deleted', 0)
-                        ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
-
+                        ->where('deleted', 0)
+                        ->groupBy('invoice_no','br_id','invoice_type','item_id','serial_no')
+                        ->orderBy('date');
         if($tBal){
             $itemsTrans->where('date','<',$date_from);
         }else{
