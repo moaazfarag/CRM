@@ -88,6 +88,7 @@
                         <th>@lang('main.invoiceNum')</th>
                         <th>@lang('main.date')</th>
                         <th>@lang('main.branchName')</th>
+                        <th>@lang('main.invoice_type')</th>
                         <th>@lang('main.item_name_')</th>
                         <th>@lang('main.category')</th>
                         <th>@lang('main.qty_')</th>
@@ -109,19 +110,32 @@
                                 @if($details->cat_id == $cat_id && $details->item_id == $item_id )
                                     <tr>
 
+                                        <?php
 
+                                        $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
+
+                                        if($invoice->invoice_type == 'sales-return'){
+
+                                            $true_earning = $earnings * -1 ;
+
+                                        }else{
+
+                                            $true_earning = $earnings;
+                                        }
+                                        ?>
                                         <td>{{ $invoice->invoice_no }}</td>
                                         <td>{{ $invoice->date }}</td>
                                         <td>{{ $invoice->branch->br_name }}</td>
+                                        <td>{{ lang::get('main.'.$invoice->invoice_type) }}</td>
                                         <td>{{ $details->item_name }}</td>
                                         <td>{{ Category::find($details->cat_id)->name }}</td>
                                         <td>{{ $details->qty }}</td>
                                         <td>{{ $details->avg_cost }}</td>
                                         <td>{{ $details->unit_price }}</td>
-                                        <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
+                                        <td>{{ $true_earning }}</td>
 
                                     </tr>
-                                    <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
+                                    <?php  $i++; $all_earnings[$i] = $true_earning; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                                 @endif
 
                             @elseif($cat_id == '' &&  $item_id != '')
@@ -129,18 +143,32 @@
                                 @if($details->item_id == $item_id )
 
                                     <tr>
+                                        <?php
+
+                                        $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
+
+                                        if($invoice->invoice_type == 'sales-return'){
+
+                                            $true_earning = $earnings * -1 ;
+
+                                        }else{
+
+                                            $true_earning = $earnings;
+                                        }
+                                        ?>
                                         <td>{{ $invoice->invoice_no }}</td>
                                         <td>{{ $invoice->date }}</td>
                                         <td>{{ $invoice->branch->br_name }}</td>
+                                        <td>{{ lang::get('main.'.$invoice->invoice_type) }}</td>
                                         <td>{{ $details->item_name }}</td>
                                         <td>{{ Category::find($details->cat_id)->name }}</td>
                                         <td>{{ $details->qty }}</td>
                                         <td>{{ $details->avg_cost }}</td>
                                         <td>{{ $details->unit_price }}</td>
-                                        <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
+                                        <td>{{  $true_earning }}</td>
 
                                     </tr>
-                                    <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
+                                    <?php  $i++; $all_earnings[$i] = $true_earning; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                                 @endif
 
                             @elseif($cat_id != '' &&  $item_id == '')
@@ -148,35 +176,63 @@
                                 @if($details->cat_id == $cat_id )
 
                                     <tr>
+                                        <?php
 
+                                        $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
+
+                                        if($invoice->invoice_type == 'sales-return'){
+
+                                            $true_earning = $earnings * -1 ;
+
+                                        }else{
+
+                                            $true_earning = $earnings;
+                                        }
+                                        ?>
                                         <td>{{ $invoice->invoice_no }}</td>
                                         <td>{{ $invoice->date }}</td>
                                         <td>{{ $invoice->branch->br_name }}</td>
+                                        <td>{{ lang::get('main.'.$invoice->invoice_type) }}</td>
+
                                         <td>{{ $details->item_name }}</td>
                                         <td>{{ Category::find($details->cat_id)->name }}</td>
                                         <td>{{ $details->qty }}</td>
                                         <td>{{ $details->avg_cost }}</td>
                                         <td>{{ $details->unit_price }}</td>
-                                        <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
+                                        <td>{{  $true_earning}}</td>
                                     </tr>
-                                    <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
+                                    <?php  $i++; $all_earnings[$i] = $true_earning; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                                 @endif
 
 
 
                             @else
                                 <tr>
+                                    <?php
+
+                                    $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
+
+                                    if($invoice->invoice_type == 'sales-return'){
+
+                                        $true_earning = $earnings * -1 ;
+
+                                    }else{
+
+                                        $true_earning = $earnings;
+                                    }
+                                    ?>
                                     <td>{{ $invoice->invoice_no }}</td>
                                     <td>{{ $invoice->date }}</td>
                                     <td>{{ $invoice->branch->br_name }}</td>
+                                    <td>{{ lang::get('main.'.$invoice->invoice_type) }}</td>
                                     <td>{{ $details->item_name }}</td>
                                     <td>{{ Category::find($details->cat_id)->name }}</td>
                                     <td>{{ $details->qty }}</td>
                                     <td>{{ $details->avg_cost }}</td>
                                     <td>{{ $details->unit_price }}</td>
-                                    <td>{{  ($details->unit_price - $details->avg_cost) * $details->qty  }}</td>
+                                    <td>{{  $true_earning  }}</td>
                                 </tr>
-                                <?php  $i++; $all_earnings[$i] = ($details->unit_price - $details->avg_cost) * $details->qty; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
+                                <?php  $i++; $all_earnings[$i] = $true_earning; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                             @endif
 
 

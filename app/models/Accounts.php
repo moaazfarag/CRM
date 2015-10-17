@@ -59,7 +59,7 @@ class Accounts extends Eloquent {
 
         'date_from'    =>'required',
         'date_to'      =>'required',
-        "account_id"   => "required",
+//        "account_id"   => "required",
 
 
     );

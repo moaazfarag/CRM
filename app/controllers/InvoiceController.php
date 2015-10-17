@@ -410,14 +410,12 @@ class InvoiceController extends BaseController
     public function reportResultInvoice (){
 
         $inputs = Input::all();
-//        var_dump($inputs);die();
 
         if(Input::Has('account')){
             $ruels = TransHeader::$report_ruels_saels_with_account;
         }else{
             $ruels = TransHeader::$report_ruels_saels;
         }
-//var_dump($ruels);die();
 
         $validation = Validator::make($inputs,$ruels,BaseController::$messages);
         if($validation->fails()) {
@@ -432,11 +430,7 @@ class InvoiceController extends BaseController
 
             if(in_array($invoice_type,$types)) {
 
-                if($invoice_type == 'sales-earnings') {
-                    $type = 'sales';
-                }else{
-                    $type    =  $inputs['invoice_type'];
-                }
+
 
                 $sum         = $inputs['sum'];
                 $date_from   = $this->strToTime($inputs['date_from']);
@@ -447,22 +441,36 @@ class InvoiceController extends BaseController
                 $pay_type    = (!empty($inputs['pay_type'])) ? $inputs['pay_type'] : "";
                 $item_id     = (!empty($inputs['item_id'])) ? $inputs['item_id'] : "";
 
-                $invoices = TransHeader::company()->dateBetween('date', $date_from, $date_to)
-                    ->where('invoice_type', $type)
-                    ->where('deleted', 0);
-                if ($br_id != '') {
-                    $invoices->where('br_id', $br_id);
-                }
 
-                if ($account_id != '') {
-                    $invoices->where('account', $account_id);
-                }
 
-                if ($pay_type != '') {
-                    $invoices->where('pay_type', $pay_type);
-                }
+                    $invoices = TransHeader::company()->dateBetween('date', $date_from, $date_to)
+                        ->where('deleted', 0);
 
-                $invoices_data = $invoices->get();
+                    if($invoice_type == 'sales-earnings') {
+
+                        $invoices->whereIn('invoice_type', ['sales-return','sales']);
+                    }else{
+
+                        $invoices->where('invoice_type', $invoice_type);
+
+
+                    }
+
+                    if ($br_id != '') {
+                        $invoices->where('br_id', $br_id);
+                    }
+
+                    if ($account_id != '') {
+                        $invoices->where('account', $account_id);
+                    }
+
+                    if ($pay_type != '') {
+                        $invoices->where('pay_type', $pay_type);
+                    }
+
+                    $invoices_data = $invoices->get();
+
+                }
 
 
                 if ($sum == NULL) {
@@ -475,6 +483,8 @@ class InvoiceController extends BaseController
                     $data['sum'] = 'sum';
 
                 }// end else
+
+
 
                 $data['cat_id'] = $cat_id;
                 $data['item_id'] = $item_id;
@@ -496,5 +506,5 @@ class InvoiceController extends BaseController
             }
 
         }
-    }
+
 }

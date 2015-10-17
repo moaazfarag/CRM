@@ -397,9 +397,13 @@ return  array(
     'qty_'                =>'الكمية',
     'sum_'                =>'القيمة',
     'result_sum'          =>'الإجمالى',
+
     'sales-return_report' =>'مرتجعات المبيعات',
     'buy_report'          => 'تقرير تحليلى للمشتريات',
     'buy_report_sum'      => ' تقرير إجمالى للمشتريات ',
+    'buy-return_report_sum' => 'تقرير إجمالى لمردودات المشتريات',
+    'sales-return_report_sum'=>'تقرير إجمالى لمرتجعات المبيعات',
+
     'buy-return_report'   => 'مردودات المشتريات',
     'sales-earnings_report'      => 'أرباح فواتير المبيعات',
     'buy_prise_avg'             =>'متوسط سعر الشراء',
@@ -438,6 +442,19 @@ return  array(
     'pay_type'              => 'صرف',
     'stock'                 => 'الرصيد',
 
+    'balance_customers' =>'ميزان العملاء',
+    'balance_suppliers' =>'ميزان الموردين',
+    'balance_bank'      =>'ميزان البنوك',
+    'balance_partners'  =>'ميزان الشركاء',
+    'balance_expenses'  =>'تجميع المصروفات',
+    'balance_multiple_revenue'=>'تجميع الإيرادات',
+
+
+
+
+
+
+
     //daily_treasury
 
     'daily_treasury' => 'يومية الخزينة',
@@ -453,5 +470,7 @@ return  array(
     'inventory_store'   => 'جرد المخازن',
     'inventory'         => 'رصيد الجرد ',
     'inventory_result'  => 'نتائج الجرد',
+
+
 
 );
