@@ -59,6 +59,9 @@
                         @endif
                     </tr>
                     </thead>
+
+                    {{--end thead --}}
+
                     <tbody>
 
                     @if($type == 'inventory_store')
@@ -74,63 +77,136 @@
 
                     @foreach($balances as $k=>$balance)
 
-                        <?php
-                            if($type == 'inventory_result'){
+                        @if($show_zero_results == 'no' && $balance->balance != 0 )
 
-                                $branch_name = $balance['branch_name'];
-                                $cat_name    = $balance['cat_name'];
-                                $item_name   = $balance['item_name'];
-                                $item_id     = $balance['item_id'];
-                                $balance_num = $balance['balance_num'];
-                                $inventory_num = $balance['inventory_num'];
+                                <?php
+                                    if($type == 'inventory_result'){
 
-                            }else{
+                                        $branch_name = $balance['branch_name'];
+                                        $cat_name    = $balance['cat_name'];
+                                        $item_name   = $balance['item_name'];
+                                        $item_id     = $balance['item_id'];
+                                        $balance_num = $balance['balance_num'];
+                                        $inventory_num = $balance['inventory_num'];
 
-                                $branch_name =  Branches::find($balance->br_id)->br_name;
-                                $cat_name    =  Category::find($balance->cat_id)->name;
-                                $item_name   = $balance->item_name;
-                                $item_id     = $balance->item_id;
-                                $balance_num = $balance->balance;
-                            }
+                                    }else{
 
-                        ?>
+                                        $branch_name =  Branches::find($balance->br_id)->br_name;
+                                        $cat_name    =  Category::find($balance->cat_id)->name;
+                                        $item_name   = $balance->item_name;
+                                        $item_id     = $balance->item_id;
+                                        $balance_num = $balance->balance;
+                                    }
 
-                        <tr>
-                            <td>{{ $branch_name }}</td>
-                            <td>{{ $cat_name }}</td>
-                            <td>{{ $item_name }}</td>
-                            {{--@if(!in_array($type,['inventory_result','inventory_store']))--}}
-                            <td>{{ $balance_num }}</td>
-                            {{--@endif--}}
+                                ?>
 
-                            @if($type == 'inventory_store')
+                                <tr>
+                                    <td>{{ $branch_name }}</td>
+                                    <td>{{ $cat_name }}</td>
+                                    <td>{{ $item_name }}</td>
+                                    {{--@if(!in_array($type,['inventory_result','inventory_store']))--}}
+                                    <td>{{ $balance_num }}</td>
+                                    {{--@endif--}}
 
-                               <?php  $all_item.= $item_id;  $i++;  if($balances_count > $i){  $all_item.= '|'; }?>
+                                    @if($type == 'inventory_store')
 
-                                    {{ Form::hidden('branchName_'.$item_id,$branch_name) }}
-                                    {{ Form::hidden('catName_'.$item_id,$cat_name) }}
-                                    {{ Form::hidden('itemName_'.$item_id,$item_name) }}
-                                    {{ Form::hidden('balance_'.$item_id,$balance->balance) }}
-                                    {{ Form::hidden('itemId_'.$item_id,$item_id) }}
+                                       <?php  $all_item.= $item_id;  $i++;  if($balances_count > $i){  $all_item.= '|'; }?>
 
-                            <td style="max-width:20px;"> {{ Form::number('inventory_'.$item_id,null) }}  </td>
+                                            {{ Form::hidden('branchName_'.$item_id,$branch_name) }}
+                                            {{ Form::hidden('catName_'.$item_id,$cat_name) }}
+                                            {{ Form::hidden('itemName_'.$item_id,$item_name) }}
+                                            {{ Form::hidden('balance_'.$item_id,$balance->balance) }}
+                                            {{ Form::hidden('itemId_'.$item_id,$item_id) }}
 
-                            @endif
+                                    <td style="max-width:20px;"> {{ Form::number('inventory_'.$item_id,null) }}  </td>
+
+                                    @endif
 
 
 
-                            @if($type == 'inventory_result')
-                                <td>{{  $balance_num - $inventory_num }}</td>
-                            @endif
-                            @if($type == 'evaluation_stores')
+                                    @if($type == 'inventory_result')
+                                        <td>{{  $balance_num - $inventory_num }}</td>
+                                    @endif
+                                    @if($type == 'evaluation_stores')
 
-                                <td>{{ $balance->avg_cost }}</td>
-                                <td>{{ $balance->avg_cost *  $balance->balance }}</td>
+                                        <td>{{ $balance->avg_cost }}</td>
+                                        <td>{{ $balance->avg_cost *  $balance->balance }}</td>
 
-                            @endif
-                        </tr>
+                                    @endif
+                                </tr>
+
+                           @elseif($show_zero_results == 'yes')
+
+                                 {{--the user want all result with zero --}}
+                                 <?php
+                                 if($type == 'inventory_result'){
+
+                                     $branch_name = $balance['branch_name'];
+                                     $cat_name    = $balance['cat_name'];
+                                     $item_name   = $balance['item_name'];
+                                     $item_id     = $balance['item_id'];
+                                     $balance_num = $balance['balance_num'];
+                                     $inventory_num = $balance['inventory_num'];
+
+                                 }else{
+
+                                     $branch_name =  Branches::find($balance->br_id)->br_name;
+                                     $cat_name    =  Category::find($balance->cat_id)->name;
+                                     $item_name   = $balance->item_name;
+                                     $item_id     = $balance->item_id;
+                                     $balance_num = $balance->balance;
+                                 }
+
+                                 ?>
+
+                                 <tr>
+                                     <td>{{ $branch_name }}</td>
+                                     <td>{{ $cat_name }}</td>
+                                     <td>{{ $item_name }}</td>
+                                     {{--@if(!in_array($type,['inventory_result','inventory_store']))--}}
+                                     <td>{{ $balance_num }}</td>
+                                     {{--@endif--}}
+
+                                     @if($type == 'inventory_store')
+
+                                         <?php  $all_item.= $item_id;  $i++;  if($balances_count > $i){  $all_item.= '|'; }?>
+
+                                         {{ Form::hidden('branchName_'.$item_id,$branch_name) }}
+                                         {{ Form::hidden('catName_'.$item_id,$cat_name) }}
+                                         {{ Form::hidden('itemName_'.$item_id,$item_name) }}
+                                         {{ Form::hidden('balance_'.$item_id,$balance->balance) }}
+                                         {{ Form::hidden('itemId_'.$item_id,$item_id) }}
+
+                                         <td style="max-width:20px;"> {{ Form::number('inventory_'.$item_id,null) }}  </td>
+
+                                     @endif
+
+
+
+                                     @if($type == 'inventory_result')
+                                         <td>{{  $balance_num - $inventory_num }}</td>
+                                     @endif
+                                     @if($type == 'evaluation_stores')
+
+                                         <td>{{ $balance->avg_cost }}</td>
+                                         <td>{{ $balance->avg_cost *  $balance->balance }}</td>
+
+                                     @endif
+                                 </tr>
+                                 {{--end the user want all result with zero--}}
+                           @endif
                     @endforeach
+                    @if(!empty($zero_results) && $show_zero_results == 'yes')
 
+                        @foreach($zero_results as $items_balance_zero)
+                            <tr>
+                                <td>غير محدد </td>
+                                <td>{{  Category::find($items_balance_zero->cat_id)->name }}</td>
+                                <td>{{ $items_balance_zero->item_name }}</td>
+                                <td>0</td>
+                            </tr>
+                        @endforeach
+                    @endif
 
                     </tbody>
                 </table>
@@ -155,36 +231,7 @@
             @endif
 
 
-        @if(!empty($zero_results))
 
-            <table   class="display table table-bordered table-striped table-hover">
-                <thead>
-                <tr>
-                    <caption class="caption-style">
-                        {{ $zero_result_title }}
-                    </caption>
-
-                </tr>
-
-                <tr>
-                    <th>@lang('main.category')</th>
-                    <th>@lang('main.item_name_')</th>
-                    <th>@lang('main.qty_')</th>
-                </tr>
-                </thead>
-                <tbody>
-
-
-                @foreach($zero_results as $items_balance_zero)
-                    <tr>
-                        <td>{{  Category::find($items_balance_zero->cat_id)->name }}</td>
-                        <td>{{ $items_balance_zero->item_name }}</td>
-                        <td>0</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        @endif
 
     </div>
 </section>

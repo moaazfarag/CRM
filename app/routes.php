@@ -23,7 +23,7 @@ Route::get('/login',function(){
 /*
  * logout route
  * */
-Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
+Route::get('/logout',array('uses'=>'UserController@logout','as'=>'logout'));
 /*
  * login post
  * check username and password
@@ -156,13 +156,13 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('{type}/{br_id}', array('before'=>'csrf','uses' => 'TransController@storeTrans','as' => 'storeTrans'));
         Route::get('all/{type}/{br_id}', array('uses' => 'TransController@viewTransactions','as' => 'viewTransactions'));
         Route::get('{type}-{br_id}-{invoice_no}', array('uses' => 'TransController@viewTransaction','as' => 'viewTransaction'));
-        Route::post('accounts-data', array('uses' => 'transController@accountsData','as' => 'accountsData'));
-        Route::post('accounts-by-id', array('uses' => 'transController@accountById','as' => 'accountById'));
-        Route::post('items-data-br', array('uses' => 'transController@itemsData','as' => 'itemsData'));
-        Route::post('serial-items-data', array('uses' => 'transController@serialItemsData','as' => 'serialItemsData'));
-        Route::post('items-data', array('uses' => 'transController@items','as' => 'items'));
-        Route::post('invoice-data', array('uses' => 'transController@returnsInvoiceData','as' => 'returnsInvoiceData'));
-        Route::post('returns-invoice-data', array('uses' => 'transController@returnsInvoiceData','as' => 'itemsData'));
+        Route::post('accounts-data', array('uses' => 'TransController@accountsData','as' => 'accountsData'));
+        Route::post('accounts-by-id', array('uses' => 'TransController@accountById','as' => 'accountById'));
+        Route::post('items-data-br', array('uses' => 'TransController@itemsData','as' => 'itemsData'));
+        Route::post('serial-items-data', array('uses' => 'TransController@serialItemsData','as' => 'serialItemsData'));
+        Route::post('items-data', array('uses' => 'TransController@items','as' => 'items'));
+        Route::post('invoice-data', array('uses' => 'TransController@returnsInvoiceData','as' => 'returnsInvoiceData'));
+        Route::post('returns-invoice-data', array('uses' => 'TransController@returnsInvoiceData','as' => 'itemsData'));
 
     });
 
@@ -170,7 +170,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      *
      */
     Route::group(array('prefix'=>'invoice'),function(){
-        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'transController@cancelInvoice','as'=>'cancelInvoice')) ;
+        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'TransController@cancelInvoice','as'=>'cancelInvoice')) ;
 
     });
 

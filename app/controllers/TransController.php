@@ -56,8 +56,8 @@ class TransController extends BaseController
                 $data['br_id']       = $br_id;
                 $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
                 $data['branch']      = $this->isAllBranch(); //
-                $data['newArray']    = $this->itemsToJsonForError($inputs);
                 dd($validation->messages());
+                $data['newArray']    = $this->itemsToJsonForError($inputs);
                 die();
                 $data['errors']      = $validation->messages();
                 Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');

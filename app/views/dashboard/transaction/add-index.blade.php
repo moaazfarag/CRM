@@ -133,10 +133,10 @@
                 <div class="col s2 ">
                     <div class="input-field">
                         <label for="item_id">
-                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem() "  ng-click=" serialItem({{ $br_id}},item.id)" class="waves-effect btn modal-trigger">
+                                <button ng-show="returnBalance(item)"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem() "  ng-click=" serialItem({{ $br_id}},item.id)" class="waves-effect btn modal-trigger">
                                 @lang('main.add')
                             </button >
-                            <button ng-hide="item.has_serial" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
+                            <button ng-hide="returnBalance(item)" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">
                                 @lang('main.add')
                             </button >
                         </label>

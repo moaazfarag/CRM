@@ -37,9 +37,9 @@ class ItemsBalancesController extends BaseController {
         $br_id =  isset($inputs['br_id'])?$inputs['br_id']:0;
         $branch =  Branches::company()->find($br_id);
         if ($branch) {
-            $validation = Validator::make($inputs, ItemsBalances::rulesCreator($inputs));
+//            $validation = Validator::make($inputs, ItemsBalances::rulesCreator($inputs));
 
-            if($validation->fails())
+            if(0)
             {
                 echo "fail";
                 dd(ItemsBalances::rulesCreator($inputs));

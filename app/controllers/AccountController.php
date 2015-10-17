@@ -319,7 +319,8 @@ class AccountController extends BaseController
             if(empty($data['accounts'])){
                 $data['accounts_empty'] = 'yes';
             }else{
-                $data['select_account'] ='أختر '. Lang::get('main.'.$type);
+
+                $data['select_account'] = Lang::get('main.balance_'.$type);
                 $data['accounts_empty'] = 'no';
             }
 
@@ -357,15 +358,23 @@ class AccountController extends BaseController
 
             // MAKE QUERY
             $account_trans     = AccountTrans::company()
-                                ->dateBetween('date',$date_from,$date_to)
-                                ->where('account_id', $account_id)->get();
+                                ->dateBetween('date',$date_from,$date_to);
+             if($account_id == 'all') {
+
+                 $account_trans->where('account', $type);
+
+             }else{
+
+                 $account_trans->where('account_id', $account_id);
+             }
+
 
 
 //            var_dump($account_trans); die();
 
             // FILL DATA FROM INPUTS AND ACCOUNT TRANS RESULT
 
-            $data['account_trans'] = $account_trans;
+            $data['account_trans'] = $account_trans->get();;
             $data['date_from']     = $date_from;
             $data['date_to']       = $date_to;
             $data['type']          = $type;
@@ -375,13 +384,20 @@ class AccountController extends BaseController
             $data['branch']        = $this->isAllBranch();
             $data['co_info']       = CoData::thisCompany()->first();
             $data['title']         = Lang::get('main.accounts_'.$type);
-            $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
             $data['name']          = Accounts::find($account_id)->acc_name;
-            $data['select_account']='أختر '. Lang::get('main.'.$type);
+            $data['select_account'] = Lang::get('main.balance_'.$type);
+
+                if($account_id != 'all'){
+                    $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
+                }
 
 
-                return View::make('dashboard.accounts.accounts_search.accounts_result',$data);
 
+                if($account_id == 'all') {
+                    return View::make('dashboard.accounts.accounts_search.accounts_balance_result', $data);
+                }else{
+                    return View::make('dashboard.accounts.accounts_search.accounts_result', $data);
+                }
             }else{
                 return 'type check error';
             }
