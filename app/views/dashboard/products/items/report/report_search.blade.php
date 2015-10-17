@@ -16,7 +16,7 @@
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i>
-             {{--{{ $title }}--}}
+             {{ $title }}
             </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>

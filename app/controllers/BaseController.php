@@ -94,7 +94,7 @@ class BaseController extends Controller {
 
     public function branchName()
     {
-     return Branches::find(Auth::user()->br_id)->br_name;
+     return Branches::find(BaseController::getBranchId())->br_name;
     }
     public function strToTime($date)
     {

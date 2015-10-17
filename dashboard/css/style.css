@@ -1,0 +1,92 @@
+/* moaaz farag*/
+input.input-without-border {
+    border: 1px solid #F5F5F5!important;
+    margin: 0!important;
+}
+/*style of drop down menu */
+ul.drop-down-menu
+{
+    position: absolute ;
+    margin:0px ;
+    box-shadow: -4px 4px 15px #888888
+}
+ul li.li-drop-down-menu{
+    width: 250px;
+    background-color: #fff;
+    cursor: pointer;
+    display: list-item;
+    margin:2px 2px 3px 2px
+}
+ ul li.li-drop-down-menu:hover{
+    width: 250px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    display: list-item;
+    margin:2px 2px 3px 2px
+}
+input.ng-invalid.ng-touched {
+    border-bottom: 1px red!important;
+    box-shadow: 1px 1px 2px red!important
+}
+
+
+div.error-div {
+    color: red;
+    font-size: 8pt;
+    margin-top: -1em;
+    margin-right: 3.5em;
+}
+.error-div-for-table {
+    color: red;
+    font-size: 8pt;
+
+}
+
+.parsley-required{
+
+    color: red;
+    font-size: 10pt;
+    text-align: right;
+    float:right;
+    direction: rtl;
+}
+
+.center_title{
+
+     font-size: 1.5em;
+     color: #333;
+     text-align: center;
+}
+.sub_title{
+
+        font-size: 1.3em;
+
+    } 
+
+.date_style{
+
+    color: #333;
+    font-style: italic;
+    font-size: 1em;
+}
+
+.caption-style{
+    padding: 1%;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    /*border-bottom: 1px solid #999;*/
+    border-top: 1px solid #ddd;
+    font-size: 1.2em; font-weight: 600;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f3f3f3+50,ededed+51,ffffff+100;White+Gloss+%232 */
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(243,243,243,1) 50%, rgba(237,237,237,1) 51%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(243,243,243,1)), color-stop(51%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+
+}

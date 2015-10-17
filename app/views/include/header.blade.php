@@ -111,7 +111,7 @@
             </li>
 
             <li>
-                <a href="/logout">
+                <a href="{{ URL::route('logout') }}">
                     <i class="fa fa-sign-out"></i> @lang('main.login') </a>
             </li>
           </ul>

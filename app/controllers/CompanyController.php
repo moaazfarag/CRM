@@ -45,6 +45,7 @@
                 $user            = new User;
                 $user->co_id     = $company->id;
                 $user->username  = $inputs['username'];
+                $user->all_br    = 1;
                 $user->password  = Hash::make($inputs['password']);
                 $user->email     = $inputs['email'];
                 $user->owner     = 'acount_creator';

@@ -23,7 +23,7 @@ Route::get('/login',function(){
 /*
  * logout route
  * */
-Route::get('/logout',array('uses'=>'UserController@logout','as'=>'login'));
+Route::get('/logout',array('uses'=>'UserController@logout','as'=>'logout'));
 /*
  * login post
  * check username and password
@@ -148,35 +148,29 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
      */
     Route::group(array('prefix'=>'Transaction'),function()
     {
-        Route::get('Add-Trans-Header/{type}', array('uses' => 'SettleController@addSettle','as' => 'addSettle'));
-        Route::get('Add-Trans-Header-data', array('uses' => 'SettleController@jsonData','as' => 'jsonData'));
-        Route::post('Add-Trans-Header/{type}', array('uses' => 'SettleController@storeSettle','as' => 'storeSettle'));
-        Route::post('Store-Trans-Header/{type}',array('before'=>'csrf','uses'=>'SettleController@storeTransHeader','as'=>'storeTransHeader')) ;
-        Route::get('view-settle/{invoiceId}',array('uses'=>'SettleController@viewSettle','as'=>'viewSettle')) ;
-        Route::get('view-settles/',array('uses'=>'SettleController@viewSettles','as'=>'viewSettles')) ;
-        Route::post('test',array('uses'=>'SettleController@test','as'=>'test')) ;
+
     });
+    Route::group(array('prefix'=>'transaction'),function()
+    {
+        Route::get('{type}/{br_id}', array('uses' => 'TransController@addTrans','as' => 'addTrans'));
+        Route::post('{type}/{br_id}', array('before'=>'csrf','uses' => 'TransController@storeTrans','as' => 'storeTrans'));
+        Route::get('all/{type}/{br_id}', array('uses' => 'TransController@viewTransactions','as' => 'viewTransactions'));
+        Route::get('{type}-{br_id}-{invoice_no}', array('uses' => 'TransController@viewTransaction','as' => 'viewTransaction'));
+        Route::post('accounts-data', array('uses' => 'TransController@accountsData','as' => 'accountsData'));
+        Route::post('accounts-by-id', array('uses' => 'TransController@accountById','as' => 'accountById'));
+        Route::post('items-data-br', array('uses' => 'TransController@itemsData','as' => 'itemsData'));
+        Route::post('serial-items-data', array('uses' => 'TransController@serialItemsData','as' => 'serialItemsData'));
+        Route::post('items-data', array('uses' => 'TransController@items','as' => 'items'));
+        Route::post('invoice-data', array('uses' => 'TransController@returnsInvoiceData','as' => 'returnsInvoiceData'));
+        Route::post('returns-invoice-data', array('uses' => 'TransController@returnsInvoiceData','as' => 'itemsData'));
+
+    });
+
     /**
      *
      */
     Route::group(array('prefix'=>'invoice'),function(){
-
-        Route::get('add-{type}-invoice/{br_id}', array('uses' => 'InvoiceController@addInvoice','as' => 'addInvoice'));
-        Route::post('add-{type}-invoice/{br_id}', array('uses' => 'InvoiceController@storeInvoice','as' => 'storeInvoice'));
-        Route::get('view-invoice/{headerId}', array('uses' => 'InvoiceController@viewInvoice','as' => 'viewInvoice'));
-        Route::get('view-invoices', array('uses' => 'InvoiceController@viewInvoices','as' => 'viewInvoices'));
-        Route::get('add-{type}-return-invoice/{br_id}', array('uses' => 'InvoiceReturnController@addReturnInvoice','as' => 'addReturnInvoice'));
-        Route::post('add-{type}-return-invoice/{br_id}', array('uses' => 'InvoiceReturnController@storeReturnInvoice','as' => 'storeReturnInvoice'));
-        Route::post('accounts-data', array('uses' => 'InvoiceController@accountsData','as' => 'accountsData'));
-        Route::post('accounts-by-id', array('uses' => 'InvoiceController@accountById','as' => 'accountById'));
-        Route::post('items-data-br', array('uses' => 'InvoiceController@itemsData','as' => 'itemsData'));
-        Route::post('serial-items-data', array('uses' => 'InvoiceController@serialItemsData','as' => 'serialItemsData'));
-        Route::post('items-data', array('uses' => 'InvoiceController@items','as' => 'items'));
-        Route::post('invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'returnsInvoiceData'));
-        Route::get('all-invoices', array('uses' => 'InvoiceController@allInvoices','as' => 'allInvoices'));
-        Route::post('returns-invoice-data', array('uses' => 'InvoiceReturnController@returnsInvoiceData','as' => 'itemsData'));
-        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'InvoiceController@cancelInvoice','as'=>'cancelInvoice')) ;
-
+        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'TransController@cancelInvoice','as'=>'cancelInvoice')) ;
 
     });
 
@@ -257,6 +251,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('settles/',array('uses'=>'SettleController@reportSettleResult','as'=>'reportSettleResult'));
 
         // invoices
+
        Route::get('search-invoices/{type}/{sum?}',array('uses'=>'InvoiceController@reportSearchInvoice','as'=>'searchReportInvoices'));
        Route::post('invoices/',array('uses'=>'InvoiceController@reportResultInvoice','as'=>'InvoiceReport'));
 

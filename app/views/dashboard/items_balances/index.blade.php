@@ -26,7 +26,33 @@
                 </a>
             </div>
             <div class="content">
+                <page>
+                    <text>
+                        <b>
 
+                        </b>
+                    </text>
+                </page>
+
+
+                <div class="row no-margin-top">
+                <div class="col s2 l3">
+                    <i class="fa fa-calendar"></i>
+                    {{ Form::label('data',Lang::get('main.date')) }}
+                    <?php $date = new dateTime;
+                    ?>
+                    <input required="required"
+                           type="date"
+                            {{--ng-model="date = Date()"--}}
+                           autofocus="autofocus"
+                           id="data"
+                           value="{{$date->format('Y-m-d')}}"
+                           max="{{$date->modify('+1 day')->format('Y-m-d')}}"
+                           min="{{$date->modify('-1 day')->format('Y-m-d')}}"
+                           name="date">
+                    <p class="parsley-required">{{ $errors ->first('data') }} </p>
+                </div> {{--date--}}
+</div>
                   {{--branches start--}}
                 @if($branch == 1)
                     <div class="row no-margin-top">
@@ -45,6 +71,7 @@
                     </div>
                 @endif
                 {{--branches end--}}
+
                 <div class="row no-margin-top">
                     <div class="col s2 l1">
                         {{ Form::label('item_id','الصنف') }}
@@ -98,11 +125,11 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <label for="item_id">
-                                <button ng-hide="item.has_serial" href="#addItem" type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
-                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) "  ng-click=" serialItem(br_id,item.id)" class="waves-effect btn modal-trigger">
+                                <button ng-hide="returnBalance(item)" href="#addItem" type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
+                                <button ng-show="returnBalance(item)"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) "  ng-click=" serialItem(br_id,item.id)" class="waves-effect btn modal-trigger">
                                     اضف
                                 </button >
-                                @include('dashboard.settle._add_popup_div')
+                                @include('dashboard.transaction._pop_up._add')
                             </label>
                         </div>
                     </div> {{-- button of one item div--}}
