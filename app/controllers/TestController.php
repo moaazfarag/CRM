@@ -56,5 +56,15 @@ class TestController extends BaseController
 
             return Response::json(array('success' => true,'data'));
         }
+   public function hi(){
+       $string ="<page>
+<text><b>MOAAZ</b></text>mail<text><b>123</b></text><text><b>sdfdsf</b></text>
+<text><b>ADDS</b></text>mail<text><b>123</b></text>
+<text><b>MOSDSAAZ</b></text>mail<text><b>123</b></text><text><b>sdfdsf</b></text>
+<text><b>MOAASDDSAZ</b></text>mail<text><b>123</b></text>
 
+</page>";
+$moaaz = preg_match("<text><b>(.*?)</b></text>",$string);
+   dd($moaaz);    
+   }
 }
