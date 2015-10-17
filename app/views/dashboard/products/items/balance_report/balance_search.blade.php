@@ -51,8 +51,8 @@
                 <div class="col s12 l3">
 
                     <p>
-                        <input name="with_zero_results" type="checkbox" id="checkbox1" />
-                        <label for="checkbox1">عرض الأرصدة التى تساوى 0 </label>
+                        <input name="no_zero_results" type="checkbox" id="checkbox1" />
+                        <label for="checkbox1">عدم عرض الارصدة الصفرية </label>
                     </p>
 
                     <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>

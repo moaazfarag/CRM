@@ -287,7 +287,7 @@ class ItemController extends BaseController
 
                 $balances->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
 
-            if(Input::get('with_zero_results') != ''){
+            if(Input::get('no_zero_results') != ''){
 
                 $zero_results       = Items::company()->whereNotIn('id',$balances->lists('item_id'));
 
@@ -298,13 +298,14 @@ class ItemController extends BaseController
 
 
 
-
+                $data['show_zero_results']  = 'no';
 
                 $data['zero_results']       = $zero_results->get();
                 $data['zero_result_title']  = 'أرصدة المخازن الصفرية ';
 
             }else {
-                $data['zero_results']  = 0;
+
+                $data['show_zero_results']  ='yes';
             }
 
                 $data['balances'] = $balances->get();
@@ -324,6 +325,7 @@ class ItemController extends BaseController
 
         $inputs         = Input::all();
         $all_item       = explode('|',$inputs['all_item']);
+        $all_item          = array_slice($all_item, 0, -1);
 
         $inventory_data = array();
          $i             = 0 ;
@@ -343,9 +345,10 @@ class ItemController extends BaseController
             $i++;
         }
 
-        $data['balances'] = $inventory_data;
-        $data['type']     = 'inventory_result';
-        $data['title']    = Lang::get('main.inventory_result');
+        $data['show_zero_results']   ='yes';
+        $data['balances']            = $inventory_data;
+        $data['type']                = 'inventory_result';
+        $data['title']               = Lang::get('main.inventory_result');
 
         return View::make('dashboard.products.items.balance_report.balance_result',$data);
 

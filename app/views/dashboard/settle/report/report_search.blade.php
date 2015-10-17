@@ -15,10 +15,6 @@
 <section class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
     <div class="row" style="margin: 1% 0;">
     <div class="col l12 s12" >
-        <div class="btn-group">
-            <a href="{{ URL::route('reportSettleSearch','settleDiscount') }}" class="btn btn-extra black-text grey lighten-2 ">تسويات الخصم    </a>
-            <a href="{{ URL::route('reportSettleSearch','settleAdd') }}" class="btn btn-extra black-text grey lighten-2"> تسويات الإضافة </a>
-        </div>
 
 
         </div>

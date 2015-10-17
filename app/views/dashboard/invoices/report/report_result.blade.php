@@ -22,52 +22,8 @@
 
         @unless($invoices->isEmpty())
 
-         @if($sum == 'sum')
+         @if($sum != 'sum')
 
-            <?php
-
-                $all_net = array();
-                $i       = 0;
-             foreach($invoices as $invoice){
-                 $i++;
-
-                 $all_net[$i] =  $invoice->transDitails->item_total;
-
-             }
-                $count_invoices  = $i;
-              ?>
-
-
-            <table style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
-                <thead>
-                <tr>
-                    <caption class="caption-style">
-                        الفترة من
-                        {{ BaseController::ViewDate($date_from) }}
-                        حتى
-                        {{ BaseController::ViewDate($date_to) }}
-                    </caption>
-
-                </tr>
-                    <tr>
-                        <th>إجمالى المبيعات</th>
-                        <th>عدد الفواتير </th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ array_sum($all_net) }}</td>
-                    <td>{{ $count_invoices }}</td>
-                </tr>
-                </tbody>
-            </table>
-
-
-
-
-
-        @else
 
         <table   class="display table table-bordered table-striped table-hover">
             <thead>
@@ -95,6 +51,9 @@
             </thead>
             <tbody>
 
+            {{--end if sum --}}
+            @endif
+
             <?php  $all_net = array(); $all_qty = array();  $i = 0; $all_invoice = array();  $all_items = array(); ?>
 
             @foreach($invoices as  $invoice)
@@ -104,9 +63,9 @@
                       @if($cat_id != '' &&  $item_id != '')
 
                             @if($details->cat_id == $cat_id && $details->item_id == $item_id )
+
+                                @if($sum != 'sum')
                                 <tr>
-
-
                                     <td>{{ $invoice->invoice_no }}</td>
                                     <td>{{ $invoice->date }}</td>
                                     <td>{{ $invoice->branch->br_name }}</td>
@@ -117,6 +76,10 @@
                                     <td>{{  $details->qty * $details->unit_price}}</td>
 
                                 </tr>
+
+                                {{--end if sum --}}
+                                @endif
+
                                 <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price;  ?>
                              @endif
 
@@ -124,23 +87,29 @@
 
                           @if($details->item_id == $item_id )
 
+                              @if($sum != 'sum')
                               <tr>
                                 <td>{{ $invoice->invoice_no }}</td>
                                 <td>{{ $invoice->date }}</td>
                                 <td>{{ $invoice->branch->br_name }}</td>
                                 <td>{{ $details->item_name }}</td>
-                                  <td>{{ Category::find($details->cat_id)->name }}</td>
-                                  <td>{{ $details->qty }}</td>
+                                <td>{{ Category::find($details->cat_id)->name }}</td>
+                                <td>{{ $details->qty }}</td>
                                 <td>{{ $details->unit_price }}</td>
                                 <td>{{  $details->qty * $details->unit_price}}</td>
 
                             </tr>
+                              {{--end if sum --}}
+                              @endif
+
                               <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                           @endif
 
                         @elseif($cat_id != '' &&  $item_id == '')
 
                           @if($details->cat_id == $cat_id )
+
+                              @if($sum != 'sum')
 
                               <tr>
 
@@ -154,12 +123,15 @@
                                 <td>{{  $details->qty * $details->unit_price}}</td>
 
                             </tr>
+                              {{--end if sum --}}
+                              @endif
                               <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                           @endif
 
 
 
                          @else
+                                @if($sum != 'sum')
                             <tr>
                                     <td>{{ $invoice->invoice_no }}</td>
                                     <td>{{ $invoice->date }}</td>
@@ -171,6 +143,9 @@
                                     <td>{{  $details->qty * $details->unit_price}}</td>
 
                             </tr>
+                            {{--end if sum --}}
+                             @endif
+
                             <?php  $i++; $all_net[$i] =  $details->qty * $details->unit_price; $all_qty[$i] = $details->qty; $all_invoice[$invoice->invoice_no] = $invoice->invoice_no; $all_items[$details->id] = $details->item_name;  ?>
                      @endif
 
@@ -207,7 +182,7 @@
 
 
 
-            @endif
+
             @else
             <div class="alert  orange lighten-4 orange-text text-darken-2">
                 <strong>عفواً!</strong>

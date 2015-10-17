@@ -14,15 +14,8 @@
 
 
     <div class=" card">
-        <div class="btn-group" style="margin: 1%  1% 0 0;">
-            <a href="{{ URL::route('searchAccounts','expenses') }}" class="btn btn-extra black-text grey lighten-2">   المصروفات</a>
-            <a href="{{ URL::route('searchAccounts','multiple_revenue') }}" class="btn btn-extra black-text grey lighten-2">   إيرادات أخرى</a>
-            <a href="{{ URL::route('searchAccounts','bank') }}" class="btn btn-extra black-text grey lighten-2">   البنوك</a>
-            <a href="{{ URL::route('searchAccounts','partners') }}" class="btn btn-extra black-text grey lighten-2">  جارى الشركاء </a>
-            <a href="{{ URL::route('searchAccounts','suppliers') }}" class="btn btn-extra black-text grey lighten-2">  الموردين </a>
-            <a href="{{ URL::route('searchAccounts','customers') }}" class="btn btn-extra black-text grey lighten-2 "> العملاء</a>
-        </div>
-        <hr/>
+
+
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i>  {{ $title }} </h5>
@@ -65,7 +58,7 @@
             {{--account name--}}
                     <div class="col s12 l2">
 
-                        {{ Form::select('account_id', array('' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id')) }}
+                        {{ Form::select('account_id', array('all' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id')) }}
 
                         <p class="parsley-required">{{ $errors ->first('account_id') }} </p>
                     </div>
