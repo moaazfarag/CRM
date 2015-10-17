@@ -67,7 +67,7 @@ class TransController extends BaseController
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
 
                     $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:null;
-                    $accountId                  = (isset($inputs['account_id']) || $inputs['account_id']<=0)?$inputs['account_id']:null;
+                    $accountId                  = (isset($inputs['account_id']))?$inputs['account_id']:null;
                     $newHeader                  = new TransHeader;
                     $newHeader->co_id           = $this->coAuth();
                     $newHeader->user_id         = Auth::id();
