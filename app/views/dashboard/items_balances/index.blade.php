@@ -125,8 +125,8 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <label for="item_id">
-                                <button ng-hide="item.has_serial" href="#addItem" type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
-                                <button ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) "  ng-click=" serialItem(br_id,item.id)" class="waves-effect btn modal-trigger">
+                                <button ng-hide="returnBalance(item)" href="#addItem" type="button" ng-disabled="form.$invalid || hasItemBalance(item.cost) " ng-click="addItem()" class="waves-effect btn">اضف </button >
+                                <button ng-show="returnBalance(item)"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) "  ng-click=" serialItem(br_id,item.id)" class="waves-effect btn modal-trigger">
                                     اضف
                                 </button >
                                 @include('dashboard.transaction._pop_up._add')

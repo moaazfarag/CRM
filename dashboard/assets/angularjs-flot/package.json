@@ -1,0 +1,45 @@
+{
+  "name": "angular-flot",
+  "version": "0.0.6",
+  "description": "An Angular directive to wrap Flotcharts.",
+  "main": "angular-flot.js",
+  "author": {
+    "name": "Lorenzo Villani",
+    "email": "lvillani@develer.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "./node_modules/coffee-script/bin/coffee -c -b angular-flot.coffee"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.8.0"
+  },
+  "contributors": [
+    {
+      "name": "Lorenzo Villani",
+      "email": "lvillani@develer.com"
+    }
+  ],
+  "gitHead": "82116d763972a575cfc916ac558dd2d26bcdc96e",
+  "_id": "angular-flot@0.0.6",
+  "_shasum": "4eab8271d97e157e1e89b13784f03eba57a44f23",
+  "_from": "angular-flot@",
+  "_npmVersion": "2.1.10",
+  "_nodeVersion": "0.10.33",
+  "_npmUser": {
+    "name": "lvillani",
+    "email": "lorenzo@villani.me"
+  },
+  "maintainers": [
+    {
+      "name": "lvillani",
+      "email": "lorenzo@villani.me"
+    }
+  ],
+  "dist": {
+    "shasum": "4eab8271d97e157e1e89b13784f03eba57a44f23",
+    "tarball": "http://registry.npmjs.org/angular-flot/-/angular-flot-0.0.6.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/angular-flot/-/angular-flot-0.0.6.tgz"
+}

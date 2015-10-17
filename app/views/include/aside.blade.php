@@ -13,6 +13,7 @@
     .yay-shrink   - shrink content width
 -->
 <?php $branches = BaseController::getBranchId()  ?>
+
   <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
 
     <div class="top">
@@ -99,7 +100,7 @@
             <li class="{{@$TransOpen}}">
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.stores')<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
-                    @if($branches['all_br'] == "all_br")
+                    @if(@$branches['all_br'] == "all_br")
                         <li>
                             <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleAdd')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                             <ul>
@@ -160,7 +161,7 @@
                 <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>   الفواتير <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                 <ul>
 
-@if($branches['all_br'] == "all_br")
+@if(@$branches['all_br'] == "all_br")
                         <li>
                             <a class="yay-sub-toggle waves-effect waves-blue">     فاتورة مبيعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                             <ul>
@@ -195,7 +196,7 @@
                         <a href="{{ URL::route('addTrans',array("buy",$branches)) }}" class="waves-effect waves-blue"> فاتورة مشتريات</a>
                     </li>
 @endif
-                        @if($branches['all_br'] == "all_br")
+                        @if(@$branches['all_br'] == "all_br")
                         <li>
                             <a class="yay-sub-toggle waves-effect waves-blue">     فاتورة مرتجعات مبيعات <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                             <ul>
