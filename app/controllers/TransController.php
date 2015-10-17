@@ -112,12 +112,17 @@ class TransController extends BaseController
                             'created_at'        => date('Y-m-d H:i:s'),
                             'updated_at'        => date('Y-m-d H:i:s')
                         );
+                        if ($item->has_serial) {
+//                            dd($item);
+//                            $Qtty[][$item->id] += $quantity;
+                            }
                         if(self::isSettle($type)) {
                             $total =   null;
                         }else{
                             $total +=   $newInvoiceItems[$k]['item_total'];
                         }
                     }
+
                     if(count($newInvoiceItems)>0){
                         $discount = isset($inputs['discount'])?$inputs['discount']:0;
                         $tax      = isset($inputs['tax'])?$inputs['tax']:0;
@@ -130,6 +135,15 @@ class TransController extends BaseController
                         if(!self::isSettle($type)){
                             AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
                         }
+                        if($type == "buy" || $type == "salesReturn"){
+                            $qtyPerItem = $this->getQty($newInvoiceItems);
+                            $this->setAvgCost($qtyPerItem, $newHeader);
+                            foreach($newInvoiceItems as $invoiceItem ){
+                                $i = Items::find( $invoiceItem['item_id'])->first();
+                                $invoiceItem['avg_cost']  = $i->avg_cost;
+                            }
+                        }
+//                        dd($newInvoiceItems);
                         $newHeader->save();
                         TransDetails::insert($newInvoiceItems);
                         Session::flash('success','تم اضافة الفاتورة بنجاح');
@@ -277,5 +291,44 @@ class TransController extends BaseController
         }
 
         return $data;
+    }
+
+    /**
+     * @param $newInvoiceItems
+     * @return array
+     */
+    private function getQty($newInvoiceItems)
+    {
+        $qtyPerItem = array();
+        foreach ($newInvoiceItems as $detail) {
+            if (!isset($qtyPerItem[$detail['item_id']])) {
+                $qtyPerItem[$detail['item_id']]['qty'] = 0;
+
+            }
+            $qtyPerItem[$detail['item_id']]['qty'] += $detail['qty'];
+            $qtyPerItem[$detail['item_id']]['unit_price'] = $detail['unit_price'];
+        }
+
+        return $qtyPerItem;
+    }
+
+    /**
+     * @param $qtyPerItem
+     * @param $newHeader
+     */
+    private function setAvgCost($qtyPerItem, $newHeader)
+    {
+        foreach ($qtyPerItem as $k => $detail) {
+            $invoiceItem = Items::getItem($newHeader->br_id, $k);
+            $updateItem = Items::company()->find($k);
+
+            if ($updateItem && $updateItem->avg_cost>0) {
+                $new_avg = (($invoiceItem->balance * $invoiceItem->avg_cost) + ($detail['qty'] * $detail['unit_price'])) / ($detail['qty'] + $invoiceItem->balance);
+                $updateItem->avg_cost = $new_avg;
+            } else {
+                $updateItem->avg_cost = $detail['unit_price'];
+            }
+            $updateItem->update();
+        }
     }
 }
