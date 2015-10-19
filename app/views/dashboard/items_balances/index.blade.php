@@ -10,7 +10,7 @@
         {{--@elseif(Route::currentRouteName() == 'editItemsBalances')--}}
         {{--{{ Form::model($item,array('route'=>array('updateItemsBalances',$item->id))) }}--}}
         {{--@endif--}}
-        <div ng-app="itemApp"  ng-controller="mainController" class="card">
+        <div  ng-app="itemApp"  ng-controller="mainController" class="card">
             {{ Form::open(array('route'=>array('storeItemsBalances'),'name'=>'form','novalidate')) }}
             <div class="title">
                 <h5>

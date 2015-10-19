@@ -9,14 +9,12 @@
 class TransController extends BaseController
 {
     public function addTrans($type,$br_id){
-
         $branch =  Branches::company()->find($br_id);
-        $types = ['sales','buy','salesReturn','buyReturn',"settleAdd","settleDown"];
+        $types = ['sales','buy','salesReturn','buyReturn','settleAdd','settleDown','itemBalance'];
         if(in_array($type,$types) && $branch)
         {
             $data['name']          = Lang::get('main.'.$type); // page title
             $data['title']         = " فاتورة " .$data['name'] ; // page title
-            $data['invoices_open'] = 'open' ;
             $data['co_info']       = CoData::thisCompany()->first();//select info models category seasons
             $data['branch']        = $branch;
             $data['type']          = $type;
@@ -24,12 +22,16 @@ class TransController extends BaseController
             $data['pay_type']      = array('cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
             $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
             if($type == "sales"){
+                $data['invoices_open'] = 'open' ;
                 return View::make('dashboard.transaction.discount-index',$data);
-            }elseif($type == "buy" ){
+            }elseif($type == "buy" || $type == "itemBalance" ){
+                $data['invoices_open'] = 'open' ;
                 return View::make('dashboard.transaction.add-index',$data);
             }elseif($type == "settleAdd"){
+                $data['TransOpen'] = 'open' ;
                 return View::make('dashboard.transaction.settle-add-index',$data);
             }elseif($type == "settleDown"){
+                $data['TransOpen'] = 'open' ;
                 return View::make('dashboard.transaction.settle-discount-index',$data);
             }elseif( $type == "buyReturn" || $type == "salesReturn"){
                 return View::make('dashboard.transaction.return-index',$data);
@@ -41,7 +43,7 @@ class TransController extends BaseController
     public function storeTrans($type,$br_id)
     {
         $branch =  Branches::company()->find($br_id);
-        $types = ['sales','buy','salesReturn','buyReturn',"settleAdd","settleDown"];
+        $types = ['sales','buy','salesReturn','buyReturn','settleAdd','settleDown','itemBalance'];
         if(in_array($type,$types) && $branch)
         {
             $inputs = Input::all();
@@ -63,11 +65,9 @@ class TransController extends BaseController
                 Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
                 return View::make('dashboard.settle.index',$data);
             }else {
-
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
-
                     $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:null;
-                    $accountId                  = (isset($inputs['account_id']))?$inputs['account_id']:null;
+                    $accountId                  = isset($inputs['account_id'])?intval($inputs['account_id']):null;
                     $newHeader                  = new TransHeader;
                     $newHeader->co_id           = $this->coAuth();
                     $newHeader->user_id         = Auth::id();
@@ -93,7 +93,7 @@ class TransController extends BaseController
                                 $unitPrice = null;
                                 $itemTotal = null;
                             }else{
-                                $unitPrice = $this->priceBaseOnAccount($inputs['account_id'], $item);// get price base in account price system
+                                $unitPrice = $this->priceBaseOnAccount(@$inputs['account_id'], $item);// get price base in account price system
                             }
                         }if(!self::isSettle($type)){
                             $itemTotal = ($unitPrice)*($quantity);
@@ -133,9 +133,11 @@ class TransController extends BaseController
                         $newHeader->net             = $net;
                         //if select account save record into account_trans
                         if(!self::isSettle($type)){
-                            AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
+                            if ($type != 'itemBalance') {
+                                AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
+                            }
                         }
-                        if($type == "buy" || $type == "salesReturn"){
+                        if($type == 'buy' || $type == 'salesReturn'|| $type == 'itemBalance'){
                             $qtyPerItem = $this->getQty($newInvoiceItems);
                             $this->setAvgCost($qtyPerItem, $newHeader);
                             foreach($newInvoiceItems as $invoiceItem ){
@@ -182,7 +184,7 @@ class TransController extends BaseController
     {
 
         $branch =  Branches::company()->find($br_id);
-        $types = ['sales','buy','salesReturn','buyReturn',"settleAdd","settleDown"];
+        $types = ['sales','buy','salesReturn','buyReturn','settleAdd','settleDown','itemBalance'];
         if(in_array($type,$types) && $branch){
             $data['title']         = "فواتير " .Lang::get('main.'.$type); // page title
             $data['invoices_open'] = 'open' ;
@@ -247,7 +249,6 @@ class TransController extends BaseController
     public function serialItemsData()
     {
         $data['items']  = Items::getSerialItemsWithBalanceByBrId(Input::get('br_id'),Input::get('item_id')) ;
-//            dd($data['items']);
         return Response::json($data);
     }
     /**

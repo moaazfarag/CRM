@@ -64,11 +64,6 @@ class Items extends Eloquent {
         return $this->belongsTo('Seasons','seasons_id','id');
     }
 
-    public function itemsBalances()
-    {
-        return $this->belongsTo('ItemsBalances','item_id');
-    }
-
     public function models()
     {
         return $this->belongsTo('Models','models_id');

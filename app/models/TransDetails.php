@@ -22,16 +22,16 @@ class TransDetails extends Eloquent {
             $type     = $inputs['type'];
             $br_id    = $inputs['br_id'];
 
-            $discount = ['sales','buyReturn',"settleDown"];
-            $add      = ['buy','salesReturn',"settleAdd"];
-            $settles  = ["settleAdd","settleDown"];
+            $discount = ['sales','buyReturn','settleDown'];
+            $add      = ['buy','salesReturn','settleAdd'];
+            $settles  = ['settleAdd','settleDown','itemBalance'];
 
             $date     = new dateTime;
             $tomorrowDate  = $date->modify('+2 day')->format('Y-m-d');
             $yesterdayDate = $date->modify('-3 day')->format('Y-m-d');
 //dd($yesterdayDate);
             $store_rules['date'] = 'required|date|before:'.$tomorrowDate.'|after:'.$yesterdayDate;
-            if(!in_array($type,$settles)){
+            if(!in_array($type,$settles) ){
 
                 if(isset($inputs['pay_type'])&&$inputs['pay_type']=="on_account"){
                     $store_rules['account_id'] = 'required|integer|exists:accounts,id,co_id,'.Auth::user()->co_id;
@@ -61,7 +61,7 @@ class TransDetails extends Eloquent {
                     $store_rules['quantity_'.$k] = 'required|integer|min:1';
                 }
 
-                if( in_array($type,$add) && @$inputs['cost_'.$k] > 0 ){
+                if( (in_array($type,$add) || $type == 'itemBalance') && @$inputs['cost_'.$k] > 0 ){
                     $store_rules['cost_'.$k]     = 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/';
                     }
             }

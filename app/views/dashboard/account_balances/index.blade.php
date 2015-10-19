@@ -4,7 +4,7 @@
 <section class="content-wrap ecommerce-dashboard">
       <div id="bank" class="col s12">
 
-<div ng-app="accountApp" ng-controller="accountController" class="card">
+<div  ng-app="accountsApp"  ng-controller="accountController" class="card">
         {{ Form::open(array('route'=>array('storeAccountsBalances'),'ng-submit'=>"submitItem()",'name'=>'form')) }}
     <form ng-submit='submitItem()' name='form'>
 
@@ -48,7 +48,7 @@
                       {{ Form::label('debit',$debit) }}
                       <div class="error-div-for-table" ng-show="form.$submitted || form.debit.$touched">
                           <div ng-show="form.debit.$error.pattern">
-                              @lang('mai    n.please_enter_valid_number')
+                              @lang('main.please_enter_valid_number')
                           </div>
                       </div>
                       <p class="parsley-required">{{ $errors ->first('debit') }} </p>
@@ -87,35 +87,6 @@
               </div>
           </div> {{--first row end--}}
 @{{  form.credit.$viewValue  }}
-          {{--<div class="row no-margin-top">--}}
-
-              {{--@if($co_info->co_use_serial)--}}
-              {{--<div class="col s12 m6 l4">--}}
-                  {{--<div class="input-field">--}}
-                      {{--<i class="fa fa-barcode prefix"></i>--}}
-                      {{--{{ Form::text('bar_code',null,array('id'=>'bar_code')) }}--}}
-                      {{--{{ Form::label('bar_code','الباركود') }}--}}
-                    {{--<p class="parsley-required">{{ $errors ->first('bar_code') }} </p>--}}
-                  {{--</div>--}}
-              {{--</div>--}}{{--bar_code--}}
-              {{--@endif--}}
-              {{--<div class="col s12 m6 l4">--}}
-                  {{--<div class="input-field">--}}
-                      {{--<i class="fa fa-barcode prefix"></i>--}}
-                      {{--{{ Form::text('serial_no',null,array('id'=>'serial_no')) }}--}}
-                      {{--{{ Form::label('serial_no','السيريال') }}--}}
-                    {{--<p class="parsley-required">{{ $errors ->first('serial_no') }} </p>--}}
-                  {{--</div>--}}
-              {{--</div>--}}{{--bar_code--}}
-            {{--<div class="col s12 m6 l2">--}}
-                {{--<div class="input-field">--}}
-                    {{--<i class="fa fa-cube prefix"></i>--}}
-                    {{--{{ Form::text('qty',null,array('id'=>'qty')) }}--}}
-                    {{--{{ Form::label('qty','الكمية') }}--}}
-                  {{--<p class="parsley-required">{{ $errors ->first('qty') }} </p>--}}
-                {{--</div>--}}
-            {{--</div>--}}{{--unit--}}
-          {{--</div> --}}{{--secound row end--}}
             <br>
       </div>
     @include('dashboard.account_balances._table_view')
