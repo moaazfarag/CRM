@@ -91,15 +91,15 @@ class Items extends Eloquent {
         $items      = Items::company()->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
         return array_merge($itemsTrans->get(),$items->toArray());
     }
-  public static function getItem($brId,$itemId)
+  public static function getItem($itemId)
     {
         $item =  DB::table('items_balance')
                             ->company()->where('deleted', 0)
                             ->groupBy('br_id')
                             ->groupBy('item_id')
-                            ->where('br_id',$brId)
                             ->where('item_id',$itemId)
-                            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')->first();
+                            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
+                            ->first();
         return $item;
     }
 

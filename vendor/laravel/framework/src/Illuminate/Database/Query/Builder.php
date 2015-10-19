@@ -1384,6 +1384,7 @@ class Builder {
 				'trans_details.qty',
 				'trans_header.br_id',
 				'branches.br_name AS br_name',
+				'trans_details.trans_header_id',
 				'trans_header.invoice_no',
 				'trans_header.date',
 				'trans_header.invoice_type',
@@ -1396,7 +1397,9 @@ class Builder {
 				'trans_details.item_id',
 				'trans_header.br_id',
 				'trans_header.invoice_type',
-				 'trans_header.co_id')
+				 'trans_header.co_id',
+				 'trans_details.trans_header_id'
+			)
 			;
 	}
 

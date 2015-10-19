@@ -163,16 +163,10 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
         Route::post('items-data', array('uses' => 'TransController@items','as' => 'items'));
         Route::post('invoice-data', array('uses' => 'TransController@returnsInvoiceData','as' => 'returnsInvoiceData'));
         Route::post('returns-invoice-data', array('uses' => 'TransController@returnsInvoiceData','as' => 'itemsData'));
+        Route::post('cancelTrans',array('before'=>'csrf','uses'=>'TransController@cancelTrans','as'=>'cancelTrans')) ;
 
     });
 
-    /**
-     *
-     */
-    Route::group(array('prefix'=>'invoice'),function(){
-        Route::post('cancelInvoice',array('before'=>'csrf','uses'=>'TransController@cancelInvoice','as'=>'cancelInvoice')) ;
-
-    });
 
 
 
