@@ -4,7 +4,7 @@
 <!--[if IE 7]>     <html class="lt-ie8"> <![endif]-->
 <!--[if IE 8]>     <html class="lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html>
+<html class="rtl">
 <!--<![endif]-->
 {{--{{ Hash::make('123e456y') }}--}}
 <head>
@@ -59,7 +59,8 @@
         <div class="row">
           <div class="col"></div>
         </div>
-  <!-- Username -->
+<br>
+          <!-- Username -->
         <div class="input-field">
           <i class="fa fa-user prefix"></i>
           <input id="username-input" type="text"  value="{{Input::old('username')}}" name="username" class="validate">
@@ -86,6 +87,20 @@
         </div>
 
         <!-- /Password -->
+          <!-- co_id -->
+          <div class="col s12 l1">
+              <div class="input-field">
+
+                  <label style=" margin: 0 40% " for="co_id-input">رقم الشركة </label>
+                  <input style=" margin: 0 40%; width:100px " id="co_id-input" type="number"  value="{{Input::old('co_id')}}" name="co_id" class="validate">
+                  <div style="text-align: right;">
+                      <ul class="parsley-errors-list filled" id="parsley-id-5202">
+                          <li class="parsley-required">@if($errors->has('co_id')){{ $errors->First('co_id') }} @endif</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!-- /co_id -->
  @if(Session::has('error'))
   <div style="text-align: right;">
    <ul class="parsley-errors-list filled" id="parsley-id-5202">

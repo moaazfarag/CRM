@@ -13,7 +13,7 @@ class MonthChangeController extends BaseController
         $data['title'] = Lang::get('main.month_change'); // page title
         $data['employees'] = "open";
         $data['monthchange'] = MonthChange::company()->first();
-        $data['co_info'] = coData::thisCompany()->first();
+        $data['co_info'] = CoData::thisCompany()->first();
         return View::make('dashboard.hr.month_change.index', $data);
     }
 
@@ -53,7 +53,7 @@ class MonthChangeController extends BaseController
         $data['employees'] = "open";
         $data['employee'] = MonthChange::findOrFail($id);
         $data['monthchange'] = MonthChange::company()->first();
-        $data['co_info'] = coData::thisCompany()->first();
+        $data['co_info'] = CoData::thisCompany()->first();
         return View::make('dashboard.hr.month_change.index', $data);
     }
 

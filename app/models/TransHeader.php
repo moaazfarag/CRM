@@ -96,8 +96,8 @@ class TransHeader extends Eloquent {
                         ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
                         ->company()
                         ->where('deleted', 0)
-                        ->groupBy('invoice_no','br_id','invoice_type','item_id','serial_no')
-                        ->orderBy('date');
+                        ->groupBy('br_id','trans_header_id','item_id','serial_no')
+                        ->orderBy('created_at','desc');
         if($tBal){
             $itemsTrans->where('date','<',$date_from);
         }else{

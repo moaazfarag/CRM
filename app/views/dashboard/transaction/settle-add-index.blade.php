@@ -84,7 +84,7 @@
             <div class="col s2 ">
                 <div class="input-field">
                     <label for="item_id">
-                        <button ng-click=" serialItem(br_id,item.id)" ng-show="item.has_serial"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " class="waves-effect btn modal-trigger">
+                        <button ng-show="returnBalance(item)"  ng-click=" serialItem(br_id,item.id)" href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " class="waves-effect btn modal-trigger">
                             اضف
                         </button >
                         <button ng-hide="returnBalance(item)" id="addItemBtn"  href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " ng-click="addItem()" class="waves-effect btn">

@@ -27,9 +27,9 @@
                 {{@ $invoice->accountInfo->acc_name }}
                </div>
                 <div style=" font-size: 1.3em; font-weight: 500; text-align: center;" >
-                    @if(!TransController::isSettle($type))
-                    {{@ Lang::get("main.$invoice->pay_type"._); }}
-                    @endif
+                        @if($invoice->pay_type)
+                            {{@ Lang::get("main.$invoice->pay_type"._); }}
+                        @endif
                 </div>
 
                 <br/>

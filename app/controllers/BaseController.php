@@ -85,7 +85,7 @@ class BaseController extends Controller {
     public function isHaveBranch()
     {
         //check if  user can controller all barnches or not
-        if(Auth::user()->all_br && !empty(Branches::company()) ){
+        if(Auth::user()->all_br ){
             return true;
         }else{
             return false;
