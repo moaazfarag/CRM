@@ -80,7 +80,7 @@ class ItemsBalancesController extends BaseController {
 
             return View::make('dashboard.items_balances.index',$data);
         }else{
-            return "item not here";
+            return  View::make('errors.missing');
         }
 
 
@@ -114,7 +114,8 @@ class ItemsBalancesController extends BaseController {
 
                 return Redirect::route('addItemsBalances');
             }else{
-                return "This Items Balances Not Found ";
+                $data['error'] = 'Â–« «·—’Ìœ «·«›  «ÕÏ €Ì— „ÊÃÊœ';
+                return  View::make('errors.missing',$data);
             }
         }
     }

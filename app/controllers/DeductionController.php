@@ -66,7 +66,8 @@ class DeductionController extends BaseController
             $newDesded->update();
             return Redirect::route('addDesded');
         }else{
-        return "this item snot found ";
+                $data['error'] = 'ÚİæÇğ åĞÇ ÇáÕäİ ÛíÑ ãæÌæÏ ';
+                return View::make('errors.missing');
     }
 
     }

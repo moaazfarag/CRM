@@ -60,26 +60,33 @@ class AccountController extends BaseController
             $data['navActive']      = "active";
             return View::make('dashboard.accounts.index',$data);
             }else{
-                    return "type check error";
+                return View::make('errors.missing');
                 }
         }
-    public function editAccount($accountType,$id)
-        {
+
+         public function editAccount($accountType,$id)
+
+         {
             if($this->checkType($accountType)) {
-            $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
-            $data['accountType'] = $accountType;
-            $data['asideOpen']   = 'open' ;
-            $data['pricing']   = $this->pricing;
-            $data['navActive']    = "active";
-            $data['arabicName']   = Lang::get('main.'.$accountType);
-            $data['account'] = Accounts::where('acc_type','=',$accountType)->where('id','=',$id)->first();
+
+            $data['rowsData']       = Accounts::where('acc_type','=',$accountType)->get();
+            $data['accountType']    = $accountType;
+            $data['asideOpen']      = 'open' ;
+            $data['pricing']        = $this->pricing;
+            $data['navActive']      = "active";
+            $data['arabicName']     = Lang::get('main.'.$accountType);
+            $data['account']        = Accounts::where('acc_type','=',$accountType)->where('id','=',$id)->first();
+
             if($data['account']) {
                 return View::make('dashboard.accounts.index', $data);
             }else{
-                return "error";
-            }
+
+                $data['error']      ="عفواً يوجد خطأ";
+
+                return View::make('errors.missing',$data);            }
         }else{
-            return "type check error";
+
+                return View::make('errors.missing');
             }
         }
 
@@ -112,15 +119,22 @@ class AccountController extends BaseController
                 $account->acc_tax_card = Input::get('acc_tax_card');
                 $account->acc_notes = Input::get('acc_notes');
                 $account->user_id = Auth::id();
-                $account->save();
+
+                if($account->save()){
+
+                    Session::flash('success',BaseController::addSuccess(Lang::get("main.the_".$accountType)));
+                }else{
+
+                    Session::flash('error',BaseController::addError(Lang::get("main.the_".$accountType)));
+                }
+
                 $data['accountType'] = $accountType;
                 return Redirect::route('addAccount', $accountType);
             }
             }else {
-                    return "type check error";
-                }
 
-        }
+                return View::make('errors.missing');                 }
+             }
     public function updateAccount($accountType,$id)
         {
             if($this->checkType($accountType)){
@@ -139,15 +153,23 @@ class AccountController extends BaseController
                 $account->acc_tax_card = Input::get('acc_tax_card');
                 $account->acc_notes = Input::get('acc_notes');
                 $account->user_id = Auth::id();
-                $account->update();
+
+                if($account->update()){
+                    Session::flash('success',BaseController::editSuccess(Lang::get('main.the_'.$accountType)));
+                }else{
+                    Session::flash('error',BaseController::editError(Lang::get('main.the_'.$accountType)));
+                }
                 $data['accountType'] = $accountType;
                 return Redirect::route('addAccount', $accountType);
             } else {
-                return "error";
-            }
+
+                return View::make('errors.missing');                 }
+
+
         }else{
-                return "type check error";
-        }
+
+                return View::make('errors.missing');                 }
+
         }
     public  function checkType($type){
     $types = array('customers','suppliers','bank','expenses','multiple_revenue','partners');
@@ -252,8 +274,9 @@ class AccountController extends BaseController
 //        var_dump($data['rowsData']); die();
             return View::make('dashboard.accounts.treasury_account.index', $data);
         }else{
-            return 'not found this movement';
-        }
+            $data['error'] = 'عفواً هذه الحركة المباشرة غير موجودة';
+            return View::make('errors.missing',$data);                 }
+
     }
 
 
@@ -384,22 +407,68 @@ class AccountController extends BaseController
             $data['branch']        = $this->isAllBranch();
             $data['co_info']       = CoData::thisCompany()->first();
             $data['title']         = Lang::get('main.accounts_'.$type);
-            $data['name']          = Accounts::find($account_id)->acc_name;
-            $data['select_account'] = Lang::get('main.balance_'.$type);
+            $data['select_account']= Lang::get('main.balance_'.$type);
 
                 if($account_id != 'all'){
+                    $data['name']          = Accounts::find($account_id)->acc_name;
                     $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
+                }else{
+
+                    $data['name']          = Lang::get('main.balance_'.$type);
+
                 }
 
 
 
                 if($account_id == 'all') {
+
+                   $all_accounts         = Accounts::company()->where('acc_type',$type)->get()->lists('id');
+                   $data['all_accounts'] = $all_accounts;
+                   $credit               = 0;
+                   $debit                = 0;
+
+                    foreach($all_accounts as $account_id){
+
+                        $all_trans_cash = AccountTrans::company()
+                            ->where('account_id',$account_id)
+                            ->whereIn('pay_type',['cash','visa'])
+                            ->select(DB::raw('SUM(credit) AS sum_credit','SUM(debit) AS sum_debit') ,'account_trans.*')
+                            ->first();
+
+                        $all_trans_on_account = AccountTrans::company()
+                            ->where('account_id',$account_id)
+                            ->where('pay_type','on_account')
+                            ->select(DB::raw('SUM(credit) AS sum_credit','SUM(debit) AS sum_debit'))
+                            ->first();
+                        if(!empty($all_trans_cash)){
+//                        dd($all_trans_cash->sum_credit);
+
+                            $credit = $all_trans_cash->sum_credit + $all_trans_cash->sum_debit;
+                            $debit  = $credit;
+
+//                           $data['account_trans'][$account_id] = ['']
+                        }
+
+                        if(!empty($all_trans_on_account)){
+
+                            $credit += $all_trans_on_account->sum_credit;
+                            $debit  += $all_trans_on_account->sum_debit;
+                        }
+                       $name = Accounts::find($account_id)->acc_name;
+
+                       $data['account_trans_result'][$account_id] =  ['credit'=>$credit,'debit'=>$debit,'name'=>$name];
+
+
+                    }
+
                     return View::make('dashboard.accounts.accounts_search.accounts_balance_result', $data);
                 }else{
                     return View::make('dashboard.accounts.accounts_search.accounts_result', $data);
                 }
             }else{
-                return 'type check error';
+
+            return View::make('errors.missing');
+
             }
 
             // end data for search
@@ -426,7 +495,7 @@ class AccountController extends BaseController
 
         if ($validation->fails()) {
 
-            return 'try in another time';
+            return View::make('errors.missing');
 
         } else {
 
@@ -521,8 +590,7 @@ class AccountController extends BaseController
                 return View::make('dashboard.accounts.accounts_search.accounts_result',$data);
 
             }else{
-                return 'type check error';
-            }
+            return View::make('errors.missing');              }
 
         }
 
@@ -787,7 +855,7 @@ class AccountController extends BaseController
         $data['movements']      = $movements;
         $data['debit_types']    = $debit_types;
         $data['credit_types']   = $credit_types;
-        $data['br_id']         = $br_id  ;
+        $data['br_id']          = $br_id  ;
         $data['account_type']   = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
 
 

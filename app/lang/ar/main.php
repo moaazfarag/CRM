@@ -421,6 +421,12 @@ return  array(
     'accounts_partners'     =>'حسابات جارى الشركاء',
     'accounts_expenses'     => 'حسابات المصروفات',
     'accounts_multiple_revenue'=>'حسابات الإيرادات الأخرى',
+    'the_customers'    =>'العميل',
+    'the_suppliers'    =>'المورد',
+    'the_bank'         =>'البنك',
+    'the_partners'     =>'الشريك',
+    'the_expenses'     =>'المصروف',
+    'the_multiple_revenue'=>'الإيراد',
     'customers_for'         =>'للعميل',
     'suppliers_for'         =>'للمورد',
     'bank_for'              =>'لبنك',
@@ -437,8 +443,8 @@ return  array(
     'direct_movement_type'  =>'حركة مباشرة ',
     'sales_type'            =>'مبيعات',
     'buy_type'              =>'مشتريات',
-    'type'            =>'النوع',
-    'item_balance'              =>'رصيد افتتاحي',
+    'type'                  =>'النوع',
+    'item_balance'          =>'رصيد افتتاحي',
 
     'invoice_no'            => 'فاتورة رقم ',
     'catch_type'            => 'قبض' ,
@@ -451,12 +457,6 @@ return  array(
     'balance_partners'  =>'ميزان الشركاء',
     'balance_expenses'  =>'تجميع المصروفات',
     'balance_multiple_revenue'=>'تجميع الإيرادات',
-
-
-
-
-
-
 
     //daily_treasury
 
@@ -474,6 +474,16 @@ return  array(
     'inventory'         => 'رصيد الجرد ',
     'inventory_result'  => 'نتائج الجرد',
 
+    // errors
+    'no_sign_up' => 'لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق ',
+
+    // success
+    'edit_done'      => 'تم تعديل ',
+    'add_done'       => 'تمت إضافة ',
+    'add_not_done'  => 'لم تتم إضافة ',
+    'edit_not_done'  => 'لم يتم تعديل ',
+    'try_again'      => '.. حاول مرة أخرى ',
+    'with_success'   => ' بنجاح ',
 
 
 );

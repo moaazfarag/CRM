@@ -25,12 +25,7 @@ class MarkesController extends \BaseController
 			->get();
 
 
-		foreach($company_info as $info){
 
-			echo 'اسم الشركة : ' . $info->company_name;
-			echo 'اسم الفرع: ' . $info->branch_name;
-
-		}
 //		foreach ($test as $t){
 //			echo $t->name;
 //			echo '<br/>';
@@ -52,8 +47,15 @@ class MarkesController extends \BaseController
 		$mark->name = Input::get('name');
 		$mark->co_id = Auth::user()->co_id; // company id
 		$mark->user_id = Auth::id();// user who add this record
-		$mark->save();
-		return Redirect::route('addMark');
+
+		if($mark->save()){
+
+			Session::flash('success',BaseController::addSuccess('الماركة'));
+
+			}else{
+
+			Session::flash('error',BaseController::addError('الماركة'));
+		}		return Redirect::route('addMark');
 	}
 
 
@@ -73,8 +75,11 @@ class MarkesController extends \BaseController
 		$mark->name = Input::get('name');
 		$mark->co_id = Auth::user()->co_id; // company id
 		$mark->user_id = Auth::id();// user who add this record
-
-		$mark->update();
+		if($mark->update()){
+			Session::flash('success',BaseController::editSuccess('الماركة'));
+		}else{
+			Session::flash('error',BaseController::editError('الماركة'));
+		}
 
 		return Redirect::route('addMark');
 

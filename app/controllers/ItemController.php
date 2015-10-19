@@ -58,7 +58,13 @@ class ItemController extends BaseController
 
             $newItem->user_id          = Auth::id();
 
-            $newItem->save();
+            if($newItem->save()){
+
+                Session::flash('success',BaseController::addSuccess('الصنف'));
+            }else{
+
+                Session::flash('error',BaseController::addError('الصنف'));
+            }
             return Redirect::route('addItem');
         }
     }
@@ -78,8 +84,8 @@ class ItemController extends BaseController
 //                ->lists('acc_name','id');// suppliers from accounts table
             return View::make('dashboard.products.items.index',$data);
         }else{
-            return "item not here";
-        }
+            $data['error'] = 'لا يوجد صنف بهذا الاسم ';
+            return View::make('errors.missing',$data);          }
     }
 
 
@@ -113,12 +119,18 @@ class ItemController extends BaseController
                 $oldItem->notes            = Input::get('notes');
                 $oldItem->user_id          = Auth::id();
 
-                $oldItem->update();
+                if($oldItem->update()){
+                    Session::flash('success',BaseController::editSuccess('الصنف'));
+                }else{
+                    Session::flash('error',BaseController::editError('الصنف'));
+                }
+
                 return Redirect::route('addItem');
             }else{
-                return "this item snot found ";
+
+                $data['error'] = '';
+                return View::make('errors.missing',$data);              }
             }
-        }
     }
     public function select_mark()
 {
@@ -253,7 +265,7 @@ class ItemController extends BaseController
 
         }else{
 
-           return 'type check error';
+            return View::make('errors.missing');
         }
 
 
@@ -315,7 +327,7 @@ class ItemController extends BaseController
 
         }else{
 
-            return 'type check error';
+            return View::make('errors.missing');
         }
 
 
@@ -325,7 +337,7 @@ class ItemController extends BaseController
 
         $inputs         = Input::all();
         $all_item       = explode('|',$inputs['all_item']);
-        $all_item          = array_slice($all_item, 0, -1);
+        $all_item       = array_slice($all_item, 0, -1);
 
         $inventory_data = array();
          $i             = 0 ;

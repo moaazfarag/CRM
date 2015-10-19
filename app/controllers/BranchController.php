@@ -40,10 +40,15 @@ class BranchController extends  BaseController
         $branch->br_address = Input::get('branch_address');
         $branch->user_id    = Auth::id();  // id of user  who add  this branch
         $branch->co_id      = Auth::user()->co_id;// id of company related this branch
-//        $branch->save();
-        if  (1 == 1 )
-        $msg =  "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
-        Session::flash('error',$msg);
+
+       if($branch->save()){
+
+           Session::flash('success_br',BaseController::addSuccess('الفرع'));
+
+       }else{
+           Session::flash('error_br',BaseController::addError('الفرع'));
+
+       }
 //        return Redirect::back();
         
 
@@ -83,7 +88,13 @@ class BranchController extends  BaseController
         $branch->br_address = Input::get('branch_address');
         $branch->user_id    = Auth::id(); // id of user  who update this branch
         $branch->co_id      = Auth::user()->co_id; // id of company related this branch
-        $branch->update();
+        if($branch->update()){
+
+            Session::flash('success_br',BaseController::editSuccess('الفرع'));
+        }else{
+            Session::flash('error_br',BaseController::editError('الفرع'));
+
+        }
         return Redirect::route('addBranch');
 //        return Redirect::route('editBranch',array("br_id"=>$branch->id));
     }

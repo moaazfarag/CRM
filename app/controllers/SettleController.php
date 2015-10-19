@@ -21,8 +21,7 @@ class SettleController extends BaseController {
 
         }else {
 
-            return "that's not correct page : type check fail";
-
+            return View::make('errors.missing');
         }
 
 
@@ -63,13 +62,13 @@ class SettleController extends BaseController {
 
                 } else {
 
-                    return "that's not correct page : type check fail";
+                    return View::make('errors.missing');
 
                 }// end else
 
             } else {
 
-                return "that's not correct page : type check fail";
+                return View::make('errors.missing');
 
             }// end else
 

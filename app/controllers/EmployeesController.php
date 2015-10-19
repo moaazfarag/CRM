@@ -131,8 +131,10 @@ class EmployeesController extends BaseController
             $oldEmp->update();
             return Redirect::route('addEmp');
         }else{
-        return "this item snot found ";
-    }
+
+                $data['error'] = 'هذا الموظف غير موجود ';
+                return View::make('errors.missing',$data);
+            }
 
         }
 

@@ -66,6 +66,7 @@ class TransController extends BaseController
                 die();
                 $data['errors']      = $validation->messages();
                 Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
+
                 return View::make('dashboard.settle.index',$data);
             }else {
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
@@ -156,12 +157,12 @@ class TransController extends BaseController
                     }//end if
 
                 }else{
-                    return "لقد قمت بادخال بعض المدخلات بشكل خطا ";
-                    //                dd(Input::all());
+                    $data['error']      ="لقد قمت بادخال بعض المدخلات بشكل خطا ";
+                    return View::make('errors.missing',$data);
                 }
             }
         }else{
-            return "404 error";
+            return View::make('errors.missing');
         }
     }
     private function itemsToJsonForError($inputs)
@@ -193,7 +194,7 @@ class TransController extends BaseController
             $data['transactions']  = TransHeader::company()->where('invoice_type',$type)->where('br_id',$branch->id)->get();
             return View::make('dashboard.transaction.view_transactions',$data);
         }else{
-            return "404 eaarror";
+            return View::make('errors.missing');
         }
     }
     public function viewTransaction($type,$br_id,$invoice_no)
@@ -211,8 +212,8 @@ class TransController extends BaseController
             return View::make('dashboard.transaction.transaction',$data);
 
         }else{
-
-            return "that's not correct page : type check fail";
+            $data['error']      ="  لا توجد فاتورة بهذا الرقم  ";
+            return View::make('errors.missing',$data);
 
         }
     }

@@ -90,7 +90,7 @@ class AccountsBalancesController extends BaseController
 
             return View::make('dashboard.account_balances.index', $data);
         } else {
-            return "item not here";
+            return View::make('errors.missing');
         }
 
 
@@ -121,7 +121,7 @@ class AccountsBalancesController extends BaseController
 
                 return Redirect::route('addAccountsBalances');
             } else {
-                return "This Items Balances Not Found ";
+                return View::make('errors.missing');
             }
         }
     }
@@ -139,7 +139,7 @@ class AccountsBalancesController extends BaseController
 
         } else {
 
-            return "that's not correct page : type check fail";
+            return View::make('errors.missing');
 
         }
     }
@@ -163,7 +163,7 @@ class AccountsBalancesController extends BaseController
 
             }
         }else{
-            return ' no deleted .. try this in other time ';
+            return View::make('errors.missing');
         }
     }
 

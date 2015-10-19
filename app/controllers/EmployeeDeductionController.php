@@ -78,8 +78,7 @@ class EmployeeDeductionController extends BaseController
                 $newEmpdesded->update();
                 return Redirect::route('addDesded');
             }else{
-                return "this item snot found ";
-            }
+                return View::make('errors.missing');             }
 
         }
     }

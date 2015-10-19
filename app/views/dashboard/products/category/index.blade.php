@@ -13,7 +13,9 @@
             </a>
           </div>
           <div class="content">
-              @if(isset($editCategory->name))
+              @include('include.messages')
+
+          @if(isset($editCategory->name))
                 {{ Form::model($editCategory,array('route'=>array('updateCategory',$editCategory->id))) }}
               @else
                 {{ Form::open(array('route'=>'storeCategory')) }}

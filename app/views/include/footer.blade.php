@@ -56,6 +56,18 @@
       {{ HTML::script('dashboard/scripts/required_msg.js') }}
 
       <script>
+
+          $(document).ready( function() {
+              $('#hidden').delay(5000).fadeOut();
+
+          });
+
+          $(document).ready( function() {
+              $('#hidden_br').delay(5000).fadeOut();
+
+          });
+
+
                 $('#table_customers').DataTable({
       "iDisplayLength": 5,
       "bLengthChange": false,
@@ -347,11 +359,10 @@
 
 
 
-
       </script>
 
 
-      @include('dashboard._flash_msg');
+      {{--@include('dashboard._flash_msg');--}}
 
 
 

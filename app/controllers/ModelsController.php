@@ -31,7 +31,13 @@ class ModelsController extends BaseController
         $model->marks_id = Input::get('marks_id'); // mark id from input
         $model->co_id    = Auth::user()->co_id; // company id
         $model->user_id  = Auth::id();// user who add this record
-        $model->save();
+        if($model->save()){
+
+            Session::flash('success',BaseController::addSuccess('الموديل'));
+        }else{
+
+            Session::flash('error',BaseController::addError('الموديل'));
+        }
         return Redirect::route('addModel');
     }
 
@@ -51,7 +57,13 @@ class ModelsController extends BaseController
         $model->marks_id = Input::get('marks_id'); //marks_id from input
         $model->co_id    = Auth::user()->co_id; // company id
         $model->user_id  = Auth::id();// user who update this record
-        $model->update();
+
+        if($model->update()){
+            Session::flash('success',BaseController::editSuccess('الموديل'));
+        }else{
+            Session::flash('error',BaseController::editError('الموديل'));
+        }
+
         return Redirect::route('addModel');
 
     }

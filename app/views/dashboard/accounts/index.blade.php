@@ -17,7 +17,9 @@
             </a>
           </div>
           <div class="content">
-                  <div class="row no-margin-top">
+              @include('include.messages')
+
+              <div class="row no-margin-top">
                     <div class="col s12 l2">
                       <label for="account-name">
                           @lang('main.name')
