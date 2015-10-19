@@ -10,9 +10,7 @@ angular.module('accountService', [])
             get : function() {
                 return $http.get(url+'/AccountsBalances/Add-Accounts-Balances-data');
             },
-            show : function(id) {
-                return $http.get('api/comments/' + id);
-            },
+
             save : function(addedAccounts) {
                 //console.log(addedAccounts);
                 return $http({
@@ -23,10 +21,7 @@ angular.module('accountService', [])
 
                 });
             },
-            destroy : function(id) {
-                return $http.delete(url+'/testdelete/' + id);
 
-            }
         }
 
     });

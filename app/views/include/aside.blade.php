@@ -86,12 +86,28 @@
                     </ul>
                 </li>
                 </li>
-                <li class="{{@$sideOpen}}">
+                <li class="{{@$itemBalance}}">
                     <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i>  @lang('main.balances')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                     <ul>
-                        <li>
-                            <a href="{{ URL::route('addItemsBalances') }}" class="waves-effect waves-blue"> @lang('main.balanceItem') </a>
-                        </li>
+                        @if(@$branches['all_br'] == "all_br")
+                            <li>
+                                <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.itemBalance')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                <ul>
+                                    <li>
+                                        @foreach($branches['branches'] as $branch)
+                                            <a href="{{ URL::route('addTrans',array("itemBalance",$branch->id)) }}" class="waves-effect waves-blue">
+                                                فرع {{$branch->br_name}}
+                                            </a>
+                                        @endforeach
+                                    </li>
+
+                                </ul>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ URL::route('addTrans',array("itemBalance",$branches)) }}" class="waves-effect waves-blue"> @lang('main.itemBalance')</a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{ URL::route('addAccountsBalances') }}" class="waves-effect waves-blue"> @lang('main.balanceAccount')</a>
                         </li>
@@ -112,18 +128,6 @@
                                         @endforeach
                                     </li>
 
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue">  @lang('main.settleDown')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("settleDown",$branch->id)) }}" class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
-                                    </li>
                                 </ul>
                             </li>
                         @else

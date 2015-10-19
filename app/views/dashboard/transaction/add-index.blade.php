@@ -45,25 +45,22 @@
 {{--{{  dd(Items::getItemsWithBalance()); }}--}}
 
       </div>{{--first row end--}}
-
-        {{-- start acount,item and quaintity  --}}
+@if($type != "itemBalance")
+        {{-- start acount,pay_type  --}}
         <div class="row no-margin-top">
             <div class="col s2 l3">
-
                 <i class="mdi mdi-editor-attach-money prefix active"></i>
                 {{ Form::label('pay_type',Lang::get('main.payment')) }}
                 {{ Form::select('pay_type',$pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type','required', 'class'=>'browser-default')) }}
                 <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
             </div>{{--pay_type--}}
             <div class="col s2 l3">
-
                 <i class="mdi mdi-communication-import-export"></i>
                 {{ Form::label('account',lang::get('main.account')) }}
                 {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
                 <p class="parsley-required">{{ $errors ->first('account') }} </p>
             </div>{{--account--}}
             <div ng_show="account.type" class="col s2 l3">
-
                 <i class="mdi mdi-communication-import-export"></i>
                 {{ Form::label('account',Lang::get('main.account')) }}
                 <select  name="account_id" ng-required='pay_type == "on_account"' ng-change='getAccountInfo()' ng-model="account.id"  class='browser-default'>
@@ -76,7 +73,8 @@
                 {{--{{ Form::select('account',array(null=>"اختر   نوع الحساب ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
                 <p class="parsley-required">{{ $errors ->first('account') }} </p>
             </div>{{--account--}}
-            </div>
+        </div>{{-- start acount,pay_type  --}}
+        @endif
             <div class="row">
             <div class="col s2 l1">
                 {{ Form::label('item_id',lang::get('main.item')) }}

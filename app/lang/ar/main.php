@@ -131,6 +131,7 @@ return  array(
     'branches'         => 'الفروع',
     'account'          => 'الحساب' ,
     //Trans
+    'itemBalance'         => 'رصيد افتتاحي ',
     'discount'         => 'خصم',
     'tax'              => 'ضريبه',
     //Users_View Page

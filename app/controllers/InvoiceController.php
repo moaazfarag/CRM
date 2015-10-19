@@ -10,49 +10,7 @@ class InvoiceController extends BaseController
 {
 
 
-    public function cancelInvoice()
-    {
 
-        $inputs = Input::all();
-        $ruels  = TransHeader::$delete_ruels;
-
-        if ($this->isHaveBranch() == 1) {
-            $ruels["br_id"] = "required";
-        }
-        $validation = Validator::make($inputs, TransHeader::$delete_ruels);
-
-        if ($validation->fails()) {
-
-            return Redirect::back()->withInput()->withErrors($validation->messages());
-
-        }else{
-
-            $invoice_no   = $inputs['invoice_no'];
-            $invoice_type = $inputs['invoice_type'];
-            $cancel_cause = $inputs['cancel_cause'];
-            $br_id        = $inputs['br_id'];
-            $invoice      = TransHeader::company()
-                ->where('invoice_no',$invoice_no)
-                ->where('invoice_type',$invoice_type);
-            if ($this->isHaveBranch() == 1) {
-
-                $invoice->where('br_id',$br_id);
-            }
-
-             $invoice->first();
-            if(!empty($invoice)){
-
-                $invoice->deleted = 1;
-                $invoice->notes   = $cancel_cause;
-                $invoice->update();
-
-                $msg = 'تم إلغاء الفاتورة بنجاح ';
-
-                Session::flash('success',$msg);
-                Return Redirect::back();
-            }
-        }
-    }
 
 
     public function reportSearchInvoice ($type,$sum = NULL){
@@ -169,7 +127,7 @@ class InvoiceController extends BaseController
                 if ($sum == NULL) {
 
                     $data['title'] = Lang::get("main.$invoice_type" . '_report');
-                    $data['sum']   = 'no';
+                    $data['sum'] = 'no';
 
                 } elseif ($sum == 'sum') {
                     $data['title'] = Lang::get("main.$invoice_type" . '_report_sum');
@@ -179,12 +137,12 @@ class InvoiceController extends BaseController
 
 
 
-                $data['cat_id']    = $cat_id;
-                $data['item_id']   = $item_id;
-                $data['invoices']  = $invoices_data;
-                $data['co_info']   = CoData::thisCompany()->first();
+                $data['cat_id'] = $cat_id;
+                $data['item_id'] = $item_id;
+                $data['invoices'] = $invoices_data;
+                $data['co_info'] = CoData::thisCompany()->first();
                 $data['date_from'] = $date_from;
-                $data['date_to']   = $date_to;
+                $data['date_to'] = $date_to;
                 $data['type'] = $invoice_type;
 
                 if($invoice_type == 'sales-earnings'){
