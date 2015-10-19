@@ -389,7 +389,7 @@ return  array(
 
     'out_going_salaries_date'   =>'تاريخ القبض',
     'show_salary_detalis'       =>'تفاصيل المرتب',
-    'settleDiscount_statement'  => ' بيان تسويات الخصم خلال فترة',
+    'settleDown_statement'  => ' بيان تسويات الخصم خلال فترة',
     'settleAdd_statement'       => 'بيان تسويات الإضافة خلال فترة',
 
     // invoice report
@@ -401,13 +401,13 @@ return  array(
     'sum_'                =>'القيمة',
     'result_sum'          =>'الإجمالى',
 
-    'sales-return_report' =>'مرتجعات المبيعات',
+    'salesReturn_report' =>'مرتجعات المبيعات',
     'buy_report'          => 'تقرير تحليلى للمشتريات',
     'buy_report_sum'      => ' تقرير إجمالى للمشتريات ',
-    'buy-return_report_sum' => 'تقرير إجمالى لمردودات المشتريات',
-    'sales-return_report_sum'=>'تقرير إجمالى لمرتجعات المبيعات',
+    'buyReturn_report_sum' => 'تقرير إجمالى لمردودات المشتريات',
+    'salesReturn_report_sum'=>'تقرير إجمالى لمرتجعات المبيعات',
 
-    'buy-return_report'   => 'مردودات المشتريات',
+    'buyReturn_report'   => 'مردودات المشتريات',
     'sales-earnings_report'      => 'أرباح فواتير المبيعات',
     'buy_prise_avg'             =>'متوسط سعر الشراء',
     'sales_prise'           =>'سعر البيع ',
@@ -461,8 +461,8 @@ return  array(
     //daily_treasury
 
     'daily_treasury' => 'يومية الخزينة',
-    'sales-return'   => 'مرتجع مبيعات',
-    'buy-return'     => 'مردود مشتريات',
+    'salesReturn'   => 'مرتجع مبيعات',
+    'buyReturn'     => 'مردود مشتريات',
     'catch'          => 'حركة مباشرة (قبض)',
     'pay'            => 'حركة مباشرة (صرف)',
 //    'multiple_revenue' => 'إيرادات أخرى',

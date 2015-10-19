@@ -32,7 +32,7 @@ class InvoiceController extends BaseController
 
 
 
-        $types = array('sales','sales-return','buy','buy-return','sales-earnings');
+        $types = array('sales','salesReturn','buy','buyReturn','sales-earnings');
 
 
         if(in_array($type,$types)){
@@ -77,7 +77,7 @@ class InvoiceController extends BaseController
 
             $invoice_type    =  $inputs['invoice_type'];
 
-            $types = array('sales','sales-return','buy','buy-return','sales-earnings');
+            $types = array('sales','salesReturn','buy','buyReturn','sales-earnings');
 
             if(in_array($invoice_type,$types)) {
 
@@ -99,7 +99,7 @@ class InvoiceController extends BaseController
 
                     if($invoice_type == 'sales-earnings') {
 
-                        $invoices->whereIn('invoice_type', ['sales-return','sales']);
+                        $invoices->whereIn('invoice_type', ['salesReturn','sales']);
                     }else{
 
                         $invoices->where('invoice_type', $invoice_type);

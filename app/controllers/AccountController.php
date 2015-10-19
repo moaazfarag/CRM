@@ -622,8 +622,8 @@ class AccountController extends BaseController
             $date_from      = $this->strToTime($inputs['date_from']);
             $date_to        = $this->strToTime($inputs['date_to']);
 
-            $debit_types    = array('buy','pay','sales-return');
-            $credit_types   = array('sales','catch','buy-return');
+            $debit_types    = array('buy','pay','salesReturn');
+            $credit_types   = array('sales','catch','buyReturn');
             $movements      = array('pay','catch');
             $debit          = array();
             $credit         = array();
@@ -841,8 +841,8 @@ class AccountController extends BaseController
         $date_to        = $this->strToTime(Input::get('date_to'));
 
 
-        $debit_types    = array('buy','pay','sales-return');
-        $credit_types   = array('sales','catch','buy-return');
+        $debit_types    = array('buy','pay','salesReturn');
+        $credit_types   = array('sales','catch','buyReturn');
         $movements      = array('pay','catch');
         $debit          = array();
         $credit         = array();

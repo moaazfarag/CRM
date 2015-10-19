@@ -133,7 +133,7 @@
                         @else
                             <li>
                                 <a href="{{ URL::route('addTrans',array("settleAdd",$branches)) }}" class="waves-effect waves-blue"> @lang('main.settleAdd')</a>
-                                <a href="{{ URL::route('addTrans',array("settleDown",$branches)) }}" class="waves-effect waves-blue">@lang('main.settleDiscount')</a>
+                                <a href="{{ URL::route('addTrans',array("settleDown",$branches)) }}" class="waves-effect waves-blue">@lang('main.settleDown')</a>
                             </li>
                         @endif
 
@@ -273,7 +273,7 @@
 
                                 <li>
                                     <a href="{{ URL::route('reportSettleSearch','settleAdd') }}" class="waves-effect waves-blue"> تسويات الإضافة </a>
-                                    <a href="{{ URL::route('reportSettleSearch','settleDiscount') }}" class="waves-effect waves-blue"> تسويات الخصم </a>
+                                    <a href="{{ URL::route('reportSettleSearch','settleDown') }}" class="waves-effect waves-blue"> تسويات الخصم </a>
                                 </li>
                                 <li>
                                     <a href="{{ URL::route('searchItemCard') }}" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
@@ -295,10 +295,10 @@
                                 <li>
                                     <a href="{{ URL::route('searchReportInvoices',array('sales',NULL)) }}" class="waves-effect waves-blue">  المبيعات ( تحليلى ) </a>
                                     <a href="{{ URL::route('searchReportInvoices',array('sales','sum')) }}" class="waves-effect waves-blue"> المبيعات ( إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('sales-return',NULL)) }}" class="waves-effect waves-blue"> مرتجعات المبيعات  </a>
+                                    <a href="{{ URL::route('searchReportInvoices',array('salesReturn',NULL)) }}" class="waves-effect waves-blue"> مرتجعات المبيعات  </a>
                                     <a href="{{ URL::route('searchReportInvoices','buy') }}" class="waves-effect waves-blue">  المشتريات ( تحليلى ) </a>
                                     <a href="{{ URL::route('searchReportInvoices',array('buy','sum')) }}" class="waves-effect waves-blue"> المشتريات ( إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices','buy-return') }}" class="waves-effect waves-blue">مردودات المشتريات</a>
+                                    <a href="{{ URL::route('searchReportInvoices','buyReturn') }}" class="waves-effect waves-blue">مردودات المشتريات</a>
                                     <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}" class="waves-effect waves-blue">أرباح المبيعات</a>
                                 </li>
                             </ul>
