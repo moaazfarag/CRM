@@ -11,7 +11,7 @@ class SettleController extends BaseController {
 
     public  function reportSettleSearch($type){
 
-        $types = array('settleDiscount','settleAdd');
+        $types = array('settleDown','settleAdd');
 
         if(in_array($type, $types)){
 
@@ -38,7 +38,7 @@ class SettleController extends BaseController {
         }else {
 
             $type = $inputs['invoice_type'];
-            $types = array('settleDiscount', 'settleAdd');
+            $types = array('settleDown', 'settleAdd');
 
             if (in_array($type, $types)) {
 

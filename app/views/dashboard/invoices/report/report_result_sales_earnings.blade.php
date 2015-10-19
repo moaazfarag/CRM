@@ -114,7 +114,7 @@
 
                                         $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
 
-                                        if($invoice->invoice_type == 'sales-return'){
+                                        if($invoice->invoice_type == 'salesReturn'){
 
                                             $true_earning = $earnings * -1 ;
 
@@ -147,7 +147,7 @@
 
                                         $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
 
-                                        if($invoice->invoice_type == 'sales-return'){
+                                        if($invoice->invoice_type == 'salesReturn'){
 
                                             $true_earning = $earnings * -1 ;
 
@@ -180,7 +180,7 @@
 
                                         $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
 
-                                        if($invoice->invoice_type == 'sales-return'){
+                                        if($invoice->invoice_type == 'salesReturn'){
 
                                             $true_earning = $earnings * -1 ;
 
@@ -212,7 +212,7 @@
 
                                     $earnings =  ($details->unit_price - $details->avg_cost) * $details->qty ;
 
-                                    if($invoice->invoice_type == 'sales-return'){
+                                    if($invoice->invoice_type == 'salesReturn'){
 
                                         $true_earning = $earnings * -1 ;
 
