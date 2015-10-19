@@ -35,7 +35,6 @@
      <!-- /Breadcrumb -->
  <!-- Store Settings  بيانات الشركة  -->
 
-
     <div class="card {{ isset($miniComInfo)?$miniComInfo:"minimized" }}">
       <div class="title">
         <h5><i class="fa fa-cog"></i>  @lang('main.companyInfo')</h5>
@@ -43,7 +42,10 @@
           <i class="mdi-navigation-expand-less"></i>
         </a>
       </div>
+
       <div class="content">
+          @include('include.messages')
+
           {{ Form::model($companyInfo, array('route'=>array('updateCompanyInfo',Auth::user()->co_id),'data-parsley-validate')) }}
 
         <div class="row no-margin-top">
@@ -268,7 +270,23 @@
             </a>
           </div>
           <div class="content">
-             @if(Route::currentRouteName() == "editBranch" )
+              @if(Session::has('error_br'))
+                  <div id="hidden" class="alert" >
+
+                      {{ Session::get('error_br') }}
+                  </div>
+              @endif
+
+              @if(Session::has('success_br'))
+
+                  <div  id="hidden_br" class="alert green lighten-4 green-text text-darken-2">
+                      {{ Session::get('success_br') }}
+                  </div>
+              @endif
+
+
+
+                  @if(Route::currentRouteName() == "editBranch" )
                   {{ Form::open(array('route'=>array('updateBranch',$branch->id),'data-parsley-validate')) }}
                  @else
               {{ Form::open(array('route'=>array('storeBranch'),'data-parsley-validate')) }}

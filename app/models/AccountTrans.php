@@ -49,6 +49,7 @@ class AccountTrans extends Eloquent {
             $newAccountTrans->account_id = $inputs['account_id'];
             $newAccountTrans->trans_id   = $transHeaderId;
             $newAccountTrans->trans_type = $type;
+            $newAccountTrans->account    = $account->acc_type;
             $newAccountTrans->date       = $Base->strToTime($inputs['date']);
             $newAccountTrans->pay_type   = $inputs['pay_type'];
             if(($type == "sales" || $type == "buyReturn") && ($inputs['pay_type'] == "cash" || $inputs['pay_type'] == "visa") ){

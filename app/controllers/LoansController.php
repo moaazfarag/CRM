@@ -93,8 +93,7 @@ class LoansController extends BaseController
             }
             else
             {
-                return "this item not found ";
-            }
+                return View::make('errors.missing');              }
         }
     }
     protected function depData()

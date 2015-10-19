@@ -1,18 +1,6 @@
 <div class="card-panel">
 
-    @if(Session::has('error'))
-        <div id="hidden" class="alert" >
 
-            {{ Session::get('error') }}
-        </div>
-    @endif
-
-    @if(Session::has('success'))
-
-        <div  id="hidden" class="alert green lighten-4 green-text text-darken-2">
-            {{ Session::get('success') }}
-        </div>
-    @endif
 
     <table class="table table-hover">
         <thead>
@@ -44,9 +32,9 @@
                     </a>
                 </td>
                 <td>
-                    @if(Route::currentRouteName() == 'addModel')
+                    @if(Route::currentRouteName() == 'addModel' || Route::currentRouteName() == 'editModel')
                         <a  onclick="return confirm('هل تريد بالفعل حذف  الموديل')" href="{{ URL::route('deleteModel',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
-                    @elseif(Route::currentRouteName() == 'addMark')
+                    @elseif(Route::currentRouteName() == 'addMark' || Route::currentRouteName() == 'editMark')
                         <a  onclick="return confirm('هل تريد بالفعل حذف  الماركة ')" href="{{ URL::route('deleteMark',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
 
                     @endif

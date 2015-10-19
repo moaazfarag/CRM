@@ -29,7 +29,13 @@ class CategoryController extends  BaseController
                 $category->name     = Input::get('name'); //category name from input
                 $category->co_id    = Auth::user()->co_id; // company id
                 $category->user_id  = Auth::id();// user who add this record
-                $category->save();
+                if($category->save()){
+
+                    Session::flash('success',BaseController::addSuccess('القسم'));
+                }else{
+
+                    Session::flash('error',BaseController::addError('القسم'));
+                }
                 return Redirect::route('addCategory');
             }
 
@@ -48,7 +54,13 @@ class CategoryController extends  BaseController
                 $category->name     = Input::get('name'); //category name from input
                 $category->co_id    = Auth::user()->co_id; // company id
                 $category->user_id  = Auth::id();// user who add this record
-                $category->update();
+
+                if($category->update()){
+                    Session::flash('success',BaseController::editSuccess('القسم'));
+                }else{
+                    Session::flash('error',BaseController::editError('القسم'));
+                }
+
                 return Redirect::route('addCategory');
 
             }

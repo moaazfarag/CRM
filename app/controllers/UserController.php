@@ -92,8 +92,10 @@ class UserController extends BaseController
         {
             return View::make('dashboard.users.index',$data);
         }else{
-            return 'user not found !!';
-        }
+
+        $data['error']      ="åĞÇ ÇáãÓÊÎÏã ÛíÑ ãæÌæÏ";
+        return View::make('errors.missing',$data);
+    }
 
 
     }
@@ -124,8 +126,9 @@ class UserController extends BaseController
             }
             return Redirect::route('addUser');
         }else{
-            return "there ara no user ";
-        }
+
+            $data['error']      ="åĞÇ ÇáãÓÊÎÏã ÛíÑ ãæÌæÏ";
+            return View::make('errors.missing',$data);        }
     }
 
     //set_password
@@ -157,7 +160,9 @@ class UserController extends BaseController
             }
             return View::make('dashboard.users.set_password');
         }else{
-            return "there ara no user ";
+
+            $data['error']      ="åĞÇ ÇáãÓÊÎÏã ÛíÑ ãæÌæÏ";
+            return View::make('errors.missing',$data);
         }
     }
 }

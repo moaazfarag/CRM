@@ -76,8 +76,8 @@ class ItemsBalancesController extends BaseController {
             }
 
         }else{
-            return "الفرع غير موجود ";
-        }
+            $data['error'] = 'عفواً هذا الفرع غير موجود ';
+            return View::make('errors.missing');                     }
 
     }
 
@@ -101,8 +101,8 @@ class ItemsBalancesController extends BaseController {
 
             return View::make('dashboard.items_balances.index',$data);
         }else{
-            return "item not here";
-        }
+            $data['error'] = 'الصنف غير موجود';
+            return View::make('errors.missing',$data);         }
     }
 
 
@@ -120,8 +120,8 @@ class ItemsBalancesController extends BaseController {
 
         }else{
 
-            return "that's not correct page : type check fail";
 
+            return View::make('errors.missing');
         }
 
     }

@@ -15,6 +15,8 @@
                 </a>
             </div>
             <div class="content">
+                @include('include.messages')
+
                 {{--{{ dd($editSeason->name) }}--}}
                 @if(isset($editMark->name))
                     {{ Form::model($editMark,array('route'=>array('updateMark',$editMark->id))) }}

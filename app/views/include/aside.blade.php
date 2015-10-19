@@ -132,16 +132,7 @@
                                 <a href="{{ URL::route('addTrans',array("settleDown",$branches)) }}" class="waves-effect waves-blue">@lang('main.settleDiscount')</a>
                             </li>
                         @endif
-                        <li>
-                            <a href="{{ URL::route('searchItemCard') }}" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('searchTheBalanceOfTheStores','inventory_store') }}" class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
-                        </li>
-                        <li>
-                            <a href="{{ URL::route('searchTheBalanceOfTheStores','balance_stores') }}" class="waves-effect waves-blue">@lang('main.balance_stores')  </a>
-                            <a href="{{ URL::route('searchTheBalanceOfTheStores','evaluation_stores') }}" class="waves-effect waves-blue">@lang('main.evaluation_stores')  </a>
-                        </li>
+
                     </ul>
                 </li>
                 <li class="{{@$employees}}">
@@ -279,6 +270,16 @@
                                 <li>
                                     <a href="{{ URL::route('reportSettleSearch','settleAdd') }}" class="waves-effect waves-blue"> تسويات الإضافة </a>
                                     <a href="{{ URL::route('reportSettleSearch','settleDiscount') }}" class="waves-effect waves-blue"> تسويات الخصم </a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::route('searchItemCard') }}" class="waves-effect waves-blue">   @lang('main.itemCart') </a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::route('searchTheBalanceOfTheStores','inventory_store') }}" class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::route('searchTheBalanceOfTheStores','balance_stores') }}" class="waves-effect waves-blue">@lang('main.balance_stores')  </a>
+                                    <a href="{{ URL::route('searchTheBalanceOfTheStores','evaluation_stores') }}" class="waves-effect waves-blue">@lang('main.evaluation_stores')  </a>
                                 </li>
                             </ul>
                         </li>

@@ -30,7 +30,14 @@ class SeasonController extends BaseController
         $season->name     = Input::get('name'); //season name from input
         $season->co_id    = Auth::user()->co_id; // company id
         $season->user_id  = Auth::id();// user who add this record
-        $season->save();
+
+        if($season->save()){
+
+            Session::flash('success',BaseController::addSuccess('الموسم'));
+        }else{
+
+            Session::flash('error',BaseController::addError('الموسم'));
+        }
         return Redirect::route('addSeason');
     }
 
@@ -49,7 +56,14 @@ class SeasonController extends BaseController
         $season->name = Input::get('name'); //season name from input
         $season->co_id    = Auth::user()->co_id; // company id
         $season->user_id  = Auth::id();// user who add this record
-        $season->update();
+
+        if($season->update()){
+            Session::flash('success',BaseController::editSuccess('الموسم'));
+        }else{
+            Session::flash('error',BaseController::editError('الموسم'));
+        }
+
+
         return Redirect::route('addSeason');
 
     }
@@ -69,7 +83,8 @@ class SeasonController extends BaseController
         $data['seasonInputName'] = "seasons";
         $data['seasonMini'] = "";
         $data['arabicName'] = $season;
-        $data['tablesData'] = Seasons::company();
+        $data['tablesData'] = Seasons::company()->get();
+//        dd($data['tablesData']);
         return $data;
     }
 }

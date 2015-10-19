@@ -107,7 +107,7 @@
         public function editCompanyInfo()
         {
             $data = $this->settingData();//company info data
-            $data['miniComInfo']  = "" ; //maxmizie company data on view
+            $data['miniComInfo']      = "" ; //maxmizie company data on view
             $data['print_size_types'] = array(
 
                 "A3"=>"A3",
@@ -140,9 +140,11 @@
                 $company->co_use_markes_models = intval(Input::get('co_use_markes_models'));// will use models AND markes  or not
                 $company->user_id              = Auth::id(); //user who update company info
                 $company->update();
+
+                Session::flash('success',BaseController::editSuccess('بيانات الشركة '));
                 return Redirect::route('editCompanyInfo');
             }else{
-                return "error";
+                return View::make('errors.missing');
             }
 
 

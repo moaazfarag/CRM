@@ -124,6 +124,37 @@ class BaseController extends Controller {
         '2016'=>'2016',
         '2017'=>'2017',
     );
+
+    public static function addSuccess($text){
+
+        return Lang::get('main.add_done').$text .Lang::get('main.with_success');
+    }
+
+    public static function editSuccess($text){
+
+        return Lang::get('main.edit_done').$text .Lang::get('main.with_success');
+    }
+
+
+    public static function deleteSuccess($text){
+
+        return Lang::get('main.delete_done').$text .Lang::get('main.with_success');
+    }
+
+
+     public static function addError($text){
+
+        return Lang::get('main.add_not_done').$text .Lang::get('main.try_again');
+    }
+
+     public static function editError($text){
+
+        return Lang::get('main.edit_not_done').$text .Lang::get('main.try_again');
+    }
+
+
+
+
     public static  $messages = array(
         'required'            => 'هذا الحقل مطلوب',
         'email'               => 'يرجى إدخال الإيميل بشكل صحيح ',
