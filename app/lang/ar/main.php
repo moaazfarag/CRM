@@ -450,6 +450,7 @@ return  array(
     'catch_type'            => 'قبض' ,
     'pay_type'              => 'صرف',
     'stock'                 => 'الرصيد',
+    'invoice_type'                 => 'نوع الفاتورة',
 
     'balance_customers' =>'ميزان العملاء',
     'balance_suppliers' =>'ميزان الموردين',

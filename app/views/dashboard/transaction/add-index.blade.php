@@ -51,7 +51,7 @@
             <div class="col s2 l3">
                 <i class="mdi mdi-editor-attach-money prefix active"></i>
                 {{ Form::label('pay_type',Lang::get('main.payment')) }}
-                {{ Form::select('pay_type',$pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type','required', 'class'=>'browser-default')) }}
+                {{ Form::select('pay_type',$pay_type,'cash',array('id'=>'pay_type','ng-model'=>'pay_type','required', 'class'=>'browser-default')) }}
                 <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
             </div>{{--pay_type--}}
             <div class="col s2 l3">

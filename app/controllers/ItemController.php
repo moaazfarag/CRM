@@ -226,8 +226,6 @@ class ItemController extends BaseController
         }else{
             $ruels = TransHeader::$report_ruels_saels;
         }
-//var_dump($ruels);die();
-
         $validation = Validator::make($inputs,$ruels,BaseController::$messages);
         if($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
@@ -242,7 +240,7 @@ class ItemController extends BaseController
                 $balBefore[$itemId]['bal'] = array_sum(TransHeader::getItems($inputs,1)->lists('item_bal') );
             }
             $data['items']     = $items;
-            $data['TransOpen']   = 'open' ;
+            $data['TransOpen'] = 'open' ;
             $data['balBefore'] = $balBefore;
             $data['co_info']   = CoData::thisCompany()->first();
             $data['date_from'] = $this->strToTime($inputs['date_from']);
