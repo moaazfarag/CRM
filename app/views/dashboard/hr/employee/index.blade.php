@@ -17,6 +17,8 @@
                 </a>
             </div>
               <div class="content">
+                  @include('include.messages')
+
                   <div class="row no-margin-top">
                       <div class="col s12 l6">
                           <div class="input-field">

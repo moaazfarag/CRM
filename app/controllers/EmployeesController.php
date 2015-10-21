@@ -65,7 +65,13 @@ class EmployeesController extends BaseController
 //        $newEmp->comm1 = Input::get('comm1');
 //        $newEmp->comm2 = Input::get('comm2');
 
-        $newEmp->save();
+        if($newEmp->save()){
+
+            Session::flash('success',BaseController::addSuccess('الموظف'));
+        }else{
+
+            Session::flash('error',BaseController::addError('الموظف'));
+        }
         return Redirect::route('addEmp');
    }
     }
@@ -128,8 +134,14 @@ class EmployeesController extends BaseController
 //                $oldEmp->comm1               =Input::get('comm1');
 //                $oldEmp->comm2               =Input::get('comm2');
 
-            $oldEmp->update();
-            return Redirect::route('addEmp');
+
+                if($oldEmp->update()){
+                    Session::flash('success',BaseController::editSuccess('الموظف'));
+                }else{
+                    Session::flash('error',BaseController::editError('الموظف'));
+                }
+
+                return Redirect::route('addEmp');
         }else{
 
                 $data['error'] = 'هذا الموظف غير موجود ';

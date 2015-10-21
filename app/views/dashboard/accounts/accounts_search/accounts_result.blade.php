@@ -84,7 +84,7 @@
 
     </div>
 
-    @unless(empty($account_trans))
+    @unless(empty($account_trans) || empty($account_balance))
     {{--table start--}}
     <table   class="display table table-bordered table-striped table-hover">
         <thead>
@@ -113,6 +113,17 @@
         </tr>
         </thead>
         <tbody>
+        @if(!empty($account_balance))
+            <tr>
+                <td> --- </td>
+                <td>رصيد إفتتاحى  </td>
+                <td>{{ $account_balance->sum_debit }}</td>
+                <td>{{ $account_balance->sum_credit }}</td>
+                <td></td>
+                <td>{{ $account_balance->notes }}</td>
+
+            </tr>
+        @endif
             <?php $all_credit = array(); $all_debit= array(); $i = 0;?>
             @foreach($account_trans as $k => $trans)
 
@@ -200,6 +211,14 @@
                 </thead>
                 <tbody>
                 <tr>
+
+                    <?php
+                        if(!empty($account_balance)){
+
+                            $all_debit['account_balance']  =  $account_balance->sum_debit;
+                            $all_credit['account_balance'] =  $account_balance->sum_credit;
+                        }
+                   ?>
                     <td>{{ array_sum($all_debit) }}</td>
                     <td>{{ array_sum($all_credit) }}</td>
                     <td><?php echo BaseController::negativeValue(array_sum($all_debit) - array_sum($all_credit)); ?></td>

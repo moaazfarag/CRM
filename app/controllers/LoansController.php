@@ -43,7 +43,13 @@ class LoansController extends BaseController
 //            var_dump($test); die();
             $newLoans->loan_currBal           = $inputs['loan_currBal'];
 //            $newLoans->user_id                    = Auth::id();
-            $newLoans->save();
+            if($newLoans->save()){
+
+                Session::flash('success',BaseController::addSuccess('القرض'));
+            }else{
+
+                Session::flash('error',BaseController::addError('القرض'));
+            }
             return Redirect::route('addLoans');
         }
     }
@@ -86,9 +92,14 @@ class LoansController extends BaseController
                 $months = ceil($inputs['loan_val'] /  $inputs['loan_currBal'] )-1;
                 $oldLoans->loan_end = date('Y-m-d', strtotime($oldLoans->loan_start ."+$months months"));;
 
-                $oldLoans->loan_currBal           = $inputs['loan_currBal']; // ����� ������
+                $oldLoans->loan_currBal           = $inputs['loan_currBal']; // القسط الشهرى
 //                $oldLoans->user_id                    = Auth::id();
-                $oldLoans->update();
+
+                if($oldLoans->update()){
+                    Session::flash('success',BaseController::editSuccess('القرض'));
+                }else{
+                    Session::flash('error',BaseController::editError('القرض'));
+                }
                 return Redirect::route('addLoans');
             }
             else

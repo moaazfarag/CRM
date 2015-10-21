@@ -9,13 +9,13 @@
     @endif
     <div class=" card ">
         <div class="title">
-            <h5>
-                <i class="fa fa-cog"></i> @lang('main.add_new_loan') </h5>
+            <h5> <i class="fa fa-cog"></i> @lang('main.add_new_loan') </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
             </a>
         </div>
         <div class="content">
+            @include('include.messages')
             <div class="row">
                 <div class="col s12 l5">
                     {{--<i class="fa fa-tag prefix"></i>--}}
@@ -104,9 +104,10 @@
             <div class="row">
                 <div class="col s12 l12">
 
-                    @if(isset($editLoans->depName))
+
+                    @if(Route::currentRouteName() == 'editLoans')
                         <button class="waves-effect btn">@lang('main.edit') </button>
-                    @else
+                    @elseif(Route::currentRouteName() == 'addLoans')
                         <button class="waves-effect btn">@lang('main.add') </button>
                     @endif
 

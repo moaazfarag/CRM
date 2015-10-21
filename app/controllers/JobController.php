@@ -31,8 +31,14 @@ class JobController extends BaseController
         $job->true_id  = BaseController::maxId($job);
         $job->name     = Input::get('name');
         $job->co_id    = Auth::user()->co_id;
-//        $dep->user_id  = Auth::id();
-        $job->save();
+        $job->user_id  = Auth::user()->id;
+        if($job->save()){
+
+            Session::flash('success',BaseController::addSuccess('الوظيفة'));
+        }else{
+
+            Session::flash('error',BaseController::addError('الوظيفة'));
+        }
         return Redirect::route('addJob');
         }
     }
@@ -50,8 +56,12 @@ class JobController extends BaseController
         $job              = Job::findOrFail($id) ;
         $job->name        = Input::get('name'); //season name from input
         $job->co_id       = Auth::user()->co_id; // company id
-//        $dep->user_id  = Auth::id();// user who add this record
-        $job->update();
+        $job->user_id  = Auth::user()->id;
+        if($job->update()){
+            Session::flash('success',BaseController::editSuccess('الوظيفة '));
+        }else{
+            Session::flash('error',BaseController::editError('الوظيفة'));
+        }
         return Redirect::route('addJob');
 
     }
@@ -64,7 +74,7 @@ class JobController extends BaseController
         $data['employees']          = 'open' ;
         $data['modelMini']          = "";
         $data['arabicName']         = $addJop;
-        $data['tablesData']         = Job::all();
+        $data['tablesData']         = Job::company()->get();
         return $data;
     }
 

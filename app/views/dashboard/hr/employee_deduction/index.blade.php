@@ -2,13 +2,14 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
-    @if(Route::currentRouteName() == 'addEmpdesded')
+
+@if(Route::currentRouteName() == 'addEmpdesded')
         {{ Form::open(array('route'=>array('storeEmpdesded'))) }}
     @elseif(Route::currentRouteName() == 'editEmpdesded')
         {{ Form::model($employee,array('route'=>array('updateEmpdesded',$employee->id))) }}
     @endif
     {{--{{ Form::model($employee,array('route'=>array('updateEmp',1))) }}--}}
-    <div class=" card ">
+    <div class="card">
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i> @lang('main.employee_debt_clause') </h5>
@@ -16,7 +17,12 @@
                 <i class="mdi-navigation-expand-less"></i>
             </a>
         </div>
-        <div class="row">
+
+        <div class="content">
+            @include('include.messages')
+
+
+            <div class="row">
             <div class="col s12 l4">
                 {{--<i class="fa fa-tag prefix"></i>--}}
                 <div class="input-field">
@@ -48,6 +54,7 @@
         </div>
         <div class="row">
             <div class="col s12 l12">
+
                 @if(Route::currentRouteName() == 'addEmpdesded')
                     {{--{{Form::submit('  اضف ')}}--}}
                     <button type="submit" class="waves-effect btn"> @lang('main.add') </button>
@@ -58,7 +65,9 @@
             </div>
             {{ Form::close() }}
         </div>{{--submit  row end--}}
-
+          <br/>
+            <hr/>
+        </div>
     </div>
     @include('dashboard.hr.employee_deduction._table_view');
    </section>

@@ -83,4 +83,30 @@ class CategoryController extends  BaseController
 
             return $data;
         }
+
+    public function deleteCategory($id)
+    {
+
+        $cat = Category::company()->find($id);
+        $items  = Items::where('cat_id','=',$id)->company()->first();
+
+
+        if(!empty($cat)){
+
+            if(!empty($items)) {
+//            die(var_dump($items));
+                Session::flash('error', 'لا يمكن الحذف ...   هناك أصناف تحمل اسم هذة الفئة ');
+                return Redirect::back();
+            }else{
+
+                $cat->delete();
+                $edit_ids = BaseController::editIds('models','Models','true_id');
+                if($edit_ids) {
+                    Session::flash('success', 'تم حذف فئة الصنف بنجاح ');
+                    return Redirect::back();
+                }
+            }//end else employees
+
+        }
+    }
 }

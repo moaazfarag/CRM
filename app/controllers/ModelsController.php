@@ -89,7 +89,7 @@ class ModelsController extends BaseController
     }
     public function deleteModel($id){
 
-        $model = Models::company()->first();
+        $model = Models::company()->find($id);
         $items  = Items::where('models_id','=',$id)->company()->first();
 
 

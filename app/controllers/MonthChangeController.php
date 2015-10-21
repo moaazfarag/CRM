@@ -41,7 +41,13 @@ class MonthChangeController extends BaseController
             $newMonthChange->day_cost      = Input::get('day_cost');
             $newMonthChange->val           = Input::get('val');
 
-            $newMonthChange->save();
+            if($newMonthChange->save()){
+
+                Session::flash('success',BaseController::addSuccess('التغير الشهرى '));
+            }else{
+
+                Session::flash('error',BaseController::addError('التغير الشهرى '));
+            }
             return Redirect::route('addMonthChange');
         }
     }
@@ -93,10 +99,11 @@ class MonthChangeController extends BaseController
                 }
 //                $oldMonthChange->cause                = Input::get('cause');
 
-
-
-
-                $oldMonthChange->update();
+            if($oldMonthChange->update()){
+                Session::flash('success',BaseController::editSuccess('التغير الشهرى '));
+            }else{
+                Session::flash('error',BaseController::editError('التغير الشهرى '));
+            }
                 return Redirect::route('addMonthChange');
 
 

@@ -1,16 +1,5 @@
 <div class="card-panel">
-    @if(Session::has('error'))
-    <div id="hidden" class="alert" >
-         {{ Session::get('error') }}
-    </div>
-        @endif
 
-        @if(Session::has('success'))
-
-                <div  id="hidden" class="alert green lighten-4 green-text text-darken-2">
-                     {{ Session::get('success') }}
-                </div>
-        @endif
     <table class="table table-hover">
         <thead>
         <tr>

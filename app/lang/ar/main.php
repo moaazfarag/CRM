@@ -18,6 +18,7 @@ return  array(
     'itemCat'          => 'فئات الاصناف ',
     'seasons'          => 'المواسم',
     'models'            => 'الموديلات  ',
+    'model_name'       => '  الموديل ',
     'markes'            => 'الماركات ',
     'items'            => 'الاصناف',
     'items'            => 'الاصناف',
