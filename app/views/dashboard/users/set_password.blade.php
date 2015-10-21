@@ -1,13 +1,18 @@
 @extends('dashboard.main')
 @section('content')
 
+
     <!-- Breadcrumb -->
 
-
+<section class="content-wrap ecommerce-dashboard">
 
     <div class=" card">
-    <div class="row">
+        <br>
+
+        <br>
+        <div class="row">
         {{ Form::open(array('route'=>'storeNewPassword')) }}
+
         <div class="col m5 s12">
             <div class="input-field">
                 <i class="fa fa-unlock-alt prefix"></i>
@@ -35,7 +40,9 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+
+
 
 </section>
 

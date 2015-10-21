@@ -91,6 +91,12 @@ class Items extends Eloquent {
         $items      = Items::company()->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
         return array_merge($itemsTrans->get(),$items->toArray());
     }
+
+    /**
+     * get item balance on whole company
+     * @param $itemId
+     * @return mixed
+     */
   public static function getItem($itemId)
     {
         $item =  DB::table('items_balance')
@@ -98,6 +104,27 @@ class Items extends Eloquent {
                             ->groupBy('br_id')
                             ->groupBy('item_id')
                             ->where('item_id',$itemId)
+                            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
+                            ->first();
+        return $item;
+    }
+    /**
+     * get item balance base on item id and br_id
+     * @param $itemId
+     * @param $brId
+     * @param $serialNo
+     * @return mixed
+     */
+  public static function getItemByBrId($itemId,$serialNo = null ,$brId)
+    {
+        $item =  DB::table('items_balance')
+                            ->company()->where('deleted', 0)
+                            ->groupBy('br_id')
+                            ->groupBy('serial_no')
+                            ->groupBy('item_id')
+                            ->where('item_id',$itemId)
+                            ->where('serial_no',$serialNo)
+                            ->where('br_id',$brId)
                             ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
                             ->first();
         return $item;

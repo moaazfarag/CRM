@@ -66,7 +66,7 @@
                      // login 
                     $user_login = new UserController;
                     Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
-                    return $user_login->checkLogin();
+                    return $user_login->checkLogin($company->id);
 
                     }else{
 

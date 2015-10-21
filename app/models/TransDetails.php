@@ -41,10 +41,14 @@ class TransDetails extends Eloquent {
             $count = TransDetails::countOfInputs($inputs);
             foreach($count as $k => $v)
             {
+                if(!intval($inputs['id_'.$k])){
+                    continue;
+                }
                 $store_rules['id_'.$k] = 'required|exists:items,id,co_id,'.Auth::user()->co_id;
+
                 $item = Items::getSerialItemsWithBalanceByBrId($br_id,$inputs['id_'.$k]);
                 $serials = implode(",",array_pluck($item,'serial_no'));
-                
+
                 $serial  = self::hasSarial($v);
                 if($serial){
                     if(in_array($type,$add)){

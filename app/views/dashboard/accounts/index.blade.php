@@ -48,7 +48,7 @@
                           <div class="col s12 l4 ">
                               <div class="input-field">
                                   <i class="mdi mdi-communication-email prefix active"></i>
-                                  <?php $mail=Lang::get('main.mail') ?>
+                                  <?php $mail=Lang::get('main.email') ?>
                                   {{ Form::text('acc_email',null,array('id'=>'account-email','placeholder'=>$mail)) }}
                                   <p class="parsley-required error-validation">{{ $errors ->first('acc_email') }} </p>
 
@@ -149,14 +149,13 @@
                       <div class="row no-margin-top">
                           <div class="col s12 l2">
                               <label for="credit-limit">
-                                  @lang('main.credit')
+                                  @lang('main.cut')
                               </label>
                           </div>
                           <div class="col s12 l4">
                               <div class="input-field">
-                                  <?php $credit=Lang::get('main.credit') ?>
                                   <i class="mdi mdi-content-remove-circle prefix"></i>
-                                  {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>$credit)) }}
+                                  {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>Lang::get('main.cut'))) }}
                                   {{--<input name="credit_limit" id="credit-limit" type="text" placeholder="   حد الائتمان  ">--}}
                                       <p class="parsley-required error-validation">{{ $errors ->first('acc_limit') }} </p>
 

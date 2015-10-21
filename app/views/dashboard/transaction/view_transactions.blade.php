@@ -33,7 +33,7 @@
                 </td>
                 <td>{{ $invoice->branch->br_name }}</td>
 
-                <th>@lang('main.'.$invoice->invoice_type)</th>
+                <th>@lang('main.'.$invoice->pay_type)</th>
                 <td class="green-text">{{ $invoice->date }}</td>
             @if(!TransController::isSettle($type))
                 <td>{{ $invoice->net }}</td>

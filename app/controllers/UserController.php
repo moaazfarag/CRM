@@ -20,12 +20,12 @@ class UserController extends BaseController
     /*
      * check login
      * */
-    public function checkLogin()
+    public function checkLogin($co_id=null)
     {
         $rules = array(
                         'password'=> 'required',
                         'username'=> 'required',
-                        'co_id'=> 'required',
+//                        'co_id'=> 'required',
                       );
         $validator=Validator::make(Input::all(),$rules);
 
@@ -35,7 +35,7 @@ class UserController extends BaseController
         }else{
             $username   = Input::get('username');
             $password   = Input::get('password');
-            $co_id      = Input::get('co_id');
+            $co_id      = (Input::has('co_id'))?Input::get('co_id'):$co_id;
             if(Auth::attempt(array('username'=>$username,'password'=>$password,'co_id'=>$co_id)))
             {
                 Session::put('permissions', json_decode(Auth::user()->permission,true));

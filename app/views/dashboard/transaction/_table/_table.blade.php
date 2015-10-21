@@ -45,6 +45,9 @@
             <div ng-show="form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.max" style="color: #ea1c18">
 لايوجد رصيد كافي
         </div>
+                <div ng-if="invoiceItem.has_serial && invoiceItem.quantity> 1" style="color: #ea1c18">
+لايوجد رصيد كافي
+        </div>
 
             <div class="error-div-for-table" ng-show="form.$submitted || form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$touched">
                 <div ng-show="form.quantity_@{{ invoiceItems.indexOf(invoiceItem) }}.$error.pattern">
@@ -63,6 +66,10 @@
         @endif
         <td>
             <input ng-required="isRequired(invoiceItem.has_serial)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.serial" type="text" readonly />
+            <div ng-show="invoiceItem.serial_error" style="color: #ea1c18">
+هذا السيريال غير موجود
+            </div>
+
         </td>
     </tr>
     </tbody>

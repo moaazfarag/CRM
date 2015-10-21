@@ -1,7 +1,7 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section class="content-wrap ecommerce-dashboard">
+<section  ng-app="itemApp"  ng-controller="mainController"  class="content-wrap ecommerce-dashboard">
       <div id="bank" class="col s12">
 
 
@@ -125,29 +125,31 @@
                     <p class="parsley-required">{{ $errors ->first('limit') }} </p>
                   </div>
               </div>
-              <div class="col s12 l3">
-                  {{--<i class="fa fa-cube prefix"></i>--}}
-                  <?php $category=Lang::get('main.category') ?>
-                  {{--{{ Form::label('cat_id',$category) }}--}}
 
-                  {{ Form::select('cat_id', array('' => 'اختر الفئة') + $co_info->cat->lists('name','id'),null,array('id'=>'cat_id')) }}
-
-                  <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>
-              </div> {{--category--}}
               @if($co_info->co_supplier_must)
                   <div class="col s2 l3">
-                      {{--<i class="fa fa-truck"></i>--}}
-                      <?php $supplier=Lang::get('main.supplier');
-                      $choseImg=Lang::get('main.chose_supplier') ?>
-                      {{--{{ Form::label('supplier_id',$supplier) }}--}}
-                      {{ Form::select('supplier_id', array('' => $choseImg )+ $co_info->accounts->lists('acc_name','id'),null,array('id'=>'supplier_id')) }}
-                      <p class="parsley-required">{{ $errors ->first('supplier_id') }} </p>
-                  </div> {{--supplier--}}
+                      {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
+                      <p class="parsley-required">{{ $errors ->first('account') }} </p>
+                  </div>{{--account--}}
+                  <div ng_show="account.type" class="col s2 l3">
+                      <select  name="account_id" ng-required='pay_type == "on_account"' ng-change='getAccountInfo()' ng-model="account.id"  class='browser-default'>
+                          <option value="@{{ account.id }}" ng-repeat="account in accounts">@{{ account.acc_name }}</option>
+                      </select>
+                  </div>{{--account--}}
               @endif
           </div>
           <div class="row no-margin-top">
 
               @if($co_info->co_use_season)
+                  <div class="col s12 l3">
+                      {{--<i class="fa fa-cube prefix"></i>--}}
+                      <?php $category=Lang::get('main.category') ?>
+                      {{--{{ Form::label('cat_id',$category) }}--}}
+
+                      {{ Form::select('cat_id', array('' => 'اختر الفئة') + $co_info->cat->lists('name','id'),null,array('id'=>'cat_id')) }}
+
+                      <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>
+                  </div> {{--category--}}
               <div class="col s2 l3">
                   <i class="wi wi-day-cloudy"></i>
                   <?php $season=Lang::get('main.season');

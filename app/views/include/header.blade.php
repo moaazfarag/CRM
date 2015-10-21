@@ -82,12 +82,12 @@
 
       <!-- Menu -->
       <ul>
-        <li>
-          {{ 'معالجة في'. round(microtime(true) - LARAVEL_START,2) .'ثانية '}}
+        <li style="font-size: 1.2em;color: dodgerblue">
+          رقم الشركة هو {{ Auth::user()->co_id }}
+
 
         </li>
         <li>
-          <i class="ion-speedometer"></i>
 
         </li>
         <li class="user">

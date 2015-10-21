@@ -10,7 +10,6 @@
             <th>@lang('main.monthly_quantity')</th>
             <th>@lang('main.loan_start')</th>
             <th>@lang('main.loan_end')</th>
-            <th>@lang('main.finished')</th>
             <th>@lang('main.balance')</th>
             <th>@lang('main.edit')</th>
 
@@ -27,11 +26,8 @@
                 <td>{{ $tableData->loan_currBal }}</td>
                 <td>{{ BaseController::ViewDate($tableData->loan_start) }}</td>
                 <td>{{ BaseController::ViewDate($tableData->loan_end) }}</td>
-                <td>{{ $tableData->employees->salary }}</td>
-                <td>
-                    <input name="finish_{{$k}}" type="checkbox" id="finish_{{$k}}" >
-                    <label for="finish_{{$k}}"></label>
-                </td>
+                <td></td>
+
                 <td>
                     <a href="{{ URL::route('editLoans',array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>
