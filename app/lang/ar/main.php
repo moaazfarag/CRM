@@ -101,6 +101,7 @@ return  array(
     'sellLimit'        => 'حد البيع',
     'item'             => 'الصنف',
     'cost'             => 'متوسط التكلفة ',
+    'theCost'             => ' التكلفة ',
     'bar_code'         => 'الباركود',
     'serial_no'        => 'السيريال',
     'qty'              => 'الكميه',
@@ -444,6 +445,7 @@ return  array(
     'sales_type'            =>'مبيعات',
     'buy_type'              =>'مشتريات',
     'type'                  =>'النوع',
+    'cut'                  =>'حد الصرف',
     'item_balance'          =>'رصيد افتتاحي',
 
     'invoice_no'            => 'فاتورة رقم ',

@@ -67,7 +67,7 @@
         <td>
             <input ng-required="isRequired(invoiceItem.has_serial)" ng-disabled="hasSerialInvoiceItem(invoiceItem.has_serial)" class="input-without-border"  name="serial_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.serial" type="text" readonly />
             <div ng-show="invoiceItem.serial_error" style="color: #ea1c18">
-                @{{ invoiceItem.serial_error }}
+هذا السيريال غير موجود
             </div>
 
         </td>

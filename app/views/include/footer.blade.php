@@ -49,6 +49,8 @@
       {{ HTML::script('dashboard/scripts/app.js') }}
       {{ HTML::script('dashboard/scripts/itemService.js') }}
       {{ HTML::script('dashboard/scripts/mainCtrl.js') }}
+      {{ HTML::script('dashboard/scripts/employeeCtrl.js') }}
+      {{ HTML::script('dashboard/scripts/employeeService.js') }}
       {{ HTML::script('dashboard/scripts/accountService.js') }}
       {{ HTML::script('dashboard/scripts/accountCtrl.js') }}
       {{ HTML::script('dashboard/scripts/select_model.js') }}

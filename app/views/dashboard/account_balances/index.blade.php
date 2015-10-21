@@ -86,7 +86,7 @@
                           class="waves-effect btn">@lang('main.add') </button>
               </div>
           </div> {{--first row end--}}
-@{{  form.credit.$viewValue  }}
+{{--@{{  form.credit.$viewValue  }}--}}
             <br>
       </div>
     @include('dashboard.account_balances._table_view')

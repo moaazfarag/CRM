@@ -25,7 +25,6 @@ class MsHeaderController extends BaseController
         if ($chosenEmployees->isEmpty()) {
             return Redirect::route('printReceipt',array('employeeId'=>Input::get('employeeId'),'for_month'=>Input::get('for_month'),'for_year'=>Input::get('for_year')));
         } else {
-           
            foreach ($chosenEmployees as $chosenEmployee) {
 
                 $allDis = $chosenEmployee->employeeDudValue('استقطاع') ;
@@ -92,19 +91,25 @@ class MsHeaderController extends BaseController
     }
     protected function depData()
     {
+
         $data['title']     = Lang::get('main.salary_equipment');
         $data['employees'] = 'open';
         $haveSalary           = MsHeader::hasSalary()->get();
         $data['haveSalary']   = MsHeader::hasSalary()->whereIn('employee_id',$haveSalary->lists('employee_id'))->get();
         if(Input::has('employee_id')){
-            $data['net']   = Employees::company()->where('id',Input::get('employee_id'))->get();
+            $data['haveSalary']   = MsHeader::hasSalary()->where('employee_id',Input::has('employee_id'))->get();
+            if( $data['haveSalary']->isEmpty()){
+                $data['net']          = Employees::company()->where('id',Input::get('employee_id'))->get();
+            }else{
+                $data['net']          = [];
+            }
         }else{
-
             $data['net']          = Employees::company()->whereNotIn('id',$haveSalary->lists('employee_id'))->get();
         }
         return $data;
     }
     public function printReceipt(){
+
         $data['title']     = Lang::get('main.salary_equipment');
         $data['employees'] = 'open';
             $data['headers'] = MsHeader::company()
@@ -116,6 +121,7 @@ class MsHeaderController extends BaseController
     }
     public function prepMsHeader()
     {
+
         $validation = Validator::make(Input::all(), MsHeader::$store_rules);
 
 //        if ($validation->fails()) {

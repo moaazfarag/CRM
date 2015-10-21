@@ -1,6 +1,5 @@
 @extends('dashboard.main')
 @section('content')
-        {{--{{ dd(BaseController::getBranchId()) }}--}}
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
 <div  ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]'}};transType= "{{ $type }}"' ng-app="itemApp"  ng-controller="mainController" class="card">
@@ -124,7 +123,7 @@
                     </span>
 
                     </div>
-                    {{ Form::label('cost',Lang::get('main.cost')) }}
+                    {{ Form::label('cost',Lang::get('main.theCost')) }}
                     <p class="parsley-required">{{ $errors ->first('cost') }} </p>
                 </div>
             </div> {{-- cost div--}}
@@ -151,60 +150,47 @@
 
 
         <br>
-        @include('dashboard.transaction._table._table')
-                {{-- start sum , discount ,tax and net--}}
-        <div class="row no-margin-top">
 
+
+            @include('dashboard.transaction._table._table')
+
+                {{-- start sum , discount ,tax and net--}}
+        @if($type != 'itemBalance')
+        <div class="row no-margin-top">
             <div class="col s2 ">
 
                 <i class="fa fa-cart-arrow-down"></i>
                 {{ Form::label('sum',Lang::get('main.total')) }}
                 <br>
                 @{{ invoice_sub_total() }}
-                {{--{{ Form::text('sum',null,array('id'=>'sum')) }}--}}
                 <p class="parsley-required">{{ $errors ->first('sum') }} </p>
             </div>{{--sum--}}
             <div class="col s2 ">
-
                 <i class="mdi mdi-content-remove-circle"></i>
                 {{ Form::label('discount',Lang::get('main.discount_')) }}
                 {{ Form::number('discount',0,array('id'=>'discount','ng-model'=>'discount')) }}
                 <p class="parsley-required">{{ $errors ->first('discount') }} </p>
             </div>{{--discount--}}
-
-
             <div class="col s2 ">
-
                 <i class="mdi mdi-maps-local-atm"></i>
                 {{ Form::label('tax',Lang::get('main.tax_')) }}
                 {{ Form::number('tax',null,array('id'=>'tax')) }}
                 <p class="parsley-required">{{ $errors ->first('tax') }} </p>
             </div>{{--tax--}}
-
             <div class="col s2 ">
-
                 <i class="fa fa-exchange"></i>
                 <br>
                 @{{ afterDiscount() }}
                 <p class="parsley-required">{{ $errors ->first('net') }} </p>
             </div>{{--net--}}
-
-        </div>
-        {{-- end sum , discount ,tax and net --}}
+        </div>{{-- end sum , discount ,tax and net --}}
+        @endif
         <div class="row">
             <div class="col s12 l12">
                 <button ng-disabled="form.$invalid || hasInvoiceItems()" type="submit" class="waves-effect btn">@lang('main.add')</button>
             </div>
             {{ Form::close() }}
-        </div>{{--submit  row end--}}
-              {{--<div class="col s12 m6 l4">--}}
-                  {{--<div class="input-field">--}}
-                      {{--<i class="fa fa-barcode prefix"></i>--}}
-                      {{--{{ Form::text('serial_no',null,array('id'=>'serial_no')) }}--}}
-                      {{--{{ Form::label('serial_no','السيريال') }}--}}
-                    {{--<p class="parsley-required">{{ $errors ->first('serial_no') }} </p>--}}
-                  {{--</div>--}}
-              {{--</div>--}}{{--bar_code--}}
+        </div>
       </div> {{--secound row end--}}
 
 </div>
