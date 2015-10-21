@@ -17,6 +17,8 @@
         </div>
 
         <div class="content">
+            @include('include.messages')
+
             <div class="row">
 
                 <div class="col s12 l5">

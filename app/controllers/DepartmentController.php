@@ -29,7 +29,13 @@ class DepartmentController extends BaseController
             $dep->name = Input::get('name');
             $dep->co_id = Auth::user()->co_id; // company id
             $dep->user_id = Auth::id();// user who add this record
-            $dep->save();
+            if($dep->save()){
+
+                Session::flash('success',BaseController::addSuccess('القسم'));
+            }else{
+
+                Session::flash('error',BaseController::addError('القسم'));
+            }
             return Redirect::route('addDep');
         }
 
@@ -49,7 +55,11 @@ class DepartmentController extends BaseController
         $dep->name = Input::get('name'); //season name from input
         $dep->co_id = Auth::user()->co_id; // company id
         $dep->user_id = Auth::id();// user who add this record
-        $dep->update();
+        if($dep->update()){
+            Session::flash('success',BaseController::editSuccess('القسم'));
+        }else{
+            Session::flash('error',BaseController::editError('القسم'));
+        }
         return Redirect::route('addDep');
 
     }

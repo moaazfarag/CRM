@@ -3,12 +3,15 @@
         <!-- Main Content -->
 <section   class="content-wrap ecommerce-invoice" ng-app>
     <div class="card">
+
         <h4>
             @lang('main.'.$type)
             فرع :
             {{ $branch->br_name }}
         </h4>
-    <table id="table_bank" class="display table table-bordered table-striped table-hover">
+        @include('include.messages')
+
+        <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
 
@@ -89,7 +92,6 @@
                     <button ng-disabled="!cancel_cause" class="modal-action modal-close waves-effect waves-red btn  ">إلغاء الفاتورة</button>
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">تراجع</a>
 
-                    {{ Form::hidden('br_id',$invoice->br_id) }}
                     {{ Form::hidden('invoice_no',$invoice->invoice_no) }}
                     {{ Form::hidden('invoice_type',$invoice->invoice_type) }}
                     {{ Form::close() }}

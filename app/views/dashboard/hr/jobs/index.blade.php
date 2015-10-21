@@ -14,6 +14,8 @@
                 </a>
             </div>
             <div class="content">
+                @include('include.messages')
+
                 {{--{{ dd($editSeason->name) }}--}}
                 @if(isset($editJob->name))
                     {{ Form::model($editJob,array('route'=>array('updateJob',$editJob->id))) }}

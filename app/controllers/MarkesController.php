@@ -88,7 +88,7 @@ class MarkesController extends \BaseController
 	public function deleteMark($id)
 	{
 
-		$markes = Markes::find($id)->company()->first();
+		$markes = Markes::company()->find($id);
 		$model = DB::table('models')->company()->where('marks_id', '=', $id)->first();
 //		$items =  DB::table('items')->company()->where('marks_id', '=', $id)->first();
 

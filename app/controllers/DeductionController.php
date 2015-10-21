@@ -14,6 +14,7 @@ class DeductionController extends BaseController
         $data['title']     = Lang::get('main.add_new_clause'); // page title
         $data['employees'] = "open";
         $data['co_info']   = CoData::thisCompany()->first();
+
         return View::make('dashboard.hr.deduction.index',$data);
 
     }
@@ -32,7 +33,15 @@ class DeductionController extends BaseController
             $newDesded->name                       = Input::get('name');
             $newDesded->ds_type                    = Input::get('ds_type');
             $newDesded->ds_cat                     = Input::get('ds_cat');
-            $newDesded->save();
+
+            if($newDesded->save()){
+
+                Session::flash('success',BaseController::addSuccess('Ø§Ù„Ø¨Ù†Ø¯'));
+            }else{
+
+                Session::flash('error',BaseController::addError('Ø§Ù„Ø¨Ù†Ø¯'));
+            }
+
             return Redirect::route('addDesded');
         }
 
@@ -63,10 +72,15 @@ class DeductionController extends BaseController
             $newDesded->ds_type                    = Input::get('ds_type');
             $newDesded->ds_cat                     = Input::get('ds_cat');
 
-            $newDesded->update();
-            return Redirect::route('addDesded');
+            if($newDesded->update()){
+                Session::flash('success',BaseController::editSuccess('Ø§Ù„Ø¨Ù†Ø¯'));
+            }else{
+                Session::flash('error',BaseController::editError('Ø§Ù„Ø¨Ù†Ø¯'));
+            }
+
+                return Redirect::route('addDesded');
         }else{
-                $data['error'] = 'ÚİæÇğ åĞÇ ÇáÕäİ ÛíÑ ãæÌæÏ ';
+                $data['error'] = 'Ø¹ÙÙˆØ§Ù‹ Ù‡Ø°Ø§ Ø§Ù„ØµÙ†Ù ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯ ';
                 return View::make('errors.missing');
     }
 

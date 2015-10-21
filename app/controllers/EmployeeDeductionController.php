@@ -39,7 +39,14 @@ class EmployeeDeductionController extends BaseController
             $newEmpdesded->des_ded      = Input::get('ds_id');
             $newEmpdesded->val          = Input::get('val');
             $newEmpdesded->user_id      = Auth::id();
-            $newEmpdesded->save();
+
+            if($newEmpdesded->save()){
+
+                Session::flash('success',BaseController::addSuccess('إستحقاق الموظف'));
+            }else{
+
+                Session::flash('error',BaseController::addError('إستحقاق الموظف'));
+            }
             return Redirect::route('addEmpdesded');
         }
 
@@ -75,7 +82,13 @@ class EmployeeDeductionController extends BaseController
                 $newEmpdesded->des_ded      = Input::get('ds_id');
                 $newEmpdesded->val          = Input::get('val');
                 $newEmpdesded->user_id      = Auth::id();
-                $newEmpdesded->update();
+
+                if($newEmpdesded->update()){
+                    Session::flash('success',BaseController::editSuccess('إستحقاق الموظف'));
+                }else{
+                    Session::flash('error',BaseController::editError('إستحقاق الموظف'));
+                }
+
                 return Redirect::route('addDesded');
             }else{
                 return View::make('errors.missing');             }

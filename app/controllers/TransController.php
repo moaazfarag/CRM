@@ -304,15 +304,16 @@ class TransController extends BaseController
 
         return $qtyPerItem;
     }
+
     public function cancelTrans()
     {
 
         $inputs = Input::all();
         $ruels =  TransHeader::$delete_ruels;
 
-        if ($this->isHaveBranch() == 1) {
-            $ruels["br_id"] = "required";
-        }
+//        if ($this->isHaveBranch() == 1) {
+//            $ruels["br_id"] = "required";
+//        }
         $validation = Validator::make($inputs, TransHeader::$delete_ruels);
 
         if ($validation->fails()) {
@@ -323,26 +324,32 @@ class TransController extends BaseController
             $invoice_no   = $inputs['invoice_no'];
             $invoice_type = $inputs['invoice_type'];
             $cancel_cause = $inputs['cancel_cause'];
-            $br_id        = $inputs['br_id'];
 
             $invoice      = TransHeader::company()
                 ->where('invoice_no',$invoice_no)
                 ->where('invoice_type',$invoice_type);
-            if ($this->isHaveBranch() == 1) {
 
-                $invoice->where('br_id',$br_id);
+            if(Auth::user()->all_br != 1){
+
+                $invoice->where('br_id',Auth::user()->br_id);
             }
 
-            $invoice->first();
-            if(!empty($invoice)){
+            $result = $invoice->first();
 
-                $invoice->deleted = 1;
-                $invoice->notes   = $cancel_cause;
-                $invoice->update();
+            if(!empty($result)){
+
+                $result->deleted = 1;
+                $result->notes   = $cancel_cause;
+                $result->save();
 
                 $msg = 'تم إلغاء الفاتورة بنجاح ';
 
                 Session::flash('success',$msg);
+                Return Redirect::back();
+            }else{
+                $msg = 'عفواً لم يتم إلغاء الفاتورة';
+
+                Session::flash('error',$msg);
                 Return Redirect::back();
             }
         }

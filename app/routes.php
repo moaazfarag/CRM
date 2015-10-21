@@ -56,6 +56,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::post('storeCategory',array('before'=>'csrf','uses'=>'CategoryController@storeCategory','as'=>'storeCategory'));
     Route::get('editCategory/{id}',array('uses'=>'CategoryController@editCategory','as'=>'editCategory'));
     Route::post('updateCategory/{id}',array('before'=>'csrf','uses'=>'CategoryController@updateCategory','as'=>'updateCategory'));
+    Route::get('deleteCategory/{id}',array('uses'=>'CategoryController@deleteCategory','as'=>'deleteCategory'));
+
     /**
      * Season Area
      */
@@ -63,6 +65,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     Route::post('storeSeason',array('before'=>'csrf','uses'=>'SeasonController@storeSeason','as'=>'storeSeason'));
     Route::get('editSeason/{id}',array('uses'=>'SeasonController@editSeason','as'=>'editSeason'));
     Route::post('updateSeason/{id}',array('before'=>'csrf','uses'=>'SeasonController@updateSeason','as'=>'updateSeason'));
+    Route::get('deleteSeason/{id}',array('uses'=>'SeasonController@deleteSeason','as'=>'deleteSeason'));
 
 //    markes area
     Route::get('addMark',array('uses'=>'MarkesController@addMark','as'=>'addMark'));

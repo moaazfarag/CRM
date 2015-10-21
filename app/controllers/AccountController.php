@@ -52,7 +52,7 @@ class AccountController extends BaseController
         public function addAccount($accountType)
         {
             if($this->checkType($accountType)) {
-            $data['rowsData'] = Accounts::where('acc_type','=',$accountType)->get();
+            $data['rowsData'] = Accounts::company()->where('acc_type','=',$accountType)->get();
             $data['pricing'] = $this->pricing;
             $data['accountType'] = $accountType;
             $data['asideOpen']   = 'open' ;
@@ -391,13 +391,16 @@ class AccountController extends BaseController
                  $account_trans->where('account_id', $account_id);
              }
 
-
+                $account_balance = AccountsBalances::where('account_id',$account_id)
+                    ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'),'accounts_balances.*')
+                    ->first();
 
 //            var_dump($account_trans); die();
 
             // FILL DATA FROM INPUTS AND ACCOUNT TRANS RESULT
 
-            $data['account_trans'] = $account_trans->get();;
+            $data['account_balance'] = $account_balance;
+            $data['account_trans'] = $account_trans->get();
             $data['date_from']     = $date_from;
             $data['date_to']       = $date_to;
             $data['type']          = $type;
@@ -429,20 +432,22 @@ class AccountController extends BaseController
 
                     foreach($all_accounts as $account_id){
 
+                        $account_balance = AccountsBalances::where('account_id',$account_id)
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->first();
+//                        dd($account_balance);
                         $all_trans_cash = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->whereIn('pay_type',['cash','visa'])
-                            ->select(DB::raw('SUM(credit) AS sum_credit','SUM(debit) AS sum_debit') ,'account_trans.*')
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
-
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
-                            ->select(DB::raw('SUM(credit) AS sum_credit','SUM(debit) AS sum_debit'))
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
-                        if(!empty($all_trans_cash)){
-//                        dd($all_trans_cash->sum_credit);
 
+                        if(!empty($all_trans_cash)){
                             $credit = $all_trans_cash->sum_credit + $all_trans_cash->sum_debit;
                             $debit  = $credit;
 
@@ -454,6 +459,14 @@ class AccountController extends BaseController
                             $credit += $all_trans_on_account->sum_credit;
                             $debit  += $all_trans_on_account->sum_debit;
                         }
+
+                        if(!empty($account_balance)){
+
+                            $credit += $account_balance->sum_credit;
+                            $debit  += $account_balance->sum_debit;
+                        }
+
+
                        $name = Accounts::find($account_id)->acc_name;
 
                        $data['account_trans_result'][$account_id] =  ['credit'=>$credit,'debit'=>$debit,'name'=>$name];
@@ -702,7 +715,8 @@ class AccountController extends BaseController
 
                         $br_id                = $branch->id;
                         $all_branches_id[$i]  = $branch->id;
-
+                        $credit = [];
+                        $debit = [];
 
                         $last_balances = Treasury::company()->where('br_id',$branch->id)->where('date','<',$date_from)->get();
 

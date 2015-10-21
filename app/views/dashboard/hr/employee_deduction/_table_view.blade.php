@@ -6,8 +6,8 @@
             <th>@lang('main.employee') </th>
             <th>@lang('main.clause') </th>
             <th>@lang('main.value') </th>
-            <th> @lang('main.edit')  </th>
-            <th> @lang('main.cancel_')  </th>
+            <th>@lang('main.edit')  </th>
+            <th>@lang('main.cancel_')  </th>
 
         </tr>
         </thead>

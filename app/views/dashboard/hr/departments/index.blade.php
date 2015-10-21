@@ -14,6 +14,8 @@
                 </a>
             </div>
             <div class="content">
+                @include('include.messages')
+
                 {{--{{ dd($editSeason->name) }}--}}
                 @if(isset($editDep->name))
                     {{ Form::model($editDep,array('route'=>array('updateDep',$editDep->id))) }}
@@ -42,7 +44,7 @@
                 <div class="row">
                     <div class="col s12 l12">
 
-                        @if(isset($editDep->depName))
+                        @if(isset($editDep->name))
                             <button class="waves-effect btn">@lang('main.edit') </button>
                         @else
                             <button class="waves-effect btn">@lang('main.add') </button>

@@ -74,8 +74,8 @@ class SeasonController extends BaseController
      */
     protected function seasonData()
     {
-        $itemCat      =Lang::get('main.itemCat');
-        $season      =Lang::get('main.season');
+        $itemCat     = Lang::get('main.itemCat');
+        $season      = Lang::get('main.season');
         $data['title'] = $itemCat;
         $data['catFunName'] = "editSeason";
         $data['activeSeasonNav'] = "active";
@@ -86,5 +86,32 @@ class SeasonController extends BaseController
         $data['tablesData'] = Seasons::company()->get();
 //        dd($data['tablesData']);
         return $data;
+    }
+
+    public function deleteSeason($id)
+    {
+
+
+        $season = Seasons::company()->find($id);
+        $items = Items::where('seasons_id', '=', $id)->company()->first();
+
+
+        if (!empty($season)) {
+
+            if (!empty($items)) {
+//            die(var_dump($items));
+                Session::flash('error', 'لا يمكن الحذف ...   هناك أصناف تحمل اسم هذا الموسم');
+                return Redirect::back();
+            } else {
+
+                $season->delete();
+                $edit_ids = BaseController::editIds('models', 'Models', 'true_id');
+                if ($edit_ids) {
+                    Session::flash('success', 'تم حذف الموسم بنجاح');
+                    return Redirect::back();
+                }
+            }//end else employees
+
+        }
     }
 }
