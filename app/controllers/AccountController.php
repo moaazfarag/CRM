@@ -652,7 +652,6 @@ class AccountController extends BaseController
              $data['br_id']         = $br_id  ;
             $data['account_type']   = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
 
-
             if(isset($br_id)&& $br_id !='' ){
 
                 $data['branch_name']    = Branches::find($br_id)->first()->br_name ;
@@ -702,7 +701,7 @@ class AccountController extends BaseController
 //                var_dump($data['treasury_between_date']); die();
                 return View::make('dashboard.accounts.daily_treasury.daily_treasury_result',$data);
 
-            }// end if branch
+            }// end if one branch
 
             else{
 
@@ -759,7 +758,7 @@ class AccountController extends BaseController
 
                         //--------------------- treasury_between_date ----------------------------------------
                         $data['all_branches_id'] = $all_branches_id;
-                        $data["treasury_between_date"]["$br_id"] =  Treasury::company()->where('br_id',$br_id)->dateBetween('date',$date_from,$date_to)->get();
+                        $data["treasury_between_date"][$br_id] =  Treasury::company()->where('br_id',$br_id)->dateBetween('date',$date_from,$date_to)->get();
 
 
                     }

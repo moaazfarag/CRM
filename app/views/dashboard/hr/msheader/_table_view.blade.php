@@ -8,7 +8,7 @@
                         لسنة: {{ Input::get('for_year') }}
                 </h2>
             </div>
-                        @if(!$net->isEmpty())
+                        @if($net && !$net->isEmpty())
             {{ Form::open(array('route'=>array('readyToPay'))) }}
                         @endif
             <table id="table_customers" class="display table table-bordered table-striped table-hover">
@@ -60,6 +60,7 @@
                         {{--<td>{{ $tableData->admin }}</td>--}}
                     </tr>
                 @endforeach
+
                 @foreach($haveSalary as $k=>$tableData )
                     <tr>
                         <td>{{ $tableData->employees->name }}</td>
@@ -96,7 +97,7 @@
             {{ Form::hidden('for_month',Input::get('for_month')) }}
             {{ Form::hidden('for_year',Input::get('for_year')) }}
 
-            @if(!$net->isEmpty())
+            @if($net && !$net->isEmpty())
             <button type="submit" class="waves-effect btn">صرف المرتبات</button>
             {{ Form::close() }}
             @endif

@@ -13,35 +13,10 @@ class TransController extends BaseController
         $types = ['sales','buy','salesReturn','buyReturn','settleAdd','settleDown','itemBalance'];
         if(in_array($type,$types) && $branch)
         {
-            $data['name']          = Lang::get('main.'.$type); // page title
-            $data['title']         = " فاتورة " .$data['name'] ; // page title
-            $data['co_info']       = CoData::thisCompany()->first();//select info models category seasons
-            $data['branch']        = $branch;
-            $data['type']          = $type;
-            $data['br_id']          = $br_id;
-            $data['pay_type']      = array('cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
-            $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
-            if($type == "sales"){
-                $data['invoices_open'] = 'open' ;
-                return View::make('dashboard.transaction.discount-index',$data);
-            }elseif($type == "buy" || $type == "itemBalance" ){
-                if(!$type == "itemBalance"){
-                    $data['invoices_open'] = 'open' ;
-                }
-                $data['itemBalance'] = 'open' ;
-                return View::make('dashboard.transaction.add-index',$data);
-            }elseif($type == "settleAdd"){
-                $data['TransOpen'] = 'open' ;
-                return View::make('dashboard.transaction.settle-add-index',$data);
-            }elseif($type == "settleDown"){
-                $data['TransOpen'] = 'open' ;
-                return View::make('dashboard.transaction.settle-discount-index',$data);
-            }elseif( $type == "buyReturn" || $type == "salesReturn"){
-                return View::make('dashboard.transaction.return-index',$data);
-            }
-        }else{
-            return  View::make('errors.missing');
+            $data['branch'] = $branch;
+            return $this->returnView($type, $data);
         }
+
     }
     public function storeTrans($type,$br_id)
     {
@@ -55,20 +30,12 @@ class TransController extends BaseController
             $validation = Validator::make($inputs, TransDetails::rulesCreator($inputs));
             if($validation->fails())
             {
-                $data['title']       = " تعديل تسوية اضافة " ; // page title
-                $data['TransOpen']   = 'open' ;
-                $data['type']        = 'type' ;
-                $data['br_id']       = $br_id;
-                $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
-                $data['branch']      = $this->isAllBranch(); //
-                dd($validation->messages());
-                $data['newArray']    = $this->itemsToJsonForError($inputs);
-                die();
-                $data['errors']      = $validation->messages();
+                $data['newArray']    = $this->itemsToJsonForError($inputs,$validation->messages());
+                $data['branch']       = $branch;
                 Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
-
-                return View::make('dashboard.settle.index',$data);
+                return $this->returnView($type, $data);
             }else {
+
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
                     $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:null;
                     $accountId                  = isset($inputs['account_id'])?intval($inputs['account_id']):null;
@@ -165,19 +132,43 @@ class TransController extends BaseController
             return View::make('errors.missing');
         }
     }
-    private function itemsToJsonForError($inputs)
+    private function itemsToJsonForError($inputs,$errors)
     {
         $count = TransDetails::countOfInputs($inputs);
+        $newArray = [];
         foreach($count as $k =>$v ){
+            $serialNo = isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:null;
+           $item = Items::getItemByBrId(intval($inputs['id_'.$k]),$serialNo,$inputs['br_id']);
+           $realItem = Items::company()->find($inputs['id_'.$k]);
+
+            if(!$item){
+                $item = $realItem;
+                if(!$item){
+                    continue;
+                }
+            }
             $newArray[] = array
             (
-                'name'     => $inputs['name_'.$k],
-                'id'       => intval($inputs['id_'.$k]),
-                'quantity' => intval($inputs['quantity_'.$k]),
-                'serial'   => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:null,
+                'item_name'        => $item->item_name,
+                'id'               => intval($inputs['id_'.$k]),
+                'id_error'         => $errors->first('id_'.$k),
+                'quantity'         => intval($inputs['quantity_'.$k]),
+                'qty_error'         => $errors->first('quantity_'.$k),
+                'cost'             => isset($inputs['cost_'.$k])?$inputs['cost_'.$k]:null,
+                'serial'           => isset($inputs['serial_'.$k])?$inputs['serial_'.$k]:null,
+                'serial_error'     => isset($inputs['serial_'.$k])? $errors->first('serial_'.$k):null,
+                'has_serial'       => $item->has_serial,
+                'bar_code'         => $item->bar_code,
+                'buy'              => $item->buy,
+                'sell_users'       => $item->sell_users,
+                'unit_price'       => $item->sell_users,
+                'sell_nos_gomla'   => $item->sell_nos_gomla,
+                'sell_gomla'       => $item->sell_gomla,
+                'sell_gomla_gomla' => $item->sell_gomla_gomla,
+                'limit'            => $item->limit,
+                'balance'          => @$item->balance,
             ) ;
         }
-//        dd($newArray);
         return $newArray;
     }
 
@@ -327,7 +318,7 @@ class TransController extends BaseController
 
         if ($validation->fails()) {
 
-            return Redirect::back()->withInput()->withErrors($validation->messages());
+            return Redirect::back()->withErrors($validation->messages());
         }else{
 
             $invoice_no   = $inputs['invoice_no'];
@@ -379,6 +370,44 @@ class TransController extends BaseController
                 $updateItem->avg_cost = $detail['unit_price'];
             }
             $updateItem->update();
+
+        }
+    }
+
+    /**
+     * @param $type
+     * @param $data
+     * @return mixed
+     */
+    private function returnView($type, $data)
+    {
+        $data['name']          = Lang::get('main.'.$type); // page title
+        $data['title']         = " فاتورة " .$data['name'] ; // page title
+        $data['co_info']       = CoData::thisCompany()->first();//select info models category seasons
+
+        $data['type']          = $type;
+        $data['br_id']          = $data['branch'] ->id;
+        $data['pay_type']      = array('cash'=>Lang::get('main.cash'),'visa'=>Lang::get('main.visa'),'on_account'=>Lang::get('main.on_account'));
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
+        if ($type == "sales") {
+            $data['invoices_open'] = 'open';
+            return View::make('dashboard.transaction.discount-index', $data);
+        } elseif ($type == "buy" || $type == "itemBalance") {
+            if (!$type == "itemBalance") {
+                $data['invoices_open'] = 'open';
+            }
+            $data['itemBalance'] = 'open';
+            return View::make('dashboard.transaction.add-index', $data);
+        } elseif ($type == "settleAdd") {
+            $data['TransOpen'] = 'open';
+            return View::make('dashboard.transaction.settle-add-index', $data);
+        } elseif ($type == "settleDown") {
+            $data['TransOpen'] = 'open';
+            return View::make('dashboard.transaction.settle-discount-index', $data);
+        } elseif ($type == "buyReturn" || $type == "salesReturn") {
+            return View::make('dashboard.transaction.return-index', $data);
+        } else {
+            return View::make('errors.missing');
 
         }
     }

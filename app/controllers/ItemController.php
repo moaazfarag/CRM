@@ -14,15 +14,10 @@ class ItemController extends BaseController
      */
     public  function addItem()
     {
-
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['title']     =  Lang::get('main.addItem')  ; // page title
         $data['asideOpen']      = "open";
-//        $data['items']     = Items::company()->get(); //  get all item to view in table
         $data['co_info']   = CoData::thisCompany()->first();//select info models category seasons
-//        $data['accounts']  = Accounts::where('acc_type','=','suppliers')
-//                                        ->where('co_id','=',Auth::user()->co_id)
-//                                        ->get()
-//                                        ->lists('acc_name','id');// suppliers from accounts table
         return View::make('dashboard.products.items.index',$data);
     }
     public  function storeItem()
@@ -35,9 +30,7 @@ class ItemController extends BaseController
             return Redirect::back()->withInput()->withErrors($validation->messages());
 
         }else {
-
             $newItem = new Items;
-            $newItem->true_id    = BaseController::maxId($newItem);
             $newItem->co_id = $this->coAuth();
             $newItem->cat_id           = $inputs['cat_id'];
             $newItem->item_name        = $inputs['item_name'];
@@ -70,6 +63,7 @@ class ItemController extends BaseController
     }
     public  function editItem($id)
     {
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['title']     = Lang::get('main.editItem'); // page title
         $data['mainasideOpen']      = "open";
 //        $data['items']     = Items::company()->get(); //  get all item to view in table
@@ -92,31 +86,30 @@ class ItemController extends BaseController
     public  function updateItem($id)
     {
         $validation = Validator::make(Input::all(), Items::$update_rules);
-
+        $inputs = Input::all();
         if($validation->fails())
         {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         }else {
-            $oldItem  = Items::where('id','=',$id)->where('co_id','=', $this->coAuth())->first();
+            $oldItem  = Items::where('id','=',$id)->company()->first();
             if($oldItem) {
                 $oldItem->co_id = $this->coAuth();
-
-                $oldItem->cat_id           = Input::get('cat_id');
-                $oldItem->item_name        = Input::get('item_name');
-                $oldItem->unit             = Input::get('unit');
-                $oldItem->supplier_id      = Input::get('supplier_id');
-                $oldItem->seasons_id       = Input::get('seasons_id');
-                $oldItem->models_id        = Input::get('models_id');
-                $oldItem->bar_code         = Input::get('bar_code');
+                $oldItem->cat_id           = $inputs['cat_id'];
+                $oldItem->item_name        = $inputs['item_name'];
+                $oldItem->unit             = $inputs['unit'];
+                $oldItem->supplier_id      = isset($inputs['supplier_id'])?$inputs['supplier_id']:0;
+                $oldItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
+                $oldItem->models_id        = isset($inputs['models_id'])?$inputs['models_id']:0;
+                $oldItem->marks_id         = isset($inputs['marks_id'])?$inputs['marks_id']:0;
+                $oldItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:0;
+                $oldItem->buy              = $inputs['buy'];
+                $oldItem->sell_users       = $inputs['sell_users'];
+                $oldItem->sell_nos_gomla   = $inputs['sell_nos_gomla'];
+                $oldItem->sell_gomla       = $inputs['sell_gomla'];
+                $oldItem->sell_gomla_gomla = $inputs['sell_gomla_gomla'];
+                $oldItem->limit            = $inputs['limit'];
+                $oldItem->notes            = $inputs['notes'];
                 $oldItem->has_serial       = isset($inputs['has_serial'])?$inputs['has_serial']:0;
-                $oldItem->buy              = Input::get('buy');
-                $oldItem->sell_users       = Input::get('sell_users');
-                $oldItem->sell_nos_gomla   = Input::get('sell_nos_gomla');
-                $oldItem->sell_gomla       = Input::get('sell_gomla');
-                $oldItem->sell_gomla_gomla = Input::get('sell_gomla_gomla');
-
-                $oldItem->limit            = Input::get('limit');
-                $oldItem->notes            = Input::get('notes');
                 $oldItem->user_id          = Auth::id();
 
                 if($oldItem->update()){
@@ -172,7 +165,7 @@ class ItemController extends BaseController
 
         }
 
-        $models = Models::where('co_id', $this->coAuth())->where('marks_id', Input::get('id'))->get();
+        $models = Models::company()->where('marks_id', Input::get('id'))->get();
 
             if (!empty($models)) {
 
@@ -226,8 +219,6 @@ class ItemController extends BaseController
         }else{
             $ruels = TransHeader::$report_ruels_saels;
         }
-//var_dump($ruels);die();
-
         $validation = Validator::make($inputs,$ruels,BaseController::$messages);
         if($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
@@ -242,7 +233,7 @@ class ItemController extends BaseController
                 $balBefore[$itemId]['bal'] = array_sum(TransHeader::getItems($inputs,1)->lists('item_bal') );
             }
             $data['items']     = $items;
-            $data['TransOpen']   = 'open' ;
+            $data['TransOpen'] = 'open' ;
             $data['balBefore'] = $balBefore;
             $data['co_info']   = CoData::thisCompany()->first();
             $data['date_from'] = $this->strToTime($inputs['date_from']);

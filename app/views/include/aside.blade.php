@@ -130,6 +130,19 @@
 
                                 </ul>
                             </li>
+                            <li>
+                                <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleDown')  <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                <ul>
+                                    <li>
+                                        @foreach($branches['branches'] as $branch)
+                                            <a href="{{ URL::route('addTrans',array("settleDown",$branch->id)) }}" class="waves-effect waves-blue">
+                                                فرع {{$branch->br_name}}
+                                            </a>
+                                        @endforeach
+                                    </li>
+
+                                </ul>
+                            </li>
                         @else
                             <li>
                                 <a href="{{ URL::route('addTrans',array("settleAdd",$branches)) }}" class="waves-effect waves-blue"> @lang('main.settleAdd')</a>
