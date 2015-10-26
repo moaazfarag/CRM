@@ -12,7 +12,11 @@
     .yay-push     - push content to right
     .yay-shrink   - shrink content width
 -->
-<?php $branches = BaseController::getBranchId()  ?>
+<?php
+
+$branches = BaseController::getBranchId();
+$company  = CoData::find(Auth::user()->co_id);
+?>
 
 <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
 
@@ -60,15 +64,20 @@
                         <li>
                             <a href="{{ URL::route('addCategory') }}" class="waves-effect waves-blue"> @lang('main.itemCat') </a>
                         </li>
-                        <li>
-                            <a href="{{ URL::route('addSeason') }}" class="waves-effect waves-blue"> @lang('main.seasons') </a>
-                        </li>
+                        @if($company->co_use_season == 1)
+                            <li>
+                                <a href="{{ URL::route('addSeason') }}" class="waves-effect waves-blue"> @lang('main.seasons') </a>
+                            </li>
+                        @endif
+
+                        @if($company->co_use_markes_models == 1)
                         <li>
                             <a href="{{ URL::route('addMark') }}" class="waves-effect waves-blue">  @lang('main.markes') </a>
                         </li>
                         <li>
                             <a href="{{ URL::route('addModel') }}" class="waves-effect waves-blue">  @lang('main.models') </a>
                         </li>
+                        @endif
 
                         <li>
                             <a href="{{ URL::route('addItem') }}" class="waves-effect waves-blue"> @lang('main.items')</a>

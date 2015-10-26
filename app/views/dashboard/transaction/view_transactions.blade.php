@@ -2,13 +2,13 @@
 @section('content')
         <!-- Main Content -->
 <section   class="content-wrap ecommerce-invoice" ng-app>
-    <div class="card">
-
-        <h4>
+    <div class="card" style="padding: 1%;">
+        <div  class="card-panel blue lighten-5 center_title">
             @lang('main.'.$type)
             فرع :
             {{ $branch->br_name }}
-        </h4>
+        </div>
+
         @include('include.messages')
 
         <table id="table_bank" class="display table table-bordered table-striped table-hover">

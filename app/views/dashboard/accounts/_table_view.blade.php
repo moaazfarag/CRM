@@ -1,4 +1,5 @@
 {{--{{ $accountType }}--}}
+<table id="table_bank" class="display table table-bordered table-striped table-hover">
           <thead>
             <tr>
               <th>@lang('main.number')</th>
@@ -12,7 +13,7 @@
                     <th>@lang('main.mail')  </th>
                     <th>@lang('main.address')</th>
                     <th>@lang('main.phone_number_1')</th>
-                    <th>@lang('main.phone_number_2')</th>
+                    {{--<th>@lang('main.phone_number_2')</th>--}}
                     <th>@lang('main.pricing')</th>
                     <th>@lang('main.regComm') </th>
                     <th>@lang('main.taxCard')</th>
@@ -36,7 +37,7 @@
                     <td>{{$rowData->acc_email}}</td>
                     <td>{{$rowData->acc_address}}</td>
                     <th>{{$rowData->acc_tel}}</th>
-                    <th>{{$rowData->acc_tel2}}</th>
+                    {{--<th>{{$rowData->acc_tel2}}</th>--}}
                     <th>{{  AccountController::pricing_name($rowData->pricing) }}</th>
                     <th>{{$rowData->acc_commercial_registration}}</th>
                     <th>{{$rowData->acc_tax_card}}</th>

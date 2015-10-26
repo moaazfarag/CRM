@@ -17,7 +17,9 @@
             </a>
           </div>
           <div class="content">
-              @include('include.messages')
+             <div class="row">
+                 @include('include.messages')
+             </div>
 
               <div class="row no-margin-top">
                     <div class="col s12 l2">
@@ -201,11 +203,13 @@
                           <button class="waves-effect btn">@lang('main.add')</button>
                       </div>
                       {{ Form::close() }}
+                      <br/>
+                      <br/>
+                      <hr/>
                   </div>
-                </div>
-                  <table id="table_bank" class="display table table-bordered table-striped table-hover">
-
                   @include('dashboard.accounts._table_view')
+          </div>
+
 </div>
 </div>
 

@@ -69,11 +69,13 @@
                         @endif
 
                         {{ Form::close() }}
+                       <br/>
+                        <hr/>
                     </div>
                 </div>
             </div>
+            @include('dashboard.products._table_view')
         </div>
-        @include('dashboard.products._table_view')
     </div>
     <!-- /عرض الفروع -->
 
