@@ -95,7 +95,7 @@ class TransHeader extends Eloquent {
         $itemsTrans =  DB::table('items_balance')
                         ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
                         ->company()
-                        ->where('deleted', 0)
+                        ->where('trans_deleted', 0)
                         ->groupBy('br_id','trans_header_id','item_id','serial_no')
                         ->orderBy('created_at','desc');
         if($tBal){

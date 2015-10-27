@@ -1,206 +1,58 @@
-
-       <div class="col m12 s12">
-            <h4>الصلاحيات</h4>
-        </div>
-
-
-        <div class="row">
+<div class="row">
+    <div class="col  l12">
+        <div class="card-panel">
             <table class="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>استعراض </th>
-                      <th> حفظ </th>
-                      <th>حذف</th>
-                      <th>طباعة</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>المبيعات</th>
-                      <td>
-                             <div class="input-field">
-                                    {{ Form::hidden('add_article','0') }}
-                                 {{ Form::checkbox('add_article','1',@$permission['article']['add'] or 0,array('id'=>'add_article')) }}
-
-                             <label for="add_article"> استعراض</label>
-                           <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                 <li class="parsley-required">{{ $errors ->First('add_article') }} </li>
-                           </ul>
-                             </div>
-                      </td>
-                      <td>
-                           <div class="input-field">
-                                    {{ Form::hidden('edit_article','0') }}
-                               {{ Form::checkbox('edit_article','1',@$permission['article']['edit'] or 0 ,array('id'=>'edit_article')) }}
-                               {{--{{{ $permission['article']['asaddd'] or 'dsadsadsa'  }}}--}}
-                           <label for="edit_article"> حفظ</label>
-                         <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                               <li class="parsley-required">{{ $errors ->First('edit_article') }} </li>
-                         </ul>
-                           </div>
-                      </td>
-                      <td>
-                             <div class="input-field">
-                                    {{ Form::hidden('delete_article','0') }}
-                                 {{ Form::checkbox('delete_article','1',@$permission['article']['delete'] or 0,array('id'=>'delete_article')) }}
-                             <label for="delete_article"> حذف</label>
-                           <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                 <li class="parsley-required">{{ $errors ->First('delete_article') }} </li>
-                           </ul>
-                             </div>
-
-                      </td>
-                       <td>
-                             <div class="input-field">
-                                    {{ Form::hidden('delete_article','0') }}
-                                 {{ Form::checkbox('delete_article','1',@$permission['article']['delete'] or 0,array('id'=>'delete_article')) }}
-                             <label for="delete_article"> طباعة</label>
-                           <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                 <li class="parsley-required">{{ $errors ->First('delete_article') }} </li>
-                           </ul>
-                             </div>
-
-                      </td>
-                    </tr>
-                    <tr>
-                        <th>تسويات</th>
-                        <td>
-                            <div class="input-field">
-                                    {{ Form::hidden('add_news','0') }}
-                                {{ Form::checkbox('add_news','1',@$permission['news']['add'] or 0,array('id'=>'add_news')) }}
-                                <label for="add_news"> استعراض</label>
-                                <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                    <li class="parsley-required">{{ $errors ->First('add_news') }} </li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-field">
-                                    {{ Form::hidden('edit_news','0') }}
-                                {{ Form::checkbox('edit_news','1',@$permission['news']['edit'] or 0,array('id'=>'edit_news')) }}
-                                <label for="edit_news"> حفظ</label>
-                                <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                    <li class="parsley-required">{{ $errors ->First('edit_news') }} </li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-field">
-                                    {{ Form::hidden('delete_news','0') }}
-                                {{ Form::checkbox('delete_news','1',@$permission['news']['delete'] or 0,array('id'=>'delete_news')) }}
-                                <label for="delete_news"> حذف</label>
-                                <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                    <li class="parsley-required">{{ $errors ->First('delete_news') }} </li>
-                                </ul>
-                            </div>
-
-                        </td>
-                                               <td>
-                                                     <div class="input-field">
-                                                            {{ Form::hidden('delete_article','0') }}
-                                                         {{ Form::checkbox('delete_article','1',@$permission['article']['delete'] or 0,array('id'=>'delete_article')) }}
-                                                     <label for="delete_article"> طباعة</label>
-                                                   <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                                         <li class="parsley-required">{{ $errors ->First('delete_article') }} </li>
-                                                   </ul>
-                                                     </div>
-
-                                              </td>
+                <thead>
+                <tr>
+                    <th>الاسم</th>
+                    <th>استعراض</th>
+                    <th> حفظ</th>
+                    <th>حذف</th>
+                    <th>طباعة</th>
                 </tr>
-                    <tr>
-<th>مشتريات</th>
-<td>
-    <div class="input-field">
-                                    {{ Form::hidden('add_document','0') }}
-        {{ Form::checkbox('add_document','1',@$permission['document']['add'] or 0,array('id'=>'add_document')) }}
-        <label for="add_document"> استعراض</label>
-        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-            <li class="parsley-required">{{ $errors ->First('add_document') }} </li>
-        </ul>
-    </div>
-</td>
-<td>
-    <div class="input-field">
-                                    {{ Form::hidden('edit_document','0') }}
-        {{ Form::checkbox('edit_document','1',@$permission['document']['edit'] or 0,array('id'=>'edit_document')) }}
-        <label for="edit_document"> حفظ</label>
-        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-            <li class="parsley-required">{{ $errors ->First('edit_document') }} </li>
-        </ul>
-    </div>
-</td>
-<td>
-    <div class="input-field">
-                                    {{ Form::hidden('delete_document','0') }}
-        {{ Form::checkbox('delete_document','1',@$permission['document']['delete'] or 0,array('id'=>'delete_document')) }}
-        <label for="delete_document"> حذف</label>
-        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-            <li class="parsley-required">{{ $errors ->First('delete_document') }} </li>
-        </ul>
-    </div>
+                </thead>
+                <tbody>
+                @if(isset($groupPermissions))
 
-</td>
-                       <td>
-                             <div class="input-field">
-                                    {{ Form::hidden('delete_article','0') }}
-                                 {{ Form::checkbox('delete_article','1',@$permission['article']['delete'] or 0,array('id'=>'delete_article')) }}
-                             <label for="delete_article"> طباعة</label>
-                           <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                 <li class="parsley-required">{{ $errors ->First('delete_article') }} </li>
-                           </ul>
-                             </div>
 
-                      </td>
-</tr>
-                    <tr>
-<th>تحولايات</th>
-<td>
-    <div class="input-field">
-                                    {{ Form::hidden('add_event','0') }}
-        {{ Form::checkbox('add_event','1',@$permission['event']['add'] or 0,array('id'=>'add_event')) }}
-        <label for="add_event"> استعراض</label>
-        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-            <li class="parsley-required">{{ $errors ->First('add_event') }} </li>
-        </ul>
-    </div>
-</td>
-<td>
-    <div class="input-field">
-                                    {{ Form::hidden('edit_event','0') }}
-        {{ Form::checkbox('edit_event','1',@$permission['event']['edit'] or 0,array('id'=>'edit_event')) }}
-        <label for="edit_event"> حفظ</label>
-        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-            <li class="parsley-required">{{ $errors ->First('edit_event') }} </li>
-        </ul>
-    </div>
-</td>
-<td>
-    <div class="input-field">
-                                    {{ Form::hidden('delete_event','0') }}
-        {{ Form::checkbox('delete_event','1',@$permission['event']['delete'] or 0,array('id'=>'delete_event')) }}
-        <label for="delete_event"> حذف</label>
-        <ul class="parsley-errors-list filled" id="parsley-id-5202">
-            <li class="parsley-required">{{ $errors ->First('delete_event') }} </li>
-        </ul>
-    </div>
+                @foreach($groupPermissions as $main =>$permissions)
+                    <tr style="background-color: #18ffff">
+                        <th>@lang('main.'.$main)  </th>
+                        @foreach($group as $v)
+                            <td>
+                                <div  class="input-field">
+                                    {{ Form::hidden($v,'0') }}
+                                    {{ Form::checkbox($v,'1',0,array('id'=>$v.$main)) }}
+                                    <label ng-click="selectALl('{{ $main."_".$v }}')" for="{{ $v.$main }}">@lang('main.'.$v)</label>
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5202">
+                                        <li class="parsley-required">{{ $errors ->First($v) }} </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        @endforeach
+                    </tr>
 
-</td>
-                       <td>
-                             <div class="input-field">
-                                    {{ Form::hidden('delete_article','0') }}
-                                 {{ Form::checkbox('delete_article','1',@$permission['article']['delete'] or 0,array('id'=>'delete_article')) }}
-                             <label for="delete_article"> طباعة</label>
-                           <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                 <li class="parsley-required">{{ $errors ->First('delete_article') }} </li>
-                           </ul>
-                             </div>
-
-                      </td>
-</tr>
-              </tbody>
+                    @foreach($permissions as $name=>$permission)
+                        <tr>
+                            <th>@lang('main.'.$name)</th>
+                            @foreach($permission as $k=>$v)
+                                <td>
+                                    <div class="input-field">
+                                        {{ Form::hidden($k.'_'.$name,'0') }}
+                                        {{ Form::checkbox($k.'_'.$name,'1',$v,array('id'=>$k.'_'.$name,'class'=>$main.'_'.$k.'_all')) }}
+                                        <label for="{{ $k.'_'.$name }}"></label>
+                                        <ul class="parsley-errors-list filled" id="parsley-id-5202">
+                                            <li class="parsley-required">{{ $errors ->First($k.'_'.$name) }} </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                @endforeach
+                    @endif
+                </tbody>
             </table>
-
-
-
-
+        </div>
+    </div>
+</div>

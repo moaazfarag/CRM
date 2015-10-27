@@ -102,7 +102,7 @@ class CoData extends Eloquent {
         'co_name'    => 'required',
         'co_address' => 'required',
         'co_tel'     => 'required',
-        'username'  => 'required|unique:users',
+//        'username'  => 'required|unique:users,username,co_id',
         'password'   => 'required',
         'email'     => 'required|email|unique:users',
         'password_confirm' =>'required|same:password',
