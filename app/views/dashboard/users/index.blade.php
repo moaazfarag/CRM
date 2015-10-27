@@ -1,7 +1,7 @@
  @extends('dashboard.main')
  @section('content')
          <!-- Main Content -->
- <section class="content-wrap ecommerce-dashboard">
+ <section ng-app="itemApp" ng-controller="mainController" class="content-wrap ecommerce-dashboard">
      <!-- Breadcrumb -->
      <div class="ecommerce-title">
 
@@ -179,7 +179,9 @@
     </div>
     <!-- /Store Settings -->
 
-@include('dashboard.users._view_table')
+     @include('dashboard.users._premisions')
+     <br>
+     @include('dashboard.users._view_table')
 
 
   </section>

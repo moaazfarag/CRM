@@ -51,7 +51,7 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     /**
      * Branch Area
      */
-    Route::get('addBranch/',array('uses'=>'BranchController@addBranch','as'=>'addBranch'));
+    Route::get('addBranch/',array('uses'=>'BranchController@addBranch','as'=>'addBranch'));//add branch
     Route::post('storeBranch/',array('before'=>'csrf','uses'=>'BranchController@storeBranch','as'=>'storeBranch'));
     Route::get('editBranch/',array('uses'=>'BranchController@editBranch','as'=>'editBranch'));
     Route::post('updateBranch/{id}',array('before'=>'csrf','uses'=>'BranchController@updateBranch','as'=>'updateBranch'));

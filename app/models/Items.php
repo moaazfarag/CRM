@@ -19,7 +19,7 @@ class Items extends Eloquent {
     public static  $store_rules = array(
         'cat_id'           => 'required|integer',
         'item_name'        => 'required|min:3',
-        'unit'             => 'min:3',
+        'unit'             => 'required|in:piece,kilo,ton,galon,meter',
         'supplier_id'      => 'integer',
         'seasons_id'       => 'integer',
         'models_id'        => 'integer',
@@ -35,7 +35,7 @@ class Items extends Eloquent {
     public static  $update_rules = array(
         'cat_id'           => 'required|integer',
         'item_name'        => 'required|min:3',
-        'unit'             => 'min:3',
+        'unit'             => 'required|in:piece,kilo,ton,galon,meter',
         'supplier_id'      => 'integer',
         'seasons_id'       => 'integer',
         'models_id'        => 'integer',
@@ -83,12 +83,12 @@ class Items extends Eloquent {
     public static function getItemsWithBalanceByBrId($brId)
     {
         $itemsTrans =  DB::table('items_balance')
-                            ->company()->where('deleted', 0)
+                            ->company()->where('trans_deleted', 0)
                             ->groupBy('br_id')
                             ->groupBy('item_id')
                             ->where('br_id',$brId)
                             ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
-        $items      = Items::company()->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
+        $items      = Items::company()->where('deleted', 0)->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
         return array_merge($itemsTrans->get(),$items->toArray());
     }
 
@@ -100,7 +100,7 @@ class Items extends Eloquent {
   public static function getItem($itemId)
     {
         $item =  DB::table('items_balance')
-                            ->company()->where('deleted', 0)
+                            ->company()->where('trans_deleted', 0)
                             ->groupBy('br_id')
                             ->groupBy('item_id')
                             ->where('item_id',$itemId)
@@ -118,7 +118,7 @@ class Items extends Eloquent {
   public static function getItemByBrId($itemId,$serialNo = null ,$brId)
     {
         $item =  DB::table('items_balance')
-                            ->company()->where('deleted', 0)
+                            ->company()->where('trans_deleted', 0)
                             ->groupBy('br_id')
                             ->groupBy('serial_no')
                             ->groupBy('item_id')

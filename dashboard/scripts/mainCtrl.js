@@ -8,8 +8,11 @@ angular.module('mainCtrl', [])
         $scope.itemData = {};
         //$scope.item = {};
         $scope.value = "";
+        $scope.custom = true;
         $scope.invoiceItems = [
         ];
+        classes = [];
+
         //$scope.date = Date();
         $scope.header={}
         $scope.invoice={}
@@ -531,6 +534,21 @@ angular.module('mainCtrl', [])
                 }else{
                     return false;
                 }
+            }
+
+        };
+        $scope.selectALl  =  function(className) {
+            var select =  document.getElementsByClassName(className);
+            if(!classes[className] ){
+                for (var i = 0; i < select.length; i++) {
+                    select[i].checked = true;
+                }
+                classes[className]= true ;
+            }else{
+                for (var i = 0; i < select.length; i++) {
+                    select[i].checked = false;
+                }
+                classes[className]= false ;
             }
 
         };

@@ -55,7 +55,7 @@
             </label>
           </div>
           <div class="col s12 m6 l5">
-            <div class="input-field">
+            <di v class="input-field">
               <i class="mdi mdi-action-home prefix"></i>
                 <?php $companyName=Lang::get('main.companyName') ?>
               {{--<input name="co_name" id="ecommerce-name" type="text" placeholder="اسم الشركة">--}}

@@ -95,7 +95,7 @@ class InvoiceController extends BaseController
 
 
                     $invoices = TransHeader::company()->dateBetween('date', $date_from, $date_to)
-                        ->where('deleted', 0);
+                        ->where('trans_deleted', 0);
 
                     if($invoice_type == 'sales-earnings') {
 

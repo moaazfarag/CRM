@@ -102,7 +102,7 @@ return  array(
     'supplier'         => 'المورد' ,
     'season'           => 'الموسم' ,
     'model'            => 'الموديل ',
-    'sellLimit'        => 'حد البيع',
+    'sellLimit'        => 'حد الطلب',
     'item'             => 'الصنف',
     'cost'             => 'متوسط التكلفة ',
     'theCost'             => ' التكلفة ',
@@ -244,7 +244,8 @@ return  array(
 
     // add employee table view
 
-    'serial'	=>'المسلسل',
+    'serial'	=>'السيربال',
+    'has_serial'	=>'يستخدم سيريال',
 
     #########{{ Department page }}###########
 
@@ -491,6 +492,16 @@ return  array(
     'edit_not_done'  => 'لم يتم تعديل ',
     'try_again'      => '.. حاول مرة أخرى ',
     'with_success'   => ' بنجاح ',
+    'piece'             =>'عدد',
+    'kilo'             =>'كيلو',
+    'ton'             => 'طن',
+    'meter'           => 'متر',
+    'galon'           => 'جالون',
+    'invoices'          => 'الفواتير',
+    'add_all'           =>'اضافة الكل',
+    'edit_all'          =>'تعديل الكل ',
+    'delete_all'        =>' حذف الكل',
+    'show_all'          =>'عرض الكل'
 
 
 );

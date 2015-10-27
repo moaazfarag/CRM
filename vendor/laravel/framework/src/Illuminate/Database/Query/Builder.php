@@ -1387,6 +1387,7 @@ class Builder {
 				'trans_details.trans_header_id',
 				'trans_header.invoice_no',
 				'trans_header.date',
+				'trans_header.deleted AS trans_deleted',
 				'trans_header.invoice_type',
 				'trans_details.serial_no',
 				'items.*')

@@ -16,14 +16,14 @@ class CreateUsersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->boolean('co_id');
-			$table->integer('br_id');
-			$table->string('all_br');
+			$table->integer('br_id')->nullable();
+			$table->string('all_br')->nullable();
 			$table->string('owner');
 			$table->string('name');
 			$table->string('username');
 			$table->string('password',255);
 			$table->string('email')->unique();
-			$table->string('permission');
+			$table->longText('permission');
 			$table->string('photo');
 			$table->string('session_id');
 			$table->rememberToken();

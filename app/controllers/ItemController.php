@@ -14,7 +14,7 @@ class ItemController extends BaseController
      */
     public  function addItem()
     {
-
+        $data['unit']  = array('piece'=>Lang::get('main.piece'), 'kilo'=>Lang::get('main.kilo'), 'ton'=>Lang::get('main.ton') , 'meter'=>Lang::get('main.meter'), 'galon'=>Lang::get('main.galon') );
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['title']     =  Lang::get('main.addItem')  ; // page title
         $data['asideOpen']      = "open";
@@ -36,6 +36,7 @@ class ItemController extends BaseController
             $newItem->cat_id           = $inputs['cat_id'];
             $newItem->item_name        = $inputs['item_name'];
             $newItem->unit             = $inputs['unit'];
+            $newItem->true_id          = Items::company()->max('true_id')+1;
             $newItem->supplier_id      = isset($inputs['supplier_id'])?$inputs['supplier_id']:0;
             $newItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
             $newItem->models_id        = isset($inputs['models_id'])?$inputs['models_id']:0;
@@ -65,6 +66,7 @@ class ItemController extends BaseController
     public  function editItem($id)
     {
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
+        $data['unit']  = array('piece'=>Lang::get('main.piece'), 'kilo'=>Lang::get('main.kilo'), 'ton'=>Lang::get('main.ton') , 'meter'=>Lang::get('main.meter') , 'galon'=>Lang::get('main.galon'));
         $data['title']     = Lang::get('main.editItem'); // page title
         $data['mainasideOpen']      = "open";
 //        $data['items']     = Items::company()->get(); //  get all item to view in table
@@ -94,6 +96,7 @@ class ItemController extends BaseController
         }else {
             $oldItem  = Items::where('id','=',$id)->company()->first();
             if($oldItem) {
+//                dd($inputs['has_serial']);
                 $oldItem->co_id = $this->coAuth();
                 $oldItem->cat_id           = $inputs['cat_id'];
                 $oldItem->item_name        = $inputs['item_name'];
@@ -211,7 +214,14 @@ class ItemController extends BaseController
 
     }
     public function reportResultItemCard (){
-
+        $addQ = DB::table('trans_header')
+            ->viewMake()
+            ->whereRaw("`invoice_type` IN ( 'buy', 'settleAdd' ,'salesReturn','itemBalance')");
+        $discountQ = DB::table('trans_header')
+            ->viewMake('*-1')
+            ->whereRaw("`invoice_type` IN ( 'settleDown', 'sales','buyReturn' )")
+            ->union($addQ);
+        DB::statement('CREATE OR REPLACE VIEW items_balance AS' . $discountQ->toSql());
         $inputs = Input::all();
 //        var_dump($inputs);die();
 

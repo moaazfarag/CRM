@@ -35,7 +35,7 @@
               @if($co_info->co_use_serial)
               <div class="col s2 l2">
                   <p>
-                      <?php $serial=Lang::get('main.serial') ?>
+                      <?php $serial=Lang::get('main.has_serial') ?>
                       {{ Form::checkbox('has_serial',1,null,array('id'=>'has_serial')) }}
                       {{ Form::label('has_serial',$serial) }}
                   <p class="parsley-required">
@@ -82,25 +82,25 @@
                       <?php $sell_nos_gomla=Lang::get('main.sell_nos_gomla') ?>
                       {{ Form::text('sell_nos_gomla',null,array('required','id'=>'sell_nos_gomla')) }}
                       {{ Form::label('sell_nos_gomla',$sell_nos_gomla) }}
-                    <p class="parsley-required">{{ $errors ->first('sell_nos_gomla') }} </p>
+                      <p class="parsley-required">{{ $errors ->first('sell_nos_gomla') }} </p>
                   </div>
               </div> {{--sell_nos_gomla--}}
               <div class="col s12 l2">
                   <div class="input-field">
                       <i class="mdi mdi-editor-attach-money prefix"></i>
-                      <?php $sell_gomla=Lang::get('main.sell_gomla') ?>
+                  <?php $sell_gomla=Lang::get('main.sell_gomla') ?>
                       {{ Form::text('sell_gomla',null,array('required','id'=>'sell_gomla')) }}
                       {{ Form::label('sell_gomla',$sell_gomla) }}
-                    <p class="parsley-required">{{ $errors ->first('sell_gomla') }} </p>
+                      <p class="parsley-required">{{ $errors ->first('sell_gomla') }} </p>
                   </div>
               </div> {{--sell_gomla--}}
               <div class="col s12 l2">
                   <div class="input-field">
                       <i class="mdi mdi-editor-attach-money prefix"></i>
-                      <?php $sell_gomla_gomla=Lang::get('main.sell_gomla_gomla') ?>
+                  <?php $sell_gomla_gomla=Lang::get('main.sell_gomla_gomla') ?>
                       {{ Form::text('sell_gomla_gomla',null,array('required','id'=>'sell_gomla_gomla')) }}
                       {{ Form::label('sell_gomla_gomla',$sell_gomla_gomla) }}
-                    <p class="parsley-required">{{ $errors ->first('sell_gomla_gomla') }} </p>
+                      <p class="parsley-required">{{ $errors ->first('sell_gomla_gomla') }} </p>
                   </div>
               </div> {{--sell_gomla_gomla--}}
 
@@ -109,24 +109,23 @@
 
               <div class="col s12  l2">
                   <div class="input-field">
-                      <i class="fa fa-cube prefix"></i>
-                      <?php $unit=Lang::get('main.unit') ?>
-                      {{ Form::text('unit',null,array('id'=>'unit')) }}
-                      {{ Form::label('unit',$unit) }}
-                    <p class="parsley-required">{{ $errors ->first('unit') }} </p>
+                      {{--<i class="fa fa-cube prefix"></i>--}}
+                      {{ Form::select('unit', $unit,null,array('id'=>'cat_id')) }}
+                      {{ Form::label('unit',Lang::get('main.unit')) }}
+                      <p class="parsley-required">{{ $errors ->first('unit') }} </p>
                   </div>
               </div>{{--unit--}}
               <div class="col s12  l2">
                   <div class="input-field">
                       <i class="mdi mdi-alert-error prefix"></i>
-                      <?php $sellLimit=Lang::get('main.sellLimit') ?>
+                  <?php $sellLimit=Lang::get('main.sellLimit') ?>
                       {{ Form::text('limit',null,array('id'=>'limit')) }}
                       {{ Form::label('limit',$sellLimit) }}
-                    <p class="parsley-required">{{ $errors ->first('limit') }} </p>
+                      <p class="parsley-required">{{ $errors ->first('limit') }} </p>
                   </div>
               </div>
 
-              @if($co_info->co_supplier_must)
+          @if($co_info->co_supplier_must)
                   <div class="col s2 l3">
                       {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
                       <p class="parsley-required">{{ $errors ->first('account') }} </p>
@@ -140,16 +139,17 @@
           </div>
           <div class="row no-margin-top">
 
-              @if($co_info->co_use_season)
-                  <div class="col s12 l3">
-                      <i class="mdi mdi-action-stars prefix"></i>
-                      <?php $category=Lang::get('main.category') ?>
-                      {{ Form::label('cat_id',$category) }}
 
+                  <div class="col s12 l3">
+                      {{--<i class="mdi mdi-action-stars prefix"></i>--}}
+                      <?php $category=Lang::get('main.category') ?>
+                      {{--{{ Form::label('cat_id',$category) }}--}}
                       {{ Form::select('cat_id', array('' => 'اختر الفئة') + $co_info->cat->lists('name','id'),null,array('id'=>'cat_id')) }}
 
                       <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>
                   </div> {{--category--}}
+
+              @if($co_info->co_use_season)
               <div class="col s2 l3">
                   <i class="wi wi-day-cloudy"></i>
                   <?php $season=Lang::get('main.season');
