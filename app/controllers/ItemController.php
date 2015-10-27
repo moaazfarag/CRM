@@ -14,6 +14,7 @@ class ItemController extends BaseController
      */
     public  function addItem()
     {
+
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['title']     =  Lang::get('main.addItem')  ; // page title
         $data['asideOpen']      = "open";

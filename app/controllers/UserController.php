@@ -25,9 +25,9 @@ class UserController extends BaseController
         $rules = array(
                         'password'=> 'required',
                         'username'=> 'required',
-//                        'co_id'=> 'required',
+                        'co_id'=> 'required',
                       );
-        $validator=Validator::make(Input::all(),$rules);
+        $validator=Validator::make(Input::all(),$rules,BaseController::$messages);
 
         if($validator->fails())
         {
@@ -95,7 +95,7 @@ class UserController extends BaseController
             return View::make('dashboard.users.index',$data);
         }else{
 
-        $data['error']      ="åĞÇ ÇáãÓÊÎÏã ÛíÑ ãæÌæÏ";
+        $data['error']      ="Ù‡Ø°Ø§ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯";
         return View::make('errors.missing',$data);
     }
 
@@ -129,7 +129,7 @@ class UserController extends BaseController
             return Redirect::route('addUser');
         }else{
 
-            $data['error']      ="åĞÇ ÇáãÓÊÎÏã ÛíÑ ãæÌæÏ";
+            $data['error']      ="Ù‡Ø°Ø§ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯";
             return View::make('errors.missing',$data);        }
     }
 
@@ -139,32 +139,37 @@ class UserController extends BaseController
     }
     public  function storeNewPassword()
     {
-        $data['company'] = CoData::find(Auth::id());
 
-        $oldUser         = $data['company']->users()->first();
-        if($oldUser) {
+
             $rules_update = array(
-                'password'         => 'min:8',
-                'confirm_password' => 'same:password',
+
+                'old_password'    => "required|min:6",
+                'new_password'         => 'required|min:6',
+                'confirm_new_password' => 'required|same:new_password',
             );
-            $validation = Validator::make(Input::all(), $rules_update);
+
+            $validation = Validator::make(Input::all(), $rules_update,BaseController::$messages);
             if ($validation->fails()) {
                 return Redirect::back()->withInput()->withErrors($validation->messages());
             } else {
-                $oldUser->co_id = Auth::user()->co_id;
-//                $oldUser->br_id = Input::get('br_id');
-//                $oldUser->all_br = Input::get('all_br');
-//                $oldUser->name = Input::get('name');
-//                $oldUser->username = Input::get('username');
-                $oldUser->password = Hash::make(Input::get('password'));
-              //  $oldUser->email = Input::get('email');
-                $oldUser->update();
-            }
-            return View::make('dashboard.users.set_password');
-        }else{
+                $old_user   = User::find(Auth::user()->id);
 
-            $data['error']      ="åĞÇ ÇáãÓÊÎÏã ÛíÑ ãæÌæÏ";
-            return View::make('errors.missing',$data);
+                $old_password_from_user    = Hash::make(Input::get('old_password'));
+                $old_password_from_db      = $old_user->password;
+                if(Hash::check(Input::get('old_password'), $old_user->getAuthPassword())){
+                    $old_user->co_id = Auth::user()->co_id;
+                    $old_user->password = Hash::make(Input::get('new_password'));
+                    $old_user->update();
+                    Session::flash('success','ØªÙ… ØªØºÙŠÙŠØ± ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ø¨Ù†Ø¬Ø§Ø­');
+                    return Redirect::back();
+                }else{
+                    return $old_password_from_db .'<br/>'.$old_password_from_user;
+
+                    Session::flash('error','Ø¹ÙÙˆØ§Ù‹ ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ø§Ù„Ù‚Ø¯ÙŠÙ…Ø© ØºÙŠØ± ØµØ­ÙŠØ­Ø©');
+                    return Redirect::back();
+
+            }
+
         }
     }
 }

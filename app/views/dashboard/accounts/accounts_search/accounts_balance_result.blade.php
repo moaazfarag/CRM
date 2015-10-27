@@ -11,7 +11,7 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section  class="content-wrap ecommerce-dashboard" ng-app>
+<section  class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
 
 
 
@@ -53,7 +53,14 @@
                     </div>
                 </div>
 
+                {{--account name--}}
+                <div class="col s12 l2">
 
+                    {{ Form::select('account_id', array('all' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id')) }}
+
+                    <p class="parsley-required">{{ $errors ->first('account_id') }} </p>
+                </div>
+                {{--account name--}}
 
             </div>
 
@@ -104,6 +111,7 @@
 
             {{--@foreach($all_accounts as $account_id)--}}
             {{--{{ dd($account_trans_result[2]['debit']); }}--}}
+            @if(!empty($account_trans_result))
                     @foreach($account_trans_result as $data)
                         <tr>
                             <td>{{  $data['name']}}</td>
@@ -113,6 +121,8 @@
                         </tr>
                     @endforeach
 
+
+            @endif
 {{--                  <td> {{ $account_trans_result[$account_id]['name'] }}</td>--}}
             {{--@endforeach--}}
             </tbody>
@@ -135,10 +145,7 @@
                 <div class="modal-content">
                     <div class="card-panel indigo lighten-5">
                         <div style="text-align: center; font-size: 1.3em;">
-                            {{ Lang::get('main.'.$type.'_title') }}
-                            @if(isset($name))
-                                {{ ' ( '.$name .' )' }}
-                            @endif
+                      إضافة حركة مباشرة
 
                         </div>
                     </div>
@@ -207,6 +214,31 @@
 
                         </div>
                         {{-- end credit & debit--}}
+
+                        {{--account  name--}}
+                        <div class="col s12 l3" style="margin-right: 2%; ">
+
+                            <i class="mdi mdi-communication-import-export"></i>
+                            {{ Form::label('account',lang::get('main.account')) }}
+                            {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
+                            <p class="parsley-required">{{ $errors ->first('account') }} </p>
+                        </div>{{--account--}}
+                        <div ng_show="account.type" class="col s12 l3">
+
+                            <i class="mdi mdi-communication-import-export"></i>
+                            {{ Form::label('account',Lang::get('main.account')) }}
+                            <select  name="account_id" ng-required='pay_type == "on_account"' ng-change='getAccountInfo()' ng-model="account.id"  class='browser-default'>
+                                <option value="@{{ account.id }}" ng-repeat="account in accounts">@{{ account.acc_name }}</option>
+                            </select>
+              <span style="color: red">
+                  @{{ isLimit() }}
+              </span>
+                            @{{  seletedAccount.pricing }}
+                            {{--{{ Form::select('account',array(null=>"اختر   نوع الحساب ")+ $account_type,null,array('id'=>'account','ng-model'=>'account.type','ng-change'=>'getAccountsByType()','class'=>'browser-default')) }}--}}
+                            <p class="parsley-required">{{ $errors ->first('account') }} </p>
+                        </div>{{--account--}}
+
+                        {{--end account name --}}
                     </div>
                     <div class="row">
 
@@ -227,8 +259,8 @@
                 <div class="modal-footer">
                     {{ Form::hidden('date_from',$date_from) }}
                     {{ Form::hidden('date_to',$date_to) }}
-                    {{ Form::hidden('account',$account) }}
-                    {{ Form::hidden('account_id',$account_id) }}
+                    {{ Form::hidden('for','all') }}
+
                     <button class="modal-action modal-close waves-effect waves-red btn"
                             ng-disabled="form.$invalid">
                         @lang('main.save')</button>

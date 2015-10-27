@@ -174,8 +174,8 @@ class BaseController extends Controller {
         'password_confirm.same'=> 'كلمتان السر غير متطابقتان',
         'email.unique'         =>'هذا الإيميل مستخدم من قبل ',
         'username.unique'      =>'هذا الأسم مستخدم من قبل',
-        'account_id.not_in'    => 'هذا الحقل مطلوب'
-
+        'account_id.not_in'    => 'هذا الحقل مطلوب',
+        'confirm_new_password.same'=>'كلمتان السر غير متطابقتان',
         );
 
 

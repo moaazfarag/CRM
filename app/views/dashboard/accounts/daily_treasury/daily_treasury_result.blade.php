@@ -21,7 +21,9 @@
         </div>
     </div>
     {{ Form::open(array('route'=>array('dailyTreasuryResult'))) }}
+
     <div class=" card ">
+        <div class="no-print">
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i>
@@ -87,17 +89,30 @@
 
 
                 {{ Form::close() }}
-                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">@lang('main.add_direct_movement')</a>
+
 
             </div>{{--submit  row end--}}
+            <div>
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">@lang('main.add_direct_movement')</a>
+            </div>
+            <hr/>
+        </div>
+
+        </div>
+            <div class="right-align invoice-print" style="margin-left: 15px;">
+                <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
+            </div>
 
 
+        <div id="print-content">
+            <div class="content">
             @if($view_branch == 'one')
             <!-- table start  -->
 
             <div class="row">
 
-                <table id="table_bank" class="display table table-bordered table-striped table-hover">
+
+                <table id="table_bank" class="display table table-bordered table-striped table-hover" style="margin-right: 7px;">
                     <thead>
                     <tr>
                         <caption class="caption-style">
@@ -226,6 +241,7 @@
             {{--start all branches--}}
 
             @elseif($view_branch == 'many')
+
             <div class="row">
                 <div  class="card-panel blue lighten-5 center_title">
                     الفترة من
@@ -369,6 +385,10 @@
 
             @endif
             <!-- table end  -->
+                </div>
+            </div>
+
+
             <!--/////////// model start }}}}}}}}}}}}}}-->
             <!-- Modal Structure -->
             <div id="modal1" class="modal">
@@ -494,15 +514,8 @@
                 </div>
             </div>
         </div>
-
-
         <!--/////////// model end }}}}}}}}}}}}}}-->
 
-        </div>
-
-
-
-    </div>
 </section>
 @stop
 

@@ -25,14 +25,14 @@
                 <div class="row no-margin-top">
                     <div class="col s12 l2">
                         <label for="name">
-                            اسم  {{@$arabicName}}
+                            اسم {{@$arabicName}}
                         </label>
 
                     </div>
                     <div class="col s12 m6 l6">
                         <div class="input-field">
                             <i class="mdi mdi-social-person prefix"></i>
-                            <?php $name=Lang::get('main.name_of') ?>
+                            <?php $name = Lang::get('main.name_of') ?>
                             {{Form::text('name',null,array('required','placeholder'=> $name .' '. @$arabicName ,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
                         </div>
@@ -54,17 +54,19 @@
                         @endif
 
                         {{ Form::close() }}
+                        <br/>
+                        <hr/>
                     </div>
                 </div>
             </div>
+
+            @include('dashboard.products._table_view')
+
         </div>
-        @include('dashboard.products._table_view')
     </div>
     <!-- /عرض الفروع -->
 
 
-
-
-    </section>
+</section>
 
 @stop

@@ -1,4 +1,4 @@
-/* moaaz farag*/
+/*      moaaz farag*/
 input.input-without-border {
     border: 1px solid #F5F5F5!important;
     margin: 0!important;
@@ -90,3 +90,12 @@ div.error-div {
 
 
 }
+
+::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-fields-wrapper { }
+::-webkit-datetime-edit-text {  padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field {  }
+::-webkit-datetime-edit-day-field {  }
+::-webkit-datetime-edit-year-field { }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator {  }

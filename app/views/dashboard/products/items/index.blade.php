@@ -142,9 +142,9 @@
 
               @if($co_info->co_use_season)
                   <div class="col s12 l3">
-                      {{--<i class="fa fa-cube prefix"></i>--}}
+                      <i class="mdi mdi-action-stars prefix"></i>
                       <?php $category=Lang::get('main.category') ?>
-                      {{--{{ Form::label('cat_id',$category) }}--}}
+                      {{ Form::label('cat_id',$category) }}
 
                       {{ Form::select('cat_id', array('' => 'اختر الفئة') + $co_info->cat->lists('name','id'),null,array('id'=>'cat_id')) }}
 
@@ -203,25 +203,25 @@
               </div> {{--notes--}}
           </div> {{--fourth row end--}}
             <br>
-          <div class="row">
-              <div  style=" width:100px; text-align:center;margin:1% auto;" >
+          <div class="row"  style=" margin:2% auto;">
               @if(Route::currentRouteName() == 'addItem')
                   <button type="submit" class="waves-effect btn">@lang('main.add') </button>
               @elseif(Route::currentRouteName() == 'editItem')
                   <button type="submit" class="waves-effect btn">@lang('main.edit') </button>
               @endif
-              </div>
               {{ Form::close() }}
+              <br/>
+              <hr/>
           </div>{{--submit  row end--}}
-      </div>
-    </div>
+
                   <table id="table_bank" class="display table table-bordered table-striped table-hover">
 
                   @include('dashboard.products.items._table_view')
 </div>
 </div>
 
-
+      </div>
+    </div>
 </section>
     {{--{{             dd(DB::getQueryLog()); }}--}}
 @stop
