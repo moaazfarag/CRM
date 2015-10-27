@@ -52,10 +52,17 @@
 
                         {{ Form::close() }}
                     </div>
+                      <br/>
+                      <br/>
+                      <hr/>
                 </div>
                 </div>
-</div>
+
+
+
+
                   @include('dashboard.products._table_view')
+        </div>
 </div>
         <!-- /عرض الفروع -->
 

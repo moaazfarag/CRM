@@ -332,6 +332,8 @@
                           @endif
                       </div>
                 </div>
+                  <br/>
+                  <hr/>
         <!-- /عرض الفروع -->
 @include('dashboard.company._branches_table_view')
           </div>

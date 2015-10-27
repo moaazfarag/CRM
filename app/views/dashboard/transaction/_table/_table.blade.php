@@ -1,3 +1,4 @@
+<div class="row" >
 <table  class="display table table-bordered table-striped table-hover">
     <thead>
     <tr>
@@ -74,3 +75,5 @@
     </tr>
     </tbody>
 </table>
+
+</div>

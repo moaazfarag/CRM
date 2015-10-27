@@ -18,7 +18,8 @@ img, legend {
         display: none;
     }
     #print-content {
-        width: 100%; margin: 0; float: none;
+        width: 100%; margin: 0;
+         float: none;
     }
     .page {
         width: 21cm;

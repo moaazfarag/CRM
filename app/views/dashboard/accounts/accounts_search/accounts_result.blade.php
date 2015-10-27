@@ -10,11 +10,12 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section  class="content-wrap ecommerce-dashboard" ng-app>
+<section id="print-content"  class="content-wrap ecommerce-dashboard " ng-app>
 
 
 
     <div class=" card">
+
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i>  {{ $title }} </h5>
@@ -22,7 +23,7 @@
                 <i class="mdi-navigation-expand-less"></i>
             </a>
         </div>
-        <div class="content">
+        <div class="content no-print">
 
         {{ Form::open(array('route'=>'resultAccounts','name'=>'form_search')) }}
 
@@ -52,17 +53,14 @@
                     </div>
                 </div>
 
-
-                @if($type != 'expenses')
                 {{--account name--}}
                 <div class="col s12 l2">
 
-                    {{ Form::select('account_id', array('' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id','required','ng-model'=>'account_id')) }}
+                    {{ Form::select('account_id', array('all' => $select_account) + $accounts->lists('acc_name','id'),null,array('id'=>'cat_id')) }}
 
                     <p class="parsley-required">{{ $errors ->first('account_id') }} </p>
                 </div>
                 {{--account name--}}
-                    @endif
             </div>
 
             <div class="row">
@@ -73,7 +71,7 @@
                 {{ Form::hidden('type',$type) }}
                 {{ Form::close() }}
                  </div>
-
+        <div>
             <hr/>
             <a class="waves-effect waves-light btn modal-trigger" href="#modal1">@lang('main.add_direct_movement')</a>
 
@@ -83,8 +81,11 @@
 
 
     </div>
+    <div class="right-align invoice-print">
+        <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
+    </div>
 
-    @unless(empty($account_trans) || empty($account_balance))
+    @if(!empty($account_trans) || !empty($account_balance))
     {{--table start--}}
     <table   class="display table table-bordered table-striped table-hover">
         <thead>
@@ -336,6 +337,8 @@
                     {{ Form::hidden('date_to',$date_to) }}
                     {{ Form::hidden('account',$account) }}
                     {{ Form::hidden('account_id',$account_id) }}
+                    {{ Form::hidden('for','one') }}
+
                     <button class="modal-action modal-close waves-effect waves-red btn"
                             ng-disabled="form.$invalid">
                         @lang('main.save')</button>

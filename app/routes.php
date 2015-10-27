@@ -35,6 +35,12 @@ Route::get('/', 'HomeController@index');
 
 Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
 
+    Route::get('/pdf', function()
+    {
+        $pdf = PDF::loadView('hello');
+        return $pdf->stream();
+
+    });
     /**
      * company info area
      */

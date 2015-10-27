@@ -192,10 +192,10 @@ class AccountController extends BaseController
             'partners' =>'جارى الشركاء',
             'bank'     =>'البنك',
         );
+        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
         $data['branch']      = $this->isAllBranch();
         $data['title']      = 'إضافة حركة مباشرة ';
         $data['company']    = CoData::find(Auth::user()->co_id);
-        $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
         $data['rowsData']   = AccountTrans::company()->whereIn('trans_type',['catch','pay'])->get();
         return View::make('dashboard.accounts.treasury_account.index', $data);
     }
@@ -418,6 +418,7 @@ class AccountController extends BaseController
                 }else{
 
                     $data['name']          = Lang::get('main.balance_'.$type);
+                    $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
 
                 }
 
@@ -425,7 +426,17 @@ class AccountController extends BaseController
 
                 if($account_id == 'all') {
 
-                   $all_accounts         = Accounts::company()->where('acc_type',$type)->get()->lists('id');
+                    $data['of_account'] = array(
+
+                        ''=>'أختر الحساب',
+                        'customers'=>'العملاء',
+                        'suppliers'=>'الموردين',
+                        'partners' =>'جارى الشركاء',
+                        'bank'     =>'البنك',
+                    );
+                    $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
+
+                    $all_accounts         = Accounts::company()->where('acc_type',$type)->get()->lists('id');
                    $data['all_accounts'] = $all_accounts;
                    $credit               = 0;
                    $debit                = 0;
@@ -494,7 +505,7 @@ class AccountController extends BaseController
     {
 
 
-        // this function add new direct movement from general accounts pages
+        // this function add new direct movement from  accounts pages
         $inputs = Input::all();
 //        var_dump($inputs); die();
         $ruels  = Accounts::$ruels_direct_movement;
@@ -504,6 +515,8 @@ class AccountController extends BaseController
             $ruels["br_id"] = "required";
 
         }
+
+
         $validation = Validator::make($inputs, $ruels, BaseController::$messages);
 
         if ($validation->fails()) {
@@ -552,8 +565,8 @@ class AccountController extends BaseController
                 $date_to     = $this->strToTime($inputs['date_to']);
                 $account_id  = $inputs['account_id'];
                 $type        = $inputs['account'];
-
-                return Redirect::route('resultSearchAccounts',array('type'=>$type,'account_id'=>$account_id,'date_from'=>$date_from,'date_to'=>$date_to));
+                $for        = $inputs['for'];
+                return Redirect::route('resultSearchAccounts',array('type'=>$type,'account_id'=>$account_id,'date_from'=>$date_from,'date_to'=>$date_to,'type'=>$type,'for'=>$for));
             }// end if movement
         }
     }
@@ -563,29 +576,40 @@ class AccountController extends BaseController
 
 
             // CHECK TYPE
-            $type        = Input::get('type');
+            $type  = Input::get('type');
             $types = array('customers','suppliers','bank','partners','expenses','multiple_revenue');
 
             if(in_array($type,$types)){
 
                 // FILL VARIABELS FROM INPUTS
-                $account_id  = Input::get('account_id');
-                $date_from   = Input::get('date_from');
-                $date_to     = Input::get('date_to');
-
-
+                $date_from          = Input::get('date_from');
+                $date_to            = Input::get('date_to');
+                $account_id         = Input::get('account_id');
+                $for                = Input::get('for');
 
                 // MAKE QUERY
                 $account_trans     = AccountTrans::company()
-                    ->dateBetween('date',$date_from,$date_to)
-                    ->where('account_id', $account_id)->get();
+                    ->dateBetween('date',$date_from,$date_to);
 
+                if($for == 'all') {
+
+                    $account_trans->where('account', $type);
+
+                }else{
+
+                    $account_trans->where('account_id', $account_id);
+                }
+
+                $account_balance = AccountsBalances::where('account_id',$account_id)
+                    ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'),'accounts_balances.*')
+                    ->first();
 
 //            var_dump($account_trans); die();
 
                 // FILL DATA FROM INPUTS AND ACCOUNT TRANS RESULT
 
-                $data['account_trans'] = $account_trans;
+                $data['account_balance'] = $account_balance;
+                $data['account_trans'] = $account_trans->get();
                 $data['date_from']     = $date_from;
                 $data['date_to']       = $date_to;
                 $data['type']          = $type;
@@ -595,15 +619,91 @@ class AccountController extends BaseController
                 $data['branch']        = $this->isAllBranch();
                 $data['co_info']       = CoData::thisCompany()->first();
                 $data['title']         = Lang::get('main.accounts_'.$type);
-                $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
-                $data['name']          = Accounts::find($account_id)->acc_name;
-                $data['select_account']='أختر '. Lang::get('main.'.$type);
+                $data['select_account']= Lang::get('main.balance_'.$type);
 
-                Session::flash('success','تم إضافة الحركة المباشرة بنجاح');
-                return View::make('dashboard.accounts.accounts_search.accounts_result',$data);
+                if($for != 'all'){
+                    $data['name']          = Accounts::find($account_id)->acc_name;
+                    $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
+                }else{
 
+                    $data['accounts']      = Accounts::company()->where('acc_type',$type)->get();
+                    $data['name']          = Lang::get('main.balance_'.$type);
+
+                }
+
+
+
+                if($for == 'all') {
+
+                    $data['of_account'] = array(
+
+                        ''=>'أختر الحساب',
+                        'customers'=>'العملاء',
+                        'suppliers'=>'الموردين',
+                        'partners' =>'جارى الشركاء',
+                        'bank'     =>'البنك',
+                    );
+                    $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
+
+                    $all_accounts         = Accounts::company()->where('acc_type',$type)->get()->lists('id');
+                    $data['all_accounts'] = $all_accounts;
+                    $credit               = 0;
+                    $debit                = 0;
+
+                    foreach($all_accounts as $account_id){
+
+                        $account_balance = AccountsBalances::where('account_id',$account_id)
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->first();
+//                        dd($account_balance);
+                        $all_trans_cash = AccountTrans::company()
+                            ->where('account_id',$account_id)
+                            ->whereIn('pay_type',['cash','visa'])
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->first();
+                        $all_trans_on_account = AccountTrans::company()
+                            ->where('account_id',$account_id)
+                            ->where('pay_type','on_account')
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->first();
+
+                        if(!empty($all_trans_cash)){
+                            $credit = $all_trans_cash->sum_credit + $all_trans_cash->sum_debit;
+                            $debit  = $credit;
+
+//                           $data['account_trans'][$account_id] = ['']
+                        }
+
+                        if(!empty($all_trans_on_account)){
+
+                            $credit += $all_trans_on_account->sum_credit;
+                            $debit  += $all_trans_on_account->sum_debit;
+                        }
+
+                        if(!empty($account_balance)){
+
+                            $credit += $account_balance->sum_credit;
+                            $debit  += $account_balance->sum_debit;
+                        }
+
+
+                        $name = Accounts::find($account_id)->acc_name;
+
+                        $data['account_trans_result'][$account_id] =  ['credit'=>$credit,'debit'=>$debit,'name'=>$name];
+
+
+                    }
+
+                    return View::make('dashboard.accounts.accounts_search.accounts_balance_result', $data);
+                }else{
+                    return View::make('dashboard.accounts.accounts_search.accounts_result', $data);
+                }
             }else{
-            return View::make('errors.missing');              }
+
+                return View::make('errors.missing');
+
+            }
+
 
         }
 

@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('owner');
 			$table->string('name');
 			$table->string('username');
-			$table->string('password');
+			$table->string('password',255);
 			$table->string('email')->unique();
 			$table->longText('permission');
 			$table->string('photo');

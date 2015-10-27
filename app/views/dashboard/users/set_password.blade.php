@@ -6,40 +6,57 @@
 
 <section class="content-wrap ecommerce-dashboard">
 
-    <div class=" card">
-        <br>
+    <div class=" card" style="padding: 1%;">
 
-        <br>
+        <div  class="card-panel blue lighten-5 center_title">
+        تغيير كلمة المرور 
+        </div>
+        @include('include.messages')
         <div class="row">
+
         {{ Form::open(array('route'=>'storeNewPassword')) }}
 
-        <div class="col m5 s12">
+        <div class="col s12 m3">
             <div class="input-field">
-                <i class="fa fa-unlock-alt prefix"></i>
-                {{ Form::password('password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'password')) }}
-                <label for="password">@lang('main.password') </label>
+                <i class="mdi mdi-action-lock-outline prefix"></i>
+                {{ Form::password('old_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'password')) }}
+                <label for="old_password">@lang('main.old_password') </label>
                 <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                    <li class="parsley-required">{{ $errors ->First('password') }} </li>
+                    <li class="parsley-required">{{ $errors ->First('old_password') }} </li>
                 </ul>
             </div>
         </div>
-        <div class="col m5 s12">
+        <div class="col s12 m3">
             <div class="input-field">
-                <i class="fa fa-unlock-alt prefix"></i>
-                {{ Form::password('confirm_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'confirm_password')) }}
-                <label for="confirm_password">@lang('main.confirm_password') </label>
+                <i class="mdi mdi-action-lock prefix"></i>
+                {{ Form::password('new_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'password')) }}
+                <label for="new_password">@lang('main.new_password') </label>
                 <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                    <li class="parsley-required">{{ $errors ->First('confirm_password') }} </li>
+                    <li class="parsley-required">{{ $errors ->First('new_password') }} </li>
                 </ul>
             </div>
         </div>
-        <div class="col m2 s12">
+        <div class="col m3 s12">
             <div class="input-field">
-                <button class="waves-effect btn">@lang('main.submit') </button>
-                {{ Form::close() }}
+                <i class="mdi mdi-action-lock prefix"></i>
+                {{ Form::password('confirm_new_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'confirm_password')) }}
+                <label for="confirm_new_password">@lang('main.confirm_new_password') </label>
+                <ul class="parsley-errors-list filled" id="parsley-id-5202">
+                    <li class="parsley-required">{{ $errors ->First('confirm_new_password') }} </li>
+                </ul>
             </div>
         </div>
-    </div>
+        </div>
+            <div class="row" style="margin: 1%;">
+                <div class="col m12 s12">
+                    <div class="input-field">
+                        <button class="waves-effect btn">@lang('main.submit') </button>
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            </div>
+
+
     </div>
 
 
