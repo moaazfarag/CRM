@@ -15,22 +15,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
-    public static  $store_rules = array(
-        'username'         => 'required|unique:users,username,co_id' ,
-//        'name'             => 'required',
-        'email'            => 'required|email|unique:users,email' ,
-        'password'         => 'required|min:8',
-        'confirm_password' => 'required|same:password',
-       // 'all_br'           => 'boolean',
 
-    );
 
     public function formattedCreatedDate()
     {

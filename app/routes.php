@@ -1,5 +1,4 @@
 <?php
-
     /*
     |--------------------------------------------------------------------------
     | Application Routes
@@ -51,8 +50,8 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     /**
      * Branch Area
      */
-    Route::get('addBranch/',array('uses'=>'BranchController@addBranch','as'=>'addBranch'));//add branch
-    Route::post('storeBranch/',array('before'=>'csrf','uses'=>'BranchController@storeBranch','as'=>'storeBranch'));
+    Route::get('addBranch/',array('before'=>'filter:main_info:company:add','uses'=>'BranchController@addBranch','as'=>'addBranch'));//add branch
+    Route::post('storeBranch/',array('before'=>'csrf|canAddBranch','uses'=>'BranchController@storeBranch','as'=>'storeBranch'));
     Route::get('editBranch/',array('uses'=>'BranchController@editBranch','as'=>'editBranch'));
     Route::post('updateBranch/{id}',array('before'=>'csrf','uses'=>'BranchController@updateBranch','as'=>'updateBranch'));
     /**
@@ -153,15 +152,11 @@ Route::group(array('prefix'=>'admin','before'=>'auth'),function(){
     });
 
     /**
-     *  settle  Area
+     * transaction area
      */
-    Route::group(array('prefix'=>'Transaction'),function()
-    {
-
-    });
     Route::group(array('prefix'=>'transaction'),function()
     {
-        Route::get('{type}/{br_id}', array('uses' => 'TransController@addTrans','as' => 'addTrans'));
+        Route::get('{type}/{br_id}', array('before'=>'canAddTrans','uses' => 'TransController@addTrans','as' => 'addTrans'));
         Route::post('{type}/{br_id}', array('before'=>'csrf','uses' => 'TransController@storeTrans','as' => 'storeTrans'));
         Route::get('all/{type}/{br_id}', array('uses' => 'TransController@viewTransactions','as' => 'viewTransactions'));
         Route::get('{type}-{br_id}-{invoice_no}', array('uses' => 'TransController@viewTransaction','as' => 'viewTransaction'));

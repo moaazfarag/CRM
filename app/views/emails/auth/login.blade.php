@@ -6,7 +6,7 @@
 <!--[if gt IE 8]><!-->
 <html class="rtl">
 <!--<![endif]-->
-{{--{{ Hash::make('123e456y') }}--}}
+{{ Hash::make('123456') }}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +43,6 @@
 <body class="body">
 
   <section id="sign-in">
-      {{Hash::make('123456')}}
 
     <!-- Background Bubbles -->
     <canvas id="bubble-canvas"></canvas>

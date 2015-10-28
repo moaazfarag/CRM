@@ -39,4 +39,21 @@ class PermissionController extends BaseController
         return $permission;
     }
 
+    public static function setSession()
+    {
+        if(Auth::check()){
+           $user = User::find(Auth::id());
+            if (Session::get('last_login') != $user->updated_at->format('d M Y - H:i:s')) {
+                Session::put('permission',json_decode($user->permission,true));
+                Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
+            }
+        }
+    }
+    public static function isSession($group,$section,$type)
+    {
+        return isset(Session::get('permission')[$group][$section][$type])
+                    ?Session::get('permission')[$group][$section][$type]
+                    :null;
+    }
+
 }

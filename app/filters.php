@@ -13,7 +13,8 @@
 
 App::before(function($request)
 {
-	//
+	class_alias('PermissionController', 'PerC');
+	PermissionController::setSession();
 });
 
 
@@ -80,7 +81,12 @@ Route::filter('guest', function()
 | session does not match the one given in this request, we'll bail.
 |
 */
-Route::filter('canEditCompany','FilterController');
+Route::filter('filter','FilterController@filter');
+Route::filter('canAddTrans','FilterController@canAddTrans');
+//Route::filter('canAddBranch', function($route, $request, $value)
+//{
+//dd($route);
+//});
 Route::filter('csrf', function()
 {
 	if (Session::token() !== Input::get('_token'))

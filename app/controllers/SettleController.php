@@ -49,7 +49,7 @@ class SettleController extends BaseController {
                 $trans = TransHeader:: dateBetween('created_at', $date_from, $date_to)
                     ->company()
                     ->where('invoice_type', $type)
-                    ->where('trans_deleted', 0)->get();
+                    ->where('deleted', 0)->get();
 
                 if ($trans) {
 

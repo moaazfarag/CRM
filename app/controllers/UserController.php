@@ -21,10 +21,9 @@ class UserController extends BaseController
     public function checkLogin($co_id = null)
     {
         $rules = array(
-
-            'password' => 'required',
             'username' => 'required',
-            'co_id' => 'required',
+            'password' => 'required',
+            'co_id'    => 'required|integer',
         );
         $validator = Validator::make(Input::all(), $rules, BaseController::$messages);
 
@@ -36,10 +35,9 @@ class UserController extends BaseController
             $password = Input::get('password');
             $co_id = (Input::has('co_id')) ? Input::get('co_id') : $co_id;
             if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
-                Session::put('permissions', json_decode(Auth::user()->permission, true));
+                Session::put('permission', json_decode(Auth::user()->permission, true));
                 $user = User::find(Auth::id());
-                $user->session_id = Session::getId();
-                $user->update();
+                Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
                 return Redirect::intended('admin/setting');
             } else {
                 $error = Lang::get('main.error');
@@ -67,8 +65,17 @@ class UserController extends BaseController
     public function storeUser()
     {
         $inputs = Input::all();
+       $store_rules = array(
+
+        'username'         => 'unique:users,username,NULL,id,co_id,'.Auth::user()->co_id ,
+        'name'             => 'required',
+        'email'            => 'required|email|unique:users,email' ,
+        'password'         => 'required|min:8',
+        'confirm_password' => 'required|same:password',
+        // 'all_br'           => 'boolean',
+    );
         $permissions = PermissionController::setPermission();
-        $validation = Validator::make(Input::all(), User::$store_rules);
+        $validation = Validator::make(Input::all(), $store_rules);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
@@ -138,7 +145,9 @@ class UserController extends BaseController
                 $oldUser->name = Input::get('name');
                 $oldUser->permission = json_encode($permissions);
                 $oldUser->username = Input::get('username');
+                if(Input::has('paswword')){
                 $oldUser->password = Hash::make(Input::get('password'));
+                }
                 $oldUser->email = Input::get('email');
                 $oldUser->update();
             }
