@@ -19,6 +19,7 @@
         </thead>
         <tbody>
         {{--@if($tablesData->isEmpty())--}}
+        @if(!empty($tablesData))
         @foreach($tablesData as $k=>$tableData)
             <tr>
                 <th>{{ $tableData->trans_date }}</th>
@@ -49,14 +50,15 @@
             </tr>
 
         @endforeach
-            {{--@else--}}
-            {{--<tr>--}}
 
-                {{--<td style="text-align: center" colspan="11">--}}
-                    {{--لا يوجد تغيرات شهرية--}}
-                {{--</td>--}}
-            {{--</tr>--}}
-{{--@endif--}}
+            @else
+            <tr>
+
+                <td style="text-align: center" colspan="11">
+                    لا يوجد تغيرات شهرية
+                </td>
+            </tr>
+@endif
         </tbody>
     </table>
 </div>

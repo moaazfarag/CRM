@@ -1,13 +1,11 @@
-
 @extends('dashboard.main')
 @section('content')
-
-        <!-- Main Content -->
-<section id="print-content"  ng-app="itemApp"  ng-controller="mainController" class="content-wrap ecommerce-invoice">
+  <!-- Main Content -->
+  <section id="print-content"  ng-app="itemApp"  ng-controller="mainController" class="content-wrap ecommerce-invoice">
 
     <div class="card-panel">
-        {{--{{ dd($invoice); }}--}}
-                <!-- Logo -->
+{{--{{ dd($invoice); }}--}}
+      <!-- Logo -->
 
         <div class="row invoice-top">
             <div class="col s3 m3">
@@ -221,6 +219,4 @@
     {{--{{ dd(DB::getQueryLog()) }}--}}
   </section>
   <!-- /Main Content -->
-
-
 @stop

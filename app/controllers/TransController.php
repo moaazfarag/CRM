@@ -202,11 +202,11 @@ class TransController extends BaseController
             $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
             $data['invoice']     = $trans;
             $data['type']        = $data['invoice']->invoice_type;
-            $pdf = PDF::loadView('dashboard.transaction._table._table',$data);
-            return $pdf->stream();
-////           return HTML::entities(View::make('dashboard.transaction.transaction',$data)->render());
-           return View::make('dashboard.transaction.transaction',$data);
-//           return PDF::load($html, 'A4', 'portrait')->show();
+//            $pdf = PDF::loadView('hello', $data);
+//
+//            return $pdf->stream();
+
+        return  View::make('dashboard.transaction.transaction',$data);
 
         }else{
             $data['error']      ="  لا توجد فاتورة بهذا الرقم  ";

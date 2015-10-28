@@ -29,6 +29,7 @@ class UserController extends BaseController
         $validator = Validator::make(Input::all(), $rules, BaseController::$messages);
 
         if ($validator->fails()) {
+
             return Redirect::back()->withErrors($validator)->withInput();
         } else {
             $username = Input::get('username');

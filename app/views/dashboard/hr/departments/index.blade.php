@@ -7,8 +7,7 @@
         <!-- ???????  -->
         <div class="card {{ @$modelMini }}">
                 <div class="title">
-                <h5>
-                    <i class="mdi mdi-notification-event-available"></i> @lang('main.addDep')   </h5>
+                <h5>  <i class="mdi mdi-notification-event-available"></i> @lang('main.add_new_dep')   </h5>
                 <a class="minimize" href="#">
                     <i class="mdi-navigation-expand-less"></i>
                 </a>
@@ -31,9 +30,9 @@
                     </div>
                     <div class="col s12 m6 l6">
                         <div class="input-field">
-                            <i class="mdi mdi-social-person prefix"></i>
+                            <i class="fa fa-shield prefix"></i>
 
-                            {{Form::text('name',null,array('required','placeholder'=>" ".  @$arabicName,'id'=>'name')) }}
+                            {{Form::text('name',null,array('required','placeholder'=>" ".  @$holder,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
                             <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                         </div>
@@ -52,10 +51,15 @@
 
                         {{ Form::close() }}
                     </div>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <br/>
                 </div>
+                @include('dashboard.hr.departments._table_view')
+
             </div>
         </div>
-        @include('dashboard.hr.departments._table_view')
     </div>
     <!-- /??? ?????? -->
 

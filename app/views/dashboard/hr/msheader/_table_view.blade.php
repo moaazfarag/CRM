@@ -1,17 +1,19 @@
 <div class="row">
     <div class="col  l12">
         <div class="card-panel">
-            <div class="title">
-                    <h2>
+            <div  class="card-panel blue lighten-5 center_title" style="margin-bottom: 1%;" >
+
+
+
  مرتبات
                         شهر: {{ Input::get('for_month') }}
                         لسنة: {{ Input::get('for_year') }}
-                </h2>
+
             </div>
                         @if($net && !$net->isEmpty())
             {{ Form::open(array('route'=>array('readyToPay'))) }}
                         @endif
-            <table id="table_customers" class="display table table-bordered table-striped table-hover">
+            <table  class="display table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
 

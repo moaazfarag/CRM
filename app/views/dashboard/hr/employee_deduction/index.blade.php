@@ -67,8 +67,9 @@
         </div>{{--submit  row end--}}
           <br/>
             <hr/>
+            @include('dashboard.hr.employee_deduction._table_view');
         </div>
     </div>
-    @include('dashboard.hr.employee_deduction._table_view');
+
    </section>
     @stop

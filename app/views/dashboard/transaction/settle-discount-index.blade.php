@@ -9,6 +9,9 @@
             <h5>
                 <i class="mdi mdi-notification-event-available"></i>
                 {{ @$title }}
+
+                فرع
+                :{{ $branch->br_name }}
             </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
@@ -19,41 +22,42 @@
         </div>
         <div class="content">
             <div class="row no-margin-top">
-                <div class="col s2 l3">
-                    <br>
-                    <b> @lang('main.branch') :{{ $branch->br_name }}</b>
 
-                </div>{{--branch--}}
-                <div class="col s2 l3">
+                {{-- ##### date start ######--}}
+                <div class="col s12 l1">
                     <i class="fa fa-calendar"></i>
                     {{ Form::label('data',Lang::get('main.date')) }}
                     <?php $date = new dateTime;
                     ?>
+                </div>
+                <div class="col s12 l2">
+
                     <input required="required"
                            type="date"
                             {{--ng-model="date = Date()"--}}
-                           autofocus="autofocus"
                            id="data"
                            value="{{$date->format('Y-m-d')}}"
                            max="{{$date->modify('+1 day')->format('Y-m-d')}}"
                            min="{{$date->modify('-1 day')->format('Y-m-d')}}"
                            name="date">
                     <p class="parsley-required">{{ $errors ->first('data') }} </p>
-                </div> {{--date--}}
+                </div>
+                {{-- ##### date start ######--}}
 
-                {{--{{  dd(Items::getItemsWithBalance()); }}--}}
-
-            </div>{{--first row end--}}
-
-            {{-- start acount,item and quaintity  --}}
-
-            <div class="row">
-                <div class="col s2 l1">
+                {{-- ##### item start ######--}}
+                <div class="col s12 l1">
                     {{ Form::label('item_id',lang::get('main.item')) }}
                 </div>
-                <div class="col s2 l3">
+
+                <div class="col s12 l3">
                     {{--<i class="mdi-action-label"></i>--}}
-                    <input   ng-focus="displayOn({{ $br_id }})"   autocomplete="off" ng-model="item.item_name" id="item_id" >
+                    <input
+                            autofocus="autofocus"
+                            ng-focus="displayOn({{ $br_id }})"
+                            autocomplete="off"
+                            ng-model="item.item_name"
+                            id="item_id"
+                            >
                     <ul id="itemsView" class="drop-down-menu" ng-show="item">
                         <li  ng-model="item.item_name"
                              class="li-drop-down-menu"
@@ -64,10 +68,14 @@
                     </ul>
                     {{--@{{  item }}--}}
                     <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
-                </div> {{-- item div --}}
+                </div>
+                {{-- ##### item end  ######--}}
+
+                {{-- ##### quantity start  ######--}}
                 <div class="col s12 l2">
+
                     <div class="input-field">
-                        <i class="fa fa-database prefix"></i>
+                        <i class="fa fa-cubes prefix"></i>
                         {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
                         <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
@@ -81,7 +89,27 @@
                         {{ Form::label('quantity',Lang::get('main.quantity')) }}
                         <p class="parsley-required">{{ $errors ->first('quantity') }} </p>
                     </div>
+
+
                 </div> {{-- quantity div--}}
+
+                        <div style="margin-right:10px" class="col s12 l2  " ng-show="item.item_name && item.id" >
+                            الرصيد الحالي هو
+                            @{{ item.balance - item.quantity }}
+                            <div style="color: #ea1c18;clear: both"  ng-show="itemBalance() && item.id">
+                                لا يوجد رصيد لهذا المنتج
+                            </div>
+                        </div>
+                {{-- ##### quantity end  ######--}}
+
+
+            </div>{{--first row end--}}
+
+            {{-- start acount,item and quaintity  --}}
+
+            <div class="row">
+
+
 
                 <div class="col s12 l1 ">
                     {{--<div class="input-field">--}}
@@ -98,13 +126,6 @@
                     {{--</div>--}}
                 </div>{{-- single item button  div --}}
 
-                <div style="margin-right:10px" class="col s12 l2  " ng-show="item.item_name && item.id" >
-                    الرصيد الحالي هو
-                    @{{ item.balance - item.quantity }}
-                    <div style="color: #ea1c18;clear: both"  ng-show="itemBalance() && item.id">
-                        لا يوجد رصيد لهذا المنتج
-                    </div>
-                </div>
 
             </div>
 

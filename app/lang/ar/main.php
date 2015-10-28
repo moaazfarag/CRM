@@ -261,7 +261,7 @@ return  array(
 
     'salary_loan'      =>'المبلغ',
     'add_new_loan'     =>'اضف قرض جديد',
-    'chose_employee'   =>'اختار الموظف ',
+    'chose_employee'   =>'أختر الموظف ',
     'monthly_quantity' =>'القسط الشهرى',
     'loan_date'        =>'تاريخ السلفه',
     'loan_start'       =>' بداية  الأقساط',
@@ -307,6 +307,10 @@ return  array(
     'canceld'            =>'ملغاه',
     'data_entry'         =>'مدخل البيانات',
     'amount' => 'مبلغ',
+    'dep_holder'=>'أدخل أسم القسم ',
+    'dep_name'=>'أسم القسم ',
+    'add_new_dep'=>'إضافة قسم جديد',
+
     ######{{ Monthly salary equipment  }}########
 
 
@@ -501,7 +505,64 @@ return  array(
     'add_all'           =>'اضافة الكل',
     'edit_all'          =>'تعديل الكل ',
     'delete_all'        =>' حذف الكل',
-    'show_all'          =>'عرض الكل'
+    'show_all'          =>'عرض الكل',
 
+    // permission
+//    main_info
+//company بيانات الشركة
+//mark_model
+//add_account
+//AccountsBalances
+//ItemBalance
+//hr
+//Employee
+//Departments
+//Desdeds
+//Empdesded
+//MonthChange
+//salariesProcessing
+
+    'main_info'     =>'القائمة الرئيسية',
+    'company'       =>'بيانات الشركة ',
+    'cat'           =>'فئات الأصناف',
+    'mark_model'    =>'الماركات والموديلات',
+    'add_account'   =>'اكواد الحسابات',
+    'AccountsBalances'=>'أرصدة الحسابات الإفتتاحية ',
+    'ItemBalance'   =>'أرصدة الأصناف الأفتتاحية',
+    'hr'            =>'شئون العاملين',
+    'Employee'      =>'الوظائف',
+    'Departments'   =>'الأقسام',
+    'Desdeds'       =>'بنود الإستحقاقات',
+    'Empdesded'      =>'بنود الإستحقاقات للموظف',
+    'MonthChange'       =>'التغيرات الشهرية',
+    'salariesProcessing'=>'تجهيز المرتبات',
+    'p_general_accounts'  =>'الحسابات العامة ',
+    'p_directMovement'  =>'يومية الخزينة ',
+    'p_dailyTreasury'   =>'الحركات المباشرة',
+    'p_customers'       =>'حسابات العملاء',
+    'p_suppliers'       =>'حسابات الموردين',
+    'p_bank'             =>'حسابات البنوك',
+    'p_partners'        =>'حسابات جارى الشركاء',
+    'p_expenses'        =>'حسابات الإيرادات الأخرى',
+    'p_multiple_revenue'=>'حسابات المصروفات',
+    'p_reports_hr'        =>'تقارير شئون العاملين',
+    'p_outgoingSalaries'  =>'المرتبات المنصرفة',
+    'p_reports_stores'    =>'تقارير المخازن',
+    'p_itemsCard'         =>'كارت الصنف',
+    'p_reports_invoices'  =>'تقارير الفواتير',
+    'p_sumSales'          =>'المبيعات (إجمالى) ',
+    'p_sumSalesReturn'    =>'مرتجع المبيعات  (إجمالى) ',
+    'p_buyReturn'         =>'مردودات المشتريات',
+    'p_sumBuy'            =>'المشتريات (إجمالى) ',
+    'p_sumBuyReturn'      =>'مردودات المشتريات  (إجمالى) ',
+    'p_salesEarnings'     => 'أرباح المبيعات',
+    'p_settleAdd'          => 'تسويه اضافه',
+    'p_settleDown'          => 'تسويه الخصم',
+    'p_inventoryStore'      => 'جرد المخزن ',
+    'p_balanceStores'       =>'ارصده المخازن',
+    'p_evaluation_stores'   =>'تقييم المخازن',
+    'p_buy'                 =>'المشتريات',
+    'p_salesReturn'         =>'مرتجع المبيعات',
+    'p_sales'               =>'المبيعات',
 
 );

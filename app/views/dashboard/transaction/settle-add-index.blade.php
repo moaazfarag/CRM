@@ -8,6 +8,9 @@
         <h5>
             <i class="mdi mdi-notification-event-available"></i>
             {{ @$title }}
+
+            فرع
+            :{{ $branch->br_name }}
         </h5>
         <a class="minimize" href="#">
           <i class="mdi-navigation-expand-less"></i>
@@ -18,17 +21,16 @@
     </div>
     <div class="content">
       <div class="row no-margin-top">
-          <div class="col s2 l3">
 
-              <br>
-              <b> @lang('main.branch') :{{ $branch->br_name }}</b>
-
-          </div>{{--branch--}}
-          <div class="col s2 l3">
+          {{-- ##### date start ######--}}
+          <div class="col s12 l1">
               <i class="fa fa-calendar"></i>
               {{ Form::label('data',Lang::get('main.date')) }}
               <?php $date = new dateTime;
               ?>
+          </div>
+          <div class="col s12 l2">
+
               <input required="required"
                      type="date"
                       {{--ng-model="date = Date()"--}}
@@ -41,6 +43,44 @@
               <p class="parsley-required">{{ $errors ->first('data') }} </p>
           </div> {{--date--}}
 
+          {{-- ##### date end ######--}}
+
+          {{-- ##### item start ######--}}
+          <div class="col s2 l1">
+              {{ Form::label('item_id','الصنف') }}
+          </div>
+          <div class="col s2 l3">
+              <input   ng-focus="displayOn(br_id)"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
+              <ul id="itemsView" class="drop-down-menu" ng-show="item">
+                  <li  ng-model="item.item_name"
+                       class="li-drop-down-menu"
+                       ng-repeat="dbitem in items| filter:item.name"
+                       ng-click="selectItem(dbitem)">
+                      @{{dbitem.item_name }}
+                  </li>
+              </ul>
+              <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
+          </div> {{-- item div --}}
+          {{-- ##### item end ######--}}
+
+          {{--#### quantity  #####--}}
+          <div class="col s12 l2">
+              <div class="input-field">
+                  <i class="fa fa-cubes prefix"></i>
+                  {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
+                  <div ng-show="form.$submitted || form.quantity.$touched">
+                    <span ng-show="form.quantity.$error.pattern">
+                        برجاء ادخل رقم صحيح
+                    </span>
+                    <span ng-show="form.quantity.$error.required">
+                            هذا الحقل مطلوب
+                    </span>
+                  </div>
+                  {{ Form::label('quantity','الكمية') }}
+                  <p class="parsley-required">{{ $errors ->first('quantity') }} </p>
+              </div>
+          </div> {{-- quantity div--}}
+          {{--#### quantity #####--}}
 
 
       </div>{{--first row end--}}
@@ -49,40 +89,9 @@
         <div class="row no-margin-top">
 
 
-            <div class="col s2 l1">
-                {{ Form::label('item_id','الصنف') }}
-            </div>
-            <div class="col s2 l3">
-                <i class="mdi-action-label"></i>
-                <input   ng-focus="displayOn(br_id)"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
-                <ul id="itemsView" class="drop-down-menu" ng-show="item">
-                    <li  ng-model="item.item_name"
-                         class="li-drop-down-menu"
-                         ng-repeat="dbitem in items| filter:item.name"
-                         ng-click="selectItem(dbitem)">
-                        @{{dbitem.item_name }}
-                    </li>
-                </ul>
-                <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
-            </div> {{-- item div --}}
-            <div class="col s12 l2">
-                <div class="input-field">
-                    <i class="fa fa-database prefix"></i>
-                    {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
-                    <div ng-show="form.$submitted || form.quantity.$touched">
-                    <span ng-show="form.quantity.$error.pattern">
-                        برجاء ادخل رقم صحيح
-                    </span>
-                    <span ng-show="form.quantity.$error.required">
-                            هذا الحقل مطلوب
-                    </span>
-                    </div>
-                    {{ Form::label('quantity','الكمية') }}
-                    <p class="parsley-required">{{ $errors ->first('quantity') }} </p>
-                </div>
-            </div> {{-- quantity div--}}
-            <div class="col s2 ">
-                <div class="input-field">
+
+
+            <div class="col s12  l12">
                     <label for="item_id">
                         <button ng-show="returnBalance(item)"  ng-click=" serialItem(br_id,item.id)" href="#addItem"  type="button" ng-disabled="form.$invalid || hasItem(item.quantity) " class="waves-effect btn modal-trigger">
                             اضف
@@ -91,7 +100,6 @@
                             اضف
                         </button >
                         </label>
-                </div>
             </div>{{-- single item button  div --}}
 
 

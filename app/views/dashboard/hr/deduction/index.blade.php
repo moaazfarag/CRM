@@ -11,6 +11,7 @@
     <div class=" card ">
         <div class="title">
             <h5>
+
                 <i class="fa fa-cog"></i> @lang('main.add_new_clause') </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
@@ -20,17 +21,15 @@
             @include('include.messages')
 
             <div class="row">
-                <div class="col s12 l4 ">
+                <div class="col s12 l3 ">
                     <div class="input-field">
-                        <i class="fa fa-tag prefix"></i>
+                        <i class="mdi mdi-action-description prefix"></i>
                         {{ Form::text('name',null,array('required','id'=>'name',)) }}
                         {{ Form::label('name',Lang::get("main.clause") )}}
                         <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12 l4">
+                <div class="col s12 l3">
                     <div class="input-field">
                         {{ Form::select('ds_type', $ds_type ,null,array('id'=>'ds_type')) }}
 
@@ -72,12 +71,17 @@
                     @endif
                 </div>
                 {{ Form::close() }}
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
             </div>{{--submit  row end--}}
 
+            @include('dashboard.hr.deduction._table_view');
         </div>
 
     </div>
-    @include('dashboard.hr.deduction._table_view');
+
     </section>
     @stop
 

@@ -41,36 +41,36 @@
 
               {{--name--}}
               <div class="col s12 l4">
-                  <div class="input-field">
-                      <i class="mdi mdi-editor-attach-money prefix"></i>
+                      <i class="mdi mdi-editor-attach-money"></i>
+                  <?php $debit=Lang::get('main.debit') ?>
+
+                  {{ Form::label('debit',$debit) }}
+
                       {{ Form::number('debit',null,array('ng-pattern'=>"/^[0-9]+$/",'id'=>'debit','ng-model'=>'account.debit','ng-disabled'=>'account.credit')) }}
-                      <?php $debit=Lang::get('main.debit') ?>
-                      {{ Form::label('debit',$debit) }}
                       <div class="error-div-for-table" ng-show="form.$submitted || form.debit.$touched">
                           <div ng-show="form.debit.$error.pattern">
                               @lang('main.please_enter_valid_number')
                           </div>
                       </div>
                       <p class="parsley-required">{{ $errors ->first('debit') }} </p>
-                  </div>
               </div> {{--debit--}}
 
               <div class="col s12 l4">
-                  <div class="input-field">
-                      <i class="mdi mdi-editor-attach-money prefix"></i>
-                      {{ Form::number('credit',null,array('ng-pattern'=>"/^[0-9]+$/",'id'=>'credit','ng-model'=>'account.credit','ng-disabled'=>'account.debit')) }}
+                      <i class="mdi mdi-editor-attach-money"></i>
                       <?php $Credit=Lang::get('main.Credit') ?>
                       {{ Form::label('credit',$Credit) }}
-                      <div class="error-div-for-table" ng-show="form.$submitted || form.credit.$touched">
+
+                  {{ Form::number('credit',null,array('ng-pattern'=>"/^[0-9]+$/",'id'=>'credit','ng-model'=>'account.credit','ng-disabled'=>'account.debit')) }}
+                           <div class="error-div-for-table" ng-show="form.$submitted || form.credit.$touched">
                           <div ng-show="form.credit.$error.pattern">
                               @lang('main.please_enter_valid_number')
                           </div>
                       </div>
                       <p class="parsley-required">{{ $errors ->first('credit') }} </p>
-                  </div>
               </div> {{--credit--}}
-
-              <div class="col s6 l6">
+          </div> {{--first row end--}}
+          <div class="row">
+              <div class="col s12 l11">
                   <div class="input-field">
                       <i class="mdi-communication-chat prefix"></i>
                       <textarea  ng-model='account.note' name="notes" id="notes" class="materialize-textarea" length="120"> {{ @$item->notes }}</textarea>
@@ -79,17 +79,25 @@
                     <p class="parsley-required">{{ $errors ->first('notes') }} </p>
                   </div>
               </div> {{--notes--}}
+              </div>
+              <div class="row">
               <div class="col s12 l2">
                   <button ng-disabled="form.credit.$invalid ||form.debit.$invalid || hasBalance()"
                           type="button"
                           ng-click="addAccount()"
                           class="waves-effect btn">@lang('main.add') </button>
               </div>
-          </div> {{--first row end--}}
+              </div>
+
 {{--@{{  form.credit.$viewValue  }}--}}
             <br>
+          <hr/>
       </div>
-    @include('dashboard.account_balances._table_view')
+        <div class="row" style="padding: 0 2% 2% 2%">
+            <div class="col s12 l12" >
+            @include('dashboard.account_balances._table_view')
+            </div>
+       </div>
         <br>
         <br>
         <div class="row">

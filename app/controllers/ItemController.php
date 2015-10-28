@@ -292,12 +292,14 @@ class ItemController extends BaseController
 
                 $balances->where('cat_id',Input::get('cat_id'));
             }
-
-            if(Input::get('br_id') != ''){
-
-
-                $balances->where('br_id',Input::get('br_id'));
+            if ($this->isHaveBranch()) {
+                if (Input::get('br_id') != '') {
+                    $balances->where('br_id', Input::get('br_id'));
+                }
+            } else{
+                $balances->where('br_id',Auth::user()->br_id);
             }
+
 
                 $balances->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
 
