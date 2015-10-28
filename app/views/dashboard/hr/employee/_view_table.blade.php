@@ -4,7 +4,7 @@
 
 
 
-                   <table id="table_customers" class="display table table-bordered table-striped table-hover">
+           <table id="table_bank" class="display table table-bordered table-striped table-hover">
 
           <thead>
             <tr>

@@ -1,6 +1,6 @@
 <div class="card-panel">
-  
-    <table class="table table-hover">
+
+    <table  class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <th>@lang('main.number')</th>

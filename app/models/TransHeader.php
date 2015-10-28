@@ -86,6 +86,7 @@ class TransHeader extends Eloquent {
     }
     public static function getItems($inputs,$tBal)
     {
+
         $bCtrl = new BaseController;
         $date_from = $bCtrl->strToTime($inputs['date_from']);
         $date_to   = $bCtrl->strToTime($inputs['date_to']);
@@ -103,9 +104,16 @@ class TransHeader extends Eloquent {
         }else{
             $itemsTrans->dateBetween('date', $date_from, $date_to);
         }
-        if ($br_id != '') {
-            $itemsTrans->where('br_id', $br_id);
-        }if($item_id != '') {
+
+        if ($bCtrl->isHaveBranch()) {
+            if ($br_id != '') {
+                $itemsTrans->where('br_id', Input::get('br_id'));
+            }
+        } else{
+            $itemsTrans->where('br_id',Auth::user()->br_id);
+        }
+
+       if($item_id != '') {
         $itemsTrans->where('item_id', $item_id);
        }if($cat_id != ''){
             $itemsTrans->where('cat_id',$cat_id);

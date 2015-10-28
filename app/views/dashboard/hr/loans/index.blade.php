@@ -17,7 +17,7 @@
         <div class="content">
             @include('include.messages')
             <div class="row">
-                <div class="col s12 l5">
+                <div class="col s12 l3">
                     {{--<i class="fa fa-tag prefix"></i>--}}
                     <div class="input-field">
                         {{ Form::label('employee_id',' ') }}
@@ -27,41 +27,41 @@
                     </div>
                     <div class="col s12 l3">
                         <div class="input-field">
-                            <i class="mdi mdi-action-language prefix"></i>
+                            <i class="fa fa-dollar prefix"></i>
                             {{ Form::text('loan_val',null,array('required','id'=>'loan_val',)) }}
                             {{ Form::label('loan_val',Lang::get('main.salary_loan')  )     }}
                             <p class="parsley-required error-validation">{{ $errors ->first('loan_val') }} </p>
                         </div>
                     </div>
-                <div class="col s12 l4">
+                <div class="col s12 l3">
                         <div class="input-field">
-                            <i class="mdi mdi-action-language prefix"></i>
+                            <i class="fa fa-puzzle-piece prefix"></i>
                             {{ Form::text('loan_currBal',null,array('required','id'=>'loan_currBal',)) }}
                             {{ Form::label('loan_currBal', lang::get('main.monthly_quantity') )     }}
                         </div>
                     <p class="parsley-required error-validation">{{ $errors ->first('loan_currBal') }} </p>
 
                 </div>
+                </div>
                 <div class="row">
-                    <div class="col s1 l2">
+                    <div class="col s12 l1" style="margin-left: 1%">
                         <div class="input-field">
-                            <i class="fa fa-tag prefix"></i>
+                            <i class="fa fa-calendar prefix"></i>
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_date',lang::get('main.loan_date')) }}
                         </div>
                         <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
-
                     </div>
-                    <div class="col s2 l2">
+                    <div class="col s12 l2">
                         <div class="input-field">
                             {{--<i class="mdi mdi-action-language prefix"></i>--}}
                             {{ Form::text('loan_date',null,array('required','id'=>'loan_date','class'=>'pikaday')) }}
                         </div>
 
                     </div>
-                    <div class="col s1 l2">
+                    <div class="col s12 l1" style="margin-left: 1%">
                         <div class="input-field">
-                            <i class="fa fa-tag prefix"></i>
+                            <i class="fa fa-calendar prefix"></i>
                             {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
                             {{ Form::label('loan_start',lang::get('main.loan_start')) }}
 
@@ -69,7 +69,7 @@
                         <p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>
 
                     </div>
-                    <div class="col s2 l2">
+                    <div class="col s12 l2">
                         <div class="input-field">
                             {{--<i class="mdi mdi-action-language prefix"></i>--}}
                             {{ Form::text('loan_start',null,array('required','id'=>'loan_start','class'=>'pikaday')) }}
@@ -99,10 +99,8 @@
 
 
                 </div>
-
-         </div>
             <div class="row">
-                <div class="col s12 l12">
+                <div class="col s4 l4"  style="padding: 1% 3% 0 0">
 
 
                     @if(Route::currentRouteName() == 'editLoans')
@@ -112,10 +110,22 @@
                     @endif
 
                     {{ Form::close() }}
+
                 </div>
+
             </div>
+            <br/>
+
+            <hr/>
+            <br/>
+            @include('dashboard.hr.loans._table_view');
+         </div>
+
+
+        <hr/>
+
             </div>
         </div>
-    @include('dashboard.hr.loans._table_view');
+
         </section>
         @stop

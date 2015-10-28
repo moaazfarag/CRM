@@ -44,8 +44,8 @@ class EmployeesController extends BaseController
         $newEmp->ins_val                    = Input::get('ins_val');
         $newEmp->ins_no                     = Input::get('ins_no');
         $newEmp->card_no                    = Input::get('card_no');
-        $newEmp->cancel_date                = $this->strToTime($inputs['cancel_date']);
-        $newEmp->cancel_cause               = Input::get('cancel_cause');
+//        $newEmp->cancel_date                = $this->strToTime($inputs['cancel_date']);
+//        $newEmp->cancel_cause               = Input::get('cancel_cause');
         $newEmp->sex                        = Input::get('sex');
         $newEmp->marital                    = Input::get('marital');
         $newEmp->religion                   = Input::get('religion');

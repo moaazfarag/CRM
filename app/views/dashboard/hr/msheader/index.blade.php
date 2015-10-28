@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                    <div class="col s12 l5">
+                    <div class="col s12 l3">
                         <div class="input-field">
                             {{ Form::label('employee_id',' ') }}
                             {{ Form::select('employee_id', array(NULL =>lang::get('main.employee')) +$co_info->employees->lists('name','id'),null,array('id'=>'employee_id')) }}
@@ -41,7 +41,7 @@
             </div>
 
             <div class="row">
-                <div class="col s12 l12">
+                <div class="col s12 l12" style="margin: 0 2% 2% 0">
 
                         <button type="submit" class="waves-effect btn">  @lang('main.monthly_salary_equipment') </button>
                     @endif

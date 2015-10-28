@@ -1,10 +1,13 @@
                      <!-- pop up  Structure -->
 <div  id="addItem"  class="modal">
-    <a class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>
+    {{--<a class="modal-action modal-close btn-floating red " style="float: left;text-align: center">X</a>--}}
     <div class="modal-content">
+        <div  class="card-panel blue lighten-5" style="font-size: 1.2em; color: #333;  text-align: center; margin-bottom: 2%; ">
+
         رقم الفاتورة : @{{ header.invoice_no }}
         تاريخ الفاتورة : @{{ header.date }}
         طريقة الدفع  : @{{ header.pay_type }}
+            </div>
         <table ng-show="invoiceItems"  class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
@@ -72,18 +75,16 @@
                 </tbody>
             </table>
         </div>
+        <div class="modal-footer">
 
+            <div ng-click="backItem(header.discount)" style="margin-right: 1%;" >
+
+                <button ng-click="backItem(header.discount)" type="button" style="margin-left: 10px" class="modal-action modal-close waves-effect blue  white-text waves-red btn-flat">اضف</button>
+            </div>
+            <div ng-click="finishReturnInvoice()" >
+                <button ng-click="finishReturnInvoice()" type="button"  class="modal-action modal-close waves-effect red white-text waves-red btn-flat">انهاء</button>
+            </div>
+        </div>
      </div>
-    <div class="modal-footer">
 
-
-<div></div>
-         <div ng-click="backItem(header.discount)" >
-
-             <button ng-click="backItem(header.discount)" type="button"  class="modal-action modal-close btn">اضف</button>
-         </div>
-         <div ng-click="finishReturnInvoice()" >
-        <button ng-click="finishReturnInvoice()" type="button"  class="modal-action modal-close btn">انهاء</button>
-          </div>
-     </div>
 </div>

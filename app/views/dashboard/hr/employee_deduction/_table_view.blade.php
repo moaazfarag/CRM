@@ -1,5 +1,4 @@
-<div class="card-panel">
-    <table  id="table_customers" class="table table-hover">
+    <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
 
@@ -33,4 +32,3 @@
 
         </tbody>
     </table>
-</div>

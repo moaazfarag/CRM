@@ -46,10 +46,10 @@
 
           {{-- ##### item start ######--}}
 
-          <div class="col s2 l1">
+          <div class="col s12 l1">
               {{ Form::label('item_id',lang::get('main.item')) }}
           </div>
-          <div class="col s2 l3">
+          <div class="col s12 l3">
               <input   ng-focus="displayOn({{ $br_id }})"   autocomplete="off" ng-model="item.item_name" id="item_id" autofocus="autofocus">
 
               <ul id="itemsView" class="drop-down-menu" ng-show="item">

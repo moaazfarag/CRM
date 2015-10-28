@@ -8,6 +8,9 @@
             <h5>
                 <i class="mdi mdi-notification-event-available"></i>
                 {{ @$title }}
+
+                فرع
+                :{{ $branch->br_name }}
             </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
@@ -18,16 +21,14 @@
         </div>
         <input name="trans_id" type="hidden"  value="@{{ header.id }}">
         <div class="content">
-            <div class="row no-margin-top">
-                <div class="col s2 l3">
-                    <br>
-                    <b> @lang('main.branch') :{{ $branch->br_name }}</b>
-                </div>{{--branch--}}
-                <div class="col s2 l3">
+            <div class="row">
+                {{-- ##### date start ######--}}
+                <div class="col s12 l3">
                     <i class="fa fa-calendar"></i>
                     {{ Form::label('data',Lang::get('main.date')) }}
                     <?php $date = new dateTime;
                     ?>
+
                     <input required="required"
                            type="date"
                            {{--ng-model="date = Date()"--}}
@@ -40,16 +41,14 @@
                     <p class="parsley-required">{{ $errors ->first('data') }} </p>
                 </div> {{--date--}}
 
-            </div>{{--first row end--}}
-            <div class="row">
-                <div class="col s2 l3">
+                <div class="col s12 l3">
 
                     <i class="mdi mdi-editor-attach-money prefix active"></i>
                     {{ Form::label('pay_type',Lang::get('main.payment')) }}
                     {{ Form::select('pay_type',$pay_type,null,array('id'=>'pay_type','ng-model'=>'pay_type','required', 'class'=>'browser-default')) }}
                     <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
                 </div>{{--pay_type--}}
-                <div class="col s2 l3">
+                <div class="col s12 l3">
 
                     <i class="mdi mdi-communication-import-export"></i>
                     {{ Form::label('account',lang::get('main.account')) }}
@@ -72,7 +71,7 @@
                 </div>{{--account--}}
             </div>
                 <div  class="row">
-                    <div class="col s12 l4">
+                    <div class="col s12 l4" style="margin: 2% 1%;">
                         <div class="input-field">
                             <i class="fa fa-database prefix"></i>
                             {{ Form::label('invoice_no',"رقم الفاتورة") }}
@@ -81,6 +80,7 @@
                             <button href="#addItem" ng-disabled="!invoice.invoiceNo" type="button" ng-click="invoiceData('{{$type }}','{{ $branch->id}}')"   class="waves-effect btn modal-trigger">
                                 @lang('main.add')
                             </button >
+
                         </div>
 
                             <button ng-show="account.id" href="#addFromInvoices" ng-disabled=" !account.id" type="button" ng-click="invoiceData('{{$type }}','{{ $branch->id}}')"   class="waves-effect btn modal-trigger">

@@ -66,11 +66,12 @@ class DepartmentController extends BaseController
 
     protected function depData()
     {
-        $parts = Lang::get('main.parts');
+        $parts = Lang::get('main.dep_name');
         $data['title'] = $parts;
         $data['employees'] = 'open';
         $data['modelMini'] = "";
         $data['arabicName'] = $parts;
+        $data['holder']     = Lang::get('main.dep_holder');
         $data['tablesData'] = Department::company()->get();
         return $data;
     }
