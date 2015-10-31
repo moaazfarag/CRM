@@ -21,18 +21,18 @@ $company = CoData::find(Auth::user()->co_id);
 <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
     <div class="top">
         <div>
-                    <!-- Sidebar toggle -->
+            <!-- Sidebar toggle -->
             <a href="#" class="yay-toggle">
                 <div class="burg1"></div>
                 <div class="burg2"></div>
                 <div class="burg3"></div>
             </a>
-                    <!-- Sidebar toggle -->
-                    <!-- Logo -->
+            <!-- Sidebar toggle -->
+            <!-- Logo -->
             <a href="#!" class="brand-logo">
                 {{ URL::asset('dashboard/assets/_con/images/logo-white.png') }}" alt="Con">
             </a>
-                    <!-- /Logo -->
+            <!-- /Logo -->
         </div>
     </div>
     <div class="nano has-scrollbar">
@@ -54,10 +54,10 @@ $company = CoData::find(Auth::user()->co_id);
 
                     <ul>
                         @if(PerC::isSession('main_info','company','add'))
-                        <li>
-                            <a href="{{ URL::route('editCompanyInfo') }}"
-                               class="waves-effect waves-blue">  @lang('main.companyInfo') </a>
-                        </li>
+                            <li>
+                                <a href="{{ URL::route('editCompanyInfo') }}"
+                                   class="waves-effect waves-blue">  @lang('main.companyInfo') </a>
+                            </li>
                         @endif
                         <li>
                             <a href="{{ URL::route('addBranch') }}"
@@ -374,13 +374,17 @@ $company = CoData::find(Auth::user()->co_id);
                                     <a href="{{ URL::route('searchReportInvoices',array('sales','sum')) }}"
                                        class="waves-effect waves-blue"> المبيعات ( إجمالى) </a>
                                     <a href="{{ URL::route('searchReportInvoices',array('salesReturn',NULL)) }}"
-                                       class="waves-effect waves-blue"> مرتجعات المبيعات </a>
+                                       class="waves-effect waves-blue">     مرتجعات المبيعات  (تحليلى)</a>
+                                    <a href="{{ URL::route('searchReportInvoices',array('salesReturn','sum')) }}"
+                                       class="waves-effect waves-blue">    مرتجعات المبيعات  (إجمالى) </a>
                                     <a href="{{ URL::route('searchReportInvoices','buy') }}"
                                        class="waves-effect waves-blue"> المشتريات ( تحليلى ) </a>
                                     <a href="{{ URL::route('searchReportInvoices',array('buy','sum')) }}"
                                        class="waves-effect waves-blue"> المشتريات ( إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices','buyReturn') }}"
-                                       class="waves-effect waves-blue">مردودات المشتريات</a>
+                                    <a href="{{ URL::route('searchReportInvoices',array('buyReturn',NULL)) }}"
+                                       class="waves-effect waves-blue">مردودات المشتريات (تحليلى)</a>
+                                    <a href="{{ URL::route('searchReportInvoices',array('buyReturn','sum')) }}"
+                                       class="waves-effect waves-blue">مردودات المشتريات (إجمالى)  </a>
                                     <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}"
                                        class="waves-effect waves-blue">أرباح المبيعات</a>
                                 </li>

@@ -1,6 +1,4 @@
-<div class="row">
-    <div class="col  l12">
-        <div class="card-panel">
+
             <table id="table_customers" class="display table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
@@ -27,6 +25,3 @@
                 @endforeach
                 </tbody>
             </table>
-        </div>
-    </div>
-</div>
