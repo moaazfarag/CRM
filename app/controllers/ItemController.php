@@ -214,17 +214,7 @@ class ItemController extends BaseController
 
     }
     public function reportResultItemCard (){
-        $addQ = DB::table('trans_header')
-            ->viewMake()
-            ->whereRaw("`invoice_type` IN ( 'buy', 'settleAdd' ,'salesReturn','itemBalance')");
-        $discountQ = DB::table('trans_header')
-            ->viewMake('*-1')
-            ->whereRaw("`invoice_type` IN ( 'settleDown', 'sales','buyReturn' )")
-            ->union($addQ);
-        DB::statement('CREATE OR REPLACE VIEW items_balance AS' . $discountQ->toSql());
         $inputs = Input::all();
-//        var_dump($inputs);die();
-
         if(Input::Has('account')){
             $ruels = TransHeader::$report_ruels_saels_with_account;
         }else{
