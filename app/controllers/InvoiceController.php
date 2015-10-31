@@ -75,7 +75,7 @@ class InvoiceController extends BaseController
 
         }else{
 
-            $invoice_type    =  $inputs['invoice_type'];
+            $invoice_type  =  $inputs['invoice_type'];
 
             $types = array('sales','salesReturn','buy','buyReturn','sales-earnings');
 
@@ -107,8 +107,13 @@ class InvoiceController extends BaseController
 
                     }
 
-                    if ($br_id != '') {
-                        $invoices->where('br_id', $br_id);
+                    if($this->isHaveBranch()){
+
+                        if ($br_id != '') {
+                            $invoices->where('br_id', $br_id);
+                        }
+                    }else{
+                        $invoices->where('br_id', Auth::user()->br_id);
                     }
 
                     if ($account_id != '') {

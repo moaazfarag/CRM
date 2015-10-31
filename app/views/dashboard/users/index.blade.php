@@ -5,33 +5,6 @@
      <!-- Breadcrumb -->
      <div class="ecommerce-title">
 
-       <div class="row">
-         <div class="col s12 m9 l10">
-           <!--h1>@@title</h1-->
-           {{--<nav>--}}
-             {{--<ul class="left">--}}
-            {{--<li class="{{ @$active }}"  >--}}
-            {{--<a href="/admin/hr">شئون العاملين </a>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<a href="/admin/accounts">الحسابات </a>--}}
-            {{--</li>--}}
-               {{--<li>--}}
-               {{--<a href="/admin/product">الاصناف </a>--}}
-               {{--</li>--}}
-               {{--<li>--}}
-               {{--<a href="/admin/setting">بيانات الموقع</a>--}}
-               {{--</li>--}}
-                {{--<li>--}}
-               {{--<a href="/admin">الرئيسية</a>--}}
-               {{--</li>--}}
-             {{--</ul>--}}
-           {{--</nav>--}}
-
-         </div>
-
-       </div>
-
          </div>
 
              <div class="title">
@@ -39,24 +12,7 @@
            <div class="row">
              <div class="col s12 m9 l10">
                <!--h1>@@title</h1-->
-               <nav>
-                 <ul class="left">
 
-
-                   <li>
-                   <a href="/admin/setting"> @lang('main.jobs')</a>
-                   </li>
-                    <li>
-                   <a href="/admin">@lang('main.parts')</a>
-                   </li>
-                   <li>
-                   <a href="/admin/hr">@lang('main.addEmployee')</a>
-                   </li>
-                     <li class="active"  >
-                   <a href="/admin/hr"> @lang('main.addSysUser')</a>
-                   </li>
-                 </ul>
-               </nav>
 
              </div>
 
@@ -66,6 +22,22 @@
                   <br>
      <!-- /Breadcrumb -->
  <!--  addUser addUser  اضف مستخدم للنظام      -->
+     <div class=" card minimized">
+         <div class="title">
+             <h5>
+                 <i class="fa fa-cog"></i>  المستخدمين الحاليين </h5>
+             <a class="minimize" href="#">
+                 <i class="mdi-navigation-expand-less"></i>
+             </a>
+         </div>
+         <div class="content">
+             @include('dashboard.users._view_table')
+    </div>
+     </div>
+         <br>
+
+
+
     <div class=" card">
       <div class="title">
                 <h5>
@@ -75,6 +47,7 @@
                 </a>
             </div>
               <div class="content">
+
                   @if(Route::currentRouteName()== "addUser" )
                   {{ Form::open(array('route'=>'storeUser','data-parsley-validate')) }}
                   @elseif(Route::currentRouteName()== "editUser")
@@ -162,13 +135,16 @@
                   </div>
 
                   <div class="row">
-
+                      @include('dashboard.users._premisions')
                   </div>
+
                   <div class="row">
                       <div class="col s10 l10">
                           <button class="waves-effect btn">{{ $button }} </button>
                       </div>
                   </div>
+
+
               </div>
             </div>
 
@@ -179,9 +155,7 @@
     </div>
     <!-- /Store Settings -->
 
-     @include('dashboard.users._premisions')
-     <br>
-     @include('dashboard.users._view_table')
+
 
 
   </section>
