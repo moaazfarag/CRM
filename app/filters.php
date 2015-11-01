@@ -82,7 +82,9 @@ Route::filter('guest', function()
 |
 */
 Route::filter('filter','FilterController@filter');
-Route::filter('canAddTrans','FilterController@canAddTrans');
+Route::filter('canTrans','FilterController@canTrans');
+Route::filter('canViewTrans','FilterController@canViewTrans');
+Route::filter('canViewOneTrans','FilterController@canViewOneTrans');
 //Route::filter('canAddBranch', function($route, $request, $value)
 //{
 //dd($route);

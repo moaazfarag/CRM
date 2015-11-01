@@ -104,11 +104,15 @@ class UserController extends BaseController
         $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
         if ($data['user']->permission) {
             $array = json_decode($data['user']->permission, true);
-            $data['groupPermissions'] = array_replace_recursive(PermissionController::setPermission(), $array);
+            if (count($array)>0){
+                $data['groupPermissions'] = array_replace_recursive(PermissionController::setPermission(), $array);
+            }else{
+                $data['groupPermissions'] = PermissionController::setPermission();
+            }
         } else {
             $data['groupPermissions'] = PermissionController::setPermission();
         }
-//        dd(json_decode($data['groupPermissions'])->company);
+
         $data['button'] = $edit;
         $data['title'] = $editUser;
         if ($data['user']) {

@@ -17,7 +17,7 @@ class usersSeeder extends Seeder {
 	    	'name'       =>'mohamed',
 	    	'username'  =>'admin',
 	    	'email'      =>'mohamed@yahoo.com',
-	    	'password'   =>Hash::Make('14781478'),
+	    	'password'   =>Hash::Make('123456'),
 	    	'permission' =>'1',
 	    	'photo'      =>'image.jpg',
 	    ),
