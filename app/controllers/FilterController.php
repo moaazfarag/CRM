@@ -89,8 +89,9 @@ class FilterController extends BaseController
     {
         $bCtrl = new BaseController;
         $uri = explode('/', Request::path());
-        $type = $uri[count($uri)-2];
-        $balances = ['ItemBalance'];
+        $link = explode('-',end($uri));
+        $type = $link[count($link)-3];
+        $balances = ['itemBalance'];
         $settles  = ['settleAdd','settleDown'];
         if(in_array($type,$balances)){
             $group = "balances";
@@ -104,7 +105,8 @@ class FilterController extends BaseController
         } else {
             if (Route::currentRouteName() == 'addTrans') {
                 if (!$bCtrl->isHaveBranch()) {
-                    if (end($uri) != Auth::user()->br_id) {
+                    if ($link[count($link)-2] != Auth::user()->br_id) {
+                        dd($link[count($link)-2]);
                         return View::make('errors.missing');
                     }
                 }

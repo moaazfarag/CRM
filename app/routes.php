@@ -167,7 +167,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('returns-invoice-data', array('uses' => 'TransController@returnsInvoiceData', 'as' => 'itemsData'));
         });
         Route::get('all/{type}/{br_id}', array('before' => 'canViewTrans', 'uses' => 'TransController@viewTransactions', 'as' => 'viewTransactions'));
-        Route::get('{type}!*@hsghd&{br_id}!*@hsghd&{invoice_no}', array('before' => 'canViewOneTrans', 'uses' => 'TransController@viewTransaction', 'as' => 'viewTransaction'));
+        Route::get('{type}-{br_id}-{invoice_no}', array('before' => 'canViewOneTrans', 'uses' => 'TransController@viewTransaction', 'as' => 'viewTransaction'));
 
         Route::post('accounts-data', array('uses' => 'TransController@accountsData', 'as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'TransController@accountById', 'as' => 'accountById'));
