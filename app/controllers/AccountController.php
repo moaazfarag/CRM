@@ -265,10 +265,10 @@ class AccountController extends BaseController
                 'partners'  => 'جارى الشركاء',
                 'bank'      => 'البنك',
             );
-
+            $data['branch']      = $this->isAllBranch();
             $data['title'] = 'تعديل حركة مباشرة';
             $data['company']       = CoData::find(Auth::user()->co_id);
-            $data['rowsData']      = AccountTrans::company()->where('type', 'direct_movement')->get();
+            $data['rowsData']   = AccountTrans::company()->whereIn('trans_type',['catch','pay'])->get();
             $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
 
 //        var_dump($data['rowsData']); die();
@@ -355,7 +355,7 @@ class AccountController extends BaseController
 
     }
 
-    public function resultAccounts(){
+    public function resultAccounts($type){
 
         // VALIDATION
 
@@ -366,8 +366,6 @@ class AccountController extends BaseController
             return Redirect::to('resultAccounts')->withInput()->withErrors($validation->messages());
         }else{
 
-            // CHECK TYPE
-            $type  = $inputs['type'];
             $types = array('customers','suppliers','bank','partners','expenses','multiple_revenue');
 
             if(in_array($type,$types)){
@@ -730,8 +728,11 @@ class AccountController extends BaseController
             return Redirect::back()->withInput()->withErrors($validation->messages());
 
         }else{
-
-            $br_id          = $inputs['br_id'];
+            if ($this->isHaveBranch()) {
+                $br_id          = $inputs['br_id'];
+            }else{
+                $br_id          = Auth::user()->br_id;
+            }
             $date_from      = $this->strToTime($inputs['date_from']);
             $date_to        = $this->strToTime($inputs['date_to']);
 

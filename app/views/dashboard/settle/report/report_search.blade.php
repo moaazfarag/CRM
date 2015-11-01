@@ -19,7 +19,7 @@
 
         </div>
     </div>
-    {{ Form::open(array('route'=>array('reportSettleResult'))) }}
+    {{ Form::open(array('route'=>array('reportSettleResult',$type))) }}
     <div class=" card ">
         <div class="title">
             <h5>

@@ -153,7 +153,7 @@
       </div>
 
     </div>
-    <!-- /Store Settings -->
+    <!--    /Store Settings -->
 
 
 

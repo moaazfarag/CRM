@@ -25,7 +25,7 @@
         </div>
         <div class="content no-print">
 
-        {{ Form::open(array('route'=>'resultAccounts','name'=>'form_search')) }}
+        {{ Form::open(array('route'=>array('resultAccounts',$type),'name'=>'form_search')) }}
 
             <div class="row">
                 <div class="col s12 l3">

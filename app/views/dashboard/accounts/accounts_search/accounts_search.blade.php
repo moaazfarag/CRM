@@ -25,7 +25,7 @@
         </div>
         <div class="content">
 
-            {{ Form::open(array('route'=>'resultAccounts','data-parsley-validate')) }}
+            {{ Form::open(array('route'=>array('resultAccounts',$type),'data-parsley-validate')) }}
 
          <div class="row">
             <div class="col s12 l3">

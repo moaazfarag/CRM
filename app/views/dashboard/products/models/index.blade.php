@@ -15,8 +15,7 @@
             </div>
             <div class="content">
                 @include('include.messages')
-
-                {{--{{ dd($editSeason->name) }}--}}
+                @if(PerC::isShow('main_info','mark_model','edit', "editModel" )||PerC::isShow('main_info','mark_model','add', "addModel" ))
                 @if(isset($editModel->name))
                     {{ Form::model($editModel,array('route'=>array('updateModel',$editModel->id))) }}
                 @else
@@ -53,12 +52,6 @@
 
                     </div>
                 </div>
-                <div class="input-field">
-                    {{--<p>--}}
-                    {{--<label for="cat_name">ادخال المورد اجباري عند تعريف الصنف </label>--}}
-                    {{--{{ Form::checkbox('cat_name', 1,null,array('id'=>'cat_name')) }}--}}
-                    {{--</p>--}}
-                </div>
                 <div class="row">
                     <div class="col s12 l12">
 
@@ -73,8 +66,13 @@
                         <hr/>
                     </div>
                 </div>
+                                @endif
             </div>
+                        <br/>
+                                    @if(PerC::isShow('main_info','mark_model','show'))
+                                                        <hr/>
             @include('dashboard.products._table_view')
+                                    @endif
         </div>
     </div>
     <!-- /عرض الفروع -->

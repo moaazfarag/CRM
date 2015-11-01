@@ -16,23 +16,23 @@ class PermissionController extends BaseController
         'invoices'           =>['buy','sales','salesReturn','buyReturn'],
         'p_general_accounts'   =>['p_directMovement','p_dailyTreasury','p_customers','p_suppliers','p_bank','p_partners','p_expenses','p_multiple_revenue'],
         'p_reports_hr'         =>['p_outgoingSalaries'],
-        'p_reports_stores'     =>['p_settleAdd','p_settleDown','p_itemsCard','p_inventoryStore','p_balanceStores','p_evaluation_stores'],
+        'p_reports_stores'     =>['p_settleAdd','p_settleDown','p_itemsCard','p_inventoryStore','p_balanceStores','p_evaluationStores'],
         'p_reports_invoices'   =>['p_sales','p_sumSales','p_salesReturn','p_sumSalesReturn','p_buy','p_sumBuy','p_buyReturn','p_sumBuyReturn','p_salesEarnings'],
     ];
     /*
      * set  permission array
      */
-    public static function setPermission()
+    public static function setPermission($all = null)
     {
         $emptyPerm = self::$basePermission;
         foreach($emptyPerm   as $group => $pre){
             foreach($pre as  $v){
                 $permission[$group][$v]=
                     [
-                        'add' =>    Input::get('add_'.$v),
-                        'edit'=>   Input::get('edit_'.$v),
-                        'delete'=> Input::get('delete_'.$v),
-                        'show'=>   Input::get('show_'.$v)
+                        'add' =>   ($all)?1:Input::get('add_'.$v),
+                        'edit'=>   ($all)?1:Input::get('edit_'.$v),
+                        'delete'=> ($all)?1:Input::get('delete_'.$v),
+                        'show'=>   ($all)?1:Input::get('show_'.$v)
                     ];
             }
         }
@@ -55,5 +55,21 @@ class PermissionController extends BaseController
                     ?Session::get('permission')[$group][$section][$type]
                     :null;
     }
+    public static function isShow($group,$section,$types,$routeName = null)
+    {
+
+        if($routeName){
+            if($routeName !=  Route::currentRouteName()){
+                return false;
+            }
+        }
+        $types_ = explode('_', $types);
+        foreach($types_ as $type){
+            if(self::isSession($group,$section,$type)){
+                return true;
+            }
+        }
+    }
+
 
 }

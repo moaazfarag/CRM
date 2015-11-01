@@ -15,8 +15,7 @@
             </div>
             <div class="content">
                 @include('include.messages')
-
-                {{--{{ dd($editSeason->name) }}--}}
+                @if(PerC::isShow('main_info','season','edit', "editSeason" )||PerC::isShow('main_info','season','add', "addSeason" ))
                 @if(isset($editSeason->name))
                     {{ Form::model($editSeason,array('route'=>array('updateSeason',$editSeason->id))) }}
                 @else
@@ -54,13 +53,17 @@
                         @endif
 
                         {{ Form::close() }}
-                        <br/>
-                        <hr/>
+
                     </div>
                 </div>
+                                               @endif
             </div>
+            <br/>
+                        @if(PerC::isShow('main_info','season','show'))
 
+                <hr/>
             @include('dashboard.products._table_view')
+                        @endif
 
         </div>
     </div>

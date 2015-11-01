@@ -43,14 +43,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
      */
     Route::get('up', 'AccountController@run');
     Route::get('/', array('uses' => 'dashboardController@index', 'as' => 'index'));
-    Route::get('setting', array('before' => 'filter:main_info:company:add', 'uses' => 'CompanyController@editCompanyInfo', 'as' => 'editCompanyInfo'));
-    Route::post('updateSetting/{id}', array('before' => 'csrf|filter:main_info:company:add', 'uses' => 'CompanyController@updateCompanyInfo', 'as' => 'updateCompanyInfo'));
+    Route::get('setting', array('before' => 'filter:main_info:company:edit_show', 'uses' => 'CompanyController@editCompanyInfo', 'as' => 'editCompanyInfo'));
+    Route::post('updateSetting/{id}', array('before' => 'csrf|filter:main_info:company:edit', 'uses' => 'CompanyController@updateCompanyInfo', 'as' => 'updateCompanyInfo'));
     /**
      * Branch Area
      */
+    Route::get('addBranch/', array('before' => 'filter:main_info:branch:show_edit_add','uses' => 'BranchController@addBranch', 'as' => 'addBranch'));//add branch
     Route::group(array('before' => 'filter:main_info:branch:add'), function () {
-        Route::get('addBranch/', array('uses' => 'BranchController@addBranch', 'as' => 'addBranch'));//add branch
-        Route::post('storeBranch/', array('before' => 'csrf|canAddBranch', 'uses' => 'BranchController@storeBranch', 'as' => 'storeBranch'));
+        Route::post('storeBranch/', array('before' => 'csrf|filter:main_info:branch:add', 'uses' => 'BranchController@storeBranch', 'as' => 'storeBranch'));
     });
     Route::group(array('before' => 'filter:main_info:branch:edit'), function () {
         Route::get('editBranch/', array('before' => 'filter:main_info:branch:edit', 'uses' => 'BranchController@editBranch', 'as' => 'editBranch'));
@@ -60,8 +60,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Category Area
      */
+    Route::get('addCategory', array('before' => 'filter:main_info:cat:show_edit_add','uses' => 'CategoryController@addCategory', 'as' => 'addCategory'));
     Route::group(array('before' => 'filter:main_info:cat:add'), function () {
-        Route::get('addCategory', array('uses' => 'CategoryController@addCategory', 'as' => 'addCategory'));
         Route::post('storeCategory', array('before' => 'csrf', 'uses' => 'CategoryController@storeCategory', 'as' => 'storeCategory'));
     });
     Route::group(array('before' => 'filter:main_info:cat:edit'), function () {
@@ -72,21 +72,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Season Area
      */
+    Route::get('addSeason', array('before' => 'filter:main_info:cat:show_edit_add','uses' => 'SeasonController@addSeason', 'as' => 'addSeason'));
     Route::group(array('before' => 'filter:main_info:season:add'), function () {
-        Route::get('addSeason', array('uses' => 'SeasonController@addSeason', 'as' => 'addSeason'));
         Route::post('storeSeason', array('before' => 'csrf', 'uses' => 'SeasonController@storeSeason', 'as' => 'storeSeason'));
     });
+    Route::get('editSeason/{id}', array('before' => 'filter:main_info:season:show_edit_add','uses' => 'SeasonController@editSeason', 'as' => 'editSeason'));
     Route::group(array('before' => 'filter:main_info:season:edit'), function () {
-        Route::get('editSeason/{id}', array('uses' => 'SeasonController@editSeason', 'as' => 'editSeason'));
         Route::post('updateSeason/{id}', array('before' => 'csrf', 'uses' => 'SeasonController@updateSeason', 'as' => 'updateSeason'));
     });
     Route::get('deleteSeason/{id}', array('before' => 'filter:main_info:season:delete', 'uses' => 'SeasonController@deleteSeason', 'as' => 'deleteSeason'));
 
 //    markes area
+    Route::get('addMark', array('before' => 'filter:main_info:mark_model:show_edit_add','uses' => 'MarkesController@addMark', 'as' => 'addMark'));
+    Route::get('addModel', array('before' => 'filter:main_info:mark_model:show_edit_add','uses' => 'ModelsController@addModel', 'as' => 'addModel'));
     Route::group(array('before' => 'filter:main_info:mark_model:add'), function () {
-        Route::get('addMark', array('uses' => 'MarkesController@addMark', 'as' => 'addMark'));
         Route::post('storeMark', array('before' => 'csrf', 'uses' => 'MarkesController@storeMark', 'as' => 'storeMark'));
-        Route::get('addModel', array('uses' => 'ModelsController@addModel', 'as' => 'addModel'));
         Route::post('storeModel', array('before' => 'csrf', 'uses' => 'ModelsController@storeModel', 'as' => 'storeModel'));
     });
     Route::group(array('before' => 'filter:main_info:mark_model:edit'), function () {
@@ -115,12 +115,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Account Area
      */
-    Route::group(array('prefix' => 'account'), function () {
+    Route::group(array('prefix' => 'account', 'before' => 'filter:main_info:add_account:add'), function () {
         Route::get('{accountType}', array('uses' => 'AccountController@addAccount', 'as' => 'addAccount'));
-        Route::get('{editAccount}/{id}', array('uses' => 'AccountController@editAccount', 'as' => 'editAccount'));
         Route::post('storeAccount/{accountType}', array('before' => 'csrf', 'uses' => 'AccountController@storeAccount', 'as' => 'storeAccount'));
+    });
+    Route::group(array('prefix' => 'account', 'before' => 'filter:main_info:add_account:edit'), function () {
+        Route::get('{editAccount}/{id}', array('uses' => 'AccountController@editAccount', 'as' => 'editAccount'));
         Route::post('updateAccount/{accountType}/{id}', array('before' => 'csrf', 'uses' => 'AccountController@updateAccount', 'as' => 'updateAccount'));
-//    Route::post('{accountType}/{id}',array('uses'=>'AccountController@storeAccount','as'=>'storeAccount'));
     });
     /**
      * Users Area
@@ -167,7 +168,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('returns-invoice-data', array('uses' => 'TransController@returnsInvoiceData', 'as' => 'itemsData'));
         });
         Route::get('all/{type}/{br_id}', array('before' => 'canViewTrans', 'uses' => 'TransController@viewTransactions', 'as' => 'viewTransactions'));
-        Route::get('{type}!*@hsghd&{br_id}!*@hsghd&{invoice_no}', array('before' => 'canViewOneTrans', 'uses' => 'TransController@viewTransaction', 'as' => 'viewTransaction'));
+        Route::get('{type}!*@hsghd&{br_id}!*@@#$)(&{invoice_no}', array('before' => 'canViewOneTrans', 'uses' => 'TransController@viewTransaction', 'as' => 'viewTransaction'));
 
         Route::post('accounts-data', array('uses' => 'TransController@accountsData', 'as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'TransController@accountById', 'as' => 'accountById'));
@@ -179,120 +180,159 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
 
     Route::group(array('prefix' => 'hr'), function () {
-        Route::get('Add-Employees', array('uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
-        Route::post('Store-Employees', array('before' => 'csrf', 'uses' => 'EmployeesController@storeEmp', 'as' => 'storeEmp'));
-        Route::get('Edit-Employees/{id}', array('uses' => 'EmployeesController@editEmp', 'as' => 'editEmp'));
-        Route::post('Update-Employees/{id}', array('before' => 'csrf', 'uses' => 'EmployeesController@updateEmp', 'as' => 'updateEmp'));
-        Route::post('employee-dep-dis-data', array('uses' => 'EmployeesController@employeeDepDisData', 'as' => 'employeeDepDisData'));
-        Route::post('store-emp-des-ded-pop', array('uses' => 'EmployeeDeductionController@storeEmpdesdedPop', 'as' => 'storeEmpdesdedPop'));
-        Route::delete('delete-emp-des-ded-pop/{id}', array('uses' => 'EmployeeDeductionController@deleteEmpdesdedPop', 'as' => 'deleteEmpdesdedPop'));
+        Route::group(array('before' => 'filter:hr:Employee:add'), function () {
+            Route::get('Add-Employees', array('uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
+            Route::post('Store-Employees', array('before' => 'csrf', 'uses' => 'EmployeesController@storeEmp', 'as' => 'storeEmp'));
+        });
+        Route::group(array('before' => 'filter:hr:Employee:edit'), function () {
+            Route::get('Edit-Employees/{id}', array('uses' => 'EmployeesController@editEmp', 'as' => 'editEmp'));
+            Route::post('Update-Employees/{id}', array('before' => 'csrf', 'uses' => 'EmployeesController@updateEmp', 'as' => 'updateEmp'));
+            Route::post('employee-dep-dis-data', array('uses' => 'EmployeesController@employeeDepDisData', 'as' => 'employeeDepDisData'));
+            Route::post('store-emp-des-ded-pop', array('uses' => 'EmployeeDeductionController@storeEmpdesdedPop', 'as' => 'storeEmpdesdedPop'));
+        });
 
+        Route::delete('delete-emp-des-ded-pop/{id}', array('before' => 'filter:hr:Employee:delete', 'uses' => 'EmployeeDeductionController@deleteEmpdesdedPop', 'as' => 'deleteEmpdesdedPop'));
 
         //Departments Page
-        Route::get('addDep', array('uses' => 'DepartmentController@addDep', 'as' => 'addDep'));
-        Route::post('storeDep', array('before' => 'csrf', 'uses' => 'DepartmentController@storeDep', 'as' => 'storeDep'));
-        Route::get('editDep/{id}', array('uses' => 'DepartmentController@editDep', 'as' => 'editDep'));
-        Route::post('updateDep/{id}', array('before' => 'csrf', 'uses' => 'DepartmentController@updateDep', 'as' => 'updateDep'));
-        Route::get('deleteDep/{id}', array('uses' => 'DepartmentController@deleteDep', 'as' => 'deleteDep'));
+        Route::group(array('before' => 'filter:hr:Departments:add'), function () {
+            Route::get('addDep', array('uses' => 'DepartmentController@addDep', 'as' => 'addDep'));
+            Route::post('storeDep', array('before' => 'csrf', 'uses' => 'DepartmentController@storeDep', 'as' => 'storeDep'));
+        });
+        Route::group(array('before' => 'filter:hr:Departments:edit'), function () {
+            Route::get('editDep/{id}', array('uses' => 'DepartmentController@editDep', 'as' => 'editDep'));
+            Route::post('updateDep/{id}', array('before' => 'csrf', 'uses' => 'DepartmentController@updateDep', 'as' => 'updateDep'));
+        });
+        Route::get('deleteDep/{id}', array('before' => 'filter:hr:Departments:delete', 'uses' => 'DepartmentController@deleteDep', 'as' => 'deleteDep'));
 
 //        Route::get('deleteDep/{id}','DepartmentController@deleteDep');
 
         //Job Page
-        Route::get('addJob', array('uses' => 'JobController@addJob', 'as' => 'addJob'));
-        Route::post('storeJob', array('before' => 'csrf', 'uses' => 'JobController@storeJob', 'as' => 'storeJob'));
-        Route::get('editJob/{id}', array('uses' => 'JobController@editJob', 'as' => 'editJob'));
-        Route::post('updateJob/{id}', array('before' => 'csrf', 'uses' => 'JobController@updateJob', 'as' => 'updateJob'));  //Job Page
-        Route::get('deleteJob/{id}', array('uses' => 'JobController@deleteJob', 'as' => 'deleteJob'));
+        Route::group(array('before' => 'filter:hr:jobs:add'), function () {
+            Route::get('addJob', array('uses' => 'JobController@addJob', 'as' => 'addJob'));
+            Route::post('storeJob', array('before' => 'csrf', 'uses' => 'JobController@storeJob', 'as' => 'storeJob'));
+        });
+        Route::group(array('before' => 'filter:hr:jobs:edit'), function () {
+            Route::get('editJob/{id}', array('uses' => 'JobController@editJob', 'as' => 'editJob'));
+            Route::post('updateJob/{id}', array('before' => 'csrf', 'uses' => 'JobController@updateJob', 'as' => 'updateJob'));  //Job Page
+        });
+        Route::get('deleteJob/{id}', array('before' => 'filter:hr:jobs:delete', 'uses' => 'JobController@deleteJob', 'as' => 'deleteJob'));
 
 
         //Loans Page
-        Route::get('addLoans', array('uses' => 'LoansController@addLoans', 'as' => 'addLoans'));
-        Route::post('storeLoans', array('before' => 'csrf', 'uses' => 'LoansController@storeLoans', 'as' => 'storeLoans'));
-        Route::get('editLoans/{id}', array('uses' => 'LoansController@editLoans', 'as' => 'editLoans'));
-        Route::post('updateLoans/{id}', array('before' => 'csrf', 'uses' => 'LoansController@updateLoans', 'as' => 'updateLoans'));
-
+        Route::group(array('before' => 'filter:hr:loans:add'), function () {
+            Route::get('addLoans', array('uses' => 'LoansController@addLoans', 'as' => 'addLoans'));
+            Route::post('storeLoans', array('before' => 'csrf', 'uses' => 'LoansController@storeLoans', 'as' => 'storeLoans'));
+        });
+        Route::group(array('before' => 'filter:hr:loans:edit'), function () {
+            Route::get('editLoans/{id}', array('uses' => 'LoansController@editLoans', 'as' => 'editLoans'));
+            Route::post('updateLoans/{id}', array('before' => 'csrf', 'uses' => 'LoansController@updateLoans', 'as' => 'updateLoans'));
+        });
         //Deduction  Page
-        Route::get('addDesded', array('uses' => 'DeductionController@addDesded', 'as' => 'addDesded'));
-        Route::post('storeDesded', array('before' => 'csrf', 'uses' => 'DeductionController@storeDesded', 'as' => 'storeDesded'));
-        Route::get('editDesded/{id}', array('uses' => 'DeductionController@editDesded', 'as' => 'editDesded'));
-        Route::post('updateDesded/{id}', array('before' => 'csrf', 'uses' => 'DeductionController@updateDesded', 'as' => 'updateDesded'));
-        Route::get('deleteDesded/{id}', array('uses' => 'DeductionController@deleteDesded', 'as' => 'deleteDesded'));
+        Route::group(array('before' => 'filter:hr:Desdeds:add'), function () {
+            Route::get('addDesded', array('uses' => 'DeductionController@addDesded', 'as' => 'addDesded'));
+            Route::post('storeDesded', array('before' => 'csrf', 'uses' => 'DeductionController@storeDesded', 'as' => 'storeDesded'));
+        });
+        Route::group(array('before' => 'filter:hr:Desdeds:edit'), function () {
+            Route::get('editDesded/{id}', array('uses' => 'DeductionController@editDesded', 'as' => 'editDesded'));
+            Route::post('updateDesded/{id}', array('before' => 'csrf', 'uses' => 'DeductionController@updateDesded', 'as' => 'updateDesded'));
+        });
+        Route::get('deleteDesded/{id}', array('before' => 'filter:hr:Desdeds:delete', 'uses' => 'DeductionController@deleteDesded', 'as' => 'deleteDesded'));
 
         //EmpDesDed Page
-        Route::get('addEmpdesded', array('uses' => 'EmployeeDeductionController@addEmpdesded', 'as' => 'addEmpdesded'));
-        Route::post('storeEmpdesded', array('before' => 'csrf', 'uses' => 'EmployeeDeductionController@storeEmpdesded', 'as' => 'storeEmpdesded'));
-        Route::get('editEmpdesded/{id}', array('uses' => 'EmployeeDeductionController@editEmpdesded', 'as' => 'editEmpdesded'));
-        Route::post('updateEmpdesded/{id}', array('before' => 'csrf', 'uses' => 'EmployeeDeductionController@updateEmpdesded', 'as' => 'updateEmpdesded'));
-        Route::get('deleteEmpdesded/{id}', array('uses' => 'EmployeeDeductionController@deleteEmpdesded', 'as' => 'deleteEmpdesded'));
+        Route::group(array('before' => 'filter:hr:Empdesded:add'), function () {
+            Route::get('addEmpdesded', array('uses' => 'EmployeeDeductionController@addEmpdesded', 'as' => 'addEmpdesded'));
+            Route::post('storeEmpdesded', array('before' => 'csrf', 'uses' => 'EmployeeDeductionController@storeEmpdesded', 'as' => 'storeEmpdesded'));
+        });
+        Route::group(array('before' => 'filter:hr:Empdesded:edit'), function () {
+            Route::get('editEmpdesded/{id}', array('uses' => 'EmployeeDeductionController@editEmpdesded', 'as' => 'editEmpdesded'));
+            Route::post('updateEmpdesded/{id}', array('before' => 'csrf', 'uses' => 'EmployeeDeductionController@updateEmpdesded', 'as' => 'updateEmpdesded'));
+        });
+        Route::get('deleteEmpdesded/{id}', array('before' => 'filter:hr:Empdesded:delete', 'uses' => 'EmployeeDeductionController@deleteEmpdesded', 'as' => 'deleteEmpdesded'));
 
 
         //ChangeMonth Page
-        Route::get('addMonthChange', array('uses' => 'MonthChangeController@addMonthChange', 'as' => 'addMonthChange'));
-        Route::post('storeMonthChange', array('before' => 'csrf', 'uses' => 'MonthChangeController@storeMonthChange', 'as' => 'storeMonthChange'));
-        Route::get('editMonthChange/{id}', array('uses' => 'MonthChangeController@editMonthChange', 'as' => 'editMonthChange'));
-        Route::post('updateMonthChange/{id}', array('before' => 'csrf', 'uses' => 'MonthChangeController@updateMonthChange', 'as' => 'updateMonthChange'));
-
-        Route::get('month-salary-search', array('uses' => 'MsHeaderController@monthSalarySearch', 'as' => 'monthSalarySearch'));
-        Route::post('storeMsHeader', array('before' => 'csrf', 'uses' => 'MsHeaderController@storeMsHeader', 'as' => 'storeMsHeader'));
-        Route::post('prepMsHeader', array('before' => 'csrf', 'uses' => 'MsHeaderController@prepMsHeader', 'as' => 'prepMsHeader'));
-        Route::get('printReceipt', array('uses' => 'MsHeaderController@printReceipt', 'as' => 'printReceipt'));
-        Route::post('readyToPay', array('before' => 'csrf', 'uses' => 'MsHeaderController@readyToPay', 'as' => 'readyToPay'));
-
+        Route::group(array('before' => 'filter:hr:MonthChange:add'), function () {
+            Route::get('addMonthChange', array('uses' => 'MonthChangeController@addMonthChange', 'as' => 'addMonthChange'));
+            Route::post('storeMonthChange', array('before' => 'csrf', 'uses' => 'MonthChangeController@storeMonthChange', 'as' => 'storeMonthChange'));
+        });
+        Route::group(array('before' => 'filter:hr:MonthChange:edit'), function () {
+            Route::get('editMonthChange/{id}', array('uses' => 'MonthChangeController@editMonthChange', 'as' => 'editMonthChange'));
+            Route::post('updateMonthChange/{id}', array('before' => 'csrf', 'uses' => 'MonthChangeController@updateMonthChange', 'as' => 'updateMonthChange'));
+        });
+        Route::group(array('before' => 'filter:hr:salariesProcessing:show'), function () {
+            Route::get('month-salary-search', array('uses' => 'MsHeaderController@monthSalarySearch', 'as' => 'monthSalarySearch'));
+            Route::post('storeMsHeader', array('before' => 'csrf', 'uses' => 'MsHeaderController@storeMsHeader', 'as' => 'storeMsHeader'));
+            Route::post('prepMsHeader', array('before' => 'csrf', 'uses' => 'MsHeaderController@prepMsHeader', 'as' => 'prepMsHeader'));
+            Route::get('printReceipt', array('uses' => 'MsHeaderController@printReceipt', 'as' => 'printReceipt'));
+            Route::post('readyToPay', array('before' => 'csrf', 'uses' => 'MsHeaderController@readyToPay', 'as' => 'readyToPay'));
+        });
     });
 
     Route::group(array('prefix' => 'report'), function () {
         // outgoing-salaries
-        Route::get('search-outgoing-salaries', array('uses' => 'MsHeaderController@searchOutgoingSalariesReport', 'as' => 'searchOutgoingSalariesReport'));
-        Route::get('view-outgoing-salaries-details/{id}', array('uses' => 'MsHeaderController@ViewOutGoingSalariesDetails', 'as' => 'ViewOutGoingSalariesDetails'));
-        Route::post('the-outgoing-salaries', array('before' => 'csrf', 'uses' => 'MsHeaderController@outGoingSalariesReport', 'as' => 'outGoingSalariesReport'));
-
+        Route::group(array('before' => 'filter:p_reports_hr:p_outgoingSalaries:show'), function () {
+            Route::get('search-outgoing-salaries', array('uses' => 'MsHeaderController@searchOutgoingSalariesReport', 'as' => 'searchOutgoingSalariesReport'));
+            Route::get('view-outgoing-salaries-details/{id}', array('uses' => 'MsHeaderController@ViewOutGoingSalariesDetails', 'as' => 'ViewOutGoingSalariesDetails'));
+            Route::post('the-outgoing-salaries', array('before' => 'csrf', 'uses' => 'MsHeaderController@outGoingSalariesReport', 'as' => 'outGoingSalariesReport'));
+        });
         // settels
-        Route::get('search-settle/{type}', array('uses' => 'SettleController@reportSettleSearch', 'as' => 'reportSettleSearch'));
-        Route::post('settles/', array('uses' => 'SettleController@reportSettleResult', 'as' => 'reportSettleResult'));
-
+        Route::group(array('before' => 'canShowSettle'), function () {
+            Route::get('search-settle/{type}', array('uses' => 'SettleController@reportSettleSearch', 'as' => 'reportSettleSearch'));
+            Route::post('settles/{type}', array('uses' => 'SettleController@reportSettleResult', 'as' => 'reportSettleResult'));
+        });
         // invoices
-
-        Route::get('search-invoices/{type}/{sum?}', array('uses' => 'InvoiceController@reportSearchInvoice', 'as' => 'searchReportInvoices'));
-        Route::post('invoices/', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
-
+        Route::group(array('before' => 'canShowSettle'), function () {
+            Route::get('search-invoices/{type}/{sum?}', array('uses' => 'InvoiceController@reportSearchInvoice', 'as' => 'searchReportInvoices'));
+            Route::post('invoices/', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
+        });
         // item card
-        Route::get('items-card/items', array('uses' => 'ItemController@searchItemCard', 'as' => 'searchItemCard'));
-        Route::post('items-card-result/', array('uses' => 'ItemController@reportResultItemCard', 'as' => 'reportResultItemCard'));
-
+        Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {
+            Route::get('items-card/items', array('uses' => 'ItemController@searchItemCard', 'as' => 'searchItemCard'));
+            Route::post('items-card-result/', array('uses' => 'ItemController@reportResultItemCard', 'as' => 'reportResultItemCard'));
+        });
         // Balances Stores
-        Route::get('search-the-balance-of-the-stores/{type}', array('uses' => 'ItemController@searchTheBalanceOfTheStores', 'as' => 'searchTheBalanceOfTheStores'));
-        Route::post('result-the-balance-of-the-stores', array('uses' => 'ItemController@resultTheBalanceOfTheStores', 'as' => 'resultTheBalanceOfTheStores'));
-        Route::post('inventory-store', array('uses' => 'ItemController@inventoryResult', 'as' => 'inventoryResult'));
+        Route::group(array('before' => 'canShowSettle'), function () {
+            Route::get('search-the-balance-of-the-stores/{type}', array('uses' => 'ItemController@searchTheBalanceOfTheStores', 'as' => 'searchTheBalanceOfTheStores'));
+            Route::post('result-the-balance-of-the-stores/{type}', array('uses' => 'ItemController@resultTheBalanceOfTheStores', 'as' => 'resultTheBalanceOfTheStores'));
+        });
+        Route::post('inventory-store', array('before' => 'filter:p_reports_stores:p_inventoryStore:show', 'uses' => 'ItemController@inventoryResult', 'as' => 'inventoryResult'));
 
     });
 
-    Route::get('test', array('uses' => 'TestController@index', 'as' => 'testIndex'));
-    Route::get('addtest', array('uses' => 'TestController@addTest', 'as' => 'addTest'));
-    Route::delete('testdelete/{id}', array('uses' => 'TestController@destroy', 'as' => 'testdelete'));
-    Route::get('tests', array('uses' => 'TestController@view', 'as' => 'testsIndex'));
+//    Route::get('test', array('uses' => 'TestController@index', 'as' => 'testIndex'));
+//    Route::get('addtest', array('uses' => 'TestController@addTest', 'as' => 'addTest'));
+//    Route::delete('testdelete/{id}', array('uses' => 'TestController@destroy', 'as' => 'testdelete'));
+//    Route::get('tests', array('uses' => 'TestController@view', 'as' => 'testsIndex'));
 
 
     Route::group(array('prefix' => 'accounts'), function () {
-
         // direct movement
-        Route::get('add-direct-movement', array('uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
-        Route::post('store-direct-movement', array('uses' => 'AccountController@storeDirectMovement', 'as' => 'storeDirectMovement'));
-        Route::get('edit-direct-movement/{id}', array('uses' => 'AccountController@editDirectMovement', 'as' => 'editDirectMovement'));
-        Route::post('update-direct-movement/{id}', array('uses' => 'AccountController@updateDirectMovement', 'as' => 'updateDirectMovement'));
-
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
+            Route::get('add-direct-movement', array('uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
+            Route::post('store-direct-movement', array('uses' => 'AccountController@storeDirectMovement', 'as' => 'storeDirectMovement'));
+        });
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:edit'), function () {
+            Route::get('edit-direct-movement/{id}', array('uses' => 'AccountController@editDirectMovement', 'as' => 'editDirectMovement'));
+            Route::post('update-direct-movement/{id}', array('uses' => 'AccountController@updateDirectMovement', 'as' => 'updateDirectMovement'));
+        });
         // Daily treasury
-        Route::get('daily-treasury-search', array('uses' => 'AccountController@dailyTreasurySearch', 'as' => 'dailyTreasurySearch'));
-        Route::post('daily-treasury-result', array('uses' => 'AccountController@dailyTreasuryResult', 'as' => 'dailyTreasuryResult'));
-        Route::post('daily-treasury-add-direct-movement', array('uses' => 'AccountController@dailyTreasuryAddDirectMovement', 'as' => 'dailyTreasuryAddDirectMovement'));
-        Route::get('result-search-daily-treasury', array('uses' => 'AccountController@resultSearchDailyTreasury', 'as' => 'resultSearchDailyTreasury'));
-
-
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
+            Route::get('daily-treasury-search', array('uses' => 'AccountController@dailyTreasurySearch', 'as' => 'dailyTreasurySearch'));
+            Route::post('daily-treasury-result', array('uses' => 'AccountController@dailyTreasuryResult', 'as' => 'dailyTreasuryResult'));
+        });
+        Route::group(array('before' => 'filter:p_general_accounts:p_dailyTreasury:add'), function () {
+            Route::get('result-search-daily-treasury', array('uses' => 'AccountController@resultSearchDailyTreasury', 'as' => 'resultSearchDailyTreasury'));
+            Route::post('daily-treasury-add-direct-movement', array('uses' => 'AccountController@dailyTreasuryAddDirectMovement', 'as' => 'dailyTreasuryAddDirectMovement'));
+        });
         //  accounts ( customers ,suppliers ,bank ,partners )
-        Route::get('search-accounts/{type}', array('uses' => 'AccountController@searchAccounts', 'as' => 'searchAccounts'));
-        Route::post('result-accounts', array('uses' => 'AccountController@resultAccounts', 'as' => 'resultAccounts'));
-        Route::post('add-new-direct-movement', array('uses' => 'AccountController@accountsAddNewDirectMovement', 'as' => 'addNewDirectMovement'));
-        Route::get('result-search-account', array('uses' => 'AccountController@resultSearchAccounts', 'as' => 'resultSearchAccounts'));
-
+        Route::group(array('before' => 'canShowSettle'), function () {
+            Route::get('search-accounts/{type}', array('uses' => 'AccountController@searchAccounts', 'as' => 'searchAccounts'));
+            Route::post('result-accounts/{type}', array('uses' => 'AccountController@resultAccounts', 'as' => 'resultAccounts'));
+        });
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
+            Route::get('result-search-account', array('uses' => 'AccountController@resultSearchAccounts', 'as' => 'resultSearchAccounts'));
+            Route::post('add-new-direct-movement', array('uses' => 'AccountController@accountsAddNewDirectMovement', 'as' => 'addNewDirectMovement'));
+        });
     });
 
 
