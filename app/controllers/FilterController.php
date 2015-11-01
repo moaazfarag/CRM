@@ -88,16 +88,19 @@ class FilterController extends BaseController
     public function canViewOneTrans()
     {
         $uri = explode('/', Request::path());
-        $type = $uri[count($uri) - 2];
-        $balances = ['ItemBalance'];
-        $settles = ['settleAdd', 'settleDown'];
-        if (in_array($type, $balances)) {
+
+        $link = explode('-',end($uri));
+        $type = $link[count($link)-3];
+        $balances = ['itemBalance'];
+        $settles  = ['settleAdd','settleDown'];
+        if(in_array($type,$balances)){
             $group = "balances";
         } elseif (in_array($type, $settles)) {
             $group = "settles";
         } else {
             $group = "invoices";
         }
+
         if (!PermissionController::isSession($group, $type, 'show')) {
             return $this->makeError();
         }
@@ -132,8 +135,6 @@ class FilterController extends BaseController
             $type = 'sum_' . $uri[count($uri) - 2];
             $type = 'p_' . camel_case($type);
             $group = "p_reports_invoices";
-        } else {
-            $group = "invoices";
         }
         if (!PermissionController::isSession($group, $type, 'show')) {
             return $this->makeError();

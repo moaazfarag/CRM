@@ -54,13 +54,13 @@
         <div class="row no-margin-top">
             <div class="col s12 l1">
                 <label for="ecommerce-tel">
-                    @lang('main.phoneNum')
+                    @lang('main.phone')
                 </label>
             </div>
             <div class="col s12 l5">
                 <div class="input-field">
                     <i class="mdi mdi-communication-phone prefix"></i>
-                    <?php $phoneNum = Lang::get('main.phoneNum') ?>
+                    <?php $phoneNum = Lang::get('main.phone') ?>
                     {{--<input name="co_tel" id="ecommerce-tel" type="text" placeholder="رقم الهاتف ">--}}
                     {{ Form::text('co_tel',null,array('required','placeholder'=>$phoneNum,@$readOnly)) }}
 

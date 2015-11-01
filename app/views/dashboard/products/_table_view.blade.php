@@ -1,6 +1,4 @@
 <div class="card-panel">
-
-
     <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -26,7 +24,7 @@
             )
                 <th>@lang('main.edit')</th>
             @endif
-                                            @if(PerC::isShow('main_info','cat','delete', "editCategory" )
+            @if(PerC::isShow('main_info','cat','delete', "editCategory" )
 ||PerC::isShow('main_info','cat','delete', "addCategory" )
 || PerC::isShow('main_info','mark_model','delete', "addModel" )
 || PerC::isShow('main_info','mark_model','delete', "editModel" )
@@ -35,8 +33,8 @@
 || PerC::isShow('main_info','season','delete', "addSeason" )
 || PerC::isShow('main_info','season','delete', "editSeason" )
 )
-            <th>@lang('main.delete')</th>
-  @endif
+                <th>@lang('main.delete')</th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -63,7 +61,7 @@
                         </a>
                     </td>
                 @endif
-                                @if(PerC::isShow('main_info','cat','delete', "editCategory" )
+                @if(PerC::isShow('main_info','cat','delete', "editCategory" )
 ||PerC::isShow('main_info','cat','delete', "addCategory" )
 || PerC::isShow('main_info','mark_model','delete', "addModel" )
 || PerC::isShow('main_info','mark_model','delete', "editModel" )
@@ -72,24 +70,25 @@
 || PerC::isShow('main_info','season','delete', "addSeason" )
 || PerC::isShow('main_info','season','delete', "editSeason" )
 )
-                <td>
-                    @if(Route::currentRouteName() == 'addModel' || Route::currentRouteName() == 'editModel')
-                        <a onclick="return confirm('هل تريد بالفعل حذف  الموديل')"
-                           href="{{ URL::route('deleteModel',array($tableData->id)) }}"
-                           class="btn btn-danger red">[X]</a>
-                    @elseif(Route::currentRouteName() == 'addMark' || Route::currentRouteName() == 'editMark')
-                        <a onclick="return confirm('هل تريد بالفعل حذف  الماركة ')"
-                           href="{{ URL::route('deleteMark',array($tableData->id)) }}"
-                           class="btn btn-danger red">[X]</a>
-                    @elseif(Route::currentRouteName() == 'addCategory' || Route::currentRouteName() == 'editCategory')
-                        <a onclick="return confirm('هل تريد بالفعل حذف  فئة الصنف ')"
-                           href="{{ URL::route('deleteCategory',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
-                    @elseif(Route::currentRouteName() == 'addSeason' || Route::currentRouteName() == 'editSeason')
-                        <a onclick="return confirm('هل تريد بالفعل حذف  الموسم ')"
-                           href="{{ URL::route('deleteSeason',array($tableData->id)) }}"
-                           class="btn btn-danger red">[X]</a>
-                    @endif
-                </td>
+                    <td>
+                        @if(Route::currentRouteName() == 'addModel' || Route::currentRouteName() == 'editModel')
+                            <a onclick="return confirm('هل تريد بالفعل حذف  الموديل')"
+                               href="{{ URL::route('deleteModel',array($tableData->id)) }}"
+                               class="btn btn-danger red">[X]</a>
+                        @elseif(Route::currentRouteName() == 'addMark' || Route::currentRouteName() == 'editMark')
+                            <a onclick="return confirm('هل تريد بالفعل حذف  الماركة ')"
+                               href="{{ URL::route('deleteMark',array($tableData->id)) }}"
+                               class="btn btn-danger red">[X]</a>
+                        @elseif(Route::currentRouteName() == 'addCategory' || Route::currentRouteName() == 'editCategory')
+                            <a onclick="return confirm('هل تريد بالفعل حذف  فئة الصنف ')"
+                               href="{{ URL::route('deleteCategory',array($tableData->id)) }}"
+                               class="btn btn-danger red">[X]</a>
+                        @elseif(Route::currentRouteName() == 'addSeason' || Route::currentRouteName() == 'editSeason')
+                            <a onclick="return confirm('هل تريد بالفعل حذف  الموسم ')"
+                               href="{{ URL::route('deleteSeason',array($tableData->id)) }}"
+                               class="btn btn-danger red">[X]</a>
+                        @endif
+                    </td>
                 @endif
             </tr>
 

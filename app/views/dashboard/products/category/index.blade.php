@@ -11,6 +11,7 @@
                 <a class="minimize" href="#">
                     <i class="mdi-navigation-expand-less"></i>
                 </a>
+
             </div>
             <div class="content">
                 @include('include.messages')
