@@ -80,8 +80,8 @@
                 "tableTools": {
                   "sSwfPath": "{{ URL::asset('dashboard/assets/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf') }}"
                     ,      "aButtons": [
-                        "copy",
-                        "print",
+//                        "copy",
+//                        "print",
                          "xls"
                     ]
 

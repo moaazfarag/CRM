@@ -12,7 +12,7 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
-    {{ Form::open(array('route'=>array('resultTheBalanceOfTheStores'))) }}
+    {{ Form::open(array('route'=>array('resultTheBalanceOfTheStores',$type))) }}
     <div class=" card ">
         <div class="title">
             <h5>

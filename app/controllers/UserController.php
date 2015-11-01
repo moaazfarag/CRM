@@ -55,6 +55,7 @@ class UserController extends BaseController
         $data['company'] = CoData::find(Auth::user()->co_id);
         $data['button'] = $add;
         $data['groupPermissions'] = PermissionController::setPermission();
+
         $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
 //        dd(current($data['permissions']['company']['add']));
         $data['asideOpen'] = 'open';
@@ -104,11 +105,15 @@ class UserController extends BaseController
         $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
         if ($data['user']->permission) {
             $array = json_decode($data['user']->permission, true);
-            $data['groupPermissions'] = array_replace_recursive(PermissionController::setPermission(), $array);
+            if (count($array)>0){
+                $data['groupPermissions'] = array_replace_recursive(PermissionController::setPermission(), $array);
+            }else{
+                $data['groupPermissions'] = PermissionController::setPermission();
+            }
         } else {
             $data['groupPermissions'] = PermissionController::setPermission();
         }
-//        dd(json_decode($data['groupPermissions'])->company);
+
         $data['button'] = $edit;
         $data['title'] = $editUser;
         if ($data['user']) {
@@ -130,7 +135,6 @@ class UserController extends BaseController
         if ($oldUser) {
             $rules_update = array(
                 'password' => 'min:8',
-                'username' => 'required|unique:users,username,' . $id,
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email,' . $id,
                 'confirm_password' => 'same:password',
@@ -144,8 +148,7 @@ class UserController extends BaseController
                 $oldUser->all_br = Input::get('all_br');
                 $oldUser->name = Input::get('name');
                 $oldUser->permission = json_encode($permissions);
-                $oldUser->username = Input::get('username');
-                if(Input::has('paswword')){
+                if(Input::has('password')){
                 $oldUser->password = Hash::make(Input::get('password'));
                 }
                 $oldUser->email = Input::get('email');
@@ -193,12 +196,12 @@ class UserController extends BaseController
                     $old_user->co_id = Auth::user()->co_id;
                     $old_user->password = Hash::make(Input::get('new_password'));
                     $old_user->update();
-                    Session::flash('success', 'طھظ… طھط؛ظٹظٹط± ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط± ط¨ظ†ط¬ط§ط­');
+                    Session::flash('success','تم  تغيير كلمة المرور بنجاح');
                     return Redirect::back();
                 } else {
                     return $old_password_from_db . '<br/>' . $old_password_from_user;
 
-                    Session::flash('error', 'ط¹ظپظˆط§ظ‹ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط± ط§ظ„ظ‚ط¯ظٹظ…ط© ط؛ظٹط± طµط­ظٹط­ط©');
+                    Session::flash('error', 'كلمة المرور القديمة غير صحيحة ');
                     return Redirect::back();
 
                 }

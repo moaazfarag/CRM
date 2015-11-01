@@ -560,7 +560,7 @@ return  array(
     'p_settleDown'          => 'تسويه الخصم',
     'p_inventoryStore'      => 'جرد المخزن ',
     'p_balanceStores'       =>'ارصده المخازن',
-    'p_evaluation_stores'   =>'تقييم المخازن',
+    'p_evaluationStores'   =>'تقييم المخازن',
     'p_buy'                 =>'المشتريات',
     'p_salesReturn'         =>'مرتجع المبيعات',
     'p_sales'               =>'المبيعات',

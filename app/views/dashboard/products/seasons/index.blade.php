@@ -15,8 +15,7 @@
             </div>
             <div class="content">
                 @include('include.messages')
-
-                {{--{{ dd($editSeason->name) }}--}}
+                @if(PerC::isShow('main_info','season','edit', "editSeason" )||PerC::isShow('main_info','season','add', "addSeason" ))
                 @if(isset($editSeason->name))
                     {{ Form::model($editSeason,array('route'=>array('updateSeason',$editSeason->id))) }}
                 @else
@@ -31,7 +30,7 @@
                     </div>
                     <div class="col s12 m6 l6">
                         <div class="input-field">
-                            <i class="mdi mdi-social-person prefix"></i>
+                            <i class="wi wi-night-sleet prefix"></i>
                             <?php $name = Lang::get('main.name_of') ?>
                             {{Form::text('name',null,array('required','placeholder'=> $name .' '. @$arabicName ,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
@@ -54,13 +53,17 @@
                         @endif
 
                         {{ Form::close() }}
-                        <br/>
-                        <hr/>
+
                     </div>
                 </div>
+                                               @endif
             </div>
+            <br/>
+                        @if(PerC::isShow('main_info','season','show'))
 
+                <hr/>
             @include('dashboard.products._table_view')
+                        @endif
 
         </div>
     </div>

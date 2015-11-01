@@ -16,13 +16,12 @@
             </div>
             <div class="content">
                 @include('include.messages')
-
-                {{--{{ dd($editSeason->name) }}--}}
+                @if(PerC::isShow('main_info','mark_model','edit', "editModel" )||PerC::isShow('main_info','mark_model','add', "addModel" ) || PerC::isShow('main_info','mark_model','edit', "editMark" )||PerC::isShow('main_info','mark_model','add', "addMark" ))
                 @if(isset($editMark->name))
                     {{ Form::model($editMark,array('route'=>array('updateMark',$editMark->id))) }}
-                @else
+                    @else
                     {{ Form::open(array('route'=>'storeMark')) }}
-                @endif
+                    @endif
                 <div class="row no-margin-top">
                     <div class="col s12 l2">
                         <label for="name">
@@ -32,17 +31,11 @@
                     </div>
                     <div class="col s12 m6 l6">
                         <div class="input-field">
-                            <i class="mdi mdi-social-person prefix"></i>
+                            <i class="fa fa-ticket prefix"></i>
                             {{Form::text('name',null,array('required','placeholder'=>"اسم   ". Lang::get('main.marka'),'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
                         </div>
                     </div>
-                </div>
-                <div class="input-field">
-                    {{--<p>--}}
-                    {{--<label for="cat_name">ادخال المورد اجباري عند تعريف الصنف </label>--}}
-                    {{--{{ Form::checkbox('cat_name', 1,null,array('id'=>'cat_name')) }}--}}
-                    {{--</p>--}}
                 </div>
                 <div class="row">
                     <div class="col s12 l12">
@@ -54,19 +47,18 @@
                         @endif
 
                         {{ Form::close() }}
-                        <br/>
-                        <hr/>
+
                     </div>
                 </div>
-
+                                @endif
             </div>
+                        <br/>
+                        @if(PerC::isShow('main_info','mark_model','show'))
+                                            <hr/>
             @include('dashboard.products._table_view')
+                        @endif
         </div>
     </div>
     <!-- /عرض الفروع -->
-
-
-
-
     </section>
 @stop

@@ -1,5 +1,5 @@
 
-            <table id="table_customers" class="display table table-bordered table-striped table-hover">
+            <table id="table_customers" class="display table table-bordered  table-hover">
                 <thead>
                 <tr>
                     <th>@lang('main.serialNum')</th>
@@ -11,9 +11,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($company->users as $user)
+                @foreach($company->users as $k=>$user)
                     <tr>
-                        <th> {{ $user->id }}</th>
+                        <th>{{ $k+1 }}  </th>
                         <td> {{ $user->name }} </td>
                         <td> {{ $user->username }} </td>
                         <td> {{ $user->formattedCreatedDate() }}</td>
