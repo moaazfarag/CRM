@@ -29,7 +29,13 @@
                     </div>
                     <div class="col s12 l4">
                       <div class="input-field">
-                        <i class="mdi mdi-social-person prefix"></i>
+                          @if($accountType == 'expenses')
+                        <i class="mdi mdi-action-trending-down prefix"></i>
+                          @elseif($accountType == 'multiple_revenue')
+                              <i class="mdi mdi-action-trending-up prefix"></i>
+                          @else
+                              <i class="mdi mdi-social-person prefix"></i>
+                          @endif
                           <?php $name=Lang::get('main.name') ?>
                           {{ Form::text('acc_name',null,array('required','id'=>'account-name','placeholder'=>$name)) }}
                         {{--<input name="account_name" id="branch-name" type="text" placeholder="  الاسم   ">--}}
@@ -128,7 +134,8 @@
                           {{--<input name="account_commercial_registration" id="account-commercial-registration" type="text" placeholder="    سجل تجاري  ">--}}
                       </div>
                     </div>
-                     <div class="row no-margin-top">
+                  </div>
+                     <div class="row no-margin-top" style="padding: 1%">
                     <div class="col s12 l2">
                       <label for="tax-card">
                           @lang('main.taxCard')
@@ -143,9 +150,10 @@
                           {{--<input name="tax_card" id="tax-card" type="text" placeholder=" البطاقة الضريبية ">--}}
                       </div>
                     </div>
-</div>
+                </div>
+
                       @endif
-                  </div>
+
 
                   @if($accountType == 'customers'||$accountType == 'suppliers')
                       <div class="row no-margin-top">
@@ -181,8 +189,8 @@
                   @endif
 
 
-                  <div class="row no-margin-top">
-                                      <div class="col s12 l2">
+                  <div class="row no-margin-top" style="padding: 1%">
+                                      <div class="col s12 l2" >
                                         <label for="account-notes">
                                             @lang('main.notes')
                                         </label>

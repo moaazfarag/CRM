@@ -130,7 +130,6 @@ class UserController extends BaseController
         if ($oldUser) {
             $rules_update = array(
                 'password' => 'min:8',
-                'username' => 'required|unique:users,username,' . $id,
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email,' . $id,
                 'confirm_password' => 'same:password',
@@ -144,8 +143,7 @@ class UserController extends BaseController
                 $oldUser->all_br = Input::get('all_br');
                 $oldUser->name = Input::get('name');
                 $oldUser->permission = json_encode($permissions);
-                $oldUser->username = Input::get('username');
-                if(Input::has('paswword')){
+                if(Input::has('password')){
                 $oldUser->password = Hash::make(Input::get('password'));
                 }
                 $oldUser->email = Input::get('email');
@@ -193,12 +191,12 @@ class UserController extends BaseController
                     $old_user->co_id = Auth::user()->co_id;
                     $old_user->password = Hash::make(Input::get('new_password'));
                     $old_user->update();
-                    Session::flash('success', 'طھظ… طھط؛ظٹظٹط± ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط± ط¨ظ†ط¬ط§ط­');
+                    Session::flash('success','تم  تغيير كلمة المرور بنجاح');
                     return Redirect::back();
                 } else {
                     return $old_password_from_db . '<br/>' . $old_password_from_user;
 
-                    Session::flash('error', 'ط¹ظپظˆط§ظ‹ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط± ط§ظ„ظ‚ط¯ظٹظ…ط© ط؛ظٹط± طµط­ظٹط­ط©');
+                    Session::flash('error', 'كلمة المرور القديمة غير صحيحة ');
                     return Redirect::back();
 
                 }

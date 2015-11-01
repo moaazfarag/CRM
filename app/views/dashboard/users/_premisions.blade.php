@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col l10 s12">
+    <div class="col l12 s12">
 
         <table  class="display table table-bordered table-striped table-hover" style=" font-size: 1em; ">
                 <thead>

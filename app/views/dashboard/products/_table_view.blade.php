@@ -17,21 +17,20 @@
             @if(Route::currentRouteName() == 'addModel' || Route::currentRouteName() == 'editModel')
             <th>@lang('main.marka') </th>
             @endif
-            <th>@lang('main.statue') </th>
             <th>@lang('main.edit')</th>
             <th>@lang('main.delete')</th>
 
         </tr>
         </thead>
         <tbody>
-        @foreach($tablesData as $tableData)
+        @foreach($tablesData as $k=>$tableData)
             <tr>
-                <th>{{ $tableData->true_id }}</th>
+                <th>{{ $k+1 }}</th>
                 <td>{{ $tableData->name }}</td>
                 @if(Route::currentRouteName() == 'addModel' || Route::currentRouteName() == 'editModel')
                 <td>{{ $tableData->getMarkName() }}</td>
                 @endif
-                <td class="green-text">Active</td>
+
                 <td>
                     <a href="{{ URL::route($catFunName,array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>

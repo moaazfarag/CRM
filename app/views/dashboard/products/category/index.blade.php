@@ -28,7 +28,7 @@
           </div>
           <div class="col s12 m6 l6">
             <div class="input-field">
-              <i class="mdi mdi-social-person prefix"></i>
+              <i class="mdi mdi-action-book prefix"></i>
 
                 {{Form::text('name',null,array('required','placeholder'=>'اسم الفئة', 'id'=>'name')) }}
                   {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
