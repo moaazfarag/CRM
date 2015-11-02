@@ -7,6 +7,7 @@
     @elseif(Route::currentRouteName() == 'editLoans')
         {{ Form::model($employee,array('route'=>array('updateLoans',$employee->id))) }}
     @endif
+    @if(PerC::isShow('hr','loans','edit','editLoans')||PerC::isShow('hr','loans','add','addLoans'))
     <div class=" card ">
         <div class="title">
             <h5> <i class="fa fa-cog"></i> @lang('main.add_new_loan') </h5>
@@ -77,27 +78,6 @@
                         </div>
                     </div>
 
-                    {{--<div class="col s1 l2">--}}
-                        {{--<div class="input-field">--}}
-                            {{--<i class="fa fa-tag prefix"></i>--}}
-                            {{--{{ Form::checkbox('cancelDate',1,null,array('id'=>'cancelDate')) }}--}}
-                            {{--{{ Form::label('loan_end',lang::get('main.loan_end')) }}--}}
-
-                        {{--</div>--}}
-                        {{--<p class="parsley-required error-validation">{{ $errors ->first('loan_end') }} </p>--}}
-
-                    {{--</div>--}}
-                    {{--<div class="col s2 l2">--}}
-                        {{--<div class="input-field">--}}
-                            {{--<i class="mdi mdi-action-language prefix"></i>--}}
-                            {{--{{ Form::text('loan_end',null,array('required','id'=>'loan_end','class'=>'pikaday')) }}--}}
-
-                        {{--</div>--}}
-                        {{--<p class="parsley-required error-validation">{{ $errors ->first('loan_date') }} </p>--}}
-
-                    {{--</div>--}}
-
-
                 </div>
             <div class="row">
                 <div class="col s4 l4"  style="padding: 1% 3% 0 0">
@@ -116,16 +96,16 @@
             </div>
             <br/>
 
-            <hr/>
-            <br/>
-            @include('dashboard.hr.loans._table_view');
          </div>
 
 
-        <hr/>
+    </div>
+            @endif
+           @if(PerC::isShow('hr','loans','add_show_edit'))
+        <br/>
+        @include('dashboard.hr.loans._table_view');
+    @endif
 
-            </div>
-        </div>
 
         </section>
         @stop

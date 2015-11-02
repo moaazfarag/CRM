@@ -2,12 +2,12 @@
 @section('content')
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
-
+                @if(PerC::isShow('hr','Departments','edit','editDep')||PerC::isShow('hr','Departments','add','addDep'))
     <div id="product_cat" class="col s12">
         <!-- ???????  -->
         <div class="card {{ @$modelMini }}">
-                <div class="title">
-                <h5>  <i class="mdi mdi-notification-event-available"></i> @lang('main.add_new_dep')   </h5>
+            <div class="title">
+                <h5><i class="mdi mdi-notification-event-available"></i> @lang('main.add_new_dep')   </h5>
                 <a class="minimize" href="#">
                     <i class="mdi-navigation-expand-less"></i>
                 </a>
@@ -24,7 +24,7 @@
                 <div class="row no-margin-top">
                     <div class="col s12 l2">
                         <label for="name">
-                             {{@$arabicName}}
+                            {{@$arabicName}}
                         </label>
 
                     </div>
@@ -51,20 +51,19 @@
 
                         {{ Form::close() }}
                     </div>
-                    <br/>
-                    <br/>
-                    <hr/>
-                    <br/>
-                </div>
-                @include('dashboard.hr.departments._table_view')
 
+                </div>
+                <br/>
             </div>
         </div>
     </div>
-    <!-- /??? ?????? -->
+                    @endif
+    @if(PerC::isShow('hr','Departments','add_show_edit'))
+        <br/>
+        @include('dashboard.hr.departments._table_view')
+    @endif
+            <!-- /??? ?????? -->
 
 
-
-
-    </section>
+</section>
 @stop

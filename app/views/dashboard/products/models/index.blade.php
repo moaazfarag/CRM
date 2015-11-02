@@ -69,7 +69,7 @@
                                 @endif
             </div>
                         <br/>
-                                    @if(PerC::isShow('main_info','mark_model','show'))
+                                    @if(PerC::isShow('main_info','mark_model','add_edit_show'))
                                                         <hr/>
             @include('dashboard.products._table_view')
                                     @endif

@@ -340,13 +340,14 @@ class TransController extends BaseController
                 $invoice->where('br_id',Auth::user()->br_id);
             }
 
-            $result = $invoice->first();
+            $trans = $invoice->first();
 
-            if(!empty($result)){
+            if(!empty($trans)){
 
-                $result->deleted = 1;
-                $result->notes   = $cancel_cause;
-                $result->save();
+                $trans->deleted = 1;
+                $trans->user_id = Auth::id();
+                $trans->notes   = $cancel_cause;
+                $trans->save();
 
                 $msg = 'تم إلغاء الفاتورة بنجاح ';
 
