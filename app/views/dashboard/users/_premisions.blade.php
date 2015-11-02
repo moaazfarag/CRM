@@ -5,10 +5,10 @@
                 <thead>
                 <tr>
                     <th>الاسم</th>
-                    <th>استعراض</th>
-                    <th> حفظ</th>
+                    <th>حفظ</th>
+                    <th> تعديل</th>
                     <th>حذف</th>
-                    <th>طباعة</th>
+                    <th>عرض</th>
                 </tr>
                 </thead>
                 <tbody>

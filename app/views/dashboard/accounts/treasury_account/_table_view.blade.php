@@ -42,7 +42,7 @@
         <td>{{ BaseController::ViewDate($rowData->date) }}</td>
         <td>{{ $rowData->debit}}</td>
         <td>{{ $rowData->credit }}</td>
-        <td>{{ lang::get('main.'.$rowData->type) }}</td>
+        <td>{{ lang::get('main.'.$rowData->trans_type) }}</td>
         <td>{{ $rowData->notes }}</td>
         <td>
             <a href="{{ URL::route('editDirectMovement',array($rowData->id)) }}" class="btn btn-small z-depth-0">

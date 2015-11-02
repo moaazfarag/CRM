@@ -263,9 +263,8 @@ class ItemController extends BaseController
 
     }
 
-    public function resultTheBalanceOfTheStores(){
+    public function resultTheBalanceOfTheStores($type){
 
-        $type = Input::get('type');
 
         if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
 

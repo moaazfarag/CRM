@@ -53,36 +53,45 @@ $company = CoData::find(Auth::user()->co_id);
                                 class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
                     <ul>
-                        @if(PerC::isSession('main_info','company','add'))
+                        @if(PerC::isShow('main_info','company','show_edit_add'))
                             <li>
                                 <a href="{{ URL::route('editCompanyInfo') }}"
                                    class="waves-effect waves-blue">  @lang('main.companyInfo') </a>
                             </li>
                         @endif
+                    @if(PerC::isShow('main_info','branch','show_edit_add'))
                         <li>
                             <a href="{{ URL::route('addBranch') }}"
                                class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
                         </li>
+                        @endif
+                        @if(PerC::isShow('main_info','cat','show_edit_add'))
                         <li>
                             <a href="{{ URL::route('addCategory') }}"
                                class="waves-effect waves-blue"> @lang('main.itemCat') </a>
                         </li>
+                        @endif
+
                         @if($company->co_use_season == 1)
-                            <li>
-                                <a href="{{ URL::route('addSeason') }}"
-                                   class="waves-effect waves-blue"> @lang('main.seasons') </a>
-                            </li>
+                            @if(PerC::isShow('main_info','season','show_edit_add'))
+                                <li>
+                                    <a href="{{ URL::route('addSeason') }}"
+                                       class="waves-effect waves-blue"> @lang('main.seasons') </a>
+                                </li>
+                           @endif
                         @endif
 
                         @if($company->co_use_markes_models == 1)
-                            <li>
-                                <a href="{{ URL::route('addMark') }}"
-                                   class="waves-effect waves-blue">  @lang('main.markes') </a>
-                            </li>
-                            <li>
-                                <a href="{{ URL::route('addModel') }}"
-                                   class="waves-effect waves-blue">  @lang('main.models') </a>
-                            </li>
+                            @if(PerC::isShow('main_info','mark_model','show_edit_add'))
+                                <li>
+                                    <a href="{{ URL::route('addMark') }}"
+                                       class="waves-effect waves-blue">  @lang('main.markes') </a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::route('addModel') }}"
+                                       class="waves-effect waves-blue">  @lang('main.models') </a>
+                                </li>
+                           @endif
                         @endif
 
                         <li>

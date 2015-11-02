@@ -85,6 +85,7 @@ Route::filter('filter','FilterController@filter');
 Route::filter('canTrans','FilterController@canTrans');
 Route::filter('canViewTrans','FilterController@canViewTrans');
 Route::filter('canViewOneTrans','FilterController@canViewOneTrans');
+Route::filter('canShowSettle','FilterController@canShowSettle');
 //Route::filter('canAddBranch', function($route, $request, $value)
 //{
 //dd($route);

@@ -55,6 +55,7 @@ class UserController extends BaseController
         $data['company'] = CoData::find(Auth::user()->co_id);
         $data['button'] = $add;
         $data['groupPermissions'] = PermissionController::setPermission();
+
         $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
 //        dd(current($data['permissions']['company']['add']));
         $data['asideOpen'] = 'open';
