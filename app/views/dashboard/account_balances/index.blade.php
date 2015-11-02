@@ -100,7 +100,7 @@
        </div>
         <br>
         <br>
-        <div class="row">
+        <div class="row" style="padding: 2%">
             <div class="col s12 l2">
                 <button type="submit"
                         ng-disabled="form.$invalid || hasBalances()"
