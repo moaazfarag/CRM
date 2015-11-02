@@ -76,8 +76,10 @@ class AccountsBalances extends Eloquent {
     }
 
     public function ofAccount(){
-
       return  $this->hasOne('Accounts','id','account_id');
+    }
+    public function user(){
+      return  $this->hasOne('User','id','user_id');
     }
 
 

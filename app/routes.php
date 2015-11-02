@@ -101,8 +101,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Item Area
      */
+    Route::get('addItem', array('before' => 'filter:main_info:item:show_edit_add','uses' => 'ItemController@addItem', 'as' => 'addItem'));
     Route::group(array('before' => 'filter:main_info:item:add'), function () {
-        Route::get('addItem', array('uses' => 'ItemController@addItem', 'as' => 'addItem'));
         Route::post('storeItem', array('before' => 'csrf', 'uses' => 'ItemController@storeItem', 'as' => 'storeItem'));
     });
     Route::group(array('before' => 'filter:main_info:item:edit'), function () {
@@ -115,9 +115,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Account Area
      */
-    Route::group(array('prefix' => 'account', 'before' => 'filter:main_info:add_account:add'), function () {
-        Route::get('{accountType}', array('uses' => 'AccountController@addAccount', 'as' => 'addAccount'));
-        Route::post('storeAccount/{accountType}', array('before' => 'csrf', 'uses' => 'AccountController@storeAccount', 'as' => 'storeAccount'));
+    Route::group(array('prefix' => 'account', ), function () {
+        Route::get('{accountType}', array('before' => 'filter:main_info:add_account:add_edit_show','uses' => 'AccountController@addAccount', 'as' => 'addAccount'));
+        Route::post('storeAccount/{accountType}', array('before' => 'csrf|filter:main_info:add_account:add', 'uses' => 'AccountController@storeAccount', 'as' => 'storeAccount'));
     });
     Route::group(array('prefix' => 'account', 'before' => 'filter:main_info:add_account:edit'), function () {
         Route::get('{editAccount}/{id}', array('uses' => 'AccountController@editAccount', 'as' => 'editAccount'));
@@ -129,8 +129,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::group(array('prefix' => 'users'), function () {
         Route::get('/set_password', array('uses' => 'UserController@set_password', 'as' => 'set_Password')); //set password
         Route::post('/set_password', array('uses' => 'UserController@storeNewPassword', 'as' => 'storeNewPassword')); //set password
+        Route::get('addUser', array('before' => 'filter:main_info:users:add_edit_show','uses' => 'UserController@addUser', 'as' => 'addUser'));
         Route::group(array('before' => 'filter:main_info:users:add'), function () {
-            Route::get('addUser', array('uses' => 'UserController@addUser', 'as' => 'addUser'));
             Route::post('storeUser', array('before' => 'csrf', 'uses' => 'UserController@storeUser', 'as' => 'storeUser'));
         });
         Route::group(array('before' => 'filter:main_info:users:edit'), function () {
@@ -143,8 +143,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
      *  Accounts Balances Area
      */
     Route::group(array('prefix' => 'AccountsBalances'), function () {
+        Route::get('Add-Accounts-Balances', array('before' => 'filter:balances:accountsBalances:add_show','uses' => 'AccountsBalancesController@addAccountsBalances', 'as' => 'addAccountsBalances'));
         Route::group(array('before' => 'filter:balances:accountsBalances:add'), function () {
-            Route::get('Add-Accounts-Balances', array('uses' => 'AccountsBalancesController@addAccountsBalances', 'as' => 'addAccountsBalances'));
             Route::get('Add-Accounts-Balances-data', array('uses' => 'AccountsBalancesController@sendData', 'as' => 'sendData'));
             Route::post('Store-Accounts-Balances', array('before' => 'csrf', 'uses' => 'AccountsBalancesController@storeAccountsBalances', 'as' => 'storeAccountsBalances'));
             Route::get('Edit-Accounts-Balances/{id}', array('uses' => 'AccountsBalancesController@editAccountsBalances', 'as' => 'editAccountsBalances'));
@@ -159,8 +159,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
      * transaction area
      */
     Route::group(array('prefix' => 'transaction'), function () {
+        Route::get('{type}/{br_id}', array('before' => 'canTrans:add_show','uses' => 'TransController@addTrans', 'as' => 'addTrans'));
         Route::group(array('before' => 'canTrans:add'), function () {
-            Route::get('{type}/{br_id}', array('uses' => 'TransController@addTrans', 'as' => 'addTrans'));
             Route::post('{type}/{br_id}', array('before' => 'csrf', 'uses' => 'TransController@storeTrans', 'as' => 'storeTrans'));
             Route::post('serial-items-data', array('uses' => 'TransController@serialItemsData', 'as' => 'serialItemsData'));
             Route::post('items-data', array('uses' => 'TransController@items', 'as' => 'items'));
@@ -179,8 +179,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
 
     Route::group(array('prefix' => 'hr'), function () {
+        Route::get('Add-Employees', array('before' => 'filter:hr:Employee:add_edit_show','uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
         Route::group(array('before' => 'filter:hr:Employee:add'), function () {
-            Route::get('Add-Employees', array('uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
             Route::post('Store-Employees', array('before' => 'csrf', 'uses' => 'EmployeesController@storeEmp', 'as' => 'storeEmp'));
         });
         Route::group(array('before' => 'filter:hr:Employee:edit'), function () {
@@ -193,8 +193,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::delete('delete-emp-des-ded-pop/{id}', array('before' => 'filter:hr:Employee:delete', 'uses' => 'EmployeeDeductionController@deleteEmpdesdedPop', 'as' => 'deleteEmpdesdedPop'));
 
         //Departments Page
+        Route::get('addDep', array('before' => 'filter:hr:Departments:add_edit_show','uses' => 'DepartmentController@addDep', 'as' => 'addDep'));
         Route::group(array('before' => 'filter:hr:Departments:add'), function () {
-            Route::get('addDep', array('uses' => 'DepartmentController@addDep', 'as' => 'addDep'));
             Route::post('storeDep', array('before' => 'csrf', 'uses' => 'DepartmentController@storeDep', 'as' => 'storeDep'));
         });
         Route::group(array('before' => 'filter:hr:Departments:edit'), function () {
@@ -206,8 +206,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 //        Route::get('deleteDep/{id}','DepartmentController@deleteDep');
 
         //Job Page
+        Route::get('addJob', array('before' => 'filter:hr:jobs:add_edit_show','uses' => 'JobController@addJob', 'as' => 'addJob'));
         Route::group(array('before' => 'filter:hr:jobs:add'), function () {
-            Route::get('addJob', array('uses' => 'JobController@addJob', 'as' => 'addJob'));
             Route::post('storeJob', array('before' => 'csrf', 'uses' => 'JobController@storeJob', 'as' => 'storeJob'));
         });
         Route::group(array('before' => 'filter:hr:jobs:edit'), function () {
@@ -218,8 +218,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
 
         //Loans Page
+        Route::get('addLoans', array('before' => 'filter:hr:loans:add_edit_show','uses' => 'LoansController@addLoans', 'as' => 'addLoans'));
         Route::group(array('before' => 'filter:hr:loans:add'), function () {
-            Route::get('addLoans', array('uses' => 'LoansController@addLoans', 'as' => 'addLoans'));
             Route::post('storeLoans', array('before' => 'csrf', 'uses' => 'LoansController@storeLoans', 'as' => 'storeLoans'));
         });
         Route::group(array('before' => 'filter:hr:loans:edit'), function () {
@@ -227,8 +227,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('updateLoans/{id}', array('before' => 'csrf', 'uses' => 'LoansController@updateLoans', 'as' => 'updateLoans'));
         });
         //Deduction  Page
+        Route::get('addDesded', array('before' => 'filter:hr:Desdeds:add_edit_show','uses' => 'DeductionController@addDesded', 'as' => 'addDesded'));
         Route::group(array('before' => 'filter:hr:Desdeds:add'), function () {
-            Route::get('addDesded', array('uses' => 'DeductionController@addDesded', 'as' => 'addDesded'));
             Route::post('storeDesded', array('before' => 'csrf', 'uses' => 'DeductionController@storeDesded', 'as' => 'storeDesded'));
         });
         Route::group(array('before' => 'filter:hr:Desdeds:edit'), function () {
@@ -238,8 +238,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::get('deleteDesded/{id}', array('before' => 'filter:hr:Desdeds:delete', 'uses' => 'DeductionController@deleteDesded', 'as' => 'deleteDesded'));
 
         //EmpDesDed Page
+        Route::get('addEmpdesded', array('before' => 'filter:hr:Empdesded:add_edit_show','uses' => 'EmployeeDeductionController@addEmpdesded', 'as' => 'addEmpdesded'));
         Route::group(array('before' => 'filter:hr:Empdesded:add'), function () {
-            Route::get('addEmpdesded', array('uses' => 'EmployeeDeductionController@addEmpdesded', 'as' => 'addEmpdesded'));
             Route::post('storeEmpdesded', array('before' => 'csrf', 'uses' => 'EmployeeDeductionController@storeEmpdesded', 'as' => 'storeEmpdesded'));
         });
         Route::group(array('before' => 'filter:hr:Empdesded:edit'), function () {
@@ -250,8 +250,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
 
         //ChangeMonth Page
+        Route::get('addMonthChange', array('before' => 'filter:hr:MonthChange:add_edit_show','uses' => 'MonthChangeController@addMonthChange', 'as' => 'addMonthChange'));
         Route::group(array('before' => 'filter:hr:MonthChange:add'), function () {
-            Route::get('addMonthChange', array('uses' => 'MonthChangeController@addMonthChange', 'as' => 'addMonthChange'));
             Route::post('storeMonthChange', array('before' => 'csrf', 'uses' => 'MonthChangeController@storeMonthChange', 'as' => 'storeMonthChange'));
         });
         Route::group(array('before' => 'filter:hr:MonthChange:edit'), function () {

@@ -40,6 +40,7 @@ class FilterController extends BaseController
     public function canTrans($route, $request, $value)
     {
         $parameter = explode(':', $value);
+        $types =  explode('_', $parameter[0]);
         $bCtrl = new BaseController;
         $uri = explode('/', Request::path());
         $type = $uri[count($uri) - 2];
@@ -52,7 +53,11 @@ class FilterController extends BaseController
         } else {
             $group = "invoices";
         }
-        if (!PermissionController::isSession($group, $type, $parameter[0])) {
+        if($types>1) {
+            if (!PermissionController::isShow($group, $type, $parameter[0])) {
+                return $this->makeError();
+            }
+        }elseif(!PermissionController::isSession($group, $type, $parameter[0])) {
             return $this->makeError();
         } else {
             if (Route::currentRouteName() == 'addTrans') {
@@ -66,12 +71,12 @@ class FilterController extends BaseController
         }
     }
 
+
     public function canViewTrans()
     {
-        $bCtrl = new BaseController;
         $uri = explode('/', Request::path());
         $type = $uri[count($uri) - 2];
-        $balances = ['ItemBalance'];
+        $balances = ['itemBalance'];
         $settles = ['settleAdd', 'settleDown'];
         if (in_array($type, $balances)) {
             $group = "balances";
@@ -101,7 +106,7 @@ class FilterController extends BaseController
             $group = "invoices";
         }
 
-        if (!PermissionController::isSession($group, $type, 'show')) {
+        if (!PermissionController::isSession($group, $type, 'show') && !PermissionController::isSession($group, $type, 'add')) {
             return $this->makeError();
         }
     }

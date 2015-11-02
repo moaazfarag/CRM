@@ -564,5 +564,6 @@ return  array(
     'p_buy'                 =>'المشتريات',
     'p_salesReturn'         =>'مرتجع المبيعات',
     'p_sales'               =>'المبيعات',
+    'accountsBalances'               =>'ارصدة الحسابات الافتتاحية ',
 
 );

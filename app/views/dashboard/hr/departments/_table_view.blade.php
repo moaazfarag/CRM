@@ -1,36 +1,46 @@
-<div class="card-panel">
+    <div class="card">
+        <div class="content">
+            <table id="table_bank" class="display table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>@lang('main.number')</th>
+                    <th>@lang('main.name') </th>
+                    @if(PerC::isShow('hr','Departments','edit'))
+                        <th>@lang('main.edit')</th>
+                    @endif
+                    @if(PerC::isShow('hr','Departments','delete'))
+                        <th>@lang('main.delete')</th>
+                    @endif
 
-    <table id="table_bank" class="display table table-bordered table-striped table-hover">
-        <thead>
-        <tr>
-            <th>@lang('main.number')</th>
-            <th>@lang('main.name') </th>
-            <th>@lang('main.edit')</th>
-            <th>@lang('main.delete')</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($tablesData as $tableData)
+                    <tr>
+                        <th>{{ $tableData->true_id }}</th>
+                        <td>{{ $tableData->name }}</td>
+                        @if(PerC::isShow('hr','Departments','edit'))
+                            <td>
+                                <a href="{{ URL::route('editDep',array($tableData->id)) }}" class="btn btn-small z-depth-0">
+                                    <i class="mdi mdi-editor-mode-edit"></i>
+                                </a>
+                            </td>
+                        @endif
+                        @if(PerC::isShow('hr','Departments','delete'))
+                            <td>
+                                <a onclick="return confirm(' هل تريد بالفعل حذف القسم ')"
+                                   href="{{ URL::route('deleteDep',array($tableData->id)) }}"
+                                   class="btn btn-danger red">[X]</a>
+                            </td>
+                        @endif
+                    </tr>
 
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($tablesData as $tableData)
-            <tr>
-                <th>{{ $tableData->true_id }}</th>
-                <td>{{ $tableData->name }}</td>
-                <td>
-                    <a href="{{ URL::route('editDep',array($tableData->id)) }}" class="btn btn-small z-depth-0">
-                        <i class="mdi mdi-editor-mode-edit"></i>
-                    </a>
-                </td>
-                <td>
-                    <a  onclick="return confirm(' هل تريد بالفعل حذف القسم ')" href="{{ URL::route('deleteDep',array($tableData->id)) }}" class="btn btn-danger red">[X]</a>
-                </td>
+                @endforeach
 
-            </tr>
-
-        @endforeach
-
-        </tbody>
-    </table>
-</div>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
 

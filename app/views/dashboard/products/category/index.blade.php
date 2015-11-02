@@ -54,7 +54,7 @@
             </div>
 
                         <br/>
-            @if(PerC::isShow('main_info','cat','show'))
+            @if(PerC::isShow('main_info','cat','add_edit_show'))
                                 <hr/>
                 @include('dashboard.products._table_view')
             @endif

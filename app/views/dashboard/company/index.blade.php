@@ -229,7 +229,7 @@
             <br/>
             <hr/>
             <!-- /عرض الفروع -->
-                @if(PerC::isShow('main_info','branch','show'))
+                @if(PerC::isShow('main_info','branch','add_edit_show'))
             @include('dashboard.company._branches_table_view')
                     @endif
         </div>
