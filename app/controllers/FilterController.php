@@ -152,7 +152,7 @@ class FilterController extends BaseController
      */
     private function makeError()
     {
-        $data['error'] = "ظ„ظٹط³ ظ„ط¯ظٹظƒ طµظ„ط§ط­ظٹط© ظ„ط¯ط®ظˆظ„ ظ‡ط°ط§ ط§ظ„ظ‚ط³ظ…";
+        $data['error'] = "ليس لديك صلاحية لدخول هذا القسم";
         return View::make('errors.missing', $data);
     }
 
