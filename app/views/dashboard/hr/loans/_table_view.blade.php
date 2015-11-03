@@ -9,7 +9,7 @@
             <th>@lang('main.monthly_quantity')</th>
             <th>@lang('main.loan_start')</th>
             <th>@lang('main.loan_end')</th>
-            <th>@lang('main.balance')</th>
+            {{--<th>@lang('main.balance')</th>--}}
             <th>@lang('main.edit')</th>
 
 
@@ -25,7 +25,7 @@
                 <td>{{ $tableData->loan_currBal }}</td>
                 <td>{{ BaseController::ViewDate($tableData->loan_start) }}</td>
                 <td>{{ BaseController::ViewDate($tableData->loan_end) }}</td>
-                <td></td>
+                {{--<td></td>--}}
 
                 <td>
                     <a href="{{ URL::route('editLoans',array($tableData->id)) }}" class="btn btn-small z-depth-0">

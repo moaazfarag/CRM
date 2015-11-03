@@ -1,5 +1,5 @@
 <div class="card-panel">
-    <table class="table table-hover">
+    <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
 
