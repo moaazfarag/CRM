@@ -10,12 +10,18 @@
 
 @extends('dashboard.main')
 @section('content')
+<<<<<<< HEAD
 <!-- Main Content -->
 <section   class="content-wrap ecommerce-invoice">
     <div class="card" style="padding: 2%;">
         <div  class="card-panel blue lighten-5 center_title">
    {{ $title }}
         </div>
+=======
+        <!-- Main Content -->
+<section class="content-wrap ecommerce-invoice">
+    <div class="card">
+>>>>>>> origin/master
         <table id="table_bank" class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
@@ -26,33 +32,42 @@
                 <th>@lang('main.debit_')</th>
                 <th>@lang('main.credit_')</th>
                 <th>@lang('main.date')</th>
+                @if(PerC::isShow('balances','accountsBalances','delete'))
+                    <th>@lang('main.cancel')</th>
+                @endif
                 <th>@lang('main.note')</th>
-                <th>@lang('main.cancel')</th>
+                <th> بواسطة</th>
+
             </tr>
             </thead>
             <tbody>
             <?php $i = 0 ?>
             @foreach($balances as  $balance)
-            <tr>
+                <tr>
 
-                <?php
-                $i++;
-                $account_name = $balance->ofAccount->acc_name;
-                $account_type = $balance->ofAccount->acc_type;
+                    <?php
+                    $i++;
+                    $account_name = $balance->ofAccount->acc_name;
+                    $account_type = $balance->ofAccount->acc_type;
 
-                ?>
-                <th>{{ $i }}</th>
-                <td>@lang('main.'.$account_type.'_')</td>
-                <td>{{ $account_name }}</td>
-                <td>{{ $balance->debit }}</td>
-                <td>{{ $balance->credit }}</td>
-                <td>{{ BaseController::ViewDate($balance->created_at) }}</td>
-                <td>{{ $balance->notes }}</td>
+                    ?>
+                    <th>{{ $i }}</th>
+                    <td>@lang('main.'.$account_type.'_')</td>
+                    <td>{{ $account_name }}</td>
+                    <td>{{ $balance->debit }}</td>
+                    <td>{{ $balance->credit }}</td>
+                    <td>{{ BaseController::ViewDate($balance->created_at) }}</td>
+                    @if(PerC::isShow('balances','accountsBalances','delete'))
+                        <td>
+                            <a onclick='return confirm("هل تريد بالفعل حذف  الرصيد الإفتتاحى لحساب ( {{ $account_name }} )")'
+                               href="{{ URL::route('deleteAccountsBalances',array($balance->id)) }}"
+                               class="btn btn-danger red">[X]</a>
+                        </td>
+                    @endif
+                    <td>{{ $balance->notes }}</td>
+                    <td>{{ $balance->user->name }}</td>
 
-                <td>
-                    <a  onclick='return confirm("هل تريد بالفعل حذف  الرصيد الإفتتاحى لحساب ( {{ $account_name }} )")' href="{{ URL::route('deleteAccountsBalances',array($balance->id)) }}" class="btn btn-danger red">[X]</a>
-                </td>
-            </tr>
+                </tr>
             @endforeach
             </tbody>
         </table>

@@ -7,7 +7,7 @@
     @elseif(Route::currentRouteName() == 'editDesded')
         {{ Form::model($employee,array('route'=>array('updateDesded',$employee->id))) }}
     @endif
-
+    @if(PerC::isShow('hr','Desdeds','edit','editDesded')||PerC::isShow('hr','Desdeds','add','addDesded'))
     <div class=" card ">
         <div class="title">
             <h5>
@@ -71,17 +71,18 @@
                     @endif
                 </div>
                 {{ Form::close() }}
-                <br/>
-                <br/>
-                <hr/>
-                <br/>
-            </div>{{--submit  row end--}}
 
-            @include('dashboard.hr.deduction._table_view');
+            </div>{{--submit  row end--}}
+            <br/>
+
         </div>
 
     </div>
-
+    @endif
+    @if(PerC::isShow('hr','Desdeds','add_show_edit'))
+<br>
+        @include('dashboard.hr.deduction._table_view');
+    @endif
     </section>
     @stop
 

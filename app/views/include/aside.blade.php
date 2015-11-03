@@ -59,17 +59,17 @@ $company = CoData::find(Auth::user()->co_id);
                                    class="waves-effect waves-blue">  @lang('main.companyInfo') </a>
                             </li>
                         @endif
-                    @if(PerC::isShow('main_info','branch','show_edit_add'))
-                        <li>
-                            <a href="{{ URL::route('addBranch') }}"
-                               class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
-                        </li>
+                        @if(PerC::isShow('main_info','branch','show_edit_add'))
+                            <li>
+                                <a href="{{ URL::route('addBranch') }}"
+                                   class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
+                            </li>
                         @endif
                         @if(PerC::isShow('main_info','cat','show_edit_add'))
-                        <li>
-                            <a href="{{ URL::route('addCategory') }}"
-                               class="waves-effect waves-blue"> @lang('main.itemCat') </a>
-                        </li>
+                            <li>
+                                <a href="{{ URL::route('addCategory') }}"
+                                   class="waves-effect waves-blue"> @lang('main.itemCat') </a>
+                            </li>
                         @endif
 
                         @if($company->co_use_season == 1)
@@ -78,7 +78,7 @@ $company = CoData::find(Auth::user()->co_id);
                                     <a href="{{ URL::route('addSeason') }}"
                                        class="waves-effect waves-blue"> @lang('main.seasons') </a>
                                 </li>
-                           @endif
+                            @endif
                         @endif
 
                         @if($company->co_use_markes_models == 1)
@@ -91,21 +91,26 @@ $company = CoData::find(Auth::user()->co_id);
                                     <a href="{{ URL::route('addModel') }}"
                                        class="waves-effect waves-blue">  @lang('main.models') </a>
                                 </li>
-                           @endif
+                            @endif
                         @endif
-
-                        <li>
-                            <a href="{{ URL::route('addItem') }}"
-                               class="waves-effect waves-blue"> @lang('main.items')</a>
-                        </li>
-                        <li>
-                            <a href="{{  URL::route('addAccount','customers') }}"
-                               class="waves-effect waves-blue"> @lang('main.accounts') </a>
-                        </li>
-                        <li>
-                            <a href="{{  URL::route('addUser') }}"
-                               class="waves-effect waves-blue"> @lang('main.users')   </a>
-                        </li>
+                        @if(PerC::isShow('main_info','item','show_edit_add'))
+                            <li>
+                                <a href="{{ URL::route('addItem') }}"
+                                   class="waves-effect waves-blue"> @lang('main.items')</a>
+                            </li>
+                        @endif
+                        @if(PerC::isShow('main_info','add_account','show_edit_add'))
+                            <li>
+                                <a href="{{  URL::route('addAccount','customers') }}"
+                                   class="waves-effect waves-blue"> @lang('main.accounts') </a>
+                            </li>
+                        @endif
+                        @if(PerC::isShow('main_info','users','show_edit_add'))
+                            <li>
+                                <a href="{{  URL::route('addUser') }}"
+                                   class="waves-effect waves-blue"> @lang('main.users')   </a>
+                            </li>{{-- users --}}
+                        @endif
                         <li>
                             <a href="{{  URL::route('set_Password') }}"
                                class="waves-effect waves-blue">     @lang('main.change_password')  </a>
@@ -113,189 +118,250 @@ $company = CoData::find(Auth::user()->co_id);
 
                     </ul>
                 </li>
-                </li>
-                <li class="{{@$itemBalance}}">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i
-                                class="fa fa-dashboard"></i> @lang('main.balances') <span
-                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-                        @if(@$branches['all_br'] == "all_br")
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.itemBalance') <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
+                @if(PerC::isMainPerm('balances','show_add'))
+                    <li class="{{@$itemBalance}}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i
+                                    class="fa fa-dashboard"></i> @lang('main.balances') <span
+                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                            @if(PerC::isShow('balances','itemBalance','add_show'))
+                                @if(@$branches['all_br'] == "all_br")
                                     <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("itemBalance",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
-                                    </li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.itemBalance')
+                                            <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("itemBalance",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
 
-                                </ul>
-                            </li>
-                        @else
-                            <li>
-                                <a href="{{ URL::route('addTrans',array("itemBalance",$branches)) }}"
-                                   class="waves-effect waves-blue"> @lang('main.itemBalance')</a>
-                            </li>
-                        @endif
-                        <li>
-                            <a href="{{ URL::route('addAccountsBalances') }}"
-                               class="waves-effect waves-blue"> @lang('main.balanceAccount')</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="{{@$TransOpen}}">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i
-                                class="fa fa-dashboard"></i> @lang('main.stores')<span
-                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-                        @if(@$branches['all_br'] == "all_br")
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleAdd') <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("settleAdd",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
+                                        </ul>
                                     </li>
+                                @else
+                                    <li>
+                                        <a href="{{ URL::route('addTrans',array("itemBalance",$branches)) }}"
+                                           class="waves-effect waves-blue"> @lang('main.itemBalance')</a>
+                                    </li>
+                                @endif{{-- item balance رصيد افتتاحي--}}
+                            @endif
+                            @if(PerC::isShow('balances','accountsBalances','add_show'))
+                                <li>
+                                    <a href="{{ URL::route('addAccountsBalances') }}"
+                                       class="waves-effect waves-blue"> @lang('main.balanceAccount')</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
+                @if(PerC::isMainPerm('settles','show_add'))
+                    <li class="{{@$TransOpen}}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i
+                                    class="fa fa-dashboard"></i> @lang('main.stores')<span
+                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                            @if(@$branches['all_br'] == "all_br")
+                                @if(PerC::isShow('settles','settleAdd','add_show'))
+                                    <li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleAdd')
+                                            <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("settleAdd",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
 
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleDown') <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("settleDown",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
+                                        </ul>
                                     </li>
+                                @endif
+                                @if(PerC::isShow('settles','settleDown','add_show'))
+                                    <li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue">   @lang('main.settleDown')
+                                            <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("settleDown",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
 
-                                </ul>
-                            </li>
-                        @else
-                            <li>
-                                <a href="{{ URL::route('addTrans',array("settleAdd",$branches)) }}"
-                                   class="waves-effect waves-blue"> @lang('main.settleAdd')</a>
-                                <a href="{{ URL::route('addTrans',array("settleDown",$branches)) }}"
-                                   class="waves-effect waves-blue">@lang('main.settleDown')</a>
-                            </li>
-                        @endif
+                                        </ul>
+                                    </li>
+                                @endif
+                            @else
+                                <li>
+                                    @if(PerC::isShow('settles','settleAdd','add_show'))
+                                        <a href="{{ URL::route('addTrans',array("settleAdd",$branches)) }}"
+                                           class="waves-effect waves-blue"> @lang('main.settleAdd')</a>
+                                    @endif
+                                    @if(PerC::isShow('settles','settleDown','add_show'))
+                                        <a href="{{ URL::route('addTrans',array("settleDown",$branches)) }}"
+                                           class="waves-effect waves-blue">@lang('main.settleDown')</a>
+                                    @endif
+                                </li>
+                            @endif
 
-                    </ul>
-                </li>
-                <li class="{{@$employees}}">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> شؤون العاملين
-                        <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-                        <li><a href="{{ URL::route('addDep') }}" class="waves-effect waves-blue">الاقسام </a></li>
-                        <li><a href="{{ URL::route('addJob') }}" class="waves-effect waves-blue">الوظائف </a></li>
-                        <li><a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف موظف </a></li>
-                        <li><a href="{{ URL::route('addLoans') }}" class="waves-effect waves-blue">القروض </a></li>
-                        <li><a href="{{ URL::route('addDesded') }}" class="waves-effect waves-blue">بنود
-                                الاستحقاقات </a></li>
-                        <li><a href="{{ URL::route('addEmpdesded') }}" class="waves-effect waves-blue"> بنود الاستحقاقات
-                                للموظف </a></li>
-                        <li><a href="{{ URL::route('addMonthChange') }}" class="waves-effect waves-blue">التغيرات
-                                الشهريه</a></li>
-                        <li><a href="{{ URL::route('monthSalarySearch') }}" class="waves-effect waves-blue">تجهيز
-                                المرتبات الشهريه </a></li>
-                    </ul>
-                </li>
-                <li class="{{@$invoices_open}}">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الفواتير <span
-                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
+                        </ul>
+                    </li>
+                @endif
+                @if(PerC::isMainPerm('hr','show_add_edit'))
+                    <li class="{{@$employees}}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> شؤون العاملين
+                            <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                            @if(PerC::isShow('hr','Departments','add_show_edit'))
+                                <li><a href="{{ URL::route('addDep') }}" class="waves-effect waves-blue">الاقسام </a>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('hr','jobs','add_show_edit'))
+                                <li><a href="{{ URL::route('addJob') }}" class="waves-effect waves-blue">الوظائف </a>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('hr','Employee','add_show_edit'))
+                                <li><a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف موظف </a>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('hr','loans','add_show_edit'))
+                                <li><a href="{{ URL::route('addLoans') }}" class="waves-effect waves-blue">القروض </a>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('hr','Desdeds','add_show_edit'))
+                                <li><a href="{{ URL::route('addDesded') }}" class="waves-effect waves-blue">بنود
+                                        الاستحقاقات </a></li>
+                            @endif
+                            @if(PerC::isShow('hr','Empdesded','add_show_edit'))
+                                <li><a href="{{ URL::route('addEmpdesded') }}" class="waves-effect waves-blue"> بنود
+                                        الاستحقاقات
+                                        للموظف </a></li>
+                            @endif
+                            @if(PerC::isShow('hr','MonthChange','add_show_edit'))
+                                <li><a href="{{ URL::route('addMonthChange') }}" class="waves-effect waves-blue">التغيرات
+                                        الشهريه</a></li>
+                            @endif
+                            @if(PerC::isShow('hr','salariesProcessing','add_show_edit'))
+                                <li><a href="{{ URL::route('monthSalarySearch') }}" class="waves-effect waves-blue">تجهيز
+                                        المرتبات الشهريه </a></li>
+                            @endif
 
-                        @if(@$branches['all_br'] == "all_br")
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مبيعات <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("sales",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مشتريات <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("buy",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li>
-                                <a href="{{ URL::route('addTrans',array("sales",$branches)) }}"
-                                   class="waves-effect waves-blue"> فاتورة مبيعات</a>
-                                <a href="{{ URL::route('addTrans',array("buy",$branches)) }}"
-                                   class="waves-effect waves-blue"> فاتورة مشتريات</a>
-                            </li>
-                        @endif
-                        @if(@$branches['all_br'] == "all_br")
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مرتجعات مبيعات <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("salesReturn",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
-                                    </li>
-                                    {{--<li><a href="{{ URL::route('purchasesReturns') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>--}}
-                                    {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مرتجعات مشتريات <span
-                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                                <ul>
-                                    <li>
-                                        @foreach($branches['branches'] as $branch)
-                                            <a href="{{ URL::route('addTrans',array("buyReturn",$branch->id)) }}"
-                                               class="waves-effect waves-blue">
-                                                فرع {{$branch->br_name}}
-                                            </a>
-                                        @endforeach
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li>
-                                <a href="{{ URL::route('addTrans',array("salesReturn",$branches)) }}"
-                                   class="waves-effect waves-blue"> فاتورة مبيعات</a>
-                                <a href="{{ URL::route('addTrans',array("buyReturn",$branches)) }}"
-                                   class="waves-effect waves-blue"> فاتورة مشتريات</a>
-                            </li>
-                        @endif
+                        </ul>
+                    </li>{{-- HR شئون العاملين--}}
+                @endif
+                @if(PerC::isMainPerm('invoices','show_add'))
+                    <li class="{{@$invoices_open}}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الفواتير <span
+                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
 
-                    </ul>
-                </li>
+                            @if(@$branches['all_br'] == "all_br")
+                                @if(PerC::isShow('invoices','sales','add_show'))
+                                    <li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مبيعات <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("sales",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
+                                        </ul>
+                                    </li>{{-- sales invoice فاتورة مشتريات للفروع--}}
+                                @endif
+                                @if(PerC::isShow('invoices','buy','add_show'))
+                                    <li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مشتريات <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("buy",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
+                                        </ul>
+                                    </li>{{-- sales invoice فاتورة مبيعات للفروع--}}
+                                @endif
+                            @else
+                                <li>
+                                    @if(PerC::isShow('invoices','sales','add_show'))
+                                        <a href="{{ URL::route('addTrans',array("sales",$branches)) }}"
+                                           class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                                    @endif{{-- sales invoice فاتورة مشتريات--}}
+                                    @if(PerC::isShow('invoices','buy','add_show'))
+                                        <a href="{{ URL::route('addTrans',array("buy",$branches)) }}"
+                                           class="waves-effect waves-blue"> فاتورة
+                                            مشتريات</a>{{-- sales invoice فاتورة مبيعات--}}
+                                    @endif{{-- sales invoice فاتورة مبيعات--}}
+                                </li>
+                            @endif
+                            @if(@$branches['all_br'] == "all_br")
+                                @if(PerC::isShow('invoices','salesReturn','add_show'))
+                                    <li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مرتجعات مبيعات <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("salesReturn",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
+                                            {{--<li><a href="{{ URL::route('purchasesReturns') }}" class="waves-effect waves-blue"> فواتير المبيعات  </a></li>--}}
+                                            {{--<li><a href="{{ URL::route('salesReturns') }}" class="waves-effect waves-blue">  فواتير المشتريات </a></li>--}}
+                                        </ul>
+                                    </li> {{-- sales invoice فاتورة مرتجع مشتريات للفروع--}}
+                                @endif
+                                @if(PerC::isShow('invoices','buyReturn','add_show'))
+                                    <li>
+                                        <a class="yay-sub-toggle waves-effect waves-blue"> فاتورة مرتجعات مشتريات <span
+                                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                        <ul>
+                                            <li>
+                                                @foreach($branches['branches'] as $branch)
+                                                    <a href="{{ URL::route('addTrans',array("buyReturn",$branch->id)) }}"
+                                                       class="waves-effect waves-blue">
+                                                        فرع {{$branch->br_name}}
+                                                    </a>
+                                                @endforeach
+                                            </li>
+                                        </ul>
+                                    </li>{{-- sales invoice فاتورة مرتجع مبيعات للفروع--}}
+                                @endif
+                            @else
+                                <li>
+                                    @if(PerC::isShow('invoices','salesReturn','add_show'))
+                                        <a href="{{ URL::route('addTrans',array("salesReturn",$branches)) }}"
+                                           class="waves-effect waves-blue"> فاتورة مبيعات</a>
+                                    @endif{{-- sales invoice فاتورة مترجع مشتريات--}}
+                                    @if(PerC::isShow('invoices','buyReturn','add_show'))
+                                        <a href="{{ URL::route('addTrans',array("buyReturn",$branches)) }}"
+                                           class="waves-effect waves-blue"> فاتورة مشتريات</a>
+                                    @endif{{-- sales invoice فاتورة مترجع مبيعات--}}
+                                </li>
+                            @endif
+
+                        </ul>
+                    </li>
+                @endif
                 <li class="">
                     <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الحسابات العامة
                         <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
@@ -383,9 +449,9 @@ $company = CoData::find(Auth::user()->co_id);
                                     <a href="{{ URL::route('searchReportInvoices',array('sales','sum')) }}"
                                        class="waves-effect waves-blue"> المبيعات ( إجمالى) </a>
                                     <a href="{{ URL::route('searchReportInvoices',array('salesReturn',NULL)) }}"
-                                       class="waves-effect waves-blue">     مرتجعات المبيعات  (تحليلى)</a>
+                                       class="waves-effect waves-blue"> مرتجعات المبيعات (تحليلى)</a>
                                     <a href="{{ URL::route('searchReportInvoices',array('salesReturn','sum')) }}"
-                                       class="waves-effect waves-blue">    مرتجعات المبيعات  (إجمالى) </a>
+                                       class="waves-effect waves-blue"> مرتجعات المبيعات (إجمالى) </a>
                                     <a href="{{ URL::route('searchReportInvoices','buy') }}"
                                        class="waves-effect waves-blue"> المشتريات ( تحليلى ) </a>
                                     <a href="{{ URL::route('searchReportInvoices',array('buy','sum')) }}"
@@ -393,7 +459,7 @@ $company = CoData::find(Auth::user()->co_id);
                                     <a href="{{ URL::route('searchReportInvoices',array('buyReturn',NULL)) }}"
                                        class="waves-effect waves-blue">مردودات المشتريات (تحليلى)</a>
                                     <a href="{{ URL::route('searchReportInvoices',array('buyReturn','sum')) }}"
-                                       class="waves-effect waves-blue">مردودات المشتريات (إجمالى)  </a>
+                                       class="waves-effect waves-blue">مردودات المشتريات (إجمالى) </a>
                                     <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}"
                                        class="waves-effect waves-blue">أرباح المبيعات</a>
                                 </li>

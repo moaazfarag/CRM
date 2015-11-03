@@ -59,7 +59,7 @@ class EmployeeDeductionController extends BaseController
         $data['employees'] = "open";
         $data = $this->depData();
 
-//        $data['employee'] = EmployeeDeduction::findOrFail($id);
+        $data['employee'] = EmployeeDeduction::findOrFail($id);
         $data['deduction']   = Deduction::company()->first();
         $data['co_info']     = CoData::thisCompany()->first();
 

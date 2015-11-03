@@ -56,6 +56,10 @@ class TransHeader extends Eloquent {
         return $this->hasOne('Branches','id','br_id');
 
     }
+    public function user()
+    {
+        return $this->hasOne('User','id','user_id');
+    }
 
 
     public static $delete_ruels = array(
