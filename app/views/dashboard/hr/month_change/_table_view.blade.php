@@ -1,27 +1,5 @@
 
-<div class="card-panel">
-    <table id="table_bank" class="display table table-bordered table-striped table-hover">
-        <thead>
-        <tr>
 
-            <th>@lang('main.date') </th>
-            <th>@lang('main.employee')  </th>
-            <th>@lang('main.for_year') </th>
-            <th>@lang('main.for_month') </th>
-            <th>@lang('main.clause')</th>
-            <th>@lang('main.value') </th>
-            <th>@lang('main.amount_or_days')</th>
-            {{--<th>@lang('main.reason')</th>--}}
-            <th>@lang('main.canceld')</th>
-            <th>@lang('main.cancellation_reason') </th>
-            <th>@lang('main.data_entry')</th>
-            <th>@lang('main.edit')</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{--@if($tablesData->isEmpty())--}}
-        @if(!empty($tablesData))
-        @foreach($tablesData as $k=>$tableData)
 
 <div class="card">
     <div class="content">

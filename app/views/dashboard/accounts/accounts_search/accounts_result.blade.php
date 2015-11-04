@@ -129,7 +129,7 @@
             <?php $all_credit = array(); $all_debit= array(); $i = 0;?>
             @foreach($account_trans as $k => $trans)
 
-               @if($trans->pay_type == "cash" && $trans->trans_type != 'direct_movement')
+               @if($trans->pay_type == "cash" && !in_array($trans->trans_type , ['catch','pay']))
                    @if($trans->debit == 0)
                        <?php $prise = $trans->credit;  ?>
                    @else
@@ -169,7 +169,7 @@
 
                @endif
 
-               @if($trans->pay_type == "cash" && $trans->trans_type != 'direct_movement')
+               @if($trans->pay_type == "cash" &&  !in_array($trans->trans_type , ['catch','pay']))
 
                     <?php
                     if($trans->debit == 0){ $price = $trans->credit;} else { $price = $trans->debit;}
