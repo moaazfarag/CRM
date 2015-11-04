@@ -14,7 +14,8 @@ class SettleController extends BaseController {
         $types = array('settleDown','settleAdd');
 
         if(in_array($type, $types)){
-
+            $data['report_open'] = "open";
+            $data['stores'] = "open";
             $data['type']    = $type;
             $data['title']   =  Lang::get("main.$type".'_statement') ;
             return View::make('dashboard.settle.report.report_search',$data);

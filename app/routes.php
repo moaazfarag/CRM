@@ -162,6 +162,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::get('{type}/{br_id}', array('before' => 'canTrans:add_show','uses' => 'TransController@addTrans', 'as' => 'addTrans'));
         Route::group(array('before' => 'canTrans:add'), function () {
             Route::post('{type}/{br_id}', array('before' => 'csrf', 'uses' => 'TransController@storeTrans', 'as' => 'storeTrans'));
+        });
+        Route::group(array('before' => 'canTransData'), function () {
             Route::post('serial-items-data', array('uses' => 'TransController@serialItemsData', 'as' => 'serialItemsData'));
             Route::post('items-data', array('uses' => 'TransController@items', 'as' => 'items'));
             Route::post('invoice-data', array('uses' => 'TransController@returnsInvoiceData', 'as' => 'returnsInvoiceData'));
@@ -282,7 +284,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         // invoices
         Route::group(array('before' => 'canShowSettle'), function () {
             Route::get('search-invoices/{type}/{sum?}', array('uses' => 'InvoiceController@reportSearchInvoice', 'as' => 'searchReportInvoices'));
-            Route::post('invoices/', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
+            Route::post('invoices/{type}', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
         });
         // item card
         Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {
@@ -306,8 +308,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
     Route::group(array('prefix' => 'accounts'), function () {
         // direct movement
-        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
-            Route::get('add-direct-movement', array('uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
+        Route::get('add-direct-movement', array('before' => 'filter:p_general_accounts:p_directMovement:add_edit_show','uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:show'), function () {
             Route::post('store-direct-movement', array('uses' => 'AccountController@storeDirectMovement', 'as' => 'storeDirectMovement'));
         });
         Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:edit'), function () {
@@ -315,11 +317,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('update-direct-movement/{id}', array('uses' => 'AccountController@updateDirectMovement', 'as' => 'updateDirectMovement'));
         });
         // Daily treasury
-        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
+        Route::group(array('before' => 'filter:p_general_accounts:p_dailyTreasury:add'), function () {
             Route::get('daily-treasury-search', array('uses' => 'AccountController@dailyTreasurySearch', 'as' => 'dailyTreasurySearch'));
             Route::post('daily-treasury-result', array('uses' => 'AccountController@dailyTreasuryResult', 'as' => 'dailyTreasuryResult'));
         });
-        Route::group(array('before' => 'filter:p_general_accounts:p_dailyTreasury:add'), function () {
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
             Route::get('result-search-daily-treasury', array('uses' => 'AccountController@resultSearchDailyTreasury', 'as' => 'resultSearchDailyTreasury'));
             Route::post('daily-treasury-add-direct-movement', array('uses' => 'AccountController@dailyTreasuryAddDirectMovement', 'as' => 'dailyTreasuryAddDirectMovement'));
         });

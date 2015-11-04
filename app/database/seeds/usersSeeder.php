@@ -18,7 +18,7 @@ class usersSeeder extends Seeder {
 	    	'username'  =>'admin',
 	    	'email'      =>'mohamed@yahoo.com',
 	    	'password'   =>Hash::Make('123456'),
-	    	'permission' =>'1',
+	    	'permission' => json_encode(PermissionController::setPermission(1)),
 	    	'photo'      =>'image.jpg',
 	    ),
  		
@@ -31,7 +31,7 @@ class usersSeeder extends Seeder {
 	    	'username'  =>'admin_2',
 	    	'email'      =>'ahmed@yahoo.com',
 	    	'password'   =>Hash::Make('1234567'),
-	    	'permission' =>'0',
+            'permission' => json_encode(PermissionController::setPermission(1)),
 	    	'photo'      =>'image_2.jpg',
 	    ),
  		
@@ -44,8 +44,8 @@ class usersSeeder extends Seeder {
 	    	'username'  =>'admin_3',
 	    	'email'      =>'sayed@yahoo.com',
 	    	'password'   =>Hash::Make('12345678'),
-	    	'permission' =>'0',
-	    	'photo'      =>'image_3.jpg',
+            'permission' => json_encode(PermissionController::setPermission(1)),
+           	'photo'      =>'image_3.jpg',
 	    ),
 
 

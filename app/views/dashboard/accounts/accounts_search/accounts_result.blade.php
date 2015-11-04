@@ -71,13 +71,14 @@
                 {{ Form::hidden('type',$type) }}
                 {{ Form::close() }}
                  </div>
+                                                    @if(PerC::isShow('p_general_accounts','p_directMovement','add'))
         <div>
             <hr/>
             <a class="waves-effect waves-light btn modal-trigger" href="#modal1">@lang('main.add_direct_movement')</a>
-
-
         </div>
+                                                  @endif
     </div>
+
 
 
     </div>
@@ -238,6 +239,7 @@
         </div>
     @endif
             <!--/////////// model start }}}}}}}}}}}}}}-->
+                                                          @if(PerC::isShow('p_general_accounts','p_directMovement','add'))
                     <!-- Modal Structure -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
@@ -287,7 +289,7 @@
                         @endif
 
                     </div>
-
+                                        @endif
 
                     <div class="row">
                         {{--price--}}

@@ -1,17 +1,17 @@
-<!--
-  Yay Sidebar
-  Options [you can use all of theme classnames]:
-    .yay-hide-to-small         - no hide menu, just set it small with big icons
-    .yay-static                - stop using fixed sidebar (will scroll with content)
-    .yay-gestures              - to show and hide menu using gesture swipes
-    .yay-light                 - light color scheme
-    .yay-hide-on-content-click - hide menu on content click
+{{--<!----}}
+{{--Yay Sidebar--}}
+{{--Options [you can use all of theme classnames]:--}}
+{{--.yay-hide-to-small         - no hide menu, just set it small with big icons--}}
+{{--.yay-static                - stop using fixed sidebar (will scroll with content)--}}
+{{--.yay-gestures              - to show and hide menu using gesture swipes--}}
+{{--.yay-light                 - light color scheme--}}
+{{--.yay-hide-on-content-click - hide menu on content click--}}
 
-  Effects [you can use one of these classnames]:
-    .yay-overlay  - overlay content
-    .yay-push     - push content to right
-    .yay-shrink   - shrink content width
--->
+{{--Effects [you can use one of these classnames]:--}}
+{{--.yay-overlay  - overlay content--}}
+{{--.yay-push     - push content to right--}}
+{{--.yay-shrink   - shrink content width--}}
+{{---->--}}
 <?php
 
 $branches = BaseController::getBranchId();
@@ -362,114 +362,165 @@ $company = CoData::find(Auth::user()->co_id);
                         </ul>
                     </li>
                 @endif
-                <li class="">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الحسابات العامة
-                        <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-                        <li>
-                            <a class="yay-sub-toggle waves-effect waves-blue">الخزينة <span
-                                        class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                            <ul>
+                @if(PerC::isMainPerm('p_general_accounts','show_add_edit'))
+                    <li class="{{ @$general_accounts_open }}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الحسابات
+                            العامة
+                            <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                            @if(PerC::isShow('p_general_accounts','p_dailyTreasury','show_add_edit') || PerC::isShow('p_general_accounts','p_directMovement','show') )
+                                <li class="{{ @$direct_movement_open }}">
+                                    <a class="yay-sub-toggle waves-effect waves-blue">الخزينة <span
+                                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
 
-                                <li>
-                                    <a href="{{ URL::route('dailyTreasurySearch') }}" class="waves-effect waves-blue">
-                                        يومية الخزينة </a>
-                                    <a href="{{ URL::route('addDirectMovement') }}" class="waves-effect waves-blue">
-                                        الحركات المباشرة </a>
-                                </li>
-                            </ul>
-                        </li>
+                                        <li>
+                                            @if(PerC::isShow('p_general_accounts','p_dailyTreasury','show_add_edit'))
+                                                <a href="{{ URL::route('dailyTreasurySearch') }}"
+                                                   class="waves-effect waves-blue">
+                                                    يومية الخزينة </a>
+                                            @endif
+                                            @if(PerC::isShow('p_general_accounts','p_directMovement','show'))
 
-                        <li><a href="{{ URL::route('searchAccounts','customers') }}"
-                               class="waves-effect waves-blue"> @lang('main.accounts_customers')</a></li>
-                        <li><a href="{{ URL::route('searchAccounts','suppliers') }}"
-                               class="waves-effect waves-blue"> @lang('main.accounts_suppliers') </a></li>
-                        <li><a href="{{ URL::route('searchAccounts','bank') }}"
-                               class="waves-effect waves-blue">   @lang('main.accounts_bank')</a></li>
-                        <li><a href="{{ URL::route('searchAccounts','partners') }}"
-                               class="waves-effect waves-blue">  @lang('main.accounts_partners') </a></li>
-                        <li><a href="{{ URL::route('searchAccounts','multiple_revenue') }}"
-                               class="waves-effect waves-blue">  @lang('main.accounts_multiple_revenue') </a></li>
-                        <li><a href="{{ URL::route('searchAccounts','expenses') }}"
-                               class="waves-effect waves-blue">  @lang('main.accounts_expenses') </a></li>
-                    </ul>
-                </li>
+                                                <a href="{{ URL::route('addDirectMovement') }}"
+                                                   class="waves-effect waves-blue">
+                                                    الحركات المباشرة </a>
+                                            @endif
 
-                <li class="">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> التقارير <span
-                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-                        <li>
-                            <a class="yay-sub-toggle waves-effect waves-blue">شئون العاملين <span
-                                        class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                            <ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_customers','show'))
+                                <li><a href="{{ URL::route('searchAccounts','customers') }}"
+                                       class="waves-effect waves-blue"> @lang('main.accounts_customers')</a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_suppliers','show'))
+                                <li><a href="{{ URL::route('searchAccounts','suppliers') }}"
+                                       class="waves-effect waves-blue"> @lang('main.accounts_suppliers') </a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_bank','show'))
+                                <li><a href="{{ URL::route('searchAccounts','bank') }}"
+                                       class="waves-effect waves-blue">   @lang('main.accounts_bank')</a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_partners','show'))
+                                <li><a href="{{ URL::route('searchAccounts','partners') }}"
+                                       class="waves-effect waves-blue">  @lang('main.accounts_partners') </a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_multiple_revenue','show'))
+                                <li><a href="{{ URL::route('searchAccounts','multiple_revenue') }}"
+                                       class="waves-effect waves-blue">  @lang('main.accounts_multiple_revenue') </a>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_expenses','show'))
+                                <li><a href="{{ URL::route('searchAccounts','expenses') }}"
+                                       class="waves-effect waves-blue">  @lang('main.accounts_expenses') </a></li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
+                @if(PerC::isMainPerm('p_reports_invoices','show') || PerC::isShow('p_reports_hr','p_outgoingSalaries','show') || PerC::isMainPerm('p_reports_stores','show'))
+                    <li class="{{ @$report_open }}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> التقارير <span
+                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                            @if(PerC::isShow('p_reports_hr','p_outgoingSalaries','show'))
+                                <li class="{{ @$salary_report }}">
+                                    <a class="yay-sub-toggle waves-effect waves-blue">شئون العاملين <span
+                                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
 
-                                <li>
-                                    <a href="{{ URL::route('searchOutgoingSalariesReport') }}"
-                                       class="waves-effect waves-blue"> المرتبات المنصرفة </a>
+                                        <li>
+                                            <a href="{{ URL::route('searchOutgoingSalariesReport') }}"
+                                               class="waves-effect waves-blue"> المرتبات المنصرفة </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="yay-sub-toggle waves-effect waves-blue"> المخازن <span
-                                        class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                            <ul>
-
-                                <li>
-                                    <a href="{{ URL::route('reportSettleSearch','settleAdd') }}"
-                                       class="waves-effect waves-blue"> تسويات الإضافة </a>
-                                    <a href="{{ URL::route('reportSettleSearch','settleDown') }}"
-                                       class="waves-effect waves-blue"> تسويات الخصم </a>
+                            @endif
+                            @if(PerC::isMainPerm('p_reports_stores','show'))
+                                <li class="{{ @$stores }}">
+                                    <a class="yay-sub-toggle waves-effect waves-blue"> المخازن <span
+                                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
+                                        <li>
+                                            @if(PerC::isShow('p_reports_stores','p_settleAdd','show'))
+                                                <a href="{{ URL::route('reportSettleSearch','settleAdd') }}"
+                                                   class="waves-effect waves-blue"> تسويات الإضافة </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_stores','p_settleDown','show'))
+                                                <a href="{{ URL::route('reportSettleSearch','settleDown') }}"
+                                                   class="waves-effect waves-blue"> تسويات الخصم </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_stores','p_itemsCard','show'))
+                                                <a href="{{ URL::route('searchItemCard') }}"
+                                                   class="waves-effect waves-blue">   @lang('main.itemCart') </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_stores','p_inventoryStore','show'))
+                                                <a href="{{ URL::route('searchTheBalanceOfTheStores','inventory_store') }}"
+                                                   class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_stores','p_balanceStores','show'))
+                                                <a href="{{ URL::route('searchTheBalanceOfTheStores','balance_stores') }}"
+                                                   class="waves-effect waves-blue">@lang('main.balance_stores')  </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_stores','p_evaluationStores','show'))
+                                                <a href="{{ URL::route('searchTheBalanceOfTheStores','evaluation_stores') }}"
+                                                   class="waves-effect waves-blue">@lang('main.evaluation_stores')  </a>
+                                            @endif
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="{{ URL::route('searchItemCard') }}"
-                                       class="waves-effect waves-blue">   @lang('main.itemCart') </a>
+                            @endif
+                            @if(PerC::isMainPerm('p_reports_invoices','show'))
+                                <li class="{{ @$invoice_open }}">
+                                    <a class="yay-sub-toggle waves-effect waves-blue"> الفواتير <span
+                                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
+                                        <li>
+                                            @if(PerC::isShow('p_reports_invoices','p_sales','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('sales',NULL)) }}"
+                                                   class="waves-effect waves-blue"> المبيعات ( تحليلى ) </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_sumSales','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('sales','sum')) }}"
+                                                   class="waves-effect waves-blue"> المبيعات ( إجمالى) </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_salesReturn','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('salesReturn',NULL)) }}"
+                                                   class="waves-effect waves-blue"> مرتجعات المبيعات (تحليلى)</a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_sumSalesReturn','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('salesReturn','sum')) }}"
+                                                   class="waves-effect waves-blue"> مرتجعات المبيعات (إجمالى) </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_buy','show'))
+                                                <a href="{{ URL::route('searchReportInvoices','buy') }}"
+                                                   class="waves-effect waves-blue"> المشتريات ( تحليلى ) </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_sumBuy','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('buy','sum')) }}"
+                                                   class="waves-effect waves-blue"> المشتريات ( إجمالى) </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_buyReturn','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('buyReturn',NULL)) }}"
+                                                   class="waves-effect waves-blue">مردودات المشتريات (تحليلى)</a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_sumBuyReturn','show'))
+                                                <a href="{{ URL::route('searchReportInvoices',array('buyReturn','sum')) }}"
+                                                   class="waves-effect waves-blue">مردودات المشتريات (إجمالى) </a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_salesEarnings','show'))
+                                                <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}"
+                                                   class="waves-effect waves-blue">أرباح المبيعات</a>
+                                            @endif
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="{{ URL::route('searchTheBalanceOfTheStores','inventory_store') }}"
-                                       class="waves-effect waves-blue">  @lang('main.inventoryStore')   </a>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::route('searchTheBalanceOfTheStores','balance_stores') }}"
-                                       class="waves-effect waves-blue">@lang('main.balance_stores')  </a>
-                                    <a href="{{ URL::route('searchTheBalanceOfTheStores','evaluation_stores') }}"
-                                       class="waves-effect waves-blue">@lang('main.evaluation_stores')  </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="yay-sub-toggle waves-effect waves-blue"> الفواتير <span
-                                        class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                            <ul>
-                                <li>
-                                    <a href="{{ URL::route('searchReportInvoices',array('sales',NULL)) }}"
-                                       class="waves-effect waves-blue"> المبيعات ( تحليلى ) </a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('sales','sum')) }}"
-                                       class="waves-effect waves-blue"> المبيعات ( إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('salesReturn',NULL)) }}"
-                                       class="waves-effect waves-blue"> مرتجعات المبيعات (تحليلى)</a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('salesReturn','sum')) }}"
-                                       class="waves-effect waves-blue"> مرتجعات المبيعات (إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices','buy') }}"
-                                       class="waves-effect waves-blue"> المشتريات ( تحليلى ) </a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('buy','sum')) }}"
-                                       class="waves-effect waves-blue"> المشتريات ( إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('buyReturn',NULL)) }}"
-                                       class="waves-effect waves-blue">مردودات المشتريات (تحليلى)</a>
-                                    <a href="{{ URL::route('searchReportInvoices',array('buyReturn','sum')) }}"
-                                       class="waves-effect waves-blue">مردودات المشتريات (إجمالى) </a>
-                                    <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}"
-                                       class="waves-effect waves-blue">أرباح المبيعات</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
             </ul>
-
-
         </div>
     </div>
 </aside>

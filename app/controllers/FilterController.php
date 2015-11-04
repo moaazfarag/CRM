@@ -72,6 +72,17 @@ class FilterController extends BaseController
     }
 
 
+
+    public function canTransData()
+    {
+        $groups = ["balances","settles", "invoices"];
+        foreach($groups as $group ){
+            if (!PermissionController::isMainPerm($group , 'show')) {
+                return $this->makeError();
+            }
+        }
+
+     }
     public function canViewTrans()
     {
         $uri = explode('/', Request::path());
@@ -122,7 +133,7 @@ class FilterController extends BaseController
         $general_accounts = ['customers', 'suppliers', 'bank', 'partners', 'expenses', 'multiple_revenue'];
         $reports_invoices = ['sales', 'sumSales', 'salesReturn', 'sumSalesReturn', 'buy', 'sumBuy', 'buyReturn', 'sumBuyReturn', 'sales-earnings'];
         if (in_array($type, $stores)) {
-            $type = camel_case($type);
+            $type = 'p_'.camel_case($type);
             $group = "p_reports_stores";
         } elseif (in_array($type, $settles)) {
             $type = 'p_' . $type;
@@ -141,7 +152,7 @@ class FilterController extends BaseController
             $type = 'p_' . camel_case($type);
             $group = "p_reports_invoices";
         }
-        if (!PermissionController::isSession($group, $type, 'show')) {
+         if (!PermissionController::isSession($group, $type, 'show')) {
             return $this->makeError();
         }
     }
@@ -152,7 +163,7 @@ class FilterController extends BaseController
      */
     private function makeError()
     {
-        $data['error'] = "ليس لديك صلاحية لدخول هذا القسم";
+        $data['error'] ="ليس لديك صلاحية لدخول هذا الصفحه ";
         return View::make('errors.missing', $data);
     }
 

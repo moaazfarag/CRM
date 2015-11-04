@@ -23,7 +23,6 @@
 
     public function storeNewCompany (){
 
-
         $inputs = Input::all();
 //       return  var_dump($inputs);
         $validation = Validator::make($inputs, CoData::$store_company,BaseController::$messages);
@@ -48,25 +47,26 @@
                 $user->all_br     = 1;
                 $user->password   = Hash::make($inputs['password']);
                 $user->email      = $inputs['email'];
-                $user->permission = PermissionController::setPermission(1);
+                $user->permission =  json_encode(PermissionController::setPermission(1));
                 $user->owner      = 'acount_creator';
                 $user->save();
-               
+
                 if($user->save()) {
                     // store mine branch data
                     $branch             = new Branches;
-                    $branch->true_id    = BaseController::maxId($branch);
+//                    $branch->true_id    = BaseController::maxId($branch);
                     $branch->br_name    = 'الفرع الرئيسى';
                     $branch->br_address = $company->co_address;
                     $branch->user_id    = $user->id;  // id of user  who add  this branch
-                    $branch->co_id      = $company->id;// id of company related this branch 
+                    $branch->co_id      = $company->id;// id of company related this branch
                     $branch->save();
 
                     if($branch->save()){
-                    
-                     // login 
-                    $user_login = new UserController;
-                    Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
+
+                        // login
+                        $user_login = new UserController;
+                        Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
+
                     return $user_login->checkLogin($company->id);
 
                     }else{

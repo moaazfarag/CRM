@@ -202,7 +202,8 @@ class ItemController extends BaseController
     public function searchItemCard(){
         $data['type']           = "item";
         $data['title']           = "كارت الصنف";
-        $data['TransOpen']   = 'open' ;
+        $data['report_open'] = "open";
+        $data['stores'] = "open";
         $data['sum']            = NULL;
         $data['co_info']        = CoData::thisCompany()->first();
         $data['branch']         = $this->isAllBranch();
@@ -234,7 +235,8 @@ class ItemController extends BaseController
                 $balBefore[$itemId]['bal'] = array_sum(TransHeader::getItems($inputs,1)->lists('item_bal') );
             }
             $data['items']     = $items;
-            $data['TransOpen'] = 'open' ;
+            $data['report_open'] = "open";
+            $data['stores'] = "open";
             $data['balBefore'] = $balBefore;
             $data['co_info']   = CoData::thisCompany()->first();
             $data['date_from'] = $this->strToTime($inputs['date_from']);
@@ -247,7 +249,8 @@ class ItemController extends BaseController
     public function searchTheBalanceOfTheStores ($type){
 
         if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
-
+            $data['report_open'] = "open";
+            $data['stores'] = "open";
             $data['type']           = $type;
             $data['title']          = Lang::get('main.'.$type);
             $data['co_info']        = CoData::thisCompany()->first();
@@ -270,7 +273,8 @@ class ItemController extends BaseController
 
             $data['type']    = $type;
             $data['title']   = Lang::get('main.'.$type);
-
+            $data['report_open'] = "open";
+            $data['stores'] = "open";
             $balances       =  DB::table('items_balance')
                 ->company()
                 ->groupBy('br_id')
@@ -351,7 +355,8 @@ class ItemController extends BaseController
 
             $i++;
         }
-
+        $data['report_open'] = "open";
+        $data['stores'] = "open";
         $data['show_zero_results']   ='yes';
         $data['balances']            = $inventory_data;
         $data['type']                = 'inventory_result';
