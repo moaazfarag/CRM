@@ -448,11 +448,19 @@ class AccountController extends BaseController
                         $all_trans_cash = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->whereIn('pay_type',['cash','visa'])
+                            ->whereNotIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
+                            ->whereIn('trans_type',['catch','pay'])
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->first();
+
+                        $all_trans_movement = AccountTrans::company()
+                            ->where('account_id',$account_id)
+                            ->whereIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 
@@ -469,6 +477,12 @@ class AccountController extends BaseController
                             $debit  += $all_trans_on_account->sum_debit;
                         }
 
+                        if(!empty($all_trans_movement)){
+
+                            $credit += $all_trans_movement->sum_credit;
+                            $debit  += $all_trans_movement->sum_debit;
+                        }
+
                         if(!empty($account_balance)){
 
                             $credit += $account_balance->sum_credit;
@@ -482,7 +496,6 @@ class AccountController extends BaseController
 
 
                     }
-
                     return View::make('dashboard.accounts.accounts_search.accounts_balance_result', $data);
                 }else{
                     return View::make('dashboard.accounts.accounts_search.accounts_result', $data);
@@ -657,11 +670,19 @@ class AccountController extends BaseController
                         $all_trans_cash = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->whereIn('pay_type',['cash','visa'])
+                            ->whereNotIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
+                            ->whereIn('trans_type',['catch','pay'])
+                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->first();
+
+                        $all_trans_movement = AccountTrans::company()
+                            ->where('account_id',$account_id)
+                            ->whereIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 
@@ -676,6 +697,12 @@ class AccountController extends BaseController
 
                             $credit += $all_trans_on_account->sum_credit;
                             $debit  += $all_trans_on_account->sum_debit;
+                        }
+
+                        if(!empty($all_trans_movement)){
+
+                            $credit += $all_trans_movement->sum_credit;
+                            $debit  += $all_trans_movement->sum_debit;
                         }
 
                         if(!empty($account_balance)){

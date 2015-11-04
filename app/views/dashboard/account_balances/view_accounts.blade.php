@@ -10,9 +10,18 @@
 
 @extends('dashboard.main')
 @section('content')
+<<<<<<< HEAD
+<!-- Main Content -->
+<section   class="content-wrap ecommerce-invoice">
+    <div class="card" style="padding: 2%;">
+        <div  class="card-panel blue lighten-5 center_title">
+   {{ $title }}
+        </div>
+=======
         <!-- Main Content -->
 <section class="content-wrap ecommerce-invoice">
     <div class="card">
+>>>>>>> origin/master
         <table id="table_bank" class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>

@@ -1,7 +1,11 @@
+
+
+
 <div class="card">
     <div class="content">
         <table id="table_bank" class="display table table-bordered table-striped table-hover">
             <thead>
+
             <tr>
 
                 <th>@lang('main.date') </th>

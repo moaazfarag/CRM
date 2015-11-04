@@ -82,6 +82,9 @@
 
 
     </div>
+    <div class="right-align invoice-print">
+        <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
+    </div>
 
     @unless(empty($account_trans))
         {{--table start--}}
