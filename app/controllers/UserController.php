@@ -25,10 +25,16 @@ class UserController extends BaseController
             'password' => 'required',
             'co_id'    => 'required|integer',
         );
+        if($co_id) {
+            $rules = array(
+                'username' => 'required',
+                'password' => 'required',
+            );
+        }
+
         $validator = Validator::make(Input::all(), $rules, BaseController::$messages);
 
         if ($validator->fails()) {
-
             return Redirect::back()->withErrors($validator)->withInput();
         } else {
             $username = Input::get('username');
@@ -98,6 +104,7 @@ class UserController extends BaseController
 
     public function editUser($id)
     {
+        $data['asideOpen'] = 'open';
         $edit = Lang::get('main.edit');
         $editUser = Lang::get('main.editUser');
         $data['company'] = CoData::find(Auth::user()->co_id);

@@ -192,6 +192,8 @@ class AccountController extends BaseController
             'partners' =>'جارى الشركاء',
             'bank'     =>'البنك',
         );
+        $data['general_accounts_open']     = 'open';
+        $data['direct_movement_open']     = 'open';
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
         $data['branch']      = $this->isAllBranch();
         $data['title']      = 'إضافة حركة مباشرة ';
@@ -336,6 +338,7 @@ class AccountController extends BaseController
 
             $data['co_info']   = CoData::thisCompany()->first();
             $data['title']     = Lang::get('main.accounts_'.$type);
+            $data['general_accounts_open']     = 'open';
             $data['accounts']  = Accounts::company()->where('acc_type',$type)->get();
             $data['type']      = $type;
 
@@ -396,7 +399,7 @@ class AccountController extends BaseController
 //            var_dump($account_trans); die();
 
             // FILL DATA FROM INPUTS AND ACCOUNT TRANS RESULT
-
+                $data['general_accounts_open']     = 'open';
             $data['account_balance'] = $account_balance;
             $data['account_trans'] = $account_trans->get();
             $data['date_from']     = $date_from;
@@ -612,6 +615,7 @@ class AccountController extends BaseController
                 $data['date_to']       = $date_to;
                 $data['type']          = $type;
                 $data['account']       = $type;
+                $data['general_accounts_open']     = 'open';
                 $data['account_id']    = $account_id;
                 $data['company']       = CoData::find(Auth::user()->co_id);
                 $data['branch']        = $this->isAllBranch();
@@ -711,6 +715,8 @@ class AccountController extends BaseController
         $data['title']       = Lang::get('main.daily_treasury');
         $data['company']     = CoData::find(Auth::user()->co_id);
         $data['branch']      = $this->isAllBranch();
+        $data['general_accounts_open']     = 'open';
+        $data['direct_movement_open']     = 'open';
 
         return View::make('dashboard.accounts.daily_treasury.daily_treasury_search',$data);
 
@@ -718,6 +724,7 @@ class AccountController extends BaseController
     }
     public function dailyTreasuryResult(){
 
+        $data['direct_movement_open']     = 'open';
 
         $inputs = Input::all();
 
@@ -741,7 +748,7 @@ class AccountController extends BaseController
             $movements      = array('pay','catch');
             $debit          = array();
             $credit         = array();
-
+            $data['general_accounts_open']     = 'open';
             $data['company']        = CoData::find(Auth::user()->co_id);
             $data['branch']         = $this->isAllBranch();
             $data['title']          = Lang::get('main.daily_treasury');
@@ -954,13 +961,14 @@ class AccountController extends BaseController
         $date_from      = $this->strToTime(Input::get('date_from'));
         $date_to        = $this->strToTime(Input::get('date_to'));
 
-
         $debit_types    = array('buy','pay','salesReturn');
         $credit_types   = array('sales','catch','buyReturn');
         $movements      = array('pay','catch');
         $debit          = array();
         $credit         = array();
 
+        $data['general_accounts_open']     = 'open';
+        $data['direct_movement_open']     = 'open';
         $data['company']        = CoData::find(Auth::user()->co_id);
         $data['branch']         = $this->isAllBranch();
         $data['title']          = Lang::get('main.daily_treasury');

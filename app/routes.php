@@ -306,8 +306,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
     Route::group(array('prefix' => 'accounts'), function () {
         // direct movement
-        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
-            Route::get('add-direct-movement', array('uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
+        Route::get('add-direct-movement', array('before' => 'filter:p_general_accounts:p_directMovement:add_edit_show','uses' => 'AccountController@addDirectMovement', 'as' => 'addDirectMovement'));
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:show'), function () {
             Route::post('store-direct-movement', array('uses' => 'AccountController@storeDirectMovement', 'as' => 'storeDirectMovement'));
         });
         Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:edit'), function () {
@@ -315,11 +315,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('update-direct-movement/{id}', array('uses' => 'AccountController@updateDirectMovement', 'as' => 'updateDirectMovement'));
         });
         // Daily treasury
-        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
+        Route::group(array('before' => 'filter:p_general_accounts:p_dailyTreasury:add'), function () {
             Route::get('daily-treasury-search', array('uses' => 'AccountController@dailyTreasurySearch', 'as' => 'dailyTreasurySearch'));
             Route::post('daily-treasury-result', array('uses' => 'AccountController@dailyTreasuryResult', 'as' => 'dailyTreasuryResult'));
         });
-        Route::group(array('before' => 'filter:p_general_accounts:p_dailyTreasury:add'), function () {
+        Route::group(array('before' => 'filter:p_general_accounts:p_directMovement:add'), function () {
             Route::get('result-search-daily-treasury', array('uses' => 'AccountController@resultSearchDailyTreasury', 'as' => 'resultSearchDailyTreasury'));
             Route::post('daily-treasury-add-direct-movement', array('uses' => 'AccountController@dailyTreasuryAddDirectMovement', 'as' => 'dailyTreasuryAddDirectMovement'));
         });

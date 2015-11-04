@@ -362,55 +362,80 @@ $company = CoData::find(Auth::user()->co_id);
                         </ul>
                     </li>
                 @endif
-                <li class="">
-                    <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الحسابات العامة
-                        <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                    <ul>
-                        <li>
-                            <a class="yay-sub-toggle waves-effect waves-blue">الخزينة <span
-                                        class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                            <ul>
+                @if(PerC::isMainPerm('p_general_accounts','show_add_edit'))
+                    <li class="{{ @$general_accounts_open }}">
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الحسابات
+                            العامة
+                            <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                        <ul>
+                            @if(PerC::isShow('p_general_accounts','p_dailyTreasury','show_add_edit') || PerC::isShow('p_general_accounts','p_directMovement','show') )
+                                <li class="{{ @$direct_movement_open }}">
+                                    <a class="yay-sub-toggle waves-effect waves-blue">الخزينة <span
+                                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
 
-                                <li>
-                                    <a href="{{ URL::route('dailyTreasurySearch') }}" class="waves-effect waves-blue">
-                                        يومية الخزينة </a>
-                                    <a href="{{ URL::route('addDirectMovement') }}" class="waves-effect waves-blue">
-                                        الحركات المباشرة </a>
+                                        <li>
+                                            @if(PerC::isShow('p_general_accounts','p_dailyTreasury','show_add_edit'))
+                                                <a href="{{ URL::route('dailyTreasurySearch') }}"
+                                                   class="waves-effect waves-blue">
+                                                    يومية الخزينة </a>
+                                            @endif
+                                            @if(PerC::isShow('p_general_accounts','p_directMovement','show'))
+
+                                                <a href="{{ URL::route('addDirectMovement') }}"
+                                                   class="waves-effect waves-blue">
+                                                    الحركات المباشرة </a>
+                                            @endif
+
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-
-                        <li><a href="{{ URL::route('searchAccounts','customers') }}"
-                               class="waves-effect waves-blue"> @lang('main.accounts_customers')</a></li>
-                        <li><a href="{{ URL::route('searchAccounts','suppliers') }}"
-                               class="waves-effect waves-blue"> @lang('main.accounts_suppliers') </a></li>
-                        <li><a href="{{ URL::route('searchAccounts','bank') }}"
-                               class="waves-effect waves-blue">   @lang('main.accounts_bank')</a></li>
-                        <li><a href="{{ URL::route('searchAccounts','partners') }}"
-                               class="waves-effect waves-blue">  @lang('main.accounts_partners') </a></li>
-                        <li><a href="{{ URL::route('searchAccounts','multiple_revenue') }}"
-                               class="waves-effect waves-blue">  @lang('main.accounts_multiple_revenue') </a></li>
-                        <li><a href="{{ URL::route('searchAccounts','expenses') }}"
-                               class="waves-effect waves-blue">  @lang('main.accounts_expenses') </a></li>
-                    </ul>
-                </li>
-
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_customers','show'))
+                                <li><a href="{{ URL::route('searchAccounts','customers') }}"
+                                       class="waves-effect waves-blue"> @lang('main.accounts_customers')</a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_suppliers','show'))
+                                <li><a href="{{ URL::route('searchAccounts','suppliers') }}"
+                                       class="waves-effect waves-blue"> @lang('main.accounts_suppliers') </a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_bank','show'))
+                                <li><a href="{{ URL::route('searchAccounts','bank') }}"
+                                       class="waves-effect waves-blue">   @lang('main.accounts_bank')</a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_partners','show'))
+                                <li><a href="{{ URL::route('searchAccounts','partners') }}"
+                                       class="waves-effect waves-blue">  @lang('main.accounts_partners') </a></li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_multiple_revenue','show'))
+                                <li><a href="{{ URL::route('searchAccounts','multiple_revenue') }}"
+                                       class="waves-effect waves-blue">  @lang('main.accounts_multiple_revenue') </a>
+                                </li>
+                            @endif
+                            @if(PerC::isShow('p_general_accounts','p_expenses','show'))
+                                <li><a href="{{ URL::route('searchAccounts','expenses') }}"
+                                       class="waves-effect waves-blue">  @lang('main.accounts_expenses') </a></li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
                 <li class="">
                     <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> التقارير <span
                                 class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                     <ul>
-                        <li>
-                            <a class="yay-sub-toggle waves-effect waves-blue">شئون العاملين <span
-                                        class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                            <ul>
+                        @if(PerC::isShow('p_reports_hr','p_outgoingSalaries','show'))
+                            <li>
+                                <a class="yay-sub-toggle waves-effect waves-blue">شئون العاملين <span
+                                            class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                <ul>
 
-                                <li>
-                                    <a href="{{ URL::route('searchOutgoingSalariesReport') }}"
-                                       class="waves-effect waves-blue"> المرتبات المنصرفة </a>
-                                </li>
-                            </ul>
-                        </li>
-
+                                    <li>
+                                        <a href="{{ URL::route('searchOutgoingSalariesReport') }}"
+                                           class="waves-effect waves-blue"> المرتبات المنصرفة </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                         <li>
                             <a class="yay-sub-toggle waves-effect waves-blue"> المخازن <span
                                         class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
@@ -468,8 +493,6 @@ $company = CoData::find(Auth::user()->co_id);
                     </ul>
                 </li>
             </ul>
-
-
         </div>
     </div>
 </aside>

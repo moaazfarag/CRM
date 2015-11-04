@@ -74,8 +74,9 @@
             </div>
 
             <hr/>
+                                                                      @if(PerC::isShow('p_general_accounts','p_directMovement','add'))
             <a class="waves-effect waves-light btn modal-trigger" href="#modal1">@lang('main.add_direct_movement')</a>
-
+                                        @endif
 
         </div>
     </div>
@@ -139,6 +140,7 @@
                 لا يوجد نتائج
             </div>
             @endif
+                                                                              @if(PerC::isShow('p_general_accounts','p_directMovement','add'))
                     <!--/////////// model start }}}}}}}}}}}}}}-->
             <!-- Modal Structure -->
             <div id="modal1" class="modal">
@@ -186,7 +188,7 @@
                         @endif
 
                     </div>
-
+                                        @endif
 
                     <div class="row">
                         {{--price--}}
