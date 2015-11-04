@@ -162,6 +162,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::get('{type}/{br_id}', array('before' => 'canTrans:add_show','uses' => 'TransController@addTrans', 'as' => 'addTrans'));
         Route::group(array('before' => 'canTrans:add'), function () {
             Route::post('{type}/{br_id}', array('before' => 'csrf', 'uses' => 'TransController@storeTrans', 'as' => 'storeTrans'));
+        });
+        Route::group(array('before' => 'canTransData'), function () {
             Route::post('serial-items-data', array('uses' => 'TransController@serialItemsData', 'as' => 'serialItemsData'));
             Route::post('items-data', array('uses' => 'TransController@items', 'as' => 'items'));
             Route::post('invoice-data', array('uses' => 'TransController@returnsInvoiceData', 'as' => 'returnsInvoiceData'));
@@ -282,7 +284,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         // invoices
         Route::group(array('before' => 'canShowSettle'), function () {
             Route::get('search-invoices/{type}/{sum?}', array('uses' => 'InvoiceController@reportSearchInvoice', 'as' => 'searchReportInvoices'));
-            Route::post('invoices/', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
+            Route::post('invoices/{type}', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
         });
         // item card
         Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {

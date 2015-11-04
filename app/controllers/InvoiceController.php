@@ -31,7 +31,8 @@ class InvoiceController extends BaseController
 
 
         if (in_array($type, $types)) {
-
+            $data['report_open'] = "open";
+            $data['invoice_open'] = "open";
             $data['type'] = $type;
             $data['co_info'] = CoData::thisCompany()->first();
             $data['branch'] = $this->isAllBranch();
@@ -54,7 +55,7 @@ class InvoiceController extends BaseController
              item
 
              */
-    public function reportResultInvoice()
+    public function reportResultInvoice($invoice_type)
     {
 
         $inputs = Input::all();
@@ -72,7 +73,7 @@ class InvoiceController extends BaseController
 
         } else {
 
-            $invoice_type = $inputs['invoice_type'];
+
 
             $types = array('sales', 'salesReturn', 'buy', 'buyReturn', 'sales-earnings');
 
@@ -135,7 +136,8 @@ class InvoiceController extends BaseController
 
             }// end else
 
-
+            $data['report_open'] = "open";
+            $data['invoice_open'] = "open";
             $data['cat_id'] = $cat_id;
             $data['item_id'] = $item_id;
             $data['invoices'] = $invoices_data;

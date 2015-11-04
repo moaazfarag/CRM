@@ -139,7 +139,8 @@ class MsHeaderController extends BaseController
     }
 
     public function searchOutgoingSalariesReport(){
-
+        $data['report_open'] = "open";
+        $data['salary_report'] = "open";
         $data['title']   = 'المرتبات المنصرفة '; // page title
         $data['co_info'] = CoData::thisCompany()->first();
         return View::make('dashboard.hr.report.index',$data);
@@ -160,7 +161,8 @@ class MsHeaderController extends BaseController
            $date_to   =  $this->strToTime($inputs['date_to']);
             
            $out_going_salaries =  MsHeader::dateBetween('created_at',$date_from,$date_to)->get();
-            // var_dump($out_going_salaries); die();
+            $data['report_open'] = "open";
+            $data['salary_report'] = "open";
             $data['tablesData'] = $out_going_salaries;
             $data['title']      = 'عرض المرتبات المنصرفة '; // page title
             $data['co_info']    = CoData::thisCompany()->first();
@@ -174,8 +176,9 @@ class MsHeaderController extends BaseController
 
     public function ViewOutGoingSalariesDetails($id){
 
-        
 
+        $data['report_open'] = "open";
+        $data['salary_report'] = "open";
             $data['headers'] = MsHeader::company()->where('id',$id)->get();
             $data['title']   = 'عرض المرتبات المنصرفة '; // page title
             return View::make('dashboard.hr.report.view_outgoing_salary_details',$data);
