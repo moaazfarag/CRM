@@ -32,7 +32,8 @@
                     <a href="{{ URL::route('editLoans',array($tableData->id)) }}" class="btn btn-small z-depth-0">
                         <i class="mdi mdi-editor-mode-edit"></i>
                     </a>
-
+                </td>
+                @endforeach
 <div class="card">
     <div class="content">
         <table id="table_bank" class="display table table-bordered table-striped table-hover">
