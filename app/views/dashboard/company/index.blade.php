@@ -182,7 +182,7 @@
             @else
                 {{ Form::open(array('route'=>array('storeBranch'),'data-parsley-validate')) }}
             @endif
-                @if(PerC::isShow('main_info','branch','edit',"editBranch" )||PerC::isShow('main_info','branch','add' ,"addBranch"))
+                @if(PerC::isShow('main_info','branch','edit',"editBranch" )||PerC::isShow('main_info','branch','add' ,"addBranch")||PerC::isShow('main_info','branch','add' ,"editCompanyInfo"))
             <div class="row no-margin-top">
                 <div class="col s12 l2">
                     <label for="branch-name">
@@ -221,7 +221,7 @@
                 <div class="col s12 l12">
                     @if(PerC::isShow('main_info','branch','edit',"editBranch" ) )
                         <button class="waves-effect btn">@lang('main.edit')</button>
-                    @elseif(PerC::isShow('main_info','branch','add',"addBranch" ) )
+                    @elseif(PerC::isShow('main_info','branch','add',"addBranch" ) || PerC::isShow('main_info','branch','add',"editCompanyInfo" ) )
                         <button class="waves-effect btn">@lang('main.add') </button>
                     @endif
                 </div>

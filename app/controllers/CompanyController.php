@@ -44,6 +44,7 @@
                 $user             = new User;
                 $user->co_id      = $company->id;
                 $user->username   = $inputs['username'];
+                $user->name   = $inputs['username'];
                 $user->all_br     = 1;
                 $user->password   = Hash::make($inputs['password']);
                 $user->email      = $inputs['email'];
@@ -104,7 +105,6 @@
          * edit company data
          */
 
-
         public function editCompanyInfo()
         {
             $data = $this->settingData();//company info data
@@ -126,6 +126,7 @@
          */
         public function updateCompanyInfo($id)
         {
+
             $company = CoData::findOrFail($id);
             if($company &&  $id == Auth::user()->co_id )
             {
