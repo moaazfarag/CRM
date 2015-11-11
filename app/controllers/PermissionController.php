@@ -54,7 +54,7 @@ class PermissionController extends BaseController
     {
         $perm_types =  explode('_', $types);
         foreach($perm_types as $type){
-            $result = array_column(Session::get('permission')[$group],$type);
+            $result = self::array_column(Session::get('permission')[$group],$type);
             if (array_sum($result)) {
                 return true;
             }
@@ -111,6 +111,20 @@ class PermissionController extends BaseController
                     }
                 }
             }
+        }
+    }
+    public static function  array_column(array $input,$columnKey, $indexKey = null){
+        if (! function_exists('array_column')) {
+
+
+                $result = array();
+                foreach ($input as $k => $v)
+                    $result[$indexKey ? $v[$index_key] : $k] = $v[$columnKey];
+
+                return $result;
+
+        }else{
+            return array_column($input,$columnKey);
         }
     }
 }
