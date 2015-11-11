@@ -107,7 +107,7 @@ Top Navbar
                     </li>
 
                     <li>
-                        <a href="{{ URL::route('logout') }}">
+                        <a href="{{ URL::route('logOutManagement') }}">
                             <i class="fa fa-sign-out"></i> @lang('main.logout') </a>
                     </li>
                 </ul>

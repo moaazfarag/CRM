@@ -11,28 +11,43 @@
 */
 
 App::setlocale('ar');
+
 Route::get('/login', function () {
     if (Auth::check()) {
         return Redirect::to('/admin');
     }
-
+    $data['type'] = 'user';
     return View::make('emails.auth.login');
 
 });
+
+Route::get('/login-management', function () {
+    if (Auth::check()) {
+        return Redirect::to('/management');
+    }
+    $data['type'] = 'management';
+    return View::make('emails.auth.login_management');
+
+});
+
+
+
 /*
  * logout route
  * */
 Route::get('/logout', array('uses' => 'UserController@logout', 'as' => 'logout'));
+Route::get('/logout-management', array('uses' => 'UserController@logOutManagement', 'as' => 'logOutManagement'));
 /*
  * login post
  * check username and password
  * */
 Route::post('/login', array('uses' => 'UserController@checkLogin', 'as' => 'login', 'before' => 'csrf'));
+Route::post('/login-management', array('uses' => 'UserController@checkLoginManagement', 'as' => 'checkLoginManagement', 'before' => 'csrf'));
 Route::get('/add-new-company', array('uses' => 'CompanyController@addNewCompany', 'as' => 'addNewCompany'));
 Route::post('/storeNewCompany', array('uses' => 'CompanyController@storeNewCompany', 'as' => 'storeNewCompany', 'before' => 'csrf'));
 Route::get('/', 'HomeController@index');
 
-Route::group(array('prefix' => 'management' ,'before' => 'auth:management'), function () {
+Route::group(array('prefix' => 'management' ,'before' => 'auth_management'), function () {
 
    Route::get('/{statues?}',array('uses'=>'elrasedManagementController@home','as'=>'elrasedManagement'));
    Route::post('update-company-reservations',array('uses'=>'elrasedManagementController@updateCompanyReservations','as'=>'updateCompanyReservations'));
