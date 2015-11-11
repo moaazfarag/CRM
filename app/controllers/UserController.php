@@ -15,6 +15,13 @@ class UserController extends BaseController
         return Redirect::to('/login');
     }
 
+    public function logOutManagement()
+    {
+        Session::flush();
+        Auth::logout();
+        return Redirect::to('/login-management');
+    }
+
     /*
      * check login
      * */
@@ -39,21 +46,58 @@ class UserController extends BaseController
         } else {
             $username = Input::get('username');
             $password = Input::get('password');
+
             $co_id = (Input::has('co_id')) ? Input::get('co_id') : $co_id;
-            if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
-                Session::put('permission', json_decode(Auth::user()->permission, true));
-                $user = User::find(Auth::id());
-                Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
-                return Redirect::intended('admin/setting');
+
+            $company = CoData::find($co_id);
+            if(in_array($company->co_statues,[1,0])){
+
+                if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
+
+
+                    Session::put('permission', json_decode(Auth::user()->permission, true));
+                    $user = User::find(Auth::id());
+                    Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
+                    return Redirect::intended('admin/setting');
+
             } else {
                 $error = Lang::get('main.error');
                 Session::flash('error', $error);
                 return Redirect::to('/login');
             }
 
+            }elseif($company->co_statues == 2){
+              return 'تم إيقاف الشركة';
+            }
+
         }
     }
 
+    public function checkLoginManagement (){
+
+        $rules = array(
+                'username' => 'required',
+                'password' => 'required',
+            );
+        $validator = Validator::make(Input::all(), $rules, BaseController::$messages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        } else {
+            $username = Input::get('username');
+            $password = Input::get('password');
+
+            if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => '0'))) {
+                return Redirect::intended('management');
+            } else {
+
+                $error = Lang::get('main.error');
+                Session::flash('error', $error);
+                return Redirect::to('/login-management');
+            }
+
+        }
+    }
     public function addUser()
     {
         $add = Lang::get('main.add');

@@ -46,7 +46,28 @@ Route::filter('auth', function()
 		{
 			return Redirect::guest('login');
 		}
+	}elseif(Auth::user()->co_id == 0){
+		return View::make('errors.404');
 	}
+});
+
+
+Route::filter('auth_management', function()
+{
+	if (Auth::guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('login-management');
+		}
+	}elseif(!Auth::user()->co_id == 0){
+			return View::make('errors.missing');
+	}
+
 });
 
 
