@@ -112,8 +112,7 @@
             <!-- table start  -->
 
             <div class="row">
-
-
+                <div class="table-responsive" >
                 <table id="table_bank" class="display table table-bordered table-striped table-hover" style="margin-right: 7px;">
                     <thead>
                     <tr>
@@ -204,19 +203,21 @@
 
 
                 </table>
+                </div>
 
-                <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
-                    <thead>
+                <div class="table-responsive" >
+                    <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
+                        <thead>
 
-                    <tr>
+                        <tr>
 
-                        <th>الفترة</th>
-                        <th>@lang('main.debit')</th>
-                        <th>@lang('main.credit_')</th>
-                        <th>@lang('main.stock')</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                            <th>الفترة</th>
+                            <th>@lang('main.debit')</th>
+                            <th>@lang('main.credit_')</th>
+                            <th>@lang('main.stock')</th>
+                        </tr>
+                        </thead>
+                      <tbody>
 
 
                     <tr>
@@ -257,6 +258,7 @@
                     <!-- table start  -->
 
             <div class="row">
+                <div class="table-responsive" >
 
 
                 <table id="table_bank" class="display table table-bordered table-striped table-hover">
@@ -346,7 +348,8 @@
 
 
                 </table>
-
+                </div>
+                <div class="table-responsive" >
                 <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
                     <thead>
 
@@ -379,7 +382,7 @@
 
                     </tbody>
                 </table>
-
+             </div>
             <hr/>
             </div>
             {{--end all branches --}}

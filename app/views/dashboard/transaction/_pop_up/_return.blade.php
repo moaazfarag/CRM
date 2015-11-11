@@ -8,7 +8,8 @@
         تاريخ الفاتورة : @{{ header.date }}
         طريقة الدفع  : @{{ header.pay_type }}
             </div>
-        <table ng-show="invoiceItems"  class="display table table-bordered table-striped table-hover">
+        <div class="table-responsive" >
+            <table ng-show="invoiceItems"  class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
                 <th> @lang('main.num')</th>
@@ -50,6 +51,7 @@
             </tr>
             </tbody>
         </table>
+      </div>
 
         <div class="table-responsive">
             <table id="table1" class="display table table-bordered table-hover" >

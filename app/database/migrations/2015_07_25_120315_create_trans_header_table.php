@@ -30,6 +30,7 @@ class CreateTransHeaderTable extends Migration {
             $table->string('pay_type')->nullable();
             $table->integer('deleted');
             $table->string('notes')->nullable();
+            $table->string('cancel_cause')->nullable();
 			$table->unique(array('invoice_no', 'invoice_type','co_id','br_id'));
 			$table->timestamps();
 		});

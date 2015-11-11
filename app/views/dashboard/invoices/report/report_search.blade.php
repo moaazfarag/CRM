@@ -1,12 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: ahmed
- * Date: 9/28/2015
- * Time: 1:29 PM
- */
 
-?>
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->

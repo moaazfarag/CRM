@@ -16,7 +16,7 @@
         <div class="content">
             @include('include.messages')
 
-            {{ Form::model($companyInfo, array('route'=>array('updateCompanyInfo',Auth::user()->co_id),'data-parsley-validate')) }}
+            {{ Form::model($companyInfo, array('files'=>'true','route'=>array('updateCompanyInfo',Auth::user()->co_id),'data-parsley-validate')) }}
 
             <div class="row no-margin-top">
                 <div class="col s12 l1">
@@ -30,6 +30,7 @@
                     <?php $companyName = Lang::get('main.companyName') ?>
                     {{--<input name="co_name" id="ecommerce-name" type="text" placeholder="اسم الشركة">--}}
                     {{ Form::text('co_name',null,array('required','placeholder'=>$companyName,@$readOnly)) }}
+                        <p class="parsley-required error-validation">{{ $errors->first('co_name') }} </p>
 
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                     <i class="mdi mdi-action-language prefix"></i>
                     <?php $address = Lang::get('main.address') ?>
                     {{ Form::text('co_address',null,array('required','placeholder'=>$address,@$readOnly)) }}
-                    {{--<input name="co_adress" id="ecommerce-adress" type="text" placeholder="العنوان">--}}
+                    <p class="parsley-required error-validation">{{ $errors->first('co_address') }} </p>
                 </div>
             </div>
             </div>
@@ -63,6 +64,7 @@
                     <?php $phoneNum = Lang::get('main.phone') ?>
                     {{--<input name="co_tel" id="ecommerce-tel" type="text" placeholder="رقم الهاتف ">--}}
                     {{ Form::text('co_tel',null,array('required','placeholder'=>$phoneNum,@$readOnly)) }}
+                    <p class="parsley-required error-validation">{{ $errors->first('co_tel') }} </p>
 
                 </div>
             </div>
@@ -80,7 +82,7 @@
 
                     {{ Form::select('co_print_size', array('' => lang::get('main.print_size')) + $print_size_types,null,array('id'=>'ecommerce-printsize',@$readOnly)) }}
 
-                    <p dir="rtl" class="parsley-required">{{ $errors ->first('br_id') }} </p>
+                    <p class="parsley-required error-validation">{{ $errors->first('co_print_size') }} </p>
                 </div>
             </div>
         </div>
@@ -95,11 +97,27 @@
                 <div class="input-field">
                     <i class="mdi mdi-editor-attach-money prefix"></i>
                     <?php $currency = Lang::get('main.currency') ?>
-                    {{--<input name="co_carrency" id="ecommerce-currency" type="text" placeholder="العملة">--}}
                     {{ Form::text('co_currency',null,array('required','placeholder'=>$currency,@$readOnly)) }}
+                    <p class="parsley-required error-validation">{{ $errors->first('co_currency') }} </p>
                 </div>
 
             </div>
+
+            <div class="col s12 l1">
+
+                <?php $logo = Lang::get('main.logo') ?>
+                {{ Form::label('logo',$logo) }}
+            </div>
+            <div class="col s12 l5">
+                <div class="input-field">
+                    {{ Form::file('co_logo',null,array('required',null,@$readOnly)) }}
+                    <p class="parsley-required error-validation">{{ $errors->first('co_logo') }} </p>
+
+                </div>
+
+            </div>
+
+
         </div>
             @if(!@$readOnly)
             <hr/>

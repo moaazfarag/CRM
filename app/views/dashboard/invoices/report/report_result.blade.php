@@ -25,7 +25,7 @@
 
          @if($sum != 'sum')
 
-
+      <div class="table-responsive" >
         <table   class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
@@ -160,8 +160,9 @@
            <?php  $count_invoices  = $i; ?>
             </tbody>
         </table>
-
-                <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
+     </div>
+                <div class="table-responsive" >
+                    <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
                     <thead>
 
                     <tr>
@@ -180,7 +181,7 @@
                     </tr>
                     </tbody>
                 </table>
-
+              </div>
 
 
 

@@ -7,8 +7,8 @@
             <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
         </div>
     	<div  class="card-panel blue lighten-5 center_title">{{ $title }}</div>
-
-    <table id="table_bank" class="display table table-bordered table-striped table-hover">
+        <div class="table-responsive" >
+            <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <caption class="caption-style">
@@ -51,6 +51,7 @@
         @endforeach
         </tbody>
     </table>
+   </div>
     </div>
 </section>
 <!-- /Main Content -->

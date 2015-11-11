@@ -89,6 +89,8 @@
 
     @unless(empty($account_trans))
         {{--table start--}}
+        <div class="table-responsive" >
+
         <table class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
@@ -131,6 +133,7 @@
             {{--@endforeach--}}
             </tbody>
         </table>
+      </div>
         {{--table end --}}
 
 

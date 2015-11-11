@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col l12 s12">
-
+        <div class="table-responsive" >
         <table  class="display table table-bordered table-striped table-hover" style=" font-size: 1em; ">
                 <thead>
                 <tr>
@@ -49,6 +49,6 @@
                     @endif
                 </tbody>
             </table>
-
+        </div>
     </div>
 </div>

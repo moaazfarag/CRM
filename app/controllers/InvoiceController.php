@@ -42,7 +42,14 @@ class InvoiceController extends BaseController
             $data['account_type'] = array('customers' => Lang::get('main.customers_'), 'suppliers' => Lang::get('main.suppliers_'), 'partners' => Lang::get('main.partners_'));
             return View::make('dashboard.invoices.report.report_search', $data);
 
-        } else {
+        } elseif($type == 'company-earnings') {
+            $data['report_open'] = "open";
+            $data['invoice_open'] = "open";
+            $data['type'] = $type;
+
+            return View::make('dashboard.invoices.report.report_search_company_earnings', $data);
+
+        }else{
 
             return 'no result about this type';
         }
@@ -55,6 +62,42 @@ class InvoiceController extends BaseController
              item
 
              */
+
+    public function reportResultCompanyEarnings (){
+
+        $inputs = Input::all();
+        $validation = Validator::make($inputs,CoData::$company_earnings, BaseController::$messages);
+        if ($validation->fails()) {
+
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        } else {
+
+            $date_from        = $this->strToTime($inputs['date_from']);
+            $date_to          = $this->strToTime($inputs['date_to']);
+            $data['invoices'] = TransHeader::company()
+                ->dateBetween('date', $date_from, $date_to)
+                ->where('deleted', 0)
+                ->whereIn('invoice_type', ['salesReturn', 'sales'])
+                ->get();
+//            dd($data['invoices']);
+            $data['expenses_and_revenue']    = AccountTrans::company()
+                ->dateBetween('date',$date_from,$date_to)
+                ->where('deleted', 0)
+                ->whereIn('account', ['expenses', 'multiple_revenue'])
+                ->get();
+//            dd($data['expenses_and_revenue']);
+            $data['sum']         = 'no';
+            $data['report_open'] = "open";
+            $data['invoice_open'] = "open";
+            $data['title']        = Lang::get('main.company-earnings_report');
+            $data['date_from'] = $date_from;
+            $data['date_to'] = $date_to;
+            return View::make('dashboard.invoices.report.report_result_company_earnings', $data);
+
+        }
+
+        }
     public function reportResultInvoice($invoice_type)
     {
 

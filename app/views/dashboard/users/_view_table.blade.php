@@ -1,3 +1,4 @@
+<div class="table-responsive" >
 <table id="table_customers" class="display table table-bordered  table-hover">
     <thead>
     <tr>
@@ -30,3 +31,4 @@
     @endforeach
     </tbody>
 </table>
+    </div>

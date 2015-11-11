@@ -57,6 +57,16 @@ class BaseController extends Controller {
      *  check if  user can controller all barnches or not
      *
      * */
+    public function saveImage($input_name){
+
+        $dest = '/dashboard/logo_images/';
+        $name = str_random(5).'.'.$input_name->getClientOriginalExtension();
+        $img  = Image::make($input_name)->resize(300, 200);
+        $img->save(public_path().$dest . $name);
+
+//        dd($dest . $name);
+             return $dest . $name;
+    }
     public function isAllBranch()
     {
         //check if  user can controller all barnches or not
@@ -176,6 +186,9 @@ class BaseController extends Controller {
         'username.unique'      =>'هذا الأسم مستخدم من قبل',
         'account_id.not_in'    => 'هذا الحقل مطلوب',
         'confirm_new_password.same'=>'كلمتان السر غير متطابقتان',
+        'image'                => 'الملف المرفوع ليس بصورة',
+        'co_logo.mimes'        => 'الملف المرفوع ليس بصورة',
+        'co_logo.between'         => 'حجم الصورة كبيــر .. يرجى رفع صورة أقل من واحد ميجا '
         );
 
 
@@ -349,5 +362,50 @@ class BaseController extends Controller {
         }
         return $result;
     }
+    // all table except co_data
+    public static $all_tabels = array(
+        'account_trans', 'accounts', 'accounts_balances', 'branches', 'cat','hr_departments', 'hr_desded',
+        'hr_empdesded', 'hr_employees', 'hr_jobs', 'hr_loans', 'hr_monthchanges', 'hr_ms_details', 'hr_ms_header', 'items',
+        'items_balances', 'marks', 'models', 'seasons', 'trans_details', 'trans_header', 'users',
+    );
+
+    public static function statues($start_date,$statues){
+        // end_date
+        $end_date = new DateTime($start_date);
+        $end_date->modify('+10 day');
+        // date now
+        $date_now = new DateTime();
+        if($date_now >= $start_date && $date_now  <= $end_date  && $statues == 0 ){
+                return 'trial';
+        }elseif($statues == 1){
+            return 'member';
+        }elseif(  $statues == 1 && $date_now >= $start_date && $date_now <= $end_date){
+            return 'member';
+        }elseif($statues == 2 || $date_now > $end_date){
+            return 'stoped';
+        }
+    }
+
+    public static function member($start_date,$statues){
+
+        // end trial date
+        $end_date = new DateTime($start_date);
+        $end_date->modify('+10 day');
+        // date now
+        $date_now = new DateTime();
+        // if the user in trial and pay the mony
+        if($date_now >= $start_date && $date_now <= $end_date && $statues == 1 ){
+            return true;
+        //if statues = 1 he must pay the mony
+        }elseif($statues == 1){
+            return true;
+        }else{
+            return false;
+
+        }
+
+    }
+
+
 
 }
