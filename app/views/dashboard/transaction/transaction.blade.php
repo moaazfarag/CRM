@@ -9,7 +9,9 @@
 
         <div class="row invoice-top">
             <div class="col s3 m3">
+                @if($co_info->co_logo)
                 <img width="150px" height="39px" src="{{ URL::asset($co_info->co_logo) }}" alt="Logo">
+                @endif
                 <br>
                 @lang('main.the_company') :
                 {{ $co_info->co_name }}
