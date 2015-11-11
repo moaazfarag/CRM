@@ -6,6 +6,7 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+dashboard/logo_images
 
 /.idea
 /.idea/workspace.xml
