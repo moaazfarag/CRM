@@ -18,7 +18,8 @@
 
 
         </div>
-        <table  class="display table table-bordered table-striped table-hover">
+        <div class="table-responsive" >
+          <table  class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
                 <th> @lang('main.num')</th>
@@ -60,7 +61,7 @@
             </tr>
             </tbody>
         </table>
-
+        </div>
         <div class="table-responsive">
             <table id="table1" class="display table table-bordered table-hover" >
                 <thead>

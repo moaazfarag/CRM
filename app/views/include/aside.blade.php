@@ -49,7 +49,7 @@ $company = CoData::find(Auth::user()->co_id);
 
                 <li class="{{@$asideOpen}}">
                     <a class="yay-sub-toggle waves-effect waves-blue"><i
-                                class="fa fa-dashboard"></i> @lang('main.mainList')<span
+                                class="fa fa-home"></i> @lang('main.mainList')<span
                                 class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 
                     <ul>
@@ -121,7 +121,7 @@ $company = CoData::find(Auth::user()->co_id);
                 @if(PerC::isMainPerm('balances','show_add'))
                     <li class="{{@$itemBalance}}">
                         <a class="yay-sub-toggle waves-effect waves-blue"><i
-                                    class="fa fa-dashboard"></i> @lang('main.balances') <span
+                                    class="mdi mdi-device-storage"></i> @lang('main.balances') <span
                                     class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
                             @if(PerC::isShow('balances','itemBalance','add_show'))
@@ -161,7 +161,7 @@ $company = CoData::find(Auth::user()->co_id);
                 @if(PerC::isMainPerm('settles','show_add'))
                     <li class="{{@$TransOpen}}">
                         <a class="yay-sub-toggle waves-effect waves-blue"><i
-                                    class="fa fa-dashboard"></i> @lang('main.stores')<span
+                                    class="ion-disc"></i> @lang('main.stores')<span
                                     class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
                             @if(@$branches['all_br'] == "all_br")
@@ -219,7 +219,7 @@ $company = CoData::find(Auth::user()->co_id);
                 @endif
                 @if(PerC::isMainPerm('hr','show_add_edit'))
                     <li class="{{@$employees}}">
-                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> شؤون العاملين
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="mdi mdi-social-people"></i> شؤون العاملين
                             <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
                             @if(PerC::isShow('hr','Departments','add_show_edit'))
@@ -261,7 +261,7 @@ $company = CoData::find(Auth::user()->co_id);
                 @endif
                 @if(PerC::isMainPerm('invoices','show_add'))
                     <li class="{{@$invoices_open}}">
-                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الفواتير <span
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="mdi mdi-action-description"></i> الفواتير <span
                                     class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
 
@@ -364,7 +364,7 @@ $company = CoData::find(Auth::user()->co_id);
                 @endif
                 @if(PerC::isMainPerm('p_general_accounts','show_add_edit'))
                     <li class="{{ @$general_accounts_open }}">
-                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> الحسابات
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class=" fa fa-exchange"></i> الحسابات
                             العامة
                             <span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
@@ -421,7 +421,7 @@ $company = CoData::find(Auth::user()->co_id);
                 @endif
                 @if(PerC::isMainPerm('p_reports_invoices','show') || PerC::isShow('p_reports_hr','p_outgoingSalaries','show') || PerC::isMainPerm('p_reports_stores','show'))
                     <li class="{{ @$report_open }}">
-                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> التقارير <span
+                        <a class="yay-sub-toggle waves-effect waves-blue"><i class="ion-printer"></i> التقارير <span
                                     class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                         <ul>
                             @if(PerC::isShow('p_reports_hr','p_outgoingSalaries','show'))
@@ -477,6 +477,7 @@ $company = CoData::find(Auth::user()->co_id);
                                                 class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
                                     <ul>
                                         <li>
+
                                             @if(PerC::isShow('p_reports_invoices','p_sales','show'))
                                                 <a href="{{ URL::route('searchReportInvoices',array('sales',NULL)) }}"
                                                    class="waves-effect waves-blue"> المبيعات ( تحليلى ) </a>
@@ -512,6 +513,10 @@ $company = CoData::find(Auth::user()->co_id);
                                             @if(PerC::isShow('p_reports_invoices','p_salesEarnings','show'))
                                                 <a href="{{ URL::route('searchReportInvoices','sales-earnings') }}"
                                                    class="waves-effect waves-blue">أرباح المبيعات</a>
+                                            @endif
+                                            @if(PerC::isShow('p_reports_invoices','p_company_earnings','show'))
+                                                <a href="{{ URL::route('searchReportInvoices','company-earnings') }}"
+                                                   class="waves-effect waves-blue"> أرباح الشركة</a>
                                             @endif
                                         </li>
                                     </ul>

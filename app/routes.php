@@ -9,6 +9,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 App::setlocale('ar');
 Route::get('/login', function () {
     if (Auth::check()) {
@@ -31,13 +32,19 @@ Route::get('/add-new-company', array('uses' => 'CompanyController@addNewCompany'
 Route::post('/storeNewCompany', array('uses' => 'CompanyController@storeNewCompany', 'as' => 'storeNewCompany', 'before' => 'csrf'));
 Route::get('/', 'HomeController@index');
 
-Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
+Route::group(array('prefix' => 'management' ,'before' => 'auth:management'), function () {
 
-    Route::get('/pdf', function () {
-        $pdf = PDF::loadView('hello');
-        return $pdf->stream();
+   Route::get('/{statues?}',array('uses'=>'elrasedManagementController@home','as'=>'elrasedManagement'));
+   Route::post('update-company-reservations',array('uses'=>'elrasedManagementController@updateCompanyReservations','as'=>'updateCompanyReservations'));
+   Route::post('stop-company',array('uses'=>'elrasedManagementController@stopCompany','as'=>'stopCompany'));
+   Route::post('activation-company',array('uses'=>'elrasedManagementController@activationCompany','as'=>'activationCompany'));
+   Route::post('delete-company',array('uses'=>'elrasedManagementController@deleteCompany','as'=>'deleteCompany'));
 
-    });
+});
+
+    Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
+
+
     /**
      * company info area
      */
@@ -159,7 +166,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
      * transaction area
      */
     Route::group(array('prefix' => 'transaction'), function () {
-        Route::get('{type}/{br_id}', array('before' => 'canTrans:add_show','uses' => 'TransController@addTrans', 'as' => 'addTrans'));
+        Route::get('{type}/{br_id}', array('before' => 'canTrans:add','uses' => 'TransController@addTrans', 'as' => 'addTrans'));
         Route::group(array('before' => 'canTrans:add'), function () {
             Route::post('{type}/{br_id}', array('before' => 'csrf', 'uses' => 'TransController@storeTrans', 'as' => 'storeTrans'));
         });
@@ -285,6 +292,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::group(array('before' => 'canShowSettle'), function () {
             Route::get('search-invoices/{type}/{sum?}', array('uses' => 'InvoiceController@reportSearchInvoice', 'as' => 'searchReportInvoices'));
             Route::post('invoices/{type}', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
+            Route::post('companyEarnings', array('uses' => 'InvoiceController@reportResultCompanyEarnings', 'as' => 'companyEarnings'));
+
         });
         // item card
         Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {

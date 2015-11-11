@@ -23,7 +23,7 @@
 
 
     @if(!empty($balances))
-
+            <div class="table-responsive" >
                 <table   class="display table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
@@ -40,14 +40,14 @@
 
 
 
-                        {{--@if(!in_array($type,['inventory_result','inventory_store']))--}}
+                       @if(!in_array($type,['inventory_result','inventory_store']))
                         <th>@lang('main.qty_')</th>
-                        {{--@endif--}}
+                        @endif
 
                         @if($type == 'evaluation_stores')
 
 
-                            <th>@lang('main.buy_prise_avg')</th>
+                            <th> سعر الشراء</th>
                             <th>@lang('main.sum_')</th>
 
                         @endif
@@ -104,9 +104,9 @@
                                     <td>{{ $branch_name }}</td>
                                     <td>{{ $cat_name }}</td>
                                     <td>{{ $item_name }}</td>
-                                    {{--@if(!in_array($type,['inventory_result','inventory_store']))--}}
+                                    @if(!in_array($type,['inventory_result','inventory_store']))
                                     <td>{{ $balance_num }}</td>
-                                    {{--@endif--}}
+                                    @endif
 
                                     @if($type == 'inventory_store')
 
@@ -163,9 +163,9 @@
                                      <td>{{ $branch_name }}</td>
                                      <td>{{ $cat_name }}</td>
                                      <td>{{ $item_name }}</td>
-                                     {{--@if(!in_array($type,['inventory_result','inventory_store']))--}}
+                                     @if(!in_array($type,['inventory_result','inventory_store']))
                                      <td>{{ $balance_num }}</td>
-                                     {{--@endif--}}
+                                     @endif
 
                                      @if($type == 'inventory_store')
 
@@ -210,7 +210,7 @@
 
                     </tbody>
                 </table>
-
+            </div>
             @if($type == 'inventory_store')
                 <div class="row">
                     <div dir="ltr" class="col s12 l12" style="float: left; padding: 2%;">

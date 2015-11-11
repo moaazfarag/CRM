@@ -83,7 +83,7 @@
             @if(!$header->detailsDes->isEmpty())
 
                 <div class="col s6">
-                     <div class="">
+                    <div class="table-responsive" >
                         <table id="table1" class="display table table-bordered table-hover">
                             <thead>
                             <tr>

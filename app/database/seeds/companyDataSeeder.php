@@ -1,5 +1,5 @@
 <?php
-  
+
 class companyDataSeeder extends Seeder {
 
 
@@ -10,6 +10,7 @@ class companyDataSeeder extends Seeder {
     DB::table('co_data')->insert(array(
 
     array(
+      'created_at'       =>new DateTime(),
       'co_name'          =>'شركة الحمد للملابس',
       'co_address'       =>'55 شارع احمد لطفى متفرع من شارع الطيران',
       'co_tel'           =>'002556699',
@@ -21,12 +22,14 @@ class companyDataSeeder extends Seeder {
       'co_supplier_must' =>'0',
       'co_use_season'    =>'0',
       'co_use_markes_models'=>'0',
-      'co_statues'       =>'0',
-      'user_id'          =>'1',
-      ),
+      'co_statues'       =>'1',
+        'user_id'          =>'1',
+        'co_expiration_date'=>'2015-11-23',
+    ),
 
     array(
-      'co_name'             =>'شركة البركة للسيارات',
+        'created_at'       =>new DateTime(),
+        'co_name'             =>'شركة البركة للسيارات',
       'co_address'          =>'النزهة الجديدة 44 شارع عثمان بن عفان ',
       'co_tel'              =>'00296299',
       'co_mobile_1'         =>'0114445566',
@@ -39,10 +42,13 @@ class companyDataSeeder extends Seeder {
       'co_use_markes_models'=>'0',
       'co_statues'          =>'0',
       'user_id'             =>'2',
-      ),
+        'co_expiration_date'=>'2016-11-15',
+
+    ),
 
     array(
-      'co_name'          =>'شركة التقوى سوبر ماركت ',
+        'created_at'       =>new DateTime(),
+        'co_name'          =>'شركة التقوى سوبر ماركت ',
       'co_address'       =>'55 عباس العقاد مدينة نصر  القاهرة ',
       'co_tel'           =>'002555006',
       'co_mobile_1'      =>'01089320255',
@@ -53,9 +59,11 @@ class companyDataSeeder extends Seeder {
       'co_supplier_must' =>'1',
       'co_use_season'    =>'1',
       'co_use_markes_models'=>'1',
-      'co_statues'       =>'0',
+      'co_statues'       =>'2',
       'user_id'          =>'3',
-      )
+        'co_expiration_date'=>'2016-6-3',
+
+    )
 
     ));
 

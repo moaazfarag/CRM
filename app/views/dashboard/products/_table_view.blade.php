@@ -1,4 +1,6 @@
 <div class="card-panel">
+    <div class="table-responsive" >
+
     <table id="table_bank" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -96,4 +98,5 @@
 
         </tbody>
     </table>
+  </div>
 </div>
