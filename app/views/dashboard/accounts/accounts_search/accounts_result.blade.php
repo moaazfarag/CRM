@@ -88,7 +88,9 @@
 
     @if(!empty($account_trans) || !empty($account_balance))
     {{--table start--}}
-    <table   class="display table table-bordered table-striped table-hover">
+        <div class="table-responsive" >
+
+        <table   class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <caption class="caption-style">
@@ -190,10 +192,13 @@
         @endforeach
         </tbody>
     </table>
+    </div>
     {{--table end --}}
 
 
     <div class="row" style="width: 80%; margin: 1% auto;">
+        <div class="table-responsive" >
+
         <table  class="display table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
@@ -228,7 +233,7 @@
                 </tr>
                 </tbody>
             </table>
-
+        </div>
     </div>
 
 

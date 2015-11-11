@@ -27,7 +27,7 @@ class AccountTrans extends Eloquent {
             return $account_name;
         }
             else {
-                return ' ÛíÑ ãÍÏÏ ';
+                return ' ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ';
             }
     }
 
@@ -69,4 +69,9 @@ class AccountTrans extends Eloquent {
 
     }
 
+    public function branch()
+    {
+        return $this->hasOne('Branches','id','br_id');
+
+    }
 }

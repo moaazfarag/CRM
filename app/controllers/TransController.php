@@ -346,7 +346,7 @@ class TransController extends BaseController
 
                 $trans->deleted = 1;
                 $trans->user_id = Auth::id();
-                $trans->notes   = $cancel_cause;
+                $trans->cancel_cause   = $cancel_cause;
                 $trans->save();
 
                 $msg = 'تم إلغاء الفاتورة بنجاح ';

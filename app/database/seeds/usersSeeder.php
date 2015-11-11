@@ -20,6 +20,7 @@ class usersSeeder extends Seeder {
 	    	'password'   =>Hash::Make('123456'),
 	    	'permission' => json_encode(PermissionController::setPermission(1)),
 	    	'photo'      =>'image.jpg',
+			'owner'      =>'acount_creator'
 	    ),
  		
  		array(
@@ -33,7 +34,9 @@ class usersSeeder extends Seeder {
 	    	'password'   =>Hash::Make('1234567'),
             'permission' => json_encode(PermissionController::setPermission(1)),
 	    	'photo'      =>'image_2.jpg',
-	    ),
+			 'owner'      =>'acount_creator'
+
+		),
  		
  		array(
 
@@ -46,7 +49,9 @@ class usersSeeder extends Seeder {
 	    	'password'   =>Hash::Make('12345678'),
             'permission' => json_encode(PermissionController::setPermission(1)),
            	'photo'      =>'image_3.jpg',
-	    ),
+			'owner'      =>'acount_creator'
+
+		),
 
 
 		));

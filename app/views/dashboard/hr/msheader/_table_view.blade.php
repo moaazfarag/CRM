@@ -13,7 +13,9 @@
                         @if($net && !$net->isEmpty())
             {{ Form::open(array('route'=>array('readyToPay'))) }}
                         @endif
-            <table  class="display table table-bordered table-striped table-hover">
+            <div class="table-responsive" >
+                <table  class="display table table-bordered table-striped table-hover">
+
                 <thead>
                 <tr>
 
@@ -96,6 +98,7 @@
 
                 </tbody>
             </table>
+          </div>
             {{ Form::hidden('for_month',Input::get('for_month')) }}
             {{ Form::hidden('for_year',Input::get('for_year')) }}
 

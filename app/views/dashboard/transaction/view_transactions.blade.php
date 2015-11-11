@@ -10,6 +10,7 @@
         </div>
 
         @include('include.messages')
+        <div class="table-responsive" >
 
         <table id="table_bank" class="display table table-bordered table-striped table-hover">
             <thead>
@@ -123,6 +124,7 @@
             @endforeach
             </tbody>
         </table>
+    </div>
     </div>
 </section>
 <!-- /Main Content -->

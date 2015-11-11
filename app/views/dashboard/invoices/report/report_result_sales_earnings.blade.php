@@ -39,7 +39,7 @@
                 $count_invoices  = $i;
                 ?>
 
-
+              <div class="table-responsive" >
                 <table style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
@@ -64,14 +64,14 @@
                     </tr>
                     </tbody>
                 </table>
-
+             </div>
 
 
 
 
             @else
-
-                <table   class="display table table-bordered table-striped table-hover">
+                <div class="table-responsive" >
+                    <table   class="display table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
                         <caption class="caption-style">
@@ -245,8 +245,9 @@
                     <?php  $count_invoices  = $i; ?>
                     </tbody>
                 </table>
-
-                <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
+                </div>
+                <div class="table-responsive" >
+                    <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
                     <thead>
 
                     <tr>
@@ -265,8 +266,7 @@
                     </tr>
                     </tbody>
                 </table>
-
-
+              </div>
 
 
             @endif

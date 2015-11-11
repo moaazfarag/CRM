@@ -76,6 +76,7 @@ class CoData extends Eloquent {
         return $this->hasMany('Department','co_id');
     }
 
+
     public function jobs()
     {
         return $this->hasMany('Job','co_id');
@@ -108,4 +109,34 @@ class CoData extends Eloquent {
         'password_confirm' =>'required|same:password',
     );
 
+    public static $edit_company = array(
+
+        'co_name'         => 'required',
+        'co_address'      => 'required',
+        'co_tel'          => 'required',
+        'co_currency'     => 'required',
+        'co_print_size'   => 'required',
+        'co_logo'         => 'image|between:1,1000|mimes:jpeg,jpg,png,gif',
+
+    );
+
+    public static $company_earnings = array(
+
+        'date_from'    => 'required',
+        'date_to'      => 'required',
+
+    );
+
+    public function ownerEmail(){
+        @$users = User::where('co_id',$this->id)->where('owner','acount_creator')->first()->email;
+        return $users;
+    }
+    public function countUsers(){
+        $users = User::where('co_id',$this->id)->get();
+        return count($users);
+    }
+    public function countBranches(){
+        $branches = Branches::where('co_id',$this->id)->get();
+        return count($branches);
+    }
 }

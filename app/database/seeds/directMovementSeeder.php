@@ -27,7 +27,7 @@ class directMovementSeeder extends Seeder{
                 'pay_type'  =>'cash',
                 'account'   =>'customers',
                 'trans_type'=>'catch',
-                'notes'     =>'åÐÉ ÇáÍÑßÉ ÇáãÈÇÔÑÉ ÑÞã 1 ',
+                'notes'     =>'Ù…Ù„Ø§Ø­Ø¸Ø©',
             ),
 
             array(
@@ -43,7 +43,7 @@ class directMovementSeeder extends Seeder{
                 'pay_type'  =>'cash',
                 'account'   =>'suppliers',
                 'trans_type'=>'pay',
-                'notes'     =>'åÐÉ ÇáÍÑßÉ ÇáãÈÇÔÑÉ ÑÞã 2 ',
+                'notes'     =>'Ù‡Ø°Ø© Ù…Ù„Ø§Ø­Ø¸Ø© ',
 
             ),
 

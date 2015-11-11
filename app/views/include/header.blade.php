@@ -112,7 +112,7 @@
 
             <li>
                 <a href="{{ URL::route('logout') }}">
-                    <i class="fa fa-sign-out"></i> @lang('main.login') </a>
+                    <i class="fa fa-sign-out"></i> @lang('main.logout') </a>
             </li>
           </ul>
         </li>

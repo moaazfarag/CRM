@@ -37,6 +37,11 @@
             $company->co_name      = $inputs['co_name'];
             $company->co_address   = $inputs['co_address'];
             $company->co_tel       = $inputs['co_tel'];
+
+            $date = new DateTime();
+            $date->modify('+10 day');
+            $company->co_expiration_date = $date->format('Y-m-d');
+            $company->co_statues = 0;
             $company->save();
 
             if($company->save()) {
@@ -126,27 +131,40 @@
          */
         public function updateCompanyInfo($id)
         {
-            $company = CoData::findOrFail($id);
-            if($company &&  $id == Auth::user()->co_id )
-            {
-                $company                       = CoData::find($id); // new object from company will update
-                $company->co_name              = Input::get('co_name'); // company name
-                $company->co_address           = Input::get('co_address'); //company address
-                $company->co_tel               = Input::get('co_tel'); // company mobile
-                $company->co_currency          = Input::get('co_currency');// currency will use in this company
-                $company->co_print_size        = Input::get('co_print_size');// print size for invoice 
-                $company->co_use_serial        = intval(Input::get('co_use_serial'));// will use serial or not
-                $company->co_supplier_must     = intval(Input::get('co_supplier_must'));// have to enter supplier when add new item
-                $company->co_use_season        = intval(Input::get('co_use_season'));// will use season or not
-                $company->co_use_markes_models = intval(Input::get('co_use_markes_models'));// will use models AND markes  or not
-                $company->user_id              = Auth::id(); //user who update company info
-                $company->update();
+            $inputs = Input::all();
+            $validation = Validator::make($inputs, CoData::$edit_company,BaseController::$messages);
 
-                Session::flash('success',BaseController::editSuccess('بيانات الشركة '));
-                return Redirect::route('editCompanyInfo');
-            }else{
-                return View::make('errors.missing');
+            if($validation->fails())
+            {
+                return Redirect::back()->withInput()->withErrors($validation->messages());
+
+            }else {
+
+                $company = CoData::findOrFail($id);
+                if($company &&  $id == Auth::user()->co_id )
+                {
+                    $company                       = CoData::find($id); // new object from company will update
+                    $company->co_name              = Input::get('co_name'); // company name
+                    $company->co_address           = Input::get('co_address'); //company address
+                    $company->co_tel               = Input::get('co_tel'); // company mobile
+                    $company->co_currency          = Input::get('co_currency');// currency will use in this company
+                    $company->co_print_size        = Input::get('co_print_size');// print size for invoice
+                    $company->co_use_serial        = intval(Input::get('co_use_serial'));// will use serial or not
+                    $company->co_supplier_must     = intval(Input::get('co_supplier_must'));// have to enter supplier when add new item
+                    $company->co_use_season        = intval(Input::get('co_use_season'));// will use season or not
+                    $company->co_use_markes_models = intval(Input::get('co_use_markes_models'));// will use models AND markes  or not
+                    $company->co_logo              = ((Input::hasFile('co_logo')) ? $this->saveImage(Input::file('co_logo')) : "");// will use models AND markes  or not
+                    $company->user_id              = Auth::id(); //user who update company info
+
+                    $company->update();
+
+                    Session::flash('success',BaseController::editSuccess('بيانات الشركة '));
+                    return Redirect::route('editCompanyInfo');
+                }else{
+                    return View::make('errors.missing');
+                }
             }
+
 
 
         }

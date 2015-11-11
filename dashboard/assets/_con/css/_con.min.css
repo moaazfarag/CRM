@@ -3596,7 +3596,7 @@ nav .input-field label.active {
 
 @media only screen and (min-width: 601px) {
     nav, nav .button-collapse.sp-cancel, nav .button-collapse.sp-cancel i, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
-        height: 64px;
+        height: 80px;
         line-height: 64px
     }
 

@@ -1,5 +1,6 @@
 <div class="card">
     <div class="content">
+        <div class="table-responsive" >
         <table id="table_bank" class="display table table-bordered table-striped table-hover">
             <thead id="all-items">
             <tr>
@@ -56,4 +57,5 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>

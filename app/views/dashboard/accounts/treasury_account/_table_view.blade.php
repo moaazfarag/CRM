@@ -1,6 +1,7 @@
 <div class="card">
     <div class="content">
-        <table id="table_bank" class="display table table-bordered table-striped table-hover">
+        <div class="table-responsive" >
+            <table id="table_bank" class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
                 <th>@lang('main.number')</th>
@@ -42,5 +43,6 @@
             @endforeach
             </tbody>
         </table>
+      </div>
     </div>
 </div>

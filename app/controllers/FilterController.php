@@ -39,6 +39,7 @@ class FilterController extends BaseController
      */
     public function canTrans($route, $request, $value)
     {
+
         $parameter = explode(':', $value);
         $types =  explode('_', $parameter[0]);
         $bCtrl = new BaseController;
@@ -56,6 +57,14 @@ class FilterController extends BaseController
         if($types>1) {
             if (!PermissionController::isShow($group, $type, $parameter[0])) {
                 return $this->makeError();
+            }
+            if (Route::currentRouteName() == 'addTrans') {
+                if (!$bCtrl->isHaveBranch()) {
+                    $branches = Branches::company()->get()->lists('id');
+                    if (end($uri) != Auth::user()->br_id && in_array(end($uri), $branches)) {
+                        return $this->makeError();
+                    }
+                }
             }
         }elseif(!PermissionController::isSession($group, $type, $parameter[0])) {
             return $this->makeError();
@@ -131,7 +140,7 @@ class FilterController extends BaseController
         $settles = ['settleAdd', 'settleDown'];
         $stores = ['balance_stores', 'evaluation_stores', 'inventory_store'];
         $general_accounts = ['customers', 'suppliers', 'bank', 'partners', 'expenses', 'multiple_revenue'];
-        $reports_invoices = ['sales', 'sumSales', 'salesReturn', 'sumSalesReturn', 'buy', 'sumBuy', 'buyReturn', 'sumBuyReturn', 'sales-earnings'];
+        $reports_invoices = ['sales', 'sumSales', 'salesReturn', 'sumSalesReturn', 'buy', 'sumBuy', 'buyReturn', 'sumBuyReturn', 'sales-earnings','company-earnings'];
         if (in_array($type, $stores)) {
             $type = 'p_'.camel_case($type);
             $group = "p_reports_stores";
@@ -144,6 +153,8 @@ class FilterController extends BaseController
         } elseif (in_array($type, $reports_invoices)) {
             if ($type == 'sales-earnings') {
                 $type = 'salesEarnings';
+            }elseif ($type == 'company-earnings') {
+                $type = 'company_earnings';
             }
             $type = 'p_' . $type;
             $group = "p_reports_invoices";

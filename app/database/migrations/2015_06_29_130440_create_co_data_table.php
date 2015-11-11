@@ -17,6 +17,7 @@ class CreateCoDataTable extends Migration {
 			$table->increments('id');
 
 			$table->string('co_name');
+			$table->string('co_logo');
 			$table->mediumText('co_address');
 			$table->integer('co_tel');
 			$table->integer('co_mobile_1');
@@ -27,7 +28,8 @@ class CreateCoDataTable extends Migration {
 			$table->boolean('co_supplier_must');
 			$table->boolean('co_use_season');
 			$table->boolean('co_use_markes_models');
-			$table->boolean('co_statues');
+			$table->string('co_statues');
+			$table->string('co_expiration_date');
 			$table->integer('user_id');
 
 	

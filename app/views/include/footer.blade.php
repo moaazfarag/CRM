@@ -58,6 +58,12 @@
 
       <script>
 
+          $(document).ready(function(){
+              $("#test_2").click(function(){
+                  $("#test2_2").toggle();
+              });
+          });
+
           $(document).ready( function() {
               $('#hidden').delay(5000).fadeOut();
 

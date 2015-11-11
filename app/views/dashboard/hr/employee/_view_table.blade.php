@@ -1,9 +1,8 @@
 <div class="row">
     <div class="col  l12">
         <div class="card-panel">
-
-
-            <table id="table_bank" class="display table table-bordered table-striped table-hover">
+            <div class="table-responsive" >
+                <table id="table_bank" class="display table table-bordered table-striped table-hover">
 
                 <thead>
                 <tr>
@@ -44,6 +43,7 @@
 
                 </tbody>
             </table>
+          </div>
         </div>
     </div>
 </div>

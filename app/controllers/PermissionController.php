@@ -17,7 +17,7 @@ class PermissionController extends BaseController
         'p_general_accounts'   =>['p_directMovement','p_dailyTreasury','p_customers','p_suppliers','p_bank','p_partners','p_expenses','p_multiple_revenue'],
         'p_reports_hr'         =>['p_outgoingSalaries'],
         'p_reports_stores'     =>['p_settleAdd','p_settleDown','p_itemsCard','p_inventoryStore','p_balanceStores','p_evaluationStores'],
-        'p_reports_invoices'   =>['p_sales','p_sumSales','p_salesReturn','p_sumSalesReturn','p_buy','p_sumBuy','p_buyReturn','p_sumBuyReturn','p_salesEarnings'],
+        'p_reports_invoices'   =>['p_sales','p_sumSales','p_salesReturn','p_sumSalesReturn','p_buy','p_sumBuy','p_buyReturn','p_sumBuyReturn','p_salesEarnings','p_company_earnings'],
     ];
     /*
      * set  permission array
