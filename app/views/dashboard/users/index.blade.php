@@ -49,7 +49,11 @@
                 <div class="col m5 s12">
                     <div class="input-field">
                         <i class="fa fa-user prefix"></i>
-                        {{ Form::text('username',null,array('required','id'=>'username','readonly')) }}
+                        @if(Route::currentRouteName()== "addUser" )
+                        {{ Form::text('username',null,array('required','id'=>'username')) }}
+                        @elseif(Route::currentRouteName()== "editUser")
+                            {{ Form::text('username',null,array('required','id'=>'username','readonly')) }}
+                        @endif
                         <label for="username">@lang('main.username')</label>
                         <ul class="parsley-errors-list filled" id="parsley-id-5202">
                             <li class="parsley-required">{{ $errors ->First('username') }} </li>
