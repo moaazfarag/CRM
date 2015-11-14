@@ -152,7 +152,9 @@
 
 
                     @endforeach
+                    @if($invoice->discount != 0)
 
+                    @endif
 
 
 

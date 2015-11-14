@@ -580,7 +580,7 @@ return  array(
 //
 	"trial"				=>"تجريبى",
 	"member"			=>"مشترك",
-	"stoped"			=>"موقوف",
+	"stopped"			=>"موقوف",
 	"extension_of_reservations" => "تعديل فترة الحجز ",
 	"stop"					=>'إيقاف',
 	"activation"			=>'تفعيل',

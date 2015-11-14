@@ -126,6 +126,14 @@
                       [5, 10, 25, 50, "all"]
                     ]
                 });
+
+                $('#table_management').DataTable({
+                    "bLengthChange": false,
+                    "aLengthMenu": [
+                        [100, 10, 25, 50, -1],
+                        [5, 10, 25, 50, "all"]
+                    ]
+                });
               </script>
                       {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
       <script>

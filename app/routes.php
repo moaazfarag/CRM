@@ -44,6 +44,7 @@ Route::get('/logout-management', array('uses' => 'UserController@logOutManagemen
 Route::post('/login', array('uses' => 'UserController@checkLogin', 'as' => 'login', 'before' => 'csrf'));
 Route::post('/login-management', array('uses' => 'UserController@checkLoginManagement', 'as' => 'checkLoginManagement', 'before' => 'csrf'));
 Route::get('/add-new-company', array('uses' => 'CompanyController@addNewCompany', 'as' => 'addNewCompany'));
+Route::get('/trial-end', array('uses' => 'CompanyController@trialEnd', 'as' => 'trialEnd'));
 Route::post('/storeNewCompany', array('uses' => 'CompanyController@storeNewCompany', 'as' => 'storeNewCompany', 'before' => 'csrf'));
 Route::get('/', 'HomeController@index');
 

@@ -369,42 +369,27 @@ class BaseController extends Controller {
         'items_balances', 'marks', 'models', 'seasons', 'trans_details', 'trans_header', 'users',
     );
 
-    public static function statues($start_date,$statues){
+    public static function statues($start_date,$end_date,$statues){
         // end_date
-        $end_date = new DateTime($start_date);
-        $end_date->modify('+10 day');
         // date now
-        $date_now = new DateTime();
-        if($date_now >= $start_date && $date_now  <= $end_date  && $statues == 0 ){
+
+        $date = new DateTime();
+        $date_now = $date->format('Y-m-d');
+
+        $end_trial_date = $date->modify('+10 day');
+        $end_trial_date = $end_trial_date->format('Y-m-d');
+
+        if($date_now >= $start_date && $date_now  <= $end_trial_date  && $statues == 0 ){
                 return 'trial';
-        }elseif($statues == 1){
-            return 'member';
-        }elseif(  $statues == 1 && $date_now >= $start_date && $date_now <= $end_date){
+        }elseif(  $statues == 1 && $date_now <= $end_date){
             return 'member';
         }elseif($statues == 2 || $date_now > $end_date){
-            return 'stoped';
-        }
-    }
-
-    public static function member($start_date,$statues){
-
-        // end trial date
-        $end_date = new DateTime($start_date);
-        $end_date->modify('+10 day');
-        // date now
-        $date_now = new DateTime();
-        // if the user in trial and pay the mony
-        if($date_now >= $start_date && $date_now <= $end_date && $statues == 1 ){
-            return true;
-        //if statues = 1 he must pay the mony
-        }elseif($statues == 1){
-            return true;
+            return 'stopped';
         }else{
-            return false;
-
+            return 'something wrong';
         }
-
     }
+
 
 
 

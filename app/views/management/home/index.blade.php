@@ -7,7 +7,7 @@
             </div>
             @include('include.messages')
             <div class="table-responsive" >
-                <table id="table_bank" class="display table  table-striped table-hover">
+                <table id="table_management" class="display table  table-striped table-hover">
                     <thead id="all-items">
                     <tr>
                         <th>@lang('main.number')</th>
@@ -39,13 +39,14 @@
                                 <td>{{ $company->countUsers() }}</td>
                                 <td>{{ $company->countBranches() }}</td>
                                 <td>
+                                    <?php $statues = BaseController::statues($company->created_at,$company->co_expiration_date,$company->co_statues); ?>
 
-                                        @if(BaseController::statues($company->created_at,$company->co_statues) == 'trial')
+                                        @if($statues == 'trial')
                                             <span style="color: blue"> @lang('main.trial')</span>
-                                        @elseif(BaseController::statues($company->created_at,$company->co_statues) == 'member')
+                                        @elseif($statues == 'member')
                                             <span style="color: green"> @lang('main.member')</span>
-                                         @elseif(BaseController::statues($company->created_at,$company->co_statues) == 'stoped')
-                                            <span style="color: red"> @lang('main.stoped')</span>
+                                         @elseif($statues == 'stopped')
+                                            <span style="color: red"> @lang('main.stopped')</span>
                                         @endif
 
                                 </td>
@@ -96,28 +97,19 @@
                                                         height: auto !important;
                                                     }
                                                 </style>
-                                                <div class="col l1 s12">
-                                                    {{ Form::number('year',null,array('class'=>'input_number','step'=>'0.0')) }}
-                                                </div>
-                                                <div class="col l1 s12" >
-                                                    @lang('main.year')
-                                                </div>
 
-                                                <div class="col l1 s12">
-                                                    {{ Form::number('month',null,array('class'=>'input_number','step'=>'0.0')) }}
-                                                </div>
-                                                <div class="col l1 s12" >
-                                                    @lang('main.month')
-                                                </div>
+                                                 <div class="col l1 s11">@lang('main.date')</div>
+                                                 <div class="col l3 s11">
+                                                     <div class="input-field">
+                                                         <i class="fa fa-calendar prefix"></i>
+                                {{ Form::text('date',null,array('required','id'=>'date','class'=>'pikaday')) }}
+                                <p class="parsley-required">{{ $errors ->first('date') }} </p>
 
-                                                <div class="col l1 s12">
-                                                    {{ Form::number('day',null,array('class'=>'input_number','step'=>'0.0')) }}
-                                                </div>
-                                                <div class="col l1 s12" >
-                                                    @lang('main.day')
-                                                </div>
-                                                <div class="col l1 s11" style="margin-top: 2px">
-                                                    <button class="waves-effect btn">@lang('main.add') </button>
+
+                            </div>
+                                                 </div>
+                                                 <div class="col l1 s11" style="margin-top: 2px">
+                                                    <button class="waves-effect btn">@lang('main.edit') </button>
                                                 </div>
                                                 {{ Form::hidden('co_id',$company->id) }}
                                                 {{ Form::close() }}
