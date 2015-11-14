@@ -135,8 +135,16 @@ class CoData extends Eloquent {
         $users = User::where('co_id',$this->id)->get();
         return count($users);
     }
+
+    public function lastLoginUsers(){
+        $last_login = User::where('co_id',$this->id)->max('updated_at');
+
+        return $last_login;
+    }
     public function countBranches(){
         $branches = Branches::where('co_id',$this->id)->get();
         return count($branches);
     }
+
+
 }

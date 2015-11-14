@@ -46,18 +46,8 @@ class elrasedManagementController extends  BaseController
 
         if(!empty($company)){
 
-            $year   = intval($inputs['year']);
-            $month  = intval($inputs['month']);
-            $day    = intval($inputs['day']);
-            $last_date = $company->co_expiration_date;
-
-
-                $date = new DateTime($last_date);
-                $date->modify("+$day day");
-                $date->modify("+$month month");
-                $date->modify("+$year year");
-
-                $company->co_expiration_date = $date->format('Y-m-d');
+                $company->co_expiration_date = Input::get('date');
+                $company->co_statues = 1;
                 $company->update();
                 Session::flash('success','تم تعديل  معاد انتهاء الحجز بنجاح');
                 return Redirect::route('elrasedManagement');

@@ -28,10 +28,8 @@ class CompanyController extends BaseController
         $inputs = Input::all();
 //       return  var_dump($inputs);
         $validation = Validator::make($inputs, CoData::$store_company, BaseController::$messages);
-
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
-
         } else {
             // store company data
             $company = new CoData;
@@ -135,9 +133,46 @@ class CompanyController extends BaseController
         $company = CoData::findOrFail($id);
         if ($company && $id == Auth::user()->co_id)
             $inputs = Input::all();
+
+        $validation = Validator::make($inputs, CoData::$edit_company, BaseController::$messages);
+
+        if ($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+
+        } else {
+
+            $company = CoData::findOrFail($id);
+            if ($company && $id == Auth::user()->co_id) {
+                $company = CoData::find($id); // new object from company will update
+                $company->co_name = Input::get('co_name'); // company name
+                $company->co_address = Input::get('co_address'); //company address
+                $company->co_tel = Input::get('co_tel'); // company mobile
+                $company->co_currency = Input::get('co_currency');// currency will use in this company
+                $company->co_print_size = Input::get('co_print_size');// print size for invoice
+                $company->co_use_serial = intval(Input::get('co_use_serial'));// will use serial or not
+                $company->co_supplier_must = intval(Input::get('co_supplier_must'));// have to enter supplier when add new item
+                $company->co_use_season = intval(Input::get('co_use_season'));// will use season or not
+                $company->co_use_markes_models = intval(Input::get('co_use_markes_models'));// will use models AND markes  or not
+                if (Input::hasFile('co_logo') && $company->co_logo != '') {
+                    File::delete('dashboard/logo_images/', $company->co_logo);
+                }
+                $company->co_logo = ((Input::hasFile('co_logo')) ? $this->saveImage(Input::file('co_logo')) : "");// will use models AND markes  or not
+                $company->user_id = Auth::id(); //user who update company info
+
+                $company->update();
+
+                Session::flash('success', BaseController::editSuccess('بيانات الشركة '));
+                return Redirect::route('editCompanyInfo');
+            } else {
+                return View::make('errors.missing');
+            }
+        }
+
+
         $validation = Validator::make($inputs, CoData::$edit_company, BaseController::$messages);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
+
 
         } else {
 
@@ -164,9 +199,14 @@ class CompanyController extends BaseController
                 return View::make('errors.missing');
             }
         }
+    }
 
+        public function trialEnd(){
+
+
+            return View::make('dashboard.company.trial_end');
+
+        }
 
     }
 
-
-}

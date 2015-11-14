@@ -130,12 +130,12 @@ Top Navbar
                 <nav>
                     <ul class="left">
 
-                        <li class="@if($type == 'suspended_companies' || $type == NULL ) active @endif"><a href="{{ URL::route('elrasedManagement','suspended_companies') }}"> الموقوفين</a>
+                        <li class="@if($type == 'suspended_companies') active @endif"><a href="{{ URL::route('elrasedManagement','suspended_companies') }}"> الموقوفين</a>
                         </li>
 
-                        <li class="@if($type == 'trial_companies' || $type == NULL ) active @endif"><a href="{{ URL::route('elrasedManagement','trial_companies') }}">الفترة المجانية</a>
+                        <li class="@if($type == 'trial_companies') active @endif"><a href="{{ URL::route('elrasedManagement','trial_companies') }}">الفترة المجانية</a>
                         </li>
-                        <li class="@if($type == 'paid_companies' || $type == NULL ) active @endif"><a href="{{ URL::route('elrasedManagement','paid_companies') }}"> المشتركين</a>
+                        <li class="@if($type == 'paid_companies') active @endif"><a href="{{ URL::route('elrasedManagement','paid_companies') }}"> المشتركين</a>
                         </li>
                         <li class="@if($type == 'all_companies' || $type == NULL ) active @endif"><a href="{{ URL::route('elrasedManagement','all_companies') }}"> الكل</a>
                         </li>

@@ -29,7 +29,7 @@ class CreateCoDataTable extends Migration {
 			$table->boolean('co_use_season');
 			$table->boolean('co_use_markes_models');
 			$table->string('co_statues');
-			$table->string('co_expiration_date');
+			$table->date('co_expiration_date');
 			$table->integer('user_id');
 
 	
