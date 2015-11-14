@@ -46,12 +46,13 @@ class UserController extends BaseController
         } else {
             $username = Input::get('username');
             $password = Input::get('password');
-
-            $co_id = (Input::has('co_id')) ? Input::get('co_id') : $co_id;
+            $co_id    = (Input::has('co_id')) ? Input::get('co_id') : $co_id;
 
             $company = CoData::find($co_id);
-            if(in_array($company->co_statues,[1,0])){
+            $user    = User::where('username',$username)->first();
+            if(!empty($user) && Hash::check($password,$user->password) ){
 
+                    if($company->co_statues != 2 && BaseController::statues($company->created_at,$company->co_expiration_date,$company->co_statues) != 'stopped'  ){
                 if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
 
 
@@ -66,9 +67,16 @@ class UserController extends BaseController
                 return Redirect::to('/login');
             }
 
-            }elseif($company->co_statues == 2){
-              return 'تم إيقاف الشركة';
+            }else{
+                return Redirect::route('trialEnd');
             }
+
+            }// end if user
+            else {
+            $error = Lang::get('main.error');
+            Session::flash('error', $error);
+            return Redirect::to('/login');
+        }
 
         }
     }

@@ -108,13 +108,19 @@
                 <?php $logo = Lang::get('main.logo') ?>
                 {{ Form::label('logo',$logo) }}
             </div>
-            <div class="col s12 l5">
+            @if(!empty($companyInfo->co_logo))
+            <div class="col s12 l2">
+                <div class="imagedropshadow">
+                    <img src='{{ URL::asset("$companyInfo->co_logo") }}' style="width:100%; height:80px;">
+                </div>
+            </div>
+            @endif
+            <div class="col s12 l2">
                 <div class="input-field">
                     {{ Form::file('co_logo',null,array('required',null,@$readOnly)) }}
                     <p class="parsley-required error-validation">{{ $errors->first('co_logo') }} </p>
 
                 </div>
-
             </div>
 
 
