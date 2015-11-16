@@ -14,7 +14,10 @@
 App::before(function($request)
 {
 	class_alias('PermissionController', 'PerC');
-	PermissionController::setSession();
+    PermissionController::setSession();
+
+        PermissionController::isLoginAble();
+
 });
 
 

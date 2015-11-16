@@ -28,7 +28,7 @@
 
                 {{@ $invoice->accountInfo->acc_name }}
                </div>
-                <div style=" font-size: 1.3em; font-weight: 500; text-align: center;" >
+                <div style="font-size: 1.3em; font-weight: 500; text-align: center;" >
                         @if($invoice->pay_type)
                             {{@ Lang::get("main.$invoice->pay_type"._); }}
                         @endif
@@ -63,54 +63,6 @@
         <!-- /Logo -->
         <br>
         <hr/>
-        {{--<div class="row">--}}
-        {{--<!-- Invoice From -->--}}
-        {{--<div class="col s4 l4">--}}
-        {{--فاتورة من :--}}
-        {{--<h4>{{ $co_info->co_name }}--}}
-        {{--<br>--}}
-        {{--فرع :--}}
-        {{--<strong>{{ $invoice->branch->br_name }}</strong>--}}
-        {{--</h4>--}}
-        {{--<address>--}}
-        {{--{{ $invoice->branch->br_address }}--}}
-        {{--<br> {{ $co_info->co_tel }}<i class="mdi-communication-phone"></i>--}}
-        {{--</address>--}}
-        {{--</div>--}}
-        {{--<!-- /Invoice From -->--}}
-
-        {{--<!-- Invoice To -->--}}
-        {{--<div class="col s12 l4">--}}
-        {{--الى--}}
-        {{--<h4>@lang('main.'.$type)</h4>--}}
-        {{--<address>--}}
-        {{--6008 Cotton Nook, Arminto,--}}
-        {{--<br>Montana, 59114-7319, US,--}}
-        {{--<br><i class="mdi-communication-phone"></i> (406) 500-7506--}}
-        {{--</address>--}}
-        {{--</div>--}}
-        {{--<!-- /Invoice To -->--}}
-
-        {{--<!-- Invoice Number and Date -->--}}
-        {{--<div class="col s4 l4">--}}
-        {{--<div class="invoice-num">--}}
-        {{--<div class="num">--}}
-        {{--@lang('main.invoiceNum'):--}}
-        {{--<span class="right">--}}
-        {{--<strong>{{ $invoice->invoice_no }}</strong>--}}
-        {{--</span>--}}
-        {{--</div>--}}
-        {{--</h4>--}}
-        {{--<div class="date">@lang('main.date'):--}}
-        {{--<span class="right">--}}
-        {{--{{ $invoice->date }}--}}
-        {{--</span>--}}
-        {{--</div>--}}
-        {{--</h4>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--<!-- /Invoice Number and Date -->--}}
-        {{--</div>--}}
         <br>
 
       <!-- Table with products -->
@@ -217,8 +169,10 @@
     <br>
     <div class="right-align invoice-print">
       <span class="btn" onclick="javascript:window.print();">اطبع</span>
-    </div>
-    {{--{{ dd(DB::getQueryLog()) }}--}}
+@if($type =='buy' || $type=='settleAdd'|| $type=='itemBalance' )
+        <a class="no-print waves-effect btn" href="{{ URL::route('viewLabel',$invoice->id) }}" >طباعة الباركود</a>    </div>
+@endif
+      {{--{{ dd(DB::getQueryLog()) }}--}}
   </section>
   <!-- /Main Content -->
 @stop

@@ -55,21 +55,13 @@
 
                     <div class="col s12 l3">
                         {{--<i class="mdi-action-label"></i>--}}
-                        <input
-                                autofocus="autofocus"
-                                ng-focus="displayOn({{ $br_id }})"
-                                autocomplete="off"
-                                ng-model="item.item_name"
-                                id="item_id"
-                                >
-                        <ul id="itemsView" class="drop-down-menu" ng-show="item">
-                            <li ng-model="item.item_name"
-                                class="li-drop-down-menu"
-                                ng-repeat="dbitem in items| filter:item.item_name"
-                                ng-click="selectItem(dbitem)">
-                                @{{dbitem.item_name }}
-                            </li>
-                        </ul>
+                        <div mass-autocomplete>
+                            <input ng-focus="displayOn({{ $br_id }})" type="text" class="form-control ng-isolate-scope ng-pristine ng-valid"
+                                   placeholder="اسم الصنف او الفئة او باركود"
+                                   autofocus
+                                   id="item_id"
+                                   ng-model="dirty.continent" mass-autocomplete-item="ac_options_users" autocomplete="off">
+                        </div>
                         {{--@{{  item }}--}}
                         <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
                     </div>
@@ -80,7 +72,7 @@
 
                         <div class="input-field">
                             <i class="fa fa-cubes prefix"></i>
-                            {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
+                            {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
                             <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
                         @lang('main.please_enter_valid_number')
@@ -149,45 +141,6 @@
 
                 <br>
                 @include('dashboard.transaction._table._table')
-                {{-- start sum , discount ,tax and net--}}
-                <div class="row no-margin-top">
-
-                    <div class="col s2 ">
-
-                        <i class="fa fa-cart-arrow-down"></i>
-                        {{ Form::label('sum',Lang::get('main.total')) }}
-                        <br>
-                        @{{ invoice_sub_total() }}
-                        {{--{{ Form::text('sum',null,array('id'=>'sum')) }}--}}
-                        <p class="parsley-required">{{ $errors ->first('sum') }} </p>
-                    </div>{{--sum--}}
-                    <div class="col s2 ">
-
-                        <i class="mdi mdi-content-remove-circle"></i>
-                        {{ Form::label('discount',Lang::get('main.discount_')) }}
-                        {{ Form::number('discount',0,array('id'=>'discount','ng-model'=>'discount')) }}
-                        <p class="parsley-required">{{ $errors ->first('discount') }} </p>
-                    </div>{{--discount--}}
-
-
-                    <div class="col s2 ">
-
-                        <i class="mdi mdi-maps-local-atm"></i>
-                        {{ Form::label('tax',Lang::get('main.tax_')) }}
-                        {{ Form::number('tax',null,array('id'=>'tax')) }}
-                        <p class="parsley-required">{{ $errors ->first('tax') }} </p>
-                    </div>{{--tax--}}
-
-                    <div class="col s2 ">
-
-                        <i class="fa fa-exchange"></i>
-                        <br>
-                        @{{ afterDiscount() }}
-                        <p class="parsley-required">{{ $errors ->first('net') }} </p>
-                    </div>{{--net--}}
-
-                </div>
-                {{-- end sum , discount ,tax and net --}}
                 <div class="row">
                     <div class="col s12 l12">
                         <button ng-disabled="form.$invalid || hasInvoiceItems()" type="submit"

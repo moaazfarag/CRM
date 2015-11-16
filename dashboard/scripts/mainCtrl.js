@@ -3,7 +3,7 @@
  */
 angular.module('mainCtrl', [])
 
-    .controller('mainController', function($scope, $http, Item) {
+    .controller('mainController', function($scope, $sce, $q ,Item) {
         // object to hold all the data for the new comment form
         $scope.itemData = {};
         //$scope.item = {};
@@ -35,7 +35,46 @@ angular.module('mainCtrl', [])
                 .error(function (data) {
                 });
         };
-        $scope.backItem = function(discount){
+        $scope.dirty = {};
+
+
+        function suggest_users(term) {
+            var q = term.toLowerCase().trim(),
+                results = [];
+
+            for (var i = 0; i < $scope.items.length; i++) {
+                var item = $scope.items[i];
+                catName = item.cat_name;
+
+                if (item.item_name.toLowerCase().indexOf(q) !== -1 ||
+                    item.bar_code.toLowerCase().indexOf(q) !== -1 ||
+                    item.cat_name.toLowerCase().indexOf(q) !== -1)
+                    results.push({
+                        value: item.item_name,
+                        // Pass the object as well. Can be any property name.
+                        obj: item,
+                        label: $sce.trustAsHtml(
+                            ' <div style="padding-right: 3px;" class="col-xs-5">' +
+                            '  <strong>' + item.item_name + '</strong>'+
+                            '  <small>' + item.cat_name + '</small>' +
+                            '</div>'
+                        )
+                    });
+            }
+            return results;
+        };
+
+        $scope.ac_options_users = {
+            suggest: suggest_users,
+            on_select: function (selected) {
+                $scope.dirty.continent = selected.obj.item_name;
+                $scope.selectItem(selected.obj);
+            }
+        };
+        $scope.onKeyEnter = function() {
+           $scope.addItem();
+        };
+            $scope.backItem = function(discount){
             $scope.backItems = [];
             angular.forEach($scope.invoiceItems,function(item,key){
                 if (item.return > 0) {
@@ -129,6 +168,7 @@ angular.module('mainCtrl', [])
                 $scope.invoiceItems.push($scope.item);
                 // Clear input fields after push
                 $scope.item = "";
+                $scope.dirty.continent = "";
                 $scope.form.$setUntouched();
 
                 //foucus into item name after add
@@ -312,7 +352,7 @@ angular.module('mainCtrl', [])
             }else{
                 $scope.item         = item;
                 document.getElementById('quantity').focus();
-                document.getElementById('itemsView').style.display = 'none';
+                //document.getElementById('itemsView').style.display = 'none';
             }
 
         };
@@ -360,7 +400,7 @@ angular.module('mainCtrl', [])
                     $scope.loading = false;
                 });
             $scope.prefs = false;
-            document.getElementById('itemsView').style.display = '';
+            //document.getElementById('itemsView').style.display = '';
         };
         $scope.serialItem = function(brId,itemId){
             info = {};
@@ -522,6 +562,7 @@ angular.module('mainCtrl', [])
         };
         $scope.clearItemForm =  function() {
             $scope.item    = "" ;
+            $scope.dirty.continent = "";
             $scope.all     = "" ;
             $scope.serials = [] ;
             $scope.added   = "" ;

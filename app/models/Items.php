@@ -20,9 +20,9 @@ class Items extends Eloquent {
         'cat_id'           => 'required|integer',
         'item_name'        => 'required|min:3',
         'unit'             => 'required|in:piece,kilo,ton,galon,meter',
-        'supplier_id'      => 'integer',
-        'seasons_id'       => 'integer',
-        'models_id'        => 'integer',
+        'supplier_id'      => 'boolean',
+        'seasons_id'       => 'boolean',
+        'models_id'        => 'boolean',
         'bar_code'         => 'min:3',
         'buy'              => 'regex:/^\d*(\.\d{2})?$/',
         'sell_users'       => 'regex:/^\d*(\.\d{2})?$/',
@@ -30,15 +30,16 @@ class Items extends Eloquent {
         'sell_gomla'       => 'regex:/^\d*(\.\d{2})?$/',
         'sell_gomla_gomla' => 'regex:/^\d*(\.\d{2})?$/',
         'limit'            => 'integer',
-        'has_serial'       =>  'boolean'
+        'has_serial'       =>  'boolean',
+        'has_label'        =>  'boolean'
     );
     public static  $update_rules = array(
         'cat_id'           => 'required|integer',
         'item_name'        => 'required|min:3',
         'unit'             => 'required|in:piece,kilo,ton,galon,meter',
-        'supplier_id'      => 'integer',
-        'seasons_id'       => 'integer',
-        'models_id'        => 'integer',
+        'supplier_id'      => 'boolean',
+        'seasons_id'       => 'boolean',
+        'models_id'        => 'boolean',
         'bar_code'         => 'min:3',
         'buy'              => 'regex:/^\d*(\.\d{2})?$/',
         'sell_users'       => 'regex:/^\d*(\.\d{2})?$/',
@@ -46,7 +47,8 @@ class Items extends Eloquent {
         'sell_gomla'       => 'regex:/^\d*(\.\d{2})?$/',
         'sell_gomla_gomla' => 'regex:/^\d*(\.\d{2})?$/',
         'limit'            => 'integer',
-        'has_serial'       =>'boolean'
+        'has_serial'       =>'boolean',
+        'has_label'        =>'boolean'
 
     );
     public function co_data()
@@ -88,7 +90,7 @@ class Items extends Eloquent {
                             ->groupBy('item_id')
                             ->where('br_id',$brId)
                             ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*');
-        $items      = Items::company()->where('deleted', 0)->whereNotIn('id',$itemsTrans->lists('item_id'))->get();
+        $items      = Items::where("items.co_id",'=',Auth::user()->co_id)->select('items.*','cat.name AS cat_name')->join('cat','cat.id','=','items.cat_id')->where('deleted', 0)->whereNotIn('items.id',$itemsTrans->lists('item_id'))->get();
         return array_merge($itemsTrans->get(),$items->toArray());
     }
 

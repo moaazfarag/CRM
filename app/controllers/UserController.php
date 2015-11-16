@@ -8,7 +8,7 @@
  */
 class UserController extends BaseController
 {
-    public function logout()
+    public static function logout()
     {
         Session::flush();
         Auth::logout();

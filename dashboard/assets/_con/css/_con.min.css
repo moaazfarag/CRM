@@ -15,6 +15,7 @@ img, legend {
 @media print
 {
     .no-print {
+        width: 0px;
         display: none;
     }
     #print-content {
@@ -35,11 +36,29 @@ img, legend {
         background: initial;
         page-break-after: always;
     }
+    .BarcodeText{
+        font-size: 16pt;
+    }
+
 
 }
 @page {
-    size: A4;
     margin: 0;
+.BarcodeText{
+    font-size: 25pt;
+    width: 5cm;
+    height: 3cm;
+}
+.text-print{
+    font-family: 'Droid Arabic Kufi', sans-serif;!important;
+    /*font-size: 25pt;*/
+    /*margin-bottom: 15px;*/
+}
+    .page{
+    size: A4;
+
+}
+
 }
 .page {
     /*width: 21cm;*/
@@ -58,7 +77,13 @@ legend, ul {
 body, sub, sup {
     position: relative
 }
-
+@font-face {
+    font-family: IDAutomationHC39M;
+    src: url(http://www.idautomation.com/barcode-fonts/woff-web-fonts/IDAutomationHC39M.woff);
+}
+.BarcodeText      {
+    font-family : IDAutomationHC39M;
+}
 .parallax img, body, html {
     min-height: 100%
 }
