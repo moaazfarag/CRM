@@ -45,6 +45,7 @@
   <!-- Main -->
   {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
     {{ HTML::style('dashboard/assets/pikaday/pikaday.css') }}
+    {{ HTML::style('dashboard/css/massautocomplete.theme.css') }}
     {{--custom css--}}
     {{ HTML::style('dashboard/css/style.css') }}
 

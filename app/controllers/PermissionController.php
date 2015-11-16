@@ -43,7 +43,6 @@ class PermissionController extends BaseController
     {
         if(Auth::check()){
            $user = User::find(Auth::id());
-
             if (Session::get('last_login') != $user->updated_at->format('d M Y - H:i:s')) {
                 Session::put('permission',json_decode($user->permission,true));
                 Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
@@ -127,4 +126,21 @@ class PermissionController extends BaseController
             return array_column($input,$columnKey);
         }
     }
+
+    public static function isLoginAble()
+    {
+        if (Auth::check()) {
+            if (Auth::user()->co_id != 0) {
+                $co_id = Auth::user()->co_id;
+                $company = CoData::find($co_id);
+                $status = BaseController::statues($company->created_at, $company->co_expiration_date, $company->co_statues);
+                if ($status == 'stopped') {
+                    $userC = new  UserController;
+                    $userC->logout();
+                }
+            }
+
+        }
+    }
+
 }

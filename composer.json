@@ -5,10 +5,11 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.*",
+      "laravel/framework": "4.2.*",
       "way/generators": "~2.0",
 	  "barryvdh/laravel-dompdf": "0.4.*",
-		"intervention/image":"2.2.1"
+      "intervention/image":"2.2.1",
+      "dinesh/barcode": "4.1"
 	},
 	"autoload": {
 		"classmap": [

@@ -17,8 +17,8 @@
 $branches = BaseController::getBranchId();
 $company = CoData::find(Auth::user()->co_id);
 ?>
-
-<aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
+@if(!(Route::currentRouteName() == "viewLabel"))
+    <aside class="no-print yaybar yay-shrink yay-hide-to-small yay-gestures">
     <div class="top">
         <div>
             <!-- Sidebar toggle -->
@@ -529,4 +529,5 @@ $company = CoData::find(Auth::user()->co_id);
         </div>
     </div>
 </aside>
+@endif
 <!-- /Yay Sidebar -->

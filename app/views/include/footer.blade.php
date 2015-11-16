@@ -55,6 +55,9 @@
       {{ HTML::script('dashboard/scripts/accountCtrl.js') }}
       {{ HTML::script('dashboard/scripts/select_model.js') }}
       {{ HTML::script('dashboard/scripts/required_msg.js') }}
+      {{ HTML::script('dashboard/scripts/angular-sanitize.js') }}
+      {{ HTML::script('dashboard/scripts/massautocomplete.min.js') }}
+
 
       <script>
 

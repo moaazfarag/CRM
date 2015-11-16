@@ -9,6 +9,8 @@
 class TransController extends BaseController
 {
     public function addTrans($type,$br_id){
+//        $q = new CreateViewMakerName;
+//        $q->up();
         $branch =  Branches::company()->find($br_id);
         $types = ['sales','buy','salesReturn','buyReturn','settleAdd','settleDown','itemBalance'];
         if(in_array($type,$types) && $branch)
@@ -202,16 +204,11 @@ class TransController extends BaseController
             $data['co_info']     = CoData::thisCompany()->first();//select info models category seasons
             $data['invoice']     = $trans;
             $data['type']        = $data['invoice']->invoice_type;
-//            $pdf = PDF::loadView('hello', $data);
-//
-//            return $pdf->stream();
-
         return  View::make('dashboard.transaction.transaction',$data);
 
         }else{
             $data['error']      ="  لا توجد فاتورة بهذا الرقم  ";
             return View::make('errors.missing',$data);
-
         }
     }
     public function accountsData()
@@ -417,5 +414,11 @@ class TransController extends BaseController
             return View::make('errors.missing');
 
         }
+    }
+    public function viewLabel($invoiceId){
+        $data['title'] = "طباعة الباركود";
+        $data['items'] =  TransDetails::where('trans_header_id',$invoiceId)
+           ->join('items','items.id','=','trans_details.item_id')->where('has_label',1)->get();
+        return View::make('dashboard.transaction.print-label', $data);
     }
 }

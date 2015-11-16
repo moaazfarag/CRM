@@ -1390,10 +1390,12 @@ class Builder {
 				'trans_header.deleted AS trans_deleted',
 				'trans_header.invoice_type',
 				'trans_details.serial_no',
+                "cat.name AS cat_name",
 				'items.*')
 			->join('trans_details', 'trans_details.trans_header_id', '=', 'trans_header.id')
 			->join('items', 'items.id', '=', 'trans_details.item_id')
 			->join('branches', 'branches.id', '=', 'trans_header.br_id')
+			->join('cat', 'cat.id', '=', 'items.cat_id')
 			->groupBy('trans_details.serial_no',
 				'trans_details.item_id',
 				'trans_header.br_id',
