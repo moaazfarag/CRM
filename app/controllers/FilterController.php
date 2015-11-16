@@ -151,6 +151,7 @@ class FilterController extends BaseController
             $type = 'p_' . $type;
             $group = "p_general_accounts";
         } elseif (in_array($type, $reports_invoices)) {
+
             if ($type == 'sales-earnings') {
                 $type = 'salesEarnings';
             }elseif ($type == 'company-earnings') {

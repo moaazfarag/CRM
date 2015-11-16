@@ -11,7 +11,7 @@
 */
 
 App::setlocale('ar');
-
+Route::get('/',array('uses'=>'HomeController@home','as'=>'homePage'));
 Route::get('/login', function () {
     if (Auth::check()) {
         return Redirect::to('/admin');
@@ -46,7 +46,6 @@ Route::post('/login-management', array('uses' => 'UserController@checkLoginManag
 Route::get('/add-new-company', array('uses' => 'CompanyController@addNewCompany', 'as' => 'addNewCompany'));
 Route::get('/trial-end', array('uses' => 'CompanyController@trialEnd', 'as' => 'trialEnd'));
 Route::post('/storeNewCompany', array('uses' => 'CompanyController@storeNewCompany', 'as' => 'storeNewCompany', 'before' => 'csrf'));
-Route::get('/', 'HomeController@index');
 
 Route::group(array('prefix' => 'management' ,'before' => 'auth_management'), function () {
 
@@ -308,7 +307,7 @@ Route::group(array('prefix' => 'management' ,'before' => 'auth_management'), fun
         Route::group(array('before' => 'canShowSettle'), function () {
             Route::get('search-invoices/{type}/{sum?}', array('uses' => 'InvoiceController@reportSearchInvoice', 'as' => 'searchReportInvoices'));
             Route::post('invoices/{type}', array('uses' => 'InvoiceController@reportResultInvoice', 'as' => 'InvoiceReport'));
-            Route::post('companyEarnings', array('uses' => 'InvoiceController@reportResultCompanyEarnings', 'as' => 'companyEarnings'));
+            Route::post('company-earnings', array('uses' => 'InvoiceController@reportResultCompanyEarnings', 'as' => 'companyEarnings'));
 
         });
         // item card
@@ -363,7 +362,17 @@ Route::group(array('prefix' => 'management' ,'before' => 'auth_management'), fun
 
 
     App::missing(function () {
-        return View::make('errors.missing');
+        if(Auth::check()){
+            if(Auth::check()->co_id == 0){
+
+                return View::make('errors.404');
+            }else{
+                return View::make('errors.missing');
+
+            }
+        }else{
+            return Redirect::to('/login');
+        }
     });
 });
 
