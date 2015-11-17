@@ -50,7 +50,7 @@ class UserController extends BaseController
 
             $company = CoData::find($co_id);
             $user    = User::where('username',$username)->first();
-            if(!empty($user) && Hash::check($password,$user->password) ){
+            if(!empty($user) && !empty($company)&&  Hash::check($password,$user->password) ){
 
                     if($company->co_statues != 2 && BaseController::statues($company->created_at,$company->co_expiration_date,$company->co_statues) != 'stopped'  ){
                 if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
