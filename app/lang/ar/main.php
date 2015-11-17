@@ -2,6 +2,7 @@
 return  array(
     // Set_password Page
     'password'         => 'كلمة المرور',
+    'has_label'         => 'طباعة الباركود',
     'confirm_password' => 'تاكيد كلمة المرور' ,
     'submit'           => 'حفظ',
     'yes'               =>'نعم',

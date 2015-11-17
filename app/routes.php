@@ -193,6 +193,7 @@ Route::group(array('prefix' => 'management' ,'before' => 'auth_management'), fun
         });
         Route::get('all/{type}/{br_id}', array('before' => 'canViewTrans', 'uses' => 'TransController@viewTransactions', 'as' => 'viewTransactions'));
         Route::get('{type}-{br_id}-{invoice_no}', array('before' => 'canViewOneTrans', 'uses' => 'TransController@viewTransaction', 'as' => 'viewTransaction'));
+        Route::get('label-{invoice_no}', array('uses' => 'TransController@viewLabel', 'as' => 'viewLabel'));
         Route::post('accounts-data', array('uses' => 'TransController@accountsData', 'as' => 'accountsData'));
         Route::post('accounts-by-id', array('uses' => 'TransController@accountById', 'as' => 'accountById'));
         Route::post('items-data-br', array('uses' => 'TransController@itemsData', 'as' => 'itemsData'));

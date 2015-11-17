@@ -43,6 +43,16 @@
                             </p>
                         </div>
                     @endif
+                    <div class="col s2 l2">
+                        <p>
+                        {{ Form::checkbox('has_label',1,null,array('id'=>'has_label')) }}
+                        {{ Form::label('has_label',Lang::get('main.has_label')) }}
+                        <p class="parsley-required">
+                            {{ $errors ->first('has_label') }}
+                        </p>
+                        {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
+                        </p>
+                    </div>
                     <div class="col s12  l4">
                         <div class="input-field">
                             <i class="fa fa-barcode prefix"></i>
@@ -185,10 +195,6 @@
                                 <p class="parsley-required">{{ $errors ->first('models_id') }} </p>
                             </div>
                         </div> {{--models--}}
-
-
-
-
                     @endif
                 </div> {{--third row end--}}
                 <div class="row no-margin-top">

@@ -50,6 +50,7 @@ class ItemController extends BaseController
             $newItem->limit            = $inputs['limit'];
             $newItem->notes            = $inputs['notes'];
             $newItem->has_serial       = isset($inputs['has_serial'])?$inputs['has_serial']:0;
+            $newItem->has_label       = isset($inputs['has_label'])?$inputs['has_label']:0;
 
             $newItem->user_id          = Auth::id();
 
@@ -114,6 +115,7 @@ class ItemController extends BaseController
                 $oldItem->limit            = $inputs['limit'];
                 $oldItem->notes            = $inputs['notes'];
                 $oldItem->has_serial       = isset($inputs['has_serial'])?$inputs['has_serial']:0;
+                $oldItem->has_label        = isset($inputs['has_label'])?$inputs['has_label']:0;
                 $oldItem->user_id          = Auth::id();
 
                 if($oldItem->update()){

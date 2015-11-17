@@ -54,16 +54,13 @@
                         {{ Form::label('item_id','الصنف') }}
                     </div>
                     <div class="col s2 l3">
-                        <input ng-focus="displayOn(br_id)" autocomplete="off" ng-model="item.item_name" id="item_id"
-                               autofocus="autofocus">
-                        <ul id="itemsView" class="drop-down-menu" ng-show="item">
-                            <li ng-model="item.item_name"
-                                class="li-drop-down-menu"
-                                ng-repeat="dbitem in items| filter:item.name"
-                                ng-click="selectItem(dbitem)">
-                                @{{dbitem.item_name }}
-                            </li>
-                        </ul>
+                        <div mass-autocomplete>
+                            <input ng-focus="displayOn({{ $br_id }})" type="text" class="form-control ng-isolate-scope ng-pristine ng-valid"
+                                   placeholder="اسم الصنف او الفئة او باركود"
+                                   autofocus
+                                   id="item_id"
+                                   ng-model="dirty.continent" mass-autocomplete-item="ac_options_users" autocomplete="off">
+                        </div>
                         <p class="parsley-required">{{ $errors ->first('item_id') }} </p>
                     </div> {{-- item div --}}
                     {{-- ##### item end ######--}}
@@ -72,7 +69,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <i class="fa fa-cubes prefix"></i>
-                            {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity')) }}
+                            {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()' ))}}
                             <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
                         برجاء ادخل رقم صحيح
