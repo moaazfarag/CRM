@@ -246,6 +246,56 @@
                     </tbody>
                 </table>
                 </div>
+
+                {{--##### discount   #####--}}
+
+                <?php $all_discount = array(); ?>
+                @foreach($invoices as  $i=>$invoice)
+
+                    @if($invoice->discount != 0)
+                        <?php $all_discount[$i] = $invoice->discount ?>
+                    @endif
+                @endforeach
+
+                @if(array_sum($all_discount) != 0)
+                    <div class="table-responsive" >
+                        <table   class="display table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <caption class="caption-style">
+                                    الخصم على الفواتير
+
+                                </caption>
+
+                            </tr>
+
+                            <tr>
+
+                                <th>@lang('main.invoiceNum')</th>
+                                <th>@lang('main.date')</th>
+                                <th>@lang('main.branchName')</th>
+                                <th>@lang('main.discount')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $all_discount = array(); ?>
+                            @foreach($invoices as  $i=>$invoice)
+
+                                @if($invoice->discount != 0)
+                                    <tr>
+                                        <td>{{ $invoice->invoice_no }}</td>
+                                        <td>{{ $invoice->date }}</td>
+                                        <td>{{ $invoice->branch->br_name }}</td>
+                                        <td>{{ $invoice->discount }}</td>
+                                    </tr>
+                                    <?php $all_discount[$i] = $invoice->discount ?>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+                {{--end discount --}}
                 <div class="table-responsive" >
                     <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
                     <thead>
@@ -254,6 +304,7 @@
                         <th>عدد الفواتير </th>
                         <th> إجمالى الكميات </th>
                         <th> إجمالى الأصناف </th>
+                        <th>إجمالى الخصومات</th>
                         <th> إجمالى الأرباح </th>
                     </tr>
                     </thead>
@@ -262,7 +313,8 @@
                         <td>{{ count($all_invoice) }}</td>
                         <td>{{ array_sum($all_qty) }}</td>
                         <td>{{ count($all_items) }}</td>
-                        <td>{{ array_sum($all_earnings) }}</td>
+                        <td>{{ array_sum($all_discount) }}</td>
+                        <td>{{ array_sum($all_earnings) -array_sum($all_discount) }}</td>
                     </tr>
                     </tbody>
                 </table>

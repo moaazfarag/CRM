@@ -67,6 +67,7 @@ class InvoiceController extends BaseController
 
         $inputs = Input::all();
         $validation = Validator::make($inputs,CoData::$company_earnings, BaseController::$messages);
+
         if ($validation->fails()) {
 
             return Redirect::back()->withInput()->withErrors($validation->messages());
