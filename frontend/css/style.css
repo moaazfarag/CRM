@@ -59,7 +59,11 @@ h1,h2{
     text-align: right;
 }
 h3,h4,h5,h6{
-	font-family: 'Varela', sans-serif;	
+	font-family: 'Varela', sans-serif;
+  text-align: right;
+  clear: both;
+
+
 }
 
 h2 {
@@ -606,14 +610,13 @@ img{
 
 
 .heading h3 {
-  color: #fff;
+  color: #000;
   display: inline-block;
-  float: left;
-  font-size: 40px;
-  margin: 0 0 40px;
+  font-size: 1.4em;
+  margin: 0 0 20px;
   padding-bottom: 10px;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight:600 ;
   line-height: 40px;
 }
 
