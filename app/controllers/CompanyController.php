@@ -154,7 +154,7 @@ class CompanyController extends BaseController
                 $company->co_use_season = intval(Input::get('co_use_season'));// will use season or not
                 $company->co_use_markes_models = intval(Input::get('co_use_markes_models'));// will use models AND markes  or not
                 if (Input::hasFile('co_logo') && $company->co_logo != '') {
-                    File::delete('dashboard/logo_images/', $company->co_logo);
+                    File::delete('/dashboard/logo_images/', $company->co_logo);
                 }
                 $company->co_logo = ((Input::hasFile('co_logo')) ? $this->saveImage(Input::file('co_logo')) : "");// will use models AND markes  or not
                 $company->user_id = Auth::id(); //user who update company info

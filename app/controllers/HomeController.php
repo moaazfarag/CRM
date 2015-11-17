@@ -15,10 +15,11 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function index()
+	public function home()
 	{
-		return View::make('hello');
+		return View::make('frontend/index');
 	}
+
 
 
 
