@@ -104,7 +104,7 @@ img { max-width: 100%; }
 .top-content .description a:focus { border-bottom: 1px dotted #fff; }
 
 .form-box {
-	margin-top: 35px;
+	margin-top: 10px;
 	border:2px #999 solid;
 	padding: 0;
 	-webkit-box-shadow: -5px -7px 11px -4px rgba(0,0,0,0.46);

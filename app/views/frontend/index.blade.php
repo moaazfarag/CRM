@@ -35,13 +35,25 @@
     <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
-
+<style>
+    #status {
+        width:200px;
+        height:200px;
+        position:absolute;
+        left:50%; /* centers the loading animation horizontally one the screen */
+        top:50%; /* centers the loading animation vertically one the screen */
+        background-image:url({{ URL::asset('frontend/img/status.gif') }}); /* path to your loading animation */
+        background-repeat:no-repeat;
+        background-position:center;
+        margin:-100px 0 0 -100px; /* is width and height divided by two */
+    }
+</style>
 </head>
 <body>
 <!-- BEGAIN PRELOADER -->
-<!--<div id="preloader">-->
-<!--<div id="status">&nbsp;</div>-->
-<!--</div>-->
+<div id="preloader">
+<div id="status">&nbsp;</div>
+</div>
 <!-- END PRELOADER -->
 
 <!-- SCROLL TOP BUTTON -->
@@ -629,7 +641,7 @@
             <!-- BEGAIN CONTACT CONTENT -->
             <div class="contact_content">
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                    <div class="" style="overflow: hidden; padding:auto 5%; background-color:#00aa0a;   ">
+                    <div class="" style="overflow: hidden; padding:auto 5%;   ">
                       <div style="width:90%">
 
                           <script type="text/javascript" src="http://www.webestools.com/google_map_gen.js?lati=30.125623&long=31.376985&zoom=19&width=600&height=400&mapType=normal&map_btn_normal=yes&map_btn_satelite=yes&map_btn_mixte=yes&map_small=yes&marqueur=yes&info_bulle="></script><br /><a href="http://www.webestools.com/google-maps-code-generator-insert-map-on-website-javascript-free-google-map-script.html"></a>                    </div>
@@ -662,7 +674,7 @@
 <!--=========== BEGAIN CONTACT FEATURE SECTION ================-->
 <section id="contactFeature">
     <!-- SKILLS COUNTER OVERLAY -->
-    <div class="slider_overlay"></div>
+    <div class="slider_overlay" style="background-image: url({{ URL::asset('frontend/img/contact-feature-bg.png') }})"></div>
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="container">
@@ -682,7 +694,7 @@
                         <div class="single_contact_feaured wow fadeInUp">
                             <i class="fa fa-envelope-o"></i>
                             <h4>راسلنا على هذا الايميل</h4>
-                            <p>singlepro@gmail.com</p>
+                            <p>share@clickfordata.net</p>
                             <br/>
                         </div>
                     </div>
@@ -690,9 +702,8 @@
                     <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="single_contact_feaured wow fadeInUp">
                             <i class="fa fa-map-marker"></i>
-                            <h4>عنوان الشركة</h4>
-                            <p>Your Company Office Location</p>
-                            <br/>
+                            <h4> عنوان الشركة </h4>
+                            <p>شارع المدينه المنوره رقم 7 الدور الـ 5 شقه 11 خلف بى تيك المطار </p>
                         </div>
                     </div>
                     <!-- BEGAIN CALL US FEATURE -->
@@ -701,9 +712,9 @@
                             <i class="fa fa-clock-o"></i>
                             <h4>ساعات العمل</h4>
                             <p>
-                                من الساعة 11 صباحاً حتى الساعة 7 مساءً
+                                من الساعة 10 صباحاً حتى الساعة 7 مساءً
                                 <br/>
-                                ما عدا الخميس - الجمعة
+                                ما عدا يوم الجمعة
                             </p>
                         </div>
                     </div>

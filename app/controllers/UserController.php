@@ -61,6 +61,7 @@ class UserController extends BaseController
                     Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
                     return Redirect::intended('admin/setting');
 
+
             } else {
                 $error = Lang::get('main.error');
                 Session::flash('error', $error);
