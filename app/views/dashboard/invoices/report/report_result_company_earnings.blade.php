@@ -5,7 +5,7 @@
  * Date: 10/3/2015
  * Time: 1:02 PM
  */
-
+$all_discount = [];
 ?>
 
 @extends('dashboard.main')

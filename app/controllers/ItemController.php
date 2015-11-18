@@ -336,7 +336,7 @@ class ItemController extends BaseController
 
         $inputs         = Input::all();
         $all_item       = explode('|',$inputs['all_item']);
-//        dd($all_item);
+        dd($all_item);
 
 //        $all_item       = array_slice($all_item, 0, -1);
 //dd($all_item);
@@ -366,5 +366,66 @@ class ItemController extends BaseController
 
         return View::make('dashboard.products.items.balance_report.balance_result',$data);
 
+    }
+
+    /**
+     * print  barcode  base on ch
+     * @return mixed
+     */
+    public  function barcode()
+    {
+        $data['title']     =  Lang::get('main.has_label')  ; // page title
+        $data['asideOpen']      = "open";
+        $data['co_info']   = CoData::thisCompany()->first();//select info models category seasons
+        return View::make('dashboard.products.items.barcode.index',$data);
+    }
+    /**
+     * print  barcode  base on ch
+     * @return mixed
+     */
+    public  function barcodeSearch()
+    {
+
+        $items = Items::company()->where('has_label',1);
+        if(Input::has('item_id')){
+            $items->where('id',Input::get('item_id'));
+        }
+        if(Input::has('cat_id')) {
+            $items->where('cat_id', Input::get('cat_id'));
+        }
+        if(Input::has('seasons_id')){
+            $items->where('seasons_id',Input::get('seasons_id'));
+        }
+//dd(Input::get('cat_id'));
+        $data['items'] = $items->get();
+        $data['asideOpen']      = "open";
+        $data['title']     =  Lang::get('main.has_label')  ; // page title
+        $data['co_info']   = CoData::thisCompany()->first();//select info models category seasons
+        return View::make('dashboard.products.items.barcode.result',$data);
+    }
+    /**
+     * print  barcode  base on ch
+     * @return mixed
+     */
+    public  function printBarcode()
+    {
+        foreach(Input::all() as $k => $v)
+        {
+            if(preg_match('/^qty_/', $k))
+            {
+                $after = [];
+                if (Input::has($k)) {
+                    $after = explode('_',$k);
+                    $idAndQty[] = ['id'=>intval($after[1]),'qty'=>$v];
+                    $ids[]    =intval($after[1]);
+                }
+            }
+        }
+        $items  = Items::company()->whereIn('id',$ids)->get();
+
+        $data['title']     =  Lang::get('main.has_label')  ; // page title
+        $data['items']     = $items;
+        $data['idAndQty']  = $idAndQty;
+        return View::make('dashboard.transaction.print-label',$data);
     }
 }
