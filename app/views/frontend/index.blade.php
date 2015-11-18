@@ -90,6 +90,7 @@
                         <li><a href="{{ URL::route('login') }}">تسجيل الدخول  </a></li>
                         <li><a href="#contact">تواصل معنا </a></li>
                         <li><a href="#clients"> عن الشركة </a></li>
+                        <li><a href="{{ URL::route('addNewCompany') }}">سجل شركتك الان</a></li>
                         <li><a href="#pricing">الإشتراك فى الموقع</a></li>
                         <li><a href="#works">شاشات من الموقع</a></li>
                         <li><a href="#service">لماذا موقع الراصد</a></li>
