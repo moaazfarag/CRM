@@ -55,6 +55,10 @@ class CoData extends Eloquent {
     {
         return $this->hasMany('Items','co_id')->where('deleted','=',0);
     }
+    public function itemsHasLabel()
+    {
+        return $this->hasMany('Items','co_id')->where('deleted','=',0)->where('has_label',1);
+    }
 
     public function accounts()
     {

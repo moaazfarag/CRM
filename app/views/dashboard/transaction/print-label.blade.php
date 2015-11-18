@@ -5,7 +5,17 @@
         <div style="margin: auto;page-break-after: always;">
             @foreach($items as $item)
                 <?php $i = 0 ?>
+            @if($idAndQty)
+                <?php
+                        foreach($idAndQty as $enterItem){
+                            if ($enterItem['id'] == $item->id) {
+                                $item->qty = $enterItem['qty'];
+                                $item->unit_price = $item->sell_users;
+                            }
+                        } ?>
+                @endif
                 @for($i;$i<$item->qty;$i++)
+
                     <div style="page-break-after: always; margin: 1.5cm auto">
                         <div>
                             <div style="margin-left:10px;text-align: center; zoom:90%"
