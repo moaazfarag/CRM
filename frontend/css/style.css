@@ -90,17 +90,7 @@ img{
   z-index:99999; /* makes sure it stays on top */
 }
 
-#status {
-  width:200px;
-  height:200px;
-  position:absolute;
-  left:50%; /* centers the loading animation horizontally one the screen */
-  top:50%; /* centers the loading animation vertically one the screen */
-  background-image:url(img/status.gif); /* path to your loading animation */
-  background-repeat:no-repeat;
-  background-position:center;
-  margin:-100px 0 0 -100px; /* is width and height divided by two */
-}
+
 
 /*scrol to top*/
 
@@ -1586,7 +1576,15 @@ textarea .form-control {
   font-size: 18px;
   text-transform: uppercase;
   font-weight: 800;
-  color: #ffffff;
+  color: #000000;
+}
+
+
+.single_contact_feaured > p {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #000000 !important;
 }
 
 

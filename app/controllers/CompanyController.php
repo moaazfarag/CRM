@@ -72,7 +72,14 @@ class CompanyController extends BaseController
                         $user_login = new UserController;
                         Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
 
-                        return $user_login->checkLogin($company->id);
+                        $data['name'] = $inputs['co_name'];
+
+                        Mail::send('emails.welcome', $data, function($message){
+                            $message->to(Input::get('email'))->subject('message from elrased web ');
+                        });
+
+                            return $user_login->checkLogin($company->id);
+
 
                     } else {
 
