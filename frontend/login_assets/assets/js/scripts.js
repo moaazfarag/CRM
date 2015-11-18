@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("http://localhost:8000/frontend/login_assets/assets/img/backgrounds/2" +
+    $.backstretch("http://elrased.net/frontend/login_assets/assets/img/backgrounds/2" +
 			".jpg");
     
     /*
