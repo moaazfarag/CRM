@@ -27,11 +27,12 @@
 
       <style>
       @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
-      
-      .body{
+
+      body{
 
  font-family: 'Droid Arabic Kufi', sans-serif;
  font-size: 18px;
+          font-weight: 600;
       }
     </style>
   <!--[if lt IE 9]>

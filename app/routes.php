@@ -17,7 +17,7 @@ Route::get('/login', function () {
         return Redirect::to('/admin');
     }
     $data['type'] = 'user';
-    return View::make('emails.auth.login');
+    return View::make('emails.auth.login_2');
 
 });
 

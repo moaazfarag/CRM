@@ -35,13 +35,25 @@
     <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
-
+<style>
+    #status {
+        width:200px;
+        height:200px;
+        position:absolute;
+        left:50%; /* centers the loading animation horizontally one the screen */
+        top:50%; /* centers the loading animation vertically one the screen */
+        background-image:url({{ URL::asset('frontend/img/status.gif') }}); /* path to your loading animation */
+        background-repeat:no-repeat;
+        background-position:center;
+        margin:-100px 0 0 -100px; /* is width and height divided by two */
+    }
+</style>
 </head>
 <body>
 <!-- BEGAIN PRELOADER -->
-<!--<div id="preloader">-->
-<!--<div id="status">&nbsp;</div>-->
-<!--</div>-->
+<div id="preloader">
+<div id="status">&nbsp;</div>
+</div>
 <!-- END PRELOADER -->
 
 <!-- SCROLL TOP BUTTON -->
@@ -75,13 +87,17 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul id="top-menu" class="nav navbar-nav navbar-right main_nav">
+                        <li><a href="{{ URL::route('login') }}">تسجيل الدخول  </a></li>
                         <li><a href="#contact">تواصل معنا </a></li>
+                        <li><a href="#clients"> عن الشركة </a></li>
                         <li><a href="#pricing">الإشتراك فى الموقع</a></li>
                         <li><a href="#works">شاشات من الموقع</a></li>
                         <li><a href="#service">لماذا موقع الراصد</a></li>
                         <li><a href="#about">موقع الراصد </a></li>
                         <li class="active"><a href="#">الرئيسية</a></li>
+
                     </ul>
+
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
@@ -303,6 +319,12 @@
                     font-size: 1.2em;
                     font-weight: 600;
                 }
+                #our_services li{
+                    font-size: 1.2em;
+                    font-weight: 600;
+                    list-style: circle ;
+                    direction: rtl;
+                }
 
             </style>
             <div class="col-lg-12 col-md-12">
@@ -310,7 +332,7 @@
                 <div class="service_area">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <!-- BEGAIN SINGLE SERVICE -->
+                            <!--     BEGAIN SINGLE SERVICE -->
                             <div class="single_service wow fadeInLeft">
                                 <div class="service_iconarea">
                                      <img src="{{ URL::asset('frontend/img/icon_6.png" style="width:150px; height:150px')}}" alt="img">
@@ -460,13 +482,81 @@
 </section>
 <!--=========== END PRICING SECTION ================-->
 
+<!--=========== BEGAIN WE ARE SECTION ================-->
+<section id="clients">
+    <div class="container">
+        <div class="row col-lg-12 col-md-12">
+            <!-- START ABOUT HEADING -->
+            <div class="heading">
+                <h2 class="wow fadeInLeftBig">شركة كليك فور داتا</h2>
+              <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="about_slider">
+                          <!-- BEGAIN FEATURED SLIDER -->
+                          <div class="featured_slider">
+                              <!-- SINGLE SLIDE IN THE SLIDER -->
+                              <div class="single_iteam">
+                                  <a href="#">  <img src="{{ URL::asset('frontend/img/we_are1.jpg')}}" alt="img"></a>
+                              </div>
+                              <!-- SINGLE SLIDE IN THE SLIDER -->
+                              <div class="single_iteam">
+                                  <a href="#">  <img src="{{ URL::asset('frontend/img/we_are2.jpg')}}" alt="img"></a>
+                              </div>
+                              <!-- SINGLE SLIDE IN THE SLIDER -->
+                              <div class="single_iteam">
+                                  <a href="#">  <img src="{{ URL::asset('frontend/img/we_are3.jpg')}}" alt="img"></a>
+                              </div>
+                              <!-- SINGLE SLIDE IN THE SLIDER -->
+                              <div class="single_iteam">
+                                  <a href="#">  <img src="{{ URL::asset('frontend/img/we_are4.jpg')}}" alt="img"></a>
+                              </div>
+                              <!-- SINGLE SLIDE IN THE SLIDER -->
 
+                          </div>
+                          <!-- END FEATURED SLIDER -->
+                      </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                      <p>
+
+                          تتحدد مهمة شركة
+                           <span style="color: #1157aa">
+كليك فور داتا
+ </span>
+
+
+
+                          في توظيف خبرتها الشاملة في مجال تكنولوجيا المعلومات لتقديم مستوى عملي حقيقي يمكن عملائها من الاستفادة الفعالة من تكنولوجيا العصر،
+                          ونبذل قصارى جهدنا لبناء علاقات راسخة مبنية على الاحترام والثقة المتبادلة مع زبائننا
+                      </p>
+                      <h3>
+                          خدماتنا
+                      </h3>
+                      <p style="width:100%">
+                      <ul id="our_services">
+                          <li>ادارة توفير الموارد البشرية</li>
+                          <li>ادارة البرمجيات.</li>
+                          <li>تصميم المواقع</li>
+                          <li>أنظمة مراقبة</li>
+                          <li>خدمات الانترنت</li>
+                      </ul>
+                      </p>
+
+                  </div>
+
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--=========== END PRICING SECTION ================-->
 
 
 
 
 <!--=========== BEGAIN CLIENTS SECTION ================-->
-<section id="clients">
+<section id="clients_2">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -551,9 +641,10 @@
             <!-- BEGAIN CONTACT CONTENT -->
             <div class="contact_content">
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                    <div class="contact_map">
-                        <!-- BEGAIN GOOGLE MAP -->
-                        <div id="map_canvas"></div>
+                    <div class="" style="overflow: hidden; padding:auto 5%;   ">
+                      <div style="width:90%">
+
+                          <script type="text/javascript" src="http://www.webestools.com/google_map_gen.js?lati=30.125623&long=31.376985&zoom=19&width=600&height=400&mapType=normal&map_btn_normal=yes&map_btn_satelite=yes&map_btn_mixte=yes&map_small=yes&marqueur=yes&info_bulle="></script><br /><a href="http://www.webestools.com/google-maps-code-generator-insert-map-on-website-javascript-free-google-map-script.html"></a>                    </div>
                     </div>
                 </div>
                 <!-- BEGAIN CONTACT FORM -->
@@ -566,7 +657,7 @@
                         <form dir="rtl">
                             <input class="form-control" type="text" placeholder="الأسم">
                             <input class="form-control" type="email" placeholder="البريد الألكترونى">
-                            <input class="form-control" type="text" placeholder="الرسالة بخصوص">
+                            <input class="form-control" type="text" placeholder=" عنوان الرسالة">
                             <textarea class="form-control" cols="30" rows="10" placeholder="رسالتك"></textarea>
                             <input class="submit_btn" type="submit" value="إرسال">
                         </form>
@@ -583,7 +674,7 @@
 <!--=========== BEGAIN CONTACT FEATURE SECTION ================-->
 <section id="contactFeature">
     <!-- SKILLS COUNTER OVERLAY -->
-    <div class="slider_overlay"></div>
+    <div class="slider_overlay" style="background-image: url({{ URL::asset('frontend/img/contact-feature-bg.png') }})"></div>
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="container">
@@ -603,7 +694,7 @@
                         <div class="single_contact_feaured wow fadeInUp">
                             <i class="fa fa-envelope-o"></i>
                             <h4>راسلنا على هذا الايميل</h4>
-                            <p>singlepro@gmail.com</p>
+                            <p>share@clickfordata.net</p>
                             <br/>
                         </div>
                     </div>
@@ -611,9 +702,8 @@
                     <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="single_contact_feaured wow fadeInUp">
                             <i class="fa fa-map-marker"></i>
-                            <h4>عنوان الشركة</h4>
-                            <p>Your Company Office Location</p>
-                            <br/>
+                            <h4> عنوان الشركة </h4>
+                            <p>شارع المدينه المنوره رقم 7 الدور الـ 5 شقه 11 خلف بى تيك المطار </p>
                         </div>
                     </div>
                     <!-- BEGAIN CALL US FEATURE -->
@@ -622,9 +712,9 @@
                             <i class="fa fa-clock-o"></i>
                             <h4>ساعات العمل</h4>
                             <p>
-                                من الساعة 11 صباحاً حتى الساعة 7 مساءً
+                                من الساعة 10 صباحاً حتى الساعة 7 مساءً
                                 <br/>
-                                ما عدا الخميس - الجمعة
+                                ما عدا يوم الجمعة
                             </p>
                         </div>
                     </div>
