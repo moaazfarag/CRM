@@ -73,37 +73,54 @@
 
                     </div>
                     <div class="form-bottom" dir="rtl">
+                        @if(Session::has('success_set_password'))
+                        <div class='alert alert-success' style="text-align: right; font-weight: 400; font-size: .8em !important;" dir="rtl">
+                            {{  Session::get('success_set_password') }}
+                        </div>
+                        @endif
+
+                      @if(Session::has('error_save_company'))
+                            <div class='alert alert-warning' style="text-align: right; font-weight: 400; font-size: .8em !important;" dir="rtl">
+                            {{  Session::get('error_save_company') }}
+                             </div>
+                        @elseif(Session::has('success_save_company'))
+                            <div class='alert alert-success' style="text-align: right; font-weight: 400; font-size: .8em !important;" dir="rtl">
+                                {{  Session::get('success_save_company') }}
+                            </div>
+                        @endif
                         {{ Form::open(array('route'=>'login','class'=>'login-form'))}}
                         {{--<form role="form" action="" method="post" class="login-form">--}}
                             <div class="form-group @if ($errors->has('username')) has-error @endif">
                                 <input type="text" name="username" placeholder="اسم المستخدم ..." class="form-username form-control" id="form-username">
-                                @if ($errors->has('username')) <p style="text-align: right;" class="help-block">{{ $errors->first('username') }}</p> @endif
+                                @if ($errors->has('username')) <p  style="text-align: right; color:darkred; font-weight: 400; font-size: .8em !important;" class="help-block">{{ $errors->first('username') }}</p> @endif
                             </div>
 
                             <div class="form-group @if ($errors->has('password')) has-error @endif">
                                 <input type="password" name="password" placeholder="كلمة المرور ..." class="form-password form-control" id="form-password">
-                                @if ($errors->has('password')) <p style="text-align: right;" class="help-block">{{ $errors->first('password') }}</p> @endif
+                                @if ($errors->has('password')) <p  style="text-align: right; font-weight: 400; font-size: .8em !important;" class="help-block">{{ $errors->first('password') }}</p> @endif
 
                             </div>
                             <div class="form-group @if ($errors->has('co_id')) has-error @endif">
                                 <input type="text" name="co_id" placeholder="رقم الشركة ... " class="form-password form-control" id="form-password">
-                                @if ($errors->has('co_id')) <p style="text-align: right;"  class="help-block">{{ $errors->first('co_id') }}</p> @endif
+                                @if ($errors->has('co_id')) <p style="text-align: right;color:darkred; font-weight: 400; font-size: .8em !important;">{{ $errors->first('co_id') }}</p> @endif
                             </div>
                         @if(Session::has('error'))
-                            <div class="form-group has-error">
-
-                            <p class="help-block" style="text-align: right;">
-                               <?php $msg =  Session::get('error'); echo $msg;?>
-                            </p>
+                                <div class='alert alert-warning' style="text-align: right;color:darkred; font-weight: 400; font-size: .8em !important;" dir="rtl">
+                                     {{  Session::get('error') }}
+                                 </div>
                         @endif
                             <button type="submit" class="btn kufifont">تسجيل الدخول</button>
-                                <div dir="rtl">
-                                    <a style="font-size: 14px !important; text-align: right; text-decoration: underline; color: #0a8ec4; text-align: right; " href="add-new-company"> تسجيل شركة جديدة  </a>
+                                <div style="float:left; text-align: right" dir="rtl">
+                                    <a style="font-size: 12px !important;  text-decoration: underline; color: #0a8ec4; text-align: right; " href="{{ URL::asset('/remind-password') }}"> هل نسيت  كلمة المرور ؟ </a>
+                                </div>
+                                <div style="float:right; text-align: left" dir="rtl">
+                                    <a style="font-size: 12px !important; text-align: right; text-decoration: underline; color: #0a8ec4; text-align: right; " href="{{ URL::asset('/add-new-company') }}"> تسجيل شركة جديدة  </a>
                                 </div>
                         {{ Form::close() }}
                     </div>
                 </div>
             </div>
+
             {{--<div class="row">--}}
                 {{--<div class="col-sm-6 col-sm-offset-3 social-login">--}}
                     {{--<h3>...or login with:</h3>--}}

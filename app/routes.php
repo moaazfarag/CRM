@@ -11,6 +11,7 @@
 */
 
 App::setlocale('ar');
+Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path','uses' => 'HomeController@confirm']);
 Route::get('/',array('uses'=>'HomeController@home','as'=>'homePage'));
 Route::get('/login', function () {
     if (Auth::check()) {
@@ -30,6 +31,12 @@ Route::get('/login-management', function () {
 
 });
 
+Route::get('remind-password', function(){
+    return View::make('password.remind_password');
+});
+Route::post('post-remind',array('uses'=>'RemindersController@postRemind','as'=>'postRemind') );
+Route::post('post-reset',array('uses'=>'RemindersController@postReset','as'=>'postReset') );
+Route::get('password/reset/{token}',array('uses'=>'RemindersController@getReset','as'=>'getReset') );
 
 
 /*

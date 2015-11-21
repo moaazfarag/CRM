@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="icon" type="image/png" href="{{ URL::asset('dashboard/assets/_con/images/icon.png') }}">
     <style>
         @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);

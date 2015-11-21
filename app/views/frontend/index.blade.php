@@ -51,9 +51,9 @@
 </head>
 <body>
 <!-- BEGAIN PRELOADER -->
-<div id="preloader">
-<div id="status">&nbsp;</div>
-</div>
+{{--<div id="preloader">--}}
+{{--<div id="status">&nbsp;</div>--}}
+{{--</div>--}}
 <!-- END PRELOADER -->
 
 <!-- SCROLL TOP BUTTON -->
