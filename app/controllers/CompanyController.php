@@ -24,9 +24,17 @@ class CompanyController extends BaseController
 
     public function storeNewCompany()
     {
-
         $inputs = Input::all();
 //       return  var_dump($inputs);
+        if (Input::has("g-recaptcha-response")) {
+            return Redirect::back()->with('success', 'شكرا');
+        }else{
+            return Redirect::back()->with('error', 'يرجى الضغط على زر الـ Capitcha');
+
+       }
+
+        $inputs = Input::all();
+
         $validation = Validator::make($inputs, CoData::$store_company, BaseController::$messages);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
@@ -36,11 +44,12 @@ class CompanyController extends BaseController
             $company->co_name = $inputs['co_name'];
             $company->co_address = $inputs['co_address'];
             $company->co_tel = $inputs['co_tel'];
-
+            $confirmation_code = str_random(30);
             $date = new DateTime();
             $date->modify('+10 day');
             $company->co_expiration_date = $date->format('Y-m-d');
             $company->co_statues = 0;
+            $company->confirmation_code = $confirmation_code;
             $company->save();
 
             if ($company->save()) {
@@ -70,15 +79,23 @@ class CompanyController extends BaseController
 
                         // login
                         $user_login = new UserController;
-                        Session::flash('success', 'مرحباً بكم فى موقع الراصد لإدارة الشركات ');
 
                         $data['name'] = $inputs['co_name'];
+                        $data['confirmation_code'] = $confirmation_code;
 
-                        Mail::send('emails.welcome', $data, function($message){
+                        if(Mail::send('emails.welcome', $data, function($message){
                             $message->to(Input::get('email'))->subject('message from elrased web ');
-                        });
+                        })){
 
-                            return $user_login->checkLogin($company->id);
+                            Session::flash('success_save_company', 'مرحباً بكم فى موقع الراصد يرجى الذهاب الى بريدك الألكترونى والضغط على رسالة التأكيد ');
+                            return Redirect::route('login');
+                        }else{
+
+                            Session::flash('error_save_company', 'عفواً حدث خطأ أثناء حفظ البيانات ... يرجى المحاولة مرة أخرى ');
+                            return Redirect::route('login');
+                        }
+
+//                            return $user_login->checkLogin($company->id);
 
 
                     } else {

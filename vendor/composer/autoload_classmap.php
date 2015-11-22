@@ -75,6 +75,7 @@ return array(
     'CreateMarksTable' => $baseDir . '/app/database/migrations/2015_06_29_131457_create_marks_table.php',
     'CreateModelsTable' => $baseDir . '/app/database/migrations/2015_06_29_131634_create_models_table.php',
     'CreateOfferTable' => $baseDir . '/app/database/migrations/2015_11_21_123841_create_offer_table.php',
+    'CreatePasswordRemindersTable' => $baseDir . '/app/database/migrations/2015_11_21_141718_create_password_reminders_table.php',
     'CreateSeasonsTable' => $baseDir . '/app/database/migrations/2015_06_29_131124_create_seasons_table.php',
     'CreateTransDetailsTable' => $baseDir . '/app/database/migrations/2015_07_25_122734_create_trans_details_table.php',
     'CreateTransHeaderTable' => $baseDir . '/app/database/migrations/2015_07_25_120315_create_trans_header_table.php',
