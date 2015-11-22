@@ -81,6 +81,10 @@ class Items extends Eloquent {
     {
         return $this->belongsTo('Accounts','supplier_id');
     }
+    public function offer()
+    {
+        return $this->belongsTo('Offer','offer_id');
+    }
 
     public static function getItemsWithBalanceByBrId($brId)
     {

@@ -91,6 +91,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     });
     Route::get('deleteCategory/{id}', array('before' => 'filter:main_info:cat:delete', 'uses' => 'CategoryController@deleteCategory', 'as' => 'deleteCategory'));
     /**
+     * Offer Area
+     */
+    Route::get('addOffer', array('before' => 'filter:main_info:offer:show_edit_add', 'uses' => 'OfferController@addOffer', 'as' => 'addOffer'));
+    Route::group(array('before' => 'filter:main_info:offer:add'), function () {
+        Route::post('storeOffer', array('before' => 'csrf', 'uses' => 'OfferController@storeOffer', 'as' => 'storeOffer'));
+    });
+    Route::group(array('before' => 'filter:main_info:offer:edit'), function () {
+        Route::get('editOffer/{id}', array('uses' => 'OfferController@editOffer', 'as' => 'editOffer'));
+        Route::post('updateOffer/{id}', array('before' => 'csrf', 'uses' => 'OfferController@updateOffer', 'as' => 'updateOffer'));
+    });
+    Route::get('deleteOffer/{id}', array('before' => 'filter:main_info:offer:delete', 'uses' => 'OfferController@deleteOffer', 'as' => 'deleteOffer'));
+    /**
      * Season Area
      */
     Route::get('addSeason', array('before' => 'filter:main_info:cat:show_edit_add', 'uses' => 'SeasonController@addSeason', 'as' => 'addSeason'));

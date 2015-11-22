@@ -470,7 +470,7 @@ angular.module('mainCtrl', [])
             if(item.cost > 0){
                 return item.cost;
             }else{
-                if( $scope.seletedAccount.pricing ){
+                if( $scope.seletedAccount.pricing  && $scope.transType == "sales"){
                     if($scope.seletedAccount.pricing=="sell_users"){
                         return item.sell_users;
                     }else if($scope.seletedAccount.pricing=="sell_gomla" && item.sell_gomla>0 ){
@@ -480,14 +480,31 @@ angular.module('mainCtrl', [])
                     }else if($scope.seletedAccount.pricing=="sell_nos_gomla" && item.sell_nos_gomla>0 ){
                         return item.sell_nos_gomla;
                     }else{
-                        return item.sell_users;
+                        return $scope.priceAfterOffer(item);
                     }
+                }else if($scope.transType == "buy"){
+                    return item.buy;
                 }else{
-                    return item.sell_users;
+                    return $scope.priceAfterOffer(item);
                 }
             }
 
         };
+        $scope.priceAfterOffer =  function(item){
+            var today =new Date();
+            from = item.offer_from.split("-");
+            from = new Date(from[0], from[1]-1 ,from[2] );
+            to = item.offer_to.split("-");
+            to = new Date(to[0], to[1]-1 , to[2]);
+            if (today.getTime() >= from.getTime() && today.getTime()  <= to.getTime() ) {
+                console.log( to);
+                return item.sell_users - (item.sell_users)*(item.offer)/100;
+            }
+            return item.sell_users;
+
+        };
+
+
         $scope.removeItem =  function(item){
             $scope.invoiceItems.splice($scope.invoiceItems.indexOf(item), 1)
         };

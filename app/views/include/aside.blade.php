@@ -95,7 +95,13 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                     </li>
                                 @endif
                             @endif
-                            @if(PerC::isShow('main_info','item','show_edit_add'))
+                            @if(PerC::isShow('main_info','offer','show_edit_add'))
+                                <li>
+                                    <a href="{{ URL::route('addOffer') }}"
+                                       class="waves-effect waves-blue"> @lang('main.offer')</a>
+                                </li>
+                            @endif
+                                @if(PerC::isShow('main_info','item','show_edit_add'))
                                 <li>
                                     <a href="{{ URL::route('addItem') }}"
                                        class="waves-effect waves-blue"> @lang('main.items')</a>
