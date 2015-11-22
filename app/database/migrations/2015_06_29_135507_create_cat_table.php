@@ -21,6 +21,18 @@ class CreateCatTable extends Migration {
 			$table->integer('user_id');
 			$table->timestamps();
 		});
+        Schema::create('offer', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('co_id');
+            $table->string('name');
+            $table->integer('offer');
+            $table->date('from');
+            $table->date('to');
+            $table->integer('user_id');
+            $table->boolean('deleted');
+            $table->timestamps();
+        });
 	}
 
 
@@ -32,6 +44,7 @@ class CreateCatTable extends Migration {
 	public function down()
 	{
 		Schema::drop('cat');
+		Schema::drop('offer');
 	}
 
 }
