@@ -12,18 +12,7 @@ class CreateOfferTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('offer', function(Blueprint $table)
-        {
-            $table->increments('id');
-            $table->integer('co_id');
-            $table->string('name');
-            $table->integer('offer');
-            $table->date('from');
-            $table->date('to');
-            $table->integer('user_id');
-            $table->boolean('deleted');
-            $table->timestamps();
-        });
+
 	}
 
 	/**
@@ -33,7 +22,7 @@ class CreateOfferTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('offer');
+//        Schema::drop('offer');
 	}
 
 }
