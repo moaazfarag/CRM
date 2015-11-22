@@ -1,12 +1,25 @@
 @extends('dashboard.company.main')
 @section('content')
         <style>
-
+            .bannerimage{
+                width:100%;
+                min-height: 100px;
+                height:auto;
+                position: relative;
+                display:block;
+                margin:5px auto;
+            }
+            .bannerimage img{
+                width:100% !important;
+                height:100% !important;
+                min-height: 100px;
+                display:block;
+            }
             .banner {
                 width:auto;
                 height: 140px;
                 /*margin: 1%;*/
-                background: url({{ URL::asset('dashboard/img/banner2.jpg') }});
+                background: url({{ URL::asset('dashboard/img/banner4.jpg') }});
                 background-size: cover;
                 -webkit-border-radius: 2px;
                 -moz-border-radius: 2px;
@@ -19,7 +32,7 @@
                background: url({{ URL::asset('dashboard/img/bg.png') }});
                background-repeat: repeat;
                padding-bottom: 5%;
-               padding-top: 1%;
+               padding: 5px;
            }
         </style>
    <!-- start container -->
@@ -27,11 +40,12 @@
 
     <div class="container card" style="min-height: 500px; padding-top:1%; padding-bottom: 3%; margin-top: 2%; ">
 
-            <div class=" banner">
-
+            <div class="bannerimage">
+                <img src="{{ URL::asset('dashboard/img/banner4.jpg') }}">
 
             </div>
         <div class="row">
+            @include('include.messages')
             <div class="col m12 l6" >
         <!-- ################### company data ############################-->
                 <div class="card" >
@@ -153,12 +167,15 @@
             </div>
         <!-- ################### submit button ################-->
         <div class="row no-margin-top">
-            <div  style="background-color:#ccc; width:100px; text-align:center;margin:1% auto;">  <button  class="waves-effect btn">@lang('main.submit') <i class="mdi-content-send right"></i></button>
+
+            <div class="g-recaptcha" data-sitekey="6LcbehETAAAAAHkZBKxw5T0mgw6I48KLbhJXEd8-"></div>
+            <div  style="background-color:#ccc; width:100px; text-align:center;margin:1% auto;">  <button type="submit" class="waves-effect btn">@lang('main.submit') <i class="mdi-content-send right"></i></button>
+                {{ Form::close() }}
             </div>
         </div>
 
-        {{ Form::close() }}
 
-            </div>{{--div container--}}
-</div>
+
+    </div>{{--div container--}}
+        </div>
 @stop

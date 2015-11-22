@@ -10,14 +10,13 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>الراصد | {{ @$title }} </title>
+    <title>الراصد | إضافة شركة جديدة </title>
     <meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-
     <link rel="icon" type="image/png" href="{{ URL::asset('dashboard/assets/_con/images/icon.png') }}">
     <style>
         @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);

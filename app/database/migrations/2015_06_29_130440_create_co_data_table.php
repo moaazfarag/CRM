@@ -31,8 +31,8 @@ class CreateCoDataTable extends Migration {
 			$table->string('co_statues');
 			$table->date('co_expiration_date');
 			$table->integer('user_id');
-
-	
+			$table->boolean('confirmed')->default(0);
+			$table->string('confirmation_code')->nullable();
 			$table->timestamps();
 		});
 	}

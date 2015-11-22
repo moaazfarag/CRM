@@ -20,6 +20,18 @@ class HomeController extends BaseController {
 		return View::make('frontend/index');
 	}
 
+	public function confirm($confirm){
+		$company = CoData::where('confirmation_code',$confirm)->first();
+		if(!$company){
+			return View::make('errors.missing');
+		}else{
+			$company->confirmed = 1;
+			$company->confirmation_code = null;
+			$company->update();
+			Session::flash('success','تم تفعيل الشركة بنجاح');
+			return Redirect::route('login');
+		}
+	}
 
 
 
