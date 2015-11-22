@@ -168,7 +168,7 @@
         <!-- ################### submit button ################-->
         <div class="row no-margin-top">
 
-            <div class="g-recaptcha" data-sitekey="6LcbehETAAAAAHkZBKxw5T0mgw6I48KLbhJXEd8-"></div>
+            {{--<div class="g-recaptcha" data-sitekey="6LcbehETAAAAAHkZBKxw5T0mgw6I48KLbhJXEd8-"></div>--}}
             <div  style="background-color:#ccc; width:100px; text-align:center;margin:1% auto;">  <button type="submit" class="waves-effect btn">@lang('main.submit') <i class="mdi-content-send right"></i></button>
                 {{ Form::close() }}
             </div>
