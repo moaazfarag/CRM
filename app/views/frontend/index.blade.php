@@ -673,6 +673,11 @@
 <!--=========== END CONTACT SECTION ================-->
 
 <!--=========== BEGAIN CONTACT FEATURE SECTION ================-->
+<style>
+    .single_contact_feaured h4{
+        text-align: center;
+    }
+</style>
 <section id="contactFeature">
     <!-- SKILLS COUNTER OVERLAY -->
     <div class="slider_overlay" style="background-image: url({{ URL::asset('frontend/img/contact-feature-bg.png') }})"></div>
@@ -685,7 +690,8 @@
                         <div class="single_contact_feaured wow fadeInUp">
                             <i class="fa fa-phone"></i>
                             <h4>اتصل بنا</h4>
-                            <p>1-265-596-580</p>
+                            <p>01000060325 – 01000047656 – 01221238846 – 01118099983
+                            </p>
                             <br/>
 
                         </div>
@@ -727,28 +733,28 @@
 <!--=========== END CONTACT FEATURE SECTION ================-->
 
 <!--=========== BEGAIN SUBSCRIBE SECTION ================-->
-<section id="subscribe">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <!-- START SUBSCRIBE HEADING -->
-                <div class="heading">
-                    <h2 class="wow fadeInLeftBig">تابعنا </h2>
-                    <p>
-                        يرجى أدخال بريدك الألكترونى ليصلك كل جديد
-                    </p>
-                </div>
-                <!-- BEGAIN SUBSCRIVE FORM -->
-                <form class="subscribe_form" dir="rtl">
-                    <div class="subscrive_group wow fadeInUp">
-                        <input class="form-control subscribe_mail" type="email" placeholder="أدخل البريد الألكترونى">
-                        <input class="subscr_btn" type="submit" value="متابعة">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+{{--<section id="subscribe">--}}
+    {{--<div class="container">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-lg-12 col-md-12">--}}
+                {{--<!-- START SUBSCRIBE HEADING -->--}}
+                {{--<div class="heading">--}}
+                    {{--<h2 class="wow fadeInLeftBig">تابعنا </h2>--}}
+                    {{--<p>--}}
+                        {{--يرجى أدخال بريدك الألكترونى ليصلك كل جديد--}}
+                    {{--</p>--}}
+                {{--</div>--}}
+                {{--<!-- BEGAIN SUBSCRIVE FORM -->--}}
+                {{--<form class="subscribe_form" dir="rtl">--}}
+                    {{--<div class="subscrive_group wow fadeInUp">--}}
+                        {{--<input class="form-control subscribe_mail" type="email" placeholder="أدخل البريد الألكترونى">--}}
+                        {{--<input class="subscr_btn" type="submit" value="متابعة">--}}
+                    {{--</div>--}}
+                {{--</form>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</section>--}}
 <!--=========== END SUBSCRIBE SECTION ================-->
 
 <!--=========== BEGAIN FOOTER ================-->
@@ -765,7 +771,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="footer_right">
                     <ul class="social_nav">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.facebook.com/ClickForData.net/"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>

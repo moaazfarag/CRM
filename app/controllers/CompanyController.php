@@ -24,9 +24,17 @@ class CompanyController extends BaseController
 
     public function storeNewCompany()
     {
-
         $inputs = Input::all();
 //       return  var_dump($inputs);
+        if (Input::has("g-recaptcha-response")) {
+            return Redirect::back()->with('success', 'شكرا');
+        }else{
+            return Redirect::back()->with('error', 'يرجى الضغط على زر الـ Capitcha');
+
+       }
+
+        $inputs = Input::all();
+
         $validation = Validator::make($inputs, CoData::$store_company, BaseController::$messages);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());

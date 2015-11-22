@@ -11,6 +11,7 @@
       </footer>
       <!-- DEMO [REMOVE IT ON PRODUCTION] -->
       {{--{{ HTML::script('dashboard/assets/_con/js/_demo.js') }}--}}
+      <script src='https://www.google.com/recaptcha/api.js'></script>
 
       <!-- jQuery -->
       {{ HTML::script('dashboard/assets/jquery/jquery.min.js') }}
