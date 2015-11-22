@@ -293,30 +293,7 @@ class BaseController extends Controller {
 
         }
     }
-    public function priceBaseOnAccount($accountId = null,$item)
-    {
 
-        if (isset($accountId)) {
-            $account = Accounts::company()->find($accountId);
-            if($account){
-                if ($account->pricing == "sell_nos_gomla" && $item->sell_nos_gomla > 0) {
-                    return $item->sell_nos_gomla;
-                }elseif ($account->pricing == "sell_gomla" && $item->sell_gomla > 0) {
-                    return $item->sell_gomla;
-                }elseif ($account->pricing == "sell_gomla_gomla" && $item->sell_gomla_gomla > 0) {
-                    return $item->sell_gomla_gomla;
-                }else{
-                    return $item->sell_users;
-                }
-            }else{
-                return $item->sell_users;
-            }
-
-        } else {
-            return $item->sell_users;
-        }
-
-    }
    public static function editIds($table_name,$model_name,$col_name)
     {
         // get all data from table

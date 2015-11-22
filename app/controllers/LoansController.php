@@ -93,7 +93,7 @@ class LoansController extends BaseController
                 $oldLoans->loan_end = date('Y-m-d', strtotime($oldLoans->loan_start ."+$months months"));;
 
                 $oldLoans->loan_currBal           = $inputs['loan_currBal']; // القسط الشهرى
-//                $oldLoans->user_id                    = Auth::id();
+                $oldLoans->user_id                    = Auth::id();
 
                 if($oldLoans->update()){
                     Session::flash('success',BaseController::editSuccess('القرض'));

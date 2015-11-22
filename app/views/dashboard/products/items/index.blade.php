@@ -158,7 +158,12 @@
 
                         <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>
                     </div> {{--category--}}
-
+                    @if(PermissionController::isShow('main_info','offer','add'))
+                    <div class="col s12 l3">
+                        {{ Form::select('offer_id', array('' => 'اختر العرض') + $co_info->offers->lists('name','id'),null,array('id'=>'offer_id')) }}
+                        <p class="parsley-required">{{ $errors ->first('offer_id') }} </p>
+                    </div> {{--offer--}}
+                    @endif
                     @if($co_info->co_use_season)
                         <div class="col s2 l3">
                             <i class="wi wi-day-cloudy"></i>

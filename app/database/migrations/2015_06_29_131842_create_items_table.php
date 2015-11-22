@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration {
 			$table->string('true_id');
 			$table->integer('co_id');
 			$table->integer('cat_id');
+			$table->integer('offer_id');
 			$table->string('item_name');
 			$table->string('unit');
 			$table->integer('supplier_id');

@@ -68,7 +68,7 @@ class TransController extends BaseController
                                 $unitPrice = null;
                                 $itemTotal = null;
                             }else{
-                                $unitPrice = $this->priceBaseOnAccount(@$inputs['account_id'], $item);// get price base in account price system
+                                $unitPrice = $this->priceBaseOnAccount(@$inputs['account_id'], $item,$type);// get price base in account price system
                             }
                         }if(!self::isSettle($type)){
                             $itemTotal = ($unitPrice)*($quantity);
@@ -135,6 +135,56 @@ class TransController extends BaseController
         }else{
             return View::make('errors.missing');
         }
+    }
+
+    /**
+     * return price baseon account pricing and offer and trans type
+     * @param null $accountId
+     * @param $item
+     * @return mixed
+     */
+    public function priceBaseOnAccount($accountId = null,$item,$type)
+    {
+
+        if (isset($accountId)) {
+            $account = Accounts::company()->find($accountId);
+            if($account && $account->acc_type == 'customers'){
+                if ($account->pricing == "sell_nos_gomla" && $item->sell_nos_gomla > 0) {
+                    return $item->sell_nos_gomla;
+                }elseif ($account->pricing == "sell_gomla" && $item->sell_gomla > 0) {
+                    return $item->sell_gomla;
+                }elseif ($account->pricing == "sell_gomla_gomla" && $item->sell_gomla_gomla > 0) {
+                    return $item->sell_gomla_gomla;
+                }else{
+                    return $this->itemAfterOffer($item);
+                }
+            }elseif($type == "buy" ||($account && $account->acc_type == 'suppliers')){
+                return $item->buy;
+            }else{
+                return $this->itemAfterOffer($item);
+            }
+
+        } else {
+            return $this->itemAfterOffer($item);
+        }
+
+    }
+
+    /**
+     * return price base on offer
+     * @param $item
+     * @return mixed
+     */
+    public function itemAfterOffer($item)
+    {
+        if($item->offer_id){
+            $date = new DateTime();
+            $today = $date->format('Y-m-d');
+            if ($today >= $item->offer->from && $today  <= $item->offer->to ) {
+                return $item->sell_users - ($item->sell_users)*($item->offer->offer)/100;
+            }
+        }
+        return $item->sell_users;
     }
     private function itemsToJsonForError($inputs,$errors)
     {
