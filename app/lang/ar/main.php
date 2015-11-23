@@ -598,4 +598,6 @@ return  array(
 	"from"                   =>'بداية من ',
 	"to"                   =>'حتى',
 	"offerValue"                   =>'قيمة العرض',
+		'tax'  => 'الضريبة',
+		'descount'  => 'الخصم  '
 );

@@ -94,8 +94,18 @@ class TransController extends BaseController
                     }//end foreach of set details
 
                     if(count($newInvoiceItems)>0){//if no details delete invoice and send error
-                        $discount = isset($inputs['discount'])?$inputs['discount']:0;
-                        $tax      = isset($inputs['tax'])?$inputs['tax']:0;
+                       if(PerC::isShow('invoices','tax','add')){
+
+                           $tax      = isset($inputs['tax'])?$inputs['tax']:0;
+                       }else{
+                           $tax = 0;
+                       }
+                        if(PerC::isShow('invoices','discount','add')){
+
+                           $discount = isset($inputs['discount'])?$inputs['discount']:0;
+                       }else{
+                            $discount = 0;
+                        }
 
                         $newHeader->in_total        = $total ;
                         $newHeader->discount        = $discount;

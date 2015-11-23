@@ -13,7 +13,7 @@
 App::setlocale('ar');
 Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path','uses' => 'HomeController@confirm']);
 Route::get('/',array('uses'=>'HomeController@home','as'=>'homePage'));
-
+Route::post('contact-us',array('uses'=>'HomeController@contactUs', 'as'=>'contactUs', 'before' => 'csrf'));
 Route::get('/login', function () {
     if (Auth::check()) {
         return Redirect::to('/admin');
@@ -52,6 +52,7 @@ Route::post('/login', array('uses' => 'UserController@checkLogin', 'as' => 'logi
 Route::post('/login-management', array('uses' => 'UserController@checkLoginManagement', 'as' => 'checkLoginManagement', 'before' => 'csrf'));
 Route::get('/add-new-company', array('uses' => 'CompanyController@addNewCompany', 'as' => 'addNewCompany'));
 Route::get('/trial-end', array('uses' => 'CompanyController@trialEnd', 'as' => 'trialEnd'));
+Route::get('/not-confirmed', array('uses' => 'CompanyController@notConfirmed', 'as' => 'notConfirmed'));
 Route::post('/storeNewCompany', array('uses' => 'CompanyController@storeNewCompany', 'as' => 'storeNewCompany', 'before' => 'csrf'));
 
 Route::group(array('prefix' => 'management', 'before' => 'auth_management'), function () {
