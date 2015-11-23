@@ -25,6 +25,7 @@ class companyDataSeeder extends Seeder {
       'co_statues'       =>'1',
         'user_id'          =>'1',
         'co_expiration_date'=>'2015-11-23',
+        'confirmed'=>'1',
     ),
 
     array(
@@ -43,7 +44,7 @@ class companyDataSeeder extends Seeder {
       'co_statues'          =>'0',
       'user_id'             =>'2',
         'co_expiration_date'=>'2016-11-15',
-
+        'confirmed'=>'1',
     ),
 
     array(
@@ -62,7 +63,7 @@ class companyDataSeeder extends Seeder {
       'co_statues'       =>'2',
       'user_id'          =>'3',
         'co_expiration_date'=>'2016-6-3',
-
+        'confirmed'=>'1',
     )
 
     ));

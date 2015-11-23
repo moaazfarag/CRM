@@ -179,23 +179,26 @@
                         {{--{{ Form::text('sum',null,array('id'=>'sum')) }}--}}
                         <p class="parsley-required">{{ $errors ->first('sum') }} </p>
                     </div>{{--sum--}}
-                    <div class="col s2 ">
-
-                        <i class="mdi mdi-content-remove-circle"></i>
-                        {{ Form::label('discount',Lang::get('main.discount_')) }}
-                        {{ Form::number('discount',0,array('id'=>'discount','ng-model'=>'discount')) }}
-                        <p class="parsley-required">{{ $errors ->first('discount') }} </p>
-                    </div>{{--discount--}}
 
 
-                    <div class="col s2 ">
+                    @if(PerC::isShow('invoices','tax','add'))
+
+                        <div class="col s3 l2 ">
 
                         <i class="mdi mdi-maps-local-atm"></i>
                         {{ Form::label('tax',Lang::get('main.tax_')) }}
                         {{ Form::number('tax',null,array('id'=>'tax')) }}
                         <p class="parsley-required">{{ $errors ->first('tax') }} </p>
                     </div>{{--tax--}}
+                    @endif
+                    @if(PerC::isShow('invoices','discount','add'))
+                        <div class="col s3 l2 ">
 
+                            <i class="mdi mdi-content-remove-circle"></i>
+                            {{ Form::label('discount',Lang::get('main.discount_')) }}
+                            {{ Form::number('discount',0,array('id'=>'discount','ng-model'=>'discount')) }}
+                            <p class="parsley-required">{{ $errors ->first('discount') }} </p>
+                        </div>{{--discount--}}
                     <div class="col s2 ">
 
                         <i class="fa fa-exchange"></i>
@@ -203,7 +206,7 @@
                         @{{ afterDiscount() }}
                         <p class="parsley-required">{{ $errors ->first('net') }} </p>
                     </div>{{--net--}}
-
+                    @endif
                 </div>
                 {{-- end sum , discount ,tax and net --}}
                 <div class="row">
