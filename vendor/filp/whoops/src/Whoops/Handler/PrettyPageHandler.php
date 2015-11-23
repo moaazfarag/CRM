@@ -73,7 +73,6 @@ class PrettyPageHandler extends Handler
         "textmate" => "txmt://open?url=file://%file&line=%line",
         "emacs"    => "emacs://open?url=file://%file&line=%line",
         "macvim"   => "mvim://open/?url=file://%file&line=%line",
-        "phpstorm" => "phpstorm://open?file=%file&line=%line",
     );
 
     /**
@@ -162,12 +161,12 @@ class PrettyPageHandler extends Handler
             "handlers"       => $this->getRun()->getHandlers(),
 
             "tables"      => array(
+                "Server/Request Data"   => $_SERVER,
                 "GET Data"              => $_GET,
                 "POST Data"             => $_POST,
                 "Files"                 => $_FILES,
                 "Cookies"               => $_COOKIE,
                 "Session"               => isset($_SESSION) ? $_SESSION :  array(),
-                "Server/Request Data"   => $_SERVER,
                 "Environment Variables" => $_ENV,
             ),
         );

@@ -50,36 +50,42 @@ class UserController extends BaseController
 
             $company = CoData::find($co_id);
             $user    = User::where('username',$username)->first();
-            if(!empty($user) && !empty($company)&&  Hash::check($password,$user->password) ){
 
-                    if($company->co_statues != 2 && BaseController::statues($company->created_at,$company->co_expiration_date,$company->co_statues) != 'stopped'  ){
-                if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
+            if(empty($user) || empty($company)||  !Hash::check($password,$user->password) ){
 
 
-                    Session::put('permission', json_decode(Auth::user()->permission, true));
-                    $user = User::find(Auth::id());
-                    Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
-                    return Redirect::intended('admin/setting');
-
-
-            } else {
                 $error = Lang::get('main.error');
                 Session::flash('error', $error);
                 return Redirect::to('/login');
             }
 
-            }else{
-                return Redirect::route('trialEnd');
-            }
+            if($company->co_statues == 2 || BaseController::statues($company->created_at,$company->co_expiration_date,$company->co_statues) == 'stopped'  ){
 
-            }// end if user
-            else {
-            $error = Lang::get('main.error');
-            Session::flash('error', $error);
-            return Redirect::to('/login');
+                   return Redirect::route('trialEnd');
+               }
+
+                if($company->confirmed != 1){
+
+                    return Redirect::route('notConfirmed');
+                }
+
+                if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
+
+                    Session::put('permission', json_decode(Auth::user()->permission, true));
+                    $user = User::find(Auth::id());
+                    Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
+                    return Redirect::intended('admin/setting');
+                } else {
+
+                $error = Lang::get('main.error');
+                Session::flash('error', $error);
+                return Redirect::to('/login');
+                 }
+
+
+
         }
 
-        }
     }
 
     public function checkLoginManagement (){

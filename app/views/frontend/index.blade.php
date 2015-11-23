@@ -36,6 +36,10 @@
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
 <style>
+    @import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+    h1, h2, h3, h4, p,.panel-body {
+        font-family: 'Droid Arabic Naskh', serif !important;
+    }
     #status {
         width:200px;
         height:200px;
@@ -90,7 +94,7 @@
                         <li><a href="{{ URL::route('login') }}">تسجيل الدخول  </a></li>
                         <li><a href="#contact">تواصل معنا </a></li>
                         <li><a href="#clients"> عن الشركة </a></li>
-                        <li><a href="{{ URL::route('addNewCompany') }}">سجل شركتك الان</a></li>
+                        <li><a href="{{ URL::route('addNewCompany') }}" target="_blank">سجل شركتك الان</a></li>
                         <li><a href="#pricing">الإشتراك فى الموقع</a></li>
                         <li><a href="#works">شاشات من الموقع</a></li>
                         <li><a href="#service">لماذا موقع الراصد</a></li>
@@ -119,9 +123,9 @@
                      <img src="{{ URL::asset('frontend/img/full-slider/full-slide7.jpg')}}" alt="img">
                     <!-- FIRST SLIDE CAPTION-->
                     <div class="slider_caption">
-                        <h2>أهلا بكم </h2>
+                        <h2>أهلاً بكم </h2>
                         <p>فى موقع الراصد لإدارة الشركات</p>
-                        <a href="#" class="slider_btn">Who We are</a>
+                        <a href="#about" class="slider_btn"> تعرف أكثر</a>
                     </div>
                 </li>
 
@@ -135,7 +139,7 @@
                     <div class="slider_caption">
                         <h2>الحسابات</h2>
                         <p>نظام حسابات متكامل لإدارة حسابات الشركة </p>
-                        <a href="#" class="slider_btn">Who We are</a>
+                        <a href="#about" class="slider_btn"> تعرف أكثر</a>
                     </div>
                 </li>
 
@@ -149,7 +153,7 @@
                     <div class="slider_caption">
                         <h2>شئون الموظفين</h2>
                         <p>نظام  لحساب كل ما يخص موظفين الشركة</p>
-                        <a href="#" class="slider_btn">Who We are</a>
+                        <a href="#about" class="slider_btn"> تعرف أكثر</a>
                     </div>
                 </li>
             </ul>
@@ -355,9 +359,9 @@
                                 <h3 class="service_title">الطباعة وإستخراج التقارير</h3>
                                 <p>
                                     يمكنكم طباعة  التقارير عن حركات البيع وأرباح المؤسسة والمرتبات المنصرفة
-                                    لمساعدة المديرين فى إتخاذ القارات
+                                    لمساعدة المديرين فى إتخاذ القرارات
                                     بناء على معلومات دقيقة
-                                </p>
+       </p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -655,13 +659,41 @@
                         <!-- FOR CONTACT FORM MESSAGE -->
                         <div id="form-messages"></div>
 
-                        <form dir="rtl">
-                            <input class="form-control" type="text" placeholder="الأسم">
-                            <input class="form-control" type="email" placeholder="البريد الألكترونى">
-                            <input class="form-control" type="text" placeholder=" عنوان الرسالة">
-                            <textarea class="form-control" cols="30" rows="10" placeholder="رسالتك"></textarea>
+
+                        {{ Form::open(['route'=>'contactUs','dir'=>'rtl']) }}
+                        @if(Session::has('error'))
+                            <div class='alert alert-warning' style="text-align: right; font-weight: 400; font-size: 1.3em !important;" dir="rtl">
+                                {{  Session::get('error') }}
+                            </div>
+                        @elseif(Session::has('success'))
+                            <div class='alert alert-success' style="text-align: right; font-weight: 400; font-size: 1.3em !important;" dir="rtl">
+                                {{  Session::get('success') }}
+                            </div>
+                        @endif
+
+                        <div class="form-group @if ($errors->has('name')) has-error @endif">
+                            <input type="text" required value="{{ Input::old('name') }}" name="name" placeholder="الأسم"  class="form-password form-control" id="form-password">
+                            @if ($errors->has('name')) <p style="text-align: right;color:darkred; font-weight: 400; font-size: .8em !important;">{{ $errors->first('name') }}</p> @endif
+                        </div>
+                        <div class="form-group @if ($errors->has('email')) has-error @endif">
+                            <input type="text" required value="{{ Input::old('email') }}" name="email" placeholder="البريد الإلكترونى"  class="form-password form-control" id="form-password">
+                            @if ($errors->has('email')) <p style="text-align: right;color:darkred; font-weight: 400; font-size: .8em !important;">{{ $errors->first('email') }}</p> @endif
+                        </div>
+                        <div class="form-group @if ($errors->has('subject')) has-error @endif">
+                            <input type="text" required value="{{ Input::old('subject') }}" name="subject" placeholder="عنوان الرسالة"  class="form-password form-control" id="form-password">
+                            @if ($errors->has('subject')) <p style="text-align: right;color:darkred; font-weight: 400; font-size: .8em !important;">{{ $errors->first('subject') }}</p> @endif
+                        </div>
+                        <div class="form-group @if ($errors->has('message')) has-error @endif">
+                            <textarea class="form-control" required cols="30" name="message" rows="10" placeholder="رسالتك">{{ Input::old('message') }}</textarea>
+                            @if ($errors->has('message')) <p style="text-align: right;color:darkred; font-weight: 400; font-size: .8em !important;">{{ $errors->first('message') }}</p> @endif
+                        </div>
+
+                        {{--<input class="form-control" required type="text" name="name" placeholder="الأسم">--}}
+                            {{--<input class="form-control" required type="email" name="email" placeholder="البريد الألكترونى">--}}
+                            {{--<input class="form-control" required type="text" name="subject" placeholder=" عنوان الرسالة">--}}
+                            {{--<textarea class="form-control" required cols="30" name="message" rows="10" placeholder="رسالتك"></textarea>--}}
                             <input class="submit_btn" type="submit" value="إرسال">
-                        </form>
+                        {{ Form::close() }}
                     </div>
                 </div>
                 <!-- BEGAIN CONTACT MAP -->
@@ -771,7 +803,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="footer_right">
                     <ul class="social_nav">
-                        <li><a href="https://www.facebook.com/ClickForData.net/"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.facebook.com/ClickForData.net/" target="_blank"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>

@@ -134,13 +134,7 @@
                     </div>{{--sum--}}
 
 
-                    <div class="col s2 ">
 
-                        <i class="fa fa-exchange"></i>
-                        <br>
-                        @{{ returnInvoiceTotal() }}
-                        <p class="parsley-required">{{ $errors ->first('net') }} </p>
-                    </div>{{--net--}}
 
                 </div>
                 {{-- end sum , discount ,tax and net --}}
