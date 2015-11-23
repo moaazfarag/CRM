@@ -1,11 +1,10 @@
 @extends('dashboard.main')
 @section('content')
-
     <section class="content-wrap ecommerce-dashboard">
         <div style="margin: auto;page-break-after: always;">
             @foreach($items as $item)
                 <?php $i = 0 ?>
-            @if($idAndQty)
+            @if(isset($idAndQty))
                 <?php
                         foreach($idAndQty as $enterItem){
                             if ($enterItem['id'] == $item->id) {
