@@ -41,13 +41,11 @@ $barcodePages = ["viewLabel", "printBarcode"];
             <div class="nano-content">
 
                 <ul>
-
-                    <li class="label">
-                        <h5>
-                            @lang('main.mainInfo')
-                        </h5>
-
-                    </li>
+                    {{--@if(Session::has('logo'))--}}
+                        {{--<div style="background-color: white; padding: 1%">--}}
+                            {{--<img src="{{ URL::asset(Session::get('logo')) }}" style="width:97%; margin:3px;height:50px;clear: both;" alt="logo">--}}
+                        {{--</div>--}}
+                    {{--@endif--}}
 
                     <li class="{{@$asideOpen}}">
                         <a class="yay-sub-toggle waves-effect waves-blue"><i
@@ -67,6 +65,29 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                        class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
                                 </li>
                             @endif
+                                <li class="{{ @$direct_movement_open }}">
+                                    <a class="yay-sub-toggle waves-effect waves-blue">بيانات الصفحة الرئيسية <span
+                                                class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
+
+                                        <li>
+                                            @if(PerC::isShow('p_general_accounts','p_dailyTreasury','show_add_edit'))
+                                                <a href="{{ URL::route('editHome') }}"
+                                                   class="waves-effect waves-blue">
+                                                    البيانات الأساسية
+                                                </a>
+                                            @endif
+                                            @if(PerC::isShow('p_general_accounts','p_directMovement','show'))
+
+                                                <a href="{{ URL::route('addDirectMovement') }}"
+                                                   class="waves-effect waves-blue">
+                                                    إضافة موضوع جديد
+                                                </a>
+                                            @endif
+
+                                        </li>
+                                    </ul>
+                                </li>
                             @if(PerC::isShow('main_info','cat','show_edit_add'))
                                 <li>
                                     <a href="{{ URL::route('addCategory') }}"

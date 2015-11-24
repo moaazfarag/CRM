@@ -47,6 +47,7 @@
       {{ HTML::script('dashboard/assets/pikaday/pikaday.jquery.js') }}
       {{ HTML::script('dashboard/assets/select2/js/select2.full.min.js') }}
       {{ HTML::script('dashboard/assets/angular.min.js') }}
+      {{ HTML::script('dashboard/assets/ckeditor/ckeditor.js') }}
       {{ HTML::script('dashboard/scripts/app.js') }}
       {{ HTML::script('dashboard/scripts/itemService.js') }}
       {{ HTML::script('dashboard/scripts/mainCtrl.js') }}
@@ -59,6 +60,13 @@
       {{ HTML::script('dashboard/scripts/angular-sanitize.js') }}
       {{ HTML::script('dashboard/scripts/massautocomplete.min.js') }}
 
+      <script>
+          CKEDITOR.replace( 'ckeditor1' );
+          CKEDITOR.inline( 'ckeditora' );
+          CKEDITOR.replace( 'ckeditor2' );
+          CKEDITOR.inline( 'ckeditorb' );
+
+      </script>
 
       <script>
 
