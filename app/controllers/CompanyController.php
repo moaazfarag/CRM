@@ -42,7 +42,13 @@ class CompanyController extends BaseController
             $company->confirmation_code = $confirmation_code;
             $company->save();
 
-            if ($company->save()) {
+            if (!$company->save()){
+
+                // if don't save company data
+                $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                Session::flash('error', $msg);
+                return Redirect::back();
+            }
                 // store owner user data
                 $user = new User;
                 $user->co_id = $company->id;
@@ -55,8 +61,16 @@ class CompanyController extends BaseController
                 $user->owner = 'acount_creator';
                 $user->save();
 
-                if ($user->save()) {
-                    // store mine branch data
+                if (!$user->save()){
+                    $delete_company = CoData::find($company->id);
+                    $delete_company->delete();
+                    // if don't save user data
+                    $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                    Session::flash('error', $msg);
+                    return Redirect::back();
+                }
+
+            // store mine branch data
                     $branch = new Branches;
 //                    $branch->true_id    = BaseController::maxId($branch);
                     $branch->br_name = 'الفرع الرئيسى';
@@ -65,30 +79,13 @@ class CompanyController extends BaseController
                     $branch->co_id = $company->id;// id of company related this branch
                     $branch->save();
 
-                    if ($branch->save()) {
+                    if (!$branch->save()) {
 
-                        // login
-                        $user_login = new UserController;
+                        $delete_company = CoData::find($company->id);
+                        $delete_company->delete();
 
-                        $data['name'] = $inputs['co_name'];
-                        $data['confirmation_code'] = $confirmation_code;
-
-                        if(Mail::send('emails.welcome', $data, function($message){
-                            $message->to(Input::get('email'))->subject('message from elrased web ');
-                        })){
-
-                            Session::flash('success_save_company', 'مرحباً بكم فى موقع الراصد يرجى الذهاب الى بريدك الألكترونى والضغط على رسالة التأكيد ');
-                            return Redirect::route('login');
-                        }else{
-
-                            Session::flash('error_save_company', 'عفواً حدث خطأ أثناء حفظ البيانات ... يرجى المحاولة مرة أخرى ');
-                            return Redirect::route('login');
-                        }
-
-//                            return $user_login->checkLogin($company->id);
-
-
-                    } else {
+                        $delete_user = User::find($user->id);
+                        $delete_user->delete();
 
                         // if don't save branch data
                         $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
@@ -96,22 +93,77 @@ class CompanyController extends BaseController
                         return Redirect::back();
                     }
 
+                        $home = new Home;
+                        $home->co_id    = $company->id;
+                        $home->title    = $company->co_name;
+                        $home->details  ='وصف مختصر عن الشركة ';
+                        $home->about    ='من نحن';
+                        $home->about_content    ='من نحن';
+                        $home->facebook ='#';
+                        $home->twitter  ='#';
+                        $home->google   ='#';
+                        $home->youtube  ='#';
+                        $home->linkedin ='#';
+                        $home->instgram ='#';
+                        $home->email    =$user->email;
+                        $branch->save();
 
-                } else {
+                        if (!$home->save()) {
 
-                    // if don't save user data 
-                    $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
-                    Session::flash('error', $msg);
-                    return Redirect::back();
-                }
+                            $delete_company = CoData::find($company->id);
+                            $delete_company->delete();
 
-            } else {
+                            $delete_user = User::find($user->id);
+                            $delete_user->delete();
 
-                // if don't save company data
-                $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
-                Session::flash('error', $msg);
-                return Redirect::back();
-            }
+                            $delete_branch = Branches::find($branch->id);
+                            $delete_branch->delete();
+
+                            // if don't save home page data
+                            $msg = "عفواً لم يتم التسجيل .. يرجى التسجيل فى وقت لاحق";
+                            Session::flash('error', $msg);
+                            return Redirect::back();
+                        }
+                        // login
+
+                        $data['name'] = $inputs['co_name'];
+                        $data['confirmation_code'] = $confirmation_code;
+
+                        Mail::send('emails.welcome', $data, function($message){
+                            $message->to(Input::get('email'))->subject('message from elrased web ');
+                        });
+
+                     if(count(Mail::failures()) > 0){
+
+                         $delete_company = CoData::find($company->id);
+                         $delete_company->delete();
+
+                         $delete_user = User::find($user->id);
+                         $delete_user->delete();
+
+                         $delete_branch = Branches::find($branch->id);
+                         $delete_branch->delete();
+
+                         $delete_home = Home::find($home->id);
+                         $delete_home->delete();
+                         
+
+                         Session::flash('error_save_company', 'عفواً حدث خطأ أثناء حفظ البيانات ... يرجى المحاولة مرة أخرى ');
+                         return Redirect::route('login');
+                     }else{
+
+                         Session::flash('success_save_company', 'مرحباً بكم فى موقع الراصد يرجى الذهاب الى بريدك الألكترونى والضغط على رسالة التأكيد ');
+                            return Redirect::route('login');
+                        }
+
+//                            return $user_login->checkLogin($company->id);
+
+
+
+
+
+
+
 
         }
     }

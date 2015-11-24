@@ -16,13 +16,20 @@ Route::get('/',array('uses'=>'HomeController@home','as'=>'homePage'));
 Route::post('contact-us',array('uses'=>'HomeController@contactUs', 'as'=>'contactUs', 'before' => 'csrf'));
 Route::get('/login', function () {
     if (Auth::check()) {
+
         return Redirect::to('/admin');
     }
     $data['type'] = 'user';
     return View::make('emails.auth.login_2');
 
 });
-
+if (Auth::check()){
+    $company = CoData::find(Auth::user()->co_id);
+    $logo    = $company->co_logo;
+    if(!empty($logo)){
+        Session::put('logo',$logo);
+    }
+}
 Route::get('/login-management', function () {
     if (Auth::check()) {
         return Redirect::to('/management');
@@ -66,13 +73,15 @@ Route::group(array('prefix' => 'management', 'before' => 'auth_management'), fun
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
-
-
     /**
      * company info area
      */
     Route::get('up', 'AccountController@run');
-    Route::get('/', array('uses' => 'dashboardController@index', 'as' => 'index'));
+
+    Route::get('/', array('uses' => 'dashboardController@home', 'as' => 'home'));
+    Route::get('/edit-home', array('uses' => 'dashboardController@editHome', 'as' => 'editHome'));
+    Route::post('update-home/{type}', array('before' => 'csrf', 'uses' => 'dashboardController@updateHome', 'as' => 'updateHome'));
+
     Route::get('setting', array('before' => 'filter:main_info:company:edit_show', 'uses' => 'CompanyController@editCompanyInfo', 'as' => 'editCompanyInfo'));
     Route::post('updateSetting/{id}', array('before' => 'csrf|filter:main_info:company:edit', 'uses' => 'CompanyController@updateCompanyInfo', 'as' => 'updateCompanyInfo'));
     /**

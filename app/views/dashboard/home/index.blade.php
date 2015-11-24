@@ -101,7 +101,6 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Image</th>
                   <th>Product Title</th>
                   <th>Stock</th>
                   <th class="right-align">Price</th>
@@ -109,9 +108,6 @@
               </thead>
               <tbody>
                 <tr>
-                  <th>
-                   <img src="{{ URL::asset('dashboard/assets/_con/images/ecommerce-apple-iphone-30x30.jpg') }}" alt="Apple iPhone 6">
-                  </th>
                   <td>
                     <strong>Apple iPhone 6</strong>
                     <div class="grey-text">2x1400 MHz, 64 Gb, 1024 Mb, 4.7", IPS, 1334x750, Cam 8 MP, 3G, 4G, BT, Wi-Fi, GPS, 1810 mAh</div>
@@ -120,9 +116,6 @@
                   <td class="right-align">$699.00</td>
                 </tr>
                 <tr>
-                  <th>
-                   <img src="{{ URL::asset('dashboard/assets/_con/images/ecommerce-apple-macbook-30x30.jpg') }}" alt="Apple Macbook Air Mid 14">
-                  </th>
                   <td>
                     <strong>Apple Macbook Air Mid 14</strong>
                     <div class="grey-text">WXGA+, 1440x900, TN+film, Intel Core i5 4260U, 2x1400 MHz, RAM 4 Gb, SSD 512 Gb, Intel HD 5000, Wi-Fi, BT, Mac OS X</div>
@@ -131,9 +124,6 @@
                   <td class="right-align">$1,299.00</td>
                 </tr>
                 <tr>
-                  <th>
-                   <img src="{{ URL::asset('dashboard/assets/_con/images/ecommerce-apple-watch-30x30.jpg') }}" alt="Apple Watch">
-                  </th>
                   <td>
                     <strong>Apple Watch</strong>
                     <div class="grey-text">No Description</div>
@@ -142,9 +132,6 @@
                   <td class="right-align">$449.00</td>
                 </tr>
                 <tr>
-                  <th>
-                   <img src="{{ URL::asset('dashboard/assets/_con/images/ecommerce-apple-imac-30x30.jpg') }}" alt="Apple iMac">
-                  </th>
                   <td>
                     <strong>Apple iMac 27"</strong>
                     <div class="grey-text">Intel Core i5 4670, 4x3400 MHz, IPS/2560х1440, 8 Gb, 1 Tb, NVIDIA GeForce GT 775M, Wi-Fi, Ethernet, Mac OS X</div>

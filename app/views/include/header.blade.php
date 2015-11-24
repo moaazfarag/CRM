@@ -77,7 +77,7 @@
 
       <!-- Logo -->
       <a href="#!" class="brand-logo">
-       <img src="{{ URL::asset('dashboard/assets/_con/images/logo.png') }}" alt="Con">
+       {{--<img src="{{ URL::asset('dashboard/assets/_con/images/logo.png') }}" alt="Con">--}}
       </a>
       <!-- /Logo -->
 
