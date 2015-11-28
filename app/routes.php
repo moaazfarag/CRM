@@ -81,6 +81,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::get('/', array('uses' => 'dashboardController@home', 'as' => 'home'));
     Route::get('/edit-home', array('uses' => 'dashboardController@editHome', 'as' => 'editHome'));
     Route::post('update-home/{type}', array('before' => 'csrf', 'uses' => 'dashboardController@updateHome', 'as' => 'updateHome'));
+    Route::post('send-mail-for-admin',array('uses'=>'dashboardController@sendMailForAdmin', 'as'=>'sendMailForAdmin', 'before' => 'csrf'));
+    Route::get('/add_topic', array('uses' => 'dashboardController@addTopic', 'as' => 'addTopic'));
+    Route::post('store-topic',array('uses'=>'dashboardController@storeTopic', 'as'=>'storeTopic', 'before' => 'csrf'));
+    Route::get('edit-topic/{id}',array('uses'=>'dashboardController@editTopic', 'as'=>'editTopic'));
+    Route::post('update-topic/{id}',array('uses'=>'dashboardController@updateTopic', 'as'=>'updateTopic'));
+    Route::get('delete-topic/{id}',array('uses'=>'dashboardController@deleteTopic', 'as'=>'deleteTopic'));
 
     Route::get('setting', array('before' => 'filter:main_info:company:edit_show', 'uses' => 'CompanyController@editCompanyInfo', 'as' => 'editCompanyInfo'));
     Route::post('updateSetting/{id}', array('before' => 'csrf|filter:main_info:company:edit', 'uses' => 'CompanyController@updateCompanyInfo', 'as' => 'updateCompanyInfo'));

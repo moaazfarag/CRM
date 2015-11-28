@@ -146,7 +146,7 @@ class CompanyController extends BaseController
 
                          $delete_home = Home::find($home->id);
                          $delete_home->delete();
-                         
+
 
                          Session::flash('error_save_company', 'عفواً حدث خطأ أثناء حفظ البيانات ... يرجى المحاولة مرة أخرى ');
                          return Redirect::route('login');
