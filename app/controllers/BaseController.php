@@ -68,16 +68,16 @@ class BaseController extends Controller {
     return $dest . $name;
 }
 
-    public function saveTopicPhoto($input_name){
+    public function saveEmployeePhoto($input_name){
 
-        $dest = '/dashboard/topic_images/';
+        $dest = '/dashboard/employee_photo/';
         $name = str_random(5).'.'.$input_name->getClientOriginalExtension();
-        $img  = Image::make($input_name);
+        $img  = Image::make($input_name)->resize(300, 200);
         $img->save(public_path().$dest . $name);
 
+//        dd($dest . $name);
         return $dest . $name;
     }
-
     public function isAllBranch()
     {
         //check if  user can controller all barnches or not

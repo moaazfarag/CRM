@@ -247,6 +247,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
     Route::group(array('prefix' => 'hr'), function () {
         Route::get('Add-Employees', array('before' => 'filter:hr:Employee:add_edit_show', 'uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
+        Route::get('show-employee/{id}', array( 'uses' => 'EmployeesController@showEmployee', 'as' => 'showEmployee'));
         Route::group(array('before' => 'filter:hr:Employee:add'), function () {
             Route::post('Store-Employees', array('before' => 'csrf', 'uses' => 'EmployeesController@storeEmp', 'as' => 'storeEmp'));
         });

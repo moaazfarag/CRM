@@ -66,6 +66,7 @@ return  array(
     'jobs'             => 'الوظائف ',
     'parts'            => 'الاقسام',
     'addEmployee'      => 'اضف موظف',
+	'employee_photo'   => 'صورة الموظف',
     'addSysUser'       => 'اضف مستخدم للنظام',
     'empName'          => 'اسم الموظف',
     'joinDate'         => 'تاريخ التعيين',
