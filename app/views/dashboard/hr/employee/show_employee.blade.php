@@ -18,7 +18,7 @@
 
 
                     <div class="col l3 " >
-                        <div class="card image-card">
+                        <div class="card image-card z-depth-3">
                             <div class="image">
                                 <img src="{{ $employee->photo }}"  style="max-width:350px; height:200px;" alt="">
                                 <a href="page-profile.html" class="link"></a>
@@ -36,7 +36,7 @@
                 <div class="col l12 s12" >
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>بيانات الوظيفة</div>
+                            <div class="collapsible-header"><i class="mdi mdi-action-description"></i>بيانات الوظيفة</div>
                             <div class="collapsible-body">
 
                                 <table class="display table  table-striped table-hover">
@@ -104,7 +104,7 @@
                                 </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="mdi-maps-place"></i>التأمين</div>
+                            <div class="collapsible-header"><i class="fa fa-medkit prefix"></i>التأمين</div>
                             <div class="collapsible-body">
                                 <table class="display table  table-striped table-hover">
                                     <tr>
@@ -138,7 +138,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="mdi-social-whatshot"></i>البيانات الشخصية</div>
+                            <div class="collapsible-header"><i class="mdi mdi-action-account-box prefix"></i>البيانات الشخصية</div>
                             <div class="collapsible-body">
                                 <table class="display table  table-striped table-hover">
 
@@ -205,7 +205,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="mdi-social-whatshot"></i>جهات الإتصال</div>
+                            <div class="collapsible-header"><i class="fa fa-phone prefix"></i> جهات الإتصال والعنوان</div>
                             <div class="collapsible-body">
                                 <table class="display table  table-striped table-hover">
                                     <tr>
@@ -238,7 +238,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="mdi-social-whatshot"></i>المؤهل</div>
+                            <div class="collapsible-header"><i class="fa fa-graduation-cap  prefix"></i>المؤهل</div>
                             <div class="collapsible-body">
                                 <table class="display table  table-striped table-hover">
                                     <tr>
