@@ -18,9 +18,8 @@ class CreateTopicsTable extends Migration {
 			$table->increments('id');
 			$table->integer('co_id');
 			$table->string('title');
-			$table->mediumText('sub_title');
 			$table->longText('content');
-			$table->string('photo');
+			$table->string('type');
 			$table->integer('user_id');
 			$table->string('statues');
 			$table->timestamps();

@@ -44,11 +44,12 @@ class CreateHrEmployeesTable extends Migration {
             $table->char('cert_location','50');
             $table->char('remark');
             $table->integer('user_id');
-            $table->string('pic');
+            $table->string('photo');
             $table->integer('finger_id');
             $table->integer('d_hours');
             $table->integer('comm1');
             $table->integer('comm2');
+
 
             $table->timestamps();
 		});

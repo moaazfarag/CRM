@@ -7,7 +7,11 @@
         <table class="profile-info">
             <tbody>
             <tr>
-
+                    {{--@if(Session::has('logo'))--}}
+                        {{--<td class="photo">--}}
+                            {{--<img src="{{ URL::asset(Session::get('logo')) }}" style="width:150px; margin:3px;height:150px;clear: both;" alt="logo">--}}
+                        {{--</td>--}}
+                    {{--@endif--}}
                 <td>
                     <!-- Name -->
                     <h3>{{@$home_page->title }}</h3>
@@ -42,16 +46,19 @@
                     </div>
                     <!-- /Contact Buttons -->
                 </td>
+
+
             </tr>
             </tbody>
         </table>
     </div>
 
     <div class="row">
+
         <div class="col s12 l9">
 
             <!-- About -->
-            <div class="card">
+            <div class="card minimized" >
                 <div class="title">
                     <h5><i class="fa fa-user"></i> {{@$home_page->about }}</h5>
                     <a class="close" href="#">
@@ -67,16 +74,64 @@
             </div>
             <!-- /About -->
 
+            @if(!empty($topics))
+                @foreach($topics as $topic)
+                    <?php $class =  Lang::get('main.'.$topic->type.'_class'); ?>
+                    <div class="{{$class}}">
+                        <h5>{{ $topic->title }}</h5>
+                        {{ $topic->content }} لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر
+
+                    </div>
+
+                @endforeach
+                    <?php echo $topics->links(); ?>
+
+            @endif
+
         </div>
 
         <div class="col s12 l3">
-
-
-            <p></p>
-
+            @include('include.messages')
 
             <p></p>
+            <!-- clender -->
+            <div class="card">
+                <div class="title">
+                    <h5><i class="fa fa-user"></i>
+                        التقويم
+                    </h5>
+                    <a class="close" href="#">
+                        <i class="mdi-content-clear"></i>
+                    </a>
+                    <a class="minimize" href="#">
+                        <i class="mdi-navigation-expand-less"></i>
+                    </a>
+                </div>
+                <div class="content">
+                    <script type="text/javascript" src="http://100widgets.com/js_data.php?id=105"></script>
+                </div>
+            </div>
+            <!-- /clender -->
+            <p></p>
+            <!-- clender -->
+            <div class="card">
+                <div class="title">
+                    <h5><i class="fa fa-user"></i>
+الساعة
+                    </h5>
+                    <a class="close" href="#">
+                        <i class="mdi-content-clear"></i>
+                    </a>
+                    <a class="minimize" href="#">
+                        <i class="mdi-navigation-expand-less"></i>
+                    </a>
+                </div>
+                <div class="content">
+                    <script type="text/javascript" src="http://100widgets.com/js_data.php?id=27"></script>            <!-- /clender -->
 
+            <p></p>
+                </div>
+            </div>
             <!-- Send Message -->
             <div class="card">
                 <div class="title">
@@ -91,21 +146,24 @@
                     </a>
                 </div>
                 <div class="content">
-                    <form action="#!">
-                        <div class="input-field">
+                {{ Form::open(array('route'=>'sendMailForAdmin')) }}
+                    <div class="input-field">
                             <textarea id="textarea1" class="materialize-textarea" name="message"></textarea>
                             <label for="textarea1">
                                 إرسال رسالة الى مدير الموقع
 
                             </label>
                         </div>
-                        <button class="btn">إرسال</button>
-                    </form>
+                        <button type="submit" class="btn">إرسال</button>
+                    {{ Form::close('') }}
                 </div>
             </div>
             <!-- /Send Message -->
+            <p></p>
 
-        </div>
-    </div>
+
+
+
+
     </section>
 @stop

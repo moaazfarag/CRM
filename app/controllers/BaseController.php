@@ -59,13 +59,24 @@ class BaseController extends Controller {
      * */
     public function saveImage($input_name){
 
-        $dest = '/dashboard/logo_images/';
+    $dest = '/dashboard/logo_images/';
+    $name = str_random(5).'.'.$input_name->getClientOriginalExtension();
+    $img  = Image::make($input_name)->resize(300, 200);
+    $img->save(public_path().$dest . $name);
+
+//        dd($dest . $name);
+    return $dest . $name;
+}
+
+    public function saveEmployeePhoto($input_name){
+
+        $dest = '/dashboard/employee_photo/';
         $name = str_random(5).'.'.$input_name->getClientOriginalExtension();
         $img  = Image::make($input_name)->resize(300, 200);
         $img->save(public_path().$dest . $name);
 
 //        dd($dest . $name);
-             return $dest . $name;
+        return $dest . $name;
     }
     public function isAllBranch()
     {
@@ -149,6 +160,11 @@ class BaseController extends Controller {
     public static function deleteSuccess($text){
 
         return Lang::get('main.delete_done').$text .Lang::get('main.with_success');
+    }
+
+    public static function deleteError($text){
+
+        return Lang::get('main.delete_not_done').$text .Lang::get('main.try_again');
     }
 
 

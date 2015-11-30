@@ -146,7 +146,7 @@ class CompanyController extends BaseController
 
                          $delete_home = Home::find($home->id);
                          $delete_home->delete();
-                         
+
 
                          Session::flash('error_save_company', 'عفواً حدث خطأ أثناء حفظ البيانات ... يرجى المحاولة مرة أخرى ');
                          return Redirect::route('login');
@@ -222,7 +222,7 @@ class CompanyController extends BaseController
                 if (Input::hasFile('co_logo') && $company->co_logo != '') {
                     File::delete('/dashboard/logo_images/', $company->co_logo);
                 }
-                $company->co_logo = ((Input::hasFile('co_logo')) ? $this->saveImage(Input::file('co_logo')) : "");// will use models AND markes  or not
+                $company->co_logo = ((Input::hasFile('co_logo')) ? $this->saveImage(Input::file('co_logo')) : "");
                 $company->user_id = Auth::id(); //user who update company info
 
                 $company->update();

@@ -59,6 +59,8 @@ class EmployeesController extends BaseController
         $newEmp->cert_location              = Input::get('cert_location');
         $newEmp->remark                     = Input::get('remark');
         $newEmp->user_id                    = Auth::id();
+        $newEmp->photo                      = ((Input::hasFile('photo')) ? $this->saveEmployeePhoto(Input::file('photo')) : "");
+
 //        $newEmp->pic = Input::get('pic');
 //        $newEmp->fingerId = Input::get('fingerId');
 //        $newEmp->dHours = Input::get('dHours');
@@ -114,13 +116,14 @@ class EmployeesController extends BaseController
                 $oldEmp->ins_val                    = Input::get('ins_val');
                 $oldEmp->ins_no                     = Input::get('ins_no');
                 $oldEmp->card_no                    = Input::get('card_no');
-                $oldEmp->cancel_date                = $this->strToTime($inputs['cancel_date']);
+                $oldEmp->cancel_date                = (Input::has('cancel_date')) ? $this->strToTime($inputs['cancel_date']) : '';
                 $oldEmp->cancel_cause               = Input::get('cancel_cause');
                 $oldEmp->sex                        = Input::get('sex');
                 $oldEmp->marital                    = Input::get('marital');
                 $oldEmp->religion                   = Input::get('religion');
                 $oldEmp->military_service           = Input::get('military_service');
                 $oldEmp->tel                        = Input::get('tel');
+                $oldEmp->tel2                       = Input::get('tel2');
                 $oldEmp->address                    = Input::get('address');
                 $oldEmp->birth_date                 = $this->strToTime($inputs['birth_date']);
                 $oldEmp->certificate                = Input::get('certificate');
@@ -128,6 +131,12 @@ class EmployeesController extends BaseController
                 $oldEmp->cert_location              = Input::get('cert_location');
                 $oldEmp->remark                     = Input::get('remark');
                 $oldEmp->user_id                    = Auth::id();
+                if (Input::hasFile('photo') && $oldEmp->photo != '') {
+                    File::delete('/dashboard/employee_photo/', $oldEmp->photo);
+                }
+
+                $oldEmp->photo                      = ((Input::hasFile('photo')) ? $this->saveEmployeePhoto(Input::file('photo')) : "");
+
 //                $oldEmp->pic                 =Input::get('pic');
 //                $oldEmp->fingerId            =Input::get('fingerId');
 //                $oldEmp->dHours              =Input::get('dHours');
@@ -151,6 +160,16 @@ class EmployeesController extends BaseController
         }
 
         }
+
+     public function showEmployee($id){
+
+        $data = $this->staticData() ;
+        $data['title']     = Lang::get('main.edit_employee'); // page title
+        $data['employees'] = "open";
+        $data['employee'] = Employees::findOrFail($id);
+        $data['co_info']   = CoData::thisCompany()->first();
+        return View::make('dashboard.hr.employee.show_employee',$data);
+    }
 
     public function employeeDepDisData()
         {

@@ -71,19 +71,16 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                     <ul>
 
                                         <li>
-                                            @if(PerC::isShow('p_general_accounts','p_dailyTreasury','show_add_edit'))
                                                 <a href="{{ URL::route('editHome') }}"
                                                    class="waves-effect waves-blue">
                                                     البيانات الأساسية
                                                 </a>
-                                            @endif
-                                            @if(PerC::isShow('p_general_accounts','p_directMovement','show'))
 
-                                                <a href="{{ URL::route('addDirectMovement') }}"
+
+                                                <a href="{{ URL::route('addTopic') }}"
                                                    class="waves-effect waves-blue">
                                                     إضافة موضوع جديد
                                                 </a>
-                                            @endif
 
                                         </li>
                                     </ul>
