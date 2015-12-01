@@ -112,7 +112,7 @@ class CoData extends Eloquent {
         'co_address' => 'required',
         'co_tel'     => 'required',
 //        'username'  => 'required|unique:users,username,co_id',
-        'password'   => 'required',
+        'password'   => 'required|min:8',
         'email'     => 'required|email|unique:users',
         'password_confirm' =>'required|same:password',
         'g-recaptcha-response' => 'required|recaptcha',
@@ -122,8 +122,8 @@ class CoData extends Eloquent {
         'co_name'         => 'required',
         'co_address'      => 'required',
         'co_tel'          => 'required',
-        'co_currency'     => 'required',
-        'co_print_size'   => 'required',
+//        'co_currency'     => 'required',
+//        'co_print_size'   => 'required',
         'co_logo'         => 'image|between:1,1000|mimes:jpeg,jpg,png,gif',
 
     );

@@ -126,11 +126,19 @@ class CompanyController extends BaseController
                         }
                         // login
 
-                        $data['name'] = $inputs['co_name'];
+                        $data['company_name'] = $inputs['co_name'];
+                        $data['username'] = $user->username;
                         $data['confirmation_code'] = $confirmation_code;
+                        $data['co_id'] = $company->id;
 
                         Mail::send('emails.welcome', $data, function($message){
                             $message->to(Input::get('email'))->subject('message from elrased web ');
+                        });
+
+                        $data['name'] = $inputs['co_name'];
+                        $data['co_id'] = $company->id;
+                        Mail::send('emails.elrased_owner', $data, function($message){
+                            $message->to('halem@clickfordata.net')->subject('message from elrased web ');
                         });
 
                      if(count(Mail::failures()) > 0){
@@ -155,16 +163,6 @@ class CompanyController extends BaseController
                          Session::flash('success_save_company', 'مرحباً بكم فى موقع الراصد يرجى الذهاب الى بريدك الألكترونى والضغط على رسالة التأكيد ');
                             return Redirect::route('login');
                         }
-
-//                            return $user_login->checkLogin($company->id);
-
-
-
-
-
-
-
-
         }
     }
 
@@ -184,6 +182,38 @@ class CompanyController extends BaseController
             "A3" => "A3",
             "A4" => "A4",
             "A5" => "A5",
+
+        );
+        $data['currency'] =array(
+            'جنية مصرى'=>'جنية مصرى',
+            'دينار عراقى'=>'دينار عراقى',
+            'ليرة سورية'=> 'ليرة سورية',
+            'ليرة لبنانية'=>'ليرة لبنانية',
+            'دينار أردنى'=>'دينار أردنى',
+            'ريال سعودى'=>'ريال سعودى',
+            'ريال يمنى'=>'ريال يمنى',
+            'دينار ليبى'=>'دينار ليبى',
+            'جنية سودانى'=>'جنية سودانى',
+            'درهم مغربى'=>'درهم مغربى',
+            'دينار تونسى'=>'دينار تونسى',
+            'دينار كويتى'=>'دينار كويتى',
+            'دينار جزائرى'=>'دينار جزائرى',
+            'أوقية موريتانية'=>'أوقية موريتانية',
+            'دينار بحرينى'=>'دينار بحرينى',
+            'ريال قطرى'=>'ريال قطرى',
+            'درهم إماراتى'=>'درهم إماراتى',
+            'ريال عمانى'=>'ريال عمانى',
+            'شلن صومالى'=>'شلن صومالى',
+            'جنية فلسطينى'=>'جنية فلسطينى',
+            'فرنك جيبوتى'=>'فرنك جيبوتى',
+            'فرنك قمرى'=>'فرنك قمرى',
+            'دولار أمريكى '=>'',
+            'يورو'=>'',
+            'جنية استرلينى '=>'',
+            'دولار كندى'=>'',
+            'دولار استرالى'=>'',
+            'ين يابانى'=>'',
+
 
         );
         return View::make('dashboard.company.index', $data);

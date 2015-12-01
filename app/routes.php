@@ -159,6 +159,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
      */
     Route::group(array('before' => 'filter:main_info:barcode:add'), function () {
         Route::get('addItem', array('uses' => 'ItemController@addItem', 'as' => 'addItem'));
+        Route::get('show-item/{id}', array('uses' => 'ItemController@showItem', 'as' => 'showItem'));
         Route::get('barcode', array( 'uses' => 'ItemController@barcode', 'as' => 'barcode'));
         Route::post('barcode', array( 'uses' => 'ItemController@barcodeSearch', 'as' => 'barcode'));
         Route::post('printBarcode', array('uses' => 'ItemController@printBarcode', 'as' => 'printBarcode'));

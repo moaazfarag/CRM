@@ -264,11 +264,19 @@
                                                 تاريخ المؤهل
                                             </h5></td>
                                         <td><h5>
-                                                {{ $employee->cert_date }}
+                                                {{ BaseController::ViewDate($employee->cert_date) }}
                                             </h5>
                                         </td>
                                     </tr>
                                 </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="mdi mdi-action-assignment  prefix"></i>ملاحظات</div>
+                            <div class="collapsible-body">
+                            <p>
+                                {{ $employee->remark }}
+                            </p>
                             </div>
                         </li>
                     </ul>

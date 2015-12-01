@@ -198,6 +198,7 @@ class BaseController extends Controller {
         'card_no.min'         => ' يرجى ادخال الرقم القومى بشكل صحيح',
         'card_no.unique'      => 'هذا الرقم مستخدم من قبل ',
         'password_confirm.same'=> 'كلمتان السر غير متطابقتان',
+        'password.min'         => 'لا بد أن تحتوى كلمة المرور على 8 أحرف على الأقل',
         'email.unique'         =>'هذا الإيميل مستخدم من قبل ',
         'username.unique'      =>'هذا الأسم مستخدم من قبل',
         'account_id.not_in'    => 'هذا الحقل مطلوب',

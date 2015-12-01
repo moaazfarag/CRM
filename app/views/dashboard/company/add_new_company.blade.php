@@ -114,7 +114,7 @@
                     <div class="col s12 l11">
                         <div class="input-field">
                             <i class="fa fa-user prefix active"></i>
-                            <?php $userName=Lang::get('main.name') ?>
+                            <?php $userName=Lang::get('main.admin_user_name') ?>
                             {{ Form::text('username',null,array('placeholder'=>$userName)) }}
                             <p class="parsley-required">{{ $errors ->first('username') }} </p>
                         </div>
@@ -168,7 +168,7 @@
         <!-- ################### submit button ################-->
         <div class="row no-margin-top">
             
-{{Form::captcha()}}
+
 
             <div  style="background-color:#ccc; width:100px; text-align:center;margin:1% auto;">  <button type="submit" class="waves-effect btn">@lang('main.submit') <i class="mdi-content-send right"></i></button>
                 {{ Form::close() }}

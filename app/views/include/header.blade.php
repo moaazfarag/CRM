@@ -83,7 +83,7 @@
 
       <!-- Menu -->
       <ul>
-        <li style="font-size: 1.2em;color: dodgerblue">
+        <li style="font-size: 8.em;color: dodgerblue">
           رقم الشركة هو {{ Auth::user()->co_id }}
 
 
@@ -93,24 +93,26 @@
         </li>
         <li class="user">
           <a class="dropdown-button" href="#!" data-activates="user-dropdown">
-           <img src="{{ URL::asset('dashboard/assets/_con/images/user.jpg') }}" alt="John Doe" class="circle">
+           {{--<img src="{{ URL::asset('dashboard/assets/_con/images/user.jpg') }}" alt="John Doe" class="circle">--}}
             {{ Auth::user()->name }}
             <i class="mdi-navigation-expand-more right"></i>
           </a>
           <ul id="user-dropdown" class="dropdown-content">
+            {{--<li>--}}
+              {{--<a href="page-profile.html">--}}
+                {{--<i class="fa fa-user"></i>--}}
+                {{--@lang('main.yourAccount')--}}
+              {{--</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+              {{--<a href="#!">--}}
+                {{--<i class="fa fa-cogs"></i>--}}
+                {{--@lang('main.settings')--}}
+              {{--</a>--}}
+            {{--</li>--}}
             <li>
-              <a href="page-profile.html">
-                <i class="fa fa-user"></i>
-                @lang('main.yourAccount')
-              </a>
+<br/>
             </li>
-            <li>
-              <a href="#!">
-                <i class="fa fa-cogs"></i>
-                @lang('main.settings')
-              </a>
-            </li>
-
             <li>
                 <a href="{{ URL::route('logout') }}">
                     <i class="fa fa-sign-out"></i> @lang('main.logout') </a>
