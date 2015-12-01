@@ -137,6 +137,19 @@ class ItemController extends BaseController
                 return View::make('errors.missing',$data);              }
             }
     }
+    public function showItem($id){
+        $data['title']     = Lang::get('main.editItem');
+        $data['mainasideOpen']      = "open";
+        $data['item']      = Items::company()->where('id','=',$id)->first();
+        if($data['item'])
+        {
+            $data['co_info']  = CoData::thisCompany()->first();
+            return View::make('dashboard.products.items.show_item',$data);
+        }else{
+            $data['error'] = 'لا يوجد صنف بهذا الاسم ';
+            return View::make('errors.missing',$data);
+         }
+    }
     public function select_mark()
 {
 

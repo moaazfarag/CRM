@@ -609,8 +609,7 @@ return  array(
 	'warning_class'			=>'alert  orange lighten-4 orange-text text-darken-2',
 	'done_class'			=>'alert green lighten-4 green-text text-darken-2',
 	'default_class'			=>'defult-message',
-	'Last' => 'السابق ',
-	'Next' => 'التالى',
-
-
+	'Last'					 => 'السابق ',
+	'Next'					 => 'التالى',
+	'admin_user_name' => 'اسم المستخدم (يستخدم فى الدخول للوحة التحكم)',
 );

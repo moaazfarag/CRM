@@ -41,11 +41,11 @@ $barcodePages = ["viewLabel", "printBarcode"];
             <div class="nano-content">
 
                 <ul>
-                    {{--@if(Session::has('logo'))--}}
-                        {{--<div style="background-color: white; padding: 1%">--}}
-                            {{--<img src="{{ URL::asset(Session::get('logo')) }}" style="width:97%; margin:3px;height:50px;clear: both;" alt="logo">--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
+                    @if(Session::has('logo'))
+                        <div style="background-color: white; padding: 1%">
+                            <img src="{{ URL::asset(Session::get('logo')) }}" style="width:97%; margin:3px;height:50px;clear: both;" alt="logo">
+                        </div>
+                    @endif
 
                     <li class="{{@$asideOpen}}">
                         <a class="yay-sub-toggle waves-effect waves-blue"><i

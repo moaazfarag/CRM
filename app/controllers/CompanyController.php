@@ -126,11 +126,19 @@ class CompanyController extends BaseController
                         }
                         // login
 
-                        $data['name'] = $inputs['co_name'];
+                        $data['company_name'] = $inputs['co_name'];
+                        $data['username'] = $user->username;
                         $data['confirmation_code'] = $confirmation_code;
+                        $data['co_id'] = $company->id;
 
                         Mail::send('emails.welcome', $data, function($message){
                             $message->to(Input::get('email'))->subject('message from elrased web ');
+                        });
+
+                        $data['name'] = $inputs['co_name'];
+                        $data['co_id'] = $company->id;
+                        Mail::send('emails.elrased_owner', $data, function($message){
+                            $message->to('halem@clickfordata.net')->subject('message from elrased web ');
                         });
 
                      if(count(Mail::failures()) > 0){
@@ -155,16 +163,6 @@ class CompanyController extends BaseController
                          Session::flash('success_save_company', 'مرحباً بكم فى موقع الراصد يرجى الذهاب الى بريدك الألكترونى والضغط على رسالة التأكيد ');
                             return Redirect::route('login');
                         }
-
-//                            return $user_login->checkLogin($company->id);
-
-
-
-
-
-
-
-
         }
     }
 
