@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'elrased@clickfordata',
+	'username' => 'elrased@clickfordata.net',
 
 	/*
 	|--------------------------------------------------------------------------
