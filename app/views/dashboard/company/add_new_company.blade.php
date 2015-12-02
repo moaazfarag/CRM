@@ -167,8 +167,8 @@
             </div>
         <!-- ################### submit button ################-->
         <div class="row no-margin-top">
-            
-{{Form::captcha()}}
+
+{{--{{Form::captcha()}}--}}
 
             <div  style="background-color:#ccc; width:100px; text-align:center;margin:1% auto;">  <button type="submit" class="waves-effect btn">@lang('main.submit') <i class="mdi-content-send right"></i></button>
                 {{ Form::close() }}
