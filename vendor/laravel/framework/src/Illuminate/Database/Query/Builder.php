@@ -1400,7 +1400,7 @@ class Builder {
 			->join('items', 'items.id', '=', 'trans_details.item_id')
 			->join('branches', 'branches.id', '=', 'trans_header.br_id')
 			->join('cat', 'cat.id', '=', 'items.cat_id')
-			->join('offer', 'offer.id', '=', 'items.offer_id')
+			->leftJoin('offer', 'offer.id', '=', 'items.offer_id')
 			->groupBy('trans_details.serial_no',
 				'trans_details.item_id',
 				'trans_header.br_id',
