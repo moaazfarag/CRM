@@ -13,7 +13,7 @@
                 </a>
             </div>
             <div class="content">
-                @include('include.messages')
+                    @include('include.messages')
 
                 {{--{{ dd($editSeason->name) }}--}}
                 @if(isset($editDep->name))

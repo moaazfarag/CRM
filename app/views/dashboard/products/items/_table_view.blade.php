@@ -27,7 +27,7 @@
             @foreach($co_info->items as $item)
                 <tr>
                     <th>{{$item->true_id}}</th>
-                    <td>{{$item->item_name}}</td>
+                    <td><a href="{{ URL::route('showItem',$item->id)  }}">{{$item->item_name}}</a></td>
                     <td>{{$item->buy}}</td>
                     <td>{{$item->unit}}</td>
                     <th>{{@$item->cat->name}}</th>

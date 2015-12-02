@@ -3,9 +3,9 @@
         <!-- Main Content -->
 <section class="content-wrap ecommerce-dashboard">
     @if(Route::currentRouteName() == 'addEmp')
-        {{ Form::open(array('route'=>array('storeEmp'))) }}
+        {{ Form::open(array('route'=>array('storeEmp'),'files'=>'true')) }}
     @elseif(Route::currentRouteName() == 'editEmp')
-        {{ Form::model($employee,array('route'=>array('updateEmp',$employee->id))) }}
+        {{ Form::model($employee,array('route'=>array('updateEmp',$employee->id),'files'=>'true')) }}
     @endif
     @if(PerC::isShow('hr','Employee','edit','editEmp')||PerC::isShow('hr','Employee','add','addEmp'))
         <div class=" card ">
@@ -100,6 +100,12 @@
                         {{--<i class="fa fa-tag prefix"></i>--}}
                         <div class="input-field">
                             {{ Form::select('marital', $marital ,null,array('id'=>'marital')) }}
+
+                            {{--<select>--}}
+                                {{--@foreach($marital as $v=>$k)--}}
+                                {{--<option  value="{{ $k }}" @if($employee && $employee->marital == $v)  selected="selected" @endif >{{ $k }}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
                             <p class="parsley-required">{{ $errors ->first('marital') }} </p>
                         </div>
                     </div>
@@ -251,6 +257,28 @@
                             <p class="parsley-required">{{ $errors ->first('remark') }} </p>
                         </div>
                     </div>
+                </div>
+                <div class="row" style="margin-bottom: 5px;">
+                    <div class="col s12 l1">
+
+                        <?php $photo = Lang::get('main.employee_photo') ?>
+                        {{ Form::label('photo',$photo) }}
+                    </div>
+                    @if(isset($employee) && !empty($employee->photo))
+                        <div class="col s12 l2">
+                            <div class="imagedropshadow">
+                                <img src='{{ URL::asset("$employee->photo") }}' style="width:100%; height:80px;">
+                            </div>
+                        </div>
+                    @endif
+                    <div class="col s12 l2">
+                        <div class="input-field">
+                            {{ Form::file('photo',null,array('required',null,@$readOnly)) }}
+                            <p class="parsley-required error-validation">{{ $errors->first('photo') }} </p>
+                        </div>
+                    </div>
+<br/>
+<br/>
                 </div>
                 <div class="row">
                     <div class="col s12 l12">

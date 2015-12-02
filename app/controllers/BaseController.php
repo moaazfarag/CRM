@@ -59,13 +59,24 @@ class BaseController extends Controller {
      * */
     public function saveImage($input_name){
 
-        $dest = '/dashboard/logo_images/';
+    $dest = '/dashboard/logo_images/';
+    $name = str_random(5).'.'.$input_name->getClientOriginalExtension();
+    $img  = Image::make($input_name)->resize(300, 200);
+    $img->save(public_path().$dest . $name);
+
+//        dd($dest . $name);
+    return $dest . $name;
+}
+
+    public function saveEmployeePhoto($input_name){
+
+        $dest = '/dashboard/employee_photo/';
         $name = str_random(5).'.'.$input_name->getClientOriginalExtension();
         $img  = Image::make($input_name)->resize(300, 200);
         $img->save(public_path().$dest . $name);
 
 //        dd($dest . $name);
-             return $dest . $name;
+        return $dest . $name;
     }
     public function isAllBranch()
     {
@@ -151,6 +162,11 @@ class BaseController extends Controller {
         return Lang::get('main.delete_done').$text .Lang::get('main.with_success');
     }
 
+    public static function deleteError($text){
+
+        return Lang::get('main.delete_not_done').$text .Lang::get('main.try_again');
+    }
+
 
      public static function addError($text){
 
@@ -182,6 +198,7 @@ class BaseController extends Controller {
         'card_no.min'         => ' يرجى ادخال الرقم القومى بشكل صحيح',
         'card_no.unique'      => 'هذا الرقم مستخدم من قبل ',
         'password_confirm.same'=> 'كلمتان السر غير متطابقتان',
+        'password.min'         => 'لا بد أن تحتوى كلمة المرور على 8 أحرف على الأقل',
         'email.unique'         =>'هذا الإيميل مستخدم من قبل ',
         'username.unique'      =>'هذا الأسم مستخدم من قبل',
         'account_id.not_in'    => 'هذا الحقل مطلوب',

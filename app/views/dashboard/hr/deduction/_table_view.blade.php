@@ -32,8 +32,8 @@
                     @endif
                     @if(PerC::isShow('hr','Desdeds','delete'))
                         <td>
-                            <a onclick="return confirm('هل تريد بالفعل حذف هذا البند ')"
-                               href="{{ URL::route('deleteDesded',array($tableData->id)) }}"
+                            <a onclick="return confirm('هل تريد بالفعل حذف هذا الموضوع ')"
+                               href="{{ URL::route('deleteTopic',array($tableData->id)) }}"
                                class="btn btn-danger red">[X]</a>
                         </td>
                     @endif

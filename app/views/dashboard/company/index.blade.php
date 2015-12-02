@@ -95,9 +95,8 @@
             </div>
             <div class="col s12 l5">
                 <div class="input-field">
-                    <i class="mdi mdi-editor-attach-money prefix"></i>
-                    <?php $currency = Lang::get('main.currency') ?>
-                    {{ Form::text('co_currency',null,array('required','placeholder'=>$currency,@$readOnly)) }}
+                    <?php $currncy = Lang::get('main.currency') ?>
+                    {{ Form::select('co_currency', array('' => lang::get('main.currency')) + $currency,null,array('id'=>'ecommerce-printsize','style'=>'max-height:200px')) }}
                     <p class="parsley-required error-validation">{{ $errors->first('co_currency') }} </p>
                 </div>
 

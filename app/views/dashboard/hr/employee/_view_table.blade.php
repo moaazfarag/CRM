@@ -22,7 +22,7 @@
                 @foreach($tablesData as $tableData)
                     <tr>
                         <td>{{ $tableData->true_id }}</td>
-                        <td>{{ $tableData->name }}</td>
+                        <td><a href="{{ URL::route('showEmployee',$tableData->id) }}">{{ $tableData->name }}</a></td>
                         <td>{{ $tableData->jobs->name }}</td>
                         <td>{{ $tableData->departments->name }}</td>
                         <td>{{ $tableData->salary }}</td>

@@ -24,7 +24,7 @@ class companyDataSeeder extends Seeder {
       'co_use_markes_models'=>'0',
       'co_statues'       =>'1',
         'user_id'          =>'1',
-        'co_expiration_date'=>'2015-11-23',
+        'co_expiration_date'=>'2016-11-23',
         'confirmed'=>'1',
     ),
 

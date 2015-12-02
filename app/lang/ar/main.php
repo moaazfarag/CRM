@@ -66,6 +66,7 @@ return  array(
     'jobs'             => 'الوظائف ',
     'parts'            => 'الاقسام',
     'addEmployee'      => 'اضف موظف',
+	'employee_photo'   => 'صورة الموظف',
     'addSysUser'       => 'اضف مستخدم للنظام',
     'empName'          => 'اسم الموظف',
     'joinDate'         => 'تاريخ التعيين',
@@ -494,8 +495,10 @@ return  array(
     // success
     'edit_done'      => 'تم تعديل ',
     'add_done'       => 'تمت إضافة ',
+	'delete_done'    => ' تم حذف ',
     'add_not_done'  => 'لم تتم إضافة ',
     'edit_not_done'  => 'لم يتم تعديل ',
+	'delete_not_done' => ' لم يتم حذف    ',
     'try_again'      => '.. حاول مرة أخرى ',
     'with_success'   => ' بنجاح ',
     'piece'             =>'عدد',
@@ -570,7 +573,6 @@ return  array(
     'accountsBalances'      =>'ارصدة الحسابات الافتتاحية ',
 
 	// management
-//		delete_company stop_company count_branches count_users expiration_date
 	"delete_company"	=>"حذف ",
 	"stop_company"		=>"إيقاف",
 	"count_branches"	=>" الفروع",
@@ -578,7 +580,6 @@ return  array(
 	"expiration_date"	=>" إنتهاء الحجز",
 	"start_date"        =>' بداية التسجيل',
 	"status"            => 'الحالة' ,
-//
 	"trial"				=>"تجريبى",
 	"member"			=>"مشترك",
 	"stopped"			=>"موقوف",
@@ -591,13 +592,24 @@ return  array(
 	"all_companies"		    =>"كل الشركات",
 	"month"				    =>'شهر',
 	"day"                   =>'يوم',
-	"offer"                   =>'العروض',
-	"addNewOffer"                   =>'اضف عرض جديد',
-	"nameOfOffer"                   =>' اسم العرض  ',
-	"theOffer"                   =>'العرض',
-	"from"                   =>'بداية من ',
-	"to"                   =>'حتى',
-	"offerValue"                   =>'قيمة العرض',
-		'tax'  => 'الضريبة',
-		'descount'  => 'الخصم  '
+	"offer"                 =>'العروض',
+	"addNewOffer"           =>'اضف عرض جديد',
+	"nameOfOffer"           =>' اسم العرض  ',
+	"theOffer"              =>'العرض',
+	"from"                  =>'بداية من ',
+	"to"                    =>'حتى',
+	"offerValue"            =>'قيمة العرض',
+	'descount'  			=> 'الخصم  ',
+
+	'error_message'			=>'تحذيرى',
+	'warning_message'		=>'تنبية',
+	'done_message'			=>'نجاح',
+	'default_message'		=>'إفتراضى',
+	'error_class'			=>'alert',
+	'warning_class'			=>'alert  orange lighten-4 orange-text text-darken-2',
+	'done_class'			=>'alert green lighten-4 green-text text-darken-2',
+	'default_class'			=>'defult-message',
+	'Last'					 => 'السابق ',
+	'Next'					 => 'التالى',
+	'admin_user_name' => 'اسم المستخدم (يستخدم فى الدخول للوحة التحكم)',
 );

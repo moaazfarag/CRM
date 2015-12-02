@@ -2725,7 +2725,7 @@ table.hoverable tbody tr {
 }
 
 .left-align, td, th {
-    text-align: left
+    text-align: right
 }
 
 td, th {
