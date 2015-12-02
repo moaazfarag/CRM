@@ -115,7 +115,7 @@ class CoData extends Eloquent {
         'password'   => 'required|min:8',
         'email'     => 'required|email|unique:users',
         'password_confirm' =>'required|same:password',
-        'g-recaptcha-response' => 'required|recaptcha',
+//        'g-recaptcha-response' => 'required|recaptcha',
         );
     public static $edit_company = array(
 
