@@ -9,7 +9,7 @@
 class PermissionController extends BaseController
 {
     public static $basePermission = [
-        'main_info' => ['company', 'branch', 'cat', 'item','offer', 'mark_model', 'season', 'add_account', 'users', 'barcode'],
+        'main_info' => ['company', 'branch','main_data', 'cat', 'item','offer', 'mark_model', 'season', 'add_account', 'users', 'barcode'],
         'balances' => ['accountsBalances', 'itemBalance'],
         'settles' => ['settleAdd', 'settleDown'],
         'hr' => ['Employee', 'Departments', 'jobs', 'loans', 'Desdeds', 'Empdesded', 'MonthChange', 'salariesProcessing'],

@@ -24,7 +24,7 @@ class ItemController extends BaseController
     public  function storeItem()
     {
         $inputs = Input::all();
-        $validation = Validator::make($inputs, Items::$store_rules);
+        $validation = Validator::make($inputs, Items::$store_rules,BaseController::$messages);
 
         if($validation->fails())
         {
@@ -92,7 +92,7 @@ class ItemController extends BaseController
 
     public  function updateItem($id)
     {
-        $validation = Validator::make(Input::all(), Items::$update_rules);
+        $validation = Validator::make(Input::all(), Items::$update_rules,BaseController::$messages);
         $inputs = Input::all();
         if($validation->fails())
         {
@@ -339,7 +339,6 @@ class ItemController extends BaseController
             }
 
                 $data['balances'] = $balances->get();
-
 
             return View::make('dashboard.products.items.balance_report.balance_result',$data);
 

@@ -612,4 +612,14 @@ return  array(
 	'Last'					 => 'السابق ',
 	'Next'					 => 'التالى',
 	'admin_user_name' => 'اسم المستخدم (يستخدم فى الدخول للوحة التحكم)',
+	'main_data'=>'بيانات الصفحة الرئيسية',
+
+		'delete_is_done' => 'تم حذف ',
+		'the_delete_not_done' => 'لم يتم حذف أى ',
+		'rows'			 =>'صفوف',
+		'from_rows'      =>'من أصل',
+		'this_because'   =>'وذلك بسبب أن ',
+		'item_carry_some'=>'هناك أصناف تحمل أسماء بعض ',
+		'has_selected'   =>'المحددة',
+
 );

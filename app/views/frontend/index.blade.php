@@ -525,14 +525,24 @@
                       <p>
 
                           تتحدد مهمة شركة
-                           <span style="color: #1157aa">
+                           <span style="color: #1157aa"><a style="color: #154ff7; text-decoration: underline;" href="http://www.clickfordata.net/">
 كليك فور داتا
- </span>
+                               </a></span>
 
 
 
                           في توظيف خبرتها الشاملة في مجال تكنولوجيا المعلومات لتقديم مستوى عملي حقيقي يمكن عملائها من الاستفادة الفعالة من تكنولوجيا العصر،
                           ونبذل قصارى جهدنا لبناء علاقات راسخة مبنية على الاحترام والثقة المتبادلة مع زبائننا
+                      </p>
+                      <h3>
+                          وكلاء لشركات محلية وعالمية
+                      </h3>
+                      <p style="width:100%">
+                      <ul id="our_services">
+                          <li>الشركة معتمدة من الشركة المصرية لنقل البيانات Te Data</li>
+                          <li>الوكيل الوحيد فى جمهورية مصر العربية لشركة SpyCam لنظم الحماية والمراقبة</li>
+
+                      </ul>
                       </p>
                       <h3>
                           خدماتنا
@@ -591,31 +601,49 @@
                             <!-- BEGAIN SINGLE CLIENT SLIDE#3 -->
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="single_client">
-                                     <img src="{{ URL::asset('frontend/img/clients_img4.jpg')}}" alt="clients Brand">
+                                     <img src="{{ URL::asset('frontend/img/clients_img3.jpg')}}" alt="clients Brand">
                                 </div>
                             </div>
                             <!-- BEGAIN SINGLE CLIENT SLIDE#4 -->
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="single_client">
-                                     <img src="{{ URL::asset('frontend/img/clients_img3.jpg')}}" alt="clients Brand">
+                                     <img src="{{ URL::asset('frontend/img/clients_img4.jpg')}}" alt="clients Brand">
                                 </div>
                             </div>
                             <!-- BEGAIN SINGLE CLIENT SLIDE#5 -->
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="single_client">
-                                     <img src="{{ URL::asset('frontend/img/clients_img4.jpg')}}" alt="clients Brand">
+                                     <img src="{{ URL::asset('frontend/img/clients_img5.jpg')}}" alt="clients Brand">
                                 </div>
                             </div>
                             <!-- BEGAIN SINGLE CLIENT SLIDE#6 -->
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="single_client">
-                                     <img src="{{ URL::asset('frontend/img/clients_img5.jpg')}}" alt="clients Brand">
+                                     <img src="{{ URL::asset('frontend/img/clients_img7.jpg')}}" alt="clients Brand">
                                 </div>
                             </div>
                             <!-- BEGAIN SINGLE CLIENT SLIDE#7 -->
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <div class="single_client">
-                                     <img src="{{ URL::asset('frontend/img/clients_img1.jpg')}}" alt="clients Brand">
+                                     <img src="{{ URL::asset('frontend/img/clients_img8.jpg')}}" alt="clients Brand">
+                                </div>
+                            </div>
+                            <!-- BEGAIN SINGLE CLIENT SLIDE#7 -->
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="single_client">
+                                     <img src="{{ URL::asset('frontend/img/clients_img9.jpg')}}" alt="clients Brand">
+                                </div>
+                            </div>
+                            <!-- BEGAIN SINGLE CLIENT SLIDE#7 -->
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="single_client">
+                                     <img src="{{ URL::asset('frontend/img/clients_img10.jpg')}}" alt="clients Brand">
+                                </div>
+                            </div>
+                        <!-- BEGAIN SINGLE CLIENT SLIDE#7 -->
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="single_client">
+                                     <img src="{{ URL::asset('frontend/img/clients_img12.jpg')}}" alt="clients Brand">
                                 </div>
                             </div>
 
@@ -804,9 +832,9 @@
                 <div class="footer_right">
                     <ul class="social_nav">
                         <li><a href="https://www.facebook.com/ClickForData.net/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        {{--<li><a href="#"><i class="fa fa-twitter"></i></a></li>--}}
+                        {{--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>--}}
+                        {{--<li><a href="#"><i class="fa fa-linkedin"></i></a></li>--}}
                     </ul>
                 </div>
             </div>

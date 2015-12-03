@@ -610,6 +610,18 @@ angular.module('mainCtrl', [])
             }
 
         };
+
+        $scope.checkAllContact = function(){
+            if ($scope.checkAllContact1) {
+                $scope.checkAllContact1 = true;
+            } else {
+                $scope.checkAllContact1 = false;
+            }
+            angular.forEach($scope.contacts, function (item) {
+                item.check = $scope.checkAllContact1;
+            });
+        }
+
 /*        $scope.pushItem = function() {
             //$scope.data =  JSON.parse(localStorage["data"]);
             $scope.data = [];

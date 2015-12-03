@@ -205,10 +205,41 @@ class BaseController extends Controller {
         'confirm_new_password.same'=>'كلمتان السر غير متطابقتان',
         'image'                => 'الملف المرفوع ليس بصورة',
         'co_logo.mimes'        => 'الملف المرفوع ليس بصورة',
-        'co_logo.between'         => 'حجم الصورة كبيــر .. يرجى رفع صورة أقل من واحد ميجا '
+        'co_logo.between'         => 'حجم الصورة كبيــر .. يرجى رفع صورة أقل من واحد ميجا ',
         );
 
+        public static $currency = array(
+        'جنية مصرى'=>'جنية مصرى',
+        'دينار عراقى'=>'دينار عراقى',
+        'ليرة سورية'=> 'ليرة سورية',
+        'ليرة لبنانية'=>'ليرة لبنانية',
+        'دينار أردنى'=>'دينار أردنى',
+        'ريال سعودى'=>'ريال سعودى',
+        'ريال يمنى'=>'ريال يمنى',
+        'دينار ليبى'=>'دينار ليبى',
+        'جنية سودانى'=>'جنية سودانى',
+        'درهم مغربى'=>'درهم مغربى',
+        'دينار تونسى'=>'دينار تونسى',
+        'دينار كويتى'=>'دينار كويتى',
+        'دينار جزائرى'=>'دينار جزائرى',
+        'أوقية موريتانية'=>'أوقية موريتانية',
+        'دينار بحرينى'=>'دينار بحرينى',
+        'ريال قطرى'=>'ريال قطرى',
+        'درهم إماراتى'=>'درهم إماراتى',
+        'ريال عمانى'=>'ريال عمانى',
+        'شلن صومالى'=>'شلن صومالى',
+        'جنية فلسطينى'=>'جنية فلسطينى',
+        'فرنك جيبوتى'=>'فرنك جيبوتى',
+        'فرنك قمرى'=>'فرنك قمرى',
+        'دولار أمريكى '=>'',
+        'يورو'=>'',
+        'جنية استرلينى '=>'',
+        'دولار كندى'=>'',
+        'دولار استرالى'=>'',
+        'ين يابانى'=>'',
 
+
+        );
     public static function ViewDate($date){
        $date_format =  date('d /m /Y',strtotime($date));
 
@@ -383,8 +414,78 @@ class BaseController extends Controller {
             return 'something wrong';
         }
     }
+    public function multiDeleteProductMsg($want_to_delete,$count_of_deleted,$name){
+        if($count_of_deleted <= 0){
+            return   $msg = Lang::get('main.the_delete_not_done').Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').Lang::get('main.item_carry_some').' '.$name.' '.Lang::get('main.has_selected');
+        }else{
+            return  $msg = Lang::get('main.delete_is_done').'(' .$count_of_deleted .')'.Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').Lang::get('main.item_carry_some').' '.$name.' '.Lang::get('main.has_selected');
+        }
+
+    }
+
+    public function multiDelete($table)
+    {
+
+        if (in_array($table, ['seasons', 'Category','marks','models','cat','offer'])) {
+
+            $inputs = Input::all();
+
+            // if user not select any check box
+            if (!isset($inputs['checkbox'])) {
+                Session::flash('error', 'لم يتم تحديد بيانات لحذفها ');
+                return Redirect::back();
+            }
+
+            $count_of_deleted = 0;
+            $want_to_delete   = count($inputs['checkbox']);
+
+            // seasons
+            if($table == 'seasons') {
+
+                $column     = 'seasons_id';
+                $name   = 'المواسم';
+
+            }elseif($table == 'models') {
+
+                $column     = 'models_id';
+                $name   = 'الموديلات';
+            }elseif($table == 'marks') {
+
+                $column     = 'marks_id';
+                $name   = 'الماركات';
+            }elseif($table == 'offer') {
+
+                $column     = 'offer_id';
+                $name   = 'العروض';
+            }elseif($table == 'cat') {
+
+                $column     = 'cat_id';
+                $name   = 'فئات الأصناف';
+            }
+                foreach ($inputs['checkbox'] as $id) {
+                    $items = Items::where($column, '=', $id)->company()->first();
+                    if(!$items){
+                        DB::table($table)->company()->where('id', $id)->delete();
+                        $count_of_deleted++;
+                    }
+                }
+                if($count_of_deleted > 0 && $count_of_deleted  == $want_to_delete){
+                    $type_of_msg = 'success';
+                    $msg = $this->deleteSuccess($name);
+                }else{
+                    $type_of_msg = 'error';
+                    $msg = $this->multiDeleteProductMsg($want_to_delete,$count_of_deleted,$name);
+                }
+
+                Session::flash($type_of_msg,$msg);
+                return Redirect::back();
+            // models
 
 
+        }else {
 
-
+            $data['error'] = "هذا الرابط غير صحيح ";
+            return View::make('errors.missing', $data);
+        }
+    }
 }

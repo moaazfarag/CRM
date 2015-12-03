@@ -1,7 +1,7 @@
 <div class="card">
     <div class="content">
         <div class="table-responsive">
-            <table id="table_bank" class="display table table-bordered table-striped table-hover">
+            <table id="" class="display table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
                     <th>@lang('main.number')</th>
@@ -11,6 +11,10 @@
                     <th>@lang('main.to') </th>
                     <th>@lang('main.edit')</th>
                     <th>@lang('main.delete')</th>
+                    <th>
+                        {{ Form::open(array('route'=>array('multiDelete',$table_name))) }}
+                        <button  class="btn btn-small red" style="float: right;">حذف المحدد</button>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +36,13 @@
                                class="btn btn-danger red">[X]</a>
 
                         </td>
+                        <td>
+
+                            <input type="checkbox" id="checkbox{{ $k }}" name="checkbox[]"  value="{{ $offer->id }}" />
+                            <label for="checkbox{{ $k }}"></label>
+
+                        </td>
+
                     </tr>
                 @endforeach
 

@@ -79,14 +79,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::get('up', 'AccountController@run');
 
     Route::get('/', array('uses' => 'dashboardController@home', 'as' => 'home'));
-    Route::get('/edit-home', array('uses' => 'dashboardController@editHome', 'as' => 'editHome'));
-    Route::post('update-home/{type}', array('before' => 'csrf', 'uses' => 'dashboardController@updateHome', 'as' => 'updateHome'));
+    Route::get('/edit-home', array('before' => 'filter:main_info:main_data:show_edit_add','uses' => 'dashboardController@editHome', 'as' => 'editHome'));
     Route::post('send-mail-for-admin',array('uses'=>'dashboardController@sendMailForAdmin', 'as'=>'sendMailForAdmin', 'before' => 'csrf'));
-    Route::get('/add_topic', array('uses' => 'dashboardController@addTopic', 'as' => 'addTopic'));
-    Route::post('store-topic',array('uses'=>'dashboardController@storeTopic', 'as'=>'storeTopic', 'before' => 'csrf'));
-    Route::get('edit-topic/{id}',array('uses'=>'dashboardController@editTopic', 'as'=>'editTopic'));
-    Route::post('update-topic/{id}',array('uses'=>'dashboardController@updateTopic', 'as'=>'updateTopic'));
-    Route::get('delete-topic/{id}',array('uses'=>'dashboardController@deleteTopic', 'as'=>'deleteTopic'));
+    Route::post('update-home/{type}', array('before' => 'filter:main_info:main_data:show_edit_add','before' => 'csrf', 'uses' => 'dashboardController@updateHome', 'as' => 'updateHome'));
+    Route::get('/add_topic', array('before' => 'filter:main_info:main_data:show_edit_add','uses' => 'dashboardController@addTopic', 'as' => 'addTopic'));
+    Route::post('store-topic',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@storeTopic', 'as'=>'storeTopic', 'before' => 'csrf'));
+    Route::get('edit-topic/{id}',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@editTopic', 'as'=>'editTopic'));
+    Route::post('update-topic/{id}',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@updateTopic', 'as'=>'updateTopic'));
+    Route::get('delete-topic/{id}',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@deleteTopic', 'as'=>'deleteTopic'));
 
     Route::get('setting', array('before' => 'filter:main_info:company:edit_show', 'uses' => 'CompanyController@editCompanyInfo', 'as' => 'editCompanyInfo'));
     Route::post('updateSetting/{id}', array('before' => 'csrf|filter:main_info:company:edit', 'uses' => 'CompanyController@updateCompanyInfo', 'as' => 'updateCompanyInfo'));
@@ -129,6 +129,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Season Area
      */
+
+    Route::post('multiDelete/{table}', array('uses' => 'BaseController@multiDelete', 'as' => 'multiDelete'));
     Route::get('addSeason', array('before' => 'filter:main_info:cat:show_edit_add', 'uses' => 'SeasonController@addSeason', 'as' => 'addSeason'));
     Route::group(array('before' => 'filter:main_info:season:add'), function () {
         Route::post('storeSeason', array('before' => 'csrf', 'uses' => 'SeasonController@storeSeason', 'as' => 'storeSeason'));
