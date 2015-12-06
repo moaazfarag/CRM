@@ -73,6 +73,7 @@ class CategoryController extends  BaseController
         {
             $itemCat                =Lang::get('main.itemCat');
             $item                   =Lang::get('main.item');
+            $data['table_name']     = 'cat';
             $data['title']          = $itemCat;
             $data['activeCatNav']   = "active";
             $data['asideOpen']      = "open";

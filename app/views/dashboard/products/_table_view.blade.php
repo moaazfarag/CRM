@@ -1,7 +1,8 @@
+
 <div class="card-panel">
     <div class="table-responsive" >
 
-    <table id="table_bank" class="display table table-bordered table-striped table-hover">
+    <table id="" class="display table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <th>@lang('main.number')</th>
@@ -36,6 +37,11 @@
 || PerC::isShow('main_info','season','delete', "editSeason" )
 )
                 <th>@lang('main.delete')</th>
+
+            <th>
+                {{ Form::open(array('route'=>array('multiDelete',$table_name))) }}
+                <button  class="btn btn-small red" style="float: right;">حذف المحدد</button>
+            </th>
             @endif
         </tr>
         </thead>
@@ -91,12 +97,23 @@
                                class="btn btn-danger red">[X]</a>
                         @endif
                     </td>
+
+                <td>
+
+                        <input type="checkbox" id="checkbox{{ $k }}" name="checkbox[]"  value="{{ $tableData->id }}" />
+                        <label for="checkbox{{ $k }}"></label>
+
+                </td>
                 @endif
             </tr>
+
 
         @endforeach
 
         </tbody>
     </table>
-  </div>
+
+    </div>
+
+    {{ Form::close() }}
 </div>

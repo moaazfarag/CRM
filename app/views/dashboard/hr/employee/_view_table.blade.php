@@ -13,7 +13,7 @@
                     <th> @lang('main.salary')</th>
                     <th> @lang('main.address')</th>
                     <th> @lang('main.qualification')</th>
-                    @if(PerC::isShow('hr','Employee','edit'))
+                    @if(PerC::isShow('hr','Employees','edit'))
                         <th> @lang('main.edit')</th>
                     @endif
                 </tr>
@@ -28,7 +28,7 @@
                         <td>{{ $tableData->salary }}</td>
                         <td>{{ $tableData->address }}</td>
                         <td>{{ $tableData->certificate }}</td>
-                        @if(PerC::isShow('hr','Employee','edit'))
+                        @if(PerC::isShow('hr','Employees','edit'))
                             <td>
                                 <a href="{{ URL::route('editEmp',array($tableData->id)) }}"
                                    class="btn btn-small z-depth-0">

@@ -10,6 +10,7 @@ class OfferController extends BaseController
 {
     public function addOffer()
     {
+        $data['table_name']= 'offer';
         $data['title'] = "اضف عرض جديد";
         $data['offers'] = Offer::company()->where('deleted', '0')->get();
         return View::make('dashboard.products.offer.index', $data);

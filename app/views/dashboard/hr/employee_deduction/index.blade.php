@@ -37,8 +37,7 @@
                         <div class="input-field">
                             {{ Form::label('ds_id',' ') }}
                             <?php $debt_credit_clause = Lang::get('main.debt_credit_clause'); ?>
-                            <?php $fixed = Lang::get('main.fixed')?>
-                            {{ Form::select('ds_id', array(NULL => $debt_credit_clause ) +$deduction->where('ds_cat',$fixed)->lists('name','id'),null,array('id'=>'ds_id')) }}
+                            {{ Form::select('ds_id', array(NULL => $debt_credit_clause ) + $deduction,null,array('id'=>'ds_id')) }}
                             <p class="parsley-required error-validation">{{ $errors ->first('ds_id') }} </p>
                         </div>
                     </div>

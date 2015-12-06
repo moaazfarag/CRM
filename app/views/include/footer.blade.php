@@ -59,7 +59,29 @@
       {{ HTML::script('dashboard/scripts/required_msg.js') }}
       {{ HTML::script('dashboard/scripts/angular-sanitize.js') }}
       {{ HTML::script('dashboard/scripts/massautocomplete.min.js') }}
+      <script type="text/javascript">
+          $(document).ready(function(){
+              $('#select_all').on('click',function(){
+                  if(this.checked){
+                      $('.checkbox').each(function(){
+                          this.checked = true;
+                      });
+                  }else{
+                      $('.checkbox').each(function(){
+                          this.checked = false;
+                      });
+                  }
+              });
 
+              $('.checkbox').on('click',function(){
+                  if($('.checkbox:checked').length == $('.checkbox').length){
+                      $('#select_all').prop('checked',true);
+                  }else{
+                      $('#select_all').prop('checked',false);
+                  }
+              });
+          });
+      </script>
       <script>
           CKEDITOR.replace( 'ckeditor1' );
           CKEDITOR.inline( 'ckeditora' );
@@ -77,7 +99,7 @@
           });
 
           $(document).ready( function() {
-              $('#hidden').delay(5000).fadeOut();
+              $('#hidden').delay(8000).fadeOut();
 
           });
 
@@ -138,7 +160,13 @@
                       [5, 10, 25, 50, "all"]
                     ]
                 });
-
+                $('#table_seasons').DataTable({
+                    "bLengthChange": false,
+                    "aLengthMenu": [
+                        [5, 10, 25, 50, -1],
+                        [5, 10, 25, 50, "all"]
+                    ]
+                });
                 $('#table_management').DataTable({
                     "bLengthChange": false,
                     "aLengthMenu": [

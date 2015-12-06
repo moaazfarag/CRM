@@ -42,8 +42,8 @@ $barcodePages = ["viewLabel", "printBarcode"];
 
                 <ul>
                     @if(Session::has('logo'))
-                        <div style="background-color: white; padding: 1%">
-                            <img src="{{ URL::asset(Session::get('logo')) }}" style="width:97%; margin:3px;height:50px;clear: both;" alt="logo">
+                        <div style="background-color: #FAF9F9; padding: 1%; line-height: 0 !important; border: 1px solid ">
+                            <img src="{{ URL::asset(Session::get('logo')) }}" style="width:100%; margin:0;height:70px;clear: both; " alt="logo">
                         </div>
                     @endif
 
@@ -65,6 +65,8 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                        class="waves-effect waves-blue"> @lang('main.branchInfo')  </a>
                                 </li>
                             @endif
+                            @if(PerC::isShow('main_info','main_data','show_edit_add'))
+
                                 <li class="{{ @$direct_movement_open }}">
                                     <a class="yay-sub-toggle waves-effect waves-blue">بيانات الصفحة الرئيسية <span
                                                 class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
@@ -85,6 +87,7 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                         </li>
                                     </ul>
                                 </li>
+                                @endif
                             @if(PerC::isShow('main_info','cat','show_edit_add'))
                                 <li>
                                     <a href="{{ URL::route('addCategory') }}"
@@ -265,7 +268,7 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                            class="waves-effect waves-blue">الوظائف </a>
                                     </li>
                                 @endif
-                                @if(PerC::isShow('hr','Employee','add_show_edit'))
+                                @if(PerC::isShow('hr','Employees','add_show_edit'))
                                     <li><a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف
                                             موظف </a>
                                     </li>

@@ -14,10 +14,10 @@ class EmployeeDeductionController extends BaseController
     {
 
 //        $data = $this->staticData();
-        $data['title'] = Lang::get('add_new_employee_clause'); // page title
-        $data['employees'] = "open";
+        $data['title']       = Lang::get('add_new_employee_clause'); // page title
+        $data['employees']   = "open";
         $data = $this->depData();
-        $data['deduction'] = Deduction::company()->first();
+        $data['deduction'] = Deduction::company()->where('deleted',0)->where('ds_cat',Lang::get('main.fixed'))->lists('name','id');
         $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.employee_deduction.index', $data);
 
@@ -60,7 +60,7 @@ class EmployeeDeductionController extends BaseController
         $data = $this->depData();
 
         $data['employee'] = EmployeeDeduction::findOrFail($id);
-        $data['deduction']   = Deduction::company()->first();
+        $data['deduction']   = Deduction::company()->where('deleted',0)->first();
         $data['co_info']     = CoData::thisCompany()->first();
 
         return View::make('dashboard.hr.employee_deduction.index',$data);
@@ -157,6 +157,43 @@ class EmployeeDeductionController extends BaseController
             return Response::json(array('success'=>false));
 
         }
+    }
+
+    public function multiDeleteEmpdesded()
+    {
+        $inputs = Input::all();
+
+        // if user not select any check box
+        if (!isset($inputs['checkbox'])) {
+            Session::flash('error', 'لم يتم تحديد بيانات لحذفها ');
+            return Redirect::back();
+        }
+
+        $count_of_deleted = 0;
+        $cant_delete_group = [];
+        $want_to_delete = count($inputs['checkbox']);
+
+        foreach ($inputs['checkbox'] as $id) {
+
+                $delete =  EmployeeDeduction::company()->find($id);
+                if($delete){
+
+                    $delete->delete();
+                    $count_of_deleted++;
+                }
+
+            }
+        if($want_to_delete != $count_of_deleted){
+            $msg = Lang::get('main.delete_is_done').' ('.$count_of_deleted.' )'.Lang::get('main.from_rows').' ('.$want_to_delete.' )';
+            $type_of_msg = 'error';
+
+        }else{
+            $msg         = Lang::get('main.the_delete_is_done').Lang::get('main.with_success');
+            $type_of_msg = 'success';
+        }
+        Session::flash($type_of_msg, $msg);
+        return Redirect::back();
+
     }
 
 }
