@@ -116,5 +116,56 @@ class MonthChangeController extends BaseController
                 $data['tablesData']         = MonthChange::company()->get();
                 return $data;
             }
+    public function deleteMonthChange($id){
+        $MonthChange = MonthChange::company()
+            ->where('id',$id)
+            ->first();
 
+        if (!empty($MonthChange)) {
+
+            $MonthChange->delete();
+
+            Session::flash('success','تم حذف التغير الشهرى بنجاح ');
+            return Redirect::back();
+        }else{
+            Session::flash('error', 'عفواً لم يتم حذف التغير الشهرى ... حاول مرة أخرى');
+            return Redirect::back();
+        }
+    }
+
+    public function multiDeleteMonthChange()
+    {
+        $inputs = Input::all();
+
+        // if user not select any check box
+        if (!isset($inputs['checkbox'])) {
+            Session::flash('error', 'لم يتم تحديد بيانات لحذفها ');
+            return Redirect::back();
+        }
+
+        $count_of_deleted = 0;
+        $want_to_delete = count($inputs['checkbox']);
+
+        foreach ($inputs['checkbox'] as $id) {
+
+            $delete =  MonthChange::company()->find($id);
+            if($delete){
+
+                $delete->delete();
+                $count_of_deleted++;
+            }
+
+        }
+        if($want_to_delete != $count_of_deleted){
+            $msg = Lang::get('main.delete_is_done').' ('.$count_of_deleted.' )'.Lang::get('main.from_rows').' ('.$want_to_delete.' )';
+            $type_of_msg = 'error';
+
+        }else{
+            $msg         = Lang::get('main.the_delete_is_done').Lang::get('main.with_success');
+            $type_of_msg = 'success';
+        }
+        Session::flash($type_of_msg, $msg);
+        return Redirect::back();
+
+    }
 }

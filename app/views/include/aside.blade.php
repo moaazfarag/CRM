@@ -268,7 +268,7 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                            class="waves-effect waves-blue">الوظائف </a>
                                     </li>
                                 @endif
-                                @if(PerC::isShow('hr','Employee','add_show_edit'))
+                                @if(PerC::isShow('hr','Employees','add_show_edit'))
                                     <li><a href="{{ URL::route('addEmp') }}" class="waves-effect waves-blue"> اضف
                                             موظف </a>
                                     </li>

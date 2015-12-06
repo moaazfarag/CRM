@@ -33,7 +33,7 @@
                         {{--<i class="fa fa-tag prefix"></i>--}}
                         <div class="input-field">
                             {{ Form::label('ds_id',' ') }}
-                            {{ Form::select('ds_id', array(NULL => lang::get("main.clauses")) +$co_info->desded()->where('ds_cat','متغير')->lists('name','id'),null,array('id'=>'ds_id')) }}
+                            {{ Form::select('ds_id', array(NULL => lang::get("main.clauses")) +$co_info->desded()->where('deleted',0)->where('ds_cat','متغير')->lists('name','id'),null,array('id'=>'ds_id')) }}
                             <p class="parsley-required error-validation">{{ $errors ->first('ds_id') }} </p>
                         </div>
                     </div>

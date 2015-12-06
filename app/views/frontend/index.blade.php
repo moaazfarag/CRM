@@ -520,10 +520,10 @@
                           </div>
                           <!-- END FEATURED SLIDER -->
                       </div>
+
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-12">
                       <p>
-
                           تتحدد مهمة شركة
                            <span style="color: #1157aa"><a style="color: #154ff7; text-decoration: underline;" href="http://www.clickfordata.net/">
 كليك فور داتا

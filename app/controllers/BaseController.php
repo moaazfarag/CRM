@@ -412,11 +412,86 @@ class BaseController extends Controller {
             return 'stopped';
         }else{
             return 'something wrong';
+
         }
     }
-    public function multiDeleteProductMsg($want_to_delete,$count_of_deleted,$name){
+    public function multiDeleteHrMsg($want_to_delete,$count_of_deleted,$name,$cant_delete_group){
         if($count_of_deleted <= 0){
-            return   $msg = Lang::get('main.the_delete_not_done').Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').Lang::get('main.item_carry_some').' '.$name.' '.Lang::get('main.has_selected');
+            $i = 0;
+            $num_count_of_deleted =$want_to_delete - $count_of_deleted -1;
+            $msg = Lang::get('main.the_delete_not_done').Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').
+                Lang::get('main.employee_carry_some').' '.$name.' (';
+            foreach($cant_delete_group as  $cant_delete){
+                $msg .= $cant_delete;
+
+                if($i< $num_count_of_deleted  ){
+                    $msg .= ',';
+                }
+                $i++;
+            }
+            $msg .= ')' .Lang::get('main.has_selected');
+            return $msg;
+        }else{
+            return  $msg = Lang::get('main.delete_is_done').'(' .$count_of_deleted .')'.Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').Lang::get('main.employee_carry_some').' '.$name.' '.Lang::get('main.has_selected');
+        }
+
+    }
+        public function multiDeleteDesdedMsg($want_to_delete,$count_of_deleted,$name,$cant_delete_group){
+            $num_count_of_deleted =$want_to_delete - $count_of_deleted -1;
+            $i = 0;
+            if($count_of_deleted <= 0){
+
+            $msg = Lang::get('main.the_delete_not_done').Lang::get('main.rows').' '
+                .Lang::get('main.from_rows').'(' .$want_to_delete .')'
+                .Lang::get('main.this_because').
+                Lang::get('main.employee_desdes_use').' '
+                .$name.' '.Lang::get('main.this_note_deleted')
+                .' (';
+            foreach($cant_delete_group as  $cant_delete){
+                $msg .= $cant_delete;
+
+                if($i< $num_count_of_deleted  ){
+                    $msg .= ',';
+                }
+                $i++;
+            }
+            $msg .= ')';
+            return $msg;
+        }else{
+                 $msg = Lang::get('main.delete_is_done').
+                    '(' .$count_of_deleted .')'.Lang::get('main.rows').' '
+                    .Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').
+                    Lang::get('main.employee_desdes_use').' '.$name.' '.Lang::get('main.this_note_deleted').' (';
+            foreach($cant_delete_group as  $cant_delete){
+                $msg .= $cant_delete;
+
+                if($i< $num_count_of_deleted  ){
+                    $msg .= ',';
+                }
+                $i++;
+            }
+            $msg .= ')';
+            return $msg;
+        }
+
+    }
+    //  multi Delete Product Msg
+    public function multiDeleteProductMsg($want_to_delete,$count_of_deleted,$name,$cant_delete_group){
+        if($count_of_deleted <= 0){
+                $i = 0;
+            $num_count_of_deleted =$want_to_delete - $count_of_deleted -1;
+               $msg = Lang::get('main.the_delete_not_done').Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').
+                Lang::get('main.item_carry_some').' '.$name.' (';
+            foreach($cant_delete_group as  $cant_delete){
+                $msg .= $cant_delete;
+
+                if($i< $num_count_of_deleted  ){
+                    $msg .= ',';
+                }
+                $i++;
+            }
+                    $msg .= ')' .Lang::get('main.has_selected');
+                return $msg;
         }else{
             return  $msg = Lang::get('main.delete_is_done').'(' .$count_of_deleted .')'.Lang::get('main.rows').' '.Lang::get('main.from_rows').'(' .$want_to_delete .')'.Lang::get('main.this_because').Lang::get('main.item_carry_some').' '.$name.' '.Lang::get('main.has_selected');
         }
@@ -426,7 +501,7 @@ class BaseController extends Controller {
     public function multiDelete($table)
     {
 
-        if (in_array($table, ['seasons', 'Category','marks','models','cat','offer'])) {
+        if (in_array($table, ['seasons','marks','models','cat','items','offer'])) {
 
             $inputs = Input::all();
 
@@ -438,7 +513,7 @@ class BaseController extends Controller {
 
             $count_of_deleted = 0;
             $want_to_delete   = count($inputs['checkbox']);
-
+            $cant_delete_group     = [];
             // seasons
             if($table == 'seasons') {
 
@@ -467,14 +542,17 @@ class BaseController extends Controller {
                     if(!$items){
                         DB::table($table)->company()->where('id', $id)->delete();
                         $count_of_deleted++;
+                    }else{
+                        $cant_delete_group[] =  DB::table($table)->company()->where('id', $id)->first()->name;
                     }
                 }
+
                 if($count_of_deleted > 0 && $count_of_deleted  == $want_to_delete){
                     $type_of_msg = 'success';
                     $msg = $this->deleteSuccess($name);
                 }else{
                     $type_of_msg = 'error';
-                    $msg = $this->multiDeleteProductMsg($want_to_delete,$count_of_deleted,$name);
+                    $msg = $this->multiDeleteProductMsg($want_to_delete,$count_of_deleted,$name,$cant_delete_group);
                 }
 
                 Session::flash($type_of_msg,$msg);
@@ -488,4 +566,6 @@ class BaseController extends Controller {
             return View::make('errors.missing', $data);
         }
     }
+
+
 }

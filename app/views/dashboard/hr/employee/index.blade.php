@@ -7,7 +7,7 @@
     @elseif(Route::currentRouteName() == 'editEmp')
         {{ Form::model($employee,array('route'=>array('updateEmp',$employee->id),'files'=>'true')) }}
     @endif
-    @if(PerC::isShow('hr','Employee','edit','editEmp')||PerC::isShow('hr','Employee','add','addEmp'))
+    @if(PerC::isShow('hr','Employees','edit','editEmp')||PerC::isShow('hr','Employees','add','addEmp'))
         <div class=" card ">
             <div class="title">
                 <h5>
@@ -306,7 +306,7 @@
             </div>
         </div>
     @endif
-    @if(PerC::isShow('hr','Employee','add_show_edit'))
+    @if(PerC::isShow('hr','Employees','add_show_edit'))
         <br/>
         @include('dashboard.hr.employee._view_table')
     @endif

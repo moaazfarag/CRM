@@ -1,7 +1,7 @@
 <div class="card">
     <div class="content">
         <div class="table-responsive" >
-        <table id="table_bank" class="display table table-bordered table-striped table-hover">
+        <table id="" class="display table table-bordered table-striped table-hover">
             <thead id="all-items">
             <tr>
                 <th>@lang('main.number')</th>
@@ -20,11 +20,15 @@
                 @endif
                 @if(PerC::isShow('main_info','item','delete'))
                     <th>@lang('main.cancel')</th>
+                    <th>
+                        {{ Form::open(array('route'=>'multiStopItems')) }}
+                        <button  class="btn btn-small red" style="float: right;">إلغاء  المحدد</button>
+                    </th>
                 @endif
             </tr>
             </thead>
             <tbody>
-            @foreach($co_info->items as $item)
+            @foreach($co_info->items as $k=>$item)
                 <tr>
                     <th>{{$item->true_id}}</th>
                     <td><a href="{{ URL::route('showItem',$item->id)  }}">{{$item->item_name}}</a></td>
@@ -50,6 +54,13 @@
                                href="{{ URL::route('deleteItems',array($item->id)) }}"
                                class="btn btn-danger red">[X]</a>
                         </td>
+                        <td>
+
+                            <input type="checkbox" id="checkbox{{ $k }}" name="checkbox[]"  value="{{ $item->id }}" />
+                            <label for="checkbox{{ $k }}"></label>
+
+                        </td>
+                        {{ Form::close() }}
                     @endif
                 </tr>
             @endforeach

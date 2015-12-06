@@ -78,10 +78,10 @@ class DepartmentController extends BaseController
 
     public function deleteDep($id)
     {
-        $dep = Department::find($id);
+        $dep = Department::company()->find($id);
         if(!empty($dep)){
 
-            $employees = Employees::where('department_id',$id)->first();
+            $employees = Employees::company()->where('department_id',$id)->first();
 //            var_dump($employees); die();
             if(!empty($employees)){
 
@@ -100,6 +100,43 @@ class DepartmentController extends BaseController
         }// end if dep
 
 
+
+    }
+
+    public function multiDeleteDep(){
+        $inputs = Input::all();
+
+        // if user not select any check box
+        if (!isset($inputs['checkbox'])) {
+            Session::flash('error', 'لم يتم تحديد بيانات لحذفها ');
+            return Redirect::back();
+        }
+
+        $count_of_deleted  = 0;
+        $cant_delete_group = [];
+        $want_to_delete    = count($inputs['checkbox']);
+
+        foreach ($inputs['checkbox'] as $id) {
+
+            $employees = Employees::company()->where('department_id',$id)->first();
+            if(!$employees){
+                 Department::company()->find($id)->delete();
+                $count_of_deleted++;
+            }else{
+                $cant_delete_group[] =  Department::company()->where('id', $id)->first()->name;
+            }
+        }
+
+        if($count_of_deleted > 0 && $count_of_deleted  == $want_to_delete){
+            $type_of_msg = 'success';
+            $msg = $this->deleteSuccess('الأقسام');
+        }else{
+            $type_of_msg = 'error';
+            $msg = $this->multiDeleteHrMsg($want_to_delete,$count_of_deleted,'الأقسام',$cant_delete_group);
+        }
+
+        Session::flash($type_of_msg,$msg);
+        return Redirect::back();
 
     }
 }
