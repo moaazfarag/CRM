@@ -46,8 +46,8 @@ img, legend {
     margin: 0;
 .BarcodeText{
     font-size: 25pt;
-    width: 5cm;
-    height: 3cm;
+    width: 89mm;
+    height: 24mm;
 }
 .text-print{
     font-family: 'Droid Arabic Kufi', sans-serif;!important;
@@ -79,7 +79,7 @@ body, sub, sup {
 }
 @font-face {
     font-family: IDAutomationHC39M;
-    src: url(http://www.idautomation.com/barcode-fonts/woff-web-fonts/IDAutomationHC39M.woff);
+    src: url(../fonts/IDAutomationHC39M.woff);
 }
 .BarcodeText      {
     font-family : IDAutomationHC39M;
