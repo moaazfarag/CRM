@@ -17,6 +17,7 @@ class BranchController extends  BaseController
     {
         $data = $this->settingData();
         $data['miniBranch']  = "" ;
+        $data['currency'] = BaseController::$currency;
         $data['print_size_types'] = array(
 
             "A3"=>"A3",
@@ -70,6 +71,7 @@ class BranchController extends  BaseController
             "A5"=>"A5",
 
         );
+        $data['currency'] = BaseController::$currency;
         $data['branch']      = Branches::findOrFail($id); //get branch will update
         $data['miniBranch']  = "" ; //to maxmize  branch card in view
         return View::make('dashboard.company.index', $data);

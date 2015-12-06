@@ -79,14 +79,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::get('up', 'AccountController@run');
 
     Route::get('/', array('uses' => 'dashboardController@home', 'as' => 'home'));
-    Route::get('/edit-home', array('uses' => 'dashboardController@editHome', 'as' => 'editHome'));
-    Route::post('update-home/{type}', array('before' => 'csrf', 'uses' => 'dashboardController@updateHome', 'as' => 'updateHome'));
+    Route::get('/edit-home', array('before' => 'filter:main_info:main_data:show_edit_add','uses' => 'dashboardController@editHome', 'as' => 'editHome'));
     Route::post('send-mail-for-admin',array('uses'=>'dashboardController@sendMailForAdmin', 'as'=>'sendMailForAdmin', 'before' => 'csrf'));
-    Route::get('/add_topic', array('uses' => 'dashboardController@addTopic', 'as' => 'addTopic'));
-    Route::post('store-topic',array('uses'=>'dashboardController@storeTopic', 'as'=>'storeTopic', 'before' => 'csrf'));
-    Route::get('edit-topic/{id}',array('uses'=>'dashboardController@editTopic', 'as'=>'editTopic'));
-    Route::post('update-topic/{id}',array('uses'=>'dashboardController@updateTopic', 'as'=>'updateTopic'));
-    Route::get('delete-topic/{id}',array('uses'=>'dashboardController@deleteTopic', 'as'=>'deleteTopic'));
+    Route::post('update-home/{type}', array('before' => 'filter:main_info:main_data:show_edit_add','before' => 'csrf', 'uses' => 'dashboardController@updateHome', 'as' => 'updateHome'));
+    Route::get('/add_topic', array('before' => 'filter:main_info:main_data:show_edit_add','uses' => 'dashboardController@addTopic', 'as' => 'addTopic'));
+    Route::post('store-topic',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@storeTopic', 'as'=>'storeTopic', 'before' => 'csrf'));
+    Route::get('edit-topic/{id}',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@editTopic', 'as'=>'editTopic'));
+    Route::post('update-topic/{id}',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@updateTopic', 'as'=>'updateTopic'));
+    Route::get('delete-topic/{id}',array('before' => 'filter:main_info:main_data:show_edit_add','uses'=>'dashboardController@deleteTopic', 'as'=>'deleteTopic'));
 
     Route::get('setting', array('before' => 'filter:main_info:company:edit_show', 'uses' => 'CompanyController@editCompanyInfo', 'as' => 'editCompanyInfo'));
     Route::post('updateSetting/{id}', array('before' => 'csrf|filter:main_info:company:edit', 'uses' => 'CompanyController@updateCompanyInfo', 'as' => 'updateCompanyInfo'));
@@ -129,6 +129,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     /**
      * Season Area
      */
+
+    Route::post('multiDelete/{table}', array('uses' => 'BaseController@multiDelete', 'as' => 'multiDelete'));
     Route::get('addSeason', array('before' => 'filter:main_info:cat:show_edit_add', 'uses' => 'SeasonController@addSeason', 'as' => 'addSeason'));
     Route::group(array('before' => 'filter:main_info:season:add'), function () {
         Route::post('storeSeason', array('before' => 'csrf', 'uses' => 'SeasonController@storeSeason', 'as' => 'storeSeason'));
@@ -175,7 +177,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::post('updateItem/{id}', array('before' => 'csrf', 'uses' => 'ItemController@updateItem', 'as' => 'updateItem'));
     });
     Route::post('addItem/select_mark', array('uses' => 'ItemController@select_mark', 'as' => 'select_mark'));
-    Route::get('deleteItems/{id}', array('before' => 'filter:main_info:mark_model:delete', 'uses' => 'ItemController@deleteItems', 'as' => 'deleteItems'));
+    Route::get('deleteItems/{id}', array('before' => 'filter:main_info:item:delete', 'uses' => 'ItemController@deleteItems', 'as' => 'deleteItems'));
+    Route::post('multi-stop-items', array('before' => 'filter:main_info:item:delete', 'uses' => 'ItemController@multiStopItems', 'as' => 'multiStopItems'));
 
     /**
      * Account Area
@@ -247,12 +250,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
 
     Route::group(array('prefix' => 'hr'), function () {
-        Route::get('Add-Employees', array('before' => 'filter:hr:Employee:add_edit_show', 'uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
-        Route::get('show-employee/{id}', array( 'uses' => 'EmployeesController@showEmployee', 'as' => 'showEmployee'));
-        Route::group(array('before' => 'filter:hr:Employee:add'), function () {
+        Route::get('Add-Employees', array('before' => 'filter:hr:Employees:add_edit_show', 'uses' => 'EmployeesController@addEmp', 'as' => 'addEmp'));
+        Route::get('show-employee/{id}', array( 'before' => 'filter:hr:Employees:show','uses' => 'EmployeesController@showEmployee', 'as' => 'showEmployee'));
+        Route::group(array('before' => 'filter:hr:Employees:add'), function () {
             Route::post('Store-Employees', array('before' => 'csrf', 'uses' => 'EmployeesController@storeEmp', 'as' => 'storeEmp'));
         });
-        Route::group(array('before' => 'filter:hr:Employee:edit'), function () {
+        Route::group(array('before' => 'filter:hr:Employees:edit'), function () {
             Route::get('Edit-Employees/{id}', array('uses' => 'EmployeesController@editEmp', 'as' => 'editEmp'));
             Route::post('Update-Employees/{id}', array('before' => 'csrf', 'uses' => 'EmployeesController@updateEmp', 'as' => 'updateEmp'));
             Route::post('employee-dep-dis-data', array('uses' => 'EmployeesController@employeeDepDisData', 'as' => 'employeeDepDisData'));
@@ -271,6 +274,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('updateDep/{id}', array('before' => 'csrf', 'uses' => 'DepartmentController@updateDep', 'as' => 'updateDep'));
         });
         Route::get('deleteDep/{id}', array('before' => 'filter:hr:Departments:delete', 'uses' => 'DepartmentController@deleteDep', 'as' => 'deleteDep'));
+        Route::post('multi-delete-dep', array('before' => 'filter:hr:Departments:delete', 'uses' => 'DepartmentController@multiDeleteDep', 'as' => 'multiDeleteDep'));
 
 //        Route::get('deleteDep/{id}','DepartmentController@deleteDep');
 
@@ -284,6 +288,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('updateJob/{id}', array('before' => 'csrf', 'uses' => 'JobController@updateJob', 'as' => 'updateJob'));  //Job Page
         });
         Route::get('deleteJob/{id}', array('before' => 'filter:hr:jobs:delete', 'uses' => 'JobController@deleteJob', 'as' => 'deleteJob'));
+        Route::post('multi-delete-job', array('before' => 'filter:hr:jobs:delete', 'uses' => 'JobController@multiDeleteJob', 'as' => 'multiDeleteJob'));
 
 
         //Loans Page
@@ -305,6 +310,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('updateDesded/{id}', array('before' => 'csrf', 'uses' => 'DeductionController@updateDesded', 'as' => 'updateDesded'));
         });
         Route::get('deleteDesded/{id}', array('before' => 'filter:hr:Desdeds:delete', 'uses' => 'DeductionController@deleteDesded', 'as' => 'deleteDesded'));
+        Route::post('multi-delete-desded', array('before' => 'filter:hr:Desdeds:delete', 'uses' => 'DeductionController@multiDeleteDesded', 'as' => 'multiDeleteDesded'));
 
         //EmpDesDed Page
         Route::get('addEmpdesded', array('before' => 'filter:hr:Empdesded:add_edit_show', 'uses' => 'EmployeeDeductionController@addEmpdesded', 'as' => 'addEmpdesded'));
@@ -316,6 +322,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('updateEmpdesded/{id}', array('before' => 'csrf', 'uses' => 'EmployeeDeductionController@updateEmpdesded', 'as' => 'updateEmpdesded'));
         });
         Route::get('deleteEmpdesded/{id}', array('before' => 'filter:hr:Empdesded:delete', 'uses' => 'EmployeeDeductionController@deleteEmpdesded', 'as' => 'deleteEmpdesded'));
+        Route::post('multi-delete-empdesded', array('before' => 'filter:hr:Empdesded:delete', 'uses' => 'EmployeeDeductionController@multiDeleteEmpdesded', 'as' => 'multiDeleteEmpdesded'));
 
 
         //ChangeMonth Page
@@ -324,17 +331,24 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('storeMonthChange', array('before' => 'csrf', 'uses' => 'MonthChangeController@storeMonthChange', 'as' => 'storeMonthChange'));
         });
         Route::group(array('before' => 'filter:hr:MonthChange:edit'), function () {
-            Route::get('editMonthChange/{id}', array('uses' => 'MonthChangeController@editMonthChange', 'as' => 'editMonthChange'));
-            Route::post('updateMonthChange/{id}', array('before' => 'csrf', 'uses' => 'MonthChangeController@updateMonthChange', 'as' => 'updateMonthChange'));
-        });
-        Route::group(array('before' => 'filter:hr:salariesProcessing:show'), function () {
+
+                Route::get('editMonthChange/{id}', array('uses' => 'MonthChangeController@editMonthChange', 'as' => 'editMonthChange'));
+                Route::post('updateMonthChange/{id}', array('before' => 'csrf', 'uses' => 'MonthChangeController@updateMonthChange', 'as' => 'updateMonthChange'));
+            });
+
+        Route::group(array('before' => 'filter:hr:MonthChange:delete'), function () {
+                Route::get('delete-month-change/{id}', array('uses' => 'MonthChangeController@deleteMonthChange', 'as' => 'deleteMonthChange'));
+                Route::post('multi-delete-month-change', array('uses' => 'MonthChangeController@multiDeleteMonthChange', 'as' => 'multiDeleteMonthChange'));
+            });
+
+            Route::group(array('before' => 'filter:hr:salariesProcessing:show'), function () {
             Route::get('month-salary-search', array('uses' => 'MsHeaderController@monthSalarySearch', 'as' => 'monthSalarySearch'));
             Route::post('storeMsHeader', array('before' => 'csrf', 'uses' => 'MsHeaderController@storeMsHeader', 'as' => 'storeMsHeader'));
             Route::post('prepMsHeader', array('before' => 'csrf', 'uses' => 'MsHeaderController@prepMsHeader', 'as' => 'prepMsHeader'));
             Route::get('printReceipt', array('uses' => 'MsHeaderController@printReceipt', 'as' => 'printReceipt'));
             Route::post('readyToPay', array('before' => 'csrf', 'uses' => 'MsHeaderController@readyToPay', 'as' => 'readyToPay'));
         });
-    });
+        });
 
     Route::group(array('prefix' => 'report'), function () {
         // outgoing-salaries

@@ -76,8 +76,8 @@
       <!-- Sidebar toggle -->
 
       <!-- Logo -->
-      <a href="#!" class="brand-logo">
-       {{--<img src="{{ URL::asset('dashboard/assets/_con/images/logo.png') }}" alt="Con">--}}
+      <a href="{{ URL::to('admin') }}" class="brand-logo">
+       <img src="{{ URL::asset('dashboard/assets/_con/images/home.png') }}" alt="Con">
       </a>
       <!-- /Logo -->
 

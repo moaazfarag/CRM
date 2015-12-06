@@ -103,4 +103,41 @@ class JobController extends BaseController
 
         }// end if dep
     }
+
+    public function multiDeleteJob(){
+        $inputs = Input::all();
+
+        // if user not select any check box
+        if (!isset($inputs['checkbox'])) {
+            Session::flash('error', 'لم يتم تحديد بيانات لحذفها ');
+            return Redirect::back();
+        }
+
+        $count_of_deleted  = 0;
+        $cant_delete_group = [];
+        $want_to_delete    = count($inputs['checkbox']);
+
+        foreach ($inputs['checkbox'] as $id) {
+
+            $employees = Employees::company()->where('job_id',$id)->first();
+            if(!$employees){
+                Job::company()->find($id)->delete();
+                $count_of_deleted++;
+            }else{
+                $cant_delete_group[] =  Job::company()->where('id', $id)->first()->name;
+            }
+        }
+
+        if($count_of_deleted > 0 && $count_of_deleted  == $want_to_delete){
+            $type_of_msg = 'success';
+            $msg = $this->deleteSuccess('الوظائف');
+        }else{
+            $type_of_msg = 'error';
+            $msg = $this->multiDeleteHrMsg($want_to_delete,$count_of_deleted,'الوظائف',$cant_delete_group);
+        }
+
+        Session::flash($type_of_msg,$msg);
+        return Redirect::back();
+
+    }
 }

@@ -16,6 +16,7 @@ class ModelsController extends BaseController
     public function addModel()
     {
         $data = $this->modelData();
+        $data['table_name']= 'models';
         $data['catActive'] = "active";
         return View::make('dashboard.products.models.index',$data);
     }
@@ -44,6 +45,7 @@ class ModelsController extends BaseController
     public function editModel($id)
     {
         //dd('saddsa');
+        $data['table_name']= 'models';
         $data = $this->modelData();
         $data['catActive'] = "active";
         $data['editModel']  = Models::findOrFail($id);

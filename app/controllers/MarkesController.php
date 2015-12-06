@@ -11,6 +11,7 @@ class MarkesController extends \BaseController
 		$data['asideOpen'] = 'open';
 		$data['modelMini'] = "";
 		$data['tablesData'] = Markes::company()->get();
+		$data['table_name']= 'marks';
 
 		return $data;
 	}

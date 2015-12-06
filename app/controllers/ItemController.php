@@ -14,6 +14,7 @@ class ItemController extends BaseController
      */
     public  function addItem()
     {
+
         $data['unit']  = array('piece'=>Lang::get('main.piece'), 'kilo'=>Lang::get('main.kilo'), 'ton'=>Lang::get('main.ton') , 'meter'=>Lang::get('main.meter'), 'galon'=>Lang::get('main.galon') );
         $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'));
         $data['title']     =  Lang::get('main.addItem')  ; // page title
@@ -24,7 +25,7 @@ class ItemController extends BaseController
     public  function storeItem()
     {
         $inputs = Input::all();
-        $validation = Validator::make($inputs, Items::$store_rules);
+        $validation = Validator::make($inputs, Items::$store_rules,BaseController::$messages);
 
         if($validation->fails())
         {
@@ -92,7 +93,7 @@ class ItemController extends BaseController
 
     public  function updateItem($id)
     {
-        $validation = Validator::make(Input::all(), Items::$update_rules);
+        $validation = Validator::make(Input::all(), Items::$update_rules,BaseController::$messages);
         $inputs = Input::all();
         if($validation->fails())
         {
@@ -340,7 +341,6 @@ class ItemController extends BaseController
 
                 $data['balances'] = $balances->get();
 
-
             return View::make('dashboard.products.items.balance_report.balance_result',$data);
 
         }else{
@@ -446,5 +446,29 @@ class ItemController extends BaseController
         $data['items']     = $items;
         $data['idAndQty']  = $idAndQty;
         return View::make('dashboard.transaction.print-label',$data);
+    }
+    public function multiStopItems()
+    {
+        $inputs = Input::all();
+
+        // if user not select any check box
+        if (!isset($inputs['checkbox'])) {
+            Session::flash('error', 'لم يتم تحديد بيانات لحذفها ');
+            return Redirect::back();
+        }
+
+        $count_of_deleted = 0;
+        $want_to_delete   = count($inputs['checkbox']);
+
+        foreach ($inputs['checkbox'] as $id) {
+            $item = Items::where('id',$id)->company()->first();
+           if($item){
+               $item->deleted = 1 ;
+               $item->update();
+               $count_of_deleted++;
+           }
+        }
+        Session::flash('success','تم إيقاف '.'('.$count_of_deleted .') صنف '.'بنجاح');
+        return Redirect::back();
     }
 }
