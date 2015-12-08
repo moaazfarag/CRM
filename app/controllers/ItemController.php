@@ -426,6 +426,12 @@ class ItemController extends BaseController
      * print  barcode  base on ch
      * @return mixed
      */
+    public function showAllItems(){
+        $data['categories'] = Category::company()->get();
+        $data['title'] = 'أصناف الشركة';
+
+        return View::make('dashboard.products.items.report.show_all_items_report',$data);
+    }
     public  function printBarcode()
     {
         foreach(Input::all() as $k => $v)

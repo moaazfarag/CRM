@@ -378,6 +378,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
         });
         // item card
+        Route::get('show-all-items', array('uses' => 'ItemController@showAllItems', 'as' => 'showAllItems'));
+
         Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {
             Route::get('items-card/items', array('uses' => 'ItemController@searchItemCard', 'as' => 'searchItemCard'));
             Route::post('items-card-result/', array('uses' => 'ItemController@reportResultItemCard', 'as' => 'reportResultItemCard'));
