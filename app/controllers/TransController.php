@@ -8,6 +8,7 @@
  */
 class TransController extends BaseController
 {
+
     public function addTrans($type,$br_id){
 //        $q = new CreateViewMakerName;
 //        $q->up();
@@ -20,25 +21,28 @@ class TransController extends BaseController
         }else{
             return View::make('errors.missing');
         }
-
     }
-    public function storeTrans($type,$br_id)
+
+    public function storeTrans($type,$br_id,$inputs= NULL,$delete_branch = NULL)
     {
         $branch =  Branches::company()->find($br_id);
         $types = ['sales','buy','salesReturn','buyReturn','settleAdd','settleDown','itemBalance'];
-        if(in_array($type,$types) && $branch)
+        if(in_array($type,$types) || $delete_branch == 1 )
         {
-            $inputs = Input::all();
+            if(!$inputs){
+                $inputs = Input::all();
+            }
             $inputs['type'] = $type;
             $inputs['br_id'] = $branch->id;
-            $validation = Validator::make($inputs, TransDetails::rulesCreator($inputs));
-            if($validation->fails())
-            {
-                $data['newArray']    = $this->itemsToJsonForError($inputs,$validation->messages());
-                $data['branch']       = $branch;
-                Session::flash('error',' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
+            if($delete_branch != 1){
+               $validation = Validator::make($inputs, TransDetails::rulesCreator($inputs));
+                 if($validation->fails()) {
+               $data['newArray'] = $this->itemsToJsonForError($inputs, $validation->messages());
+               $data['branch'] = $branch;
+                Session::flash('error', ' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
                 return $this->returnView($type, $data);
-            }else {
+            }
+        }
 
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
                     $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:null;
@@ -52,10 +56,11 @@ class TransController extends BaseController
                     $invoice_no                 = $newHeader->company()->where('invoice_type',$type)->where('br_id',$br_id)->max('invoice_no')+1;
                     $newHeader->invoice_no      = $invoice_no;
                     $newHeader->invoice_type    = $type;
-                    $newHeader->date            = $this->strToTime($inputs['date']) ;
+                    $newHeader->date            = ($delete_branch == 1)?$inputs['date']:$this->strToTime($inputs['date']) ;
                     $newHeader->save();
                     $newInvoiceItems = [];//create array to insert into database on save
                     $total=0;
+
                     foreach (TransDetails::countOfInputs($inputs) as $k=>$v)
                     {
                         $item      = Items::findOrFail($inputs['id_'.$k]);
@@ -70,7 +75,7 @@ class TransController extends BaseController
                             }else{
                                 $unitPrice = $this->priceBaseOnAccount(@$inputs['account_id'], $item,$type);// get price base in account price system
                             }
-                        }if(!self::isSettle($type)){
+                        }if(!self::isSettle($type) || $delete_branch == 1 ){
                             $itemTotal = ($unitPrice)*($quantity);
                         }
                         $newInvoiceItems[] =   array
@@ -86,7 +91,7 @@ class TransController extends BaseController
                             'created_at'        => date('Y-m-d H:i:s'),
                             'updated_at'        => date('Y-m-d H:i:s')
                         );
-                        if(self::isSettle($type)) {
+                        if(self::isSettle($type) || $delete_branch == 1) {
                             $total =   null;
                         }else{
                             $total +=   $newInvoiceItems[$k]['item_total'];
@@ -113,7 +118,7 @@ class TransController extends BaseController
                         $net                        = $total - ($total)*($discount)/100;
                         $newHeader->net             = $net;
                         //if select account save record into account_trans
-                        if(!self::isSettle($type)){//save account base on type
+                        if(!self::isSettle($type) || $delete_branch != 1){//save account base on type
                             if ($type != 'itemBalance') {
                                 //save account trans if user select account id
                                 AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);
@@ -127,8 +132,13 @@ class TransController extends BaseController
                                 $newInvoiceItems[$k]['avg_cost']  = $i->avg_cost;
                             }
                         }
+
+
                         $newHeader->save();// save header
                         TransDetails::insert($newInvoiceItems); // insert details into trans_detail table
+                        if($delete_branch == 1 ){
+                          return 1;
+                        }
                         Session::flash('success','تم اضافة الفاتورة بنجاح');
                         return Redirect::route('viewTransaction',array($type,$branch->id,$invoice_no));
                         //redirect to invoice to print
@@ -141,7 +151,7 @@ class TransController extends BaseController
                     $data['error']      ="لقد قمت بادخال بعض المدخلات بشكل خطا ";
                     return View::make('errors.missing',$data);
                 }
-            }
+
         }else{
             return View::make('errors.missing');
         }

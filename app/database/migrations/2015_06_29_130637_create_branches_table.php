@@ -19,6 +19,7 @@ class CreateBranchesTable extends Migration {
 			$table->integer('co_id');
 			$table->string('br_name');
 			$table->string('br_address');
+			$table->boolean('deleted');
 			$table->integer('user_id');
 
 			$table->timestamps();

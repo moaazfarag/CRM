@@ -98,10 +98,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::post('storeBranch/', array('before' => 'csrf|filter:main_info:branch:add', 'uses' => 'BranchController@storeBranch', 'as' => 'storeBranch'));
     });
     Route::group(array('before' => 'filter:main_info:branch:edit'), function () {
-        Route::get('editBranch/', array('before' => 'filter:main_info:branch:edit', 'uses' => 'BranchController@editBranch', 'as' => 'editBranch'));
-        Route::post('updateBranch/{id}', array('before' => 'csrf|filter:main_info:branch:edit', 'uses' => 'BranchController@updateBranch', 'as' => 'updateBranch'));
+        Route::get('editBranch/', array( 'uses' => 'BranchController@editBranch', 'as' => 'editBranch'));
+        Route::post('updateBranch/{id}', array('before' => 'csrf', 'uses' => 'BranchController@updateBranch', 'as' => 'updateBranch'));
 
     });
+
+    Route::group(array('before' => 'filter:main_info:branch:delete'), function () {
+        Route::get('delete-branch/{id}', array( 'uses' => 'BranchController@deleteBranch', 'as' => 'deleteBranch'));
+        Route::post('cut-balance', array( 'uses' => 'BranchController@cutBalance', 'as' => 'cutBalance'));
+
+    });
+
+
     /**
      * Category Area
      */
@@ -370,6 +378,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
         });
         // item card
+        Route::get('show-all-items', array('uses' => 'ItemController@showAllItems', 'as' => 'showAllItems'));
+
         Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {
             Route::get('items-card/items', array('uses' => 'ItemController@searchItemCard', 'as' => 'searchItemCard'));
             Route::post('items-card-result/', array('uses' => 'ItemController@reportResultItemCard', 'as' => 'reportResultItemCard'));

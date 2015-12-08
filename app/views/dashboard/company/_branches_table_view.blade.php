@@ -10,6 +10,9 @@
 @if(PerC::isShow('main_info','branch','edit'))
               <th>@lang('main.edit')</th>
     @endif
+                @if(PerC::isShow('main_info','branch','delete'))
+                    <th>@lang('main.delete')</th>
+                @endif
             </tr>
           </thead>
           <tbody>
@@ -23,13 +26,21 @@
                   <span class="grey-text">{{ $branch->br_address }}</span>
                 </a>
               </td>
-@if(PerC::isShow('main_info','branch','edit'))
+        @if(PerC::isShow('main_info','branch','edit'))
               <td>
                   <a href="{{ URL::route('editBranch',array("br_id"=>$branch->id)) }}" class="btn btn-small z-depth-0"><i class="mdi mdi-editor-mode-edit"></i></a>
               </td>
             @endif
+            @if(PerC::isShow('main_info','branch','delete'))
 
+                <td>
+                    <a onclick="return confirm('هل تريد بالفعل حذف هذا الفرع ')"
+                       href="{{ URL::route('deleteBranch',array($branch->id)) }}"
+                       class="btn btn-danger red">[X]</a>
+                </td>
+            @endif
             </tr>
+
 @endforeach
 
           </tbody>

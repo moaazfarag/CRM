@@ -13,6 +13,7 @@ class BranchController extends  BaseController
      * @return mixed
      *
      */
+
     public  function addBranch()
     {
         $data = $this->settingData();
@@ -72,7 +73,7 @@ class BranchController extends  BaseController
 
         );
         $data['currency'] = BaseController::$currency;
-        $data['branch']      = Branches::findOrFail($id); //get branch will update
+        $data['branch']      = Branches::company()->where('deleted',0)->where('id',$id)->first(); //get branch will update
         $data['miniBranch']  = "" ; //to maxmize  branch card in view
         return View::make('dashboard.company.index', $data);
     }
@@ -100,4 +101,86 @@ class BranchController extends  BaseController
         return Redirect::route('addBranch');
 //        return Redirect::route('editBranch',array("br_id"=>$branch->id));
     }
+
+    public function deleteBranch($id){
+
+        $branch = Branches::company()->where('id',$id)->first();
+        if(!$branch){
+            Session::flash('error','الفرع المراد حذفة غير موجود ');
+            return Redirect::back();
+        }
+        $balances      =  DB::table('items_balance')
+            ->company()
+            ->groupBy('br_id')
+            ->groupBy('item_id')
+            ->where('br_id',$id)
+            ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
+            ->get();
+        if(count($balances)){
+            $data['branch_name']        = $branch->br_name;
+            $data['branch_delete_id']   = $branch->id;
+            $branches                   = Branches::company()->whereNotIn('id',[$id])->where('deleted',0)->get();
+            if(count($branches)){
+                $data['all_branches']   = Branches::company()->whereNotIn('id',[$id])->where('deleted',0)->get()->lists('br_name','id');
+            }else{
+
+                Session::flash('error_br','لا يمكنكم حذف الفرع .. لإتمام عملية الحذف يرجى إنشاء فرع جديد والمحاولة مرة أخرى');
+                return Redirect::route('addBranch');
+            }
+
+            return View::make('dashboard.company.delete_branch',$data);
+        }else{
+            $delete_branch = Branches::company()->find($id);
+            $delete_branch->deleted = 1;
+            $delete_branch->update();
+            Session::flash('success_br','تم حذف الفرع بنجاح');
+            return Redirect::route('addBranch');
+        }
+
+//        if(count($branches)){ $data['all_branches'] =  Branches::company()->whereNotIn('id',[$id])->where('deleted',0)->get()->lists('br_name','id'); }else{ $data['all_branches'] = array(); }
+
+    }
+
+   public function cutBalance(){
+
+       $inputs        = Input::all();
+       $branch_from   = $inputs['branch_from'];
+       $branch_to     = $inputs['branch_to'];
+       $delete_branch = 1;
+       $date = new DateTime();
+       $balances      =  DB::table('items_balance')
+           ->company()
+           ->groupBy('br_id')
+           ->groupBy('item_id')
+           ->where('br_id',$branch_from)
+           ->select(DB::raw('SUM(item_bal) AS balance') ,'items_balance.*')
+            ->get();
+       if(count($balances)){
+           foreach($balances as $k=>$balance){
+
+            $inputs['id_'.$k]         = $balance->item_id;
+            $inputs['quantity_'.$k]   = $balance->balance;
+            $inputs['serial_'.$k]     = $balance->has_serial;
+
+           }
+
+           $inputs['date'] = $date;
+           $trans = new TransController;
+           $settle_down = $trans->storeTrans('settleDown',$branch_from,$inputs,$delete_branch);
+           if($settle_down){
+               $settle_add = $trans->storeTrans('settleAdd',$branch_to,$inputs,$delete_branch);
+               if($settle_add){
+                   $delete_branch = Branches::company()->find($branch_from);
+                   $delete_branch->deleted = 1;
+                   $delete_branch->update();
+                   Session::flash('success_br','تم حذف الفرع بنجاح');
+                   return Redirect::route('addBranch');
+               }
+
+           }else{
+               Session::flash('success_br','تم حذف الفرع بنجاح');
+               return Redirect::back();
+           }
+       }
+   }
 }

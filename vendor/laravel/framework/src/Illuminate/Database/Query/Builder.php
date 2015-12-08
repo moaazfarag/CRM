@@ -1384,6 +1384,7 @@ class Builder {
 				'trans_details.qty',
 				'trans_header.br_id',
 				'branches.br_name AS br_name',
+				'branches.deleted AS br_deleted',
 				'trans_details.trans_header_id',
 				'trans_header.invoice_no',
 				'trans_header.date',

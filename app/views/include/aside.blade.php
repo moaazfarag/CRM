@@ -494,6 +494,8 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                                     <a href="{{ URL::route('reportSettleSearch','settleDown') }}"
                                                        class="waves-effect waves-blue"> تسويات الخصم </a>
                                                 @endif
+                                                    <a href="{{ URL::route('showAllItems') }}"
+                                                       class="waves-effect waves-blue">  الأصناف </a>
                                                 @if(PerC::isShow('p_reports_stores','p_itemsCard','show'))
                                                     <a href="{{ URL::route('searchItemCard') }}"
                                                        class="waves-effect waves-blue">   @lang('main.itemCart') </a>
