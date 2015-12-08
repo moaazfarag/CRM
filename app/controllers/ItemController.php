@@ -271,8 +271,9 @@ class ItemController extends BaseController
     public function searchTheBalanceOfTheStores ($type){
 
         if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
-            $data['report_open'] = "open";
-            $data['stores'] = "open";
+
+            $data['report_open']    = "open";
+            $data['stores']         = "open";
             $data['type']           = $type;
             $data['title']          = Lang::get('main.'.$type);
             $data['co_info']        = CoData::thisCompany()->first();
@@ -293,16 +294,15 @@ class ItemController extends BaseController
 
         if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
 
-            $data['type']    = $type;
-            $data['title']   = Lang::get('main.'.$type);
+            $data['type']        = $type;
+            $data['title']       = Lang::get('main.'.$type);
             $data['report_open'] = "open";
-            $data['stores'] = "open";
-            $balances       =  DB::table('items_balance')
+            $data['stores']      = "open";
+            $balances            =  DB::table('items_balance')
                 ->company()
                 ->groupBy('br_id')
-                ->groupBy('item_id');
-
-
+                ->groupBy('item_id')
+                ->where('br_deleted',0);
             if(Input::get('cat_id') != ''){
 
                 $balances->where('cat_id',Input::get('cat_id'));

@@ -45,7 +45,7 @@ class BaseController extends Controller {
         $data['companyInfo'] = CoData::Where('id','=',Auth::user()->co_id)->first();
         $data['asideOpen']   = 'open' ;
         $data['printSize']   = array('a1'=>$small,'a3'=>$average,'a4'=>$large);
-        $data['branches']    = Branches::where('co_id','=',Auth::user()->co_id)->get();
+        $data['branches']    = Branches::company()->where('deleted',0)->get();
         return $data;
     }
 
@@ -90,7 +90,7 @@ class BaseController extends Controller {
     public static function  getBranchId()
     {
         //check if  user can controller all barnches or not
-        $branches =Branches::company()->get();
+        $branches =Branches::company()->where('deleted',0)->get();
         if(Auth::user()->all_br && $branches->count()>1){
             $data['branches'] = $branches;
             $data['all_br']   = "all_br";

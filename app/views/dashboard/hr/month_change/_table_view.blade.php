@@ -3,9 +3,7 @@
         <div class="table-responsive" >
           <table id="" class="display table table-bordered table-striped table-hover">
             <thead>
-
             <tr>
-
                 <th>@lang('main.date') </th>
                 <th>@lang('main.employee')  </th>
                 <th>@lang('main.for_year') </th>
