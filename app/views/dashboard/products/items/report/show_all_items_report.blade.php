@@ -39,7 +39,7 @@
                     </thead>
                     <tbody>
                     @foreach($category->items as $item)
-                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->true_id }}</td>
                         <td>{{ $item->item_name }}</td>
                         <td>{{ $item->bar_code }}</td>
                         <td>{{ $item->sell_users }}</td>

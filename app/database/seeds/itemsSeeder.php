@@ -73,26 +73,7 @@ array(
 			),
 
 
-	    array(
-			'true_id'  			=> '4',
-	    	'co_id'           =>'2',
-	    	'cat_id'          =>'2',
-	    	'item_name'       =>'سيارة موديل 2012 ',
-	    	'unit'            =>'سيارة',
-	    	'supplier_id'        =>'متولى',
-	    	'seasons_id'          =>'فصل الصيف',
-	    	'models_id'           =>'x5',
-	    	'bar_code'        =>'no',
-	    	'buy'             =>'50000.20',
-	    	'sell_users'      =>'75000.35',
-	    	'sell_nos_gomla'  =>'70000.33',
-	    	'sell_gomla'      =>'65000.222',
-	    	'sell_gomla_gomla'=>'60000.78',
-	    	'limit'           =>'5',
-			'has_serial'      =>'0',
-	    	'notes'           =>'السيارة 2500 cc حمراء اللون ',
-	    	'user_id'         =>'2',
-	    ), array(
+	 array(
 			'true_id'  => '5',
 	    	'co_id'           =>'3',
 	    	'cat_id'          =>'3',
