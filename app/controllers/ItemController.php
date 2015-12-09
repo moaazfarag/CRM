@@ -40,12 +40,13 @@ class ItemController extends BaseController
             if(PermissionController::isShow('main_info','offer','add')){
                 $newItem->offer_id         = $inputs['offer_id'];
             }
-            $newItem->true_id          = Items::company()->max('true_id')+1;
+            $true_id                   = Items::company()->max('true_id')+1;
+            $newItem->true_id          = $true_id;
             $newItem->supplier_id      = isset($inputs['supplier_id'])?$inputs['supplier_id']:0;
             $newItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
             $newItem->models_id        = isset($inputs['models_id'])?$inputs['models_id']:0;
             $newItem->marks_id         = isset($inputs['marks_id'])?$inputs['marks_id']:0;
-            $newItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:0;
+            $newItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:intval("100".$true_id);
             $newItem->buy              = $inputs['buy'];
             $newItem->sell_users       = $inputs['sell_users'];
             $newItem->sell_nos_gomla   = $inputs['sell_nos_gomla'];
@@ -113,7 +114,7 @@ class ItemController extends BaseController
                 $oldItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
                 $oldItem->models_id        = isset($inputs['models_id'])?$inputs['models_id']:0;
                 $oldItem->marks_id         = isset($inputs['marks_id'])?$inputs['marks_id']:0;
-                $oldItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:0;
+                $oldItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:intval("100".$oldItem->true_id);
                 $oldItem->buy              = $inputs['buy'];
                 $oldItem->sell_users       = $inputs['sell_users'];
                 $oldItem->sell_nos_gomla   = $inputs['sell_nos_gomla'];
