@@ -21,9 +21,9 @@
             {{ $title }}
         </div>
 
-        @if(count($categories))
+        @if(count($categories)>0)
             @foreach($categories as $category)
-                @if($category->items)
+                @if(count($category->items)>0)
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
