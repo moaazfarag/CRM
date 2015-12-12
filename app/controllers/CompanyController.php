@@ -135,8 +135,9 @@ class CompanyController extends BaseController
                             $message->to(Input::get('email'))->subject('message from elrased web ');
                         });
 
-                        $data['name'] = $inputs['co_name'];
-                        $data['co_id'] = $company->id;
+                        $data['company'] = $inputs['co_name'];
+                        $data['name']    = $inputs['co_name'];
+                        $data['co_id']   = $company->id;
                         Mail::send('emails.elrased_owner', $data, function($message){
                             $message->to('halem@clickfordata.net')->subject('message from elrased web ');
                         });

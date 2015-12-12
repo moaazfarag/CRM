@@ -3,14 +3,14 @@
         <!-- Main Content -->
 <section id="print-content" ng-app="itemApp" ng-controller="mainController" class="content-wrap ecommerce-invoice">
 
-    <div class="card-panel">
+    <div class="card-panel" style="color: #000;">
         {{--{{ dd($invoice); }}--}}
         <!-- Logo -->
 
         <div class="row invoice-top">
-            <div class="col s3 m3">
+            <div class="col l3 s12 ">
                 @if($co_info->co_logo)
-                    <img width="150px" height="39px" src="{{ URL::asset($co_info->co_logo) }}" alt="Logo">
+                    <img   src="{{ URL::asset($co_info->co_logo) }}" alt="Logo">
                 @endif
                 <br>
                 @lang('main.the_company') :
@@ -20,7 +20,7 @@
                 <strong>{{ $invoice->branch->br_name }}</strong>
 
             </div>
-            <div class="col s6 m6">
+            <div class="col s12 m6">
                 <div style=" font-size: 1.5em; font-weight: 500; text-decoration: underline;  text-align: center;">
                     @lang('main.invoice') @lang('main.'.$type)
                 </div>
@@ -39,7 +39,7 @@
 
             </div>
 
-            <div class="col s3 m3">
+            <div class="col s12 m3">
                 <div class="invoice-num">
                     <div class="num">
                         @lang('main.invoiceNum'):
@@ -58,7 +58,7 @@
 
             </div>
 
-            <hr/>
+            {{--<hr/>--}}
         </div>
         <!-- /Logo -->
         <br>
