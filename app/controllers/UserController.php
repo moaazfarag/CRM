@@ -154,7 +154,7 @@ class UserController extends BaseController
             $newUser->name = Input::get('name');
             $newUser->permission = json_encode($permissions);
             $newUser->username = Input::get('username');
-            $newUser->password = Hash::make('12345678');
+            $newUser->password = Hash::make(Input::get('password'));
             $newUser->email = Input::get('email');
             $newUser->save();
             return Redirect::route('addUser');
