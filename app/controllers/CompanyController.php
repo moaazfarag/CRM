@@ -135,6 +135,7 @@ class CompanyController extends BaseController
                             $message->to(Input::get('email'))->subject('message from elrased web ');
                         });
 
+                        $data['address'] = $inputs['co_address'];
                         $data['company'] = $inputs['co_name'];
                         $data['name']    = $inputs['co_name'];
                         $data['co_id']   = $company->id;

@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => 'smtp.clickfordata.net',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'elrased.web@gmail.com', 'name' => "message from elrased web site"),
+	'from' => array('address' => 'elrased@clickfordata.net', 'name' => "message from elrased web site"),
 
 	/*
 	|--------------------------------------------------------------------------
