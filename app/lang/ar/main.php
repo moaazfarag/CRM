@@ -62,6 +62,7 @@ return  array(
     'Credit'           => 'دائن',
     'debit'            => 'مدين ',
     'date'             => 'التاريخ' ,
+	'time'             => 'الوقت',
     //Add Employee
     'jobs'             => 'الوظائف ',
     'parts'            => 'الاقسام',
@@ -197,6 +198,7 @@ return  array(
     'invoiceNum'    => 'رقم الفاتورة',
     'view'          => 'عرض',
     'invoice'       =>'فاتورة',
+	'invoice_notes' 	=> 'ملاحظات داخل كل فاتورة ',
     'theType'          => 'النوع',
     'settles'          => 'التسويات',
     'cash_'           => '(نقداً)',

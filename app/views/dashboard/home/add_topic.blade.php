@@ -31,7 +31,7 @@
                 <div class="col s12 m5 l5">
                     <div class="input-field">
 
-                        {{Form::text('title',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
+                        {{Form::text('title',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('title'))?'parsley-error':null)) }}
                         {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
                         <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
                     </div>
@@ -45,7 +45,7 @@
                 <div class="col s12 l4">
                     <div class="input-field">
 
-                        {{ Form::select('type', $types,null,array('id'=>'type')) }}
+                        {{ Form::select('type', $types,null,array('id'=>'type','data-parsley-id'=>'4370','class'=>($errors->first('type'))?'parsley-error':null)) }}
 
                         <p class="parsley-required error-validation">{{ $errors->first('type') }} </p>
 
@@ -62,9 +62,8 @@
                 <div class="col s12 l9">
 
                     <div class="input-field" >
-                        {{ Form::textarea('content',null,array('id'=>'ckeditor1','dir'=>'rtl','class'=>"materialize-textarea")) }}
+                        {{ Form::textarea('content',null,array('id'=>'ckeditor1','dir'=>'rtl','data-parsley-id'=>'4370','class'=>($errors->first('content'))?'parsley-error materialize-textarea':'materialize-textarea')) }}
                         <div id="ckeditora"></div>
-
                         <p class="parsley-required">{{ $errors ->first('details') }} </p>
                     </div>
                 </div>

@@ -44,7 +44,7 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="mdi mdi-action-language prefix"></i>
-                            {{ Form::number('val',null,array('id'=>'val','step'=>'0.01')) }}
+                            {{ Form::number('val',null,array('data-parsley-id'=>'4370','class'=>($errors->first('val'))?'parsley-error':null,'id'=>'val','step'=>'0.01')) }}
                             <?php $value = Lang::get('main.value'); ?>
                             {{ Form::label('val', $value)}}
                             <p class="parsley-required error-validation">{{ $errors ->first('val') }} </p>

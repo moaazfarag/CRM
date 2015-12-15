@@ -24,7 +24,7 @@
                 <div class="col s12 l3 ">
                     <div class="input-field">
                         <i class="mdi mdi-action-description prefix"></i>
-                        {{ Form::text('name',null,array('required','id'=>'name',)) }}
+                        {{ Form::text('name',null,array('data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null,'required','id'=>'name')) }}
                         {{ Form::label('name',Lang::get("main.clause") )}}
                         <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                     </div>

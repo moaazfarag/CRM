@@ -35,6 +35,10 @@
                         <input required="required"
                                type="date"
                                 {{--ng-model="date = Date()"--}}
+                               @if($errors->first('date'))
+                               class='parsley-error'
+                               @endif
+                               data-parsley-id="4370"
                                autofocus="autofocus"
                                id="data"
                                value="{{$date->format('Y-m-d')}}"

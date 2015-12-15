@@ -18,7 +18,7 @@ class OfferController extends BaseController
 
     public function storeOffer()
     {
-        $validation = Validator::make(Input::all(), Offer::$store_rules);
+        $validation = Validator::make(Input::all(), Offer::$store_rules,BaseController::$messages);
 
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());

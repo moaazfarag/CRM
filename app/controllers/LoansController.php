@@ -10,7 +10,7 @@ class LoansController extends BaseController
     public function addLoans()
     {
         $data['title']     = Lang::get('main.loan_request'); // page title
-        $data = $this->depData();
+        $data              = $this->depData();
         $data['employees'] = "open";
         $data['co_info']   = CoData::thisCompany()->first();
         return View::make('dashboard.hr.loans.index',$data);
@@ -32,6 +32,7 @@ class LoansController extends BaseController
             $newLoans->employee_id            = $inputs['employee_id'];
             $newLoans->loan_val               = $inputs['loan_val'];
             $newLoans->loan_start             = $this->strToTime($inputs['loan_start']);
+            $newLoans->user_id                = Auth::id();
 
 
             $months = ceil($inputs['loan_val'] /  $inputs['loan_currBal'] )-1;

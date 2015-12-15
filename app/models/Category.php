@@ -24,7 +24,7 @@ class Category extends Eloquent {
     {
         return $this->belongsTo('Co_data','co_id');
     }
-
+	public static $store_rules = ['name'=>'required'];
     public function items()
     {
         return $this->hasMany('Items','cat_id','id');

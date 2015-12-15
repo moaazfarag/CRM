@@ -40,7 +40,7 @@
                                     <i class="mdi mdi-social-person prefix"></i>
                                 @endif
                                 <?php $name = Lang::get('main.name') ?>
-                                {{ Form::text('acc_name',null,array('required','id'=>'account-name','placeholder'=>$name)) }}
+                                {{ Form::text('acc_name',null,array('required','id'=>'account-name','placeholder'=>$name,'data-parsley-id'=>'4370','class'=>($errors->first('acc_name'))?'parsley-error':null)) }}
                                 {{--<input name="account_name" id="branch-name" type="text" placeholder="  الاسم   ">--}}
                                 <p class="parsley-required error-validation">{{ $errors ->first('acc_name') }} </p>
 
@@ -168,7 +168,7 @@
                             <div class="col s12 l4">
                                 <div class="input-field">
                                     <i class="mdi mdi-content-remove-circle prefix"></i>
-                                    {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','placeholder'=>Lang::get('main.cut'))) }}
+                                    {{ Form::text('acc_limit',null,array('required','id'=>'credit-limit','data-parsley-id'=>'4370','class'=>($errors->first('acc_limit'))?'parsley-error':null,'placeholder'=>Lang::get('main.cut'))) }}
                                     {{--<input name="credit_limit" id="credit-limit" type="text" placeholder="   حد الائتمان  ">--}}
                                     <p class="parsley-required error-validation">{{ $errors ->first('acc_limit') }} </p>
 
@@ -183,7 +183,7 @@
                             </div>
                             <div class="col s12 l3">
 
-                                {{ Form::select('pricing', array('' => lang::get('main.select_system')) + $pricing ,null,array('id'=>'mark_id')) }}
+                                {{ Form::select('pricing', array('' => lang::get('main.select_system')) + $pricing ,null,array('id'=>'mark_id','data-parsley-id'=>'4370','class'=>($errors->first('pricing'))?'parsley-error':null)) }}
                                 <p class="parsley-required error-validation">{{ $errors ->first('pricing') }} </p>
 
                             </div>

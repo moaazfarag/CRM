@@ -93,9 +93,17 @@ class Employees extends Eloquent {
             $endMonth   = date('m',strtotime($loan->loan_end));
             $endYear    = date('Y',strtotime($loan->loan_end));
             $startMonth = date('m',strtotime($loan->loan_start));
-            $startyear  = date('Y',strtotime($loan->loan_start));
-            if($endMonth >= Input::get('for_month') && $endYear >= Input::get('for_year')&& $startyear <= Input::get('for_year') && $startMonth <= Input::get('for_month') ){
+            $startYear  = date('Y',strtotime($loan->loan_start));
+//            if($endMonth >= Input::get('for_month') && $endYear >= Input::get('for_year')&& $startyear <= Input::get('for_year') && $startMonth <= Input::get('for_month') ){
+            if($startYear == Input::get('for_year')){
+                if($endMonth >= Input::get('for_month') && $startMonth <= Input::get('for_month')){
+                    $value += $loan->loan_currBal;
+
+                }
+
+            }elseif(Input::get('for_year') > $startYear  && Input::get('for_year') <= $endYear ){
                 $value += $loan->loan_currBal;
+
             }
         }
         return $value ;

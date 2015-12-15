@@ -17,7 +17,7 @@ class dashboardController extends BaseController {
 
 	public function home()
 	{
-		$data['topics']    = Topic::company()->paginate(10) ;
+		$data['topics']    = Topic::company()->orderBy('id', 'DESC')->paginate(10) ;
 		$data['home_page'] = Home::company()->first();
 		return View::make('dashboard.home.home',$data);
 	}

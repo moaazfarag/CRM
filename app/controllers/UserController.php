@@ -69,12 +69,22 @@ class UserController extends BaseController
                     return Redirect::route('notConfirmed');
                 }
 
+                if($user->deleted == 1){
+
+                    Session::flash('error',  'عفواً تم حذف هذا المستخدم ');
+                    return Redirect::to('/login');                }
+
                 if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
 
-                    Session::put('permission', json_decode(Auth::user()->permission, true));
+                        if(Auth::user()->owner == 'acount_creator'){
+                             Session::put('permission',PermissionController::setPermission(1));
+                        }else{
+
+                            Session::put('permission', json_decode(Auth::user()->permission, true));
+                        }
                     $user = User::find(Auth::id());
                     Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
-                    return Redirect::intended('admin/setting');
+                    return Redirect::intended('/admin');
                 } else {
 
                 $error = Lang::get('main.error');
@@ -135,13 +145,13 @@ class UserController extends BaseController
 
         'username'         => 'unique:users,username,NULL,id,co_id,'.Auth::user()->co_id ,
         'name'             => 'required',
-        'email'            => 'required|email|unique:users,email' ,
-        'password'         => 'required|min:8',
-        'confirm_password' => 'required|same:password',
-        // 'all_br'           => 'boolean',
+//        'email'            => 'email|unique:users,email' ,
+        //'password'         => 'required|min:8',
+        //'confirm_password' => 'required|same:password',
+        // 'all_br'          => 'boolean',
     );
         $permissions = PermissionController::setPermission();
-        $validation = Validator::make(Input::all(), $store_rules);
+        $validation = Validator::make(Input::all(), $store_rules,BaseController::$messages);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
@@ -157,10 +167,16 @@ class UserController extends BaseController
             $newUser->password = Hash::make('12345678');
             $newUser->email = Input::get('email');
             $newUser->save();
-            return Redirect::route('addUser');
+
+            return Redirect::route('addUserSuccess',array($newUser->name,$newUser->username));
         }
     }
+    public function addUserSuccess($name,$user_name){
 
+        $data['name'] = $name;
+        $data['user_name'] = $user_name;
+        return View::make('dashboard.users.add_user_success',$data);
+    }
     public function editUser($id)
     {
         $data['asideOpen'] = 'open';
@@ -200,10 +216,10 @@ class UserController extends BaseController
         $permissions = PermissionController::setPermission();
         if ($oldUser) {
             $rules_update = array(
-                'password' => 'min:8',
+//                'password' => 'min:8',
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id,
-                'confirm_password' => 'same:password',
+//                'email' => 'required|email|unique:users,email,' . $id,
+//                'confirm_password' => 'same:password',
             );
             $validation = Validator::make(Input::all(), $rules_update);
             if ($validation->fails()) {
@@ -245,8 +261,8 @@ class UserController extends BaseController
         if ($oldUser) {
             $rules_update = array(
 
-                'old_password' => "required|min:6",
-                'new_password' => 'required|min:6',
+                'old_password' => "required",
+                'new_password' => 'required|min:8',
                 'confirm_new_password' => 'required|same:new_password',
 
             );
@@ -265,7 +281,7 @@ class UserController extends BaseController
                     Session::flash('success','تم  تغيير كلمة المرور بنجاح');
                     return Redirect::back();
                 } else {
-                    return $old_password_from_db . '<br/>' . $old_password_from_user;
+//                    return $old_password_from_db . '<br/>' . $old_password_from_user;
 
                     Session::flash('error', 'كلمة المرور القديمة غير صحيحة ');
                     return Redirect::back();
@@ -273,5 +289,20 @@ class UserController extends BaseController
                 }
             }
         }
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::where('id',$id)->company()->first();
+        if(!empty($user)){
+                     $user->deleted = 1 ;
+                     $user->update();
+
+                    Session::flash('success','تم حذف المستخدم بنجاح');
+                    return Redirect::back();
+                }else{
+                     Session::flash('error','عفواً لم يتم حذف المستخدم حاول مرة أخرى ');
+                     return Redirect::back();
+            }
     }
 }

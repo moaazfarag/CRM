@@ -99,23 +99,26 @@ class TransController extends BaseController
                     }//end foreach of set details
 
                     if(count($newInvoiceItems)>0){//if no details delete invoice and send error
-                       if(PerC::isShow('invoices','tax','add')){
 
-                           $tax      = isset($inputs['tax'])?$inputs['tax']:0;
-                       }else{
-                           $tax = 0;
-                       }
                         if(PerC::isShow('invoices','discount','add')){
 
                            $discount = isset($inputs['discount'])?$inputs['discount']:0;
                        }else{
                             $discount = 0;
                         }
+                        if(PerC::isShow('invoices','tax','add')){
+
+                           $tax = isset($inputs['tax'])?$inputs['tax']:0;
+                       }else{
+                            $tax = 0;
+                        }
 
                         $newHeader->in_total        = $total ;
                         $newHeader->discount        = $discount;
                         $newHeader->tax             = $tax;
-                        $net                        = $total - ($total)*($discount)/100;
+                        $net_after_descount         = $total - ($total)*($discount)/100;
+                        $net                        = $net_after_descount - ($net_after_descount)*($tax)/100;
+
                         $newHeader->net             = $net;
                         //if select account save record into account_trans
                         if(!self::isSettle($type) || $delete_branch != 1){//save account base on type

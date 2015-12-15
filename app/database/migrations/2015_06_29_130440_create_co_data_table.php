@@ -23,6 +23,7 @@ class CreateCoDataTable extends Migration {
 			$table->integer('co_mobile_1');
 			$table->integer('co_mobile_2');
 			$table->string('co_currency');
+			$table->string('co_invoice_notes');
 			$table->string('co_print_size');
 			$table->boolean('co_use_serial');
 			$table->boolean('co_supplier_must');

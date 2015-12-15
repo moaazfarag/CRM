@@ -10,7 +10,7 @@ class PermissionController extends BaseController
 {
     public static $basePermission = [
         'main_info' => ['company', 'branch','main_data', 'cat', 'item','offer', 'mark_model', 'season', 'add_account', 'users', 'barcode'],
-        'balances' => ['accountsBalances', 'itemBalance'],
+        'balances'   => ['accountsBalances', 'itemBalance'],
         'settles' => ['settleAdd', 'settleDown'],
         'hr' => ['Employees', 'Departments', 'jobs', 'loans', 'Desdeds', 'Empdesded', 'MonthChange', 'salariesProcessing'],
         'invoices' => ['buy', 'sales', 'salesReturn', 'buyReturn','tax','descount'],
@@ -43,6 +43,9 @@ class PermissionController extends BaseController
     public static function setSession()
     {
         if (Auth::check()) {
+            if(Auth::user()->owner == 'acount_creator'){
+                return Session::put('permission',PermissionController::setPermission(1));
+            }
             $user = User::find(Auth::id());
             if (Session::get('last_login') != $user->updated_at->format('d M Y - H:i:s')) {
                 Session::put('permission', json_decode($user->permission, true));
