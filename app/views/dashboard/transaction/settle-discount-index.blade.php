@@ -37,6 +37,10 @@
 
                         <input required="required"
                                type="date"
+                               @if($errors->first('date'))
+                               class='parsley-error'
+                               @endif
+                               data-parsley-id="4370"
                                 {{--ng-model="date = Date()"--}}
                                id="data"
                                value="{{$date->format('Y-m-d')}}"
@@ -56,7 +60,8 @@
                     <div class="col s12 l3">
                         {{--<i class="mdi-action-label"></i>--}}
                         <div mass-autocomplete>
-                            <input ng-focus="displayOn({{ $br_id }})" type="text" class="form-control ng-isolate-scope ng-pristine ng-valid"
+                            <input ng-focus="displayOn({{ $br_id }})" type="text" class="form-control ng-isolate-scope ng-pristine ng-valid @if($errors->first('item_id'))  parsley-error @endif"
+                                   data-parsley-id="4370"
                                    placeholder="اسم الصنف او الفئة او باركود"
                                    autofocus
                                    id="item_id"
@@ -72,7 +77,7 @@
 
                         <div class="input-field">
                             <i class="fa fa-cubes prefix"></i>
-                            {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
+                            {{ Form::number('quantity',null,array('data-parsley-id'=>'4370','class'=>($errors->first('quantity'))?'parsley-error':null,'ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
                             <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
                         @lang('main.please_enter_valid_number')

@@ -23,7 +23,7 @@
                     <div class="col s12 l6">
                         <div class="input-field">
                             <i class="mdi mdi-action-account-box prefix"></i>
-                            {{ Form::text('name',null,array('required','id'=>'name',)) }}
+                            {{ Form::text('name',null,array('data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null,'required','id'=>'name',)) }}
                             {{ Form::label('name',lang::get('main.employe_name'))     }}
                             <p class="parsley-required">{{ $errors ->first('name') }} </p>
                         </div>
@@ -31,7 +31,7 @@
                     <div class="col s12 l5">
                         <div class="input-field">
                             <i class="fa fa-calendar prefix"></i>
-                            {{ Form::text('employee_date',null,array('required','id'=>'employee_date','class'=>'pikaday')) }}
+                            {{ Form::text('employee_date',null,array('data-parsley-id'=>'4370','class'=>($errors->first('employee_date'))?'parsley-error pikaday':'pikaday','required','id'=>'employee_date')) }}
                             <p class="parsley-required">{{ $errors ->first('employee_date') }} </p>
 
                             <label for="employee_date">
@@ -44,7 +44,7 @@
                     <div class="col s12 l6">
                         <div class="input-field">
                             <i class="mdi mdi-av-web prefix"></i>
-                            {{ Form::number('card_no',null,array('required','id'=>'card_no','length'=>"14")) }}
+                            {{ Form::number('card_no',null,array('data-parsley-id'=>'4370','class'=>($errors->first('card_no'))?'parsley-error':null,'required','id'=>'card_no','length'=>"14")) }}
                             {{ Form::label('card_no',lang::get('main.national_id'))     }}
                             <p class="parsley-required">{{ $errors ->first('card_no') }} </p>
                         </div>
@@ -53,7 +53,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-av-subtitles prefix"></i>
 
-                            {{ Form::text('ins_no',null,array('id'=>'ins_no',)) }}
+                            {{ Form::text('ins_no',null,array('data-parsley-id'=>'4370','class'=>($errors->first('ins_no'))?'parsley-error':null,'id'=>'ins_no',)) }}
                             {{ Form::label('ins_no',lang::get('main.insurance_number'))  }}
                             <p class="parsley-required">{{ $errors ->first('ins_no') }} </p>
                         </div>
@@ -129,7 +129,7 @@
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-money prefix"></i>
-                            {{ Form::number('salary',null,array('id'=>'salary', 'step'=>'0.01')) }}
+                            {{ Form::number('salary',null,array('data-parsley-id'=>'4370','class'=>($errors->first('salary'))?'parsley-error':null,'id'=>'salary', 'step'=>'0.01')) }}
                             {{ Form::label('salary',lang::get('main.salary'))     }}
                             <p class="parsley-required">{{ $errors ->first('salary') }} </p>
                         </div>
@@ -137,7 +137,7 @@
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-medkit prefix"></i>
-                            {{ Form::number('ins_salary',null,array('id'=>'ins_salary','step'=>'0.01')) }}
+                            {{ Form::number('ins_salary',null,array('data-parsley-id'=>'4370','class'=>($errors->first('ins_salary'))?'parsley-error':null,'id'=>'ins_salary','step'=>'0.01')) }}
                             {{ Form::label('ins_salary',lang::get('main.insurance_salary'))   }}
                             <p class="parsley-required">{{ $errors ->first('ins_salary') }} </p>
                         </div>
@@ -145,7 +145,7 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="mdi mdi-content-remove-circle prefix"></i>
-                            {{ Form::number('ins_val',null,array('id'=>'ins_val','step'=>'0.01')) }}
+                            {{ Form::number('ins_val',null,array('data-parsley-id'=>'4370','class'=>($errors->first('ins_val'))?'parsley-error':null,'id'=>'ins_val','step'=>'0.01')) }}
                             {{ Form::label('ins_val',lang::get('main.discount_insurance'))    }}
                             <p class="parsley-required">{{ $errors ->first('ins_val') }} </p>
                         </div>
@@ -180,7 +180,7 @@
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-phone-square prefix"></i>
-                            {{ Form::text('tel',null,array('id'=>'tel',)) }}
+                            {{ Form::text('tel',null,array('data-parsley-id'=>'4370','class'=>($errors->first('tel'))?'parsley-error':null,'id'=>'tel',)) }}
                             {{ Form::label('tel',lang::get('main.phone_number_1') )      }}
                             <p class="parsley-required">{{ $errors ->first('tel') }} </p>
                         </div>
@@ -189,7 +189,7 @@
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-phone prefix"></i>
-                            {{ Form::text('tel2',null,array('id'=>'tel2',)) }}
+                            {{ Form::text('tel2',null,array('data-parsley-id'=>'4370','class'=>($errors->first('tel2'))?'parsley-error':null,'id'=>'tel2',)) }}
                             {{ Form::label('tel2',lang::get('main.phone_number_2'))     }}
                             <p class="parsley-required">{{ $errors ->first('tel2') }} </p>
                         </div>
@@ -197,7 +197,7 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="fa fa-birthday-cake prefix"></i>
-                            {{ Form::text('birth_date',null,array('id'=>'birth_date','class'=>'pikaday')) }}
+                            {{ Form::text('birth_date',null,array('data-parsley-id'=>'4370','class'=>($errors->first('birth_date'))?'parsley-error pikaday':'pikaday','id'=>'birth_date','class'=>'pikaday')) }}
                             {{ Form::label('birth_date',lang::get('main.birthday')) }}
 
                             <p class="parsley-required">{{ $errors ->first('birth_date') }} </p>
@@ -212,7 +212,7 @@
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-graduation-cap  prefix"></i>
-                            {{ Form::text('certificate',null,array('id'=>'certificate')) }}
+                            {{ Form::text('certificate',null,array('data-parsley-id'=>'4370','class'=>($errors->first('certificate'))?'parsley-error':null,'id'=>'certificate')) }}
                             {{ Form::label('certificate' ,lang::get('main.qualification'))   }}
                             <p class="parsley-required">{{ $errors ->first('certificate') }} </p>
                         </div>
@@ -221,7 +221,7 @@
                     <div class="col s12 l4">
                         <div class="input-field">
                             <i class="fa fa-institution prefix"></i>
-                            {{ Form::text('cert_location',null,array('id'=>'cert_location')) }}
+                            {{ Form::text('cert_location',null,array('data-parsley-id'=>'4370','class'=>($errors->first('cert_location'))?'parsley-error':null,'id'=>'cert_location')) }}
                             {{ Form::label('cert_location' ,lang::get('main.face_qualification'))   }}
                             <p class="parsley-required">{{ $errors ->first('cert_location') }} </p>
                         </div>
@@ -230,7 +230,7 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="fa fa-calendar prefix"></i>
-                            {{ Form::text('cert_date',null,array('id'=>'cert_date','class'=>'pikaday')) }}
+                            {{ Form::text('cert_date',null,array('data-parsley-id'=>'4370','class'=>($errors->first('cert_date'))?'parsley-error pikaday':'pikaday','id'=>'cert_date','class'=>'pikaday')) }}
                             {{ Form::label('cert_date',lang::get('main.date_qualification'))   }}
                             <p class="parsley-required">{{ $errors ->first('cert_date') }} </p>
                         </div>
@@ -241,7 +241,7 @@
                     <div class="col s12 l11">
                         <div class="input-field">
                             <i class="fa fa-home prefix"></i>
-                            {{ Form::text('address',null,array('id'=>'address','length'=>"200")) }}
+                            {{ Form::text('address',null,array('data-parsley-id'=>'4370','class'=>($errors->first('address'))?'parsley-error':null,'id'=>'address','length'=>"200")) }}
                             {{ Form::label('address',lang::get('main.address'))   }}
                             <p class="parsley-required">{{ $errors ->first('address') }} </p>
                         </div>
@@ -252,7 +252,7 @@
                     <div class="col s12 l11">
                         <div class="input-field">
                             <i class="fa fa-pencil-square-o prefix"></i>
-                            {{ Form::textarea('remark',null,array('id'=>'remark','class'=>"materialize-textarea" ,'length'=>"200")) }}
+                            {{ Form::textarea('remark',null,array('data-parsley-id'=>'4370','class'=>($errors->first('remark'))?'parsley-error':null,'id'=>'remark','class'=>"materialize-textarea" ,'length'=>"200")) }}
                             {{ Form::label('remark',lang::get('main.comments'))    }}
                             <p class="parsley-required">{{ $errors ->first('remark') }} </p>
                         </div>

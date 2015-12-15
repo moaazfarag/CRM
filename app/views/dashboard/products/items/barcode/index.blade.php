@@ -48,6 +48,7 @@
             </div>{{--submit  row end--}}
         </div>
     </div>
+
     @if(Route::currentRouteName() == "prepMsHeader")
         @include('dashboard.hr.msheader._table_view');
     @endif

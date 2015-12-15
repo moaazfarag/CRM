@@ -46,7 +46,7 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="mdi mdi-action-language prefix"></i>
-                            {{ Form::number('val',null,array('ng-required'=>"displayCondition",'ng-model'=>'dudDis.val','id'=>'val')) }}
+                            {{ Form::number('val',null,array('data-parsley-id'=>'4370','class'=>($errors->first('val'))?'parsley-error':null,'ng-required'=>"displayCondition",'ng-model'=>'dudDis.val','id'=>'val')) }}
                             {{ Form::label('val',  lang::get('main.value') )     }}
                             <p class="parsley-required">{{ $errors ->first('val') }} </p>
                            <span style="font-size: large"> @{{  message }}</span>

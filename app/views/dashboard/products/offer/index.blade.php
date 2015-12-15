@@ -29,14 +29,15 @@
                         </div>
                         <div class="col s12 m3 l2">
                             <div class="input-field">
-                                <i class="mdi mdi-social-person prefix"></i>
-                                {{Form::text('name',null,array('required','placeholder'=>Lang::get('main.nameOfOffer'), 'id'=>'name')) }}
+                                <i class="mdi mdi-action-wallet-giftcard prefix"></i>
+                                {{Form::text('name',null,array('required','placeholder'=>Lang::get('main.nameOfOffer'), 'id'=>'name','data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null)) }}
+                                <p class="parsley-required">{{ $errors ->first('offer') }} </p>
                             </div>
                         </div>
                         <div class="col s12 l2">
                             <div class="input-field">
-                                <i class="mdi mdi-action-language prefix"></i>
-                                {{ Form::number('offer',null,array('id'=>'offer','required','max'=>100,'min'=>1)) }}
+                                <i class="mdi mdi-content-undo prefix"></i>
+                                {{ Form::number('offer',null,array('id'=>'offer','required','max'=>100,'min'=>1,'data-parsley-id'=>'4370','class'=>($errors->first('offer'))?'parsley-error':null)) }}
                                 <p class="parsley-required">{{ $errors ->first('offer') }} </p>
 
                                 <label for="offer">
@@ -46,8 +47,8 @@
                         </div>
                         <div class="col s12 l3">
                             <div class="input-field">
-                                <i class="mdi mdi-action-language prefix"></i>
-                                {{ Form::text('from',null,array('id'=>'from','class'=>'pikaday')) }}
+                                <i class="fa fa-calendar prefix"></i>
+                                {{ Form::text('from',null,array('id'=>'from','data-parsley-id'=>'4370','class'=>($errors->first('from'))?'parsley-error pikaday':'pikaday')) }}
                                 <p class="parsley-required">{{ $errors ->first('from') }} </p>
 
                                 <label for="from">
@@ -59,8 +60,8 @@
 
                         <div class="col s12 l3">
                             <div class="input-field">
-                                <i class="mdi mdi-action-language prefix"></i>
-                                {{ Form::text('to',null,array('id'=>'to','class'=>'pikaday')) }}
+                                <i class="fa fa-calendar prefix"></i>
+                                {{ Form::text('to',null,array('id'=>'to','data-parsley-id'=>'4370','class'=>($errors->first('to'))?'parsley-error pikaday':'pikaday')) }}
                                 <p class="parsley-required">{{ $errors ->first('to') }} </p>
 
                                 <label for="to">

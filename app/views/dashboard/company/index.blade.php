@@ -29,7 +29,7 @@
                         <i class="mdi mdi-action-home prefix"></i>
                     <?php $companyName = Lang::get('main.companyName') ?>
                     {{--<input name="co_name" id="ecommerce-name" type="text" placeholder="اسم الشركة">--}}
-                    {{ Form::text('co_name',null,array('required','placeholder'=>$companyName,@$readOnly)) }}
+                    {{ Form::text('co_name',null,array('required','placeholder'=>$companyName,@$readOnly,'id'=>'input-name','data-parsley-id'=>'4370','class'=>($errors->first('co_name'))?'parsley-error':null)) }}
                         <p class="parsley-required error-validation">{{ $errors->first('co_name') }} </p>
 
                     </div>
@@ -46,7 +46,7 @@
                 <div class="input-field">
                     <i class="mdi mdi-action-language prefix"></i>
                     <?php $address = Lang::get('main.address') ?>
-                    {{ Form::text('co_address',null,array('required','placeholder'=>$address,@$readOnly)) }}
+                    {{ Form::text('co_address',null,array('required','placeholder'=>$address,@$readOnly,'data-parsley-id'=>'4370','class'=>($errors->first('co_address'))?'parsley-error':null)) }}
                     <p class="parsley-required error-validation">{{ $errors->first('co_address') }} </p>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <i class="mdi mdi-communication-phone prefix"></i>
                     <?php $phoneNum = Lang::get('main.phone') ?>
                     {{--<input name="co_tel" id="ecommerce-tel" type="text" placeholder="رقم الهاتف ">--}}
-                    {{ Form::text('co_tel',null,array('required','placeholder'=>$phoneNum,@$readOnly)) }}
+                    {{ Form::text('co_tel',null,array('required','placeholder'=>$phoneNum,@$readOnly,'data-parsley-id'=>'4370','class'=>($errors->first('co_tel'))?'parsley-error':null)) }}
                     <p class="parsley-required error-validation">{{ $errors->first('co_tel') }} </p>
 
                 </div>
@@ -80,7 +80,7 @@
                 <div class="input-field">
 
 
-                    {{ Form::select('co_print_size', array('' => lang::get('main.print_size')) + $print_size_types,null,array('id'=>'ecommerce-printsize',@$readOnly)) }}
+                    {{ Form::select('co_print_size', array('' => lang::get('main.print_size')) + $print_size_types,null,array('id'=>'ecommerce-printsize',@$readOnly,'data-parsley-id'=>'4370','class'=>($errors->first('co_print_size'))?'parsley-error':null)) }}
 
                     <p class="parsley-required error-validation">{{ $errors->first('co_print_size') }} </p>
                 </div>
@@ -96,7 +96,7 @@
             <div class="col s12 l5">
                 <div class="input-field">
                     <?php $currncy = Lang::get('main.currency') ?>
-                    {{ Form::select('co_currency', array('' => lang::get('main.currency')) + $currency,null,array('id'=>'ecommerce-printsize','style'=>'max-height:200px')) }}
+                    {{ Form::select('co_currency', array('' => lang::get('main.currency')) + $currency,null,array('id'=>'ecommerce-printsize','style'=>'max-height:200px','data-parsley-id'=>'4370','class'=>($errors->first('co_currency'))?'parsley-error':null)) }}
                     <p class="parsley-required error-validation">{{ $errors->first('co_currency') }} </p>
                 </div>
 
@@ -116,7 +116,7 @@
             @endif
             <div class="col s12 l2">
                 <div class="input-field">
-                    {{ Form::file('co_logo',null,array('required',null,@$readOnly)) }}
+                    {{ Form::file('co_logo',null,array('required',null,@$readOnly,'data-parsley-id'=>'4370','class'=>($errors->first('co_logo'))?'parsley-error':null)) }}
                     <p class="parsley-required error-validation">{{ $errors->first('co_logo') }} </p>
 
                 </div>
@@ -124,6 +124,21 @@
 
 
         </div>
+            <div class="row">
+                <div class="col s12 l2">
+
+                    <?php $invoice_notes = Lang::get('main.invoice_notes') ?>
+                    {{ Form::label('logo',$invoice_notes) }}
+                </div>
+                <div class="col s12 l8">
+                    <div class="input-field">
+                        <i class="fa fa-pencil-square-o prefix"></i>
+                        {{ Form::text('co_invoice_notes',null,array('required','placeholder'=>$invoice_notes,@$readOnly,'data-parsley-id'=>'4370','class'=>($errors->first('co_tel'))?'parsley-error':null)) }}
+                        <p class="parsley-required error-validation">{{ $errors->first('co_tel') }} </p>
+
+                    </div>
+                </div>
+            </div>
             @if(!@$readOnly)
             <hr/>
         <div class="row">
@@ -135,6 +150,9 @@
         </div>
 
         <div class="row">
+
+
+
             <div class="col s12 l5">
 
                 {{ Form::checkbox('co_use_serial', 1,null,array('id'=>'co_use_serial')) }}
@@ -215,8 +233,11 @@
                 <div class="col s12 m6 l6">
                     <div class="input-field">
                         <i class="mdi mdi-social-person prefix"></i>
-                        <input value="{{ isset($branch->br_name)?$branch->br_name:null }}" name="branch_name"
-                               id="branch-name" type="text" placeholder=@lang('main.branchName')>
+                        <input value="{{ isset($branch->br_name)?$branch->br_name:null }}" data-parsley-id='4370' @if($errors->first('branch_name')) class='parsley-error' @endif
+                        name="branch_name"
+                        id="branch-name" type="text" placeholder=@lang('main.branchName')>
+                        <p class="parsley-required error-validation">{{ $errors->first('branch_name') }} </p>
+
                     </div>
                 </div>
 
@@ -230,8 +251,10 @@
                 <div class="col s12 m6 l8">
                     <div class="input-field">
                         <i class="mdi mdi-social-person prefix"></i>
-                        <input value="{{ isset($branch->br_address)?$branch->br_address :null }}" name="branch_address"
-                               id="branch-address" type="text" placeholder= @lang('main.branchAddress')>
+                        <input value="{{ isset($branch->br_address)?$branch->br_address :null }}" name="branch_address" @if($errors->first('branch_address')) class='parsley-error' @endif
+                        data-parsley-id='4370'  id="branch-address" type="text" placeholder= @lang('main.branchAddress')>
+                        <p class="parsley-required error-validation">{{ $errors->first('branch_address') }} </p>
+
                     </div>
                 </div>
 
@@ -253,8 +276,8 @@
             <hr/>
             <!-- /عرض الفروع -->
                 @if(PerC::isShow('main_info','branch','add_edit_show'))
-            @include('dashboard.company._branches_table_view')
-                    @endif
+                @include('dashboard.company._branches_table_view')
+                @endif
         </div>
     </div>
     <!-- /Store Policies -->

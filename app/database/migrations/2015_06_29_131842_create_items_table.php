@@ -25,7 +25,7 @@ class CreateItemsTable extends Migration {
 			$table->integer('seasons_id');
 			$table->integer('models_id');
 			$table->integer('marks_id');
-			$table->integer('bar_code');
+			$table->string('bar_code');
 			$table->decimal('buy',10,2);
 			$table->decimal('sell_users',10,2);
 			$table->decimal('sell_nos_gomla',10,2);

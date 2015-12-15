@@ -16,6 +16,10 @@ class Branches extends Eloquent {
 	 *
 	 * @var array
 	 */
+	public static $store_rules = array(
+		'branch_name'	 =>'required',
+		'branch_address' =>'required',
+	);
     public function co_data()
     {
         return $this->belongsTo('Co_data','co_id');

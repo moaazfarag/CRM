@@ -128,12 +128,12 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                        class="waves-effect waves-blue"> @lang('main.items')</a>
                                 </li>
                             @endif
-                            @if(PerC::isShow('main_info','barcode','add'))
-                                <li>
-                                    <a href="{{ URL::route('barcode') }}"
-                                       class="waves-effect waves-blue"> @lang('main.has_label')</a>
-                                </li>
-                            @endif
+                            {{--@if(PerC::isShow('main_info','barcode','add'))--}}
+                                {{--<li>--}}
+                                    {{--<a href="{{ URL::route('barcode') }}"--}}
+                                       {{--class="waves-effect waves-blue"> @lang('main.has_label')</a>--}}
+                                {{--</li>--}}
+                            {{--@endif--}}
                             @if(PerC::isShow('main_info','add_account','show_edit_add'))
                                 <li>
                                     <a href="{{  URL::route('addAccount','customers') }}"

@@ -14,6 +14,11 @@ img, legend {
 }
 @media print
 {
+    /*a:link:after,*/
+    /*a:visited:after {*/
+        /*content: "" !important;*/
+    /*}*/
+    a:link:after,a:visited:after{content:"(" attr(href) ")";font-size:90%}
     .no-print {
         width: 0px;
         display: none;
@@ -43,7 +48,9 @@ img, legend {
 
 }
 @page {
-    margin: 0;
+
+    size: auto;
+    margin: 0mm;
 .BarcodeText{
     font-size: 25pt;
     width: 89mm;

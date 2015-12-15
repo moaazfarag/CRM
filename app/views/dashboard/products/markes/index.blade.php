@@ -32,7 +32,7 @@
                     <div class="col s12 m6 l6">
                         <div class="input-field">
                             <i class="fa fa-ticket prefix"></i>
-                            {{Form::text('name',null,array('required','placeholder'=>"اسم   ". Lang::get('main.marka'),'id'=>'name')) }}
+                            {{Form::text('name',null,array('data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null,'required','placeholder'=>"اسم   ". Lang::get('main.marka'),'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
                         </div>
                     </div>

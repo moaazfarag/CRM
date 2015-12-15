@@ -24,6 +24,11 @@ class CategoryController extends  BaseController
      */
         public function storeCategory()
             {
+                $validation = Validator::make(Input::all(), Category::$store_rules, BaseController::$messages);
+
+                if ($validation->fails()) {
+                    return Redirect::back()->withInput()->withErrors($validation->messages());
+                }
                 $category           = new Category ;
                 $category->true_id  = BaseController::maxId($category);
                 $category->name     = Input::get('name'); //category name from input
