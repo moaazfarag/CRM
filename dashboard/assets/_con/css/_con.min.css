@@ -4944,12 +4944,12 @@ input[type=date], input[type=datetime-local], input[type=email], input[type=numb
 }
 
 input[type=date]:disabled, input[type=date][readonly=readonly], input[type=datetime-local]:disabled, input[type=datetime-local][readonly=readonly], input[type=email]:disabled, input[type=email][readonly=readonly], input[type=number]:disabled, input[type=number][readonly=readonly], input[type=password]:disabled, input[type=password][readonly=readonly], input[type=search]:disabled, input[type=search][readonly=readonly], input[type=tel]:disabled, input[type=tel][readonly=readonly], input[type=text]:disabled, input[type=text][readonly=readonly], input[type=time]:disabled, input[type=time][readonly=readonly], input[type=url]:disabled, input[type=url][readonly=readonly], textarea.materialize-textarea:disabled, textarea.materialize-textarea[readonly=readonly] {
-    color: rgba(0, 0, 0, .26);
+    color: rgba(0, 0, 0, .5);
     border-bottom: 1px dotted rgba(0, 0, 0, .26)
 }
 
 input[type=date]:disabled + label, input[type=date][readonly=readonly] + label, input[type=datetime-local]:disabled + label, input[type=datetime-local][readonly=readonly] + label, input[type=email]:disabled + label, input[type=email][readonly=readonly] + label, input[type=number]:disabled + label, input[type=number][readonly=readonly] + label, input[type=password]:disabled + label, input[type=password][readonly=readonly] + label, input[type=search]:disabled + label, input[type=search][readonly=readonly] + label, input[type=tel]:disabled + label, input[type=tel][readonly=readonly] + label, input[type=text]:disabled + label, input[type=text][readonly=readonly] + label, input[type=time]:disabled + label, input[type=time][readonly=readonly] + label, input[type=url]:disabled + label, input[type=url][readonly=readonly] + label, textarea.materialize-textarea:disabled + label, textarea.materialize-textarea[readonly=readonly] + label {
-    color: rgba(0, 0, 0, .26)
+    color: rgba(0, 0, 0, 0.5)
 }
 
 input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=search]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=url]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
