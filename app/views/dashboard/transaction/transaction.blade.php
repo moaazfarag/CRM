@@ -150,17 +150,17 @@
                         @endif
                     </div>
                     <?php
-                    include 'phar://ArPHP.phar/Arabic.php';
-                    $obj = new I18N_Arabic('Numbers');
+                    //if(include('phar://ArPHP.phar/Arabic.php'))
+                    //$obj = new I18N_Arabic('Numbers');
 
-                    $total_with_arabic = $obj->int2str($invoice->in_total += .22);
+                    //$total_with_arabic = $obj->int2str($invoice->in_total += .22);
 
                     ?>
-                    <h4 style="border:solid rgba(86, 86, 86, 1) ; padding: 1%;">
-                        {{ $total_with_arabic.' '. $co_info->co_currency }}
+                    {{--<h4 style="border:solid rgba(86, 86, 86, 1) ; padding: 1%;">--}}
+                        {{--{{ $total_with_arabic.' '. $co_info->co_currency }}--}}
 
-                         فقط لا غير
-                    </h4>
+                         {{--فقط لا غير--}}
+                    {{--</h4>--}}
                     @if($co_info->co_invoice_notes !='')<h4>{{ $co_info->co_invoice_notes }}</h4>@endif
                     <address>
                         عنوان الشركة الرئيسى

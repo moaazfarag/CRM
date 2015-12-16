@@ -6,12 +6,13 @@
     <div class="container">
         <div class="row">
             <div class="col l12 s12">
-                <img src="{{URL::asset('dashboard/img/404_3.jpg')}}" width="auto"
-                     style="width: 600px; min-height: 400px; margin: 1% "/>
+                <img src="{{URL::asset('dashboard/img/2.png')}}" width="auto"
+                     style="max-width: 700px; min-height: 200px; margin: 1% "/>
+                <h2>
+                    {{ isset($error)?$error:'الصفحة المطلوبة غير موجودة'}}
+                </h2>
             </div>
-            <h1>
-                {{ isset($error)?$error:'                الصفحة المطلوبة غير موجودة' }}
-            </h1>
+
         </div>
     </div>
 </section>

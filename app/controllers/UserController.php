@@ -125,47 +125,41 @@ class UserController extends BaseController
     }
     public function addUser()
     {
-        $add = Lang::get('main.add');
-        $addUser = Lang::get('main.addUser');
-        $data['company'] = CoData::find(Auth::user()->co_id);
-        $data['button'] = $add;
+        $add                      = Lang::get('main.add');
+        $addUser                  = Lang::get('main.addUser');
+        $data['company']          = CoData::find(Auth::user()->co_id);
+        $data['button']           = $add;
         $data['groupPermissions'] = PermissionController::setPermission();
+        $data['group']            = ['add_all', 'edit_all', 'delete_all', 'show_all'];
+        $data['asideOpen']        = 'open';
+        $data['title']            = $addUser;
 
-        $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
-//        dd(current($data['permissions']['company']['add']));
-        $data['asideOpen'] = 'open';
-        $data['title'] = $addUser;
         return View::make('dashboard.users.index', $data);
     }
 
     public function storeUser()
     {
         $inputs = Input::all();
-       $store_rules = array(
-
-        'username'         => 'unique:users,username,NULL,id,co_id,'.Auth::user()->co_id ,
-        'name'             => 'required',
-//        'email'            => 'email|unique:users,email' ,
-        //'password'         => 'required|min:8',
-        //'confirm_password' => 'required|same:password',
-        // 'all_br'          => 'boolean',
+        $user_rules = array(
+        'username'  => 'unique:users,username,NULL,id,co_id,'.Auth::user()->co_id ,
+        'name'      => 'required',
+        'br_id'     => 'required',
     );
         $permissions = PermissionController::setPermission();
-        $validation = Validator::make(Input::all(), $store_rules,BaseController::$messages);
+        $validation = Validator::make(Input::all(), $user_rules,BaseController::$messages);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
-            $newUser = new User;
-            $newUser->co_id = Auth::user()->co_id;
-            $data['asideOpen'] = 'open';
-            $newUser->br_id = Input::get('br_id');
-            $newUser->id = User::max('id') + 1;
-            $newUser->all_br = Input::get('all_br');
-            $newUser->name = Input::get('name');
-            $newUser->permission = json_encode($permissions);
-            $newUser->username = Input::get('username');
-            $newUser->password = Hash::make('12345678');
-            $newUser->email = Input::get('email');
+            $newUser                = new User;
+            $newUser->id            = User::max('id') + 1;
+            $newUser->co_id         = Auth::user()->co_id;
+            $newUser->br_id         = ($inputs['br_id'] == 'all')?0:$inputs['br_id'];
+            $newUser->all_br        = ($inputs['br_id'] == 'all')?1:0;
+            $newUser->name          = $inputs['name'];
+            $newUser->username      = $inputs['username'];
+            $newUser->password      = Hash::make('12345678');
+            $newUser->email         = Input::get('email');
+            $newUser->permission    = json_encode($permissions);
             $newUser->save();
 
             return Redirect::route('addUserSuccess',array($newUser->name,$newUser->username));
@@ -173,18 +167,22 @@ class UserController extends BaseController
     }
     public function addUserSuccess($name,$user_name){
 
-        $data['name'] = $name;
-        $data['user_name'] = $user_name;
+        $data['asideOpen']  = 'open';
+        $data['name']       = $name;
+        $data['user_name']  = $user_name;
         return View::make('dashboard.users.add_user_success',$data);
     }
     public function editUser($id)
     {
-        $data['asideOpen'] = 'open';
-        $edit = Lang::get('main.edit');
-        $editUser = Lang::get('main.editUser');
-        $data['company'] = CoData::find(Auth::user()->co_id);
-        $data['user'] = $data['company']->users()->where('id', '=', $id)->first();;
-        $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
+        $edit               = Lang::get('main.edit');
+        $editUser           = Lang::get('main.editUser');
+        $data['company']    = CoData::find(Auth::user()->co_id);
+        $data['user']       = $data['company']->users()->where('id', '=', $id)->first();;
+        $data['group']      = ['add_all', 'edit_all', 'delete_all', 'show_all'];
+        $data['asideOpen']  = 'open';
+        $data['button']     = $edit;
+        $data['title']      = $editUser;
+
         if ($data['user']->permission) {
             $array = json_decode($data['user']->permission, true);
             if (count($array)>0){
@@ -196,8 +194,6 @@ class UserController extends BaseController
             $data['groupPermissions'] = PermissionController::setPermission();
         }
 
-        $data['button'] = $edit;
-        $data['title'] = $editUser;
         if ($data['user']) {
             return View::make('dashboard.users.index', $data);
         } else {
@@ -211,32 +207,37 @@ class UserController extends BaseController
 
     public function updateUser($id)
     {
+
         $data['company'] = CoData::find(Auth::user()->co_id);
-        $oldUser = $data['company']->users()->where('id', '=', $id)->first();
-        $permissions = PermissionController::setPermission();
+        $oldUser         = $data['company']->users()->where('id', '=', $id)->first();
+        $permissions     = PermissionController::setPermission();
+
         if ($oldUser) {
-            $rules_update = array(
-//                'password' => 'min:8',
-                'name' => 'required',
-//                'email' => 'required|email|unique:users,email,' . $id,
-//                'confirm_password' => 'same:password',
+
+            $user_rules = array(
+                'name'      => 'required',
+                'br_id'     => 'required',
             );
-            $validation = Validator::make(Input::all(), $rules_update);
+
+            $validation = Validator::make(Input::all(), $user_rules);
             if ($validation->fails()) {
                 return Redirect::back()->withInput()->withErrors($validation->messages());
-            } else {
-                $oldUser->co_id = Auth::user()->co_id;
-                $oldUser->br_id = Input::get('br_id');
-                $oldUser->all_br = Input::get('all_br');
-                $oldUser->name = Input::get('name');
-                $oldUser->permission = json_encode($permissions);
-                if(Input::has('password')){
-                $oldUser->password = Hash::make(Input::get('password'));
-                }
-                $oldUser->email = Input::get('email');
-                $oldUser->update();
             }
-            return Redirect::route('addUser');
+                $inputs              = Input::all();
+                $oldUser->co_id      = Auth::user()->co_id;
+                $oldUser->br_id      = ($inputs['br_id'] == 'all')?0:$inputs['br_id'];
+                $oldUser->all_br     = ($inputs['br_id'] == 'all')?1:0;
+                $oldUser->name       = Input::get('name');
+                $oldUser->permission = json_encode($permissions);
+
+                if(isset($inputs['reset_password'])){
+                    $oldUser->password =Hash::make('12345678');
+                }
+
+                $oldUser->update();
+
+                Session::flash('success','تم تعديل بيانات المستخدم بنجاح');
+                return Redirect::route('addUser');
         } else {
 
             $data['error'] = "هذا المستخدم غير موجود";
@@ -295,7 +296,8 @@ class UserController extends BaseController
     {
         $user = User::where('id',$id)->company()->first();
         if(!empty($user)){
-                     $user->deleted = 1 ;
+                     $user->username = '';
+                     $user->deleted  = 1 ;
                      $user->update();
 
                     Session::flash('success','تم حذف المستخدم بنجاح');

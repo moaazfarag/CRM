@@ -39,6 +39,7 @@
             </a>
         </div>
         <div class="content">
+            @include('include.messages')
             <h5 style=" color:#000000; font-weight: 500; width: 100%; padding: 1%; border-radius: 2%;" >   بيانات المستخدم</h5>
             <hr/>
             @if(Route::currentRouteName()== "addUser" )
@@ -72,8 +73,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row">
                 @if(Route::currentRouteName()== "editUser" && $user->owner == 'acount_creator' )
                 <div class="col m5 s12">
@@ -89,74 +88,51 @@
                 @endif
                 @if(Route::currentRouteName()== "editUser" && $user->owner != 'acount_creator' ||Route::currentRouteName()== "addUser" )
                 <div class="col s12 l4">
-                    <?php $branch = Lang::get('main.branch');
-                    $choseBranch = Lang::get('main.choseBranch') ?>
+                    <?php $branch        = Lang::get('main.branch');
+                          $choseBranch   = Lang::get('main.choseBranch') ?>
                     {{--{{ Form::label('br_id',$branch) }}--}}
-                    {{ Form::select('br_id', array('' => $choseBranch )+$company->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
+                    {{ Form::select('br_id', array('all' => 'كل الفروع' )+$company->branches->lists('br_name','id'),null,array('id'=>'br_id')) }}
                     <p class="parsley-required">
                         {{ $errors ->first('br_id') }}
                     </p>
                 </div>
-                <div class="col s12 l2">
-                    <p>
-                    <?php $allParts = Lang::get('main.allParts') ?>
-                    {{ Form::checkbox('all_br',1,null,array('id'=>'all_br')) }}
-                    {{ Form::label('all_br',$allParts) }}
-                    <p class="parsley-required">
-                        {{ $errors ->first('all_br') }}
-                    </p>
-                    {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
-                    </p>
-                </div>
-
-            </div>
-                 @if(Route::currentRouteName()== "editUser")
-                <div class="row">
-                    <div class="col m5 s12">
-                        <div class="input-field">
-                            <i class="mdi mdi-action-lock prefix active"></i>
-                            {{ Form::password('password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'password','data-parsley-id'=>'4370','class'=>($errors->first('password'))?'parsley-error':null)) }}
-                            <label for="password">@lang('main.password')</label>
-                            <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                <li class="parsley-required">{{ $errors ->First('password') }} </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col m5 s12">
-                        <div class="input-field">
-                            <i class="mdi mdi-action-lock prefix active"></i>
-                            {{ Form::password('confirm_password',array((Route::currentRouteName()== "addUser")?'required':'','id'=>'confirm_password','data-parsley-id'=>'4370','class'=>($errors->first('confirm_password'))?'parsley-error':null)) }}
-                            <label for="confirm_password"> @lang('main.confirm_password') </label>
-                            <ul class="parsley-errors-list filled" id="parsley-id-5202">
-                                <li class="parsley-required">{{ $errors ->First('confirm_password') }} </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endif
+                @if(Route::currentRouteName()== "editUser" && $user->owner != 'acount_creator')
+                <div class="col s12 l4">
+                   <p>
+                   <?php //$allParts = Lang::get('main.allParts')
+                       ?>
+                   {{ Form::checkbox('reset_password',1,null,array('id'=>'reset_password')) }}
+                   {{ Form::label('reset_password','تغيير كلمة المرور إلى (12345678)') }}
+                   <p class="parsley-required">
+                       {{ $errors ->first('all_br') }}
+                   </p>
+                   <input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >
+                   </p>
+               </div>
                @endif
-
+           </div>
+           @if(Route::currentRouteName()== "editUser")
+                   @if($user->owner != 'acount_creator')
+                   <div class="row">
+                       @include('dashboard.users._premisions')
+                   </div>
+                   @endif
+           @else
+                       @include('dashboard.users._premisions')
            @endif
-            @if(Route::currentRouteName()== "editUser")
-                    @if($user->owner != 'acount_creator')
-                    <div class="row">
-                        @include('dashboard.users._premisions')
-                    </div>
-                    @endif
-            @else
-                        @include('dashboard.users._premisions')
-            @endif
-            <div class="row">
-                <div class="col s10 l10" style="margin: 5px 20px 5px 5px;">
-                    <button class="waves-effect btn">{{ $button }} </button>
-                </div>
-            </div>
+           <div class="row">
+               <div class="col s10 l10" style="margin: 5px 20px 5px 5px;">
+                   <button class="waves-effect btn">{{ $button }} </button>
+               </div>
+           </div>
 
 
-        </div>
-    </div>
+       </div>
+   </div>
 
-    <!--    /Store Settings -->
-            @endif
+   <!--    /Store Settings -->
+           @endif
 
 </section>
 <!-- /Main Content -->

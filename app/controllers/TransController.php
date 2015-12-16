@@ -117,7 +117,7 @@ class TransController extends BaseController
                         $newHeader->discount        = $discount;
                         $newHeader->tax             = $tax;
                         $net_after_descount         = $total - ($total)*($discount)/100;
-                        $net                        = $net_after_descount - ($net_after_descount)*($tax)/100;
+                        $net                        = $net_after_descount + ($net_after_descount)*($tax)/100;
 
                         $newHeader->net             = $net;
                         //if select account save record into account_trans
@@ -147,7 +147,7 @@ class TransController extends BaseController
                         //redirect to invoice to print
                     }else{
                         $newHeader->delete();
-                        return "الاتورة خالية من المنتجات";
+                        return "الفاتورة خالية من المنتجات";
                     }//end if
 
                 }else{

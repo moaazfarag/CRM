@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->string('username');
 			$table->string('password');
 			$table->string('management_password');
-			$table->string('email');
+			$table->string('email')->nullable();
 			$table->longText('permission');
 			$table->string('photo');
 			$table->boolean('deleted');
