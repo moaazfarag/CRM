@@ -150,6 +150,7 @@ class UserController extends BaseController
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
+
             $newUser                = new User;
             $newUser->id            = User::max('id') + 1;
             $newUser->co_id         = Auth::user()->co_id;
@@ -160,6 +161,7 @@ class UserController extends BaseController
             $newUser->password      = Hash::make('12345678');
             $newUser->email         = Input::get('email');
             $newUser->permission    = json_encode($permissions);
+
             $newUser->save();
 
             return Redirect::route('addUserSuccess',array($newUser->name,$newUser->username));
