@@ -492,14 +492,16 @@ angular.module('mainCtrl', [])
 
         };
         $scope.priceAfterOffer =  function(item){
-            var today =new Date();
-            from = item.offer_from.split("-");
-            from = new Date(from[0], from[1]-1 ,from[2] );
-            to = item.offer_to.split("-");
-            to = new Date(to[0], to[1]-1 , to[2]);
-            if (today.getTime() >= from.getTime() && today.getTime()  <= to.getTime() ) {
-                console.log( to);
-                return item.sell_users - (item.sell_users)*(item.offer)/100;
+            if(item.offer_from){
+                var today =new Date();
+                from = item.offer_from.split("-");
+                from = new Date(from[0], from[1]-1 ,from[2] );
+                to = item.offer_to.split("-");
+                to = new Date(to[0], to[1]-1 , to[2]);
+                if (today.getTime() >= from.getTime() && today.getTime()  <= to.getTime() ) {
+                    console.log( to);
+                    return item.sell_users - (item.sell_users)*(item.offer)/100;
+                }
             }
             return item.sell_users;
 
