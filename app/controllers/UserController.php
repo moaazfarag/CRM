@@ -69,12 +69,22 @@ class UserController extends BaseController
                     return Redirect::route('notConfirmed');
                 }
 
+                if($user->deleted == 1){
+
+                    Session::flash('error',  'عفواً تم حذف هذا المستخدم ');
+                    return Redirect::to('/login');                }
+
                 if (Auth::attempt(array('username' => $username, 'password' => $password, 'co_id' => $co_id))) {
 
-                    Session::put('permission', json_decode(Auth::user()->permission, true));
+                        if(Auth::user()->owner == 'acount_creator'){
+                             Session::put('permission',PermissionController::setPermission(1));
+                        }else{
+
+                            Session::put('permission', json_decode(Auth::user()->permission, true));
+                        }
                     $user = User::find(Auth::id());
                     Session::put('last_login',$user->updated_at->format('d M Y - H:i:s'));
-                    return Redirect::intended('admin/setting');
+                    return Redirect::intended('/admin');
                 } else {
 
                 $error = Lang::get('main.error');
@@ -115,60 +125,66 @@ class UserController extends BaseController
     }
     public function addUser()
     {
-        $add = Lang::get('main.add');
-        $addUser = Lang::get('main.addUser');
-        $data['company'] = CoData::find(Auth::user()->co_id);
-        $data['button'] = $add;
+        $add                      = Lang::get('main.add');
+        $addUser                  = Lang::get('main.addUser');
+        $data['company']          = CoData::find(Auth::user()->co_id);
+        $data['button']           = $add;
         $data['groupPermissions'] = PermissionController::setPermission();
+        $data['group']            = ['add_all', 'edit_all', 'delete_all', 'show_all'];
+        $data['asideOpen']        = 'open';
+        $data['title']            = $addUser;
 
-        $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
-//        dd(current($data['permissions']['company']['add']));
-        $data['asideOpen'] = 'open';
-        $data['title'] = $addUser;
         return View::make('dashboard.users.index', $data);
     }
 
     public function storeUser()
     {
         $inputs = Input::all();
-       $store_rules = array(
-
-        'username'         => 'unique:users,username,NULL,id,co_id,'.Auth::user()->co_id ,
-        'name'             => 'required',
-        'email'            => 'required|email|unique:users,email' ,
-        'password'         => 'required|min:8',
-        'confirm_password' => 'required|same:password',
-        // 'all_br'           => 'boolean',
+        $user_rules = array(
+        'username'  => 'unique:users,username,NULL,id,co_id,'.Auth::user()->co_id ,
+        'name'      => 'required',
+        'br_id'     => 'required',
     );
         $permissions = PermissionController::setPermission();
-        $validation = Validator::make(Input::all(), $store_rules);
+        $validation = Validator::make(Input::all(), $user_rules,BaseController::$messages);
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
-            $newUser = new User;
-            $newUser->co_id = Auth::user()->co_id;
-            $data['asideOpen'] = 'open';
-            $newUser->br_id = Input::get('br_id');
-            $newUser->id = User::max('id') + 1;
-            $newUser->all_br = Input::get('all_br');
-            $newUser->name = Input::get('name');
-            $newUser->permission = json_encode($permissions);
-            $newUser->username = Input::get('username');
-            $newUser->password = Hash::make(Input::get('password'));
-            $newUser->email = Input::get('email');
+
+            $newUser                = new User;
+            $newUser->id            = User::max('id') + 1;
+            $newUser->co_id         = Auth::user()->co_id;
+            $newUser->br_id         = ($inputs['br_id'] == 'all')?0:$inputs['br_id'];
+            $newUser->all_br        = ($inputs['br_id'] == 'all')?1:0;
+            $newUser->name          = $inputs['name'];
+            $newUser->username      = $inputs['username'];
+            $newUser->password      = Hash::make('12345678');
+            $newUser->email         = Input::get('email');
+            $newUser->permission    = json_encode($permissions);
+
             $newUser->save();
-            return Redirect::route('addUser');
+
+            return Redirect::route('addUserSuccess',array($newUser->name,$newUser->username));
         }
     }
+    public function addUserSuccess($name,$user_name){
 
+        $data['asideOpen']  = 'open';
+        $data['name']       = $name;
+        $data['user_name']  = $user_name;
+        return View::make('dashboard.users.add_user_success',$data);
+    }
     public function editUser($id)
     {
-        $data['asideOpen'] = 'open';
-        $edit = Lang::get('main.edit');
-        $editUser = Lang::get('main.editUser');
-        $data['company'] = CoData::find(Auth::user()->co_id);
-        $data['user'] = $data['company']->users()->where('id', '=', $id)->first();;
-        $data['group'] = ['add_all', 'edit_all', 'delete_all', 'show_all'];
+        $edit               = Lang::get('main.edit');
+        $editUser           = Lang::get('main.editUser');
+        $data['company']    = CoData::find(Auth::user()->co_id);
+        $data['user']       = $data['company']->users()->where('id', '=', $id)->first();;
+        $data['group']      = ['add_all', 'edit_all', 'delete_all', 'show_all'];
+        $data['asideOpen']  = 'open';
+        $data['button']     = $edit;
+        $data['title']      = $editUser;
+
         if ($data['user']->permission) {
             $array = json_decode($data['user']->permission, true);
             if (count($array)>0){
@@ -180,8 +196,6 @@ class UserController extends BaseController
             $data['groupPermissions'] = PermissionController::setPermission();
         }
 
-        $data['button'] = $edit;
-        $data['title'] = $editUser;
         if ($data['user']) {
             return View::make('dashboard.users.index', $data);
         } else {
@@ -195,32 +209,37 @@ class UserController extends BaseController
 
     public function updateUser($id)
     {
+
         $data['company'] = CoData::find(Auth::user()->co_id);
-        $oldUser = $data['company']->users()->where('id', '=', $id)->first();
-        $permissions = PermissionController::setPermission();
+        $oldUser         = $data['company']->users()->where('id', '=', $id)->first();
+        $permissions     = PermissionController::setPermission();
+
         if ($oldUser) {
-            $rules_update = array(
-                'password' => 'min:8',
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id,
-                'confirm_password' => 'same:password',
+
+            $user_rules = array(
+                'name'      => 'required',
+                'br_id'     => 'required',
             );
-            $validation = Validator::make(Input::all(), $rules_update);
+
+            $validation = Validator::make(Input::all(), $user_rules);
             if ($validation->fails()) {
                 return Redirect::back()->withInput()->withErrors($validation->messages());
-            } else {
-                $oldUser->co_id = Auth::user()->co_id;
-                $oldUser->br_id = Input::get('br_id');
-                $oldUser->all_br = Input::get('all_br');
-                $oldUser->name = Input::get('name');
-                $oldUser->permission = json_encode($permissions);
-                if(Input::has('password')){
-                $oldUser->password = Hash::make(Input::get('password'));
-                }
-                $oldUser->email = Input::get('email');
-                $oldUser->update();
             }
-            return Redirect::route('addUser');
+                $inputs              = Input::all();
+                $oldUser->co_id      = Auth::user()->co_id;
+                $oldUser->br_id      = ($inputs['br_id'] == 'all')?0:$inputs['br_id'];
+                $oldUser->all_br     = ($inputs['br_id'] == 'all')?1:0;
+                $oldUser->name       = Input::get('name');
+                $oldUser->permission = json_encode($permissions);
+
+                if(isset($inputs['reset_password'])){
+                    $oldUser->password =Hash::make('12345678');
+                }
+
+                $oldUser->update();
+
+                Session::flash('success','تم تعديل بيانات المستخدم بنجاح');
+                return Redirect::route('addUser');
         } else {
 
             $data['error'] = "هذا المستخدم غير موجود";
@@ -245,8 +264,8 @@ class UserController extends BaseController
         if ($oldUser) {
             $rules_update = array(
 
-                'old_password' => "required|min:6",
-                'new_password' => 'required|min:6',
+                'old_password' => "required",
+                'new_password' => 'required|min:8',
                 'confirm_new_password' => 'required|same:new_password',
 
             );
@@ -265,7 +284,7 @@ class UserController extends BaseController
                     Session::flash('success','تم  تغيير كلمة المرور بنجاح');
                     return Redirect::back();
                 } else {
-                    return $old_password_from_db . '<br/>' . $old_password_from_user;
+//                    return $old_password_from_db . '<br/>' . $old_password_from_user;
 
                     Session::flash('error', 'كلمة المرور القديمة غير صحيحة ');
                     return Redirect::back();
@@ -273,5 +292,21 @@ class UserController extends BaseController
                 }
             }
         }
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::where('id',$id)->company()->first();
+        if(!empty($user)){
+                     $user->username = '';
+                     $user->deleted  = 1 ;
+                     $user->update();
+
+                    Session::flash('success','تم حذف المستخدم بنجاح');
+                    return Redirect::back();
+                }else{
+                     Session::flash('error','عفواً لم يتم حذف المستخدم حاول مرة أخرى ');
+                     return Redirect::back();
+            }
     }
 }

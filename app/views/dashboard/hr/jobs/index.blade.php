@@ -32,7 +32,7 @@
                         <div class="col s12 m6 l6">
                             <div class="input-field">
                                 <i class="ion-pricetags prefix"></i>
-                                {{Form::text('name',null,array('required','placeholder'=>"". @$arabicName,'id'=>'name')) }}
+                                {{Form::text('name',null,array('data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null,'required','placeholder'=>"". @$arabicName,'id'=>'name')) }}
                                 {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
                                 <p class="parsley-required error-validation">{{ $errors->first('name') }} </p>
                             </div>

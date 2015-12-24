@@ -48,7 +48,7 @@
                     </div>
                     <div class="col  l2">
                         <div class="input-field">
-                            {{ Form::text('trans_date',null,array('id'=>'trans_date','class'=>'pikaday')) }}
+                            {{ Form::text('trans_date',null,array('data-parsley-id'=>'4370','class'=>($errors->first('trans_date'))?'parsley-error pikaday':'pikaday','id'=>'trans_date')) }}
                             <p class="parsley-required error-validation">{{ $errors ->first('trans_date') }} </p>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                     <div class="col  l3 s12">
                         <div class="input-field">
                             {{--<i class="fa fa-tag prefix"></i>--}}
-                            {{ Form::text('val',null,array('id'=>'val',)) }}
+                            {{ Form::text('val',null,array('data-parsley-id'=>'4370','class'=>($errors->first('val'))?'parsley-error':null,'id'=>'val')) }}
                             {{--{{ Form::label('val',  ' خصم التامين' )     }}--}}
                             <p class="parsley-required error-validation">{{ $errors ->first('val') }} </p>
                         </div>

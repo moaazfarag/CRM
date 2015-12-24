@@ -32,7 +32,7 @@
                         <div class="input-field">
                             <i class="wi wi-night-sleet prefix"></i>
                             <?php $name = Lang::get('main.name_of') ?>
-                            {{Form::text('name',null,array('required','placeholder'=> $name .' '. @$arabicName ,'id'=>'name')) }}
+                            {{Form::text('name',null,array('data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null,'required','placeholder'=> $name .' '. @$arabicName ,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="اسم  {{@$arabicName}}">--}}
                         </div>
                     </div>

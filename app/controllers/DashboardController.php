@@ -17,7 +17,7 @@ class dashboardController extends BaseController {
 
 	public function home()
 	{
-		$data['topics']    = Topic::company()->paginate(10) ;
+		$data['topics']    = Topic::company()->orderBy('id', 'DESC')->paginate(10) ;
 		$data['home_page'] = Home::company()->first();
 		return View::make('dashboard.home.home',$data);
 	}
@@ -43,7 +43,12 @@ class dashboardController extends BaseController {
 	}
 	public function editTopic($id)
 	{
-
+		$data['types'] = array(
+				'default'	=> Lang::get('main.default_message'),
+				'done'		=> Lang::get('main.done_message'),
+				'warning'	=> Lang::get('main.warning_message'),
+				'error'		=> Lang::get('main.error_message'),
+		);
 		$topic =  Topic::company()->where('id',$id)->first();
 		$data['tablesData'] =  Topic::company()->get();
 		if(empty($topic)){

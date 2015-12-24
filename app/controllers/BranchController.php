@@ -35,7 +35,11 @@ class BranchController extends  BaseController
      */
     public  function storeBranch()
     {
-    //d(Input::get('branch_name') );
+        $validation = Validator::make(Input::all(), Branches::$store_rules, BaseController::$messages);
+
+        if ($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }
         $branch             = new Branches; //object from branch will add
         $branch->true_id    = BaseController::maxId($branch);
         $branch->br_name    = Input::get('branch_name');

@@ -110,12 +110,19 @@ $all_discount = [];
                     </tbody>
                 </table>
                 </div>
-        {{--##### discount   #####--}}
+        {{--##### discount  #####--}}
 
+        <?php $all_discount = [];  $all_tax = [];?>
         @foreach($invoices as  $i=>$invoice)
 
             @if($invoice->discount != 0)
-                <?php $all_discount[$i] = $invoice->discount ?>
+                <?php
+                $discount = ($invoice->in_total) * ($invoice->discount)/100;
+                $tax      = ($invoice->in_total - $discount) * ($invoice->tax)/100;
+
+                $all_discount[$i] = $discount;
+                $all_tax[$i]      = $tax;
+                ?>
             @endif
         @endforeach
 
@@ -125,8 +132,7 @@ $all_discount = [];
                     <thead>
                     <tr>
                         <caption class="caption-style">
-                            الخصم على الفواتير
-
+                            الخصومات
                         </caption>
 
                     </tr>
@@ -136,7 +142,8 @@ $all_discount = [];
                         <th>@lang('main.invoiceNum')</th>
                         <th>@lang('main.date')</th>
                         <th>@lang('main.branchName')</th>
-                        <th>@lang('main.discount')</th>
+                        <th>نسبة الخصم</th>
+                        <th>قيمة الخصم</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -148,9 +155,10 @@ $all_discount = [];
                                 <td>{{ $invoice->invoice_no }}</td>
                                 <td>{{ $invoice->date }}</td>
                                 <td>{{ $invoice->branch->br_name }}</td>
-                                <td>{{ $invoice->discount }}</td>
+                                <td>{{ $invoice->discount}}%</td>
+                                <td>{{ ($invoice->in_total) * ($invoice->discount)/100 }}</td>
                             </tr>
-                            <?php $all_discount[$i] = $invoice->discount ?>
+                            <?php $all_discount[$i] =($invoice->in_total) * ($invoice->discount)/100; ?>
                         @endif
                     @endforeach
                     </tbody>
@@ -158,6 +166,53 @@ $all_discount = [];
             </div>
         @endif
         {{--end discount --}}
+
+        {{--##### tax #####--}}
+        @if(array_sum($all_tax) != 0)
+            <div class="table-responsive" >
+                <table   class="display table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <caption class="caption-style">
+                            الضرائب
+                        </caption>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>@lang('main.invoiceNum')</th>
+                        <th>@lang('main.date')</th>
+                        <th>@lang('main.branchName')</th>
+                        <th>نسبة الضريبة </th>
+                        <th> قيمة الضريبة</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $all_tax = array(); ?>
+                    @foreach($invoices as  $i=>$invoice)
+
+                        @if($invoice->discount != 0)
+                            <?php
+                            $discount = ($invoice->in_total) * ($invoice->discount)/100;
+                            $tax      = ($invoice->in_total - $discount) * ($invoice->tax)/100;
+
+                            $all_tax[$i]      = $tax;
+                            ?>
+                            <tr>
+                                <td>{{ $invoice->invoice_no }}</td>
+                                <td>{{ $invoice->date }}</td>
+                                <td>{{ $invoice->branch->br_name }}</td>
+                                <td>{{ $invoice->tax  }}%</td>
+                                <td>{{ $tax  }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+        {{--end tax --}}
         <div class="table-responsive" >
             <table  style="width:80%; margin:1% auto;" class="display table table-bordered table-striped table-hover">
                     <thead>
@@ -171,10 +226,13 @@ $all_discount = [];
                     </thead>
                     <tbody>
                     <tr>
-
-                        <td>{{ array_sum($debit) }}</td>
-                        <td>{{ array_sum($credit)+ array_sum($all_discount)  }}</td>
-                        <td>{{ BaseController::negativeValue(array_sum($credit)-array_sum($debit)) }}</td>
+                        <?php
+                            $_debit  = array_sum($debit);
+                            $_credit = array_sum($credit)- array_sum($all_discount) + array_sum($all_tax) ;
+                        ?>
+                        <td>{{ $_debit }}</td>
+                        <td>{{ $_credit }} </td>
+                        <td>{{ BaseController::negativeValue($_credit - $_debit) }}</td>
                     </tr>
                     </tbody>
                 </table>

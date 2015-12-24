@@ -24,7 +24,7 @@
                         <div class="input-field">
                             <i class="fa fa-tag prefix"></i>
                             <?php $itemName = Lang::get('main.itemName') ?>
-                            {{ Form::text('item_name',null,array('required','id'=>'item_name',)) }}
+                            {{ Form::text('item_name',null,array('required','id'=>'item_name','data-parsley-id'=>'4370','class'=>($errors->first('item_name'))?'parsley-error':null)) }}
                             {{ Form::label('item_name',$itemName) }}
                             <p class="parsley-required">{{ $errors ->first('item_name') }} </p>
                         </div>
@@ -43,21 +43,21 @@
                             </p>
                         </div>
                     @endif
-                    <div class="col s2 l2">
-                        <p>
-                        {{ Form::checkbox('has_label',1,null,array('id'=>'has_label')) }}
-                        {{ Form::label('has_label',Lang::get('main.has_label')) }}
-                        <p class="parsley-required">
-                            {{ $errors ->first('has_label') }}
-                        </p>
+                    {{--<div class="col s2 l2">--}}
+                        {{--<p>--}}
+                        {{--{{ Form::checkbox('has_label',1,null,array('id'=>'has_label')) }}--}}
+                        {{--{{ Form::label('has_label',Lang::get('main.has_label')) }}--}}
+                        {{--<p class="parsley-required">--}}
+                            {{--{{ $errors ->first('has_label') }}--}}
+                        {{--</p>--}}
                         {{--<input name="use_serial_no" type="checkbox" id="use_serial_no" value="use_serial_no"  >--}}
-                        </p>
-                    </div>
+                        {{--</p>--}}
+                    {{--</div>--}}
                     <div class="col s12  l4">
                         <div class="input-field">
                             <i class="fa fa-barcode prefix"></i>
                             <?php $bar_code = Lang::get('main.bar_code') ?>
-                            {{ Form::text('bar_code',null,array('id'=>'bar_code')) }}
+                            {{ Form::text('bar_code',null,array('id'=>'bar_code','data-parsley-id'=>'4370','class'=>($errors->first('bar_code'))?'parsley-error':null)) }}
                             {{ Form::label('bar_code',$bar_code) }}
                             <p class="parsley-required">{{ $errors ->first('bar_code') }} </p>
                         </div>
@@ -69,7 +69,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-editor-attach-money prefix"></i>
                             <?php $purchPrice = Lang::get('main.purchPrice') ?>
-                            {{ Form::text('buy',null,array('required','id'=>'buy')) }}
+                            {{ Form::text('buy',null,array('required','id'=>'buy','data-parsley-id'=>'4370','class'=>($errors->first('buy'))?'parsley-error':null)) }}
                             {{ Form::label('buy',$purchPrice) }}
                             <p class="parsley-required">{{ $errors ->first('buy') }} </p>
                         </div>
@@ -79,7 +79,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-editor-attach-money prefix"></i>
                             <?php $sellPrice = Lang::get('main.sellPrice') ?>
-                            {{ Form::text('sell_users',null,array('required','id'=>'sell_users')) }}
+                            {{ Form::text('sell_users',null,array('required','id'=>'sell_users','data-parsley-id'=>'4370','class'=>($errors->first('sell_users'))?'parsley-error':null)) }}
                             {{ Form::label('sell_users',$sellPrice) }}
                             <p class="parsley-required">{{ $errors ->first('sell_users') }} </p>
                         </div>
@@ -88,7 +88,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-editor-attach-money prefix"></i>
                             <?php $sell_nos_gomla = Lang::get('main.sell_nos_gomla') ?>
-                            {{ Form::text('sell_nos_gomla',null,array('required','id'=>'sell_nos_gomla')) }}
+                            {{ Form::text('sell_nos_gomla',null,array('required','id'=>'sell_nos_gomla','data-parsley-id'=>'4370','class'=>($errors->first('sell_nos_gomla'))?'parsley-error':null)) }}
                             {{ Form::label('sell_nos_gomla',$sell_nos_gomla) }}
                             <p class="parsley-required">{{ $errors ->first('sell_nos_gomla') }} </p>
                         </div>
@@ -97,7 +97,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-editor-attach-money prefix"></i>
                             <?php $sell_gomla = Lang::get('main.sell_gomla') ?>
-                            {{ Form::text('sell_gomla',null,array('required','id'=>'sell_gomla')) }}
+                            {{ Form::text('sell_gomla',null,array('required','id'=>'sell_gomla','data-parsley-id'=>'4370','class'=>($errors->first('sell_gomla'))?'parsley-error':null)) }}
                             {{ Form::label('sell_gomla',$sell_gomla) }}
                             <p class="parsley-required">{{ $errors ->first('sell_gomla') }} </p>
                         </div>
@@ -106,7 +106,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-editor-attach-money prefix"></i>
                             <?php $sell_gomla_gomla = Lang::get('main.sell_gomla_gomla') ?>
-                            {{ Form::text('sell_gomla_gomla',null,array('required','id'=>'sell_gomla_gomla')) }}
+                            {{ Form::text('sell_gomla_gomla',null,array('required','id'=>'sell_gomla_gomla','data-parsley-id'=>'4370','class'=>($errors->first('sell_gomla_gomla'))?'parsley-error':null)) }}
                             {{ Form::label('sell_gomla_gomla',$sell_gomla_gomla) }}
                             <p class="parsley-required">{{ $errors ->first('sell_gomla_gomla') }} </p>
                         </div>
@@ -127,7 +127,7 @@
                         <div class="input-field">
                             <i class="mdi mdi-alert-error prefix"></i>
                             <?php $sellLimit = Lang::get('main.sellLimit') ?>
-                            {{ Form::text('limit',null,array('id'=>'limit')) }}
+                            {{ Form::text('limit',null,array('id'=>'limit','data-parsley-id'=>'4370','class'=>($errors->first('limit'))?'parsley-error':null)) }}
                             {{ Form::label('limit',$sellLimit) }}
                             <p class="parsley-required">{{ $errors ->first('limit') }} </p>
                         </div>
@@ -159,10 +159,13 @@
                         <p class="parsley-required">{{ $errors ->first('cat_id') }} </p>
                     </div> {{--category--}}
                     @if(PermissionController::isShow('main_info','offer','add'))
-                    <div class="col s12 l3">
-                        {{ Form::select('offer_id', array('' => 'اختر العرض') + $co_info->offers->lists('name','id'),null,array('id'=>'offer_id')) }}
+                    <?php $offers = $co_info->offers->lists('name','id'); ?>
+                    @if(count($offers))
+                        <div class="col s12 l3">
+                        {{ Form::select('offer_id', array('' => 'اختر العرض') + $offers,null,array('id'=>'offer_id')) }}
                         <p class="parsley-required">{{ $errors ->first('offer_id') }} </p>
                     </div> {{--offer--}}
+                    @endif
                     @endif
                     @if($co_info->co_use_season)
                         <div class="col s2 l3">

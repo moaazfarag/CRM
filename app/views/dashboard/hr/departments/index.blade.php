@@ -32,7 +32,7 @@
                         <div class="input-field">
                             <i class="fa fa-shield prefix"></i>
 
-                            {{Form::text('name',null,array('required','placeholder'=>" ".  @$holder,'id'=>'name')) }}
+                            {{Form::text('name',null,array('data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null,'required','placeholder'=>" ".  @$holder,'id'=>'name')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
                             <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
                         </div>

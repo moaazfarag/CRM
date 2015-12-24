@@ -37,7 +37,7 @@
                     <div class="col s12 m5 l5">
                         <div class="input-field">
 
-                            {{Form::text('title',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
+                            {{Form::text('title',null,array('required','placeholder'=>" ".  @$holder,'data-parsley-id'=>'4370','class'=>($errors->first('title'))?'parsley-error':null,'id'=>'title')) }}
                             {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
                             <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
                         </div>
@@ -53,7 +53,7 @@
                 <div class="col s12 l9">
 
                     <div class="input-field">
-                        {{ Form::textarea('details',null,array('id'=>'ckeditor2','class'=>"materialize-textarea")) }}
+                        {{ Form::textarea('details',null,array('id'=>'ckeditor2','data-parsley-id'=>'4370','class'=>($errors->first('details'))?'parsley-error':"materialize-textarea")) }}
                         <div id="ckeditorb"></div>
 
                         <p class="parsley-required">{{ $errors ->first('details') }} </p>
@@ -94,9 +94,8 @@
                         <div class="col s12 m5 l5">
                             <div class="input-field">
 
-                                {{Form::text('about',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('about',null,array('required','placeholder'=>" ".  @$holder,'data-parsley-id'=>'4370','class'=>($errors->first('about'))?'parsley-error':null,'id'=>'title')) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('about') }} </p>
                             </div>
                         </div>
                     </div>
@@ -110,8 +109,8 @@
                         <div class="col s12 l9">
 
                             <div class="input-field">
-                                {{ Form::textarea('about_content',null,array("id"=>"ckeditor1",'class'=>"materialize-textarea")) }}
-                                <p class="parsley-required">{{ $errors ->first('details') }} </p>
+                                {{ Form::textarea('about_content',null,array("id"=>"ckeditor1",'data-parsley-id'=>'4370','class'=>($errors->first('about_content'))?'parsley-error materialize-textarea':'materialize-textarea')) }}
+                                <p class="parsley-required">{{ $errors ->first('about_content') }} </p>
                             </div>
                         </div>
                         <div id="ckeditora"></div>
@@ -149,10 +148,8 @@
                         <div class="col s12 m5 l5">
                             <div class="input-field">
                                 <i class="fa fa-facebook-square prefix"></i>
-
-                                {{Form::text('facebook',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('facebook',null,array('required','placeholder'=>" ".  @$holder,'data-parsley-id'=>'4370','class'=>($errors->first(''))?'parsley-error':null,'id'=>'title')) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('facebook') }} </p>
                             </div>
                         </div>
                         <div class="col s12 l1">
@@ -164,10 +161,8 @@
                         <div class="col s12 m5 l5">
                             <div class="input-field">
                                 <i class="fa fa-twitter-square prefix"></i>
-
-                                {{Form::text('twitter',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('twitter',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('twitter'))?'parsley-error':null)) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('twitter') }} </p>
                             </div>
                         </div>
                     </div>
@@ -183,9 +178,8 @@
                             <div class="input-field">
                                 <i class="fa fa-google-plus-square  prefix"></i>
 
-                                {{Form::text('google',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('google',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('google'))?'parsley-error':null)) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('google') }} </p>
                             </div>
                         </div>
                         <div class="col s12 l1">
@@ -198,9 +192,8 @@
                             <div class="input-field">
                                 <i class="fa fa-youtube-square prefix"></i>
 
-                                {{Form::text('youtube',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('youtube',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('youtube'))?'parsley-error':null)) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('youtube') }} </p>
                             </div>
                         </div>
                     </div>
@@ -209,15 +202,12 @@
                             <label for="title">
 لينكدإن
                             </label>
-
                         </div>
                         <div class="col s12 m5 l5">
                             <div class="input-field">
                                 <i class="fa fa-linkedin-square  prefix"></i>
-
-                                {{Form::text('linkedin',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('linkedin',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('linkedin'))?'parsley-error':null)) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('linkedin') }} </p>
                             </div>
                         </div>
                         <div class="col s12 l1">
@@ -229,10 +219,8 @@
                         <div class="col s12 m5 l5">
                             <div class="input-field">
                                 <i class="fa fa-instagram prefix"></i>
-
-                                {{Form::text('instgram',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
-                                {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                {{Form::text('instgram',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('instgram'))?'parsley-error':null)) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('instgram') }} </p>
                             </div>
 
                         </div>
@@ -271,9 +259,9 @@
                         <div class="col s12 m5 l5">
                             <div class="input-field">
 
-                                {{Form::text('email',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title')) }}
+                                {{Form::text('email',null,array('required','placeholder'=>" ".  @$holder,'id'=>'title','data-parsley-id'=>'4370','class'=>($errors->first('email'))?'parsley-error':null)) }}
                                 {{--<input value="{{ null }}" name="cat_name" id="cat-name" type="text" placeholder="???  {{@$arabicName}}">--}}
-                                <p class="parsley-required error-validation">{{ $errors ->first('title') }} </p>
+                                <p class="parsley-required error-validation">{{ $errors ->first('email') }} </p>
                             </div>
                         </div>
                         <div class="col s12 l3">

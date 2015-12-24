@@ -30,7 +30,9 @@
                         <div class="col s12 m6 l6">
                             <div class="input-field">
                                 <i class="mdi mdi-social-person prefix"></i>
-                                {{Form::text('name',null,array('required','placeholder'=>'اسم الفئة', 'id'=>'name')) }}
+                                {{Form::text('name',null,array('required','placeholder'=>'اسم الفئة', 'id'=>'name','data-parsley-id'=>'4370','class'=>($errors->first('name'))?'parsley-error':null)) }}
+                                <p class="parsley-required error-validation">{{ $errors ->first('name') }} </p>
+
                             </div>
                         </div>
                     </div>

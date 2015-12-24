@@ -3,14 +3,14 @@
         <!-- Main Content -->
 <section id="print-content" ng-app="itemApp" ng-controller="mainController" class="content-wrap ecommerce-invoice">
 
-    <div class="card-panel">
+    <div class="card-panel" style="color: #000 !important; font-weight: 600; font-size:1.4em; font-family: ' Tahoma, Arial, Verdana">
         {{--{{ dd($invoice); }}--}}
         <!-- Logo -->
 
         <div class="row invoice-top">
-            <div class="col s3 m3">
+            <div class="col l3 s12 " style="color: #000 !important;">
                 @if($co_info->co_logo)
-                    <img width="150px" height="39px" src="{{ URL::asset($co_info->co_logo) }}" alt="Logo">
+                    <img  style="max-width:120px; max-height: 70px;" src="{{ URL::asset($co_info->co_logo) }}" alt="Logo">
                 @endif
                 <br>
                 @lang('main.the_company') :
@@ -20,7 +20,7 @@
                 <strong>{{ $invoice->branch->br_name }}</strong>
 
             </div>
-            <div class="col s6 m6">
+            <div class="col s12 m6" style="color: #000 !important;">
                 <div style=" font-size: 1.5em; font-weight: 500; text-decoration: underline;  text-align: center;">
                     @lang('main.invoice') @lang('main.'.$type)
                 </div>
@@ -28,7 +28,7 @@
 
                     {{@ $invoice->accountInfo->acc_name }}
                 </div>
-                <div style="font-size: 1.3em; font-weight: 500; text-align: center;">
+                <div class="" style="font-size: 1.3em; font-weight: 500; text-align: center;">
                     @if($invoice->pay_type)
                         {{@ Lang::get("main.$invoice->pay_type"._); }}
                     @endif
@@ -39,41 +39,45 @@
 
             </div>
 
-            <div class="col s3 m3">
-                <div class="invoice-num">
+            <div class="col s12 m3">
+                <div  style="color: #000 !important;">
                     <div class="num">
                         @lang('main.invoiceNum'):
               <span class="right">
                 <strong>{{ $invoice->invoice_no }}</strong>
               </span>
                     </div>
-                    </h4>
                     <div class="date">@lang('main.date'):
               <span class="right">
                 {{ $invoice->date }}
               </span>
                     </div>
-                    </h4>
+                    <div class="date">@lang('main.time'):
+              <span class="right">
+                  {{ BaseController::ViewTime($invoice->created_at) }}
+              </span>
+                    </div>
                 </div>
 
             </div>
 
-            <hr/>
+            {{--<hr/>--}}
         </div>
         <!-- /Logo -->
-        <br>
-        <hr/>
-        <br>
-
         <!-- Table with products -->
         <div class="row">
             <div class="col s12">
 
                 <div class="table-responsive">
-                    <table id="table1" class="display table table-bordered table-hover">
+                    <style>
+                        .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+                            border-top:1px solid #000000;
+                            border: 1px solid #000000;
+                        }
+                    </style>
+                    <table id="table1" class="display table table-bordered table-hover" style="border:1px solid #000000 !important;">
                         <thead>
                         <tr>
-                            <th>الرقم</th>
                             <th class="center-align">الاسم</th>
                             <th class="center-align">العدد</th>
                             @if(!TransController::isSettle($type))
@@ -86,9 +90,7 @@
                         <tbody>
                         @foreach($invoice->details as $k =>$detail)
                             <tr>
-                                <td>
-                                    {{ $k+1 }}
-                                </td>
+
                                 <td>
                                     <strong> {{ $detail->item_name }}</strong>
                                 </td>
@@ -100,11 +102,11 @@
                                 <td class="center-align">{{ $detail->serial_no }}</td>
                             </tr>
                         @endforeach
+
                         @if(!TransController::isSettle($type))
 
                             <tr>
                                 <td><strong>الاجمالي</strong></td>
-                                <td style="border-right:none;border-left:none;"></td>
                                 <td style="border-right:none;border-left:none;"></td>
                                 <td style="border-right:none;border-left:none;"></td>
                                 <td style="border-right:none;border-left:none;"></td>
@@ -125,7 +127,7 @@
                     <div class="table-responsive">
                         <table id="table1" class="display table table-bordered table-hover">
                             <thead>
-                            <tr>
+                            <tr style="border-top: 1px solid #000000 !important;">
                                 <td><strong>الاجمالي</strong></td>
                                 <td class="right-align no-border"><strong>تخفيض</strong></td>
                                 <td class="right-align no-border"><strong>الضرائب</strong></td>
@@ -135,9 +137,9 @@
                             <tbody>
 
                             <tr>
-                                <td> {{ $invoice->net }}</td>
+                                <td>{{ $invoice->in_total }}</td>
                                 <td>{{ $invoice->discount }}%</td>
-                                <td>{{ $invoice->tax }}</td>
+                                <td>{{ $invoice->tax }}%</td>
                                 <td>{{ $invoice->net }}</td>
 
 
@@ -147,6 +149,19 @@
                         </table>
                         @endif
                     </div>
+                    <?php
+                    //if(include('phar://ArPHP.phar/Arabic.php'))
+                    //$obj = new I18N_Arabic('Numbers');
+
+                    //$total_with_arabic = $obj->int2str($invoice->in_total += .22);
+
+                    ?>
+                    {{--<h4 style="border:solid rgba(86, 86, 86, 1) ; padding: 1%;">--}}
+                        {{--{{ $total_with_arabic.' '. $co_info->co_currency }}--}}
+
+                         {{--فقط لا غير--}}
+                    {{--</h4>--}}
+                    @if($co_info->co_invoice_notes !='')<h4>{{ $co_info->co_invoice_notes }}</h4>@endif
                     <address>
                         عنوان الشركة الرئيسى
                         /

@@ -45,9 +45,9 @@ angular.module('mainCtrl', [])
             for (var i = 0; i < $scope.items.length; i++) {
                 var item = $scope.items[i];
                 catName = item.cat_name;
-
+//console.log( item.item_name.toLowerCase())
                 if (item.item_name.toLowerCase().indexOf(q) !== -1 ||
-                    item.bar_code.toLowerCase().indexOf(q) !== -1 ||
+                    item.bar_code.toString().toLowerCase().indexOf(q) !== -1 ||
                     item.cat_name.toLowerCase().indexOf(q) !== -1)
                     results.push({
                         value: item.item_name,
@@ -463,6 +463,7 @@ angular.module('mainCtrl', [])
                     total += (item.return *  item.cost);
                 }
             });
+
             return total;
         };
 

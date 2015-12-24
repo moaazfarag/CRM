@@ -18,12 +18,12 @@
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
             </a>
-                        @if(PermissionController::isTrans('show',$type))
+            @if(PermissionController::isTrans('show',$type))
             <a style="float: left;height:30px;line-height:32px;font-size: medium" type="button"
                href="{{ URL::route('viewTransactions',[$type,$branch->id]) }}" class="btn btn-small z-depth-0">
                 @lang('main.view_invoices')  {{ @$name}}
             </a>
-                                    @endif
+            @endif
         </div>
         {{--{{ dd(PerC::isShow('balances','itemBalance','add')); }}--}}
         @if(PermissionController::isTrans('add',$type))
@@ -41,7 +41,10 @@
                         <input required="required"
                                type="date"
                                 {{--ng-model="date = Date()"--}}
-
+                                @if($errors->first('date'))
+                               class='parsley-error'
+                               @endif
+                               data-parsley-id="4370"
                                id="data"
                                value="{{$date->format('Y-m-d')}}"
                                max="{{$date->modify('+1 day')->format('Y-m-d')}}"
@@ -60,7 +63,9 @@
                     </div>
                     <div class="col s12 l3">
                         <div mass-autocomplete>
-                            <input ng-focus="displayOn({{ $br_id }})" type="text" class="form-control ng-isolate-scope ng-pristine ng-valid"
+                            <input ng-focus="displayOn({{ $br_id }})" type="text"
+                                   class="form-control ng-isolate-scope ng-pristine ng-valid "
+                                   data-parsley-id="4370"
                                    placeholder="اسم الصنف او الفئة او باركود"
                                    autofocus
                                    id="item_id"
@@ -76,7 +81,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <i class="fa fa-cubes prefix"></i>
-                            {{ Form::number('quantity',null,array('ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
+                            {{ Form::number('quantity',null,array('data-parsley-id'=>'4370','class'=>($errors->first('quantity'))?'parsley-error':null,'ng-model'=>"item.quantity",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'quantity','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
                             <div ng-show="form.$submitted || form.quantity.$touched">
                     <span ng-show="form.quantity.$error.pattern">
                         @lang('main.please_enter_valid_number')
@@ -93,7 +98,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <i class="fa fa-dollar prefix"></i>
-                            {{ Form::number('cost',null,array('ng-model'=>"item.cost",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'cost','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
+                            {{ Form::number('cost',null,array('data-parsley-id'=>'4370','class'=>($errors->first('cost'))?'parsley-error':null,'ng-model'=>"item.cost",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'cost','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
                             <div ng-show="form.$submitted || form.cost.$touched">
                     <span ng-show="form.cost.$error.pattern">
                         @lang('main.please_enter_valid_number')
@@ -210,7 +215,7 @@
                                 <i class="fa fa-exchange"></i>
                                 <br>
                                 @{{ afterDiscount() }}
-                                <p class="parsley-required">{{ $errors ->first('net') }} </p>
+                                <p class="parsley-required">{{ $errors->first('net') }} </p>
                             </div>{{--net--}}
                         @endif
 

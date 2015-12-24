@@ -13,7 +13,7 @@ class Loans extends Eloquent
         'employee_id'     => 'required',
         'loan_date'       => 'required|date',
         'loan_start'      => 'required|date',
-        'loan_currBal'        => 'required|date',
+        'loan_currBal'    => 'required|date',
         'loan_val'        => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
         'loan_currBal'    => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/',
     );

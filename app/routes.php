@@ -25,9 +25,11 @@ Route::get('/login', function () {
 });
 if (Auth::check()){
     $company = CoData::find(Auth::user()->co_id);
-    $logo    = $company->co_logo;
-    if(!empty($logo)){
-        Session::put('logo',$logo);
+    if(count($company)){
+        $logo    = $company->co_logo;
+        if(!empty($logo)){
+            Session::put('logo',$logo);
+        }
     }
 }
 Route::get('/login-management', function () {
@@ -170,9 +172,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::group(array('before' => 'filter:main_info:barcode:add'), function () {
         Route::get('addItem', array('uses' => 'ItemController@addItem', 'as' => 'addItem'));
         Route::get('show-item/{id}', array('uses' => 'ItemController@showItem', 'as' => 'showItem'));
-        Route::get('barcode', array( 'uses' => 'ItemController@barcode', 'as' => 'barcode'));
-        Route::post('barcode', array( 'uses' => 'ItemController@barcodeSearch', 'as' => 'barcode'));
-        Route::post('printBarcode', array('uses' => 'ItemController@printBarcode', 'as' => 'printBarcode'));
+//        Route::get('barcode', array( 'uses' => 'ItemController@barcode', 'as' => 'barcode'));
+//        Route::post('barcode', array( 'uses' => 'ItemController@barcodeSearch', 'as' => 'barcode'));
+//        Route::post('printBarcode', array('uses' => 'ItemController@printBarcode', 'as' => 'printBarcode'));
     });
     /**
      * Item Area
@@ -208,10 +210,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::get('addUser', array('before' => 'filter:main_info:users:add_edit_show', 'uses' => 'UserController@addUser', 'as' => 'addUser'));
         Route::group(array('before' => 'filter:main_info:users:add'), function () {
             Route::post('storeUser', array('before' => 'csrf', 'uses' => 'UserController@storeUser', 'as' => 'storeUser'));
+            Route::get('add-user-success/{user}/{user_name}', array('uses' => 'UserController@addUserSuccess', 'as' => 'addUserSuccess'));
         });
         Route::group(array('before' => 'filter:main_info:users:edit'), function () {
             Route::get('editUser/{id}', array('uses' => 'UserController@editUser', 'as' => 'editUser'));
             Route::post('updateUser/{id}', array('before' => 'csrf', 'uses' => 'UserController@updateUser', 'as' => 'updateUser'));
+        });
+        Route::group(array('before' => 'filter:main_info:users:delete'), function () {
+            Route::get('delete-user/{id}', array('uses' => 'UserController@deleteUser', 'as' => 'deleteUser'));
         });
     });
 

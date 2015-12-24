@@ -29,15 +29,15 @@
                     <div class="col s12 l3">
                         <div class="input-field">
                             <i class="fa fa-dollar prefix"></i>
-                            {{ Form::text('loan_val',null,array('required','id'=>'loan_val',)) }}
-                            {{ Form::label('loan_val',Lang::get('main.salary_loan')  )     }}
+                            {{ Form::text('loan_val',null,array('data-parsley-id'=>'4370','class'=>($errors->first('loan_val'))?'parsley-error':null,'required','id'=>'loan_val',)) }}
+                            {{ Form::label('loan_val',Lang::get('main.salary_loan')) }}
                             <p class="parsley-required error-validation">{{ $errors ->first('loan_val') }} </p>
                         </div>
                     </div>
                 <div class="col s12 l3">
                         <div class="input-field">
                             <i class="fa fa-puzzle-piece prefix"></i>
-                            {{ Form::text('loan_currBal',null,array('required','id'=>'loan_currBal',)) }}
+                            {{ Form::text('loan_currBal',null,array('data-parsley-id'=>'4370','class'=>($errors->first('loan_currBal'))?'parsley-error':null,'required','id'=>'loan_currBal',)) }}
                             {{ Form::label('loan_currBal', lang::get('main.monthly_quantity') )     }}
                         </div>
                     <p class="parsley-required error-validation">{{ $errors ->first('loan_currBal') }} </p>
@@ -56,7 +56,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             {{--<i class="mdi mdi-action-language prefix"></i>--}}
-                            {{ Form::text('loan_date',null,array('required','id'=>'loan_date','class'=>'pikaday')) }}
+                            {{ Form::text('loan_date',null,array('data-parsley-id'=>'4370','class'=>($errors->first('loan_date'))?'parsley-error pikaday':'pikaday','required','id'=>'loan_date')) }}
                         </div>
 
                     </div>
@@ -73,7 +73,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             {{--<i class="mdi mdi-action-language prefix"></i>--}}
-                            {{ Form::text('loan_start',null,array('required','id'=>'loan_start','class'=>'pikaday')) }}
+                            {{ Form::text('loan_start',null,array('data-parsley-id'=>'4370','class'=>($errors->first('loan_start'))?'parsley-error pikaday':'pikaday','required','id'=>'loan_start','class'=>'pikaday')) }}
 
                         </div>
                     </div>

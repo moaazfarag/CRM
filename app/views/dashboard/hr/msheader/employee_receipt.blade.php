@@ -119,7 +119,7 @@
 
                 @endif
 
-            @if(!$header->detailsDed->isEmpty())
+            @if(!$header->detailsDed->isEmpty() ||!empty($header->loan) )
 
                     <div class="col s6">
                         <div class="table-responsive">
@@ -136,7 +136,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if(!empty($header->loan))
+                                    <tr>
+                                        <td>
+قروض
+                                        </td>
+                                        <td>
+                                            {{ $header->loan}}
+                                        </td>
 
+                                        <td>
+                                           متغير
+                                        </td>
+                                    </tr>
+                                @endif
                                 @foreach($header->detailsDed as $k => $detail)
                                     <tr>
                                         <td>
@@ -183,7 +196,7 @@
 
                                         <td> {{ $header->fixed_salary }}  </td>
 
-                                        <td>  {{ $header->deserves or 0}}   </td>
+                                        <td>  {{ $header->deserves + $header->loan}}   </td>
 
                                         <td>  {{ $header->deductions or 0 }}   </td>
 

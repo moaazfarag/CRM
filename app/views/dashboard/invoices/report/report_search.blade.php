@@ -19,7 +19,7 @@
                 <div class="col s12 l3">
                     <div class="input-field">
                         <i class="mdi mdi-action-language prefix"></i>
-                        {{ Form::text('date_from',null,array('required','id'=>'date_from','class'=>'pikaday')) }}
+                        {{ Form::text('date_from',null,array('data-parsley-id'=>'4370','class'=>($errors->first('date_from'))?'parsley-error pikaday':'pikaday','required','id'=>'date_from','class'=>'pikaday')) }}
                         <p class="parsley-required">{{ $errors ->first('date_from') }} </p>
 
                         <label for="date_from">
@@ -32,7 +32,7 @@
                 <div class="col s12 l3">
                     <div class="input-field">
                         <i class="mdi mdi-action-language prefix"></i>
-                        {{ Form::text('date_to',null,array('required','id'=>'date_to','class'=>'pikaday')) }}
+                        {{ Form::text('date_to',null,array('data-parsley-id'=>'4370','class'=>($errors->first('date_to'))?'parsley-error pikaday':'pikaday','required','id'=>'date_to','class'=>'pikaday')) }}
                         <p class="parsley-required">{{ $errors ->first('date_to') }} </p>
 
                         <label for="date_to">
