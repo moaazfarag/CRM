@@ -393,12 +393,12 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                     <li>
                                         @if(PerC::isShow('invoices','salesReturn','add_show'))
                                             <a href="{{ URL::route('addTrans',array("salesReturn",$branches)) }}"
-                                               class="waves-effect waves-blue"> فاتورة مبيعات</a>
-                                        @endif{{-- sales invoice فاتورة مترجع مشتريات--}}
+                                               class="waves-effect waves-blue"> فاتورة مرتجع مبيعات</a>
+                                        @endif{{-- sales invoice فاتورة مترجع مبيعات--}}
                                         @if(PerC::isShow('invoices','buyReturn','add_show'))
                                             <a href="{{ URL::route('addTrans',array("buyReturn",$branches)) }}"
-                                               class="waves-effect waves-blue"> فاتورة مشتريات</a>
-                                        @endif{{-- sales invoice فاتورة مترجع مبيعات--}}
+                                               class="waves-effect waves-blue"> فاتورة مرتجع مشتريات</a>
+                                            @endif{{-- sales invoice فاتورة مترجع مشتريات--}}
                                     </li>
                                 @endif
 

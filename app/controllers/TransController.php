@@ -45,7 +45,12 @@ class TransController extends BaseController
         }
 
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
-                    $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:null;
+                    $invoice_types = ['sales','buy','salesReturn','buyReturn'];
+                    if (in_array($type,$invoice_types)) {
+                        $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:'cash';
+                    }else{
+                        $payType                    = null;
+                    }
                     $accountId                  = isset($inputs['account_id'])?intval($inputs['account_id']):null;
                     $newHeader                  = new TransHeader;
                     $newHeader->co_id           = $this->coAuth();
