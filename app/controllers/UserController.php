@@ -127,7 +127,6 @@ class UserController extends BaseController
     {
         $add                      = Lang::get('main.add');
         $addUser                  = Lang::get('main.addUser');
-        $data['users']      = User::company()->where('deleted',null)->orWhere('deleted',0)->get();
         $data['company']          = CoData::find(Auth::user()->co_id);
         $data['button']           = $add;
         $data['groupPermissions'] = PermissionController::setPermission();
@@ -181,8 +180,7 @@ class UserController extends BaseController
         $edit               = Lang::get('main.edit');
         $editUser           = Lang::get('main.editUser');
         $data['company']    = CoData::find(Auth::user()->co_id);
-        $data['user']       = User::company()->where('id', '=', $id)->first();
-        $data['users']      = User::company()->where('deleted',null)->orWhere('deleted',0)->get();
+        $data['user']       = $data['company']->users()->where('id', '=', $id)->first();
         $data['group']      = ['add_all', 'edit_all', 'delete_all', 'show_all'];
         $data['asideOpen']  = 'open';
         $data['button']     = $edit;

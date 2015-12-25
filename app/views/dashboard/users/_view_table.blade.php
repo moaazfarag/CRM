@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($users as $k=>$user)
+    @foreach($company->users as $k=>$user)
         <tr>
             <th>{{ $k+1 }}  </th>
             <td> {{ $user->name }} </td>
