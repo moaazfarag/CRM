@@ -38,7 +38,7 @@ class ItemController extends BaseController
             $newItem->item_name        = $inputs['item_name'];
             $newItem->unit             = $inputs['unit'];
             if(PermissionController::isShow('main_info','offer','add')){
-                $newItem->offer_id         = $inputs['offer_id'];
+                $newItem->offer_id         = isset($inputs['offer_id'])?$inputs['offer_id']:null;
             }
             $true_id                   = Items::company()->max('true_id')+1;
             $newItem->true_id          = $true_id;
@@ -108,7 +108,7 @@ class ItemController extends BaseController
                 $oldItem->item_name        = $inputs['item_name'];
                 $oldItem->unit             = $inputs['unit'];
                 if(PermissionController::isShow('main_info','offer','add')){
-                    $oldItem->offer_id         = $inputs['offer_id'];
+                    $oldItem->offer_id         = isset($inputs['offer_id'])?$inputs['offer_id']:null;
                 }
                 $oldItem->supplier_id      = isset($inputs['supplier_id'])?$inputs['supplier_id']:0;
                 $oldItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
