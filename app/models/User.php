@@ -74,11 +74,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return $this->hasMany('Accounts','user_id');
     }
-    public function company()
-
-    {
-        return $this->belongsTo('CoData','user_id');
-    }
+//    public function company()
+//
+//    {
+//        return $this->belongsTo('CoData','user_id');
+//    }
     public function set_password()
 
     {
