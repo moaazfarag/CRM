@@ -160,6 +160,7 @@ class UserController extends BaseController
             $newUser->username      = $inputs['username'];
             $newUser->password      = Hash::make('12345678');
             $newUser->email         = Input::get('email');
+            $newUser->deleted         = 0;
             $newUser->permission    = json_encode($permissions);
 
             $newUser->save();
@@ -298,7 +299,7 @@ class UserController extends BaseController
     {
         $user = User::where('id',$id)->company()->first();
         if(!empty($user)){
-                     $user->username = '';
+//                     $user->username = '';
                      $user->deleted  = 1 ;
                      $user->update();
 

@@ -71,7 +71,7 @@ class CoData extends Eloquent {
 
     public function users()
     {
-        return $this->hasMany('User','co_id')->where('deleted',0);
+        return $this->hasMany('User','co_id')->where('deleted',null)->orWhere('deleted',0);
     }
 
     public function employees()
