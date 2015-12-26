@@ -17,6 +17,7 @@ class dashboardController extends BaseController {
 
 	public function home()
 	{
+		$data['title']  = 'الصفحة الرئيسية ';
 		$data['topics']    = Topic::company()->orderBy('id', 'DESC')->paginate(10) ;
 		$data['home_page'] = Home::company()->first();
 		return View::make('dashboard.home.home',$data);
@@ -38,6 +39,7 @@ class dashboardController extends BaseController {
 				'warning'	=> Lang::get('main.warning_message'),
 				'error'		=> Lang::get('main.error_message'),
 		);
+		$data['title']  = 'إضافة موضوع جديد';
 		$data['tablesData'] =  Topic::company()->get();
 		return View::make('dashboard.home.add_topic',$data);
 	}
@@ -49,6 +51,7 @@ class dashboardController extends BaseController {
 				'warning'	=> Lang::get('main.warning_message'),
 				'error'		=> Lang::get('main.error_message'),
 		);
+		$data['title']  = 'تعديل موضوع';
 		$topic =  Topic::company()->where('id',$id)->first();
 		$data['tablesData'] =  Topic::company()->get();
 		if(empty($topic)){
