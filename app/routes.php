@@ -217,7 +217,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('updateUser/{id}', array('before' => 'csrf', 'uses' => 'UserController@updateUser', 'as' => 'updateUser'));
         });
         Route::group(array('before' => 'filter:main_info:users:delete'), function () {
-            Route::get('delete-user/{id}', array('uses' => 'UserController@deleteUser', 'as' => 'deleteUser'));
+            Route::get('final-delete-user/{id}', array('uses' => 'UserController@finaDeleteUser', 'as' => 'finaDeleteUser'));
+
+            Route::get('suspend-user/{id}', array('uses' => 'UserController@suspendUser', 'as' => 'suspendUser'));
+            Route::get('returning-user/{id}', array('uses' => 'UserController@returningUser', 'as' => 'returningUser'));
         });
     });
 

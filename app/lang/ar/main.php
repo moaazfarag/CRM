@@ -26,6 +26,8 @@ return  array(
     'items'            => 'الاصناف',
     'accounts'         => 'اكواد الحسابات',
     'users'            => 'المستخدمين ',
+	'returning_user'   => 'تفعيل المستخدم',
+	'end_delete'       => 'حذف نهائى',
     'change_password'  => 'تغيير كلمة السر',
     'old_password'     => 'كلمة المرور القديمة ',
     'new_password'     => 'كلمة المرور الجديدة ',
