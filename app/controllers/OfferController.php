@@ -10,6 +10,7 @@ class OfferController extends BaseController
 {
     public function addOffer()
     {
+        $data['asideOpen']      = "open";
         $data['table_name']= 'offer';
         $data['title'] = "اضف عرض جديد";
         $data['offers'] = Offer::company()->where('deleted', '0')->get();
@@ -42,6 +43,7 @@ class OfferController extends BaseController
 
     public function editOffer($id)
     {
+        $data['asideOpen']      = "open";
         $data['title'] = " تعديل عرض ";
         $data['offer'] = Offer::find($id);
         if ($data['offer']) {
