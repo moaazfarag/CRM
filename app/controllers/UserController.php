@@ -160,6 +160,7 @@ class UserController extends BaseController
             $newUser->username      = $inputs['username'];
             $newUser->password      = Hash::make('12345678');
             $newUser->email         = Input::get('email');
+            $newUser->deleted         = 0;
             $newUser->permission    = json_encode($permissions);
 
             $newUser->save();
@@ -179,7 +180,7 @@ class UserController extends BaseController
         $edit               = Lang::get('main.edit');
         $editUser           = Lang::get('main.editUser');
         $data['company']    = CoData::find(Auth::user()->co_id);
-        $data['user']       = $data['company']->users()->where('id', '=', $id)->first();;
+        $data['user']       = $data['company']->users()->where('id', '=', $id)->first();
         $data['group']      = ['add_all', 'edit_all', 'delete_all', 'show_all'];
         $data['asideOpen']  = 'open';
         $data['button']     = $edit;
@@ -298,7 +299,7 @@ class UserController extends BaseController
     {
         $user = User::where('id',$id)->company()->first();
         if(!empty($user)){
-                     $user->username = '';
+//                     $user->username = '';
                      $user->deleted  = 1 ;
                      $user->update();
 
