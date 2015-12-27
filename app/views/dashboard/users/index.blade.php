@@ -13,7 +13,33 @@
                 </a>
             </div>
             <div class="content">
-                @include('dashboard.users._view_table')
+                @include('include.messages')
+                <div class="row">
+                    @if(count($suspended))
+                    <div class="col s12 m9 l10">
+                        <div class="ecommerce-title">
+                        <nav  style="height: 66px !important;line-height: 69px !important;">
+                            <ul class="left">
+
+                                <li id="suspended_li"><a onClick="hide('existing'); show('suspended');$('#suspended_li').addClass('active');$('#existing_li').removeClass('active');"  href="#" > الموقوفين</a>
+                                </li>
+
+                                <li id="existing_li" class="active"><a onClick="hide('suspended'); show('existing'); $('#existing_li').addClass('active');$('#suspended_li').removeClass('active')" href="#" > الحاليين</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="col s12 m9 l10" id="existing">
+                        @include('dashboard.users._view_table')
+                    </div>
+                    @if(count($suspended))
+                       <div class="col s12 m9 l10" id="suspended" style="display: none;">
+                            @include('dashboard.users._view_suspended_table')
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
         <br>
@@ -39,7 +65,7 @@
             </a>
         </div>
         <div class="content">
-            @include('include.messages')
+
             <h5 style=" color:#000000; font-weight: 500; width: 100%; padding: 1%; border-radius: 2%;" >   بيانات المستخدم</h5>
             <hr/>
             @if(Route::currentRouteName()== "addUser" )

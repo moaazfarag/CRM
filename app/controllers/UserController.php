@@ -127,6 +127,7 @@ class UserController extends BaseController
     {
         $add                      = Lang::get('main.add');
         $addUser                  = Lang::get('main.addUser');
+        $data['suspended']        = User::where('deleted',1)->where('username','!=','')->company()->get();
         $data['company']          = CoData::find(Auth::user()->co_id);
         $data['button']           = $add;
         $data['groupPermissions'] = PermissionController::setPermission();
@@ -179,6 +180,7 @@ class UserController extends BaseController
     {
         $edit               = Lang::get('main.edit');
         $editUser           = Lang::get('main.editUser');
+        $data['suspended']        = User::where('deleted',1)->where('username','!=','')->company()->get();
         $data['company']    = CoData::find(Auth::user()->co_id);
         $data['user']       = $data['company']->users()->where('id', '=', $id)->first();
         $data['group']      = ['add_all', 'edit_all', 'delete_all', 'show_all'];
@@ -234,7 +236,7 @@ class UserController extends BaseController
                 $oldUser->permission = json_encode($permissions);
 
                 if(isset($inputs['reset_password'])){
-                    $oldUser->password =Hash::make('12345678');
+                    $oldUser->password = Hash::make('12345678');
                 }
 
                 $oldUser->update();
@@ -275,11 +277,9 @@ class UserController extends BaseController
                 return Redirect::back()->withInput()->withErrors($validation->messages());
             } else {
                 $old_user = User::find(Auth::user()->id);
-
-                $old_password_from_user = Hash::make(Input::get('old_password'));
-                $old_password_from_db = $old_user->password;
                 if (Hash::check(Input::get('old_password'), $old_user->getAuthPassword())) {
-                    $old_user->co_id = Auth::user()->co_id;
+
+                    $old_user->co_id    = Auth::user()->co_id;
                     $old_user->password = Hash::make(Input::get('new_password'));
                     $old_user->update();
                     Session::flash('success','تم  تغيير كلمة المرور بنجاح');
@@ -294,12 +294,44 @@ class UserController extends BaseController
             }
         }
     }
-
-    public function deleteUser($id)
+    public function suspendUser($id)
     {
         $user = User::where('id',$id)->company()->first();
         if(!empty($user)){
 //                     $user->username = '';
+            $user->deleted  = 1 ;
+            $user->update();
+
+            Session::flash('success','تم إيقاف المستخدم بنجاح');
+            return Redirect::back();
+        }else{
+            Session::flash('error','عفواً لم يتم إيقاف المستخدم حاول مرة أخرى ');
+            return Redirect::back();
+        }
+    }
+
+   public function returningUser($id)
+   {
+    $user = User::where('id',$id)->company()->first();
+    if(!empty($user)){
+//                     $user->username = '';
+        $user->deleted  = 0 ;
+        $user->update();
+
+        Session::flash('success','تم تفعيل المستخدم بنجاح');
+        return Redirect::back();
+    }else{
+        Session::flash('error','عفواً لم يتم تفعيل المستخدم حاول مرة أخرى ');
+        return Redirect::back();
+    }
+}
+
+
+    public function finaDeleteUser($id)
+    {
+        $user = User::where('id',$id)->company()->first();
+        if(!empty($user)){
+                     $user->username = null;
                      $user->deleted  = 1 ;
                      $user->update();
 

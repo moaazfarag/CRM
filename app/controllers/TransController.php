@@ -48,6 +48,9 @@ class TransController extends BaseController
                     $invoice_types = ['sales','buy','salesReturn','buyReturn'];
                     if (in_array($type,$invoice_types)) {
                         $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:'cash';
+                        if($payType == "? undefined:undefined ?"){
+                            $payType = 'cash';
+                        }
                     }else{
                         $payType                    = null;
                     }

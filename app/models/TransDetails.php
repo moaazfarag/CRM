@@ -36,7 +36,7 @@ class TransDetails extends Eloquent {
                 if(isset($inputs['pay_type'])&&$inputs['pay_type']=="on_account"){
                     $store_rules['account_id'] = 'required|integer|exists:accounts,id,co_id,'.Auth::user()->co_id;
                 }
-                $store_rules['pay_type'] = 'required|in:cash,visa,on_account';
+//                $store_rules['pay_type'] = 'required|in:cash,visa,on_account';
             }
             $count = TransDetails::countOfInputs($inputs);
             foreach($count as $k => $v)

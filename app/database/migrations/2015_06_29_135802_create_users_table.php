@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('all_br')->nullable();
 			$table->string('owner');
 			$table->string('name');
-			$table->string('username');
+			$table->string('username')->nullable();;
 			$table->string('password');
 			$table->string('management_password');
 			$table->string('email')->nullable();
@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('deleted');
 			$table->string('session_id');
 			$table->rememberToken();
-			$table->unique(array('username', 'co_id'));
+			//$table->unique(array('username', 'co_id'));
 			$table->timestamps();
 		});
 	}

@@ -9,7 +9,7 @@
 {{--        <th>@lang('main.statue') </th>--}}
         @if(PerC::isShow('main_info','users','edit'))
             <th>@lang('main.edit')</th>
-            <th>@lang('main.delete')</th>
+            <th>@lang('main.stop')</th>
         @endif
     </tr>
     </thead>
@@ -29,10 +29,12 @@
                 </td>
             @endif
             @if(PerC::isShow('main_info','users','delete'))
-            <td>
-                <a onclick="return confirm('هل تريد بالفعل حذف هذا المستخدم ')"
-                   href="{{ URL::route('deleteUser',array($user->id)) }}"
-                   class="btn btn-danger red">[X]</a>
+                <td>
+                    @if($user->owner != 'acount_creator')
+                        <a onclick="return confirm('هل تريد بالفعل إيقاف هذا المستخدم ')"
+                           href="{{ URL::route('suspendUser',array($user->id)) }}"
+                           class="btn btn-small btn-danger red accent-1"><i class="fa fa-pause"></i></a>
+                    @endif
             </td>
             @endif
         </tr>
