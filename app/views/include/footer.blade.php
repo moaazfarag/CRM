@@ -413,9 +413,26 @@
         });
 
 
+        function hide(obj) {
 
+            var el = document.getElementById(obj);
+
+            el.style.display = 'none';
+
+        }
+        function show(obj) {
+
+            var el = document.getElementById(obj);
+
+            el.style.display = 'block';
+
+        }
+        function changeClass(btn, cls) {
+            if(!hasClass(btn, cls)) {
+                addClass(btn, cls);
+            }
+        }
       </script>
-
 
       {{--@include('dashboard._flash_msg');--}}
 

@@ -14,7 +14,7 @@
                 @if(PerC::isShow('hr','Desdeds','delete'))
                     <th>@lang('main.delete') </th>
                     <th>
-                        {{ Form::open(array('route'=>'multiDeleteDesded')) }}
+                        {!!  Form::open(array('route'=>'multiDeleteDesded')) !!}
                         <button  class="btn btn-small red" style="float: right;">إلغاء  المحدد</button>
                     </th>
                 @endif
