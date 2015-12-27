@@ -46,7 +46,7 @@ class ItemController extends BaseController
             $newItem->seasons_id       = isset($inputs['seasons_id'])?$inputs['seasons_id']:0;
             $newItem->models_id        = isset($inputs['models_id'])?$inputs['models_id']:0;
             $newItem->marks_id         = isset($inputs['marks_id'])?$inputs['marks_id']:0;
-            $newItem->bar_code         = isset($inputs['bar_code'])?$inputs['bar_code']:intval("100".$true_id);
+            $newItem->bar_code         = ($inputs['bar_code'])?$inputs['bar_code']:intval("100".$true_id);
             $newItem->buy              = $inputs['buy'];
             $newItem->sell_users       = $inputs['sell_users'];
             $newItem->sell_nos_gomla   = $inputs['sell_nos_gomla'];
