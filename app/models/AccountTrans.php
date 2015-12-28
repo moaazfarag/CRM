@@ -38,6 +38,7 @@ class AccountTrans extends Eloquent {
     public static function saveAccountTrans($inputs,$transHeaderId,$type,$net,$branchId)
 
     {
+//        isset($inputs['account_id'])
         $account = Accounts::company()->find($inputs['account_id']);
 
         if ($account) {
