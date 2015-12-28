@@ -62,8 +62,7 @@ angular.module('mainCtrl', [])
                     });
             }
             if(Number.isInteger(Number(term))){
-                 one = [];
-                one.push( results[0]);
+                 one = [results[0]];
                 return one;
             }
             return results;

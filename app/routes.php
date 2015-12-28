@@ -261,7 +261,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
         Route::post('accounts-by-id', array('uses' => 'TransController@accountById', 'as' => 'accountById'));
         Route::post('items-data-br', array('uses' => 'TransController@itemsData', 'as' => 'itemsData'));
 
-        Route::post('cancelTrans', array('before' => 'csrf|canTrans:delete', 'uses' => 'TransController@cancelTrans', 'as' => 'cancelTrans'));
+        Route::post('{type}/cancel/trans', array('before' => 'csrf|canTrans:delete', 'uses' => 'TransController@cancelTrans', 'as' => 'cancelTrans'));
 
     });
 
