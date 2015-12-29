@@ -97,7 +97,7 @@
                         <div class="col s12 l10">
                             <div class="input-field">
                                 <?php $cancel_cause = Lang::get('main.cancel_cause') ?>
-                                {{ Form::open(array('route'=>array('cancelTrans'),'name'=>'form')) }}
+                            {{ Form::open(array('route'=>array('cancelTrans',$type),'name'=>'form')) }}
                                 {{ Form::label('cancel_cause',$cancel_cause)}}
                                 {{ Form::text('cancel_cause',null,array('required','id'=>'cancel_cause','ng-model'=>'cancel_cause','class'=>"materialize-textarea" ,'length'=>"200")) }}
 

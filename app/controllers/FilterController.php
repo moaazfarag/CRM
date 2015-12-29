@@ -45,6 +45,9 @@ class FilterController extends BaseController
         $bCtrl = new BaseController;
         $uri = explode('/', Request::path());
         $type = $uri[count($uri) - 2];
+        if ($type == "cancel") {
+            $type = $uri[count($uri) - 3];
+        }
         $balances = ['itemBalance'];
         $settles = ['settleAdd', 'settleDown'];
         if (in_array($type, $balances)) {

@@ -48,6 +48,9 @@ class TransController extends BaseController
                     $invoice_types = ['sales','buy','salesReturn','buyReturn'];
                     if (in_array($type,$invoice_types)) {
                         $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:'cash';
+                        if($payType == "? undefined:undefined ?"){
+                            $payType = 'cash';
+                        }
                     }else{
                         $payType                    = null;
                     }
@@ -126,7 +129,8 @@ class TransController extends BaseController
 
                         $newHeader->net             = $net;
                         //if select account save record into account_trans
-                        if(!self::isSettle($type) || $delete_branch != 1){//save account base on type
+                        if(!self::isSettle($type) || $delete_branch ){//save account base on type
+//                            dd( $delete_branch);
                             if ($type != 'itemBalance') {
                                 //save account trans if user select account id
                                 AccountTrans::saveAccountTrans(Input::all(),$newHeader->id,$type,$net,$branch->id);

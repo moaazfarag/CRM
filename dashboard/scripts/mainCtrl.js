@@ -45,9 +45,9 @@ angular.module('mainCtrl', [])
             for (var i = 0; i < $scope.items.length; i++) {
                 var item = $scope.items[i];
                 catName = item.cat_name;
-//console.log( item.item_name.toLowerCase())
+                barcode = item.bar_code.toString().toLowerCase();
                 if (item.item_name.toLowerCase().indexOf(q) !== -1 ||
-                    item.bar_code.toString().toLowerCase().indexOf(q) !== -1 ||
+                    barcode.indexOf(q) !== -1 ||
                     item.cat_name.toLowerCase().indexOf(q) !== -1)
                     results.push({
                         value: item.item_name,
@@ -61,9 +61,12 @@ angular.module('mainCtrl', [])
                         )
                     });
             }
+            if(Number.isInteger(Number(term))){
+                 one = [results[0]];
+                return one;
+            }
             return results;
         };
-
         $scope.ac_options_users = {
             suggest: suggest_users,
             on_select: function (selected) {
