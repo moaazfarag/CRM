@@ -72,7 +72,7 @@
                         </td>
                     @endif
                     <td>
-                        {{ $invoice->notes }}
+                        {{ ($invoice->deleted == 1)?$invoice->cancel_cause:$invoice->notes  }}
                     </td>
                     <td>
                         {{ $invoice->user->name }}
