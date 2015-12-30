@@ -10,9 +10,9 @@
         </div>
 
         @include('include.messages')
-        <div class="table-responsive" >
+        <div class="table-responsive" style="overflow-y: hidden !important;" >
 
-        <table id="table_bank" class="display table table-bordered table-striped table-hover">
+        <table id="table_view_trans"  class="display table table-bordered table-striped table-hover">
             <thead>
             <tr>
 
@@ -79,7 +79,6 @@
                     </td>
 
                 </tr>
-
                 <!--/////////// model start }}}}}}}}}}}}}}-->
                 @unless($invoice->deleted == 1)
                         <!-- Modal Structure -->
@@ -122,6 +121,7 @@
                 @endunless
                         <!--/////////// model end }}}}}}}}}}}}}}-->
             @endforeach
+            <?php echo $transactions->links(); ?>
             </tbody>
         </table>
     </div>

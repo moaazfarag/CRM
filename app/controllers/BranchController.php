@@ -168,7 +168,7 @@ class BranchController extends  BaseController
 
            }
 
-           $inputs['date'] = $date;
+           $inputs['date'] = $date->format("Y-m-d");
            $trans = new TransController;
            $settle_down = $trans->storeTrans('settleDown',$branch_from,$inputs,$delete_branch);
            if($settle_down){
