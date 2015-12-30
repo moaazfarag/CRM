@@ -630,4 +630,5 @@ return  array(
 		'employee_desdes_use' => 'بعض البنود مستخدمة فى بنود استحقاقات الموظفين',
 		'has_selected'   =>'المحددة',
 		'this_note_deleted'=> 'التى لم يتم حذفها ',
+		'user'=> 'بواسطة ',
 );

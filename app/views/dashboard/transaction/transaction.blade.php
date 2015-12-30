@@ -39,7 +39,7 @@
 
             </div>
 
-            <div class="col s12 m3">
+            <div class="col s6 m3">
                 <div  style="color: #000 !important;">
                     <div class="num">
                         @lang('main.invoiceNum'):
@@ -55,6 +55,11 @@
                     <div class="date">@lang('main.time'):
               <span class="right">
                   {{ BaseController::ViewTime($invoice->created_at) }}
+              </span>
+                    </div>
+                    <div class="date">@lang('main.user'):
+              <span class="right">
+                  {{ $invoice->user->name }}
               </span>
                     </div>
                 </div>
@@ -167,7 +172,7 @@
                         /
                         {{ $co_info->co_address }}
                         تيلفون /
-                        {{ $co_info->co_mobile_1 }} <i class="mdi-communication-phone"></i>
+                        {{ $co_info->co_tel }} <i class="mdi-communication-phone"></i>
                         @if($co_info->co_mobile_2 !='')
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             تيلفون2 <i class="mdi-communication-phone"></i>
