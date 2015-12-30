@@ -266,7 +266,7 @@ class TransController extends BaseController
             $data['invoices_open'] = 'open' ;
             $data['branch']        = $branch ;
             $data['type']        = $type ;
-            $data['transactions']  = TransHeader::company()->where('invoice_type',$type)->where('br_id',$branch->id)->get();
+            $data['transactions']  = TransHeader::company()->where('invoice_type',$type)->where('br_id',$branch->id)->paginate(15);
             return View::make('dashboard.transaction.view_transactions',$data);
         }else{
             return View::make('errors.missing');

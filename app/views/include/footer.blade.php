@@ -174,6 +174,10 @@
                         [5, 10, 25, 50, "all"]
                     ]
                 });
+                $('#table_view_trans').DataTable({
+                    "scrollCollapse": false,
+                    "paging": false
+                });
               </script>
                       {{ HTML::script('dashboard/assets/dataTables/js/jquery.dataTables.min.js') }}
       <script>
