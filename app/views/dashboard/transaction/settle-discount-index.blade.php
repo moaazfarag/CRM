@@ -5,7 +5,7 @@
 <section class="content-wrap ecommerce-dashboard">
     <div ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]'}};transType= "{{ $type }}"'
          ng-app="itemApp" ng-controller="mainController" class="card">
-        {{ Form::open(array('route'=>array('storeTrans',$type,$branch->id),'name'=>'form','novalidate')) }}
+        {{ Form::open(array('route'=>array('storeTrans',$type,$branch->id),'name'=>'form','novalidate',"id"=>"transaction")) }}
         <div class="title">
             <h5>
                 <i class="mdi mdi-notification-event-available"></i>

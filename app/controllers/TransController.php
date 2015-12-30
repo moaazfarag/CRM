@@ -47,7 +47,7 @@ class TransController extends BaseController
                 if ($this->IsItemsBelongToCompany() && $this->IsAccountBelongToCompany() ) {
                     $invoice_types = ['sales','buy','salesReturn','buyReturn'];
                     if (in_array($type,$invoice_types)) {
-                        $payType                    = isset($inputs['pay_type'])?$inputs['pay_type']:'cash';
+                        $payType                    = ($inputs['pay_type'] && $inputs['pay_type'] != "? undefined:undefined ?")?$inputs['pay_type']:'cash';
                     }else{
                         $payType                    = null;
                     }

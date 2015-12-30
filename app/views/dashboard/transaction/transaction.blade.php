@@ -166,14 +166,16 @@
 
                          {{--فقط لا غير--}}
                     {{--</h4>--}}
-                    @if($co_info->co_invoice_notes !='')<h4>{{ $co_info->co_invoice_notes }}</h4>@endif
+                 <div class="center">
+                     {{ ($co_info->co_invoice_notes)?' <h4> '.$co_info->co_invoice_notes .'</h4>':'' }}
+                 </div>
                     <address>
                         عنوان الشركة الرئيسى
                         /
                         {{ $co_info->co_address }}
                         تيلفون /
                         {{ $co_info->co_tel }} <i class="mdi-communication-phone"></i>
-                        @if($co_info->co_mobile_2 !='')
+                        @if($co_info->co_mobile_2)
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             تيلفون2 <i class="mdi-communication-phone"></i>
                             {{ $co_info->co_mobile_2 }}  <i class="mdi-communication-phone"></i>
