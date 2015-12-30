@@ -5,7 +5,7 @@
 <section class="content-wrap ecommerce-dashboard">
     <div ng-init='invoiceItems ={{ isset($newArray)?json_encode($newArray):'[]'}};transType= "{{ $type }}"'
          ng-app="itemApp" ng-controller="mainController" class="card">
-        {{ Form::open(array('route'=>array('storeTrans',$type,$branch->id),'name'=>'form','novalidate')) }}
+        {{ Form::open(array('route'=>array('storeTrans',$type,$branch->id),'name'=>'form','novalidate',"id"=>"transaction")) }}
         <div class="title">
             <h5>
                 <i class="mdi mdi-notification-event-available"></i>
@@ -106,14 +106,14 @@
 
                         <i class="mdi mdi-editor-attach-money prefix active"></i>
                         {{ Form::label('pay_type',Lang::get('main.payment')) }}
-                        {{ Form::select('pay_type',$pay_type,'cash',array('id'=>'pay_type','ng-model'=>'pay_type')) }}
+                        {{ Form::select('pay_type',$pay_type,'cash',array('id'=>'pay_type','ng-model'=>'pay_type', 'class'=>'browser-default')) }}
                         <p class="parsley-required">{{ $errors ->first('pay_type') }} </p>
                     </div>{{--pay_type--}}
                     <div class="col s2 l3">
 
                         <i class="mdi mdi-communication-import-export"></i>
                         {{ Form::label('account',lang::get('main.account')) }}
-                        {{ Form::select('account',array(null=>lang::get('main.select_account'))+ $account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
+                        {{ Form::select('account',$account_type,null,array('id'=>'account','ng-required'=>'pay_type == "on_account"','ng-model'=>'account.type','ng-change'=>'getAccountsByType()')) }}
                         <p class="parsley-required">{{ $errors ->first('account') }} </p>
                     </div>{{--account--}}
                     <div ng_show="account.type" class="col s2 l3">
