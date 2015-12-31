@@ -59,7 +59,7 @@
         </td>{{--invoice Item quantity--}}
         @if(!TransController::isSettle($type))
             <td >
-            <input hidden class="input-without-border" ng-pattern="/^[0-9]+$/" name="cost_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.cost" type="number" value="@{{ cost(invoiceItem) }}"/>
+            <input hidden class="input-without-border" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="cost_@{{ invoiceItems.indexOf(invoiceItem) }}"  ng-model="invoiceItem.cost" type="number" value="@{{ cost(invoiceItem) }}"/>
             @{{ cost(invoiceItem)  }}
         </td>{{--invoice Item cost --}}
         <td >
