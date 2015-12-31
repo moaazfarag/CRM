@@ -98,7 +98,7 @@
                     <div class="col s12 l2">
                         <div class="input-field">
                             <i class="fa fa-dollar prefix"></i>
-                            {{ Form::number('cost',null,array('data-parsley-id'=>'4370','class'=>($errors->first('cost'))?'parsley-error':null,'ng-model'=>"item.cost",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+$/",'id'=>'cost','ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
+                            {{ Form::number('cost',null,array('data-parsley-id'=>'4370','class'=>($errors->first('cost'))?'parsley-error':null,'ng-model'=>"item.cost",'ng-minlength'=>"1",'ng-pattern'=>"/^[0-9]+(\.[0-9]{1,2})?$/",'id'=>'cost',"step"=>"0.01",'ng-keyup'=>'$event.keyCode == 16 && onKeyEnter()')) }}
                             <div ng-show="form.$submitted || form.cost.$touched">
                     <span ng-show="form.cost.$error.pattern">
                         @lang('main.please_enter_valid_number')
