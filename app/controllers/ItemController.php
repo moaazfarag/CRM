@@ -303,7 +303,8 @@ class ItemController extends BaseController
                 ->company()
                 ->groupBy('br_id')
                 ->groupBy('item_id')
-                ->where('br_deleted',0);
+                ->where('br_deleted',0)
+                ->where('trans_deleted',0);
             if(Input::get('cat_id') != ''){
 
                 $balances->where('cat_id',Input::get('cat_id'));
