@@ -143,7 +143,7 @@
                 {{-- end sum , discount ,tax and net --}}
                 <div class="row">
                     <div class="col s12 l12">
-                        <button ng-disabled="form.$invalid" type="submit"
+                        <button type="submit"
                                 class="waves-effect btn">@lang('main.add')</button>
                     </div>
                     {{ Form::close() }}
