@@ -380,12 +380,15 @@ class ItemController extends BaseController
 
             $i++;
         }
-        $data['report_open'] = "open";
-        $data['stores'] = "open";
+        $data['report_open']         = "open";
+        $data['stores']              = "open";
         $data['show_zero_results']   ='yes';
         $data['balances']            = $inventory_data;
         $data['type']                = 'inventory_result';
+        $data['type_form']           = 'inventory_result';
         $data['title']               = Lang::get('main.inventory_result');
+        $data['branch']      = $this->isAllBranch();
+        $data['co_info']        = CoData::thisCompany()->first();
 
         return View::make('dashboard.products.items.balance_report.balance_result',$data);
 
