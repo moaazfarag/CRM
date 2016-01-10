@@ -357,10 +357,9 @@ class ItemController extends BaseController
 
         $inputs         = Input::all();
         $all_item       = explode('|',$inputs['all_item']);
-        dd($all_item);
-
+//        dd($all_item);
 //        $all_item       = array_slice($all_item, 0, -1);
-//dd($all_item);
+
         $inventory_data = array();
          $i             = 0 ;
 
