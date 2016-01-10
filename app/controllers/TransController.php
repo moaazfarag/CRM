@@ -72,7 +72,7 @@ class TransController extends BaseController
                         $serial_no = ($item->has_serial)?$inputs['serial_'.$k]:null;
                         $quantity  = ($item->has_serial)?1:$inputs['quantity_'.$k];
                         if(isset($inputs['cost_'.$k]) && intval($inputs['cost_'.$k]) > 0 && $type == "buy"){
-                            $unitPrice =  intval($inputs['cost_'.$k] );// get price from input
+                            $unitPrice =  $inputs['cost_'.$k];// get price from input
                         }else{
                             if(self::isSettle($type)) {
                                 $unitPrice = null;
