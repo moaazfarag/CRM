@@ -1,15 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: ahmed
- * Date: 9/28/2015
- * Time: 2:08 PM
- */
-        ?>
-@extends('dashboard.main')
-@section('content')
-        <!-- Main Content -->
-<section   class="content-wrap ecommerce-invoice" ng-app>
+
 
     <div class="card" style="padding:1%;">
         <div class="right-align invoice-print">
@@ -312,7 +301,3 @@
             @endif
 
     </div>
-</section>
-<!-- /Main Content -->
-
-@stop

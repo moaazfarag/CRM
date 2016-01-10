@@ -299,6 +299,9 @@ class ItemController extends BaseController
             $data['title']       = Lang::get('main.'.$type);
             $data['report_open'] = "open";
             $data['stores']      = "open";
+            $data['branch']      = $this->isAllBranch();
+            $data['co_info']        = CoData::thisCompany()->first();
+
             $balances            =  DB::table('items_balance')
                 ->company()
                 ->groupBy('br_id')

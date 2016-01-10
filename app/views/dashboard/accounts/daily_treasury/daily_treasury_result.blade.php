@@ -12,7 +12,7 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
+<section class="content-wrap ecommerce-dashboard" ng-app="itemApp" id="print-content"  ng-controller="mainController">
     <div class="row" style="margin: 1% 0;">
         <div class="col l12 s12" >
 
@@ -113,7 +113,7 @@
 
             <div class="row">
                 <div class="table-responsive" >
-                <table id="table_bank" class="display table table-bordered table-striped table-hover" style="margin-right: 7px;">
+                <table id="table_bank" class="display table table-bordered table-striped table-hover"   >
                     <thead>
                     <tr>
                         <caption class="caption-style">

@@ -14,7 +14,7 @@
 
 
 
-    <div class=" card">
+    <div class=" card no-print">
 
         <div class="title">
             <h5>
@@ -23,7 +23,7 @@
                 <i class="mdi-navigation-expand-less"></i>
             </a>
         </div>
-        <div class="content no-print">
+        <div class="content ">
 
         {{ Form::open(array('route'=>array('resultAccounts',$type),'name'=>'form_search')) }}
 

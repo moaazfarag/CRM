@@ -1,17 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: ahmed
- * Date: 10/3/2015
- * Time: 1:02 PM
- */
 
-?>
-
-@extends('dashboard.main')
-@section('content')
-        <!-- Main Content -->
-<section   class="content-wrap ecommerce-invoice" ng-app>
     <div class="card" style="padding:1%;">
         <div class="right-align invoice-print">
             <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
@@ -387,8 +374,3 @@
             @endif
 
     </div>
-</section>
-<!-- /Main Content -->
-
-@stop
-

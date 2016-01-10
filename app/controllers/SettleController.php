@@ -54,12 +54,14 @@ class SettleController extends BaseController {
 
                 if ($trans) {
 
-                    $data['title']       = Lang::get("main.$type" . '_statement'); // page title
-                    $data['date_from']   = $date_from;
-                    $data['date_to']     = $date_to;
-                    $data['invoices']     = $trans;
-
-                    return View::make('dashboard.settle.report.report_result', $data);
+                    $data['title']           = Lang::get("main.$type" . '_statement'); // page title
+                    $data['date_from']       = $date_from;
+                    $data['date_to']         = $date_to;
+                    $data['invoices']        = $trans;
+                    $data['report_open'] = "open";
+                    $data['stores'] = "open";
+                    $data['type']    = $type;
+                    return View::make('dashboard.settle.report.report_search', $data);
 
                 } else {
 

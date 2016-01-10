@@ -2,13 +2,13 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
+<section class="content-wrap ecommerce-dashboard" ng-app="itemApp" id="print-content" ng-controller="mainController">
     {{ Form::open(array('route'=>array('InvoiceReport',$type))) }}
-    <div class=" card ">
+    <div class=" card no-print">
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i>
-             {{ $title }}
+             {{ @$title }}
             </h5>
             <a class="minimize" href="#">
                 <i class="mdi-navigation-expand-less"></i>
@@ -127,8 +127,10 @@
 
 
     </div>
-    @if(Route::currentRouteName() == "prepMsHeader")
-        @include('dashboard.hr.msheader._table_view');
+    @if(Route::currentRouteName() == "InvoiceReport" && $type == 'sales-earnings')
+        @include('dashboard.invoices.report.report_result_sales_earnings');
+    @elseif(Route::currentRouteName() == "InvoiceReport")
+        @include('dashboard.invoices.report.report_result');
     @endif
 </section>
 @stop
