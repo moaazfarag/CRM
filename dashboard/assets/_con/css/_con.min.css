@@ -26,6 +26,10 @@ img, legend {
     #print-content {
         width: 100%; margin: 0;
          float: none;
+        color: #000 !important;
+        font-weight: 600;
+        font-size:1.4em;
+        font-family: ' Tahoma, Arial, Verdana
     }
     .page {
         width: 21cm;

@@ -1,9 +1,9 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section class="content-wrap ecommerce-dashboard">
+<section class="content-wrap ecommerce-dashboard" id="print-content">
         {{ Form::open(array('route'=>array('outGoingSalariesReport'))) }}
-        <div class=" card ">
+        <div class=" card no-print">
             <div class="title">
                 <h5>
                     <i class="fa fa-cog"></i>

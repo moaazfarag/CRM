@@ -60,7 +60,9 @@
 
 
     </div>
-
+    @if(Route::currentRouteName() == "companyEarnings")
+        @include('dashboard.invoices.report.report_result_company_earnings');
+    @endif
 </section>
 @stop
 

@@ -3,7 +3,7 @@
         <!-- Main Content -->
 <section id="print-content" ng-app="itemApp" ng-controller="mainController" class="content-wrap ecommerce-invoice">
 
-    <div class="card-panel" style="color: #000 !important; font-weight: 600; font-size:1.4em; font-family: ' Tahoma, Arial, Verdana">
+    <div class="card-panel print-font" >
         {{--{{ dd($invoice); }}--}}
         <!-- Logo -->
 

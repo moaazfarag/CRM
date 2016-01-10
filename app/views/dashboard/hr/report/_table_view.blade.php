@@ -1,4 +1,8 @@
+<br/>
 <div class="card-panel">
+    <div class="right-align invoice-print">
+        <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
+    </div>
     <div class="table-responsive" >
 
     <table  class="display table table-bordered table-striped table-hover">
@@ -49,15 +53,16 @@
         @endforeach
         </tbody>
     </table>
-    <hr/>
-  <div class="sub_title"> إجمالى صافى المرتبات خلال الفترة من 
-  <span class="date_style"> {{ BaseController::ViewDate($date_from) }} </span>
-   حتى 
-  <span class="date_style"> {{ BaseController::ViewDate($date_to) }} </span>
-  تساوى <?php echo array_sum($all_net) ?> </div>
-     @endif
+
+
      
 </div>
+    <div class="sub_title"> إجمالى صافى المرتبات خلال الفترة من
+        <span class="date_style"> {{ BaseController::ViewDate($date_from) }} </span>
+        حتى
+        <span class="date_style"> {{ BaseController::ViewDate($date_to) }} </span>
+        تساوى <?php echo array_sum($all_net) ?> </div>
+    @endif
 </div>
 
 

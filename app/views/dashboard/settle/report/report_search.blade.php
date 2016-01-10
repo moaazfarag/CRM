@@ -12,15 +12,9 @@
 @extends('dashboard.main')
 @section('content')
         <!-- Main Content -->
-<section class="content-wrap ecommerce-dashboard" ng-app="itemApp"  ng-controller="mainController">
-    <div class="row" style="margin: 1% 0;">
-    <div class="col l12 s12" >
-
-
-        </div>
-    </div>
+<section class="content-wrap ecommerce-dashboard" id="print-content" ng-app="itemApp"  ng-controller="mainController">
     {{ Form::open(array('route'=>array('reportSettleResult',$type))) }}
-    <div class=" card ">
+    <div class=" card  no-print">
         <div class="title">
             <h5>
                 <i class="fa fa-cog"></i>
@@ -77,8 +71,9 @@
 
 
     </div>
-    @if(Route::currentRouteName() == "prepMsHeader")
-        @include('dashboard.hr.msheader._table_view');
+    <br/>
+    @if(Route::currentRouteName() == "reportSettleResult")
+        @include('dashboard.settle.report.report_result');
     @endif
 </section>
 @stop

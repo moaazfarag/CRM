@@ -789,7 +789,7 @@ class AccountController extends BaseController
 
             if(isset($br_id)&& $br_id !='' ){
 
-                $data['branch_name']    = Branches::find($br_id)->first()->br_name ;
+                $data['branch_name']    = Branches::find($br_id)->br_name ;
                 $data['view_branch']  = 'one';
                 $last_balances = Treasury::company()->where('br_id',$br_id)->where('date','<',$date_from)->get();
 
@@ -1010,7 +1010,8 @@ class AccountController extends BaseController
 
         if(isset($br_id)&& $br_id !='' ){
 
-            $data['branch_name']    = Branches::find($br_id)->first()->br_name ;
+            $data['branch_name']    = Branches::find($br_id)->br_name ;
+//            dd($data['branch_name']);
             $data['view_branch']  = 'one';
             $last_balances = Treasury::company()->where('br_id',$br_id)->where('date','<',$date_from)->get();
 
