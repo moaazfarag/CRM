@@ -32,7 +32,7 @@
         <td>
             <input id="@{{ invoiceItem.id }}"
                    @if($type == "buy" || $type == "settleAdd"|| $type == "salesReturn")
-                   max="@{{ returnBalance(invoiceItem) }}"
+                   {{--max="@{{ returnBalance(invoiceItem) }}"--}}
                    @else
                    max="@{{ invoiceItem.balance }}"
                    @endif
