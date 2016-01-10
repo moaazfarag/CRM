@@ -14,7 +14,7 @@ class CompanyController extends BaseController
 
         if (Auth::check()) {
 
-            return Redirect::route('index');
+            return Redirect::route('home');
 
         } else {
 
