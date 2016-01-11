@@ -132,6 +132,7 @@
                         <th>@lang('main.trans_type')</th>
                         <th>@lang('main.debit')</th>
                         <th>@lang('main.credit_')</th>
+                        <th>@lang('main.notes')</th>
                     </tr>
 
                     </thead>
@@ -142,6 +143,7 @@
                         <td>رصيد ما قبل</td>
                         <td>{{ $last_debit }}</td>
                         <td>{{ $last_credit }}</td>
+                        <td></td>
                     </tr>
                     <?php
 
@@ -193,7 +195,7 @@
 
                                 ?>
 
-
+                                <td> {{$treasury->notes}}</td>
 
 
                             </tr>
@@ -275,6 +277,7 @@
                         <th>@lang('main.trans_type')</th>
                         <th>@lang('main.debit')</th>
                         <th>@lang('main.credit_')</th>
+                        <th>@lang('main.notes')</th>
                     </tr>
 
                     </thead>
@@ -287,6 +290,7 @@
                         <td>رصيد ما قبل</td>
                         <td>{{ $last_debit[$branch_id] }}</td>
                         <td>{{ $last_credit[$branch_id]; }}</td>
+                        <td></td>
                     </tr>
                     <?php
 
@@ -338,7 +342,7 @@
 
                             ?>
 
-
+                            <td> {{ $treasury->notes }}</td>
 
 
                         </tr>

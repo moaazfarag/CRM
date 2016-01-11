@@ -220,7 +220,7 @@ class AccountController extends BaseController
 
             $movement           = new AccountTrans;
             $movement->co_id    = Auth::user()->co_id;
-            $movement->br_id       = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+            $movement->br_id       = (!empty($inputs['br_id'])) ? $inputs['br_id'] :$this->getBranchId();
             $movement->account  = $inputs['account'];
             $movement->account_id  = $inputs['account_id'];
             $movement->pay_type = 'cash';
@@ -302,7 +302,7 @@ class AccountController extends BaseController
             $movement->account       = $inputs['account'];
             $movement->account_id    = $inputs['account_id'];
             $movement->pay_type      = 'cash';
-            $movement->br_id       = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+            $movement->br_id       = (!empty($inputs['br_id'])) ? $inputs['br_id'] : $this->getBranchId();
             $movement->date          = $this->strToTime($inputs['date']);
             $movement->notes         = $inputs['notes'];
             $movement->user_id       = Auth::id();
@@ -542,7 +542,7 @@ class AccountController extends BaseController
             $movement               = new AccountTrans;
             $movement->co_id        = Auth::user()->co_id;
             $movement->account      = $inputs['account'];
-            $movement->br_id        = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+            $movement->br_id        = (!empty($inputs['br_id'])) ? $inputs['br_id'] : $this->getBranchId();
             $movement->account_id   = $inputs['account_id'];
             $movement->pay_type     = 'cash';
             $movement->date         = $this->strToTime($inputs['date']);
@@ -919,7 +919,6 @@ class AccountController extends BaseController
 
         $inputs = Input::all();
         $ruels  = Accounts::$ruels_direct_movement;
-
         if ($this->isHaveBranch() == 1) {
             $ruels["br_id"] = "required";
         }
@@ -934,7 +933,7 @@ class AccountController extends BaseController
 
             $movement               = new AccountTrans;
             $movement->co_id        = Auth::user()->co_id;
-            $movement->br_id        = (!empty($inputs['br_id'])) ? $inputs['br_id'] : "";
+            $movement->br_id        = (!empty($inputs['br_id'])) ? $inputs['br_id'] :$this->getBranchId();
             $movement->account      = $inputs['account'];
             $movement->account_id   = $inputs['account_id'];
             $movement->pay_type     = 'cash';
