@@ -80,8 +80,9 @@
 
 
     </div>
-    @if(Route::currentRouteName() == "prepMsHeader")
-        @include('dashboard.hr.msheader._table_view');
+    @if(Route::currentRouteName() == "resultTheBalanceOfTheStores" || Route::currentRouteName() == "inventoryResult")
+
+        @include('dashboard.products.items.balance_report.balance_result')
     @endif
 </section>
 @stop
