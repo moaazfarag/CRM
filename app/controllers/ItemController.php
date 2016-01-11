@@ -296,6 +296,7 @@ class ItemController extends BaseController
         if(in_array($type,['balance_stores','evaluation_stores','inventory_store'])){
 
             $data['type']        = $type;
+            $data['type_form']   = $type;
             $data['title']       = Lang::get('main.'.$type);
             $data['report_open'] = "open";
             $data['stores']      = "open";
@@ -346,7 +347,7 @@ class ItemController extends BaseController
 
                 $data['balances'] = $balances->get();
 
-            return View::make('dashboard.products.items.balance_report.balance_result',$data);
+            return View::make('dashboard.products.items.balance_report.balance_search',$data);
 
         }else{
 
@@ -384,13 +385,13 @@ class ItemController extends BaseController
         $data['stores']              = "open";
         $data['show_zero_results']   ='yes';
         $data['balances']            = $inventory_data;
-        $data['type']                = 'inventory_result';
+        $data['type']                = 'inventory_store';
         $data['type_form']           = 'inventory_result';
         $data['title']               = Lang::get('main.inventory_result');
-        $data['branch']      = $this->isAllBranch();
-        $data['co_info']        = CoData::thisCompany()->first();
+        $data['branch']              = $this->isAllBranch();
+        $data['co_info']             = CoData::thisCompany()->first();
 
-        return View::make('dashboard.products.items.balance_report.balance_result',$data);
+        return View::make('dashboard.products.items.balance_report.balance_search',$data);
 
     }
 
