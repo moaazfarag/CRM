@@ -818,8 +818,8 @@ class AccountController extends BaseController
                         }// end else
                     }
 
-                    $data['last_debit'] = array_sum($credit);
-                    $data['last_credit'] = array_sum($debit);
+                    $data['last_debit'] = array_sum($debit);
+                    $data['last_credit'] = array_sum($credit);
 
                 }else{
 
@@ -881,8 +881,8 @@ class AccountController extends BaseController
                                 }// end else
                             }
 
-                            $data["last_debit"][$branch->id]  = array_sum($credit);
-                            $data["last_credit"][$branch->id] = array_sum($debit);
+                            $data["last_debit"][$branch->id]  = array_sum($debit);
+                            $data["last_credit"][$branch->id] = array_sum($credit);
 
                         }else{
 
@@ -1039,8 +1039,8 @@ class AccountController extends BaseController
                     }// end else
                 }
 
-                $data['last_debit'] = array_sum($credit);
-                $data['last_credit'] = array_sum($debit);
+                $data['last_debit'] = array_sum($debit);
+                $data['last_credit'] = array_sum($credit);
 
             }else{
 
@@ -1101,8 +1101,8 @@ class AccountController extends BaseController
                         }// end else
                     }
 
-                    $data["last_debit"][$branch->id]  = array_sum($credit);
-                    $data["last_credit"][$branch->id] = array_sum($debit);
+                    $data["last_debit"][$branch->id]  = array_sum($debit);
+                    $data["last_credit"][$branch->id] = array_sum($credit);
 
                 }else{
 
