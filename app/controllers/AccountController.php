@@ -457,7 +457,7 @@ class AccountController extends BaseController
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
-                            ->whereIn('trans_type',['catch','pay'])
+                            ->whereNotIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 
@@ -680,7 +680,7 @@ class AccountController extends BaseController
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
-                            ->whereIn('trans_type',['catch','pay'])
+                            ->whereNotIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 

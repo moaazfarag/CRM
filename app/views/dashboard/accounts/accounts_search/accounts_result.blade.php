@@ -131,7 +131,7 @@
             <?php $all_credit = array(); $all_debit= array(); $i = 0;?>
             @foreach($account_trans as $k => $trans)
 
-               @if($trans->pay_type == "cash" && !in_array($trans->trans_type , ['catch','pay']))
+               @if(in_array($trans->pay_type ,['cash','visa']) && !in_array($trans->trans_type , ['catch','pay']))
                    @if($trans->debit == 0)
                        <?php $prise = $trans->credit;  ?>
                    @else
@@ -170,8 +170,7 @@
                    </tr>
 
                @endif
-
-               @if($trans->pay_type == "cash" &&  !in_array($trans->trans_type , ['catch','pay']))
+               @if(in_array($trans->pay_type ,['cash','visa']) &&  !in_array($trans->trans_type , ['catch','pay']))
 
                     <?php
                     if($trans->debit == 0){ $price = $trans->credit;} else { $price = $trans->debit;}
@@ -179,8 +178,9 @@
                     $all_credit[$k]= $price; $all_debit[$k]= $price;
 
                     ?>
-
-                @else
+                @elseif($trans->pay_type == 'on_account')
+                   <?php $all_debit[$k]= $trans->debit; ?>
+                @elseif(in_array($trans->trans_type , ['catch','pay']))
                     <?php
                     {
                         $all_credit[$k]= $trans->credit; $all_debit[$k]= $trans->debit;
