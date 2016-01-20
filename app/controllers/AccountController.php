@@ -482,8 +482,8 @@ class AccountController extends BaseController
 
                         if(!empty($all_trans_movement)){
 
-                            $credit += $all_trans_movement->sum_credit;
-                            $debit  += $all_trans_movement->sum_debit;
+                            $credit += $all_trans_movement->sum_debit;
+                            $debit  += $all_trans_movement->sum_credit;
                         }
 
                         if(!empty($account_balance)){
@@ -705,8 +705,8 @@ class AccountController extends BaseController
 
                         if(!empty($all_trans_movement)){
 
-                            $credit += $all_trans_movement->sum_credit;
-                            $debit  += $all_trans_movement->sum_debit;
+                            $credit += $all_trans_movement->sum_debit;
+                            $debit  += $all_trans_movement->sum_credit;
                         }
 
                         if(!empty($account_balance)){

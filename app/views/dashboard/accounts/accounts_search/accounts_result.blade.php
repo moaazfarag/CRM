@@ -158,17 +158,25 @@
 
                </tr>
 
-               @else
+               @elseif($trans->pay_type == 'on_account')
 
                    <tr>
                        <td>{{  $trans->date }}</td>
                        <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
-                       <td>@if($trans->debit == 0) ---- @else {{  $trans->debit }} @endif</td>
-                       <td>@if($trans->credit == 0) ---- @else{{  $trans->credit }}  @endif</td>
+                       <td>@if($trans->debit == 0) ---- @else{{  $trans->debit }}  @endif</td>
+                       <td>@if($trans->credit == 0) ---- @else {{  $trans->credit }} @endif</td>
                        <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
                        <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
                    </tr>
-
+                @else
+                   <tr>
+                       <td>{{  $trans->date }}</td>
+                       <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
+                       <td>@if($trans->credit == 0) ---- @else {{  $trans->credit }} @endif</td>
+                       <td>@if($trans->debit == 0) ---- @else{{  $trans->debit }}  @endif</td>
+                       <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
+                       <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
+                   </tr>
                @endif
                @if(in_array($trans->pay_type ,['cash','visa']) &&  !in_array($trans->trans_type , ['catch','pay']))
 
@@ -179,11 +187,12 @@
 
                     ?>
                 @elseif($trans->pay_type == 'on_account')
-                   <?php $all_debit[$k]= $trans->debit; ?>
+                   <?php
+                   $all_credit[$k]= $trans->credit; ?>
                 @elseif(in_array($trans->trans_type , ['catch','pay']))
                     <?php
                     {
-                        $all_credit[$k]= $trans->credit; $all_debit[$k]= $trans->debit;
+                        $all_credit[$k]= $trans->debit; $all_debit[$k]= $trans->credit;
                     }
 
                     ?>
