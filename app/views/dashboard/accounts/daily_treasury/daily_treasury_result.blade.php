@@ -464,7 +464,7 @@
 
                         {{--end account name --}}
                     </div>
-                                        @endif
+
 
                     <div class="row">
                         {{--price--}}
@@ -524,7 +524,7 @@
             </div>
         </div>
         <!--/////////// model end }}}}}}}}}}}}}}-->
-
+    @endif
 </section>
 @stop
 

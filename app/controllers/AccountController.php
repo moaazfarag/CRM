@@ -402,6 +402,7 @@ class AccountController extends BaseController
                 $data['general_accounts_open']     = 'open';
             $data['account_balance'] = $account_balance;
             $data['account_trans'] = $account_trans->get();
+//                dd($data['account_trans']);
             $data['date_from']     = $date_from;
             $data['date_to']       = $date_to;
             $data['type']          = $type;
@@ -436,30 +437,24 @@ class AccountController extends BaseController
                         'bank'     =>'البنك',
                     );
                     $data['account_type']  = array('customers'=>Lang::get('main.customers_'),'suppliers'=>Lang::get('main.suppliers_'),'partners'=>Lang::get('main.partners_'),'bank'=>Lang::get('main.bank'),'multiple_revenue'=>Lang::get('main.multiple_revenue'),'expenses'=>Lang::get('main.expenses'));
-
                     $all_accounts         = Accounts::company()->where('acc_type',$type)->get()->lists('id');
-                   $data['all_accounts'] = $all_accounts;
-                   $credit               = 0;
-                   $debit                = 0;
+                    $data['all_accounts'] = $all_accounts;
+
+                    $debit_types          = array('buy','salesReturn');
+                    $credit_types         = array('sales','buyReturn');
+                    $movements            = array('pay','catch');
 
                     foreach($all_accounts as $account_id){
-
+                        $credit               = 0;
+                        $debit                = 0;
                         $account_balance = AccountsBalances::where('account_id',$account_id)
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 //                        dd($account_balance);
-                        $all_trans_cash = AccountTrans::company()
-                            ->where('account_id',$account_id)
-                            ->whereIn('pay_type',['cash','visa'])
-                            ->whereNotIn('trans_type',['catch','pay'])
-                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
-                            ->first();
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
-                            ->whereNotIn('trans_type',['catch','pay'])
-                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
-                            ->first();
+                            ->get();
 
                         $all_trans_movement = AccountTrans::company()
                             ->where('account_id',$account_id)
@@ -467,17 +462,25 @@ class AccountController extends BaseController
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 
-                        if(!empty($all_trans_cash)){
-                            $credit = $all_trans_cash->sum_credit + $all_trans_cash->sum_debit;
-                            $debit  = $credit;
-
-//                           $data['account_trans'][$account_id] = ['']
-                        }
-
+                        $on_account_credit =[] ; $on_account_debit = [];
                         if(!empty($all_trans_on_account)){
-
-                            $credit += $all_trans_on_account->sum_credit;
-                            $debit  += $all_trans_on_account->sum_debit;
+                            foreach($all_trans_on_account as $k =>$trans){
+                                if(in_array($trans->trans_type,$credit_types)){
+                                    if($trans->credit == 0){
+                                        $on_account_credit[$k]= $trans->debit;
+                                    }else {
+                                        $on_account_credit[$k]= $trans->credit;
+                                    }
+                                }elseif(in_array($trans->trans_type,$debit_types)){
+                                    if($trans->credit == 0){
+                                        $on_account_debit[$k]= $trans->debit;
+                                    }else {
+                                        $on_account_debit[$k]= $trans->credit;
+                                    }
+                                }
+                            }
+                            $credit += array_sum($on_account_credit);
+                            $debit  += array_sum($on_account_debit);
                         }
 
                         if(!empty($all_trans_movement)){
@@ -662,27 +665,20 @@ class AccountController extends BaseController
 
                     $all_accounts         = Accounts::company()->where('acc_type',$type)->get()->lists('id');
                     $data['all_accounts'] = $all_accounts;
-                    $credit               = 0;
-                    $debit                = 0;
 
+                    $debit_types          = array('buy','salesReturn');
+                    $credit_types         = array('sales','buyReturn');
                     foreach($all_accounts as $account_id){
-
+                        $credit               = 0;
+                        $debit                = 0;
                         $account_balance = AccountsBalances::where('account_id',$account_id)
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
-//                        dd($account_balance);
-                        $all_trans_cash = AccountTrans::company()
-                            ->where('account_id',$account_id)
-                            ->whereIn('pay_type',['cash','visa'])
-                            ->whereNotIn('trans_type',['catch','pay'])
-                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
-                            ->first();
+
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
-                            ->whereNotIn('trans_type',['catch','pay'])
-                            ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
-                            ->first();
+                            ->get();
 
                         $all_trans_movement = AccountTrans::company()
                             ->where('account_id',$account_id)
@@ -690,17 +686,25 @@ class AccountController extends BaseController
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
 
-                        if(!empty($all_trans_cash)){
-                            $credit = $all_trans_cash->sum_credit + $all_trans_cash->sum_debit;
-                            $debit  = $credit;
-
-//                           $data['account_trans'][$account_id] = ['']
-                        }
-
+                        $on_account_credit =[] ; $on_account_debit = [];
                         if(!empty($all_trans_on_account)){
-
-                            $credit += $all_trans_on_account->sum_credit;
-                            $debit  += $all_trans_on_account->sum_debit;
+                            foreach($all_trans_on_account as $k =>$trans){
+                                if(in_array($trans->trans_type,$credit_types)){
+                                    if($trans->credit == 0){
+                                        $on_account_credit[$k]= $trans->debit;
+                                    }else {
+                                        $on_account_credit[$k]= $trans->credit;
+                                    }
+                                }elseif(in_array($trans->trans_type,$debit_types)){
+                                    if($trans->credit == 0){
+                                        $on_account_debit[$k]= $trans->debit;
+                                    }else {
+                                        $on_account_debit[$k]= $trans->credit;
+                                    }
+                                }
+                            }
+                            $credit += array_sum($on_account_credit);
+                            $debit  += array_sum($on_account_debit);
                         }
 
                         if(!empty($all_trans_movement)){
