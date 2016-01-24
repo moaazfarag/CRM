@@ -85,7 +85,11 @@
     <div class="right-align invoice-print">
         <span class="btn indigo" onclick="javascript:window.print();"><i class="ion-printer"></i></span>
     </div>
-
+<?php
+    $debit_types    = array('buy','salesReturn');
+    $credit_types   = array('sales','buyReturn');
+    $movements      = array('pay','catch');
+    ?>
     @if(!empty($account_trans) || !empty($account_balance))
     {{--table start--}}
         <div class="table-responsive" >
@@ -128,77 +132,46 @@
 
             </tr>
         @endif
+
             <?php $all_credit = array(); $all_debit= array(); $i = 0;?>
+        @if(!empty($account_trans))
             @foreach($account_trans as $k => $trans)
-
-               @if(in_array($trans->pay_type ,['cash','visa']) && !in_array($trans->trans_type , ['catch','pay']))
-                   @if($trans->debit == 0)
-                       <?php $prise = $trans->credit;  ?>
-                   @else
-                       <?php $prise = $trans->debit; ?>
-                   @endif
-
-                  <tr>
-                <td>{{  $trans->date }}</td>
-                <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
-                <td>{{ $prise }}</td>
-                <td>----</td>
-                <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
-                <td>{{  $trans->notes }}</td>
-
-                  </tr>
-
-               <tr>
-                   <td>{{  $trans->date }}</td>
-                   <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
-                   <td> ---- </td>
-                   <td>{{ $prise }}</td>
-                   <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
-                   <td>{{  $trans->notes }}</td>
-
-               </tr>
-
-               @elseif($trans->pay_type == 'on_account')
-
+               @if($trans->pay_type == 'on_account' && in_array($trans->trans_type,$credit_types))
                    <tr>
                        <td>{{  $trans->date }}</td>
                        <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
-                       <td>@if($trans->debit == 0) ---- @else{{  $trans->debit }}  @endif</td>
-                       <td>@if($trans->credit == 0) ---- @else {{  $trans->credit }} @endif</td>
+                       <td> ---- </td>
+                       <?php (intval($trans->credit) == 0)? $all_credit[$k]= $trans->debit:$all_credit[$k]= $trans->credit; ?>
+                       <td>{{  $all_credit[$k] }}</td>
                        <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
                        <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
                    </tr>
-                @else
+                @elseif($trans->pay_type == 'on_account' && in_array($trans->trans_type,$debit_types))
+                   <tr>
+                       <td>{{  $trans->date }}</td>
+                       <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
+                       <td>{{  $trans->credit }}</td>
+                       <td> ---- </td>
+                       <?php (intval($trans->credit) == 0)? $all_debit[$k]= $trans->credit:$all_debit[$k]= $trans->debit; ?>
+                       <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
+                       <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
+                   </tr>
+                   @elseif(in_array($trans->trans_type,$movements))
                    <tr>
                        <td>{{  $trans->date }}</td>
                        <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
                        <td>@if($trans->credit == 0) ---- @else {{  $trans->credit }} @endif</td>
                        <td>@if($trans->debit == 0) ---- @else{{  $trans->debit }}  @endif</td>
+                       <?php
+                            $all_debit[$k]= $trans->credit;
+                            $all_credit[$k]= $trans->debit;
+                       ?>
                        <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
                        <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
                    </tr>
                @endif
-               @if(in_array($trans->pay_type ,['cash','visa']) &&  !in_array($trans->trans_type , ['catch','pay']))
-
-                    <?php
-                    if($trans->debit == 0){ $price = $trans->credit;} else { $price = $trans->debit;}
-
-                    $all_credit[$k]= $price; $all_debit[$k]= $price;
-
-                    ?>
-                @elseif($trans->pay_type == 'on_account')
-                   <?php
-                   $all_credit[$k]= $trans->credit; ?>
-                @elseif(in_array($trans->trans_type , ['catch','pay']))
-                    <?php
-                    {
-                        $all_credit[$k]= $trans->debit; $all_debit[$k]= $trans->credit;
-                    }
-
-                    ?>
-                @endif
-
         @endforeach
+        @endif
         </tbody>
     </table>
     </div>

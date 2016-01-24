@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'el_rased',
+			'database'  => 'elrased_clickdsl',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
