@@ -386,8 +386,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
             Route::post('company-earnings', array('uses' => 'InvoiceController@reportResultCompanyEarnings', 'as' => 'companyEarnings'));
 
         });
-        // item card
-        Route::get('show-all-items', array('uses' => 'ItemController@showAllItems', 'as' => 'showAllItems'));
+        // 
+        Route::get('show-all-items', array('before' => 'filter:p_reports_stores:p_showItems:show','uses' => 'ItemController@showAllItems', 'as' => 'showAllItems'));
+        Route::get('search-item-cost', array('before' => 'filter:p_reports_stores:p_itemsCost:show','uses' => 'ItemController@searchItemCost', 'as' => 'searchItemCost'));
 
         Route::group(array('before' => 'filter:p_reports_stores:p_itemsCard:show'), function () {
             Route::get('items-card/items', array('uses' => 'ItemController@searchItemCard', 'as' => 'searchItemCard'));

@@ -485,4 +485,11 @@ class ItemController extends BaseController
         Session::flash('success','تم إيقاف '.'('.$count_of_deleted .') صنف '.'بنجاح');
         return Redirect::back();
     }
+    public function searchItemCost(){
+
+        $data['items'] = Items::company()->where('deleted',0)->get();
+        $data['title'] = 'تكلفة المنتجات';
+        return View::make('dashboard.products.items.report.show_item_cost_search',$data);
+
+    }
 }

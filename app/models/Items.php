@@ -65,7 +65,30 @@ class Items extends Eloquent {
     {
         return $this->belongsTo('Seasons','seasons_id','id');
     }
+    public static function round_up($value, $places)
+    {
+        $mult = pow(10, abs($places));
+        return $places < 0 ?
+            ceil($value / $mult) * $mult :
+            ceil($value * $mult) / $mult;
+    }
+    public function cost()
+    {
+        $header_id = TransHeader::company()->whereIn('invoice_type',['buy','itemBalance',])->lists('id');
+        $details   = TransDetails::company()
+            ->where('item_id',$this->id)
+            ->whereIn('trans_header_id',$header_id)
+            ->select( DB::raw('sum(qty) as total_qty'),DB::raw('sum(item_total) as total_item') )
+            ->first();
+        if(count($details) && $details->total_item != 0 && $details->total_qty != 0){
 
+            $cost = $this->round_up($details->total_item / $details->total_qty,2);
+        }else{
+            $cost = 0;
+        }
+
+        return $cost;
+    }
     public function models()
     {
         return $this->belongsTo('Models','models_id');
