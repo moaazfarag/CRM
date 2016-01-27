@@ -462,7 +462,7 @@ $barcodePages = ["viewLabel", "printBarcode"];
                             </ul>
                         </li>
                     @endif
-                    @if(PerC::isMainPerm('p_reports_invoices','show') || PerC::isShow('p_reports_hr','p_outgoingSalaries','show') || PerC::isMainPerm('p_reports_stores','show'))
+                    @if(PerC::isMainPerm('p_reports_invoices','show_add_edit') || PerC::isShow('p_reports_hr','p_outgoingSalaries','show_add') || PerC::isMainPerm('p_reports_stores','show_add') || PerC::isMainPerm('p_reports_stores','show_add'))
                         <li class="{{ @$report_open }}">
                             <a class="yay-sub-toggle waves-effect waves-blue"><i class="ion-printer"></i> التقارير <span
                                         class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
@@ -494,8 +494,14 @@ $barcodePages = ["viewLabel", "printBarcode"];
                                                     <a href="{{ URL::route('reportSettleSearch','settleDown') }}"
                                                        class="waves-effect waves-blue"> تسويات الخصم </a>
                                                 @endif
+                                                @if(PerC::isShow('p_reports_stores','p_showItems','show'))
                                                     <a href="{{ URL::route('showAllItems') }}"
                                                        class="waves-effect waves-blue">  الأصناف </a>
+                                               @endif
+                                                @if(PerC::isShow('p_reports_stores','p_itemsCost','show'))
+                                                        <a href="{{ URL::route('searchItemCost') }}"
+                                                       class="waves-effect waves-blue">  تكلفة الأصناف </a>
+                                                @endif
                                                 @if(PerC::isShow('p_reports_stores','p_itemsCard','show'))
                                                     <a href="{{ URL::route('searchItemCard') }}"
                                                        class="waves-effect waves-blue">   @lang('main.itemCart') </a>

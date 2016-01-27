@@ -559,6 +559,8 @@ return  array(
     'p_outgoingSalaries'    =>'المرتبات المنصرفة',
     'p_reports_stores'      =>'تقارير المخازن',
     'p_itemsCard'           =>'كارت الصنف',
+	'p_showItems'			=>'الأصناف',
+	'p_itemsCost'			=>'تكلفة الأصناف',
     'p_reports_invoices'    =>'تقارير الفواتير',
     'p_sumSales'            =>'المبيعات (إجمالى) ',
     'p_sumSalesReturn'      =>'مرتجع المبيعات  (إجمالى) ',
@@ -576,6 +578,7 @@ return  array(
     'p_sales'               =>' المبيعات (تحليلي)',
 	'p_company_earnings'    =>'أرباح الشركة',
     'accountsBalances'      =>'ارصدة الحسابات الافتتاحية ',
+
 
 	// management
 	"delete_company"	=>"حذف ",
