@@ -59,6 +59,11 @@
       {{ HTML::script('dashboard/scripts/required_msg.js') }}
       {{ HTML::script('dashboard/scripts/angular-sanitize.js') }}
       {{ HTML::script('dashboard/scripts/massautocomplete.min.js') }}
+
+      {{ HTML::script('dashboard/assets/markitup/sets/default/set.js') }}
+      {{ HTML::script('dashboard/assets/markitup/jquery.markitup.js') }}
+      {{ HTML::script('dashboard/assets/parsley/parsley.min.js') }}
+
       <script type="text/javascript">
           $(document).ready(function(){
               $('#select_all').on('click',function(){

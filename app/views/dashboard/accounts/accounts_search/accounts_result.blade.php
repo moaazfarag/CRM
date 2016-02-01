@@ -150,9 +150,9 @@
                    <tr>
                        <td>{{  $trans->date }}</td>
                        <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
-                       <td>{{  $trans->credit }}</td>
-                       <td> ---- </td>
                        <?php (intval($trans->credit) == 0)? $all_debit[$k]= $trans->credit:$all_debit[$k]= $trans->debit; ?>
+                       <td>{{  $all_debit[$k] }}</td>
+                       <td> ---- </td>
                        <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
                        <td>@if($trans->trans_id != '')@lang('main.invoice_no') : {{  $trans->invoiceNo->invoice_no }} @endif  @if($trans->notes != '') |  {{$trans->notes }} @endif</td>
                    </tr>

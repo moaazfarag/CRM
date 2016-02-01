@@ -23,10 +23,7 @@
           @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
         </style>
   <!-- nanoScroller -->
-
-
     {{ HTML::style('dashboard/assets/nanoScroller/nanoscroller.css') }}
-
   <!-- FontAwesome -->
   {{ HTML::style('dashboard/assets/font-awesome/css/font-awesome.min.css') }}
   {{ HTML::style('dashboard/assets/select2/css/select2.min.css') }}
@@ -43,14 +40,17 @@
   <!-- Google Prettify -->
   {{ HTML::style('dashboard/assets/google-code-prettify/prettify.css') }}
   <!-- Main -->
-  {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
+    {{ HTML::Style('dashboard/assets/_con/css/_con-indigo.min.css') }}
+    {{ HTML::Style('dashboard/assets/markitup/skins/_con/style.css') }}
+    {{ HTML::Style('dashboard/assets/markitup/sets/default/style.css') }}
+    {{ HTML::style('dashboard/assets/_con/css/_con.min.css') }}
     {{ HTML::style('dashboard/assets/pikaday/pikaday.css') }}
     {{ HTML::style('dashboard/css/massautocomplete.theme.css') }}
     {{--custom css--}}
     {{ HTML::style('dashboard/css/style.css') }}
 
   <!--[if lt IE 9]>
-    <script src="assets/html5shiv/html5shiv.min.js">
+        {{ HTML::script('assets/html5shiv/html5shiv.min.js') }}
         {{ HTML::script('dashboard/assets/angular.min.js') }}
 
   <![endif]-->
