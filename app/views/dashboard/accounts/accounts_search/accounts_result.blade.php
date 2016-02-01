@@ -150,7 +150,7 @@
                    <tr>
                        <td>{{  $trans->date }}</td>
                        <td>{{  Lang::get('main.'.$trans->trans_type.'_type') }}</td>
-                       <?php (intval($trans->credit) == 0)? $all_debit[$k]= $trans->credit:$all_debit[$k]= $trans->debit; ?>
+                       <?php (intval($trans->credit) == 0)? $all_debit[$k]= $trans->debit:$all_debit[$k]= $trans->credit; ?>
                        <td>{{  $all_debit[$k] }}</td>
                        <td> ---- </td>
                        <td>{{  Lang::get('main.'.$trans->pay_type) }}</td>
