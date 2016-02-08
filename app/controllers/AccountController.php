@@ -382,6 +382,7 @@ class AccountController extends BaseController
 
             // MAKE QUERY
             $account_trans     = AccountTrans::company()
+                                ->where('deleted',0)
                                 ->dateBetween('date',$date_from,$date_to);
              if($account_id == 'all') {
 
@@ -452,12 +453,14 @@ class AccountController extends BaseController
                             ->first();
 //                        dd($account_balance);
                         $all_trans_on_account = AccountTrans::company()
+                            ->where('deleted',0)
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
                             ->get();
 
                         $all_trans_movement = AccountTrans::company()
                             ->where('account_id',$account_id)
+                            ->where('deleted',0)
                             ->whereIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
                             ->first();
@@ -606,6 +609,7 @@ class AccountController extends BaseController
 
                 // MAKE QUERY
                 $account_trans     = AccountTrans::company()
+                    ->where('deleted',0)
                     ->dateBetween('date',$date_from,$date_to);
 
                 if($for == 'all') {
@@ -678,12 +682,14 @@ class AccountController extends BaseController
                         $all_trans_on_account = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->where('pay_type','on_account')
+                            ->where('deleted',0)
                             ->get();
 
                         $all_trans_movement = AccountTrans::company()
                             ->where('account_id',$account_id)
                             ->whereIn('trans_type',['catch','pay'])
                             ->select(DB::raw('SUM(credit) AS sum_credit'),DB::raw('SUM(debit) AS sum_debit'))
+                            ->where('deleted',0)
                             ->first();
 
                         $on_account_credit =[] ; $on_account_debit = [];
