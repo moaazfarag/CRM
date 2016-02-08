@@ -420,11 +420,17 @@ class TransController extends BaseController
             $trans = $invoice->first();
 
             if(!empty($trans)){
-
+                // delete account trans row about this invoice
+                $account_trans = AccountTrans::company()
+                    ->where('trans_id',$trans->id)
+                    ->first();
+                $account_trans->deleted = 1;
+                $account_trans->update();
+                // delete invoice
                 $trans->deleted = 1;
                 $trans->user_id = Auth::id();
                 $trans->cancel_cause   = $cancel_cause;
-                $trans->save();
+                $trans->update();
 
                 $msg = 'تم إلغاء الفاتورة بنجاح ';
 
