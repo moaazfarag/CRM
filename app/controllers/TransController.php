@@ -392,22 +392,13 @@ class TransController extends BaseController
     {
 
         $inputs = Input::all();
-        $ruels =  TransHeader::$delete_ruels;
-
-//        if ($this->isHaveBranch() == 1) {
-//            $ruels["br_id"] = "required";
-//        }
         $validation = Validator::make($inputs, TransHeader::$delete_ruels);
-
         if ($validation->fails()) {
-
             return Redirect::back()->withErrors($validation->messages());
         }else{
-
             $invoice_no   = $inputs['invoice_no'];
             $invoice_type = $inputs['invoice_type'];
             $cancel_cause = $inputs['cancel_cause'];
-
             $invoice      = TransHeader::company()
                 ->where('invoice_no',$invoice_no)
                 ->where('invoice_type',$invoice_type);
@@ -416,9 +407,7 @@ class TransController extends BaseController
 
                 $invoice->where('br_id',Auth::user()->br_id);
             }
-
             $trans = $invoice->first();
-
             if(!empty($trans)){
                 // delete account trans row about this invoice
                 $account_trans = AccountTrans::company()
@@ -431,7 +420,6 @@ class TransController extends BaseController
                 $trans->user_id = Auth::id();
                 $trans->cancel_cause   = $cancel_cause;
                 $trans->update();
-
                 $msg = 'تم إلغاء الفاتورة بنجاح ';
 
                 Session::flash('success',$msg);
