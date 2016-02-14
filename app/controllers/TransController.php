@@ -38,7 +38,7 @@ class TransController extends BaseController
             $validation = Validator::make($inputs, TransDetails::rulesCreator($inputs));
 //            dd($inputs);
             if($validation->fails()) {
-
+                dd($validation->errors());
                 $data['newArray'] = $this->itemsToJsonForError($inputs, $validation->messages());
                 $data['branch'] = $branch;
                 Session::flash('error', ' <strong>فشل في العملية</strong> بعض المدخلات تم ادخالها على نحو غير صحيح  ');
@@ -69,10 +69,16 @@ class TransController extends BaseController
                     foreach (TransDetails::countOfInputs($inputs) as $k=>$v)
                     {
                         $item      = Items::findOrFail($inputs['id_'.$k]);
+                        if($type == "salesReturn" || $type == "buyReturn"){
+                            $quantity  = ($item->has_serial)?1:$inputs['return_'.$k];
+                        }else{
+
+                            $quantity  = ($item->has_serial)?1:$inputs['quantity_'.$k];
+                        }
                         $serial_no = ($item->has_serial)?$inputs['serial_'.$k]:null;
-                        $quantity  = ($item->has_serial)?1:$inputs['quantity_'.$k];
+
                         if(isset($inputs['cost_'.$k]) && intval($inputs['cost_'.$k]) > 0 && $type == "buy"){
-                            $unitPrice =  $inputs['cost_'.$k];// get price from input
+                            $unitPrice =  $inputs['cost_'.$k] ;// get price from input
                         }else{
                             if(self::isSettle($type)) {
                                 $unitPrice = null;
@@ -442,6 +448,7 @@ class TransController extends BaseController
             $invoiceItem = Items::getItem($k);
             $updateItem = Items::company()->find($k);
             if ($updateItem && $updateItem->avg_cost>0 && $invoiceItem ) {
+
                 $new_avg = (($invoiceItem->balance * $invoiceItem->avg_cost) + ($detail['qty'] * $detail['unit_price'])) / ($detail['qty'] + $invoiceItem->balance);
                 $updateItem->avg_cost = $new_avg;
             } else {
