@@ -12,9 +12,9 @@ class Employees extends Eloquent {
 
         'name'                  => 'required|min:3',
         'ins_no'                => 'integer',
-        'employee_date'         => 'required|date',
+        'employee_date'         => 'date',
 
-        'card_no'               => 'required|min:14|max:14|unique:hr_employees',
+        'card_no'               => 'min:14|max:14',
         'cancel_cause'          => 'min:3|max:200',
         'address'               => 'min:3|max:200',
         'remark'                => 'min:3|max:200',
@@ -22,21 +22,20 @@ class Employees extends Eloquent {
         'birth_date'            => 'date',
         'cert_date'             => 'date',
 
-        //selects
-        'sex'                   => 'required',
-        'marital'               => 'required',
-        'religion'              => 'required',
-        'military_service'      => 'required',
-        'br_id'             => 'required',
-        'department_id'         => 'required',
-        'job_id'                => 'required',
-        'work_nature'           => 'required',
+//        //selects
+//        'sex'                   => 'required',
+//        'marital'               => 'required',
+//        'religion'              => 'required',
+//        'military_service'      => 'required',
+//        'br_id'             => 'required',
+//        'department_id'         => 'required',
+//        'job_id'                => 'required',
+//        'work_nature'           => 'required',
 
         //mony
-        'salary'                => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
-        'ins_salary'            => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
-        'ins_val'               => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
-
+        'salary'                => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
+        'ins_salary'            => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
+        'ins_val'               => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
     );
     public function updateRuels($id){
 
@@ -44,8 +43,8 @@ class Employees extends Eloquent {
 
         'name'                  => 'required|min:3',
         'ins_no'                => 'integer',
-        'employee_date'         => 'required|date',
-        'card_no'               => 'required|min:14|max:14|unique:hr_employees,id,'.$id,
+        'employee_date'         => 'date',
+        'card_no'               => 'min:14|max:14',
         'cancel_cause'          => 'min:3|max:200',
         'address'               => 'min:3|max:200',
         'remark'                => 'min:3|max:200',
@@ -54,19 +53,19 @@ class Employees extends Eloquent {
         'cert_date'             => 'date',
 
         //selects
-        'sex'                   => 'required',
-        'marital'               => 'required',
-        'religion'              => 'required',
-        'military_service'      => 'required',
-        'br_id'             => 'required',
-        'department_id'         => 'required',
-        'job_id'                => 'required',
-        'work_nature'           => 'required',
+//        'sex'                   => 'required',
+//        'marital'               => 'required',
+//        'religion'              => 'required',
+//        'military_service'      => 'required',
+//        'br_id'             => 'required',
+//        'department_id'         => 'required',
+//        'job_id'                => 'required',
+//        'work_nature'           => 'required',
 
         //mony
-        'salary'                => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
-        'ins_salary'            => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
-        'ins_val'               => 'required|regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
+        'salary'                => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
+        'ins_salary'            => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
+        'ins_val'               => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/' ,
 
         );
 
